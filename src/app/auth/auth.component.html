@@ -1,0 +1,42 @@
+<div class="card auth-card">
+  <div class="card-content">
+    <span class="card-title">Вход в личный кабинет</span>
+    <div class="formGroup">
+      <input id="email" type="text" class="formControl" #userName required />
+      <label for="email">Логин</label>
+    </div>
+    <div class="formGroup">
+      <input
+        id="password"
+        type="password"
+        class="formControl"
+        #userPassword
+        required
+      />
+      <label for="password">Пароль</label>
+      <small class="helper-text invalid"></small>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center">
+    <p
+      *ngIf="error === 'wrong password or login'"
+      class="helper-text red-text invalid"
+    >
+      Неверный логин или пароль
+    </p>
+    <p
+      *ngIf="error === 'you are deactivated'"
+      class="helper-text red-text invalid"
+    >
+      Учетная запись была деаткивирована
+    </p>
+  </div>
+  <div class="card-action">
+    <div>
+      <button class="btn" (click)="login(userName.value, userPassword.value)">
+        Войти
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </div>
+</div>

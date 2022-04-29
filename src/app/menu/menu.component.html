@@ -1,0 +1,26 @@
+<nav class="blue">
+  <div class="nav-wrapper">
+    <ul>
+      <li>
+        <a id="devices" [routerLink]="'/devices'">Устройства</a>
+      </li>
+      <li>
+        <a id="groups" [routerLink]="'/groups'">Группы устройств</a>
+      </li>
+      <li>
+        <a id="users" [routerLink]="'/users'">Пользователи</a>
+      </li>
+      <li>
+        <a id="map" [routerLink]="'/map'">Карта</a>
+      </li>
+    </ul>
+    <ul class="right hide-on-med-and-down">
+      <li>
+        <a>{{ user.login }}</a>
+      </li>
+      <li>
+        <a (click)="logout()"> Выйти </a>
+      </li>
+    </ul>
+  </div>
+</nav>
