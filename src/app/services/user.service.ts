@@ -22,12 +22,8 @@ export class UserService {
     };
     return new Promise((resolve, reject) => {
       this.http
-        .post(url, body, {
-          headers: {
-            MDMToken: this.token,
-            MDMLogin: this.login,
-          },
-        })
+        .post(url, body
+        )
         .subscribe({
           next: (res) => {
             resolve(res);
@@ -46,12 +42,7 @@ export class UserService {
     };
     return new Promise((resolve, reject) => {
       this.http
-        .post(url, body, {
-          headers: {
-            MDMToken: this.token,
-            MDMLogin: this.login,
-          },
-        })
+        .post(url, body)
         .subscribe({
           next: (res) => {
             resolve(res);
@@ -71,12 +62,7 @@ export class UserService {
     return new Promise<boolean>((resolve, reject) => {
       // @ts-ignore
       this.http
-        .post(url, body, {
-          headers: {
-            MDMToken: this.token,
-            MDMLogin: this.login,
-          },
-        })
+        .post(url, body)
         .subscribe({
           next: (res: { success: boolean; error: string }) => {
             resolve(res.success);
@@ -95,12 +81,7 @@ export class UserService {
     return new Promise<boolean>((resolve, reject) => {
       // @ts-ignore
       this.http
-        .post(url, body, {
-          headers: {
-            MDMToken: this.token,
-            MDMLogin: this.login,
-          },
-        })
+        .post(url, body)
         .subscribe({
           next: (res: { success: boolean; error: string }) => {
             resolve(res.success);
@@ -122,12 +103,7 @@ export class UserService {
     return new Promise<Users[]>((resolve, reject) => {
       // @ts-ignore
       this.http
-        .get(url, {
-          headers: {
-            MDMToken: this.token,
-            MDMLogin: this.login,
-          },
-        })
+        .get(url)
         .subscribe({
           next: (res: { users: Users[]; success: boolean; error: string }) => {
             resolve(res.users);
@@ -148,12 +124,7 @@ export class UserService {
     };
     return new Promise((resolve, reject) => {
       this.http
-        .post(url, body, {
-          headers: {
-            MDMToken: this.token,
-            MDMLogin: this.login,
-          },
-        })
+        .post(url, body)
         .subscribe({
           next: (res) => {
             resolve(res);

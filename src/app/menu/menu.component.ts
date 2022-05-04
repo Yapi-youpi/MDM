@@ -16,7 +16,18 @@ export class MenuComponent implements OnInit {
     public user: UserService,
     public router: Router,
     public asset: AssetService
-  ) {}
+  ) {
+    if (!this.user.token) {
+      this.asset.getFromStorage('token').then((token: string) => {
+        this.user.token = token;
+      });
+      this.asset
+        .getFromStorage('login')
+        .then((login: string) => {
+          this.user.login = login;
+        })
+    }
+  }
 
   ngOnInit(): void {
     let path = window.location.pathname.slice(1)

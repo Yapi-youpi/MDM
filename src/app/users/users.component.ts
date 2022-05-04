@@ -39,25 +39,18 @@ export class UsersComponent implements OnInit {
           this.userService.getUserInfo(undefined, 'all').then((res) => {
             this.users = res;
             this.sortUsers();
+          }).catch((err)=>{
+            console.log(err);
           });
         });
     } else {
       this.userService.getUserInfo(undefined, 'all').then((res) => {
         this.users = res;
         this.sortUsers();
+      }).catch((err)=>{
+        console.log(err);
       });
     }
-  }
-
-  changePassword(pass: string) {
-    this.userService
-      .changePassword(pass)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((res) => {
-        console.log(res);
-      });
   }
   addUser() {
     const login = this.form.get('login')?.value;

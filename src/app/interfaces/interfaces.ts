@@ -21,3 +21,8 @@ export interface GroupPermissions {
   viewUsers: boolean;
   super: boolean | false;
 }
+export interface Groups {
+  id: string;
+  name: string;
+  activeState: boolean;
+}

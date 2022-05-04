@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import M from 'materialize-css';
 import { UserService } from '../services/user.service';
 import { AssetService } from '../services/asset.service';
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-auth',
@@ -35,14 +36,20 @@ export class AuthComponent implements OnInit {
           this.asset.setToStorage('login', login).then();
           this.asset.setToStorage('last_password', password).then();
           this.user.token = res.token;
+          console.log(res.token, this.user.token, res)
           this.user.login = login;
           this.user.last_password = password;
           this.router.navigateByUrl('devices').then(() => {
             if (res.error === 'change super admin password') {
-              let elem = document.querySelector('.modal');
-              M.Modal.init(elem);
-              let instance = M.Modal.getInstance(elem);
-              instance.open();
+              let i = interval(1000).subscribe(()=>{
+                let elem = document.querySelector('.modal');
+                if (elem) {
+                  i.unsubscribe()
+                  M.Modal.init(elem);
+                  let instance = M.Modal.getInstance(elem);
+                  instance.open();
+                }
+              })
             }
           });
         }

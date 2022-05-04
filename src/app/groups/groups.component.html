@@ -1,2 +1,37 @@
 <app-menu></app-menu>
-<p>groups works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col s6">Название</div>
+    <div class="col s6">Состояние</div>
+  </div>
+  <div class="row" style="height: 70vh; overflow: auto">
+    <div class="progress" *ngIf="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <ng-container *ngFor="let group of groups">
+      <div class="row">
+        <div class="col s6">{{ group.name }}</div>
+        <div class="col s6">
+          <div class="switch">
+            <label>
+              <input
+                (click)="changeState(!group.activeState, group.id)"
+                [checked]="group.activeState"
+                type="checkbox"
+              />
+              <span class="lever"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <input type="text" #name />
+      <button (click)="addGroup(name.value)" class="btn blue lighten-2">
+        Добавить
+      </button>
+    </div>
+  </div>
+</div>
