@@ -1,12 +1,72 @@
-<app-menu>
-</app-menu>
-<p>devices works!</p>
-<div class="modal modal-fixed-footer" id="changePass">
+<app-menu> </app-menu>
+
+<div class="container">
+  <div class="row" style="padding: 5px">
+    <div class="col s2"><b>Название</b></div>
+    <div class="col s3"><b>Описание</b></div>
+    <div class="col s2"><b>Номер телефона</b></div>
+    <div class="col s1"><b>Статус</b></div>
+    <div class="col s1"><b>Батарея</b></div>
+  </div>
+  <div class="row" style="height: 70vh; overflow: auto">
+    <div class="progress" *ngIf="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <ng-container *ngFor="let device of devices">
+      <div class="row">
+        <div class="col s2">{{ device.name }}</div>
+        <div class="col s3">{{ device.description }}</div>
+        <div class="col s2">{{ device.phone_number }}</div>
+        <div class="col s1">
+          <div class="switch">
+            <label>
+              <input disabled [checked]="device.online_state" type="checkbox" />
+              <span class="lever"></span>
+            </label>
+          </div>
+        </div>
+        <div class="col s1">{{ device.battery_percent }}</div>
+        <div class="col s3">
+          <button
+            (click)="editDevice(device)"
+            class="btn btn-small blue lighten-1 modal-trigger"
+            data-target="add_device"
+          >
+            Редактировать
+          </button>
+          <button
+            (click)="removeDevice(device.id)"
+            class="btn btn-small red lighten-1"
+          >
+            Удалить
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <button
+        class="btn btn-small blue lighten-1 modal-trigger"
+        data-target="add_device"
+      >
+        Добавить устройство
+      </button>
+    </div>
+  </div>
+</div>
+<div id="changePass" class="modal modal-fixed-footer">
   <div class="modal-content">
     <div class="card-content">
       <span class="card-title">Вход в личный кабинет</span>
       <div class="formGroup">
-        <input id="pass" type="password" class="formControl" #pass required />
+        <input
+          id="pass"
+          type="password"
+          class="formControl"
+          [(ngModel)]="password"
+          required
+        />
         <label for="pass">Введите новый пароль</label>
         <small class="helper-text invalid"></small>
         <small class="helper-text invalid"></small>
@@ -16,8 +76,8 @@
           id="ChangePassword"
           type="password"
           class="formControl"
-          #newPass
           required
+          [(ngModel)]="new_password"
         />
         <label for="ChangePassword">Повторите новый пароль</label>
         <small class="helper-text invalid"></small>
@@ -27,12 +87,116 @@
   </div>
   <div class="modal-footer">
     <button
-      [disabled]="pass.value !== newPass.value"
-      (click)="changePassword(pass.value)"
+      [disabled]="password !== new_password"
+      (click)="changePassword(password)"
       class="btn-flat green-text"
     >
       Сменить
       <i class="material-icons right">send</i>
     </button>
+  </div>
+</div>
+<div id="add_device" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col s6">
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Название устройства"
+          />
+          <label for="name">Название</label>
+        </div>
+        <div class="col s6">
+          <input
+            type="text"
+            id="phone_number"
+            formControlName="phone_number"
+            placeholder="Номер телефона"
+          />
+          <label for="phone_number">Номер телефона</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <input
+            type="text"
+            id="description"
+            formControlName="description"
+            placeholder="Описание"
+          />
+          <label for="description">Описание</label>
+        </div>
+      </div>
+      <ng-container *ngIf="edit">
+        <div class="row">
+          <div class="col s6">
+            <input
+              id="battery"
+              readonly
+              type="text"
+              formControlName="battery_percent"
+            />
+            <label for="battery">Батарея</label>
+          </div>
+          <div class="col s6">
+            <input id="model" readonly type="text" formControlName="model" />
+            <label for="model">Модель</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <input
+              id="online"
+              readonly
+              type="text"
+              formControlName="online_state"
+            />
+            <label for="online"></label>
+          </div>
+          <div class="col s6">
+            <input
+              id="active_state"
+              readonly
+              type="text"
+              formControlName="model"
+            />
+            <label for="model">Состояние</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <input
+              readonly
+              id="launcher"
+              formControlName="launcher_version"
+              type="text"
+            />
+            <label for="launcher">Лаунчер</label>
+          </div>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      (click)="addDevice()"
+      [disabled]="form.invalid"
+      *ngIf="!edit"
+      class="btn-flat modal-close green-text"
+    >
+      Добавить
+    </button>
+    <button
+      (click)="saveChange()"
+      [disabled]="form.invalid"
+      *ngIf="edit"
+      class="btn-flat modal-close green-text"
+    >
+      Сохранить
+    </button>
+    <button class="btn-flat modal-close red-text">Отмена</button>
   </div>
 </div>

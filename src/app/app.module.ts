@@ -14,9 +14,10 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { DevicesComponent } from './devices/devices.component';
 import { GroupsComponent } from './groups/groups.component';
 import { MapComponent } from './map/map.component';
+import { ConfigsComponent } from './configs/configs.component';
 
 @NgModule({
-  declarations: [AppComponent, UsersComponent, AuthComponent, MenuComponent, DevicesComponent, GroupsComponent, MapComponent],
+  declarations: [AppComponent, UsersComponent, AuthComponent, MenuComponent, DevicesComponent, GroupsComponent, MapComponent, ConfigsComponent],
   imports: [
     BrowserModule,
     RouterModule,

@@ -1,2 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~leaflet/dist/leaflet.css";
+
+.switch label input[type="checkbox"]:checked + .lever:after {
+  background-color: #2196f3 !important;
+}
+
+.switch label input[type="checkbox"]:checked + .lever {
+  background-color: #94c6f5 !important;
+}
+
+.progress {
+  background-color: #94c6f5 !important;
+}
+
+.indeterminate {
+  background-color: #2196f3 !important;
+}
+.btn-small {
+  margin: 0.3rem;
+}
+.s3 {
+  word-break: break-all;
+}

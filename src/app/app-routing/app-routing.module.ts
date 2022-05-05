@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from '../users/users.component';
 import { AuthComponent } from '../auth/auth.component';
-import {DevicesComponent} from "../devices/devices.component";
-import {GroupsComponent} from "../groups/groups.component";
-import {MapComponent} from "../map/map.component";
+import { DevicesComponent } from '../devices/devices.component';
+import { GroupsComponent } from '../groups/groups.component';
+import { MapComponent } from '../map/map.component';
+import { ConfigsComponent } from '../configs/configs.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'map',
     component: MapComponent,
+  },
+  {
+    path: 'config',
+    component: ConfigsComponent,
   },
 ];
 

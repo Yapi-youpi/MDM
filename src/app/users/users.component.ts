@@ -4,6 +4,7 @@ import M from 'materialize-css';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AssetService } from '../services/asset.service';
 import { Users } from '../interfaces/interfaces';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -14,7 +15,8 @@ export class UsersComponent implements OnInit {
   public form: FormGroup;
   public users: Users[] = [];
   public login: string = '';
-  constructor(private userService: UserService, public asset: AssetService) {
+  public loading: boolean = true;
+  constructor(private userService: UserService) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
@@ -26,32 +28,27 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     let elem = document.querySelectorAll('.modal');
     M.Modal.init(elem);
-    if (!this.userService.token) {
-      this.asset.getFromStorage('token').then((token: string) => {
-        this.userService.token = token;
-      });
-      this.asset
-        .getFromStorage('login')
-        .then((login: string) => {
-          this.userService.login = login;
-        })
-        .then(() => {
-          this.userService.getUserInfo(undefined, 'all').then((res) => {
-            this.users = res;
-            this.sortUsers();
-          }).catch((err)=>{
-            console.log(err);
-          });
-        });
-    } else {
-      this.userService.getUserInfo(undefined, 'all').then((res) => {
+    let i = interval(1000).subscribe(() => {
+      if (this.userService.token) {
+        i.unsubscribe();
+        this.getAllUsers();
+      }
+    });
+  }
+
+  getAllUsers() {
+    this.userService
+      .getUserInfo(undefined, 'all')
+      .then((res) => {
         this.users = res;
+        this.loading = false;
         this.sortUsers();
-      }).catch((err)=>{
+      })
+      .catch((err) => {
         console.log(err);
       });
-    }
   }
+
   addUser() {
     const login = this.form.get('login')?.value;
     const name = this.form.get('name')?.value;
@@ -59,7 +56,7 @@ export class UsersComponent implements OnInit {
     const role = this.form.get('role')?.value;
     this.userService
       .addUser(login, password, name, role)
-      .then((res) => {
+      .then(() => {
         this.userService.getUserInfo(undefined, 'all').then((res) => {
           this.users = res;
           console.log(res);

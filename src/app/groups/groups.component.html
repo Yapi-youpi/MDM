@@ -1,8 +1,10 @@
 <app-menu></app-menu>
 <div class="container">
-  <div class="row">
-    <div class="col s6">Название</div>
-    <div class="col s6">Состояние</div>
+  <div class="row" style="padding: 5px">
+    <div class="col s6">
+      <b>Название</b>
+    </div>
+    <div class="col s6"><b>Состояние</b></div>
   </div>
   <div class="row" style="height: 70vh; overflow: auto">
     <div class="progress" *ngIf="loading">
@@ -10,8 +12,8 @@
     </div>
     <ng-container *ngFor="let group of groups">
       <div class="row">
-        <div class="col s6">{{ group.name }}</div>
-        <div class="col s6">
+        <div class="col s4">{{ group.name }}</div>
+        <div class="col s4">
           <div class="switch">
             <label>
               <input
@@ -23,15 +25,58 @@
             </label>
           </div>
         </div>
+        <div class="col s4">
+          <button
+            (click)="getID(group.id)"
+            data-target="rename"
+            class="btn btn-small blue lighten-1 modal-trigger"
+          >
+            Переименовать
+          </button>
+          <button
+            (click)="removeGroup(group.id)"
+            class="btn btn-small red lighten-1"
+          >
+            Удалить
+          </button>
+          <button
+            (click)="removeGroupWithDevices(group.id)"
+            class="btn btn-small red lighten-1"
+          >
+            Удалить с устройствами
+          </button>
+        </div>
       </div>
     </ng-container>
   </div>
   <div class="row">
     <div class="col s6">
-      <input type="text" #name />
-      <button (click)="addGroup(name.value)" class="btn blue lighten-2">
+      <input [(ngModel)]="name" id="name" type="text" />
+    </div>
+    <div class="col s6">
+      <button
+        (click)="addGroup(name)"
+        [disabled]="!name"
+        class="btn btn-small blue lighten-1"
+      >
         Добавить
       </button>
+    </div>
+  </div>
+</div>
+<div id="rename" class="modal">
+  <div class="row" style="padding: 10px">
+    <div class="col s6">
+      <input type="text" [(ngModel)]="rename" />
+    </div>
+    <div class="col s6">
+      <button
+        (click)="renameGroup(id, rename)"
+        class="btn btn-small blue lighten-1 modal-close"
+      >
+        Сохранить
+      </button>
+      <button class="btn btn-small red lighten-1 modal-close">Отмена</button>
     </div>
   </div>
 </div>

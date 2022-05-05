@@ -1,18 +1,11 @@
 .btn {
   margin: 0.5rem;
 }
-.lever:after {
-  /*background-color: #2196f3 !important;*/
-}
-.lever:before {
-  /*background-color: grey !important;*/
-}
-.switch label .lever {
-  /*background-color: grey !important;*/
-}
-.switch label input[type="checkbox"]:checked + .lever:after {
-  background-color: #2196f3 !important;
-}
-.switch label input[type="checkbox"]:checked + .lever {
-  background-color: #94c6f5 !important;
-}
+
+/*.switch label input[type="checkbox"]:checked + .lever:after {*/
+/*  background-color: #2196f3 !important;*/
+/*}*/
+
+/*.switch label input[type="checkbox"]:checked + .lever {*/
+/*  background-color: #94c6f5 !important;*/
+/*}*/

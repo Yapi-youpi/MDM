@@ -2,13 +2,16 @@
 
 <div class="container">
   <div class="row" style="padding: 5px">
-    <div class="col s2">Логин</div>
-    <div class="col s2">ФИО</div>
-    <div class="col s2">Роль</div>
-    <div class="col s2">Активна</div>
+    <div class="col s2"><b>Логин</b></div>
+    <div class="col s2"><b>ФИО</b></div>
+    <div class="col s2"><b>Роль</b></div>
+    <div class="col s2"><b>Состояние</b></div>
   </div>
   <div class="divider"></div>
   <div style="height: 70vh; overflow: auto">
+    <div class="progress" *ngIf="loading">
+      <div class="indeterminate"></div>
+    </div>
     <ng-container *ngFor="let user of users; index as index">
       <div class="row" style="padding: 5px">
         <div class="col s2">

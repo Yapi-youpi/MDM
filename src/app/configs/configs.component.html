@@ -1,0 +1,65 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="row" style="padding: 5px">
+    <div class="col s6"><b>Название</b></div>
+    <div class="col s6"></div>
+  </div>
+  <div class="row" style="height: 70vh; overflow: auto">
+    <div class="progress" *ngIf="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <ng-container *ngFor="let config of configs">
+      <div class="row">
+        <div class="col s6">{{ config.name }}</div>
+        <div class="col s6">
+          <button
+            (click)="getID(config.ID)"
+            data-target="rename"
+            class="btn btn-small blue lighten-1 modal-trigger"
+          >
+            Изменить название
+          </button>
+          <button
+            (click)="removeConfig(config.ID)"
+            class="btn btn-small red lighten-1"
+          >
+            Удалить
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <input [(ngModel)]="name" type="text" />
+    </div>
+    <div class="col s6">
+      <button
+        [disabled]="!name"
+        (click)="addConfig(name)"
+        class="btn btn-small blue lighten-1"
+      >
+        Добавить
+      </button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="rename">
+  <div class="container">
+    <div class="row">
+      <div class="col s6">
+        <input type="text" [(ngModel)]="rename" />
+      </div>
+      <div class="col s6">
+        <button
+          (click)="renameConfig(id, rename)"
+          [disabled]="!rename"
+          class="btn btn-small blue lighten-1 modal-close"
+        >
+          Переименовать
+        </button>
+        <button class="btn btn-small red lighten-1 modal-close">Отмена</button>
+      </div>
+    </div>
+  </div>
+</div>
