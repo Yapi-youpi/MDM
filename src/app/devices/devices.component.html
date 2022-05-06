@@ -3,10 +3,11 @@
 <div class="container">
   <div class="row" style="padding: 5px">
     <div class="col s2"><b>Название</b></div>
-    <div class="col s3"><b>Описание</b></div>
+    <div class="col s2"><b>Описание</b></div>
     <div class="col s2"><b>Номер телефона</b></div>
     <div class="col s1"><b>Статус</b></div>
     <div class="col s1"><b>Батарея</b></div>
+    <div class="col s1"><b>QR</b></div>
   </div>
   <div class="row" style="height: 70vh; overflow: auto">
     <div class="progress" *ngIf="loading">
@@ -15,7 +16,7 @@
     <ng-container *ngFor="let device of devices">
       <div class="row">
         <div class="col s2">{{ device.name }}</div>
-        <div class="col s3">{{ device.description }}</div>
+        <div class="col s2">{{ device.description }}</div>
         <div class="col s2">{{ device.phone_number }}</div>
         <div class="col s1">
           <div class="switch">
@@ -25,7 +26,16 @@
             </label>
           </div>
         </div>
-        <div class="col s1">{{ device.battery_percent }}</div>
+        <div class="col s1">{{ device.battery_percent }}%</div>
+        <div class="col s1">
+          <a
+            (click)="getQR(device.qr_code)"
+            class="modal-trigger"
+            data-target="qr-code"
+          >
+            <i class="material-icons">qr_code</i>
+          </a>
+        </div>
         <div class="col s3">
           <button
             (click)="editDevice(device)"
@@ -35,7 +45,7 @@
             Редактировать
           </button>
           <button
-            (click)="removeDevice(device.id)"
+            (click)="removeDevice(device.device_id)"
             class="btn btn-small red lighten-1"
           >
             Удалить
@@ -178,6 +188,34 @@
           </div>
         </div>
       </ng-container>
+      <div class="row">
+        <ng-container *ngFor="let group of groups">
+          <p class="col s6">
+            <label>
+              <input
+                [value]="group.id"
+                type="radio"
+                formControlName="device_group_id"
+              />
+              <span>{{ group.name }}</span>
+            </label>
+          </p>
+        </ng-container>
+      </div>
+      <div class="row">
+        <ng-container *ngFor="let config of configs">
+          <p class="col s6">
+            <label>
+              <input
+                [value]="config.ID"
+                type="radio"
+                formControlName="device_config_id"
+              />
+              <span>{{ config.name }}</span>
+            </label>
+          </p>
+        </ng-container>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
@@ -198,5 +236,20 @@
       Сохранить
     </button>
     <button class="btn-flat modal-close red-text">Отмена</button>
+  </div>
+</div>
+<div id="qr-code" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <div class="col s12">
+      <ngx-qrcode
+        [elementType]="elementType"
+        [errorCorrectionLevel]="correctionLevel"
+        [value]="valueQR"
+        class="b-shadow"
+      ></ngx-qrcode>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-flat modal-close">Закрыть</button>
   </div>
 </div>

@@ -85,7 +85,7 @@ export interface DevicesConfig {
 
 export interface AllowedClasses {}
 export interface Device {
-  id: string;
+  device_id: string;
   name: string;
   device_config_id: string;
   device_group_id: string;
@@ -98,4 +98,6 @@ export interface Device {
   model: string;
   online_state: boolean;
   qr_code: any;
+  raw_qr_code: string;
+  objectId: string;
 }

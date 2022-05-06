@@ -19,6 +19,11 @@
 .btn-small {
   margin: 0.3rem;
 }
-.s3 {
+.s2 {
   word-break: break-all;
+}
+.container {
+  max-width: 80% !important;
+  width: 80% !important;
+  padding-top: 2rem;
 }

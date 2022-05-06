@@ -15,9 +15,19 @@ import { DevicesComponent } from './devices/devices.component';
 import { GroupsComponent } from './groups/groups.component';
 import { MapComponent } from './map/map.component';
 import { ConfigsComponent } from './configs/configs.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
-  declarations: [AppComponent, UsersComponent, AuthComponent, MenuComponent, DevicesComponent, GroupsComponent, MapComponent, ConfigsComponent],
+  declarations: [
+    AppComponent,
+    UsersComponent,
+    AuthComponent,
+    MenuComponent,
+    DevicesComponent,
+    GroupsComponent,
+    MapComponent,
+    ConfigsComponent,
+  ],
   imports: [
     BrowserModule,
     RouterModule,
@@ -26,6 +36,7 @@ import { ConfigsComponent } from './configs/configs.component';
     FormsModule,
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),
+    NgxQRCodeModule,
   ],
   providers: [
     {
