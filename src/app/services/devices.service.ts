@@ -43,10 +43,10 @@ export class DevicesService {
     });
   }
 
-  removeDevice(id: string) {
+  removeDevice(device_id: string) {
     const url = `${environment.url}/remove_device`;
     const body = {
-      id,
+      device_id,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({

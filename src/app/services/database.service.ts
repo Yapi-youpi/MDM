@@ -16,4 +16,31 @@ export class DatabaseService {
   query(cl: any) {
     return new Parse.Query(cl);
   }
+
+  async logIN(login: string, password: string) {
+    return await Parse.User.logIn(login, password, { usePost: true });
+  }
+
+  signup(login: string, password: string) {
+    const user = new Parse.User();
+    user.set('username', login);
+    user.set('password', password);
+    user.set('email', login + '@gmail.com');
+    return new Promise<any>((resolve, reject) => {
+      user
+        .signUp()
+        .then((res) => {
+          console.log(res);
+          resolve(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          if (
+            err.toString().includes('Account already exists for this username.')
+          ) {
+            reject(400);
+          }
+        });
+    });
+  }
 }

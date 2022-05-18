@@ -32,7 +32,7 @@ export class DevicesComponent implements OnInit {
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   public valueQR: string = '';
   constructor(
-    private userService: UserService,
+    public userService: UserService,
     private device: DevicesService,
     private elementRef: ElementRef,
     private groupsService: GroupsService,
@@ -52,16 +52,16 @@ export class DevicesComponent implements OnInit {
   ngOnInit(): void {
     let elem = this.elementRef.nativeElement.querySelectorAll('.modal');
     const options = {
-      onCloseStart: () => {
+      dismissible: false,
+      onCloseEnd: () => {
         this.form.reset();
         this.edit = false;
       },
     };
     let q = this.db.query('Device');
     q.findAll().then((res) => {
-      console.log(res);
-      res.map((device) => {
-        console.log(device.toJSON());
+      res.map(() => {
+        // console.log(device.toJSON());
       });
     });
     M.Modal.init(elem, options);
@@ -145,12 +145,10 @@ export class DevicesComponent implements OnInit {
       new FormControl(device.launcher_version)
     );
     this.form.addControl('qr_code', new FormControl(device.qr_code));
-    console.log(JSON.stringify(device.qr_code));
     this.form.patchValue(device);
   }
 
   saveChange() {
-    console.log(this.form.getRawValue());
     this.device
       .editDevice(this.form.getRawValue())
       .then((res) => {
@@ -205,8 +203,6 @@ export class DevicesComponent implements OnInit {
     });
   }
   getQR(qr: any) {
-    console.log(qr);
-    console.log(JSON.parse(JSON.stringify(qr)));
     this.valueQR = JSON.stringify(qr);
   }
 }

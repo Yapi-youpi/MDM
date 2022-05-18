@@ -19,8 +19,8 @@
 .btn-small {
   margin: 0.3rem;
 }
-.s2 {
-  word-break: break-all;
+.col {
+  word-break: break-word;
 }
 .container {
   max-width: 80% !important;

@@ -10,7 +10,11 @@ export class UserService {
   public token: string = '';
   public login: string = '';
   public last_password: string = '';
-
+  public upperCase: boolean = false;
+  public lowerCase: boolean = false;
+  public number: boolean = false;
+  public specialChar: boolean = false;
+  public passLength: number = 0;
   constructor(private http: HttpClient) {}
 
   changePassword(password: string) {
@@ -21,36 +25,57 @@ export class UserService {
       lastPassword: this.last_password,
     };
     return new Promise((resolve, reject) => {
-      this.http
-        .post(url, body
-        )
-        .subscribe({
-          next: (res) => {
-            resolve(res);
-          },
-          error: (err) => {
-            reject(err);
-          },
-        });
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
     });
   }
   changeUserPassword(login: string, password: string) {
+    this.lowerCase = false;
+    this.upperCase = false;
+    this.number = false;
+    this.specialChar = false;
+    this.passLength = 0;
     const url = `${environment.url}/change_user_password`;
     const body = {
       login: login,
-      password: password,
+      password: password.trim(),
     };
     return new Promise((resolve, reject) => {
-      this.http
-        .post(url, body)
-        .subscribe({
-          next: (res) => {
-            resolve(res);
-          },
-          error: (err) => {
-            reject(err);
-          },
-        });
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          if (err.error.error.includes('lowercase letter missing')) {
+            this.lowerCase = true;
+          }
+          if (err.error.error.includes('uppercase letter missing')) {
+            this.upperCase = true;
+          }
+          if (
+            err.error.error.includes('at least one numeric character required')
+          ) {
+            this.number = true;
+          }
+          if (err.error.error.includes('special character missing')) {
+            this.specialChar = true;
+          }
+          if (
+            err.error.error.includes(
+              'password length must be between 8 to 64 character'
+            )
+          ) {
+            this.passLength = 8 - password.length;
+          }
+          reject(err);
+        },
+      });
     });
   }
   changeUserState(id: string, state: boolean) {
@@ -61,16 +86,14 @@ export class UserService {
     };
     return new Promise<boolean>((resolve, reject) => {
       // @ts-ignore
-      this.http
-        .post(url, body)
-        .subscribe({
-          next: (res: { success: boolean; error: string }) => {
-            resolve(res.success);
-          },
-          error: (err) => {
-            reject(err);
-          },
-        });
+      this.http.post(url, body).subscribe({
+        next: (res: { success: boolean; error: string }) => {
+          resolve(res.success);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
     });
   }
   deleteUser(id: string) {
@@ -80,16 +103,14 @@ export class UserService {
     };
     return new Promise<boolean>((resolve, reject) => {
       // @ts-ignore
-      this.http
-        .post(url, body)
-        .subscribe({
-          next: (res: { success: boolean; error: string }) => {
-            resolve(res.success);
-          },
-          error: (err) => {
-            reject(err);
-          },
-        });
+      this.http.post(url, body).subscribe({
+        next: (res: { success: boolean; error: string }) => {
+          resolve(res.success);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
     });
   }
   getUserInfo(id: string | undefined, param: string) {
@@ -102,16 +123,14 @@ export class UserService {
     const url = `${environment.url}/get_user/${param}`;
     return new Promise<Users[]>((resolve, reject) => {
       // @ts-ignore
-      this.http
-        .get(url)
-        .subscribe({
-          next: (res: { users: Users[]; success: boolean; error: string }) => {
-            resolve(res.users);
-          },
-          error: (err) => {
-            reject(err);
-          },
-        });
+      this.http.get(url).subscribe({
+        next: (res: { users: Users[]; success: boolean; error: string }) => {
+          resolve(res.users);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
     });
   }
   addUser(login: string, password: string, name: string, role: string) {
@@ -123,16 +142,32 @@ export class UserService {
       name,
     };
     return new Promise((resolve, reject) => {
-      this.http
-        .post(url, body)
-        .subscribe({
-          next: (res) => {
-            resolve(res);
-          },
-          error: (error) => {
-            reject(error);
-          },
-        });
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (error) => {
+          reject(error);
+        },
+      });
+    });
+  }
+
+  renameUSer(login: string, name: string) {
+    const url = `${environment.url}/rename_user`;
+    const body = {
+      login,
+      name,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
     });
   }
 }

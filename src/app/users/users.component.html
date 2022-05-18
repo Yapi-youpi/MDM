@@ -27,6 +27,7 @@
           <div class="switch">
             <label>
               <input
+                [disabled]="user.role === 'super'"
                 [checked]="user.activeState"
                 type="checkbox"
                 (click)="changeState(user.id, user.activeState, index)"
@@ -35,16 +36,24 @@
             </label>
           </div>
         </div>
-        <div class="col s3">
+        <div class="col s4">
           <button
             (click)="getLogin(user.login)"
             class="btn btn-small modal-trigger blue lighten-1"
             data-target="changeUserPass"
           >
-            Редактировать
+            Сменить пароль
+          </button>
+          <button
+            (click)="getLogin(user.login)"
+            class="btn btn-small modal-trigger blue lighten-1"
+            data-target="rename"
+          >
+            Переименовать
           </button>
           <button
             (click)="deleteUser(user.id)"
+            [disabled]="user.role === 'super'"
             class="btn btn-small red lighten-1"
           >
             Удалить
@@ -99,13 +108,71 @@
     <button class="btn-flat modal-close">Закрыть</button>
   </div>
 </div>
-<div class="modal" id="changeUserPass">
-  <input type="text" #password />
-  <button
-    (click)="changeUserPassword(login, password.value)"
-    class="btn-flat modal-close"
-  >
-    Изменить
-  </button>
-  <button class="btn-flat modal-close">Закрыть</button>
+<div class="modal" style="width: 40%; padding: 10px" id="changeUserPass">
+  <div style="display: flex; justify-content: center">
+    <div class="col s12">
+      <h6>Пароль должен стостоять минимум иметь минимум по 1:</h6>
+      <ul class="collection">
+        <li class="collection-item">
+          Заглавный символ
+          <span *ngIf="userService.upperCase" class="red-text"
+            >отсутствует</span
+          >
+        </li>
+        <li class="collection-item">
+          Прописной символ
+          <span *ngIf="userService.lowerCase" class="red-text"
+            >отсутствует</span
+          >
+        </li>
+        <li class="collection-item">
+          Цифра
+          <span *ngIf="userService.number" class="red-text">отсутствует</span>
+        </li>
+        <li class="collection-item">
+          Спец. символ
+          <span *ngIf="userService.specialChar" class="red-text"
+            >отсутствует</span
+          >
+        </li>
+        <li class="collection-item">
+          Состоять минимум из 8 символов
+          <span *ngIf="userService.passLength > 0" class="red-text"
+            >{{ userService.passLength }} осталось</span
+          >
+        </li>
+      </ul>
+      <div class="row">
+        <div class="col s6"><input type="text" [(ngModel)]="changePas" /></div>
+        <div class="col s6">
+          <button
+            (click)="changeUserPassword(login, changePas)"
+            [disabled]="!changePas"
+            class="btn-small blue lighten-1"
+          >
+            Сохранить
+          </button>
+          <button class="btn-small red lighten-1 modal-close">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="rename">
+  <div class="row">
+    <div class="col s6 offset-s3">
+      <div class="col s6">
+        <input [(ngModel)]="rename" type="text" />
+      </div>
+      <div class="col s6">
+        <button
+          (click)="renameUser(login, rename)"
+          class="btn-small blue lighten-1 modal-close"
+        >
+          Переименовать
+        </button>
+        <button class="btn-small red lighten-1 modal-close">Закрыть</button>
+      </div>
+    </div>
+  </div>
 </div>
