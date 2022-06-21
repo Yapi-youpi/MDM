@@ -1,29 +1,41 @@
-<nav class="blue">
-  <div class="nav-wrapper">
-    <ul>
-      <li>
-        <a id="devices" [routerLink]="'/devices'">Устройства</a>
-      </li>
-      <li>
-        <a id="groups" [routerLink]="'/groups'">Группы устройств</a>
-      </li>
-      <li>
-        <a id="config" [routerLink]="'/config'">Конфигурации</a>
-      </li>
-      <li>
-        <a id="users" [routerLink]="'/users'">Пользователи</a>
-      </li>
-      <li>
-        <a id="map" [routerLink]="'/map'">Карта</a>
-      </li>
-    </ul>
-    <ul class="right hide-on-med-and-down">
-      <li>
-        <a>{{ user.login }}</a>
-      </li>
-      <li>
-        <a (click)="logout()"> Выйти </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="sidenav sidenav-fixed blue">
+  <ul>
+    <li class="brand-logo">
+      <img src="assets/c9K2Y9r5Keo.jpg" alt="" />
+    </li>
+    <li>
+      <a id="devices" [routerLink]="'/devices'"
+        >Устройства<i class="material-icons left">phone_android</i></a
+      >
+    </li>
+    <li>
+      <a id="groups" [routerLink]="'/groups'">
+        <i class="material-icons left">dataset</i>Группы устройств</a
+      >
+    </li>
+    <li>
+      <a id="config" [routerLink]="'/config'"
+        ><i class="material-icons left">settings</i>Конфигурации</a
+      >
+    </li>
+    <li>
+      <a id="users" [routerLink]="'/users'"
+        ><i class="material-icons left">group</i>Пользователи</a
+      >
+    </li>
+    <li>
+      <a id="map" [routerLink]="'/map'"
+        ><i class="material-icons left">map</i>Карта</a
+      >
+    </li>
+  </ul>
+  <div class="divider"></div>
+  <ul class="">
+    <li>
+      <a><i class="material-icons left">person</i>{{ user.login }}</a>
+    </li>
+    <li>
+      <a (click)="logout()"><i class="material-icons left">logout</i> Выйти </a>
+    </li>
+  </ul>
+</div>

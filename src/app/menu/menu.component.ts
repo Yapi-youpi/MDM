@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import M from 'materialize-css';
-import {AssetService} from "../services/asset.service";
+import { AssetService } from '../services/asset.service';
 
 @Component({
   selector: 'app-menu',
@@ -21,19 +21,17 @@ export class MenuComponent implements OnInit {
       this.asset.getFromStorage('token').then((token: string) => {
         this.user.token = token;
       });
-      this.asset
-        .getFromStorage('login')
-        .then((login: string) => {
-          this.user.login = login;
-        })
+      this.asset.getFromStorage('login').then((login: string) => {
+        this.user.login = login;
+      });
     }
   }
 
   ngOnInit(): void {
-    let path = window.location.pathname.slice(1)
-    let elem = document.getElementById(`${path}`)
+    let path = window.location.pathname.slice(1);
+    let elem = document.getElementById(`${path}`);
     if (elem) {
-      elem.style.color = '#a9cfee'
+      elem.classList.add('active');
     }
   }
   logout() {
@@ -43,9 +41,9 @@ export class MenuComponent implements OnInit {
         if (res) {
           this.user.token = '';
           this.router.navigateByUrl('auth').then();
-          this.asset.removeFromStorage('token').then()
-          this.asset.removeFromStorage('name').then()
-          this.asset.removeFromStorage('login').then()
+          this.asset.removeFromStorage('token').then();
+          this.asset.removeFromStorage('name').then();
+          this.asset.removeFromStorage('login').then();
         } else {
           M.toast({ html: 'Ошибка' });
         }

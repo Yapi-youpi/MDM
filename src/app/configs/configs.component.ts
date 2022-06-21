@@ -11,12 +11,12 @@ import M from 'materialize-css';
   styleUrls: ['./configs.component.css'],
 })
 export class ConfigsComponent implements OnInit {
-  public name: string = '';
+  public name = '';
   public default_config!: DevicesConfig;
   public configs: DevicesConfig[] = [];
-  public loading: boolean = true;
-  public rename: string = '';
-  public id: string = '';
+  public loading = true;
+  public rename = '';
+  public id = '';
   constructor(
     private configService: DevicesConfigService,
     private userService: UserService,
@@ -24,8 +24,10 @@ export class ConfigsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let elem = this.elementRef.nativeElement.querySelector('.modal');
-    M.Modal.init(elem);
+    let rename = this.elementRef.nativeElement.querySelectorAll('.modal');
+    let config = this.elementRef.nativeElement.querySelectorAll('.modal');
+    M.Modal.init(rename);
+    M.Modal.init(config);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
@@ -95,7 +97,6 @@ export class ConfigsComponent implements OnInit {
         this.getAllConfigs();
       })
       .catch((err) => {
-        console.log(err);
         console.log(err.error.error);
       });
   }
@@ -113,6 +114,7 @@ export class ConfigsComponent implements OnInit {
   }
 
   getID(id: string) {
+    console.log('aaaaaa');
     this.id = id;
   }
 

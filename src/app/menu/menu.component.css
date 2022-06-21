@@ -1,0 +1,10 @@
+.active {
+  color: white;
+}
+.active i {
+  color: white;
+}
+.brand-logo > img {
+  padding: 1rem;
+  width: 100%;
+}

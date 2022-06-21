@@ -6,6 +6,7 @@ import { UserService } from '../services/user.service';
 import { AssetService } from '../services/asset.service';
 import { interval } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
+import { ErrorService } from '../services/error.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,12 +14,13 @@ import { DatabaseService } from '../services/database.service';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  public error: string = '';
+  public error = '';
   constructor(
     private auth: AuthService,
     private router: Router,
     public user: UserService,
     public asset: AssetService,
+    public err: ErrorService,
     private db: DatabaseService
   ) {}
 

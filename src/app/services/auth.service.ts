@@ -9,11 +9,12 @@ export class AuthService {
   constructor(public http: HttpClient) {}
 
   login(login: string, password: string) {
-    const url = `${environment.url}/login`;
+    const url = environment.url + '/login';
     const body = {
       login: login.trim(),
       password: password.trim(),
     };
+    console.log(body);
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
         next: (res) => {
@@ -25,11 +26,11 @@ export class AuthService {
       });
     });
   }
+
   logout(token: string, login: string) {
-    const url = `${environment.url}/logout`;
+    const url = environment.url + '/logout';
     const body = {};
     return new Promise<boolean>((resolve, reject) => {
-      // @ts-ignore
       this.http
         .post(url, body, {
           headers: {
@@ -38,7 +39,7 @@ export class AuthService {
           },
         })
         .subscribe({
-          next: (res: { success: boolean; error: string }) => {
+          next: (res: { success: boolean; error: string } | any) => {
             resolve(res.success);
           },
           error: (error) => {

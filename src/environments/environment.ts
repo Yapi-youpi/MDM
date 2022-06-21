@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // url: 'https://lk3.variag.ru/central_mdm',
-  url: 'http://172.24.18.26:2525',
+  url: 'http://62.113.111.186:2525',
+  // url: 'http://172.24.18.25:2525',
 };
 
 /*

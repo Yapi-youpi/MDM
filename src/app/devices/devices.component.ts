@@ -19,18 +19,18 @@ import { DatabaseService } from '../services/database.service';
   styleUrls: ['./devices.component.css'],
 })
 export class DevicesComponent implements OnInit {
-  public password: string = '';
-  public new_password: string = '';
+  public password = '';
+  public new_password = '';
   public devices: Device[] = [];
   public form: FormGroup;
   private add_device!: Device;
-  public edit: boolean = false;
-  public loading: boolean = true;
+  public edit = false;
+  public loading = true;
   public groups: Groups[] = [];
   public configs: DevicesConfig[] = [];
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  public valueQR: string = '';
+  public valueQR = '';
   constructor(
     public userService: UserService,
     private device: DevicesService,

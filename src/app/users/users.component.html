@@ -1,71 +1,74 @@
 <app-menu></app-menu>
 
 <div class="container">
-  <div class="row" style="padding: 5px">
-    <div class="col s2"><b>Логин</b></div>
-    <div class="col s2"><b>ФИО</b></div>
-    <div class="col s2"><b>Роль</b></div>
-    <div class="col s2"><b>Состояние</b></div>
-  </div>
-  <div class="divider"></div>
-  <div style="height: 70vh; overflow: auto">
-    <div class="progress" *ngIf="loading">
-      <div class="indeterminate"></div>
+  <h3>Пользователи</h3>
+  <div class="box">
+    <div class="row" style="padding: 5px">
+      <div class="col s2"><b>Логин</b></div>
+      <div class="col s2"><b>ФИО</b></div>
+      <div class="col s2"><b>Роль</b></div>
+      <div class="col s2"><b>Состояние</b></div>
     </div>
-    <ng-container *ngFor="let user of users; index as index">
-      <div class="row" style="padding: 5px">
-        <div class="col s2">
-          <span>{{ user.login }}</span>
-        </div>
-        <div class="col s2">
-          <span>{{ user.name }}</span>
-        </div>
-        <div class="col s2">
-          <span>{{ user.role }}</span>
-        </div>
-        <div class="col s2">
-          <div class="switch">
-            <label>
-              <input
-                [disabled]="user.role === 'super'"
-                [checked]="user.activeState"
-                type="checkbox"
-                (click)="changeState(user.id, user.activeState, index)"
-              />
-              <span class="lever"></span>
-            </label>
+    <div class="divider"></div>
+    <div class="box">
+      <div class="progress" *ngIf="loading">
+        <div class="indeterminate"></div>
+      </div>
+      <ng-container *ngFor="let user of users; index as index">
+        <div class="row" style="padding: 5px">
+          <div class="col s2">
+            <span>{{ user.login }}</span>
+          </div>
+          <div class="col s2">
+            <span>{{ user.name }}</span>
+          </div>
+          <div class="col s2">
+            <span>{{ user.role }}</span>
+          </div>
+          <div class="col s2">
+            <div class="switch">
+              <label>
+                <input
+                  [disabled]="user.role === 'super'"
+                  [checked]="user.activeState"
+                  type="checkbox"
+                  (click)="changeState(user.id, user.activeState, index)"
+                />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col s4">
+            <button
+              (click)="getLogin(user.login)"
+              class="btn btn-small modal-trigger blue lighten-1"
+              data-target="changeUserPass"
+            >
+              Сменить пароль
+            </button>
+            <button
+              (click)="getLogin(user.login)"
+              class="btn btn-small modal-trigger blue lighten-1"
+              data-target="rename"
+            >
+              Переименовать
+            </button>
+            <button
+              (click)="deleteUser(user.id)"
+              [disabled]="user.role === 'super'"
+              class="btn btn-small red lighten-1"
+            >
+              Удалить
+            </button>
           </div>
         </div>
-        <div class="col s4">
-          <button
-            (click)="getLogin(user.login)"
-            class="btn btn-small modal-trigger blue lighten-1"
-            data-target="changeUserPass"
-          >
-            Сменить пароль
-          </button>
-          <button
-            (click)="getLogin(user.login)"
-            class="btn btn-small modal-trigger blue lighten-1"
-            data-target="rename"
-          >
-            Переименовать
-          </button>
-          <button
-            (click)="deleteUser(user.id)"
-            [disabled]="user.role === 'super'"
-            class="btn btn-small red lighten-1"
-          >
-            Удалить
-          </button>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-  <div class="row">
-    <button class="btn blue modal-trigger" data-target="add">
-      Добавить пользователя
-    </button>
+      </ng-container>
+    </div>
+    <div class="row">
+      <button class="btn blue modal-trigger" data-target="add">
+        Добавить пользователя
+      </button>
+    </div>
   </div>
 </div>
 <div class="modal modal-fixed-footer" id="add">

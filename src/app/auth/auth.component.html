@@ -24,17 +24,8 @@
     </div>
   </div>
   <div style="display: flex; justify-content: center">
-    <p
-      *ngIf="error === 'wrong password or login'"
-      class="helper-text red-text invalid"
-    >
-      Неверный логин или пароль
-    </p>
-    <p
-      *ngIf="error === 'you are deactivated'"
-      class="helper-text red-text invalid"
-    >
-      Учетная запись была деаткивирована
+    <p *ngIf="err.error" class="helper-text red-text invalid">
+      {{ err.error }}
     </p>
   </div>
   <div class="card-action">

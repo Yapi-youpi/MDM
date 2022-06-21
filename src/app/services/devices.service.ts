@@ -10,7 +10,7 @@ export class DevicesService {
   constructor(private http: HttpClient) {}
 
   getDevice(param: string, group_id?: string) {
-    let url = `${environment.url}/get_device/${param}`;
+    let url = environment.url + '/get_device/' + param;
     if (param === 'group') {
       url = url + `/${group_id}`;
     }
@@ -27,7 +27,7 @@ export class DevicesService {
   }
 
   addDevice(device: Device) {
-    const url = `${environment.url}/add_device`;
+    const url = environment.url + '/add_device';
     const body = {
       ...device,
     };
@@ -44,7 +44,7 @@ export class DevicesService {
   }
 
   removeDevice(device_id: string) {
-    const url = `${environment.url}/remove_device`;
+    const url = environment.url + '/remove_device';
     const body = {
       device_id,
     };
@@ -61,7 +61,7 @@ export class DevicesService {
   }
 
   editDevice(device: Device) {
-    const url = `${environment.url}/edit_device`;
+    const url = environment.url + '/edit_device';
     const body = {
       ...device,
     };

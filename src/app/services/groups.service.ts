@@ -10,15 +10,18 @@ export class GroupsService {
   constructor(private http: HttpClient) {}
 
   getGroups(parameter: string) {
-    const url = `${environment.url}/get_device_group/${parameter}`;
+    const url = environment.url + '/get_device_group/' + parameter;
     return new Promise<Groups[]>((resolve, reject) => {
-      // @ts-ignore
       this.http.get(url).subscribe({
-        next: (res: {
-          success: boolean;
-          error: string;
-          devicesGroups: Groups[];
-        }) => {
+        next: (
+          res:
+            | {
+                success: boolean;
+                error: string;
+                devicesGroups: Groups[];
+              }
+            | any
+        ) => {
           resolve(res.devicesGroups);
         },
         error: (err) => {
@@ -29,7 +32,7 @@ export class GroupsService {
   }
 
   addGroups(name: string) {
-    const url = `${environment.url}/add_device_group`;
+    const url = environment.url + '/add_device_group';
     const body = {
       name,
     };
@@ -46,7 +49,7 @@ export class GroupsService {
   }
 
   changeState(activeState: boolean, id: string) {
-    const url = `${environment.url}/change_active_state_device_group`;
+    const url = environment.url + '/change_active_state_device_group';
     const body = {
       id,
       activeState,
@@ -64,7 +67,7 @@ export class GroupsService {
   }
 
   removeGroup(id: string) {
-    const url = `${environment.url}/remove_device_group`;
+    const url = environment.url + '/remove_device_group';
     const body = {
       id,
     };
@@ -81,7 +84,7 @@ export class GroupsService {
   }
 
   renameGroup(id: string, name: string) {
-    const url = `${environment.url}/rename_device_group`;
+    const url = environment.url + '/rename_device_group';
     const body = {
       id,
       name,
@@ -99,7 +102,7 @@ export class GroupsService {
   }
 
   removeGroupWithDevices(id: string) {
-    const url = `${environment.url}/remove_device_group_and_all_devices`;
+    const url = environment.url + '/remove_device_group_and_all_devices';
     const body = {
       id,
     };

@@ -14,7 +14,7 @@ export class ErrorService {
     eng: 'change super admin password',
     rus: 'Смените пароль',
   };
-  private NotFound: Error = { eng: 'not found', rus: 'Не найдено' };
+  private NotFound: Error = { eng: 'not found', rus: 'не найден' };
   private LoginOrPasswordIsEmpty: Error = {
     eng: 'login or password is empty',
     rus: 'Заполните логин и пароль',
@@ -97,7 +97,7 @@ export class ErrorService {
     eng: 'not empty group, some devices in this group, move devices before remove group',
     rus: 'Невозможно удалить. Группа содержит устройства',
   };
-  public error: string = '';
+  public error = '';
   public Errors: Error[] = [];
   constructor() {
     this.Errors.push(this.ChangeSuperAdminPassword);
@@ -131,7 +131,7 @@ export class ErrorService {
       if (error === err.eng) {
         this.error = err.rus;
         M.toast({ html: this.error });
-        console.log(this.error);
+        // console.log(this.error);
       }
     });
   }

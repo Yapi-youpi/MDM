@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
+import { Map } from 'leaflet';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MapService {
-  public map;
-  constructor() {
-  }
+  public map!: Map;
+  constructor() {}
 
   initMap(lon, lat, zoom) {
     this.map = L.map('map-container', {

@@ -7,18 +7,18 @@ import { Users } from '../interfaces/interfaces';
   providedIn: 'root',
 })
 export class UserService {
-  public token: string = '';
-  public login: string = '';
-  public last_password: string = '';
-  public upperCase: boolean = false;
-  public lowerCase: boolean = false;
-  public number: boolean = false;
-  public specialChar: boolean = false;
-  public passLength: number = 0;
+  public token = '';
+  public login = '';
+  public last_password = '';
+  public upperCase = false;
+  public lowerCase = false;
+  public number = false;
+  public specialChar = false;
+  public passLength = 0;
   constructor(private http: HttpClient) {}
 
   changePassword(password: string) {
-    const url = `${environment.url}/change_password`;
+    const url = environment.url + '/change_password';
     const body = {
       login: this.login,
       password: password,
@@ -79,15 +79,14 @@ export class UserService {
     });
   }
   changeUserState(id: string, state: boolean) {
-    const url = `${environment.url}/change_user_state`;
+    const url = environment.url + '/change_user_state';
     const body = {
       id: id,
       activeState: state,
     };
     return new Promise<boolean>((resolve, reject) => {
-      // @ts-ignore
       this.http.post(url, body).subscribe({
-        next: (res: { success: boolean; error: string }) => {
+        next: (res: { success: boolean; error: string } | any) => {
           resolve(res.success);
         },
         error: (err) => {
@@ -97,14 +96,13 @@ export class UserService {
     });
   }
   deleteUser(id: string) {
-    const url = `${environment.url}/delete_user`;
+    const url = environment.url + '/delete_user';
     const body = {
       id,
     };
     return new Promise<boolean>((resolve, reject) => {
-      // @ts-ignore
       this.http.post(url, body).subscribe({
-        next: (res: { success: boolean; error: string }) => {
+        next: (res: { success: boolean; error: string } | any) => {
           resolve(res.success);
         },
         error: (err) => {
@@ -120,11 +118,12 @@ export class UserService {
     if (!param) {
       param = id;
     }
-    const url = `${environment.url}/get_user/${param}`;
+    const url = environment.url + `/get_user/${param}`;
     return new Promise<Users[]>((resolve, reject) => {
-      // @ts-ignore
       this.http.get(url).subscribe({
-        next: (res: { users: Users[]; success: boolean; error: string }) => {
+        next: (
+          res: { users: Users[]; success: boolean; error: string } | any
+        ) => {
           resolve(res.users);
         },
         error: (err) => {
@@ -134,7 +133,7 @@ export class UserService {
     });
   }
   addUser(login: string, password: string, name: string, role: string) {
-    const url = `${environment.url}/register`;
+    const url = environment.url + '/register';
     const body = {
       login,
       password,
@@ -154,7 +153,7 @@ export class UserService {
   }
 
   renameUSer(login: string, name: string) {
-    const url = `${environment.url}/rename_user`;
+    const url = environment.url + '/rename_user';
     const body = {
       login,
       name,

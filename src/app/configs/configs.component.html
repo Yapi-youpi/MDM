@@ -1,46 +1,40 @@
 <app-menu></app-menu>
 <div class="container">
-  <div class="row" style="padding: 5px">
-    <div class="col s6"><b>Название</b></div>
-    <div class="col s6"></div>
-  </div>
-  <div class="row" style="height: 70vh; overflow: auto">
-    <div class="progress" *ngIf="loading">
-      <div class="indeterminate"></div>
-    </div>
-    <ng-container *ngFor="let config of configs">
-      <div class="row">
-        <div class="col s6">{{ config.name }}</div>
-        <div class="col s6">
-          <button
-            (click)="getID(config.ID)"
-            data-target="rename"
-            class="btn btn-small blue lighten-1 modal-trigger"
-          >
-            Изменить название
-          </button>
-          <button
-            (click)="removeConfig(config.ID)"
-            class="btn btn-small red lighten-1"
-          >
-            Удалить
-          </button>
-        </div>
+  <h3>Конфигурации</h3>
+  <div class="box">
+    <div class="row">
+      <div class="progress" *ngIf="loading">
+        <div class="indeterminate"></div>
       </div>
-    </ng-container>
-  </div>
-  <div class="row">
-    <div class="col s6">
-      <input [(ngModel)]="name" type="text" />
+      <div class="row">
+        <ng-container *ngFor="let config of configs">
+          <div
+            class="col s1 card setting-card modal-trigger"
+            data-target="setting"
+            (click)="getID(config.ID)"
+          >
+            <div class="col s12" style="display: flex; justify-content: center">
+              <i class="material-icons large">settings</i>
+            </div>
+            <p style="text-align: center">{{ config.name }}</p>
+          </div>
+        </ng-container>
+      </div>
     </div>
-    <div class="col s6">
-      <button
-        [disabled]="!name"
-        (click)="addConfig(name)"
-        class="btn btn-small blue lighten-1"
-      >
-        Добавить
-      </button>
+    <div class="row">
+      <div class="col s3">
+        <input [(ngModel)]="name" type="text" />
+      </div>
+      <div class="col s6">
+        <button
+          [disabled]="!name"
+          (click)="addConfig(name)"
+          class="btn btn-small blue lighten-1"
+        >
+          Добавить
+          <i class="material-icons left">add</i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -61,5 +55,24 @@
         <button class="btn btn-small red lighten-1 modal-close">Отмена</button>
       </div>
     </div>
+  </div>
+</div>
+<div class="modal" id="setting">
+  <div class="modal-content">
+    <div class="col s12">
+      <button
+        data-target="rename"
+        class="btn btn-small blue lighten-1 modal-trigger"
+      >
+        Изменить название
+      </button>
+      <button (click)="removeConfig(id)" class="btn btn-small red lighten-1">
+        Удалить
+      </button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="btn-flat modal-close green-text">Сохранить</a>
+    <a class="btn-flat modal-close red-text">Отменить</a>
   </div>
 </div>

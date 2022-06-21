@@ -12,10 +12,10 @@ import M from 'materialize-css';
 })
 export class GroupsComponent implements OnInit {
   public groups: Groups[] = [];
-  public loading: boolean = true;
-  public id: string = '';
-  public name: string = '';
-  public rename: string = '';
+  public loading = true;
+  public id = '';
+  public name = '';
+  public rename = '';
   constructor(
     private groupService: GroupsService,
     private userService: UserService,

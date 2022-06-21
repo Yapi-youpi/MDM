@@ -4,7 +4,7 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { UserService } from './services/user.service';
@@ -28,12 +28,18 @@ export class AppInterceptor implements HttpInterceptor {
       req.url.includes('registration') ||
       req.url.includes('address')
     ) {
+      console.log(req);
       return next.handle(req).pipe(
         tap({
-          next: () => {},
+          next: (req) => {
+            console.log(req, 'REQ');
+          },
           error: (err) => {
             if (err.error?.error) {
               this.err.errorCatch(err.error.error);
+              if (err.error.error === 'not found') {
+                err.error.error = 'Пользователь ' + err.error.error;
+              }
             }
           },
         })

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { AuthComponent } from './auth/auth.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -16,6 +16,15 @@ import { GroupsComponent } from './groups/groups.component';
 import { MapComponent } from './map/map.component';
 import { ConfigsComponent } from './configs/configs.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
+];
 
 @NgModule({
   declarations: [
@@ -37,8 +46,10 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),
     NgxQRCodeModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppInterceptor,
