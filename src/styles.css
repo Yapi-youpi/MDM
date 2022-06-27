@@ -1,6 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~leaflet/dist/leaflet.css";
 
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  font-family: HelveticaNeueCyrRegular, sans-serif;
+  font-weight: 400;
+  font-size: 16px !important;
+  /*line-height: 16px;*/
+  color: #526c9b !important;
+}
+
 .switch label input[type="checkbox"]:checked + .lever:after {
   background-color: #2196f3 !important;
 }
@@ -35,6 +62,44 @@
   background-color: #42a5f5;
   z-index: 0;
 }
+/*input:not([type]):focus:not([readonly]),*/
+/*input[type="text"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="password"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="email"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="url"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="time"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="date"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="datetime"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="datetime-local"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="tel"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="number"]:not(.browser-default):focus:not([readonly]),*/
+/*input[type="search"]:not(.browser-default):focus:not([readonly]),*/
+/*textarea.materialize-textarea:focus:not([readonly]) {*/
+/*  !*border-bottom: 1px solid #42a5f5 !important;*!*/
+/*  !*-webkit-box-shadow: 0 1px 0 0 #42a5f5 !important;*!*/
+/*  !*box-shadow: 0 1px 0 0 #42a5f5 !important;*!*/
+
+/*  !*margin: 0 !important;*!*/
+/*  !*padding: 11px !important;*!*/
+/*  */
+/*  !*background-color: #fff !important;*!*/
+/*  !*border: 1px solid #526C9B !important;*!*/
+/*}*/
+
+input {
+  height: 45px !important;
+  margin: 0 !important;
+  padding: 11px !important;
+
+  color: inherit !important;
+
+  background-color: #fff !important;
+  border: 1px solid #526c9b !important;
+  border-radius: 16px !important;
+
+  box-sizing: border-box !important;
+}
+
 input:not([type]):focus:not([readonly]),
 input[type="text"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),
@@ -48,10 +113,73 @@ input[type="tel"]:not(.browser-default):focus:not([readonly]),
 input[type="number"]:not(.browser-default):focus:not([readonly]),
 input[type="search"]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #42a5f5 !important;
-  -webkit-box-shadow: 0 1px 0 0 #42a5f5 !important;
-  box-shadow: 0 1px 0 0 #42a5f5 !important;
+  box-shadow: none !important;
 }
+
+label {
+  font-size: inherit !important;
+  color: inherit !important;
+}
+
+button,
+a.sdm-btn {
+  font-family: inherit;
+  color: inherit;
+
+  border: 1px solid #526c9b;
+
+  cursor: pointer;
+}
+
+button:disabled {
+  border-color: transparent !important;
+  background-color: #d8d8d8 !important;
+  color: #fff !important;
+
+  cursor: inherit !important;
+}
+
+button:focus {
+  background-color: inherit !important;
+}
+
+button.selected:focus {
+  background-color: #526c9b !important;
+}
+
+button.sdm-btn-medium,
+a.sdm-btn.sdm-btn-medium {
+  height: 40px;
+
+  padding: 10px 14px;
+
+  font-size: 16px;
+
+  border-radius: 14px;
+}
+
+button.sdm-btn-small,
+a.sdm-btn.sdm-btn-small {
+  height: 26px;
+
+  padding: 5px 12px;
+
+  font-size: 12px;
+
+  border-radius: 8px;
+}
+
+button.selected {
+  background-color: #526c9b;
+  color: #fff;
+}
+
+a.sdm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .progress {
   background-color: #85caf5;
 }
@@ -67,22 +195,22 @@ textarea.materialize-textarea:focus:not([readonly]) {
 [type="radio"].with-gap:checked + span:after {
   border: 2px solid #42a5f5 !important;
 }
-input:not([type]):focus:not([readonly]) + label,
-input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="password"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="url"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="time"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="date"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="datetime-local"]:not(.browser-default):focus:not([readonly])
-  + label,
-input[type="tel"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="number"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="search"]:not(.browser-default):focus:not([readonly]) + label,
-textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #42a5f5 !important;
-}
+/*input:not([type]):focus:not([readonly]) + label,*/
+/*input[type="text"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="password"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="email"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="url"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="time"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="date"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="datetime-local"]:not(.browser-default):focus:not([readonly])*/
+/*  + label,*/
+/*input[type="tel"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="number"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*input[type="search"]:not(.browser-default):focus:not([readonly]) + label,*/
+/*textarea.materialize-textarea:focus:not([readonly]) + label {*/
+/*  color: #42a5f5 !important;*/
+/*}*/
 .container {
   padding-left: 300px;
 }
@@ -102,7 +230,31 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   overflow: auto;
   padding: 10px;
 }
+
 .card {
-  border-radius: 5px !important;
-  /*padding: 10px !important;*/
+  margin: 0 !important;
+
+  background-color: transparent !important;
+
+  border-radius: 14px !important;
+
+  box-shadow: none !important;
+
+  transition: none !important;
+}
+
+.sdm-bg-light-blue {
+  background-color: #eaeff8 !important;
+}
+
+.sdm-bg-blue-select {
+  background-color: #cbd9f2 !important;
+}
+
+.sdm-bg-blue-dark {
+  background-color: #526c9b !important;
+}
+
+.sdm-bg-grey {
+  background-color: #d8d8d8;
 }

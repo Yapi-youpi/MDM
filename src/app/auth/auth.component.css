@@ -1,4 +1,57 @@
-.auth-card {
-  width: 500px;
-  margin: 10rem auto;
+.card {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 298px;
+  height: auto;
+  width: 630px;
+
+  margin: 0 auto !important;
+  margin-top: calc(50vh - (298px / 2)) !important;
+
+  padding: 52px 55px 37px 55px;
+}
+
+.formGroup:not(:nth-of-type(2)) {
+  margin-bottom: 31px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0 0 31px;
+}
+
+.btns-row {
+  justify-content: normal;
+
+  margin-left: 85px;
+  margin-top: auto;
+  margin-bottom: 0 !important;
+}
+
+.btns-row a {
+  margin-right: 28px;
+}
+
+input:not(.auth-password),
+div.password {
+  width: 436px !important;
+
+  margin-left: auto !important;
+}
+
+div.password {
+  position: relative;
+}
+
+div.password i {
+  position: absolute;
+
+  top: 8px;
+  right: 11px;
+
+  cursor: pointer;
 }

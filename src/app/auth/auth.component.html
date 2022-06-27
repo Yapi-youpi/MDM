@@ -1,45 +1,46 @@
-<form (ngSubmit)="login(user.login, user.last_password)" class="card auth-card">
-  <div class="card-content">
-    <span class="card-title">Авторизация</span>
-    <div class="formGroup">
+<form
+  (ngSubmit)="login(user.login, user.last_password)"
+  class="card sdm-bg-light-blue"
+>
+  <div class="row">
+    <label for="login"> Логин </label>
+    <input
+      [(ngModel)]="user.login"
+      id="login"
+      type="text"
+      name="login"
+      required
+    />
+  </div>
+  <div class="row">
+    <label for="password">Пароль</label>
+    <div class="password">
       <input
-        [(ngModel)]="user.login"
-        id="login"
-        type="text"
-        name="login"
-        required
-      />
-      <label for="login">Логин</label>
-    </div>
-    <div class="formGroup">
-      <input
+        class="auth-password"
         [(ngModel)]="user.last_password"
         name="password"
         id="password"
-        type="password"
+        [attr.type]="isPasswordVisible ? 'text' : 'password'"
         required
       />
-      <label for="password">Пароль</label>
-      <small class="helper-text invalid"></small>
+      <i (click)="togglePasswordVisibility()" class="small material-icons">
+        {{ isPasswordVisible ? "visibility" : "visibility_off" }}
+      </i>
     </div>
   </div>
-  <div style="display: flex; justify-content: center">
-    <p *ngIf="err.error" class="helper-text red-text invalid">
+  <ng-container>
+    <p *ngIf="err.error" class="center-align helper-text red-text invalid">
       {{ err.error }}
     </p>
-  </div>
-  <div class="card-action">
-    <div>
-      <button
-        class="btn-small blue lighten-1"
-        type="submit"
-        [disabled]="
-          user.login.trim() === '' || user.last_password.trim() === ''
-        "
-      >
-        Войти
-        <i class="material-icons right">send</i>
-      </button>
-    </div>
+  </ng-container>
+  <div class="row btns-row">
+    <a class="sdm-btn sdm-btn-medium" href=""> Зарегистрироваться </a>
+    <button
+      class="center-align sdm-btn-medium selected"
+      type="submit"
+      [disabled]="user.login.trim() === '' || user.last_password.trim() === ''"
+    >
+      Войти
+    </button>
   </div>
 </form>
