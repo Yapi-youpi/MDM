@@ -1,33 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
-import M from 'materialize-css';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Users } from '../interfaces/interfaces';
-import { interval } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { UserService } from "../../../services/user.service";
+import M from "materialize-css";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Users } from "../../../interfaces/interfaces";
+import { interval } from "rxjs";
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
+  selector: "app-users",
+  templateUrl: "./users.component.html",
+  styleUrls: ["./users.component.css"],
 })
 export class UsersComponent implements OnInit {
   public form: FormGroup;
   public users: Users[] = [];
-  public login: string = '';
+  public login: string = "";
   public loading: boolean = true;
-  public changePas: string = '';
-  public rename: string = '';
+  public changePas: string = "";
+  public rename: string = "";
   constructor(public userService: UserService) {
     this.form = new FormGroup({
-      name: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      login: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required),
+      name: new FormControl("", Validators.required),
+      password: new FormControl("", Validators.required),
+      login: new FormControl("", Validators.required),
+      role: new FormControl("", Validators.required),
     });
   }
 
   ngOnInit(): void {
-    let elem = document.querySelectorAll('.modal');
+    let elem = document.querySelectorAll(".modal");
     const options = {};
     M.Modal.init(elem, options);
     let i = interval(1000).subscribe(() => {
@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
 
   getAllUsers() {
     this.userService
-      .getUserInfo(undefined, 'all')
+      .getUserInfo(undefined, "all")
       .then((res) => {
         this.users = res;
         this.loading = false;
@@ -52,14 +52,14 @@ export class UsersComponent implements OnInit {
   }
 
   addUser() {
-    const login = this.form.get('login')?.value;
-    const name = this.form.get('name')?.value;
-    const password = this.form.get('password')?.value;
-    const role = this.form.get('role')?.value;
+    const login = this.form.get("login")?.value;
+    const name = this.form.get("name")?.value;
+    const password = this.form.get("password")?.value;
+    const role = this.form.get("role")?.value;
     this.userService
       .addUser(login, password, name, role)
       .then(() => {
-        this.userService.getUserInfo(undefined, 'all').then((res) => {
+        this.userService.getUserInfo(undefined, "all").then((res) => {
           this.users = res;
           console.log(res);
           this.sortUsers();
@@ -74,24 +74,24 @@ export class UsersComponent implements OnInit {
       .deleteUser(id)
       .then((res) => {
         console.log(res);
-        this.userService.getUserInfo(undefined, 'all').then((res) => {
+        this.userService.getUserInfo(undefined, "all").then((res) => {
           this.users = res;
           this.sortUsers();
         });
       })
       .catch((err) => {
-        if (err.error.error === 'super admin never die') {
-          M.toast({ html: 'Пользователя нельзя удалить' });
+        if (err.error.error === "super admin never die") {
+          M.toast({ html: "Пользователя нельзя удалить" });
         }
-        if (err.error.error === 'api forbidden by user, only for super admin') {
-          M.toast({ html: 'Доступ запрещен' });
+        if (err.error.error === "api forbidden by user, only for super admin") {
+          M.toast({ html: "Доступ запрещен" });
         }
       });
   }
 
   sortUsers() {
     this.users.sort((a) => {
-      if (a.role === 'admin') {
+      if (a.role === "admin") {
         return -1;
       } else {
         return 1;
@@ -111,12 +111,12 @@ export class UsersComponent implements OnInit {
       .changeUserState(id, !state)
       .then((res) => {
         if (res) {
-          M.toast({ html: 'Успешно' });
+          M.toast({ html: "Успешно" });
         }
       })
       .catch((err) => {
-        if (err.error.error === 'api forbidden by user') {
-          M.toast({ html: 'Доступ запрещен' });
+        if (err.error.error === "api forbidden by user") {
+          M.toast({ html: "Доступ запрещен" });
         }
       });
   }
@@ -127,7 +127,7 @@ export class UsersComponent implements OnInit {
     this.userService.number = false;
     this.userService.specialChar = false;
     this.userService.passLength = 0;
-    this.changePas = '';
+    this.changePas = "";
     this.login = login;
   }
 
@@ -135,10 +135,10 @@ export class UsersComponent implements OnInit {
     this.userService
       .changeUserPassword(login, password)
       .then((res) => {
-        let elem = document.getElementById('changeUserPass');
+        let elem = document.getElementById("changeUserPass");
         let inst = M.Modal.getInstance(elem);
         inst.close();
-        this.changePas = '';
+        this.changePas = "";
         console.log(res);
       })
       .catch((err) => {

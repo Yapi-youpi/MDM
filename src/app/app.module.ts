@@ -1,22 +1,26 @@
 import { NgModule } from "@angular/core";
+
 import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule, Routes } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LocationStrategy, PathLocationStrategy } from "@angular/common";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+
+import { IonicStorageModule } from "@ionic/storage-angular";
+import { NgxQRCodeModule } from "@techiediaries/ngx-qrcode";
+
+import { AppRoutingModule } from "./app-routing/app-routing.module";
+import { AppInterceptor } from "./app.interceptor";
 
 import { AppComponent } from "./app.component";
-import { RouterModule, Routes } from "@angular/router";
-import { UsersComponent } from "./users/users.component";
-import { AuthComponent } from "./auth/auth.component";
-import { AppRoutingModule } from "./app-routing/app-routing.module";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { AppInterceptor } from "./app.interceptor";
-import { MenuComponent } from "./menu/menu.component";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { IonicStorageModule } from "@ionic/storage-angular";
-import { DevicesComponent } from "./devices/devices.component";
-import { GroupsComponent } from "./groups/groups.component";
-import { MapComponent } from "./map/map.component";
-import { ConfigsComponent } from "./configs/configs.component";
-import { NgxQRCodeModule } from "@techiediaries/ngx-qrcode";
-import { LocationStrategy, PathLocationStrategy } from "@angular/common";
+import { AuthComponent } from "./components/pages/auth/auth.component";
+import { UsersComponent } from "./components/pages/users/users.component";
+import { MenuComponent } from "./components/common/menu/menu.component";
+import { DevicesComponent } from "./components/pages/devices/devices.component";
+import { GroupsComponent } from "./components/pages/groups/groups.component";
+import { MapComponent } from "./components/pages/map/map.component";
+import { ConfigsComponent } from "./components/pages/configs/configs.component";
+import { UserComponent } from "./components/common/user/user.component";
 
 const routes: Routes = [
   {
@@ -36,6 +40,7 @@ const routes: Routes = [
     GroupsComponent,
     MapComponent,
     ConfigsComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

@@ -56,7 +56,6 @@ body {
 
   margin-left: 12px !important;
   margin-right: 12px !important;
-  /*padding-top: 5rem;*/
 }
 
 [type="checkbox"].filled-in:checked + span:not(.lever):after {
@@ -255,6 +254,14 @@ a.sdm-btn {
   box-shadow: none !important;
 
   transition: none !important;
+}
+
+.divider {
+  height: 2px !important;
+
+  /*margin: 5px 0;*/
+
+  background-color: #cbd9f2 !important;
 }
 
 .sdm-bg-light-blue {

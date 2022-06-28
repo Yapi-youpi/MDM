@@ -1,19 +1,24 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../services/auth.service";
-import { UserService } from "../services/user.service";
+import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import M from "materialize-css";
-import { AssetService } from "../services/asset.service";
+
+import { AuthService } from "../../../services/auth.service";
+import { UserService } from "../../../services/user.service";
+import { AssetService } from "../../../services/asset.service";
 
 @Component({
-  selector: "app-menu",
-  templateUrl: "./menu.component.html",
-  styleUrls: ["./menu.component.css"],
+  selector: "app-user",
+  templateUrl: "./user.component.html",
+  styleUrls: ["./user.component.css"],
 })
-export class MenuComponent implements OnInit {
-  public isSidebarHidden: boolean = false;
+export class UserComponent {
+  @ViewChild("popup_btn") public btnRef!: ElementRef;
+  @ViewChild("popup") public popupRef!: ElementRef;
+
+  public isPopupOpen: boolean = false;
 
   constructor(
+    private elementRef: ElementRef,
     private auth: AuthService,
     public user: UserService,
     public router: Router,
@@ -29,16 +34,15 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    let path = window.location.pathname.slice(1);
-    let elem = document.getElementById(`${path}`);
-    if (elem) {
-      elem.classList.add("active");
+  @HostListener("document:mousedown", ["$event"])
+  onGlobalClick(event): void {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.isPopupOpen = false;
     }
   }
 
-  toggleSidebarView() {
-    this.isSidebarHidden = !this.isSidebarHidden;
+  togglePopup() {
+    this.isPopupOpen = !this.isPopupOpen;
   }
 
   logout() {

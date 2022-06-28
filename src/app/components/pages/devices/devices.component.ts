@@ -1,17 +1,17 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
-import { UserService } from "../services/user.service";
-import { DevicesService } from "../services/devices.service";
+import { UserService } from "../../../services/user.service";
+import { DevicesService } from "../../../services/devices.service";
 import { interval } from "rxjs";
-import { Device, DevicesConfig, Groups } from "../interfaces/interfaces";
+import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
 import M from "materialize-css";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { GroupsService } from "../services/groups.service";
-import { DevicesConfigService } from "../services/devices-config.service";
+import { GroupsService } from "../../../services/groups.service";
+import { DevicesConfigService } from "../../../services/devices-config.service";
 import {
   NgxQrcodeElementTypes,
   NgxQrcodeErrorCorrectionLevels,
 } from "@techiediaries/ngx-qrcode";
-import { DatabaseService } from "../services/database.service";
+import { DatabaseService } from "../../../services/database.service";
 
 @Component({
   selector: "app-devices",

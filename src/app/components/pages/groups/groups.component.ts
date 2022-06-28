@@ -1,21 +1,21 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { GroupsService } from '../services/groups.service';
-import { UserService } from '../services/user.service';
-import { interval } from 'rxjs';
-import { Groups } from '../interfaces/interfaces';
-import M from 'materialize-css';
+import { Component, ElementRef, OnInit } from "@angular/core";
+import { GroupsService } from "../../../services/groups.service";
+import { UserService } from "../../../services/user.service";
+import { interval } from "rxjs";
+import { Groups } from "../../../interfaces/interfaces";
+import M from "materialize-css";
 
 @Component({
-  selector: 'app-groups',
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.css'],
+  selector: "app-groups",
+  templateUrl: "./groups.component.html",
+  styleUrls: ["./groups.component.css"],
 })
 export class GroupsComponent implements OnInit {
   public groups: Groups[] = [];
   public loading = true;
-  public id = '';
-  public name = '';
-  public rename = '';
+  public id = "";
+  public name = "";
+  public rename = "";
   constructor(
     private groupService: GroupsService,
     private userService: UserService,
@@ -23,12 +23,12 @@ export class GroupsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let elem = this.elementRef.nativeElement.querySelectorAll('.modal');
+    let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
     M.Modal.init(elem);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
-        this.getGroups('all');
+        this.getGroups("all");
       }
     });
   }
@@ -51,8 +51,8 @@ export class GroupsComponent implements OnInit {
       .addGroups(name)
       .then((res) => {
         console.log(res);
-        this.name = '';
-        this.getGroups('all');
+        this.name = "";
+        this.getGroups("all");
       })
       .catch((err) => {
         console.log(err);
@@ -75,7 +75,7 @@ export class GroupsComponent implements OnInit {
       .removeGroup(id)
       .then((res) => {
         console.log(res);
-        this.getGroups('all');
+        this.getGroups("all");
       })
       .catch((err) => {
         console.log(err);
@@ -85,8 +85,8 @@ export class GroupsComponent implements OnInit {
   renameGroup(id: string, name: string) {
     this.groupService.renameGroup(id, name).then((res) => {
       console.log(res);
-      this.rename = '';
-      this.getGroups('all');
+      this.rename = "";
+      this.getGroups("all");
     });
   }
 

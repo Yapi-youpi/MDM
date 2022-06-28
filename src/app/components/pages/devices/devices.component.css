@@ -1,4 +1,7 @@
 .global-wrapper {
+  /*min-width: calc(100vw - 36px - 280px);*/
+  /*width: 100% !important;*/
+
   display: flex;
   flex-direction: row;
 
@@ -7,15 +10,25 @@
 
 .content-container {
   height: calc(100vh - 24px);
+  width: 100%;
 
   margin-top: 12px;
-  /*padding: 27px 22px;*/
 }
 
 .card {
   height: 100%;
 
   padding: 27px 22px;
+}
+
+.header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
 }
 
 h2 {
