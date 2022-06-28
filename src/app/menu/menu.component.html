@@ -1,41 +1,76 @@
-<div class="sidenav sidenav-fixed blue">
-  <ul>
-    <li class="brand-logo">
-      <img src="assets/c9K2Y9r5Keo.jpg" alt="" />
-    </li>
-    <li>
-      <a id="devices" [routerLink]="'/devices'"
-        >Устройства<i class="material-icons left">phone_android</i></a
-      >
-    </li>
-    <li>
-      <a id="groups" [routerLink]="'/groups'">
-        <i class="material-icons left">dataset</i>Группы устройств</a
-      >
-    </li>
-    <li>
-      <a id="config" [routerLink]="'/config'"
-        ><i class="material-icons left">settings</i>Конфигурации</a
-      >
-    </li>
-    <li>
-      <a id="users" [routerLink]="'/users'"
-        ><i class="material-icons left">group</i>Пользователи</a
-      >
-    </li>
-    <li>
-      <a id="map" [routerLink]="'/map'"
-        ><i class="material-icons left">map</i>Карта</a
-      >
-    </li>
-  </ul>
+<aside class="sdm-bg-light-blue" [class.hidden]="isSidebarHidden">
+  <div class="content">
+    <div class="header" [class.shift]="isSidebarHidden">
+      <button (click)="toggleSidebarView()" [class.shift]="isSidebarHidden">
+        <i class="material-icons">view_headline</i>
+      </button>
+      <h1 *ngIf="!isSidebarHidden">SDM</h1>
+    </div>
+    <ul>
+      <li>
+        <a id="devices" [routerLink]="'/devices'">
+          <i class="material-icons">phone_android</i>
+          Устройства
+        </a>
+      </li>
+      <li>
+        <a id="groups" [routerLink]="'/groups'">
+          <i class="material-icons">devices</i>
+          Группы устройств
+        </a>
+      </li>
+      <li>
+        <a id="apps" [routerLink]="'/apps'">
+          <i class="material-icons">apps</i>
+          Приложения
+        </a>
+      </li>
+      <li>
+        <a id="messages" [routerLink]="'/messages'">
+          <i class="material-icons">mail</i>
+          Сообщения
+        </a>
+      </li>
+      <li>
+        <a id="map" [routerLink]="'/map'">
+          <i class="material-icons">map</i>
+          Карта
+        </a>
+      </li>
+    </ul>
+  </div>
   <div class="divider"></div>
-  <ul class="">
-    <li>
-      <a><i class="material-icons left">person</i>{{ user.login }}</a>
-    </li>
-    <li>
-      <a (click)="logout()"><i class="material-icons left">logout</i> Выйти </a>
-    </li>
-  </ul>
-</div>
+  <div class="content">
+    <ul>
+      <li>
+        <a id="config" [routerLink]="'/config'">
+          <i class="material-icons">settings</i>
+          Конфигурации
+        </a>
+      </li>
+      <li>
+        <a id="users" [routerLink]="'/users'">
+          <i class="material-icons">supervisor_account</i>
+          Пользователи
+        </a>
+      </li>
+      <!--    <li>-->
+      <!--      <a><i class="material-icons">person</i>{{ user.login }}</a>-->
+      <!--    </li>-->
+      <!--    <li>-->
+      <!--      <a (click)="logout()"><i class="material-icons">logout</i> Выйти </a>-->
+      <!--    </li>-->
+    </ul>
+  </div>
+  <div class="divider"></div>
+  <div class="content">
+    <ul>
+      <li>
+        <a id="help" [routerLink]="'/help'">
+          <i class="material-icons">help</i>
+          Помощь
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>

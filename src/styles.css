@@ -49,11 +49,16 @@ body {
 .col {
   word-break: break-word;
 }
-.container {
-  max-width: 100% !important;
-  width: 97% !important;
+
+.content-container {
+  /*max-width: 100% !important;*/
+  /*width: 97% !important;*/
+
+  margin-left: 12px !important;
+  margin-right: 12px !important;
   /*padding-top: 5rem;*/
 }
+
 [type="checkbox"].filled-in:checked + span:not(.lever):after {
   top: 0;
   width: 20px;
@@ -121,6 +126,10 @@ label {
   color: inherit !important;
 }
 
+a {
+  color: inherit !important;
+}
+
 button,
 a.sdm-btn {
   font-family: inherit;
@@ -180,6 +189,12 @@ a.sdm-btn {
   justify-content: center;
 }
 
+.sidenav {
+  padding-bottom: 0 !important;
+
+  box-shadow: none !important;
+}
+
 .progress {
   background-color: #85caf5;
 }
@@ -211,19 +226,18 @@ a.sdm-btn {
 /*textarea.materialize-textarea:focus:not([readonly]) + label {*/
 /*  color: #42a5f5 !important;*/
 /*}*/
+
 .container {
-  padding-left: 300px;
+  /*padding-left: 300px;*/
 }
-.divider {
-  background-color: black !important;
-}
+
 ::-webkit-scrollbar {
   width: 8px;
   background: none;
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #42a5f5;
+  background-color: #526c9b;
 }
 .box {
   max-height: 70vh;

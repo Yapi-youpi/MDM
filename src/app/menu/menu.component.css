@@ -1,10 +1,116 @@
-.active {
-  color: white;
+aside {
+  height: calc(100vh - 24px);
+  width: 280px;
+
+  margin: 12px 0 12px 18px;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  transition: width 0.3s ease;
 }
-.active i {
-  color: white;
+
+aside.hidden {
+  width: 76px;
 }
-.brand-logo > img {
-  padding: 1rem;
+
+aside .content {
+  margin: 0 12px;
+}
+
+aside .header {
+  display: flex;
+  align-items: center;
+
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+aside .header.shift {
+  margin-bottom: 30px;
+}
+
+aside .header button {
+  width: 24px;
+
+  margin-left: 14px;
+  margin-right: 12px;
+
+  border: none;
+}
+
+aside .header button.shift {
+  margin-top: 10px;
+}
+
+aside .header h1 {
+  display: inline-block;
+
+  margin: 0;
+
+  font-size: 40px;
+
+  transition: all 0.3s ease;
+}
+
+aside li {
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+}
+
+aside li a:hover,
+aside li a.active {
+  background-color: #cbd9f2;
+
+  border-radius: 8px;
+}
+
+aside li a {
+  height: 100%;
   width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px !important;
+
+  font-size: 16px !important;
+  white-space: nowrap;
+
+  overflow: hidden;
+}
+
+aside .material-icons {
+  height: 24px;
+  width: 24px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 12px;
+
+  font-size: 16px !important;
+
+  background-color: #526c9b;
+  color: #eaeff8 !important;
+
+  border-radius: 12px;
+}
+
+.active {
+  background-color: #cbd9f2;
+}
+
+aside .divider {
+  height: 2px;
+
+  margin: 5px 0;
+
+  background-color: #cbd9f2;
 }

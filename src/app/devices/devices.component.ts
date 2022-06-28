@@ -1,26 +1,26 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { DevicesService } from '../services/devices.service';
-import { interval } from 'rxjs';
-import { Device, DevicesConfig, Groups } from '../interfaces/interfaces';
-import M from 'materialize-css';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GroupsService } from '../services/groups.service';
-import { DevicesConfigService } from '../services/devices-config.service';
+import { Component, ElementRef, OnInit } from "@angular/core";
+import { UserService } from "../services/user.service";
+import { DevicesService } from "../services/devices.service";
+import { interval } from "rxjs";
+import { Device, DevicesConfig, Groups } from "../interfaces/interfaces";
+import M from "materialize-css";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { GroupsService } from "../services/groups.service";
+import { DevicesConfigService } from "../services/devices-config.service";
 import {
   NgxQrcodeElementTypes,
   NgxQrcodeErrorCorrectionLevels,
-} from '@techiediaries/ngx-qrcode';
-import { DatabaseService } from '../services/database.service';
+} from "@techiediaries/ngx-qrcode";
+import { DatabaseService } from "../services/database.service";
 
 @Component({
-  selector: 'app-devices',
-  templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.css'],
+  selector: "app-devices",
+  templateUrl: "./devices.component.html",
+  styleUrls: ["./devices.component.css"],
 })
 export class DevicesComponent implements OnInit {
-  public password = '';
-  public new_password = '';
+  public password = "";
+  public new_password = "";
   public devices: Device[] = [];
   public form: FormGroup;
   private add_device!: Device;
@@ -30,7 +30,8 @@ export class DevicesComponent implements OnInit {
   public configs: DevicesConfig[] = [];
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  public valueQR = '';
+  public valueQR = "";
+
   constructor(
     public userService: UserService,
     private device: DevicesService,
@@ -40,17 +41,17 @@ export class DevicesComponent implements OnInit {
     public db: DatabaseService
   ) {
     this.form = new FormGroup({
-      name: new FormControl('', Validators.required),
-      phone_number: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      device_config_id: new FormControl('02e0f851-9b85-4c10-8814-4beb70134b63'),
-      device_group_id: new FormControl('bc5a083f-1361-4619-b4ec-2a81cdbe6a26'),
-      device_id: new FormControl(''),
+      name: new FormControl("", Validators.required),
+      phone_number: new FormControl("", Validators.required),
+      description: new FormControl("", Validators.required),
+      device_config_id: new FormControl("02e0f851-9b85-4c10-8814-4beb70134b63"),
+      device_group_id: new FormControl("bc5a083f-1361-4619-b4ec-2a81cdbe6a26"),
+      device_id: new FormControl(""),
     });
   }
 
   ngOnInit(): void {
-    let elem = this.elementRef.nativeElement.querySelectorAll('.modal');
+    let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
     const options = {
       dismissible: false,
       onCloseEnd: () => {
@@ -58,7 +59,7 @@ export class DevicesComponent implements OnInit {
         this.edit = false;
       },
     };
-    let q = this.db.query('Device');
+    let q = this.db.query("Device");
     q.findAll().then((res) => {
       res.map(() => {
         // console.log(device.toJSON());
@@ -79,8 +80,8 @@ export class DevicesComponent implements OnInit {
       .changePassword(pass)
       .then((res) => {
         console.log(res);
-        this.password = '';
-        this.new_password = '';
+        this.password = "";
+        this.new_password = "";
       })
       .catch((res) => {
         console.log(res);
@@ -89,7 +90,7 @@ export class DevicesComponent implements OnInit {
 
   getAllDevices() {
     this.device
-      .getDevice('all')
+      .getDevice("all")
       .then((res: { devices: Device[]; success: boolean; error: string }) => {
         console.log(res);
         this.loading = false;
@@ -117,34 +118,34 @@ export class DevicesComponent implements OnInit {
 
   editDevice(device: Device) {
     let i = interval(1000).subscribe(() => {
-      let elem = this.elementRef.nativeElement.querySelector('select');
+      let elem = this.elementRef.nativeElement.querySelector("select");
       if (elem) {
         i.unsubscribe();
         M.FormSelect.init(elem);
       }
     });
     this.edit = true;
-    this.form.addControl('imei', new FormControl(device.imei));
+    this.form.addControl("imei", new FormControl(device.imei));
     this.form.addControl(
-      'device_group_id',
+      "device_group_id",
       new FormControl(device.device_group_id)
     );
-    this.form.addControl('model', new FormControl(device.model));
+    this.form.addControl("model", new FormControl(device.model));
     this.form.addControl(
-      'device_config_id',
+      "device_config_id",
       new FormControl(device.device_config_id)
     );
-    this.form.addControl('online_state', new FormControl(device.online_state));
-    this.form.addControl('active_state', new FormControl(device.active_state));
+    this.form.addControl("online_state", new FormControl(device.online_state));
+    this.form.addControl("active_state", new FormControl(device.active_state));
     this.form.addControl(
-      'battery_percent',
+      "battery_percent",
       new FormControl(device.battery_percent)
     );
     this.form.addControl(
-      'launcher_version',
+      "launcher_version",
       new FormControl(device.launcher_version)
     );
-    this.form.addControl('qr_code', new FormControl(device.qr_code));
+    this.form.addControl("qr_code", new FormControl(device.qr_code));
     this.form.patchValue(device);
   }
 
@@ -174,14 +175,14 @@ export class DevicesComponent implements OnInit {
   }
 
   getGroups() {
-    this.groupsService.getGroups('all').then((res) => {
+    this.groupsService.getGroups("all").then((res) => {
       this.groups = res;
     });
   }
 
   getConfigs() {
     this.configService
-      .getConfig('all')
+      .getConfig("all")
       .then(
         (res: {
           success: boolean;
