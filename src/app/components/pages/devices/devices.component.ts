@@ -1,16 +1,17 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { interval } from "rxjs";
+import M from "materialize-css";
+// import {
+//   NgxQrcodeElementTypes,
+//   NgxQrcodeErrorCorrectionLevels,
+// } from "@techiediaries/ngx-qrcode";
+
 import { UserService } from "../../../services/user.service";
 import { DevicesService } from "../../../services/devices.service";
-import { interval } from "rxjs";
 import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
-import M from "materialize-css";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { GroupsService } from "../../../services/groups.service";
 import { DevicesConfigService } from "../../../services/devices-config.service";
-import {
-  NgxQrcodeElementTypes,
-  NgxQrcodeErrorCorrectionLevels,
-} from "@techiediaries/ngx-qrcode";
 import { DatabaseService } from "../../../services/database.service";
 
 @Component({
@@ -28,17 +29,17 @@ export class DevicesComponent implements OnInit {
   public loading = true;
   public groups: Groups[] = [];
   public configs: DevicesConfig[] = [];
-  public elementType = NgxQrcodeElementTypes.URL;
-  public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  // public elementType = NgxQrcodeElementTypes.URL;
+  // public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   public valueQR = "";
+  public currentTitle = "";
 
   constructor(
     public userService: UserService,
     private device: DevicesService,
     private elementRef: ElementRef,
     private groupsService: GroupsService,
-    private configService: DevicesConfigService,
-    public db: DatabaseService
+    private configService: DevicesConfigService // public db: DatabaseService
   ) {
     this.form = new FormGroup({
       name: new FormControl("", Validators.required),
@@ -51,21 +52,38 @@ export class DevicesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
-    const options = {
+    // let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
+    let nonClosingModal =
+      this.elementRef.nativeElement.querySelector(".non-closing");
+    let closingModal =
+      this.elementRef.nativeElement.querySelectorAll(".closing");
+
+    // const options = {
+    //   dismissible: false,
+    //   onCloseEnd: () => {
+    //     this.form.reset();
+    //     // this.edit = false;
+    //   },
+    // };
+
+    // let q = this.db.query("Device");
+
+    // q.findAll().then((res) => {
+    //   res.map(() => {
+    //     // console.log(device.toJSON());
+    //   });
+    // });
+
+    M.Modal.init(nonClosingModal, {
       dismissible: false,
       onCloseEnd: () => {
         this.form.reset();
-        this.edit = false;
       },
-    };
-    let q = this.db.query("Device");
-    q.findAll().then((res) => {
-      res.map(() => {
-        // console.log(device.toJSON());
-      });
     });
-    M.Modal.init(elem, options);
+    M.Modal.init(closingModal, {
+      dismissible: true,
+    });
+
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
@@ -75,6 +93,7 @@ export class DevicesComponent implements OnInit {
       }
     });
   }
+
   changePassword(pass: string) {
     this.userService
       .changePassword(pass)
@@ -203,7 +222,8 @@ export class DevicesComponent implements OnInit {
       }
     });
   }
-  getQR(qr: any) {
+  getQR(title: string, qr: any) {
+    this.currentTitle = title;
     this.valueQR = JSON.stringify(qr);
   }
 }

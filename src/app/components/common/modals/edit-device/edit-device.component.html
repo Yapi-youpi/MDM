@@ -1,0 +1,132 @@
+<div id="edit_device" class="modal closing modal-fixed-footer">
+  <div class="modal-content">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col s6">
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Название устройства"
+          />
+          <label for="name">Название</label>
+        </div>
+        <div class="col s6">
+          <input
+            type="text"
+            id="phone_number"
+            formControlName="phone_number"
+            placeholder="Номер телефона"
+          />
+          <label for="phone_number">Номер телефона</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <input
+            type="text"
+            id="description"
+            formControlName="description"
+            placeholder="Описание"
+          />
+          <label for="description">Описание</label>
+        </div>
+      </div>
+      <ng-container *ngIf="edit">
+        <div class="row">
+          <div class="col s6">
+            <input
+              id="battery"
+              readonly
+              type="text"
+              formControlName="battery_percent"
+            />
+            <label for="battery">Батарея</label>
+          </div>
+          <div class="col s6">
+            <input id="model" readonly type="text" formControlName="model" />
+            <label for="model">Модель</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <input
+              id="online"
+              readonly
+              type="text"
+              formControlName="online_state"
+            />
+            <label for="online"></label>
+          </div>
+          <div class="col s6">
+            <input
+              id="active_state"
+              readonly
+              type="text"
+              formControlName="model"
+            />
+            <label for="model">Состояние</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <input
+              readonly
+              id="launcher"
+              formControlName="launcher_version"
+              type="text"
+            />
+            <label for="launcher">Лаунчер</label>
+          </div>
+        </div>
+      </ng-container>
+      <div class="row">
+        <ng-container *ngFor="let group of groups">
+          <p class="col s6">
+            <label>
+              <input
+                [value]="group.id"
+                type="radio"
+                formControlName="device_group_id"
+              />
+              <span>{{ group.name }}</span>
+            </label>
+          </p>
+        </ng-container>
+      </div>
+      <div class="row">
+        <ng-container *ngFor="let config of configs">
+          <p class="col s6">
+            <label>
+              <input
+                [value]="config.ID"
+                type="radio"
+                formControlName="device_config_id"
+              />
+              <span>{{ config.name }}</span>
+            </label>
+          </p>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+<!--    <button-->
+<!--      (click)="addDevice()"-->
+<!--      [disabled]="form.invalid"-->
+<!--      *ngIf="!edit"-->
+<!--      class="btn-flat modal-close green-text"-->
+<!--    >-->
+<!--      Добавить-->
+<!--    </button>-->
+    <button
+      (click)="saveChange()"
+      [disabled]="form.invalid"
+      *ngIf="edit"
+      class="btn-flat modal-close green-text"
+    >
+      Сохранить
+    </button>
+    <button class="btn-flat modal-close red-text">Отмена</button>
+  </div>
+</div>

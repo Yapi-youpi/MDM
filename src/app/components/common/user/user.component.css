@@ -16,6 +16,8 @@
   border-radius: 15px;
 
   background-color: #526c9b;
+
+  box-shadow: 0 0 10px 0 #85858540;
 }
 
 .user-popup {
@@ -27,8 +29,6 @@
   right: 0;
 
   padding: 16px 17px;
-
-  border-radius: 14px;
 
   background-color: #fff;
 
@@ -51,8 +51,6 @@
 
   margin-right: 16px;
 
-  border-radius: 15px;
-
   box-shadow: 0 0 10px 0 #85858540;
 }
 
@@ -69,7 +67,6 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 8px;
   border: none;
 
   background-color: #526c9b;

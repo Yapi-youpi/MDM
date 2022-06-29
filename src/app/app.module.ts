@@ -21,6 +21,8 @@ import { GroupsComponent } from "./components/pages/groups/groups.component";
 import { MapComponent } from "./components/pages/map/map.component";
 import { ConfigsComponent } from "./components/pages/configs/configs.component";
 import { UserComponent } from "./components/common/user/user.component";
+import { QrCodeComponent } from "./components/common/modals/qr-code/qr-code.component";
+import { EditDeviceComponent } from "./components/common/modals/edit-device/edit-device.component";
 
 const routes: Routes = [
   {
@@ -41,6 +43,8 @@ const routes: Routes = [
     MapComponent,
     ConfigsComponent,
     UserComponent,
+    EditDeviceComponent,
+    QrCodeComponent,
   ],
   imports: [
     BrowserModule,

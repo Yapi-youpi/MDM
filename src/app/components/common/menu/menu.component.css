@@ -1,10 +1,9 @@
 aside {
-  height: calc(100vh - 24px);
+  height: 100%;
   width: 280px;
 
-  margin: 12px 0 12px 18px;
-
-  border-radius: 14px;
+  /*margin: 12px 0 12px 18px;*/
+  margin-right: 12px;
 
   overflow: hidden;
 
@@ -99,8 +98,6 @@ aside .material-icons {
 
   background-color: #526c9b;
   color: #eaeff8 !important;
-
-  border-radius: 12px;
 }
 
 .active {
@@ -108,9 +105,5 @@ aside .material-icons {
 }
 
 aside .divider {
-  /*height: 2px;*/
-
   margin: 5px 0;
-
-  /*background-color: #cbd9f2;*/
 }

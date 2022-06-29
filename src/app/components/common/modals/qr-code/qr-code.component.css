@@ -1,0 +1,16 @@
+#qr-code {
+  height: 695px !important;
+  width: 594px;
+}
+
+#qr-code .qr-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 30px;
+}
+
+#qr-code .action-btns button {
+  padding: 5px 14px;
+}
