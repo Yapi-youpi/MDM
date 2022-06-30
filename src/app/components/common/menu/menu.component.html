@@ -1,4 +1,4 @@
-<aside class="sdm-bg-light-blue r-14" [class.hidden]="isSidebarHidden">
+<aside class="sdm-bg-light-grey r-14" [class.hidden]="isSidebarHidden">
   <div class="content">
     <div class="header" [class.shift]="isSidebarHidden">
       <button (click)="toggleSidebarView()" [class.shift]="isSidebarHidden">
@@ -9,31 +9,41 @@
     <ul>
       <li>
         <a id="devices" [routerLink]="'/devices'">
-          <i class="material-icons r-round">phone_android</i>
+          <div class="icon-container devices">
+            <span></span>
+          </div>
           Устройства
         </a>
       </li>
       <li>
         <a id="groups" [routerLink]="'/groups'">
-          <i class="material-icons r-round">devices</i>
+          <div class="icon-container groups">
+            <span></span>
+          </div>
           Группы устройств
         </a>
       </li>
       <li>
         <a id="apps" [routerLink]="'/apps'">
-          <i class="material-icons r-round">apps</i>
+          <div class="icon-container apps">
+            <span></span>
+          </div>
           Приложения
         </a>
       </li>
       <li>
         <a id="messages" [routerLink]="'/messages'">
-          <i class="material-icons r-round">mail</i>
+          <div class="icon-container messages">
+            <span></span>
+          </div>
           Сообщения
         </a>
       </li>
       <li>
         <a id="map" [routerLink]="'/map'">
-          <i class="material-icons r-round">map</i>
+          <div class="icon-container map">
+            <span></span>
+          </div>
           Карта
         </a>
       </li>
@@ -44,13 +54,17 @@
     <ul>
       <li>
         <a id="config" [routerLink]="'/config'">
-          <i class="material-icons r-round">settings</i>
+          <div class="icon-container config">
+            <span></span>
+          </div>
           Конфигурации
         </a>
       </li>
       <li>
         <a id="users" [routerLink]="'/users'">
-          <i class="material-icons r-round">supervisor_account</i>
+          <div class="icon-container users">
+            <span></span>
+          </div>
           Пользователи
         </a>
       </li>
@@ -61,7 +75,9 @@
     <ul>
       <li>
         <a id="help" [routerLink]="'/help'">
-          <i class="material-icons r-round">help</i>
+          <div class="icon-container help">
+            <span></span>
+          </div>
           Помощь
         </a>
       </li>

@@ -1,7 +1,7 @@
 <div class="global-wrapper">
   <app-menu></app-menu>
   <div class="content-container">
-    <div class="card sdm-bg-light-blue">
+    <div class="card sdm-bg-light-grey">
       <div class="card-header">
         <h2>Устройства</h2>
         <!--    Место для кнопки добавления/редактирования и пр.    -->
@@ -13,26 +13,35 @@
       </div>
       <div class="body">
         <div class="sort row">
-          <button class="check-btn"></button>
-          <p>Статус</p>
-          <button class="power-up-date">
-            Дата вкл. <i class="material-icons tiny">keyboard_arrow_down</i>
-          </button>
-          <button class="name">
-            Название <i class="material-icons tiny">keyboard_arrow_down</i>
-          </button>
-          <p>Описание</p>
-          <p>Телефон</p>
-          <p>IMEI</p>
-          <p>Модель</p>
-          <p>Конфигурация</p>
-          <p>Обновление</p>
-          <p>Группа</p>
-          <button class="battery">
-            Заряд <i class="material-icons tiny">keyboard_arrow_down</i>
-          </button>
-          <p>Состояние</p>
-          <p>Действия</p>
+          <div class="checkbox-container">
+            <label>
+              <input type="checkbox" class="filled-in main-checkbox" />
+              <span></span>
+            </label>
+          </div>
+          <div class="content">
+            <button class="status">
+              Статус <i class="material-icons tiny">keyboard_arrow_down</i>
+            </button>
+            <button class="power-up-date">
+              Дата вкл. <i class="material-icons tiny">keyboard_arrow_down</i>
+            </button>
+            <button class="name">
+              Название <i class="material-icons tiny">keyboard_arrow_down</i>
+            </button>
+            <p>Описание</p>
+            <p>Телефон</p>
+            <p>IMEI</p>
+            <p>Модель</p>
+            <p>Конфигурация</p>
+            <p>Обновление</p>
+            <p>Группа</p>
+            <button class="battery">
+              Заряд <i class="material-icons tiny">keyboard_arrow_down</i>
+            </button>
+            <p>Состояние</p>
+            <p>Действия</p>
+          </div>
         </div>
         <div class="list">
           <div *ngIf="devices.length === 0 && !loading">
@@ -40,7 +49,13 @@
           </div>
           <ng-container *ngFor="let device of devices">
             <div class="item row">
-              <button class="check-btn"></button>
+              <!--              <button class="check-btn"></button>-->
+              <div class="checkbox-container">
+                <label>
+                  <input type="checkbox" class="filled-in main-checkbox" />
+                  <span></span>
+                </label>
+              </div>
               <div class="content r-14">
                 <div class="status">
                   <span
@@ -51,13 +66,29 @@
                 </div>
                 <p>123</p>
                 <p>{{ device.name }}</p>
-                <p>{{ device.description }}</p>
+                <p class="desc">{{ device.description }}</p>
                 <p>{{ device.phone_number }}</p>
-                <p>{{ device.imei }}</p>
-                <p>{{ device.model }}</p>
-                <p>{{ device.device_config_id }}</p>
-                <span class="update">123</span>
-                <p>123</p>
+                <p>012345678912345</p>
+                <p>Meizu 10</p>
+<!--                <p>{{ device.imei }}</p>-->
+<!--                <p>{{ device.model }}</p>-->
+                <div class="input-field">
+                  <select
+                    class="config-select"
+                    (change)="setDeviceConfig(device, $event)"
+                  >
+                    <option value="0" selected>По умолчанию</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+                <div class="status update">
+                  <span
+                    class="r-round active"
+                  ></span>
+                </div>
+                <p>Санкт-Петербург</p>
                 <p>{{ device.battery_percent }}%</p>
                 <div class="switch">
                   <label>
@@ -230,8 +261,5 @@
     [addDevice]="addDevice"
     [saveChange]="saveChange"
   ></app-edit-device>
-  <app-qr-code
-    [title]="currentTitle"
-    [valueQR]="valueQR"
-  ></app-qr-code>
+  <app-qr-code [title]="currentTitle" [valueQR]="valueQR"></app-qr-code>
 </div>

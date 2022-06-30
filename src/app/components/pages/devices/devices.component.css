@@ -1,149 +1,163 @@
 .card {
   padding: 27px 22px;
+
+  flex-grow: 1;
 }
 
 .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-header h2 {
+  margin: 0;
+
+  font-size: 24px;
+  color: #32485e;
+}
+
+.sort {
+  margin-top: 22px;
+}
+
+.sort .content,
+.item .content {
   width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  font-size: 12px;
+  color: #32485e;
 }
 
-h2 {
-  margin: 0;
-
-  font-size: 24px;
-}
-
-.check-btn {
-  height: 16px;
+/* Чекбокс */
+.sort > .checkbox-container,
+.item > .checkbox-container {
   width: 16px;
 
-  margin-right: 14px;
-
-  border-color: #cbd9f2;
-  border-radius: 2px;
-  background-color: transparent;
+  margin-right: 10px;
 }
-
-.sort {
-  justify-content: space-between;
-
-  margin-top: 22px;
-  margin-bottom: 0;
-}
-
-.sort,
-.item .content {
-  font-size: 12px;
-  color: #4b4e51;
-}
-
-/*table.head,*/
-/*table.body {*/
-/*  font-size: 12px;*/
-/*  color: #4b4e51;*/
-/*}*/
-
-/*.box {*/
-/*  max-height: 300px;*/
-
-/*  overflow-y: auto;*/
-/*}*/
-
-.body button:not(.check-btn) {
-  display: flex;
-  align-items: center;
-
-  border: none;
-
-  background-color: transparent;
-}
-
-.body button:not(.check-btn) i {
-  width: 10px;
-
-  display: block;
-}
-
-.sort > * {
-  display: block;
-}
-
-.sort > *:nth-child(1) {
-  /*width: 30px;*/
-}
-.sort > *:nth-child(2),
-.item .content > *:nth-child(1) {
+/* Статус */
+.sort .content > *:nth-child(1) {
   width: 55px;
 }
-.sort > *:nth-child(3),
-.item .content > *:nth-child(2) {
-  width: 90px;
+.item .content > *:nth-child(1) {
+  width: 38px;
+
+  margin-right: 5px;
 }
-.sort > *:nth-child(4),
-.item .content > *:nth-child(3) {
+/* Дата вкл. */
+.sort .content > *:nth-child(2) {
+  width: 87px;
+}
+.item .content > *:nth-child(2) {
   width: 80px;
+
+  margin-right: 10px;
+}
+/* Название */
+.sort .content > *:nth-child(3) {
+  width: 73px;
+}
+.item .content > *:nth-child(3) {
+  width: 70px;
+
+  margin-right: 5px;
 }
 .item .content > *:nth-child(3) {
   font-weight: 700;
 }
-.sort > *:nth-child(5),
-.item .content > *:nth-child(4) {
-  width: 200px;
+/* Описание */
+.sort .content > *:nth-child(4) {
+  width: 197px;
 }
-.sort > *:nth-child(6),
-.item .content > *:nth-child(5) {
+.item .content > *:nth-child(4) {
+  width: 195px;
+
+  margin-right: 5px;
+}
+/* Телефон */
+.sort .content > *:nth-child(5) {
   width: 100px;
 }
-.sort > *:nth-child(7),
+.item .content > *:nth-child(5) {
+  width: 90px;
+
+  margin-right: 12px;
+}
+/* imei */
+.sort .content > *:nth-child(6) {
+  width: 112px;
+}
 .item .content > *:nth-child(6) {
-  width: 102px;
+  width: 105px;
+
+  margin-right: 10px;
 }
-.sort > *:nth-child(8),
+/* Модель */
+.sort .content > *:nth-child(7) {
+  width: 75px;
+}
 .item .content > *:nth-child(7) {
-  width: 60px;
+  width: 70px;
+
+  margin-right: 5px;
 }
-.sort > *:nth-child(9),
+/* Конфигурация */
+.sort .content > *:nth-child(8),
 .item .content > *:nth-child(8) {
-  width: 122px;
+  width: 120px;
 }
-.sort > *:nth-child(10),
+/* Обновление */
+.sort .content > *:nth-child(9) {
+  width: 80px;
+}
 .item .content > *:nth-child(9) {
-  width: 82px;
+  width: 75px;
+
+  margin-right: 10px;
 }
-.item .content > *:nth-child(9) {
-  padding-left: 10px;
+/* Группа */
+.sort .content > *:nth-child(10) {
+  width: 97px;
 }
-.sort > *:nth-child(11),
 .item .content > *:nth-child(10) {
-  width: 92px;
+  width: 100px;
+
+  margin-right: 5px;
 }
-.sort > *:nth-child(12),
+/* Заряд */
+.sort .content > *:nth-child(11) {
+  width: 51px;
+}
 .item .content > *:nth-child(11) {
-  width: 62px;
+  width: 46px;
+
+  margin-right: 5px;
 }
-.item .content > *:nth-child(11) {
-  padding-left: 10px;
+/* Состояние */
+.sort .content > *:nth-child(12) {
+  width: 66px;
 }
-.sort > *:nth-child(13),
 .item .content > *:nth-child(12) {
-  width: 68px;
-}
+  width: 61px;
 
-.sort > *:nth-child(14),
+  margin-right: 5px;
+}
+/* Действия */
+.sort .content > *:nth-child(13) {
+  width: 112px;
+}
 .item .content > *:nth-child(13) {
-  width: 122px;
-}
-.item .content > *:nth-child(13) {
-  padding-left: 10px;
+  width: 96px;
 }
 
-.item .content > * {
-  max-height: 40px;
-
-  overflow-y: auto;
+.sort button {
+  display: flex;
+  align-items: center;
 }
 
 .list {
@@ -154,17 +168,29 @@ h2 {
   min-height: 60px;
   width: 100%;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 12px;
+  padding: 0 16px;
 
   background-color: #fff;
 }
 
+.item .content p {
+  max-height: 40px;
+
+  display: block;
+
+  overflow-y: auto;
+}
+
 .item:not(:last-of-type) {
   margin-bottom: 10px !important;
+}
+
+.item .status.update span {
+  margin: 0 auto;
+}
+
+.item .lever {
+  margin: 0;
 }
 
 .content .status span {
@@ -204,28 +230,3 @@ h2 {
 .modal .action-btns {
   justify-content: space-between;
 }
-
-/*#qr-code .qrcode img {*/
-/*  height: 526px !important;*/
-/*  width: 526px !important;*/
-/*}*/
-
-/*.b-shadow {*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  !*filter: drop-shadow(5px 5px 5px #222222);*!*/
-/*  !*opacity: 0.5;*!*/
-/*}*/
-/*a {*/
-/*  cursor: pointer;*/
-/*  color: black;*/
-/*}*/
-/*#qr-code {*/
-/*  height: 80% !important;*/
-/*  max-height: 100% !important;*/
-/*}*/
-/*.col {*/
-/*  overflow: auto;*/
-/*  max-height: 20vh;*/
-/*}*/

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
 import M from "materialize-css";
@@ -90,6 +90,16 @@ export class DevicesComponent implements OnInit {
         this.getAllDevices();
         this.getGroups();
         this.getConfigs();
+      }
+    });
+
+    let selectsInter = interval(1000).subscribe(() => {
+      const elems =
+        this.elementRef.nativeElement.querySelectorAll(".config-select");
+      // console.log(elems);
+      if (elems && elems.length !== 0) {
+        selectsInter.unsubscribe();
+        M.FormSelect.init(elems, {});
       }
     });
   }
@@ -222,8 +232,14 @@ export class DevicesComponent implements OnInit {
       }
     });
   }
+
   getQR(title: string, qr: any) {
     this.currentTitle = title;
     this.valueQR = JSON.stringify(qr);
+  }
+
+  setDeviceConfig(device: Device, $event) {
+    console.log($event.target.value);
+    console.log(device.device_id);
   }
 }

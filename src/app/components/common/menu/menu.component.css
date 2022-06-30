@@ -2,12 +2,11 @@ aside {
   height: 100%;
   width: 280px;
 
-  /*margin: 12px 0 12px 18px;*/
   margin-right: 12px;
 
   overflow: hidden;
 
-  transition: width 0.3s ease;
+  transition: width 0.4s ease;
 }
 
 aside.hidden {
@@ -19,6 +18,8 @@ aside .content {
 }
 
 aside .header {
+  height: 44px;
+
   display: flex;
   align-items: center;
 
@@ -27,7 +28,7 @@ aside .header {
 }
 
 aside .header.shift {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 aside .header button {
@@ -37,10 +38,6 @@ aside .header button {
   margin-right: 12px;
 
   border: none;
-}
-
-aside .header button.shift {
-  margin-top: 10px;
 }
 
 aside .header h1 {
@@ -78,32 +75,71 @@ aside li a {
 
   font-size: 16px !important;
   white-space: nowrap;
+  color: #32485e !important;
 
   overflow: hidden;
 }
 
-aside .material-icons {
-  height: 24px;
-  width: 24px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-right: 12px;
-
-  font-size: 16px !important;
-
-  background-color: #526c9b;
-  color: #eaeff8 !important;
+aside li a.active {
+  background-color: #dce4f1;
+  color: #5d8ce0 !important;
 }
 
-.active {
-  background-color: #cbd9f2;
+aside li a:not(.active):hover {
+  background-color: #eceef1;
+}
+
+aside .icon-container {
+  margin-right: 12px;
+
+  flex-shrink: 0;
 }
 
 aside .divider {
   margin: 5px 0;
+}
+
+.icon-container span {
+  background-color: #f5f5f5;
+}
+
+.active .icon-container span {
+  background-color: #dce4f1;
+}
+
+aside li a:not(.active):hover .icon-container span {
+  background-color: #eceef1;
+}
+
+.icon-container.devices span {
+  mask-image: url("../../../../assets/UI/mobile.svg");
+  -webkit-mask-image: url("../../../../assets/UI/mobile.svg");
+}
+.icon-container.groups span {
+  mask-image: url("../../../../assets/UI/devices_group.svg");
+  -webkit-mask-image: url("../../../../assets/UI/devices_group.svg");
+}
+.icon-container.apps span {
+  mask-image: url("../../../../assets/UI/apps.svg");
+  -webkit-mask-image: url("../../../../assets/UI/apps.svg");
+}
+.icon-container.messages span {
+  mask-image: url("../../../../assets/UI/mail.svg");
+  -webkit-mask-image: url("../../../../assets/UI/mail.svg");
+}
+.icon-container.map span {
+  mask-image: url("../../../../assets/UI/map.svg");
+  -webkit-mask-image: url("../../../../assets/UI/map.svg");
+}
+.icon-container.config span {
+  mask-image: url("../../../../assets/UI/puzzle.svg");
+  -webkit-mask-image: url("../../../../assets/UI/puzzle.svg");
+}
+.icon-container.users span {
+  mask-image: url("../../../../assets/UI/users_group.svg");
+  -webkit-mask-image: url("../../../../assets/UI/users_group.svg");
+}
+.icon-container.help span {
+  mask-image: url("../../../../assets/UI/question.svg");
+  -webkit-mask-image: url("../../../../assets/UI/question.svg");
 }
