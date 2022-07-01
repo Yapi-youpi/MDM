@@ -23,6 +23,7 @@ import { ConfigsComponent } from "./components/pages/configs/configs.component";
 import { UserComponent } from "./components/common/user/user.component";
 import { QrCodeComponent } from "./components/common/modals/qr-code/qr-code.component";
 import { EditDeviceComponent } from "./components/common/modals/edit-device/edit-device.component";
+import { DeviceItemComponent } from './components/common/device-item/device-item.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     UserComponent,
     EditDeviceComponent,
     QrCodeComponent,
+    DeviceItemComponent,
   ],
   imports: [
     BrowserModule,

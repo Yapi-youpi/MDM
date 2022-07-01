@@ -2,17 +2,13 @@ import { Component, ElementRef, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
 import M from "materialize-css";
-// import {
-//   NgxQrcodeElementTypes,
-//   NgxQrcodeErrorCorrectionLevels,
-// } from "@techiediaries/ngx-qrcode";
 
 import { UserService } from "../../../services/user.service";
 import { DevicesService } from "../../../services/devices.service";
 import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
 import { GroupsService } from "../../../services/groups.service";
 import { DevicesConfigService } from "../../../services/devices-config.service";
-import { DatabaseService } from "../../../services/database.service";
+// import { DatabaseService } from "../../../services/database.service";
 
 @Component({
   selector: "app-devices",
@@ -20,19 +16,27 @@ import { DatabaseService } from "../../../services/database.service";
   styleUrls: ["./devices.component.css"],
 })
 export class DevicesComponent implements OnInit {
-  public password = "";
-  public new_password = "";
   public devices: Device[] = [];
-  public form: FormGroup;
-  private add_device!: Device;
-  public edit = false;
-  public loading = true;
   public groups: Groups[] = [];
   public configs: DevicesConfig[] = [];
-  // public elementType = NgxQrcodeElementTypes.URL;
-  // public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  public valueQR = "";
-  public currentTitle = "";
+  public loading = true;
+
+  private add_device!: Device; // ???
+
+  public form: FormGroup;
+  public edit = false;
+  public password = "";
+  public new_password = "";
+
+  public currQR = "";
+  public currName = "";
+  public isAllSelected: boolean = false;
+
+  public sortStatusAsc: boolean = true;
+  public sortDateAsc: boolean = true;
+  public sortNameAsc: boolean = true;
+  public sortGroupAsc: boolean = true;
+  public sortPowerAsc: boolean = true;
 
   constructor(
     public userService: UserService,
@@ -52,27 +56,10 @@ export class DevicesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
     let nonClosingModal =
       this.elementRef.nativeElement.querySelector(".non-closing");
     let closingModal =
       this.elementRef.nativeElement.querySelectorAll(".closing");
-
-    // const options = {
-    //   dismissible: false,
-    //   onCloseEnd: () => {
-    //     this.form.reset();
-    //     // this.edit = false;
-    //   },
-    // };
-
-    // let q = this.db.query("Device");
-
-    // q.findAll().then((res) => {
-    //   res.map(() => {
-    //     // console.log(device.toJSON());
-    //   });
-    // });
 
     M.Modal.init(nonClosingModal, {
       dismissible: false,
@@ -145,39 +132,6 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  editDevice(device: Device) {
-    let i = interval(1000).subscribe(() => {
-      let elem = this.elementRef.nativeElement.querySelector("select");
-      if (elem) {
-        i.unsubscribe();
-        M.FormSelect.init(elem);
-      }
-    });
-    this.edit = true;
-    this.form.addControl("imei", new FormControl(device.imei));
-    this.form.addControl(
-      "device_group_id",
-      new FormControl(device.device_group_id)
-    );
-    this.form.addControl("model", new FormControl(device.model));
-    this.form.addControl(
-      "device_config_id",
-      new FormControl(device.device_config_id)
-    );
-    this.form.addControl("online_state", new FormControl(device.online_state));
-    this.form.addControl("active_state", new FormControl(device.active_state));
-    this.form.addControl(
-      "battery_percent",
-      new FormControl(device.battery_percent)
-    );
-    this.form.addControl(
-      "launcher_version",
-      new FormControl(device.launcher_version)
-    );
-    this.form.addControl("qr_code", new FormControl(device.qr_code));
-    this.form.patchValue(device);
-  }
-
   saveChange() {
     this.device
       .editDevice(this.form.getRawValue())
@@ -185,18 +139,6 @@ export class DevicesComponent implements OnInit {
         console.log(res);
         this.getAllDevices();
         this.edit = false;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  removeDevice(id: string) {
-    this.device
-      .removeDevice(id)
-      .then((res) => {
-        console.log(res);
-        this.getAllDevices();
       })
       .catch((err) => {
         console.log(err);
@@ -233,13 +175,100 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  getQR(title: string, qr: any) {
-    this.currentTitle = title;
-    this.valueQR = JSON.stringify(qr);
+  selectUnselectDevices() {
+    this.isAllSelected = !this.isAllSelected;
+
+    this.devices.map((d) => {
+      d.isSelected = this.isAllSelected;
+    });
   }
 
-  setDeviceConfig(device: Device, $event) {
+  sortDevicesByStatus() {
+    this.sortStatusAsc = !this.sortStatusAsc;
+    //    CODE
+  }
+  sortDevicesByDate() {
+    this.sortDateAsc = !this.sortDateAsc;
+    //    CODE
+  }
+  sortDevicesByName() {
+    this.sortNameAsc = !this.sortNameAsc;
+    //    CODE
+  }
+  sortDevicesByGroup() {
+    this.sortGroupAsc = !this.sortGroupAsc;
+    //    CODE
+  }
+  sortDevicesByPower() {
+    this.sortPowerAsc = !this.sortPowerAsc;
+    //    CODE
+  }
+
+  // ЛОГИКА УПРАВЛЕНИЯ ДЕВАЙСОМ
+
+  selectUnselectSingleDevice(device: Device) {
+    this.devices.map((d) => {
+      if (d.device_id === device.device_id) {
+        d.isSelected = !d.isSelected;
+      }
+    });
+    if (!device.isSelected && this.isAllSelected) {
+      this.isAllSelected = !this.isAllSelected;
+    }
+  }
+
+  changeDeviceConfig(device: Device, $event) {
     console.log($event.target.value);
     console.log(device.device_id);
+  }
+
+  getDeviceQRCode(name: string, qr: any) {
+    this.currName = name;
+    this.currQR = JSON.stringify(qr);
+  }
+
+  editDevice(device: Device) {
+    let i = interval(1000).subscribe(() => {
+      let elem = this.elementRef.nativeElement.querySelector("select");
+      if (elem) {
+        i.unsubscribe();
+        M.FormSelect.init(elem);
+      }
+    });
+    this.edit = true;
+    this.form.addControl("imei", new FormControl(device.imei));
+    this.form.addControl(
+      "device_group_id",
+      new FormControl(device.device_group_id)
+    );
+    this.form.addControl("model", new FormControl(device.model));
+    this.form.addControl(
+      "device_config_id",
+      new FormControl(device.device_config_id)
+    );
+    this.form.addControl("online_state", new FormControl(device.online_state));
+    this.form.addControl("active_state", new FormControl(device.active_state));
+    this.form.addControl(
+      "battery_percent",
+      new FormControl(device.battery_percent)
+    );
+    this.form.addControl(
+      "launcher_version",
+      new FormControl(device.launcher_version)
+    );
+    this.form.addControl("qr_code", new FormControl(device.qr_code));
+    this.form.patchValue(device);
+  }
+
+  deleteDevice(id: string) {
+    this.device
+      .removeDevice(id)
+      .then((res) => {
+        console.log(res);
+        this.getAllDevices();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

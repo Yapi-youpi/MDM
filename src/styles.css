@@ -31,6 +31,7 @@
 
 body {
   font-family: HelveticaNeueCyrRegular, sans-serif;
+  /*font-family: Roboto, sans-serif;*/
   font-weight: 400;
   font-size: 16px !important;
   /*line-height: 16px;*/
@@ -126,7 +127,7 @@ input {
   margin: 0 !important;
   padding: 11px !important;
 
-  color: inherit !important;
+  color: inherit;
 
   background-color: #fff !important;
   border: 1px solid #526c9b !important;
@@ -186,10 +187,12 @@ textarea.materialize-textarea:focus:not([readonly]) {
   overflow-y: initial !important;
 }
 
-.select-wrapper {
+.sdm-light-select .select-wrapper {
   color: #436bb2 !important;
 }
-
+.sdm-dark-select .select-wrapper {
+  color: #32485e !important;
+}
 .select-wrapper input.select-dropdown {
   height: 30px !important;
 
@@ -197,40 +200,63 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
   font-size: 12px !important;
 
-  background-color: #f6f6f6 !important;
   border-radius: 8px !important;
-  border-color: #dce4f1 !important;
 }
-
+.sdm-light-select .select-wrapper input.select-dropdown {
+  background-color: #eceef1 !important;
+  border-color: transparent !important;
+}
+.sdm-dark-select .select-wrapper input.select-dropdown {
+  background-color: #32485e !important;
+  border-color: transparent !important;
+  color: #fff;
+}
 .select-wrapper .caret {
-  fill: #436bb2 !important;
-
   z-index: 1 !important;
 }
-
+.sdm-light-select .select-wrapper .caret {
+  fill: #436bb2 !important;
+}
+.sdm-dark-select .select-wrapper .caret {
+  fill: #fff !important;
+}
 .select-wrapper ul.select-dropdown {
   border-radius: 8px;
-  border: 1px solid #dce4f1;
 
   box-shadow: none;
 }
-
+.sdm-light-select .select-wrapper ul.select-dropdown {
+  border: 1px solid #dce4f1;
+}
+.sdm-dark-select .select-wrapper ul.select-dropdown {
+  border: 1px solid #32485e;
+}
 .select-wrapper ul.select-dropdown li {
   min-height: fit-content;
 }
-
 .select-wrapper ul.select-dropdown span {
   padding: 4px 5px;
 
   font-size: 12px;
+}
+.sdm-light-select ul.select-dropdown span {
   color: #436bb2;
 }
-
-.select-dropdown.dropdown-content li:hover,
-.select-dropdown.dropdown-content li.selected {
+.sdm-dark-select ul.select-dropdown span {
+  color: #32485e;
+}
+.sdm-light-select .select-dropdown.dropdown-content li:hover,
+.sdm-light-select .select-dropdown.dropdown-content li.selected {
   background-color: #eceef1 !important;
 }
-
+.sdm-dark-select .select-dropdown.dropdown-content li:hover,
+.sdm-dark-select .select-dropdown.dropdown-content li.selected {
+  background-color: #32485e !important;
+}
+.sdm-dark-select .select-dropdown.dropdown-content li:hover span,
+.sdm-dark-select .select-dropdown.dropdown-content li.selected span {
+  color: #fff;
+}
 .select-dropdown.dropdown-content li:first-child.selected,
 .select-dropdown.dropdown-content li:last-child.selected {
   border-radius: 8px;
@@ -385,6 +411,22 @@ button.sdm-btn-common > span,
   background-color: #fff;
 }
 
+button.sdm-btn-list-sort span {
+  height: 17px;
+  width: 14px;
+
+  background-size: 17px 14px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+button.sdm-btn-list-sort.sort-up span {
+  background-image: url("/assets/UI/sort_up.svg");
+}
+button.sdm-btn-list-sort.sort-down span {
+  background-image: url("/assets/UI/sort_down.svg");
+}
+
 button.check-btn {
   height: 16px;
   width: 16px;
@@ -402,27 +444,27 @@ a.sdm-btn {
   justify-content: center;
 }
 
-td,
-th {
-  padding: 0 !important;
+.status-container span {
+  height: 18px;
+  width: 18px;
 
-  font-weight: normal;
+  display: block;
+}
+.status-container.small span {
+  height: 14px;
+  width: 14px;
 }
 
-tr {
-  border-bottom: none !important;
+.status-container span.active {
+  background-color: #afd9a1;
+}
+
+.status-container span.disabled {
+  background-color: #fca3a3;
 }
 
 .sdm-bg-light-grey {
   background-color: #f5f5f5 !important;
-}
-
-.sdm-bg-blue-select {
-  background-color: #cbd9f2 !important;
-}
-
-.sdm-bg-blue-dark {
-  background-color: #526c9b !important;
 }
 
 .sdm-bg-grey {
@@ -439,4 +481,24 @@ tr {
 
 .r-round {
   border-radius: 50%;
+}
+
+.font-tip {
+  font-size: 10px;
+}
+.font-thin {
+  font-weight: 300;
+}
+.font-middle {
+  font-weight: 500;
+}
+.font-bold {
+  font-weight: 700;
+}
+
+.font-regular-color {
+  color: #667389;
+}
+.font-bold-color {
+  color: #32485e;
 }

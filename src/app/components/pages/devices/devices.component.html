@@ -15,32 +15,64 @@
         <div class="sort row">
           <div class="checkbox-container">
             <label>
-              <input type="checkbox" class="filled-in main-checkbox" />
+              <input
+                type="checkbox"
+                class="filled-in main-checkbox"
+                [checked]="isAllSelected"
+                (change)="selectUnselectDevices()"
+              />
               <span></span>
             </label>
           </div>
           <div class="content">
-            <button class="status">
-              Статус <i class="material-icons tiny">keyboard_arrow_down</i>
+            <button
+              class="sdm-btn-list-sort sort-up font-bold-color"
+              [class.sort-up]="sortStatusAsc"
+              [class.sort-down]="!sortStatusAsc"
+              (click)="sortDevicesByStatus()"
+            >
+              Статус <span></span>
             </button>
-            <button class="power-up-date">
-              Дата вкл. <i class="material-icons tiny">keyboard_arrow_down</i>
+            <button
+              class="sdm-btn-list-sort sort-up font-bold-color"
+              [class.sort-up]="sortDateAsc"
+              [class.sort-down]="!sortDateAsc"
+              (click)="sortDevicesByDate()"
+            >
+              Дата вкл. <span></span>
             </button>
-            <button class="name">
-              Название <i class="material-icons tiny">keyboard_arrow_down</i>
+            <button
+              class="sdm-btn-list-sort sort-up font-bold-color"
+              [class.sort-up]="sortNameAsc"
+              [class.sort-down]="!sortNameAsc"
+              (click)="sortDevicesByName()"
+            >
+              Название <span></span>
             </button>
-            <p>Описание</p>
-            <p>Телефон</p>
-            <p>IMEI</p>
-            <p>Модель</p>
-            <p>Конфигурация</p>
-            <p>Обновление</p>
-            <p>Группа</p>
-            <button class="battery">
-              Заряд <i class="material-icons tiny">keyboard_arrow_down</i>
+            <p class="font-bold-color">Описание</p>
+            <p class="font-bold-color">Телефон</p>
+            <p class="font-bold-color">IMEI</p>
+            <p class="font-bold-color">Модель</p>
+            <p class="font-bold-color">Конфигурация</p>
+            <p class="font-bold-color">Обновление</p>
+            <button
+              class="sdm-btn-list-sort sort-up font-bold-color"
+              [class.sort-up]="sortGroupAsc"
+              [class.sort-down]="!sortGroupAsc"
+              (click)="sortDevicesByGroup()"
+            >
+              Группа <span></span>
             </button>
-            <p>Состояние</p>
-            <p>Действия</p>
+            <button
+              class="sdm-btn-list-sort sort-up font-bold-color"
+              [class.sort-up]="sortPowerAsc"
+              [class.sort-down]="!sortPowerAsc"
+              (click)="sortDevicesByPower()"
+            >
+              Заряд <span></span>
+            </button>
+            <p class="font-bold-color">Состояние</p>
+            <p class="font-bold-color">Действия</p>
           </div>
         </div>
         <div class="list">
@@ -48,78 +80,14 @@
             Устройств не найдено
           </div>
           <ng-container *ngFor="let device of devices">
-            <div class="item row">
-              <!--              <button class="check-btn"></button>-->
-              <div class="checkbox-container">
-                <label>
-                  <input type="checkbox" class="filled-in main-checkbox" />
-                  <span></span>
-                </label>
-              </div>
-              <div class="content r-14">
-                <div class="status">
-                  <span
-                    class="r-round"
-                    [class.active]="device.active_state"
-                    [class.disabled]="!device.active_state"
-                  ></span>
-                </div>
-                <p>123</p>
-                <p>{{ device.name }}</p>
-                <p class="desc">{{ device.description }}</p>
-                <p>{{ device.phone_number }}</p>
-                <p>012345678912345</p>
-                <p>Meizu 10</p>
-<!--                <p>{{ device.imei }}</p>-->
-<!--                <p>{{ device.model }}</p>-->
-                <div class="input-field">
-                  <select
-                    class="config-select"
-                    (change)="setDeviceConfig(device, $event)"
-                  >
-                    <option value="0" selected>По умолчанию</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                </div>
-                <div class="status update">
-                  <span
-                    class="r-round active"
-                  ></span>
-                </div>
-                <p>Санкт-Петербург</p>
-                <p>{{ device.battery_percent }}%</p>
-                <div class="switch">
-                  <label>
-                    <input type="checkbox" [checked]="device.online_state" />
-                    <span class="lever"></span>
-                  </label>
-                </div>
-                <div class="btns">
-                  <button
-                    class="modal-trigger sdm-btn-common qr-code"
-                    (click)="getQR(device.name, device.qr_code)"
-                    data-target="qr-code"
-                  >
-                    <span></span>
-                  </button>
-                  <button
-                    class="modal-trigger sdm-btn-common edit"
-                    (click)="editDevice(device)"
-                    data-target="edit_device"
-                  >
-                    <span></span>
-                  </button>
-                  <button
-                    class="modal-trigger sdm-btn-common delete"
-                    (click)="removeDevice(device.device_id)"
-                  >
-                    <span></span>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <app-device-item
+              [device]="device"
+              (onSelectUnselectDevice)="selectUnselectSingleDevice($event)"
+              (onChangeDeviceConfig)="changeDeviceConfig($event.device, $event.$event)"
+              (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
+              (onEditDevice)="editDevice($event)"
+              (onDeleteDevice)="deleteDevice($event)"
+            ></app-device-item>
           </ng-container>
         </div>
         <!--          <ng-container *ngFor="let device of devices">-->
@@ -261,5 +229,5 @@
     [addDevice]="addDevice"
     [saveChange]="saveChange"
   ></app-edit-device>
-  <app-qr-code [title]="currentTitle" [valueQR]="valueQR"></app-qr-code>
+  <app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
 </div>
