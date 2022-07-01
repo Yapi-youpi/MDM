@@ -321,6 +321,8 @@ a {
 
 button {
   background-color: transparent !important;
+
+  /*transition: background-color 0.4s ease;*/
 }
 
 button,
@@ -328,9 +330,11 @@ a.sdm-btn {
   font-family: inherit;
   color: inherit;
 
-  border: 1px solid transparent;
+  border: 1px solid #557ebe;
 
   cursor: pointer;
+
+  transition: background-color 0.4s ease;
 }
 
 button.selected {
@@ -346,8 +350,9 @@ button:disabled {
   cursor: inherit !important;
 }
 
-button:focus {
-  background-color: inherit !important;
+button:focus,
+button:hover {
+  background-color: #eceef1 !important;
 }
 
 button.selected:focus {

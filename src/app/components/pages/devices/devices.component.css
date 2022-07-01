@@ -107,6 +107,12 @@
 .sort button {
   display: flex;
   align-items: center;
+
+  border-color: transparent;
+}
+.sort button:hover,
+.sort button:focus {
+  background-color: inherit !important;
 }
 
 .list {
