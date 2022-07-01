@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ElementRef } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { DevicesConfig, Groups } from "../../../../interfaces/interfaces";
+import { interval } from "rxjs";
+import M from "materialize-css";
 
 @Component({
   selector: "app-edit-device",
@@ -15,7 +17,17 @@ export class EditDeviceComponent implements OnInit {
   @Input() public addDevice!: Function;
   @Input() public saveChange!: Function;
 
-  constructor() {}
+  constructor(private elementRef: ElementRef) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let i = interval(1000).subscribe(() => {
+      const elems = this.elementRef.nativeElement.querySelectorAll(
+        ".config-select-modal"
+      );
+      if (elems && elems.length !== 0) {
+        i.unsubscribe();
+        M.FormSelect.init(elems, {});
+      }
+    });
+  }
 }

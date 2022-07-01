@@ -1,0 +1,13 @@
+#edit_device {
+  width: 770px;
+
+  overflow: initial;
+}
+
+#edit_device .modal-content {
+  padding: 30px 93px !important;
+}
+
+#edit_device input[name="phone"] {
+  margin-left: 50px !important;
+}
