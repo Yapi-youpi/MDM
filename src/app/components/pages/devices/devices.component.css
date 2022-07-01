@@ -110,8 +110,7 @@
 
   border-color: transparent;
 }
-.sort button:hover,
-.sort button:focus {
+.sort button:hover {
   background-color: inherit !important;
 }
 

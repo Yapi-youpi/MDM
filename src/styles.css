@@ -350,14 +350,14 @@ button:disabled {
   cursor: inherit !important;
 }
 
-button:focus,
+/*button:focus,*/
 button:hover {
   background-color: #eceef1 !important;
 }
 
-button.selected:focus {
-  background-color: #526c9b !important;
-}
+/*button.selected:focus {*/
+/*  background-color: #526c9b !important;*/
+/*}*/
 
 button.sdm-btn-medium,
 a.sdm-btn.sdm-btn-medium {
