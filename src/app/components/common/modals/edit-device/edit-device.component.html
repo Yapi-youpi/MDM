@@ -6,31 +6,31 @@
       <div>
         <div class="form-group">
           <label for="name">Название</label>
-          <input id="name" name="name" type="text" class="w-440" />
+          <input formControlName="name" id="name" name="name" type="text" class="w-440" />
         </div>
         <div class="form-group">
           <label for="desc">Описание</label>
-          <input id="desc" name="desc" type="text" class="w-440" />
+          <input formControlName="desc" id="desc" name="desc" type="text" class="w-440" />
         </div>
       </div>
       <div class="divider"></div>
       <div>
         <div class="form-group">
           <label for="phone">Телефон</label>
-          <input id="phone" name="phone" type="text" class="w-170" />
+          <input formControlName="phone" id="phone" name="phone" type="number" class="w-170" />
           <label for="imei">IMEI</label>
-          <input id="imei" name="imei" type="text" class="w-186" />
+          <input id="imei" name="imei" type="number" class="w-186" />
         </div>
-        <div class="form-group">
+        <div class="form-group model">
           <label for="model">Модель</label>
-          <input id="model" name="model" type="text" class="w-440" />
+          <input id="model" name="model" type="text" class="w-170" />
         </div>
       </div>
       <div class="divider"></div>
       <div>
         <div class="form-group">
           <label for="config">Конфигурация</label>
-          <div class="input-field-modal sdm-light-select">
+          <div class="input-field-modal sdm-blue-select">
             <select id="config" name="config" class="config-select-modal">
               <option value="0" selected>По умолчанию</option>
               <option value="1">Option 1</option>
@@ -39,7 +39,7 @@
             </select>
           </div>
           <label for="group">Группа</label>
-          <div class="input-field-modal sdm-light-select">
+          <div class="input-field-modal sdm-blue-select">
             <select id="group" name="group" class="config-select-modal" multiple>
               <option value="0" selected>По умолчанию</option>
               <option value="1">Option 1</option>
@@ -48,133 +48,20 @@
             </select>
           </div>
         </div>
+        <div class="form-btns">
+          <button
+            type="button"
+            class="modal-close sdm-big r-14"
+          >
+            Отменить</button>
+          <button
+            type="submit"
+            class="sdm-big r-14 sdm-dark-blue"
+            (click)="setDeviceSettings()"
+          >
+            Сохранить</button>
+        </div>
       </div>
-<!--      <div class="row">-->
-<!--        <div class="col s6">-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="name"-->
-<!--            formControlName="name"-->
-<!--            placeholder="Название устройства"-->
-<!--          />-->
-<!--          <label for="name">Название</label>-->
-<!--        </div>-->
-<!--        <div class="col s6">-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="phone_number"-->
-<!--            formControlName="phone_number"-->
-<!--            placeholder="Номер телефона"-->
-<!--          />-->
-<!--          <label for="phone_number">Номер телефона</label>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="row">-->
-<!--        <div class="col s6">-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="description"-->
-<!--            formControlName="description"-->
-<!--            placeholder="Описание"-->
-<!--          />-->
-<!--          <label for="description">Описание</label>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <ng-container *ngIf="edit">-->
-<!--        <div class="row">-->
-<!--          <div class="col s6">-->
-<!--            <input-->
-<!--              id="battery"-->
-<!--              readonly-->
-<!--              type="text"-->
-<!--              formControlName="battery_percent"-->
-<!--            />-->
-<!--            <label for="battery">Батарея</label>-->
-<!--          </div>-->
-<!--          <div class="col s6">-->
-<!--            <input id="model" readonly type="text" formControlName="model" />-->
-<!--            <label for="model">Модель</label>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <div class="col s6">-->
-<!--            <input-->
-<!--              id="online"-->
-<!--              readonly-->
-<!--              type="text"-->
-<!--              formControlName="online_state"-->
-<!--            />-->
-<!--            <label for="online"></label>-->
-<!--          </div>-->
-<!--          <div class="col s6">-->
-<!--            <input-->
-<!--              id="active_state"-->
-<!--              readonly-->
-<!--              type="text"-->
-<!--              formControlName="model"-->
-<!--            />-->
-<!--            <label for="model">Состояние</label>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <div class="col s6">-->
-<!--            <input-->
-<!--              readonly-->
-<!--              id="launcher"-->
-<!--              formControlName="launcher_version"-->
-<!--              type="text"-->
-<!--            />-->
-<!--            <label for="launcher">Лаунчер</label>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </ng-container>-->
-<!--      <div class="row">-->
-<!--        <ng-container *ngFor="let group of groups">-->
-<!--          <p class="col s6">-->
-<!--            <label>-->
-<!--              <input-->
-<!--                [value]="group.id"-->
-<!--                type="radio"-->
-<!--                formControlName="device_group_id"-->
-<!--              />-->
-<!--              <span>{{ group.name }}</span>-->
-<!--            </label>-->
-<!--          </p>-->
-<!--        </ng-container>-->
-<!--      </div>-->
-<!--      <div class="row">-->
-<!--        <ng-container *ngFor="let config of configs">-->
-<!--          <p class="col s6">-->
-<!--            <label>-->
-<!--              <input-->
-<!--                [value]="config.ID"-->
-<!--                type="radio"-->
-<!--                formControlName="device_config_id"-->
-<!--              />-->
-<!--              <span>{{ config.name }}</span>-->
-<!--            </label>-->
-<!--          </p>-->
-<!--        </ng-container>-->
-<!--      </div>-->
     </form>
   </div>
-<!--  <div class="modal-footer">-->
-<!--&lt;!&ndash;    <button&ndash;&gt;-->
-<!--&lt;!&ndash;      (click)="addDevice()"&ndash;&gt;-->
-<!--&lt;!&ndash;      [disabled]="form.invalid"&ndash;&gt;-->
-<!--&lt;!&ndash;      *ngIf="!edit"&ndash;&gt;-->
-<!--&lt;!&ndash;      class="btn-flat modal-close green-text"&ndash;&gt;-->
-<!--&lt;!&ndash;    >&ndash;&gt;-->
-<!--&lt;!&ndash;      Добавить&ndash;&gt;-->
-<!--&lt;!&ndash;    </button>&ndash;&gt;-->
-<!--    <button-->
-<!--      (click)="saveChange()"-->
-<!--      [disabled]="form.invalid"-->
-<!--      *ngIf="edit"-->
-<!--      class="btn-flat modal-close green-text"-->
-<!--    >-->
-<!--      Сохранить-->
-<!--    </button>-->
-<!--    <button class="btn-flat modal-close red-text">Отмена</button>-->
-<!--  </div>-->
 </div>

@@ -89,7 +89,7 @@ aside li a:not(.active):hover {
   background-color: #eceef1;
 }
 
-aside .icon-container {
+aside .sdm-menu-icon {
   margin-right: 12px;
 
   flex-shrink: 0;
@@ -99,47 +99,35 @@ aside .divider {
   margin: 5px 0;
 }
 
-.icon-container span {
-  background-color: #f5f5f5;
-}
-
-.active .icon-container span {
-  background-color: #dce4f1;
-}
-
-aside li a:not(.active):hover .icon-container span {
-  background-color: #eceef1;
-}
-
-.icon-container.devices span {
+.sdm-menu-icon.devices span {
   mask-image: url("../../../../assets/UI/mobile.svg");
   -webkit-mask-image: url("../../../../assets/UI/mobile.svg");
 }
-.icon-container.groups span {
+.sdm-menu-icon.groups span {
   mask-image: url("../../../../assets/UI/devices_group.svg");
   -webkit-mask-image: url("../../../../assets/UI/devices_group.svg");
 }
-.icon-container.apps span {
+.sdm-menu-icon.apps span {
   mask-image: url("../../../../assets/UI/apps.svg");
   -webkit-mask-image: url("../../../../assets/UI/apps.svg");
 }
-.icon-container.messages span {
+.sdm-menu-icon.messages span {
   mask-image: url("../../../../assets/UI/mail.svg");
   -webkit-mask-image: url("../../../../assets/UI/mail.svg");
 }
-.icon-container.map span {
+.sdm-menu-icon.map span {
   mask-image: url("../../../../assets/UI/map.svg");
   -webkit-mask-image: url("../../../../assets/UI/map.svg");
 }
-.icon-container.config span {
+.sdm-menu-icon.config span {
   mask-image: url("../../../../assets/UI/puzzle.svg");
   -webkit-mask-image: url("../../../../assets/UI/puzzle.svg");
 }
-.icon-container.users span {
+.sdm-menu-icon.users span {
   mask-image: url("../../../../assets/UI/users_group.svg");
   -webkit-mask-image: url("../../../../assets/UI/users_group.svg");
 }
-.icon-container.help span {
+.sdm-menu-icon.help span {
   mask-image: url("../../../../assets/UI/question.svg");
   -webkit-mask-image: url("../../../../assets/UI/question.svg");
 }

@@ -107,6 +107,7 @@
 .sort button {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 
   border-color: transparent;
 }

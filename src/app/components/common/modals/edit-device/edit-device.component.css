@@ -11,3 +11,32 @@
 #edit_device input[name="phone"] {
   margin-left: 50px !important;
 }
+
+#edit_device input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+#edit_device input[type='number']::-webkit-outer-spin-button,
+#edit_device input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+
+  -webkit-appearance: none;
+}
+
+#edit_device .model {
+  justify-content: start;
+}
+
+#edit_device .model input {
+  margin-left: 85px !important;
+}
+
+#edit_device .form-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#edit_device .form-btns > *:first-child {
+  margin-right: 34px;
+}

@@ -90,63 +90,6 @@
             ></app-device-item>
           </ng-container>
         </div>
-        <!--          <ng-container *ngFor="let device of devices">-->
-        <!--            <div class="row">-->
-        <!--              <div class="col s2">{{ device.name }}</div>-->
-        <!--              <div class="col s2">-->
-        <!--                {{ device.description }}-->
-        <!--              </div>-->
-        <!--              <div class="col s2">{{ device.phone_number }}</div>-->
-        <!--              <div class="col s1">-->
-        <!--                <div class="switch">-->
-        <!--                  <label>-->
-        <!--                    <input-->
-        <!--                      disabled-->
-        <!--                      [checked]="device.online_state"-->
-        <!--                      type="checkbox"-->
-        <!--                    />-->
-        <!--                    <span class="lever"></span>-->
-        <!--                  </label>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--              <div class="col s1">{{ device.battery_percent }}%</div>-->
-        <!--              <div class="col s1">-->
-        <!--                <a-->
-        <!--                  (click)="getQR(device.qr_code)"-->
-        <!--                  class="modal-trigger"-->
-        <!--                  data-target="qr-code"-->
-        <!--                >-->
-        <!--                  <i class="material-icons">qr_code</i>-->
-        <!--                </a>-->
-        <!--              </div>-->
-        <!--              <div class="col s3">-->
-        <!--                <button-->
-        <!--                  (click)="editDevice(device)"-->
-        <!--                  class="btn btn-small blue lighten-1 modal-trigger"-->
-        <!--                  data-target="add_device"-->
-        <!--                >-->
-        <!--                  Редактировать-->
-        <!--                </button>-->
-        <!--                <button-->
-        <!--                  (click)="removeDevice(device.device_id)"-->
-        <!--                  class="btn btn-small red lighten-1"-->
-        <!--                >-->
-        <!--                  Удалить-->
-        <!--                </button>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </ng-container>-->
-        <!--        </div>-->
-        <!--        <div class="row">-->
-        <!--          <div class="col s6">-->
-        <!--            <button-->
-        <!--              class="btn btn-small blue lighten-1 modal-trigger"-->
-        <!--              data-target="add_device"-->
-        <!--            >-->
-        <!--              Добавить устройство-->
-        <!--            </button>-->
-        <!--          </div>-->
-        <!--        </div>-->
       </div>
     </div>
   </div>
@@ -223,11 +166,9 @@
   </div>
   <app-edit-device
     [form]="form"
-    [edit]="edit"
     [groups]="groups"
     [configs]="configs"
-    [addDevice]="addDevice"
-    [saveChange]="saveChange"
+    (onSetDeviceSettings)="setDeviceSettings()"
   ></app-edit-device>
   <app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
 </div>

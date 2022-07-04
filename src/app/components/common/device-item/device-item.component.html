@@ -10,7 +10,7 @@
       <span></span>
     </label>
   </div>
-  <div class="content r-14">
+  <div class="content b-shadow r-14">
     <div class="status-container">
       <span
         class="r-round"
@@ -22,8 +22,8 @@
     <p class="font-bold font-bold-color">{{ device.name }}</p>
     <p class="font-middle font-regular-color">{{ device.description }}</p>
     <p class="font-regular-color">{{ device.phone_number }}</p>
-    <!--                    <p class="font-regular-color">012345678912345</p>-->
-    <!--                    <p class="font-regular-color">Meizu 10</p>-->
+<!--                        <p class="font-regular-color">012345678912345</p>-->
+<!--                        <p class="font-regular-color">Meizu 10</p>-->
     <p class="font-regular-color">{{ device.imei }}</p>
     <p class="font-regular-color">{{ device.model }}</p>
     <div class="input-field sdm-light-select">
@@ -47,21 +47,21 @@
     </div>
     <div class="btns">
       <button
-        class="modal-trigger sdm-btn-common qr-code"
+        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round qr-code"
         (click)="getDeviceQRCode(device.name, device.qr_code)"
         data-target="qr-code"
       >
         <span></span>
       </button>
       <button
-        class="modal-trigger sdm-btn-common edit"
+        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round edit"
         (click)="editDevice(device)"
         data-target="edit_device"
       >
         <span></span>
       </button>
       <button
-        class="modal-trigger sdm-btn-common delete"
+        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round delete"
         (click)="deleteDevice(device.device_id)"
       >
         <span></span>

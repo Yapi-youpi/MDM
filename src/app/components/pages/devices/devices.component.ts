@@ -23,7 +23,7 @@ export class DevicesComponent implements OnInit {
 
   private add_device!: Device; // ???
 
-  public form: FormGroup;
+  public form!: FormGroup;
   public edit = false;
   public password = "";
   public new_password = "";
@@ -46,12 +46,13 @@ export class DevicesComponent implements OnInit {
     private configService: DevicesConfigService // public db: DatabaseService
   ) {
     this.form = new FormGroup({
-      name: new FormControl("", Validators.required),
-      phone_number: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required),
-      device_config_id: new FormControl("02e0f851-9b85-4c10-8814-4beb70134b63"),
-      device_group_id: new FormControl("bc5a083f-1361-4619-b4ec-2a81cdbe6a26"),
-      device_id: new FormControl(""),
+      name: new FormControl(""),
+      desc: new FormControl(""),
+      phone: new FormControl(""),
+      imei: new FormControl(""),
+      model: new FormControl(""),
+      config: new FormControl(""),
+      group: new FormControl(""),
     });
   }
 
@@ -89,6 +90,9 @@ export class DevicesComponent implements OnInit {
         M.FormSelect.init(elems, {});
       }
     });
+
+    //  Загрузить все возможные варианты конфигураций и групп и
+    //  и подгрузить в селекты
   }
 
   changePassword(pass: string) {
@@ -132,17 +136,25 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  saveChange() {
-    this.device
-      .editDevice(this.form.getRawValue())
-      .then((res) => {
-        console.log(res);
-        this.getAllDevices();
-        this.edit = false;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // saveChange() {
+  //   this.device
+  //     .editDevice(this.form.getRawValue())
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.getAllDevices();
+  //       this.edit = false;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+  setDeviceSettings() {
+    console.log(this.form.getRawValue());
+
+    const settingsModal =
+      this.elementRef.nativeElement.querySelector("#edit_device");
+    M.Modal.getInstance(settingsModal).close();
   }
 
   getGroups() {
@@ -228,36 +240,13 @@ export class DevicesComponent implements OnInit {
   }
 
   editDevice(device: Device) {
-    let i = interval(1000).subscribe(() => {
-      let elem = this.elementRef.nativeElement.querySelector("select");
-      if (elem) {
-        i.unsubscribe();
-        M.FormSelect.init(elem);
-      }
-    });
-    this.edit = true;
-    this.form.addControl("imei", new FormControl(device.imei));
-    this.form.addControl(
-      "device_group_id",
-      new FormControl(device.device_group_id)
-    );
-    this.form.addControl("model", new FormControl(device.model));
-    this.form.addControl(
-      "device_config_id",
-      new FormControl(device.device_config_id)
-    );
-    this.form.addControl("online_state", new FormControl(device.online_state));
-    this.form.addControl("active_state", new FormControl(device.active_state));
-    this.form.addControl(
-      "battery_percent",
-      new FormControl(device.battery_percent)
-    );
-    this.form.addControl(
-      "launcher_version",
-      new FormControl(device.launcher_version)
-    );
-    this.form.addControl("qr_code", new FormControl(device.qr_code));
-    this.form.patchValue(device);
+    this.form.controls["name"].setValue(device.name);
+    this.form.controls["desc"].setValue(device.description);
+    this.form.controls["phone"].setValue(device.phone_number);
+    this.form.controls["imei"].setValue(device.imei);
+    this.form.controls["model"].setValue(device.model);
+    this.form.controls["config"].setValue(device.device_config_id);
+    this.form.controls["group"].setValue(device.device_group_id);
   }
 
   deleteDevice(id: string) {
