@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
   selector: "app-menu",
@@ -6,7 +6,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./menu.component.css"],
 })
 export class MenuComponent implements OnInit {
-  public isSidebarHidden: boolean = false;
+  @Input() public isSidebarHidden!: boolean;
+
+  @Output() onSidebarHide = new EventEmitter<any>();
 
   constructor() {}
 
@@ -19,6 +21,6 @@ export class MenuComponent implements OnInit {
   }
 
   toggleSidebarView() {
-    this.isSidebarHidden = !this.isSidebarHidden;
+    this.onSidebarHide.emit(this.isSidebarHidden);
   }
 }

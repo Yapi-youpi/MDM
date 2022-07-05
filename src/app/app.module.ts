@@ -23,7 +23,8 @@ import { ConfigsComponent } from "./components/pages/configs/configs.component";
 import { UserComponent } from "./components/common/user/user.component";
 import { QrCodeComponent } from "./components/common/modals/qr-code/qr-code.component";
 import { EditDeviceComponent } from "./components/common/modals/edit-device/edit-device.component";
-import { DeviceItemComponent } from './components/common/device-item/device-item.component';
+import { DeviceItemComponent } from "./components/common/device-item/device-item.component";
+import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
     EditDeviceComponent,
     QrCodeComponent,
     DeviceItemComponent,
+    GlobalContainerComponent,
   ],
   imports: [
     BrowserModule,

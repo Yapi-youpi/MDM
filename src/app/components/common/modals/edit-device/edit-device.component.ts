@@ -17,11 +17,12 @@ import M from "materialize-css";
   styleUrls: ["./edit-device.component.css"],
 })
 export class EditDeviceComponent implements OnInit {
+  @Input() public device_id!: string;
   @Input() public form!: FormGroup;
   @Input() public groups!: Groups[];
   @Input() public configs!: DevicesConfig[];
 
-  @Output() public onSetDeviceSettings = new EventEmitter<any>();
+  @Output() public onSetDeviceSettings = new EventEmitter<string>();
 
   constructor(private elementRef: ElementRef) {}
 
@@ -37,7 +38,7 @@ export class EditDeviceComponent implements OnInit {
     });
   }
 
-  setDeviceSettings() {
-    this.onSetDeviceSettings.emit();
+  setDeviceSettings(id: string) {
+    this.onSetDeviceSettings.emit(id);
   }
 }

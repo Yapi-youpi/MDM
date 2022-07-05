@@ -1,174 +1,166 @@
-<div class="global-wrapper">
-  <app-menu></app-menu>
-  <div class="content-container">
-    <div class="card sdm-bg-light-grey">
-      <div class="card-header">
-        <h2>Устройства</h2>
-        <!--    Место для кнопки добавления/редактирования и пр.    -->
-        <app-user></app-user>
-      </div>
-      <div class="divider"></div>
-      <div class="progress" *ngIf="loading">
-        <div class="indeterminate"></div>
-      </div>
-      <div class="body">
-        <div class="sort row">
-          <div class="checkbox-container">
-            <label>
-              <input
-                type="checkbox"
-                class="filled-in main-checkbox"
-                [checked]="isAllSelected"
-                (change)="selectUnselectDevices()"
-              />
-              <span></span>
-            </label>
-          </div>
-          <div class="content">
-            <button
-              class="sdm-btn-list-sort sort-up font-bold-color"
-              [class.sort-up]="sortStatusAsc"
-              [class.sort-down]="!sortStatusAsc"
-              (click)="sortDevicesByStatus()"
-            >
-              Статус <span></span>
-            </button>
-            <button
-              class="sdm-btn-list-sort sort-up font-bold-color"
-              [class.sort-up]="sortDateAsc"
-              [class.sort-down]="!sortDateAsc"
-              (click)="sortDevicesByDate()"
-            >
-              Дата вкл. <span></span>
-            </button>
-            <button
-              class="sdm-btn-list-sort sort-up font-bold-color"
-              [class.sort-up]="sortNameAsc"
-              [class.sort-down]="!sortNameAsc"
-              (click)="sortDevicesByName()"
-            >
-              Название <span></span>
-            </button>
-            <p class="font-bold-color">Описание</p>
-            <p class="font-bold-color">Телефон</p>
-            <p class="font-bold-color">IMEI</p>
-            <p class="font-bold-color">Модель</p>
-            <p class="font-bold-color">Конфигурация</p>
-            <p class="font-bold-color">Обновление</p>
-            <button
-              class="sdm-btn-list-sort sort-up font-bold-color"
-              [class.sort-up]="sortGroupAsc"
-              [class.sort-down]="!sortGroupAsc"
-              (click)="sortDevicesByGroup()"
-            >
-              Группа <span></span>
-            </button>
-            <button
-              class="sdm-btn-list-sort sort-up font-bold-color"
-              [class.sort-up]="sortPowerAsc"
-              [class.sort-down]="!sortPowerAsc"
-              (click)="sortDevicesByPower()"
-            >
-              Заряд <span></span>
-            </button>
-            <p class="font-bold-color">Состояние</p>
-            <p class="font-bold-color">Действия</p>
-          </div>
+<app-global-container>
+  <div class="card sdm-bg-light-grey">
+    <div class="card-header">
+      <h2>Устройства</h2>
+      <!--    Место для кнопки добавления/редактирования и пр.    -->
+      <app-user></app-user>
+    </div>
+    <div class="divider"></div>
+    <div class="progress" *ngIf="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <div class="body">
+      <div class="sort row">
+        <div class="checkbox-container">
+          <label>
+            <input
+              type="checkbox"
+              class="filled-in main-checkbox"
+              [checked]="isAllSelected"
+              (change)="selectUnselectDevices()"
+            />
+            <span></span>
+          </label>
         </div>
-        <div class="list">
-          <div *ngIf="devices.length === 0 && !loading">
-            Устройств не найдено
-          </div>
-          <ng-container *ngFor="let device of devices">
-            <app-device-item
-              [device]="device"
-              (onSelectUnselectDevice)="selectUnselectSingleDevice($event)"
-              (onChangeDeviceConfig)="changeDeviceConfig($event.device, $event.$event)"
-              (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
-              (onEditDevice)="editDevice($event)"
-              (onDeleteDevice)="deleteDevice($event)"
-            ></app-device-item>
-          </ng-container>
+        <div class="content">
+          <button
+            class="sdm-btn-list-sort sort-up font-bold-color"
+            [class.sort-up]="sortStatusAsc"
+            [class.sort-down]="!sortStatusAsc"
+            (click)="sortDevicesByStatus()"
+          >
+            Статус <span></span>
+          </button>
+          <button
+            class="sdm-btn-list-sort sort-up font-bold-color"
+            [class.sort-up]="sortDateAsc"
+            [class.sort-down]="!sortDateAsc"
+            (click)="sortDevicesByDate()"
+          >
+            Дата вкл. <span></span>
+          </button>
+          <button
+            class="sdm-btn-list-sort sort-up font-bold-color"
+            [class.sort-up]="sortNameAsc"
+            [class.sort-down]="!sortNameAsc"
+            (click)="sortDevicesByName()"
+          >
+            Название <span></span>
+          </button>
+          <p class="font-bold-color">Описание</p>
+          <p class="font-bold-color">Телефон</p>
+          <p class="font-bold-color">IMEI</p>
+          <p class="font-bold-color">Модель</p>
+          <p class="font-bold-color">Конфигурация</p>
+          <p class="font-bold-color">Обновление</p>
+          <button
+            class="sdm-btn-list-sort sort-up font-bold-color"
+            [class.sort-up]="sortGroupAsc"
+            [class.sort-down]="!sortGroupAsc"
+            (click)="sortDevicesByGroup()"
+          >
+            Группа <span></span>
+          </button>
+          <button
+            class="sdm-btn-list-sort sort-up font-bold-color"
+            [class.sort-up]="sortPowerAsc"
+            [class.sort-down]="!sortPowerAsc"
+            (click)="sortDevicesByPower()"
+          >
+            Заряд <span></span>
+          </button>
+          <p class="font-bold-color">Состояние</p>
+          <p class="font-bold-color">Действия</p>
         </div>
+      </div>
+      <div class="list">
+        <div *ngIf="devices.length === 0 && !loading">Устройств не найдено</div>
+        <ng-container *ngFor="let device of devices">
+          <app-device-item
+            [device]="device"
+            (onSelectUnselectDevice)="selectUnselectSingleDevice($event)"
+            (onChangeDeviceConfig)="changeDeviceConfig($event.device, $event.$event)"
+            (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
+            (onEditDevice)="editDevice($event)"
+            (onDeleteDevice)="deleteDevice($event)"
+          ></app-device-item>
+        </ng-container>
       </div>
     </div>
   </div>
-  <div id="changePass" class="modal non-closing modal-fixed-footer">
-    <div class="modal-content">
-      <h6>Пароль должен стостоять минимум иметь минимум по 1:</h6>
-      <ul class="collection">
-        <li class="collection-item">
-          Заглавный символ
-          <span *ngIf="userService.upperCase" class="red-text"
-            >отсутствует</span
-          >
-        </li>
-        <li class="collection-item">
-          Прописной символ
-          <span *ngIf="userService.lowerCase" class="red-text"
-            >отсутствует</span
-          >
-        </li>
-        <li class="collection-item">
-          Цифра
-          <span *ngIf="userService.number" class="red-text">отсутствует</span>
-        </li>
-        <li class="collection-item">
-          Спец. символ
-          <span *ngIf="userService.specialChar" class="red-text"
-            >отсутствует</span
-          >
-        </li>
-        <li class="collection-item">
-          Состоять минимум из 8 символов
-          <span *ngIf="userService.passLength > 0" class="red-text"
-            >{{ userService.passLength }} осталось</span
-          >
-        </li>
-      </ul>
-      <div class="card-content">
-        <div class="formGroup">
-          <input
-            id="pass"
-            type="password"
-            class="formControl"
-            [(ngModel)]="password"
-            required
-          />
-          <label for="pass">Введите новый пароль</label>
-          <small class="helper-text invalid"></small>
-          <small class="helper-text invalid"></small>
-        </div>
-        <div class="formGroup">
-          <input
-            id="ChangePassword"
-            type="password"
-            class="formControl"
-            required
-            [(ngModel)]="new_password"
-          />
-          <label for="ChangePassword">Повторите новый пароль</label>
-          <small class="helper-text invalid"></small>
-          <small class="helper-text invalid"></small>
-        </div>
+</app-global-container>
+<div id="changePass" class="modal non-closing modal-fixed-footer">
+  <div class="modal-content">
+    <h6>Пароль должен стостоять минимум иметь минимум по 1:</h6>
+    <ul class="collection">
+      <li class="collection-item">
+        Заглавный символ
+        <span *ngIf="userService.upperCase" class="red-text">отсутствует</span>
+      </li>
+      <li class="collection-item">
+        Прописной символ
+        <span *ngIf="userService.lowerCase" class="red-text">отсутствует</span>
+      </li>
+      <li class="collection-item">
+        Цифра
+        <span *ngIf="userService.number" class="red-text">отсутствует</span>
+      </li>
+      <li class="collection-item">
+        Спец. символ
+        <span *ngIf="userService.specialChar" class="red-text"
+          >отсутствует</span
+        >
+      </li>
+      <li class="collection-item">
+        Состоять минимум из 8 символов
+        <span *ngIf="userService.passLength > 0" class="red-text"
+          >{{ userService.passLength }} осталось</span
+        >
+      </li>
+    </ul>
+    <div class="card-content">
+      <div class="formGroup">
+        <input
+          id="pass"
+          type="password"
+          class="formControl"
+          [(ngModel)]="password"
+          required
+        />
+        <label for="pass">Введите новый пароль</label>
+        <small class="helper-text invalid"></small>
+        <small class="helper-text invalid"></small>
+      </div>
+      <div class="formGroup">
+        <input
+          id="ChangePassword"
+          type="password"
+          class="formControl"
+          required
+          [(ngModel)]="new_password"
+        />
+        <label for="ChangePassword">Повторите новый пароль</label>
+        <small class="helper-text invalid"></small>
+        <small class="helper-text invalid"></small>
       </div>
     </div>
-    <div class="modal-footer">
-      <button
-        [disabled]="password !== new_password"
-        (click)="changePassword(password)"
-        class="btn-flat green-text"
-      >
-        Сменить
-        <i class="material-icons right">send</i>
-      </button>
-    </div>
   </div>
-  <app-edit-device
-    [form]="form"
-    [groups]="groups"
-    [configs]="configs"
-    (onSetDeviceSettings)="setDeviceSettings()"
-  ></app-edit-device>
-  <app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
+  <div class="modal-footer">
+    <button
+      [disabled]="password !== new_password"
+      (click)="changePassword(password)"
+      class="btn-flat green-text"
+    >
+      Сменить
+      <i class="material-icons right">send</i>
+    </button>
+  </div>
 </div>
+<app-edit-device
+  [device_id]="currID"
+  [form]="form"
+  [groups]="groups"
+  [configs]="configs"
+  (onSetDeviceSettings)="setDeviceSettings($event)"
+></app-edit-device>
+<app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>

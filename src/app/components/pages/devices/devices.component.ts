@@ -19,17 +19,18 @@ export class DevicesComponent implements OnInit {
   public devices: Device[] = [];
   public groups: Groups[] = [];
   public configs: DevicesConfig[] = [];
-  public loading = true;
+  public loading: boolean = true;
 
   private add_device!: Device; // ???
 
   public form!: FormGroup;
-  public edit = false;
-  public password = "";
-  public new_password = "";
+  public edit: boolean = false;
+  public password: string = "";
+  public new_password: string = "";
 
-  public currQR = "";
-  public currName = "";
+  public currID: string = "";
+  public currQR: string = "";
+  public currName: string = "";
   public isAllSelected: boolean = false;
 
   public sortStatusAsc: boolean = true;
@@ -46,13 +47,13 @@ export class DevicesComponent implements OnInit {
     private configService: DevicesConfigService // public db: DatabaseService
   ) {
     this.form = new FormGroup({
-      name: new FormControl(""),
-      desc: new FormControl(""),
-      phone: new FormControl(""),
-      imei: new FormControl(""),
-      model: new FormControl(""),
-      config: new FormControl(""),
-      group: new FormControl(""),
+      name: new FormControl("", Validators.required),
+      desc: new FormControl("", Validators.required),
+      phone: new FormControl("", Validators.required),
+      imei: new FormControl("", Validators.required),
+      model: new FormControl("", Validators.required),
+      config: new FormControl("", Validators.required),
+      group: new FormControl("", Validators.required),
     });
   }
 
@@ -149,12 +150,20 @@ export class DevicesComponent implements OnInit {
   //     });
   // }
 
-  setDeviceSettings() {
+  setDeviceSettings(id: string) {
+    console.log(id);
     console.log(this.form.getRawValue());
 
-    const settingsModal =
-      this.elementRef.nativeElement.querySelector("#edit_device");
-    M.Modal.getInstance(settingsModal).close();
+    this.form.controls["name"].setErrors({ invalid: "Тестовая ошибка" });
+    this.form.controls["desc"].setErrors({ invalid: "Тестовая ошибка" });
+    this.form.controls["phone"].setErrors({ invalid: "Тестовая ошибка" });
+    this.form.controls["imei"].setErrors({ invalid: "Тестовая ошибка" });
+    this.form.controls["model"].setErrors({ invalid: "Тестовая ошибка" });
+    // console.log(this.form);
+
+    // const settingsModal =
+    //   this.elementRef.nativeElement.querySelector("#edit_device");
+    // M.Modal.getInstance(settingsModal).close();
   }
 
   getGroups() {
@@ -240,6 +249,7 @@ export class DevicesComponent implements OnInit {
   }
 
   editDevice(device: Device) {
+    this.currID = device.device_id;
     this.form.controls["name"].setValue(device.name);
     this.form.controls["desc"].setValue(device.description);
     this.form.controls["phone"].setValue(device.phone_number);

@@ -1,0 +1,8 @@
+.global-container {
+  margin: 12px 18px 12px 310px;
+
+  transition: margin-left .4s ease;
+}
+.global-container.full-width {
+  margin-left: 106px;
+}

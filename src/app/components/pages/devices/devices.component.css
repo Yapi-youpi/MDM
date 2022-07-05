@@ -1,7 +1,9 @@
 .card {
-  padding: 27px 22px;
+  min-height: calc(100vh - 24px);
+  height: fit-content;
+  min-width: fit-content;
 
-  flex-grow: 1;
+  padding: 27px 22px;
 }
 
 .card-header {
@@ -117,6 +119,10 @@
 
 .list {
   margin-top: 22px;
+
+  /*max-height: 200px;*/
+
+  /*overflow-y: visible;*/
 }
 
 .modal .action-btns {

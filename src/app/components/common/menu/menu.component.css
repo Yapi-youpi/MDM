@@ -1,8 +1,8 @@
 aside {
-  height: 100%;
+  height: calc(100vh - 24px);
   width: 280px;
 
-  margin-right: 12px;
+  margin: 12px 0 12px 18px;
 
   overflow: hidden;
 
@@ -89,7 +89,7 @@ aside li a:not(.active):hover {
   background-color: #eceef1;
 }
 
-aside .sdm-menu-icon {
+aside .sdm-menu-icon:not(.menu) {
   margin-right: 12px;
 
   flex-shrink: 0;
@@ -99,6 +99,19 @@ aside .divider {
   margin: 5px 0;
 }
 
+.sdm-menu-icon.menu span,
+.sdm-menu-icon.apps span,
+.sdm-menu-icon.config span {
+  height: 24px;
+  width: 24px;
+
+  mask-size: 24px 24px;
+  -webkit-mask-size: 24px 24px;
+}
+.sdm-menu-icon.menu span {
+  mask-image: url("../../../../assets/UI/hamburger.svg");
+  -webkit-mask-image: url("../../../../assets/UI/hamburger.svg");
+}
 .sdm-menu-icon.devices span {
   mask-image: url("../../../../assets/UI/mobile.svg");
   -webkit-mask-image: url("../../../../assets/UI/mobile.svg");
@@ -120,14 +133,14 @@ aside .divider {
   -webkit-mask-image: url("../../../../assets/UI/map.svg");
 }
 .sdm-menu-icon.config span {
-  mask-image: url("../../../../assets/UI/puzzle.svg");
-  -webkit-mask-image: url("../../../../assets/UI/puzzle.svg");
+  mask-image: url("../../../../assets/UI/settings.svg");
+  -webkit-mask-image: url("../../../../assets/UI/settings.svg");
 }
 .sdm-menu-icon.users span {
   mask-image: url("../../../../assets/UI/users_group.svg");
   -webkit-mask-image: url("../../../../assets/UI/users_group.svg");
 }
 .sdm-menu-icon.help span {
-  mask-image: url("../../../../assets/UI/question.svg");
-  -webkit-mask-image: url("../../../../assets/UI/question.svg");
+  mask-image: url("../../../../assets/UI/faq.svg");
+  -webkit-mask-image: url("../../../../assets/UI/faq.svg");
 }

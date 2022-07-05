@@ -8,8 +8,19 @@
   padding: 30px 93px !important;
 }
 
-#edit_device input[name="phone"] {
-  margin-left: 50px !important;
+#edit_device .form-group.phone,
+#edit_device .form-group.model,
+#edit_device .selects .form-group:first-child {
+  width: 314px;
+}
+#edit_device .form-group.imei {
+  width: calc(100% - 314px);
+}
+#edit_device .form-group.phone input {
+  margin-left: auto;
+}
+#edit_device .form-group.imei label {
+  margin-left: 27px;
 }
 
 #edit_device input[type='number'] {
@@ -29,6 +40,40 @@
 
 #edit_device .model input {
   margin-left: 85px !important;
+}
+
+#edit_device .selects {
+  margin-bottom: 100px !important;
+}
+
+#edit_device .selects .form-group {
+  margin-bottom: 0;
+}
+
+#edit_device .selects .form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#edit_device .input-field-modal {
+  width: 170px;
+}
+
+#edit_device .input-field-modal,
+#edit_device .input-field-modal .select-wrapper input.select-dropdown {
+  height: 45px;
+}
+
+#edit_device .selects .form-group:first-child label {
+  margin-right: 30px;
+}
+
+#edit_device .selects .form-group:last-child {
+  margin-left: auto;
+}
+#edit_device .selects .form-group:last-child label {
+  margin-right: 23px;
 }
 
 #edit_device .form-btns {
