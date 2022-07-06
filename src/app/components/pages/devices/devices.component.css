@@ -18,6 +18,10 @@
   color: #32485e;
 }
 
+.row.actions {
+  justify-content: space-between;
+}
+
 .sort {
   margin-top: 22px;
 }

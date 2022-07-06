@@ -26,6 +26,7 @@ import { EditDeviceComponent } from "./components/common/modals/edit-device/edit
 import { DeviceItemComponent } from "./components/common/device-item/device-item.component";
 import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
 import { FilterSidebarComponent } from "./components/common/filter-sidebar/filter-sidebar.component";
+import { SearchInputComponent } from './components/common/UI/search-input/search-input.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
     DeviceItemComponent,
     GlobalContainerComponent,
     FilterSidebarComponent,
+    SearchInputComponent,
   ],
   imports: [
     BrowserModule,
