@@ -19,6 +19,9 @@
   color: var(--sdm-dark-blue-grey);
 }
 
+.row.actions .search-input-wrapper {
+  margin-right: 12px;
+}
 .row.actions .add-btn-wrapper {
   margin-left: auto;
 }
@@ -45,11 +48,11 @@
 }
 /* Статус */
 .sort .content > *:nth-child(1) {
-  width: 55px;
+  width: 50px;
 }
 /* Дата вкл. */
 .sort .content > *:nth-child(2) {
-  width: 85px;
+  width: 90px;
 }
 /* Название */
 .sort .content > *:nth-child(3) {

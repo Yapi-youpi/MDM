@@ -2,8 +2,6 @@
   display: flex;
   align-items: center;
 
-  margin-right: 12px;
-
   border: 1px solid var(--sdm-light-blue);
 
   transition: border-color .4s ease;

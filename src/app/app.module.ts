@@ -29,6 +29,8 @@ import { FilterSidebarComponent } from "./components/common/filter-sidebar/filte
 import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 
+import { DateConverterPipe } from "./pipes/date-converter.pipe";
+
 const routes: Routes = [
   {
     path: "",
@@ -55,6 +57,7 @@ const routes: Routes = [
     FilterSidebarComponent,
     SearchInputComponent,
     AddButtonComponent,
+    DateConverterPipe,
   ],
   imports: [
     BrowserModule,

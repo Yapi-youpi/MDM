@@ -6,6 +6,7 @@ export interface Users {
   role: string;
   groupsPermissions: GroupPermissions;
 }
+
 export interface GroupPermissions {
   applicationsAdd: boolean;
   changeOperatorPassword: boolean;
@@ -21,6 +22,7 @@ export interface GroupPermissions {
   viewUsers: boolean;
   super: boolean | false;
 }
+
 export interface Groups {
   id: string;
   name: string;
@@ -84,6 +86,7 @@ export interface DevicesConfig {
 }
 
 export interface AllowedClasses {}
+
 export interface Device {
   device_id: string;
   name: string;
@@ -101,4 +104,11 @@ export interface Device {
   raw_qr_code: string;
   objectId: string;
   isSelected?: boolean;
+  updatedAt: string;
+}
+
+export interface DeviceConfigsState {
+  success: boolean;
+  error: string;
+  deviceConfigs: DevicesConfig[];
 }

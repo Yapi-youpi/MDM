@@ -20,13 +20,13 @@
 }
 /* Статус */
 .item .content > *:nth-child(1) {
-  width: 38px;
+  width: 33px;
 
   margin-right: 5px;
 }
 /* Дата вкл. */
 .item .content > *:nth-child(2) {
-  width: 80px;
+  width: 85px;
 
   margin-right: 5px;
 }

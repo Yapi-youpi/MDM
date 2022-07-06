@@ -2,10 +2,16 @@ import { Component, ElementRef, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
 import M from "materialize-css";
+import * as moment from "moment";
 
 import { UserService } from "../../../services/user.service";
 import { DevicesService } from "../../../services/devices.service";
-import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
+import {
+  Device,
+  DeviceConfigsState,
+  DevicesConfig,
+  Groups,
+} from "../../../interfaces/interfaces";
 import { GroupsService } from "../../../services/groups.service";
 import { DevicesConfigService } from "../../../services/devices-config.service";
 // import { DatabaseService } from "../../../services/database.service";
@@ -88,7 +94,7 @@ export class DevicesComponent implements OnInit {
       // console.log(elems);
       if (elems && elems.length !== 0) {
         selectsInter.unsubscribe();
-        M.FormSelect.init(elems, {});
+        M.FormSelect.init(elems);
       }
     });
 
@@ -173,17 +179,14 @@ export class DevicesComponent implements OnInit {
   }
 
   getConfigs() {
-    this.configService
-      .getConfig("all")
-      .then(
-        (res: {
-          success: boolean;
-          error: string;
-          devicesConfigs: DevicesConfig[];
-        }) => {
-          this.configs = res.devicesConfigs;
-        }
-      );
+    this.configService.getConfig("all").then((res: DeviceConfigsState) => {
+      console.log(res);
+      if (res.success) {
+        this.configs = res.deviceConfigs;
+      } else {
+        console.log(res.error);
+      }
+    });
   }
 
   sortDevices() {

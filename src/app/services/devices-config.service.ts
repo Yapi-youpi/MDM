@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { DevicesConfig } from '../interfaces/interfaces';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
+import { DevicesConfig } from "../interfaces/interfaces";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class DevicesConfigService {
   constructor(private http: HttpClient) {}
 
   getConfig(param: string) {
-    const url = environment.url + '/get_config/' + param;
+    const url = environment.url + "/get_config/" + param;
     return new Promise<any>((resolve, reject) => {
       this.http.get(url).subscribe({
         next: (res) => {
@@ -27,7 +27,7 @@ export class DevicesConfigService {
     if (config) {
       config.name = name;
     }
-    const url = environment.url + '/add_config';
+    const url = environment.url + "/add_config";
     const body = {
       ...config,
     };
@@ -44,7 +44,7 @@ export class DevicesConfigService {
   }
 
   renameConfig(id: string, name: string) {
-    const url = environment.url + '/rename_config';
+    const url = environment.url + "/rename_config";
     const body = {
       id,
       name,
@@ -62,7 +62,7 @@ export class DevicesConfigService {
   }
 
   removeConfig(id: string) {
-    const url = environment.url + '/remove_config';
+    const url = environment.url + "/remove_config";
     const body = {
       id,
     };

@@ -18,7 +18,7 @@
         [class.disabled]="!device.active_state"
       ></span>
     </div>
-    <p class="font-regular-color">14 сент, 14:20</p>
+    <p class="font-regular-color">{{ device.updatedAt | dateConverter }}</p>
     <p class="font-bold font-bold-color">{{ device.name }}</p>
     <p class="font-middle font-regular-color">{{ device.description }}</p>
     <p class="font-regular-color">{{ device.phone_number }}</p>
