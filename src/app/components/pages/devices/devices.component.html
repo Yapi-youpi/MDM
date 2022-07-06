@@ -9,6 +9,9 @@
     <div class="row actions">
       <app-search-input></app-search-input>
       <app-filter-sidebar></app-filter-sidebar>
+      <div class="add-btn-wrapper">
+        <app-add-button [title]="'Добавить устройство'"></app-add-button>
+      </div>
     </div>
     <div class="progress" *ngIf="loading">
       <div class="indeterminate"></div>

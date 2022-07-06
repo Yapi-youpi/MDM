@@ -143,6 +143,7 @@ body {
   margin-bottom: 23px;
 
   font-size: 24px;
+  font-weight: 550;
   text-align: center;
   color: var(--sdm-dark-blue-grey);
 }

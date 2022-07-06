@@ -40,11 +40,11 @@
   mask-size: 13px 13px;
   mask-repeat: no-repeat;
   mask-position: center;
-  mask-image: url("../../../../../assets/UI/search.svg");
+  mask-image: url("../../../../../../assets/UI/search.svg");
   -webkit-mask-size: 13px 13px;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  -webkit-mask-image: url("../../../../../assets/UI/search.svg");
+  -webkit-mask-image: url("../../../../../../assets/UI/search.svg");
 
   background-color: var(--sdm-light-blue);
 

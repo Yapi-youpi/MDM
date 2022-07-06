@@ -15,11 +15,12 @@
   margin: 0;
 
   font-size: 24px;
-  color: #32485e;
+  font-weight: 550;
+  color: var(--sdm-dark-blue-grey);
 }
 
-.row.actions {
-  justify-content: space-between;
+.row.actions .add-btn-wrapper {
+  margin-left: auto;
 }
 
 .sort {

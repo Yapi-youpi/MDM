@@ -26,7 +26,8 @@ import { EditDeviceComponent } from "./components/common/modals/edit-device/edit
 import { DeviceItemComponent } from "./components/common/device-item/device-item.component";
 import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
 import { FilterSidebarComponent } from "./components/common/filter-sidebar/filter-sidebar.component";
-import { SearchInputComponent } from './components/common/UI/search-input/search-input.component';
+import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
+import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 
 const routes: Routes = [
   {
@@ -53,6 +54,7 @@ const routes: Routes = [
     GlobalContainerComponent,
     FilterSidebarComponent,
     SearchInputComponent,
+    AddButtonComponent,
   ],
   imports: [
     BrowserModule,
