@@ -1,6 +1,5 @@
 .card {
-  min-height: calc(100vh - 24px);
-  height: fit-content;
+  height: 100%;
   min-width: fit-content;
 
   padding: 27px 22px;

@@ -1,0 +1,117 @@
+<button
+  data-target="slide-out"
+  class="sidenav-trigger sdm-only-icon sdm-dark-blue r-round filter"
+>
+  <span></span>
+</button>
+<div
+  id="slide-out"
+  class="sidenav sdm-right filter"
+>
+  <h2>Фильтр</h2>
+  <div class="divider"></div>
+  <div class="body">
+  <div class="status row">
+    <p>Статус</p>
+    <button class="sdm-middle r-14">вкл</button>
+    <button class="sdm-middle r-14">выкл</button>
+  </div>
+    <p class="date-title">Последнее включение</p>
+    <div class="date">
+      <div class="row">
+        <p>с</p>
+        <input type="datetime-local" class="w-186">
+      </div>
+      <div class="row">
+        <p>по</p>
+        <input type="datetime-local" class="w-186">
+      </div>
+    </div>
+    <ul class="collapsible">
+      <li class="config">
+        <div
+          class="collapsible-header"
+          (click)="toggleConfigDropdown()"
+        >
+          Конфигурация
+          <span
+            class="accordion-arrow"
+            [class.up]="!isConfigDropdownHidden"
+          ></span>
+        </div>
+        <div class="collapsible-body">
+          <!--          -->
+          <div class="row">
+            <div class="checkbox-container">
+              <label>
+                <input
+                  type="checkbox"
+                  class="filled-in item-checkbox"
+                />
+                <span>Ololo</span>
+              </label>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="checkbox-container">
+              <label>
+                <input
+                  type="checkbox"
+                  class="filled-in item-checkbox"
+                />
+                <span>Ololo</span>
+              </label>
+            </div>
+
+          </div>
+          <!--            -->
+        </div>
+      </li>
+      <li class="group">
+        <div
+          class="collapsible-header"
+          (click)="toggleGroupDropdown()"
+        >
+          Группа
+          <span
+            class="accordion-arrow"
+            [class.up]="!isGroupDropdownHidden"
+          ></span>
+        </div>
+        <div class="collapsible-body">
+          <!--          -->
+          <div class="row">
+            <div class="checkbox-container">
+              <label>
+                <input
+                  type="checkbox"
+                  class="filled-in item-checkbox"
+                />
+                <span>Ololo</span>
+              </label>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="checkbox-container">
+              <label>
+                <input
+                  type="checkbox"
+                  class="filled-in item-checkbox"
+                />
+                <span>Ololo</span>
+              </label>
+            </div>
+
+          </div>
+          <!--            -->
+        </div>
+      </li>
+    </ul>
+    <div class="row action-btns">
+      <button type="button" class="sidenav-close sdm-middle r-14">Сброс</button>
+      <button type="button" class="sdm-middle sdm-dark-blue r-14">Поиск</button>
+    </div>
+  </div>
+</div>

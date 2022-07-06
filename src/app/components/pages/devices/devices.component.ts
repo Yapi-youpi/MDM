@@ -124,17 +124,17 @@ export class DevicesComponent implements OnInit {
   }
 
   addDevice() {
-    this.add_device = this.form.getRawValue();
-    this.device
-      .addDevice(this.add_device)
-      .then((res) => {
-        console.log(res);
-        this.getAllDevices();
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.error.error);
-      });
+    // this.add_device = this.form.getRawValue();
+    // this.device
+    //   .addDevice(this.add_device)
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.getAllDevices();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     console.log(err.error.error);
+    //   });
   }
 
   // saveChange() {
