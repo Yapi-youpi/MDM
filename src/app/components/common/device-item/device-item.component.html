@@ -27,11 +27,18 @@
     <p class="font-regular-color">{{ device.imei }}</p>
     <p class="font-regular-color">{{ device.model }}</p>
     <div class="input-field sdm-light-select">
-      <select class="config-select" (change)="changeDeviceConfig(device, $event)">
-        <option value="0" selected>По умолчанию</option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
+      <select
+        class="config-select"
+        (change)="changeDeviceConfig(device, $event)"
+      >
+        <ng-container *ngFor="let config of configs">
+          <option
+            [value]="config.ID"
+            [selected]="device.device_config_id === config.ID"
+          >
+            {{ config.name }}
+          </option>
+        </ng-container>
       </select>
     </div>
     <div class="status-container update small">

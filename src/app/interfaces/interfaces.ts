@@ -107,8 +107,8 @@ export interface Device {
   updatedAt: string;
 }
 
-export interface DeviceConfigsState {
+export interface DevicesConfigsState {
   success: boolean;
   error: string;
-  deviceConfigs: DevicesConfig[];
+  devicesConfigs: DevicesConfig[];
 }

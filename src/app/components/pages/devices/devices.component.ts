@@ -8,7 +8,7 @@ import { UserService } from "../../../services/user.service";
 import { DevicesService } from "../../../services/devices.service";
 import {
   Device,
-  DeviceConfigsState,
+  DevicesConfigsState,
   DevicesConfig,
   Groups,
 } from "../../../interfaces/interfaces";
@@ -119,10 +119,13 @@ export class DevicesComponent implements OnInit {
     this.device
       .getDevice("all")
       .then((res: { devices: Device[]; success: boolean; error: string }) => {
-        console.log(res);
-        this.loading = false;
-        this.devices = res.devices;
-        this.sortDevices();
+        if (res.success) {
+          this.loading = false;
+          this.devices = res.devices;
+          this.sortDevices();
+        } else {
+          console.log(res.error);
+        }
       })
       .catch((err) => {
         console.log(err.error.error);
@@ -179,10 +182,9 @@ export class DevicesComponent implements OnInit {
   }
 
   getConfigs() {
-    this.configService.getConfig("all").then((res: DeviceConfigsState) => {
-      console.log(res);
+    this.configService.getConfig("all").then((res: DevicesConfigsState) => {
       if (res.success) {
-        this.configs = res.deviceConfigs;
+        this.configs = res.devicesConfigs;
       } else {
         console.log(res.error);
       }
@@ -242,8 +244,8 @@ export class DevicesComponent implements OnInit {
   }
 
   changeDeviceConfig(device: Device, $event) {
-    console.log($event.target.value);
-    console.log(device.device_id);
+    console.log("Option value (config ID): " + $event.target.value);
+    console.log("device ID: " + device.device_id);
   }
 
   getDeviceQRCode(name: string, qr: any) {

@@ -87,6 +87,7 @@
         <ng-container *ngFor="let device of devices">
           <app-device-item
             [device]="device"
+            [configs]="configs"
             (onSelectUnselectDevice)="selectUnselectSingleDevice($event)"
             (onChangeDeviceConfig)="changeDeviceConfig($event.device, $event.$event)"
             (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
