@@ -9,7 +9,6 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
-import M from 'materialize-css';
 import { ErrorService } from './services/error.service';
 
 @Injectable()
@@ -65,7 +64,7 @@ export class AppInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('auth').then();
             }
             if (err.status === 0) {
-              M.toast({ html: 'Сервер недоступен' });
+              // M.toast({ html: 'Сервер недоступен' });
             }
           },
         })

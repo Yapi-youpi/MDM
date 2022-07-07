@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
-import M from "materialize-css";
 
 @Component({
   selector: "app-filter-sidebar",
@@ -18,12 +17,12 @@ export class FilterSidebarComponent implements OnInit {
     const accordions =
       this.elementRef.nativeElement.querySelectorAll(".collapsible");
 
-    M.Sidenav.init(sidebar, {
+/*    M.Sidenav.init(sidebar, {
       edge: "right",
     });
     M.Collapsible.init(accordions, {
       accordion: false,
-    });
+    });*/
   }
 
   toggleConfigDropdown() {

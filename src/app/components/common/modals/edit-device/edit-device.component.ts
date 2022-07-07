@@ -9,7 +9,6 @@ import {
 import { FormGroup } from "@angular/forms";
 import { DevicesConfig, Groups } from "../../../../interfaces/interfaces";
 import { interval } from "rxjs";
-import M from "materialize-css";
 
 @Component({
   selector: "app-edit-device",
@@ -33,7 +32,7 @@ export class EditDeviceComponent implements OnInit {
       );
       if (elems && elems.length !== 0) {
         i.unsubscribe();
-        M.FormSelect.init(elems, {});
+        // M.FormSelect.init(elems, {});
       }
     });
   }

@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
-import M from "materialize-css";
 
 import { UserService } from "../../../services/user.service";
 import { DevicesService } from "../../../services/devices.service";
@@ -63,7 +62,7 @@ export class DevicesComponent implements OnInit {
     let closingModal =
       this.elementRef.nativeElement.querySelectorAll(".closing");
 
-    M.Modal.init(nonClosingModal, {
+/*    M.Modal.init(nonClosingModal, {
       dismissible: false,
       onCloseEnd: () => {
         this.form.reset();
@@ -71,7 +70,7 @@ export class DevicesComponent implements OnInit {
     });
     M.Modal.init(closingModal, {
       dismissible: true,
-    });
+    });*/
 
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
@@ -88,7 +87,7 @@ export class DevicesComponent implements OnInit {
       // console.log(elems);
       if (elems && elems.length !== 0) {
         selectsInter.unsubscribe();
-        M.FormSelect.init(elems, {});
+        // M.FormSelect.init(elems, {});
       }
     });
 

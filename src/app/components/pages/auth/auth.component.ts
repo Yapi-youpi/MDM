@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../../services/auth.service";
 import { Router } from "@angular/router";
-import M from "materialize-css";
 import { UserService } from "../../../services/user.service";
 import { AssetService } from "../../../services/asset.service";
 import { interval } from "rxjs";
@@ -75,9 +74,9 @@ export class AuthComponent implements OnInit {
                 };
                 if (elem) {
                   i.unsubscribe();
-                  M.Modal.init(elem, options);
-                  let instance = M.Modal.getInstance(elem);
-                  instance.open();
+                  // M.Modal.init(elem, options);
+                  // let instance = M.Modal.getInstance(elem);
+                  // instance.open();
                 }
               });
             }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import M from 'materialize-css';
 
 export interface Error {
   eng: string;
@@ -130,8 +129,8 @@ export class ErrorService {
     this.Errors.map((err) => {
       if (error === err.eng) {
         this.error = err.rus;
-        M.toast({ html: this.error });
-        // console.log(this.error);
+        // M.toast({ html: this.error });
+        console.log(this.error);
       }
     });
   }

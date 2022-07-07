@@ -3,7 +3,6 @@ import { GroupsService } from "../../../services/groups.service";
 import { UserService } from "../../../services/user.service";
 import { interval } from "rxjs";
 import { Groups } from "../../../interfaces/interfaces";
-import M from "materialize-css";
 
 @Component({
   selector: "app-groups",
@@ -24,7 +23,7 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
-    M.Modal.init(elem);
+    // M.Modal.init(elem);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
