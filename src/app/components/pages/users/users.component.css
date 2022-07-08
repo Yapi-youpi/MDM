@@ -11,6 +11,10 @@
 }
 .card--sidebar {
   max-width: 350px;
+  height: calc(100vh - var(--header-height) - 32px /*paddings*/);
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
 }
 .card__header {
   height: 48px;
@@ -23,7 +27,18 @@
   font-size: 20px;
   border-bottom: 2px solid var(--sdm-light-blue);
 }
+.card__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-top: 16px;
+}
 .search-input {
+  height: 30px;
+  padding: 8px;
+  font-size: 12px;
+  background-color: inherit;
   border: 1px solid var(--sdm-light-blue);
   border-radius: 8px;
 }
@@ -35,13 +50,18 @@
   color: white;
   border-radius: 50%;
 }
-.outline-btn {
+.btn--outline {
   padding: 9px 14px;
   background: transparent;
   color: var(--sdm-dark-blue);
   font-size: 12px;
   line-height: 12px;
   border: 1px solid var(--sdm-dark-blue);
+  border-radius: 14px;
+}
+.btn--big {
+  padding: 12px 16px;
+  font-size: 16px;
   border-radius: 14px;
 }
 .common-btn {
@@ -53,6 +73,9 @@
   border-radius: 8px;
   white-space: nowrap;
 }
+.right-btn {
+  margin-left: auto;
+}
 .users-wrapper {
   padding-top: 15px;
   display: flex;
@@ -63,6 +86,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-height: 130px;
   padding: 0 21px 0 16px;
   background: white;
   border-radius: 14px;
@@ -71,10 +95,125 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  background: var(--sdm-light-blue);
+  box-shadow: 0 0 10px rgba(133, 133, 133, 0.15);
 }
 .user-card__descr {
   display: flex;
   flex-direction: column;
 }
+.user-card__name {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--sdm-dark-grey);
+}
+.user-card__email {
+  font-size: 12px;
+  color: var(--sdm-dark-grey);
+}
+.user-card__group {
+  border-radius: 14px;
+}
+.user-card__role {
+  width: fit-content;
+  padding: 4px 14px;
+  font-size: 12px;
+  line-height: 12px;
+  color: white;
+  background-color: var(--sdm-red);
+  border-radius: 14px;
+}
 .user-card__menu {
+  display: flex;
+  align-self: flex-start;
+  padding-top: 32px;
+}
+.user-card__menu-btn {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background-color: var(--sdm-dark-blue);
+  color: white;
+  border-radius: 50%;
+}
+.user-settings {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+fieldset.user-category {
+  margin: 0;
+  padding: 0;
+  border: none;
+  flex: 1;
+  /*height: 0;*/
+  display: flex;
+}
+.user-category__header {
+  padding-top: 17px;
+  font-size: 16px;
+  color: var(--sdm-dark-blue-grey);
+}
+.user-category__params {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ЧЕКБОКС */
+
+.input {
+  box-sizing: border-box;
+  background: inherit;
+  border: 1px solid var(--sdm-light-blue);
+  color: var(--sdm-light-blue);
+  font-weight: inherit;
+}
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.checkbox-wrapper span {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+.checkbox-custom {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.checkbox-custom svg polyline {
+  fill: none;
+  stroke: none;
+  stroke-width: 1.9;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: 16px;
+  transition: all 0.3s ease;
+}
+input[type="checkbox"]:hover + .checkbox-custom,
+input[type="checkbox"]:focus-visible + .checkbox-custom {
+  border-color: var(--sdm-light-blue);
+  background-color: var(--sdm-light-blue);
+}
+input[type="checkbox"]:checked + .checkbox-custom {
+  border-color: var(--sdm-dark-blue);
+  background-color: var(--sdm-dark-blue);
+}
+input[type="checkbox"]:checked + .checkbox-custom svg polyline {
+  stroke: #fff;
+  stroke-dashoffset: 0;
+}
+input[type="checkbox"]:checked:hover + .checkbox-custom,
+input[type="checkbox"]:checked:focus-visible + .checkbox-custom {
+  border-color: var(--sdm-blue);
+  background-color: var(--sdm-blue);
+}
+input[type="checkbox"]:disabled + .checkbox-custom {
+  border-color: var(--sdm-grey);
 }

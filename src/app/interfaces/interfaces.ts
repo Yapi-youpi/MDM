@@ -6,6 +6,9 @@ export interface Users {
   role: string;
   groupsPermissions: GroupPermissions;
 }
+export interface Roles {
+  [key: string]: string;
+}
 export interface GroupPermissions {
   applicationsAdd: boolean;
   changeOperatorPassword: boolean;
@@ -30,7 +33,7 @@ export interface Groups {
 export interface DevicesConfig {
   GPS?: boolean | true;
   ID: string;
-  appUpdateTime?: string | "02:00";
+  appUpdateTime?: string | '02:00';
   applications?: null;
   autoBrightness: boolean | false;
   autoUpdate: boolean | false;
@@ -40,13 +43,13 @@ export interface DevicesConfig {
   blockStatusBar: boolean | false;
   bluetooth: boolean | true;
   brightness: number | 255;
-  contentAppId: string | "";
-  description: string | "Стандартная конфигурация";
-  desktopHeader: string | "NO_HEADER";
-  desktopHeaderTemplate: string | "";
+  contentAppId: string | '';
+  description: string | 'Стандартная конфигурация';
+  desktopHeader: string | 'NO_HEADER';
+  desktopHeaderTemplate: string | '';
   disableScreenshots: boolean | false;
-  eventReceivingComponent: string | "";
-  iconSize: string | "SMALL";
+  eventReceivingComponent: string | '';
+  iconSize: string | 'SMALL';
   keepaliveTime: number | 60000000000;
   kioskHome: boolean | false;
   kioskKeyguard: boolean | false;
@@ -57,29 +60,29 @@ export interface DevicesConfig {
   kioskSystemInfo: boolean | false;
   lockSafeSettings: boolean | true;
   lockVolume: boolean | false;
-  mainAppId: string | "";
+  mainAppId: string | '';
   manageTimeout: boolean | false;
   manageVolume: boolean | false;
   mobileData: boolean | true;
   mobileEnrollment: boolean | false;
   name: string;
   orientation: number | 0;
-  pushOptions: string | "all";
-  restrictions: string | "";
+  pushOptions: string | 'all';
+  restrictions: string | '';
   scheduleAppUpdate: boolean | false;
   showWifi: boolean | false;
-  systemUpdateTime: string | "00:00";
+  systemUpdateTime: string | '00:00';
   systemUpdateType: number | 0;
-  textColor: string | "";
-  timeZone: string | "auto";
+  textColor: string | '';
+  timeZone: string | 'auto';
   timeout: number | 30000000000;
   usbStorage: boolean | false;
   useDefaultDesignSettings: boolean | false;
   volume: number | 90;
   wifi: boolean | true;
-  wifiPassword: string | "";
-  wifiSSID: string | "";
-  wifiSecurityType: string | "";
+  wifiPassword: string | '';
+  wifiSSID: string | '';
+  wifiSecurityType: string | '';
   allowedClasses: AllowedClasses;
 }
 

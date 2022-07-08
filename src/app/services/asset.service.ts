@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Roles } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssetService {
+  public roles: Roles = {
+    operator: 'Оператор',
+    admin: 'Администратор',
+    super: 'Суперадмин',
+  };
   constructor(private storage: Storage) {
     this.storage.create().then();
   }

@@ -8,26 +8,101 @@
         <button type="button" class="search-btn">
           <i class="material-icons">search</i>
         </button>
-        <button type="button" class="outline-btn">Суперадмины</button>
-        <button type="button" class="outline-btn">Администраторы</button>
-        <button type="button" class="outline-btn">Оператор</button>
-        <button type="button" class="common-btn">Добавить пользователя</button>
+        <button type="button" class="btn--outline">Суперадмины</button>
+        <button type="button" class="btn--outline">Администраторы</button>
+        <button type="button" class="btn--outline">Оператор</button>
+        <button type="button" class="common-btn right-btn">
+          Добавить пользователя
+        </button>
       </div>
       <div class="users-wrapper">
         <div class="user-card">
           <div class="user-card__avatar"></div>
-          <div class="user-card__descr"></div>
-          <div class="user-card__menu"></div>
+          <div class="user-card__descr">
+            <div class="user-card__name">Константин</div>
+            <div class="user-card__email">prosto.kostya@mail.ru</div>
+            <div class="user-card__group"></div>
+            <div class="user-card__role">суперадмин</div>
+          </div>
+          <div class="user-card__menu">
+            <button class="user-card__menu-btn">
+              <i class="material-icons">more_vert</i>
+            </button>
+          </div>
         </div>
         <div class="user-card">
           <div class="user-card__avatar"></div>
-          <div class="user-card__descr"></div>
-          <div class="user-card__menu"></div>
+          <div class="user-card__descr">
+            <div class="user-card__name">Владислав</div>
+            <div class="user-card__email">
+              vlad-super-admin-better-in-the-universe@gmail.com
+            </div>
+            <div class="user-card__group"></div>
+            <div class="user-card__role">суперадмин</div>
+          </div>
+          <div class="user-card__menu">
+            <button class="user-card__menu-btn">
+              <i class="material-icons">more_vert</i>
+            </button>
+          </div>
+        </div>
+        <div class="progress" *ngIf="loading">
+          <div class="indeterminate"></div>
+        </div>
+        <div class="user-card" *ngFor="let user of users">
+          <div class="user-card__avatar"></div>
+          <div class="user-card__descr">
+            <div class="user-card__name">{{ user.name }}</div>
+            <div class="user-card__email">
+              {{ user.login }}
+            </div>
+            <div class="user-card__group"></div>
+            <div class="user-card__role">
+              {{ asset.roles[user.role].toLowerCase() }}
+            </div>
+          </div>
+          <div class="user-card__menu">
+            <button class="user-card__menu-btn">
+              <i class="material-icons">more_vert</i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <div class="card card--sidebar">
       <div class="card__header">Настройка доступа</div>
+      <div class="user-settings">
+        <fieldset
+          class="user-category"
+          *ngFor="let role of asset.roles | keyvalue"
+        >
+          <legend class="user-category__header">{{ role.value }}</legend>
+          <div class="user-category__params">
+            <label
+              for="{{ param }}'-'{{ role.key }}"
+              class="checkbox-wrapper"
+              *ngFor="let param of params"
+            >
+              <input
+                type="checkbox"
+                name="params"
+                id="{{ param }}'-'{{ role.key }}"
+                class="visually-hidden"
+              />
+              <div class="input checkbox-custom">
+                <svg width="18" height="18" viewBox="0 0 20 20">
+                  <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+                </svg>
+              </div>
+              <span>{{ param }}</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="card__footer">
+        <button type="button" class="btn--big">Отмена</button>
+        <button type="button" class="btn--big">Сохранить</button>
+      </div>
     </div>
   </main>
   <!--<div class="container">
