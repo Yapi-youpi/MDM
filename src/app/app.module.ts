@@ -30,6 +30,8 @@ import { SearchInputComponent } from "./components/common/UI/input/search-input/
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 
 import { DateConverterPipe } from "./pipes/date-converter.pipe";
+import { DevicesFilterPipe } from "./pipes/devices-filter.pipe";
+import { GroupConverterPipe } from "./pipes/group-converter.pipe";
 
 const routes: Routes = [
   {
@@ -41,6 +43,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    // COMPONENTS
     AppComponent,
     UsersComponent,
     AuthComponent,
@@ -57,7 +60,10 @@ const routes: Routes = [
     FilterSidebarComponent,
     SearchInputComponent,
     AddButtonComponent,
+    // PIPES
     DateConverterPipe,
+    DevicesFilterPipe,
+    GroupConverterPipe,
   ],
   imports: [
     BrowserModule,

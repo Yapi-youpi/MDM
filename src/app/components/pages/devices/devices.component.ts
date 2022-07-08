@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
 import M from "materialize-css";
-import * as moment from "moment";
 
 import { UserService } from "../../../services/user.service";
 import { DevicesService } from "../../../services/devices.service";
@@ -11,9 +10,11 @@ import {
   DevicesConfigsState,
   DevicesConfig,
   Groups,
+  DevicesFilter,
 } from "../../../interfaces/interfaces";
 import { GroupsService } from "../../../services/groups.service";
 import { DevicesConfigService } from "../../../services/devices-config.service";
+import * as moment from "moment";
 // import { DatabaseService } from "../../../services/database.service";
 
 @Component({
@@ -29,7 +30,9 @@ export class DevicesComponent implements OnInit {
 
   private add_device!: Device; // ???
 
-  public form!: FormGroup;
+  public form: FormGroup;
+  public filterForm: FormGroup;
+
   public edit: boolean = false;
   public password: string = "";
   public new_password: string = "";
@@ -44,6 +47,14 @@ export class DevicesComponent implements OnInit {
   public sortNameAsc: boolean = true;
   public sortGroupAsc: boolean = true;
   public sortPowerAsc: boolean = true;
+
+  public devicesFilters: DevicesFilter = {
+    status: null,
+    dateFrom: null,
+    dateTo: null,
+    configsIDs: null,
+    groupsIDs: null,
+  };
 
   constructor(
     public userService: UserService,
@@ -60,6 +71,14 @@ export class DevicesComponent implements OnInit {
       model: new FormControl("", Validators.required),
       config: new FormControl("", Validators.required),
       group: new FormControl("", Validators.required),
+    });
+    this.filterForm = new FormGroup({
+      "status-on": new FormControl(false),
+      "status-off": new FormControl(false),
+      "date-from": new FormControl(null),
+      "date-to": new FormControl(null),
+      config_ids: new FormControl(null),
+      group_ids: new FormControl(null),
     });
   }
 
@@ -97,9 +116,6 @@ export class DevicesComponent implements OnInit {
         M.FormSelect.init(elems);
       }
     });
-
-    //  Загрузить все возможные варианты конфигураций и групп и
-    //  и подгрузить в селекты
   }
 
   changePassword(pass: string) {
@@ -115,11 +131,30 @@ export class DevicesComponent implements OnInit {
       });
   }
 
+  // ПЕРВЫЕ ВЫПОЛНЯЕМЫЕ Ф-ЦИИ
+
+  getConfigs() {
+    this.configService.getConfig("all").then((res: DevicesConfigsState) => {
+      if (res.success) {
+        this.configs = res.devicesConfigs;
+      } else {
+        console.log(res.error);
+      }
+    });
+  }
+
+  getGroups() {
+    this.groupsService.getGroups("all").then((res) => {
+      this.groups = res;
+    });
+  }
+
   getAllDevices() {
     this.device
       .getDevice("all")
       .then((res: { devices: Device[]; success: boolean; error: string }) => {
         if (res.success) {
+          console.log(res.devices);
           this.loading = false;
           this.devices = res.devices;
           this.sortDevices();
@@ -130,6 +165,34 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err.error.error);
       });
+  }
+
+  resetSearchParams() {
+    this.devicesFilters.status = null;
+    this.devicesFilters.dateFrom = null;
+    this.devicesFilters.dateTo = null;
+    this.devicesFilters.configsIDs = null;
+    this.devicesFilters.groupsIDs = null;
+  }
+  searchDevicesWithParams(form: FormGroup) {
+    this.devicesFilters.status =
+      (form.getRawValue()["status-on"] && form.getRawValue()["status-off"]) ||
+      (!form.getRawValue()["status-on"] && !form.getRawValue()["status-off"])
+        ? null
+        : form.getRawValue()["status-on"] && !form.getRawValue()["status-off"]
+        ? true
+        : !form.getRawValue()["status-on"] &&
+          form.getRawValue()["status-off"] &&
+          false;
+
+    this.devicesFilters.dateFrom = form.getRawValue()["date-from"]
+      ? moment.utc(form.getRawValue()["date-from"]).format()
+      : null;
+    this.devicesFilters.dateTo = form.getRawValue()["date-to"]
+      ? moment.utc(form.getRawValue()["date-to"]).format()
+      : null;
+    this.devicesFilters.groupsIDs = form.getRawValue()["group_ids"];
+    this.devicesFilters.configsIDs = form.getRawValue()["config_ids"];
   }
 
   addDevice() {
@@ -173,22 +236,6 @@ export class DevicesComponent implements OnInit {
     // const settingsModal =
     //   this.elementRef.nativeElement.querySelector("#edit_device");
     // M.Modal.getInstance(settingsModal).close();
-  }
-
-  getGroups() {
-    this.groupsService.getGroups("all").then((res) => {
-      this.groups = res;
-    });
-  }
-
-  getConfigs() {
-    this.configService.getConfig("all").then((res: DevicesConfigsState) => {
-      if (res.success) {
-        this.configs = res.devicesConfigs;
-      } else {
-        console.log(res.error);
-      }
-    });
   }
 
   sortDevices() {

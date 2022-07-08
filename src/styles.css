@@ -335,6 +335,9 @@ input.w-186 {
 
   font-size: 12px;
 }
+.input-field-filter .select-wrapper ul.select-dropdown span {
+  padding: 7px 14px;
+}
 .sdm-light-select ul.select-dropdown span {
   color: var(--sdm-dark-blue);
 }
@@ -365,6 +368,27 @@ input.w-186 {
   color: var(--sdm-white);
 }
 
+.sidenav.filter .select-wrapper input.select-dropdown {
+  height: 45px !important;
+
+  border-radius: 14px !important;
+}
+.sidenav.filter .select-wrapper input.select-dropdown {
+  font-size: 16px !important;
+  color: var(--sdm-dark-blue-grey);
+}
+.sidenav.filter .select-wrapper ul.select-dropdown {
+  border-radius: 14px !important;
+}
+.sidenav.filter .select-wrapper ul.select-dropdown span {
+  font-size: 16px;
+}
+.sidenav.filter .input-field-filter label {
+  display: block;
+
+  margin-bottom: 10px;
+}
+
 .checkbox-container {
   height: 16px;
 }
@@ -382,10 +406,6 @@ input.w-186 {
 
   padding-left: 0 !important;
 }
-/*.checkbox-container .main-checkbox [type="checkbox"] + span:not(.lever),*/
-/*.checkbox-container .item-checkbox [type="checkbox"] + span:not(.lever) {*/
-/*  padding-left: 0 !important;*/
-/*}*/
 .checkbox-container [type="checkbox"].filled-in:not(:checked) + span:not(.lever):before {
   top: 3px !important;
   left: 2px !important;
@@ -466,6 +486,9 @@ input.w-186 {
 
   padding-left: 30px;
 }
+.input-field-filter .select-dropdown [type='checkbox'] + span:nth-child(2) {
+  padding-left: 25px;
+}
 
 /* ЧЕКБОКС В АККОРДЕОНЕ */
 .collapsible-body .checkbox-container,
@@ -487,6 +510,42 @@ input.w-186 {
 }
 .collapsible-body [type="checkbox"].filled-in:checked + span:not(.lever):before {
   top: 4px !important;
+}
+
+/* ЧЕКБОКСЫ КАК ОБЫЧНЫЕ КНОПКИ */
+.sdm-check-btn {
+  height: 30px;
+
+  display: flex;
+
+  color: var(--sdm-dark-blue);
+  border: 1px solid var(--sdm-dark-blue);
+}
+.sdm-check-btn:hover {
+  background-color: var(--sdm-light-grey);
+}
+.sdm-check-btn.checked {
+  background-color: var(--sdm-dark-blue);
+  border-color: transparent;
+  color: var(--sdm-white);
+}
+.sdm-check-btn.checked:hover {
+  background-color: var(--sdm-blue);
+}
+.sdm-check-btn label {
+  height: 30px;
+  width: 100%;
+
+  display: block;
+}
+.sdm-check-btn [type="checkbox"] + span:not(.lever) {
+  padding: 0 10px !important;
+
+  line-height: 30px;
+}
+.sdm-check-btn [type="checkbox"] + span:not(.lever):before,
+.sdm-check-btn [type="checkbox"] + span:not(.lever):after {
+  display: none;
 }
 
 label {

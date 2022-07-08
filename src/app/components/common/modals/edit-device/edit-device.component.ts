@@ -33,7 +33,7 @@ export class EditDeviceComponent implements OnInit {
       );
       if (elems && elems.length !== 0) {
         i.unsubscribe();
-        M.FormSelect.init(elems, {});
+        M.FormSelect.init(elems);
       }
     });
   }

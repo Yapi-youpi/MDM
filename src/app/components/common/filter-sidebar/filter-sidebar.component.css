@@ -91,6 +91,10 @@
   line-height: 30px;
 }
 
+.sidenav.filter .input-field-filter:not(:last-child) {
+  margin-bottom: 30px;
+}
+
 .accordion-arrow {
   height: 30px;
   width: 30px;

@@ -2,7 +2,6 @@
   <div class="card sdm-bg-light-grey">
     <div class="card-header">
       <h2>Устройства</h2>
-      <!--    Место для кнопки добавления/редактирования и пр.    -->
       <app-user></app-user>
     </div>
     <div class="divider"></div>
@@ -10,7 +9,13 @@
       <div class="search-input-wrapper">
         <app-search-input></app-search-input>
       </div>
-      <app-filter-sidebar></app-filter-sidebar>
+      <app-filter-sidebar
+        [configs]="configs"
+        [groups]="groups"
+        [form]="filterForm"
+        (onResetFilterSettings)="resetSearchParams()"
+        (onSetFilterSettings)="searchDevicesWithParams($event)"
+      ></app-filter-sidebar>
       <div class="add-btn-wrapper">
         <app-add-button [title]="'Добавить устройство'"></app-add-button>
       </div>
@@ -84,10 +89,13 @@
       </div>
       <div class="list">
         <div *ngIf="devices.length === 0 && !loading">Устройств не найдено</div>
-        <ng-container *ngFor="let device of devices">
+        <ng-container
+          *ngFor="let device of devices | devicesFilter: devicesFilters.status:devicesFilters.dateFrom:devicesFilters.dateTo:devicesFilters.configsIDs:devicesFilters.groupsIDs"
+        >
           <app-device-item
             [device]="device"
             [configs]="configs"
+            [groups]="groups"
             (onSelectUnselectDevice)="selectUnselectSingleDevice($event)"
             (onChangeDeviceConfig)="changeDeviceConfig($event.device, $event.$event)"
             (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"

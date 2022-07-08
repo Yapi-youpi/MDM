@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { Device, DevicesConfig } from "../../../interfaces/interfaces";
+import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
 
 @Component({
   selector: "app-device-item",
@@ -10,6 +10,7 @@ import { Device, DevicesConfig } from "../../../interfaces/interfaces";
 export class DeviceItemComponent {
   @Input() public device!: Device;
   @Input() public configs!: DevicesConfig[];
+  @Input() public groups!: Groups[];
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
   @Output() onChangeDeviceConfig = new EventEmitter<{
