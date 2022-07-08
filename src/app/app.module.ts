@@ -28,13 +28,18 @@ import { GlobalContainerComponent } from "./components/common/global-container/g
 import { FilterSidebarComponent } from "./components/common/filter-sidebar/filter-sidebar.component";
 import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
+import { PageHeaderComponent } from "./components/common/page-header/page-header.component";
 
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
 import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
 import { GroupConverterPipe } from "./shared/pipes/group-converter.pipe";
-import { PageHeaderComponent } from './components/common/page-header/page-header.component';
-import { SearchPipe } from './shared/pipes/search.pipe';
-import { ConfigConverterPipe } from './shared/pipes/config-converter.pipe';
+import { SearchPipe } from "./shared/pipes/search.pipe";
+import { ConfigConverterPipe } from "./shared/pipes/config-converter.pipe";
+import { StatusPipe } from "./shared/pipes/sort/devices/status.pipe";
+import { DatePipe } from "./shared/pipes/sort/devices/date.pipe";
+import { NamePipe } from "./shared/pipes/sort/devices/name.pipe";
+import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
+import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
 
 const routes: Routes = [
   {
@@ -62,14 +67,19 @@ const routes: Routes = [
     GlobalContainerComponent,
     FilterSidebarComponent,
     SearchInputComponent,
+    PageHeaderComponent,
     AddButtonComponent,
     // PIPES
     DateConverterPipe,
     DevicesFilterPipe,
     GroupConverterPipe,
-    PageHeaderComponent,
     SearchPipe,
     ConfigConverterPipe,
+    StatusPipe,
+    DatePipe,
+    NamePipe,
+    GroupPipe,
+    BatteryPipe,
   ],
   imports: [
     BrowserModule,

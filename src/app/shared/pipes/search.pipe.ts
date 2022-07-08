@@ -8,7 +8,7 @@ export class SearchPipe implements PipeTransform {
   transform(
     array: Device[] | any[],
     value: string,
-    objType:
+    arrayType:
       | "device"
       | "group"
       | "app"
@@ -17,18 +17,18 @@ export class SearchPipe implements PipeTransform {
       | "config"
       | "user"
       | "question"
-  ): any[] {
-    if (objType === "device")
+  ): Device[] | any[] {
+    if (arrayType === "device")
       return array.filter((el) =>
         value !== "" ? el.name.toLowerCase().includes(value.toLowerCase()) : el
       );
-    if (objType === "group") return [];
-    if (objType === "app") return [];
-    if (objType === "message") return [];
-    if (objType === "mapMark") return [];
-    if (objType === "config") return [];
-    if (objType === "user") return [];
-    if (objType === "question") return [];
+    if (arrayType === "group") return [];
+    if (arrayType === "app") return [];
+    if (arrayType === "message") return [];
+    if (arrayType === "mapMark") return [];
+    if (arrayType === "config") return [];
+    if (arrayType === "user") return [];
+    if (arrayType === "question") return [];
 
     return [];
   }

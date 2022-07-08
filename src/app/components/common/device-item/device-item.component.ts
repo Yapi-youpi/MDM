@@ -13,10 +13,6 @@ export class DeviceItemComponent {
   @Input() public groups!: Groups[];
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
-  @Output() onChangeDeviceConfig = new EventEmitter<{
-    device: Device;
-    $event: Event;
-  }>();
   @Output() onGetDeviceQRCode = new EventEmitter<{
     name: string;
     qrcode: any;
@@ -28,10 +24,6 @@ export class DeviceItemComponent {
 
   selectUnselectDevice(device: Device) {
     this.onSelectUnselectDevice.emit(device);
-  }
-
-  changeDeviceConfig(device: Device, $event) {
-    this.onChangeDeviceConfig.emit({ device, $event });
   }
 
   getDeviceQRCode(name: string, qrcode: any) {

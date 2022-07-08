@@ -46,7 +46,7 @@ export class DevicesComponent implements OnInit {
   public sortDateAsc: boolean = true;
   public sortNameAsc: boolean = true;
   public sortGroupAsc: boolean = true;
-  public sortPowerAsc: boolean = true;
+  public sortBatteryAsc: boolean = true;
 
   public searchParam: string = "";
 
@@ -159,7 +159,6 @@ export class DevicesComponent implements OnInit {
           console.log(res.devices);
           this.loading = false;
           this.devices = res.devices;
-          this.sortDevices();
         } else {
           console.log(res.error);
         }
@@ -262,30 +261,27 @@ export class DevicesComponent implements OnInit {
     });
   }
 
+  // СОРТИРОВКА
+
   sortDevicesByStatus() {
     this.sortStatusAsc = !this.sortStatusAsc;
-    //    CODE
   }
   sortDevicesByDate() {
     this.sortDateAsc = !this.sortDateAsc;
-    //    CODE
   }
   sortDevicesByName() {
     this.sortNameAsc = !this.sortNameAsc;
-    //    CODE
   }
   sortDevicesByGroup() {
     this.sortGroupAsc = !this.sortGroupAsc;
-    //    CODE
   }
   sortDevicesByPower() {
-    this.sortPowerAsc = !this.sortPowerAsc;
-    //    CODE
+    this.sortBatteryAsc = !this.sortBatteryAsc;
   }
 
   // ЛОГИКА УПРАВЛЕНИЯ ДЕВАЙСОМ
 
-  selectUnselectSingleDevice(device: Device) {
+  selectUnselectDevice(device: Device) {
     this.devices.map((d) => {
       if (d.device_id === device.device_id) {
         d.isSelected = !d.isSelected;
@@ -294,11 +290,6 @@ export class DevicesComponent implements OnInit {
     if (!device.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
-  }
-
-  changeDeviceConfig(device: Device, $event) {
-    console.log("Option value (config ID): " + $event.target.value);
-    console.log("device ID: " + device.device_id);
   }
 
   getDeviceQRCode(name: string, qr: any) {

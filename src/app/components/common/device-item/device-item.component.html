@@ -22,10 +22,8 @@
     <p class="font-bold font-bold-color">{{ device.name }}</p>
     <p class="font-middle font-regular-color">{{ device.description }}</p>
     <p class="font-regular-color">{{ device.phone_number }}</p>
-    <p class="font-regular-color">123456789012345</p>
-    <p class="font-regular-color">Ololo XS</p>
-<!--    <p class="font-regular-color">{{ device.imei }}</p>-->
-<!--    <p class="font-regular-color">{{ device.model }}</p>-->
+    <p class="font-regular-color">{{ device.imei }}</p>
+    <p class="font-regular-color">{{ device.model }}</p>
     <p class="font-regular-color">{{ device.device_config_id | configConverter: configs }}</p>
     <div class="status-container update small">
       <span class="r-round active"></span>
