@@ -1,6 +1,36 @@
-<app-menu></app-menu>
-
-<div class="container">
+<app-global-container class="global-container">
+  <app-global-header class="global-header" [title]="'Пользователи'">
+  </app-global-header>
+  <main class="global-main card-wrapper">
+    <div class="card">
+      <div class="card__header">
+        <input type="text" name="search" id="search" class="search-input" />
+        <button type="button" class="search-btn">
+          <i class="material-icons">search</i>
+        </button>
+        <button type="button" class="outline-btn">Суперадмины</button>
+        <button type="button" class="outline-btn">Администраторы</button>
+        <button type="button" class="outline-btn">Оператор</button>
+        <button type="button" class="common-btn">Добавить пользователя</button>
+      </div>
+      <div class="users-wrapper">
+        <div class="user-card">
+          <div class="user-card__avatar"></div>
+          <div class="user-card__descr"></div>
+          <div class="user-card__menu"></div>
+        </div>
+        <div class="user-card">
+          <div class="user-card__avatar"></div>
+          <div class="user-card__descr"></div>
+          <div class="user-card__menu"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card card--sidebar">
+      <div class="card__header">Настройка доступа</div>
+    </div>
+  </main>
+  <!--<div class="container">
   <h3>Пользователи</h3>
   <div class="box">
     <div class="row" style="padding: 5px">
@@ -178,4 +208,5 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+</app-global-container>
