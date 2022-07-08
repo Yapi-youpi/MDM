@@ -1,16 +1,19 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment";
-import { DevicesConfig } from "../interfaces/interfaces";
+import { environment } from "../../../environments/environment";
+import { Device } from "../../interfaces/interfaces";
 
 @Injectable({
   providedIn: "root",
 })
-export class DevicesConfigService {
+export class DevicesService {
   constructor(private http: HttpClient) {}
 
-  getConfig(param: string) {
-    const url = environment.url + "/get_config/" + param;
+  getDevice(param: string, group_id?: string) {
+    let url = environment.url + "/get_device/" + param;
+    if (param === "group") {
+      url = url + `/${group_id}`;
+    }
     return new Promise<any>((resolve, reject) => {
       this.http.get(url).subscribe({
         next: (res) => {
@@ -23,13 +26,10 @@ export class DevicesConfigService {
     });
   }
 
-  addConfig(config: DevicesConfig | undefined, name: string) {
-    if (config) {
-      config.name = name;
-    }
-    const url = environment.url + "/add_config";
+  addDevice(device: Device) {
+    const url = environment.url + "/add_device";
     const body = {
-      ...config,
+      ...device,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
@@ -43,11 +43,10 @@ export class DevicesConfigService {
     });
   }
 
-  renameConfig(id: string, name: string) {
-    const url = environment.url + "/rename_config";
+  removeDevice(device_id: string) {
+    const url = environment.url + "/remove_device";
     const body = {
-      id,
-      name,
+      device_id,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
@@ -61,10 +60,10 @@ export class DevicesConfigService {
     });
   }
 
-  removeConfig(id: string) {
-    const url = environment.url + "/remove_config";
+  editDevice(device: Device) {
+    const url = environment.url + "/edit_device";
     const body = {
-      id,
+      ...device,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({

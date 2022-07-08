@@ -29,9 +29,9 @@ import { FilterSidebarComponent } from "./components/common/filter-sidebar/filte
 import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 
-import { DateConverterPipe } from "./pipes/date-converter.pipe";
-import { DevicesFilterPipe } from "./pipes/devices-filter.pipe";
-import { GroupConverterPipe } from "./pipes/group-converter.pipe";
+import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
+import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
+import { GroupConverterPipe } from "./shared/pipes/group-converter.pipe";
 
 const routes: Routes = [
   {

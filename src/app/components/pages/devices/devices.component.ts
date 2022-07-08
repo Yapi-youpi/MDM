@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
 import M from "materialize-css";
 
-import { UserService } from "../../../services/user.service";
-import { DevicesService } from "../../../services/devices.service";
+import { UserService } from "../../../shared/services/user.service";
+import { DevicesService } from "../../../shared/services/devices.service";
 import {
   Device,
   DevicesConfigsState,
@@ -12,8 +12,8 @@ import {
   Groups,
   DevicesFilter,
 } from "../../../interfaces/interfaces";
-import { GroupsService } from "../../../services/groups.service";
-import { DevicesConfigService } from "../../../services/devices-config.service";
+import { GroupsService } from "../../../shared/services/groups.service";
+import { DevicesConfigService } from "../../../shared/services/devices-config.service";
 import * as moment from "moment";
 // import { DatabaseService } from "../../../services/database.service";
 

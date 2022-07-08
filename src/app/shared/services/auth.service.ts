@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   constructor(public http: HttpClient) {}
 
   login(login: string, password: string) {
-    const url = environment.url + '/login';
+    const url = environment.url + "/login";
     const body = {
       login: login.trim(),
       password: password.trim(),
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   logout(token: string, login: string) {
-    const url = environment.url + '/logout';
+    const url = environment.url + "/logout";
     const body = {};
     return new Promise<boolean>((resolve, reject) => {
       this.http

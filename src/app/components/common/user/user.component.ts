@@ -2,9 +2,9 @@ import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import M from "materialize-css";
 
-import { AuthService } from "../../../services/auth.service";
-import { UserService } from "../../../services/user.service";
-import { AssetService } from "../../../services/asset.service";
+import { AuthService } from "../../../shared/services/auth.service";
+import { UserService } from "../../../shared/services/user.service";
+import { AssetService } from "../../../shared/services/asset.service";
 
 @Component({
   selector: "app-user",

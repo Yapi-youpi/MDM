@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
-import { DevicesConfigService } from "../../../services/devices-config.service";
-import { UserService } from "../../../services/user.service";
+import { DevicesConfigService } from "../../../shared/services/devices-config.service";
+import { UserService } from "../../../shared/services/user.service";
 import { interval } from "rxjs";
 import { DevicesConfig } from "../../../interfaces/interfaces";
 import M from "materialize-css";

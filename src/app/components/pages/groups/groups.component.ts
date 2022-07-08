@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
-import { GroupsService } from "../../../services/groups.service";
-import { UserService } from "../../../services/user.service";
+import { GroupsService } from "../../../shared/services/groups.service";
+import { UserService } from "../../../shared/services/user.service";
 import { interval } from "rxjs";
 import { Groups } from "../../../interfaces/interfaces";
 import M from "materialize-css";

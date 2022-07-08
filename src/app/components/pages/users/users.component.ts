@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../../services/user.service";
+import { UserService } from "../../../shared/services/user.service";
 import M from "materialize-css";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Users } from "../../../interfaces/interfaces";

@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../../../services/auth.service";
+import { AuthService } from "../../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import M from "materialize-css";
-import { UserService } from "../../../services/user.service";
-import { AssetService } from "../../../services/asset.service";
+import { UserService } from "../../../shared/services/user.service";
+import { AssetService } from "../../../shared/services/asset.service";
 import { interval } from "rxjs";
-import { DatabaseService } from "../../../services/database.service";
-import { ErrorService } from "../../../services/error.service";
+import { DatabaseService } from "../../../shared/services/database.service";
+import { ErrorService } from "../../../shared/services/error.service";
 
 @Component({
   selector: "app-auth",

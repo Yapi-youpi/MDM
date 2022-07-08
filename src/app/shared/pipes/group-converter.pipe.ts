@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Groups } from "../interfaces/interfaces";
+import { Groups } from "../../interfaces/interfaces";
 
 @Pipe({
   name: "groupConverter",

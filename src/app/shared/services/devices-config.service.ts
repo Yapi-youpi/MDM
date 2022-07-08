@@ -1,19 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Device } from '../interfaces/interfaces';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { DevicesConfig } from "../../interfaces/interfaces";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
-export class DevicesService {
+export class DevicesConfigService {
   constructor(private http: HttpClient) {}
 
-  getDevice(param: string, group_id?: string) {
-    let url = environment.url + '/get_device/' + param;
-    if (param === 'group') {
-      url = url + `/${group_id}`;
-    }
+  getConfig(param: string) {
+    const url = environment.url + "/get_config/" + param;
     return new Promise<any>((resolve, reject) => {
       this.http.get(url).subscribe({
         next: (res) => {
@@ -26,10 +23,13 @@ export class DevicesService {
     });
   }
 
-  addDevice(device: Device) {
-    const url = environment.url + '/add_device';
+  addConfig(config: DevicesConfig | undefined, name: string) {
+    if (config) {
+      config.name = name;
+    }
+    const url = environment.url + "/add_config";
     const body = {
-      ...device,
+      ...config,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
@@ -43,10 +43,11 @@ export class DevicesService {
     });
   }
 
-  removeDevice(device_id: string) {
-    const url = environment.url + '/remove_device';
+  renameConfig(id: string, name: string) {
+    const url = environment.url + "/rename_config";
     const body = {
-      device_id,
+      id,
+      name,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
@@ -60,10 +61,10 @@ export class DevicesService {
     });
   }
 
-  editDevice(device: Device) {
-    const url = environment.url + '/edit_device';
+  removeConfig(id: string) {
+    const url = environment.url + "/remove_config";
     const body = {
-      ...device,
+      id,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({

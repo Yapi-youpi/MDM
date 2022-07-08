@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Device } from "../interfaces/interfaces";
+import { Device } from "../../interfaces/interfaces";
 import * as moment from "moment";
 
 @Pipe({

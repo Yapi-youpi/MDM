@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Users } from '../interfaces/interfaces';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { Users } from "../../interfaces/interfaces";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class UserService {
-  public token = '';
-  public login = '';
-  public last_password = '';
+  public token = "";
+  public login = "";
+  public last_password = "";
   public upperCase = false;
   public lowerCase = false;
   public number = false;
@@ -18,7 +18,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   changePassword(password: string) {
-    const url = environment.url + '/change_password';
+    const url = environment.url + "/change_password";
     const body = {
       login: this.login,
       password: password,
@@ -52,23 +52,23 @@ export class UserService {
           resolve(res);
         },
         error: (err) => {
-          if (err.error.error.includes('lowercase letter missing')) {
+          if (err.error.error.includes("lowercase letter missing")) {
             this.lowerCase = true;
           }
-          if (err.error.error.includes('uppercase letter missing')) {
+          if (err.error.error.includes("uppercase letter missing")) {
             this.upperCase = true;
           }
           if (
-            err.error.error.includes('at least one numeric character required')
+            err.error.error.includes("at least one numeric character required")
           ) {
             this.number = true;
           }
-          if (err.error.error.includes('special character missing')) {
+          if (err.error.error.includes("special character missing")) {
             this.specialChar = true;
           }
           if (
             err.error.error.includes(
-              'password length must be between 8 to 64 character'
+              "password length must be between 8 to 64 character"
             )
           ) {
             this.passLength = 8 - password.length;
@@ -79,7 +79,7 @@ export class UserService {
     });
   }
   changeUserState(id: string, state: boolean) {
-    const url = environment.url + '/change_user_state';
+    const url = environment.url + "/change_user_state";
     const body = {
       id: id,
       activeState: state,
@@ -96,7 +96,7 @@ export class UserService {
     });
   }
   deleteUser(id: string) {
-    const url = environment.url + '/delete_user';
+    const url = environment.url + "/delete_user";
     const body = {
       id,
     };
@@ -113,7 +113,7 @@ export class UserService {
   }
   getUserInfo(id: string | undefined, param: string) {
     if (!id) {
-      id = '';
+      id = "";
     }
     if (!param) {
       param = id;
@@ -133,7 +133,7 @@ export class UserService {
     });
   }
   addUser(login: string, password: string, name: string, role: string) {
-    const url = environment.url + '/register';
+    const url = environment.url + "/register";
     const body = {
       login,
       password,
@@ -153,7 +153,7 @@ export class UserService {
   }
 
   renameUSer(login: string, name: string) {
-    const url = environment.url + '/rename_user';
+    const url = environment.url + "/rename_user";
     const body = {
       login,
       name,
