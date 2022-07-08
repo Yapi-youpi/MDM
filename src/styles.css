@@ -530,11 +530,9 @@ a.sdm-btn {
 button.sdm-no-border {
   border-color: transparent;
 }
-button:hover,
 a.sdm-btn:hover {
   background-color: var(--sdm-light-blue-grey) !important;
 }
-button:focus,
 a.sdm-btn:focus {
   background-color: transparent !important;
 }
@@ -745,4 +743,68 @@ a.active .sdm-menu-icon span,
 }
 .global-main {
   grid-area: main;
+}
+/* КНОПКИ */
+.btn {
+  padding: 9px 14px;
+  font-size: 12px;
+  line-height: 12px;
+  background: var(--sdm-dark-blue);
+  color: white;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+.btn:hover,
+.btn:focus {
+  background: var(--sdm-blue);
+  border: 1px solid var(--sdm-blue);
+}
+.btn:disabled {
+  background: var(--sdm-grey);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--sdm-dark-blue);
+  border: 1px solid var(--sdm-dark-blue);
+}
+.btn--outline:focus,
+.btn--outline:hover {
+  background: var(--sdm-light-grey);
+}
+.btn--outline:disabled {
+  color: var(--sdm-grey);
+  border: 1px solid var(--sdm-grey);
+}
+.btn--flat {
+  color: var(--sdm-dark-blue);
+  background: var(--sdm-light-grey);
+}
+.btn--flat:hover,
+.btn--flat:focus {
+  background: var(--sdm-light-blue-grey);
+}
+.btn--flat:disabled {
+  color: var(--sdm-grey);
+}
+.btn--big {
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 16px;
+}
+.btn--small {
+  padding: 7px 10px;
+  font-size: 10px;
+  line-height: 10px;
+}
+.btn--rounded {
+  border-radius: 8px;
+}
+.btn--round {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+.btn--right {
+  margin-left: auto;
 }
