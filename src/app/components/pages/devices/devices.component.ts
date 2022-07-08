@@ -48,6 +48,8 @@ export class DevicesComponent implements OnInit {
   public sortGroupAsc: boolean = true;
   public sortPowerAsc: boolean = true;
 
+  public searchParam: string = "";
+
   public devicesFilters: DevicesFilter = {
     status: null,
     dateFrom: null,
@@ -165,6 +167,10 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err.error.error);
       });
+  }
+
+  onChangeSearchInputHandler(value: string) {
+    this.searchParam = value;
   }
 
   resetSearchParams() {

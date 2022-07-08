@@ -1,13 +1,12 @@
 <app-global-container>
   <app-page-header [title]="'Устройства'"></app-page-header>
   <div class="card sdm-bg-light-grey">
-<!--    <div class="card-header">-->
-<!--      <h2>Устройства</h2>-->
-<!--      <app-user></app-user>-->
-<!--    </div>-->
     <div class="row actions">
       <div class="search-input-wrapper">
-        <app-search-input></app-search-input>
+        <app-search-input
+          [value]="searchParam"
+          (onChange)="onChangeSearchInputHandler($event)"
+        ></app-search-input>
       </div>
       <app-filter-sidebar
         [configs]="configs"
@@ -90,7 +89,16 @@
       <div class="list">
         <div *ngIf="devices.length === 0 && !loading">Устройств не найдено</div>
         <ng-container
-          *ngFor="let device of devices | devicesFilter: devicesFilters.status:devicesFilters.dateFrom:devicesFilters.dateTo:devicesFilters.configsIDs:devicesFilters.groupsIDs"
+          *ngFor="
+            let device of devices
+              | devicesFilter
+                : devicesFilters.status
+                : devicesFilters.dateFrom
+                : devicesFilters.dateTo
+                : devicesFilters.configsIDs
+                : devicesFilters.groupsIDs
+              | search: searchParam : 'device'
+          "
         >
           <app-device-item
             [device]="device"
