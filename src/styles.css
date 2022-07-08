@@ -87,7 +87,7 @@ body {
 
 .card {
   margin: 0 !important;
-  padding: 27px 22px !important;
+  padding: 27px 22px 19px 22px !important;
 
   background-color: var(--sdm-light-grey) !important;
 

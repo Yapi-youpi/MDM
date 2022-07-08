@@ -86,13 +86,11 @@
 .sort .content > *:nth-child(8) {
   width: 120px;
 
-  padding-left: 6px;
+  margin-left: -5px;
 }
 /* Обновление */
 .sort .content > *:nth-child(9) {
   width: 80px;
-
-  margin-left: -5px;
 }
 /* Группа */
 .sort .content > *:nth-child(10) {
@@ -126,10 +124,6 @@
 
 .list {
   margin-top: 22px;
-
-  /*max-height: 200px;*/
-
-  /*overflow-y: visible;*/
 }
 
 .modal .action-btns {
