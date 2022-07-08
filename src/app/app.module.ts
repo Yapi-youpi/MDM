@@ -32,6 +32,7 @@ import { AddButtonComponent } from "./components/common/UI/button/add-button/add
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
 import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
 import { GroupConverterPipe } from "./shared/pipes/group-converter.pipe";
+import { PageHeaderComponent } from './components/common/page-header/page-header.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
     DateConverterPipe,
     DevicesFilterPipe,
     GroupConverterPipe,
+    PageHeaderComponent,
   ],
   imports: [
     BrowserModule,

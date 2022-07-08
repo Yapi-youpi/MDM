@@ -1,0 +1,20 @@
+.sdm-page-header {
+  width: 100%;
+
+  margin-bottom: 8px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sdm-page-header .title {
+  display: block;
+
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 550;
+
+  color: var(--sdm-dark-blue-grey);
+}
