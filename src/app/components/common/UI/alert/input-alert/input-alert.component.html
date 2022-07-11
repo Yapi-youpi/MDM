@@ -1,0 +1,21 @@
+<span *ngIf="inputControl.hasError('required')" class="alert error">
+  Данное поле должно быть заполнено
+</span>
+<span *ngIf="inputControl.hasError('pattern')" class="alert error">
+  Недопустимый формат поля
+</span>
+<span *ngIf="inputControl.hasError('min')" class="alert error">
+  Недопустимый минимальный размер поля
+</span>
+<span *ngIf="inputControl.hasError('minlength')" class="alert error">
+  Недопустимый минимальный размер поля
+</span>
+<span *ngIf="inputControl.hasError('max')" class="alert error">
+  Недопустимый максимальный размер поля
+</span>
+<span *ngIf="inputControl.hasError('maxlength')" class="alert error">
+  Недопустимый максимальный размер поля
+</span>
+<span *ngIf="inputControl.invalid" class="alert error">
+  {{ inputControl.errors?.['invalid'] }}
+</span>

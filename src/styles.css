@@ -121,16 +121,7 @@ body {
 
   background-color: var(--sdm-white) !important;
   color: var(--sdm-dark-blue-grey);
-}
 
-.row {
-  display: flex;
-  align-items: center;
-
-  margin-bottom: 0 !important;
-}
-
-.modal {
   border-radius: 14px !important;
 
   box-shadow: none !important;
@@ -150,7 +141,14 @@ body {
 }
 
 .modal .action-btns {
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 0 !important;
 }
 
 .progress {
@@ -189,8 +187,8 @@ input {
 
   box-sizing: border-box !important;
 }
-input:hover,
-input:focus {
+input:not(:disabled):hover,
+input:not(:disabled):focus {
   border-color: var(--sdm-dark-blue) !important;
 }
 input:not([type]):focus:not([readonly]),

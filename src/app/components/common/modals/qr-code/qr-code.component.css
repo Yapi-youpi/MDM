@@ -9,8 +9,9 @@
   justify-content: center;
 
   margin-top: 30px;
+  margin-bottom: 40px;
 }
 
-#qr-code .action-btns button {
-  padding: 5px 14px;
+#qr-code .action-btns button:nth-child(1) {
+  margin-right: 30px;
 }

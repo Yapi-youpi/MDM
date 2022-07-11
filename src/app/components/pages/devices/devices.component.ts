@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Output } from "@angular/core";
+import { Component, ElementRef, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
 import M from "materialize-css";
@@ -7,7 +7,6 @@ import { UserService } from "../../../shared/services/user.service";
 import { DevicesService } from "../../../shared/services/devices.service";
 import {
   Device,
-  DevicesConfigsState,
   DevicesConfig,
   Groups,
   DevicesFilter,
@@ -15,7 +14,12 @@ import {
 import { GroupsService } from "../../../shared/services/groups.service";
 import { DevicesConfigService } from "../../../shared/services/devices-config.service";
 import * as moment from "moment";
-// import { DatabaseService } from "../../../services/database.service";
+import {
+  DevicesConfigsState,
+  DevicesGroupsState,
+  DevicesState,
+  SingleDeviceState,
+} from "../../../interfaces/states";
 
 @Component({
   selector: "app-devices",
@@ -30,14 +34,15 @@ export class DevicesComponent implements OnInit {
 
   private add_device!: Device; // ???
 
-  public form: FormGroup;
+  // public form: FormGroup;
+  public editDeviceForm: FormGroup;
   public filterForm: FormGroup;
 
   public edit: boolean = false;
   public password: string = "";
   public new_password: string = "";
 
-  public currID: string = "";
+  public currDevice!: Device;
   public currQR: string = "";
   public currName: string = "";
   public isAllSelected: boolean = false;
@@ -65,14 +70,26 @@ export class DevicesComponent implements OnInit {
     private groupsService: GroupsService,
     private configService: DevicesConfigService // public db: DatabaseService
   ) {
-    this.form = new FormGroup({
+    // this.form = new FormGroup({
+    //   name: new FormControl("", Validators.required),
+    //   desc: new FormControl("", Validators.required),
+    //   phone: new FormControl("", Validators.required),
+    //   imei: new FormControl("", [Validators.required, Validators.max(15)]),
+    //   model: new FormControl("", Validators.required),
+    //   config_id: new FormControl("", Validators.required),
+    //   group_id: new FormControl("", Validators.required),
+    // });
+    this.editDeviceForm = new FormGroup({
       name: new FormControl("", Validators.required),
-      desc: new FormControl("", Validators.required),
-      phone: new FormControl("", Validators.required),
-      imei: new FormControl("", Validators.required),
-      model: new FormControl("", Validators.required),
-      config: new FormControl("", Validators.required),
-      group: new FormControl("", Validators.required),
+      desc: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(60),
+      ]),
+      // phone: new FormControl({ value: "", disabled: true }),
+      // imei: new FormControl({ value: "", disabled: true }),
+      // model: new FormControl({ value: "", disabled: true }),
+      config_id: new FormControl(""),
+      group_id: new FormControl(""),
     });
     this.filterForm = new FormGroup({
       "status-on": new FormControl(false),
@@ -90,12 +107,12 @@ export class DevicesComponent implements OnInit {
     let closingModal =
       this.elementRef.nativeElement.querySelectorAll(".closing");
 
-    M.Modal.init(nonClosingModal, {
-      dismissible: false,
-      onCloseEnd: () => {
-        this.form.reset();
-      },
-    });
+    // M.Modal.init(nonClosingModal, {
+    //   dismissible: false,
+    //   onCloseEnd: () => {
+    //     this.form.reset();
+    //   },
+    // });
     M.Modal.init(closingModal, {
       dismissible: true,
     });
@@ -109,15 +126,15 @@ export class DevicesComponent implements OnInit {
       }
     });
 
-    let selectsInter = interval(1000).subscribe(() => {
-      const elems =
-        this.elementRef.nativeElement.querySelectorAll(".config-select");
-      // console.log(elems);
-      if (elems && elems.length !== 0) {
-        selectsInter.unsubscribe();
-        M.FormSelect.init(elems);
-      }
-    });
+    // let selectsInter = interval(1000).subscribe(() => {
+    //   const elems =
+    //     this.elementRef.nativeElement.querySelectorAll(".config-select");
+    //   // console.log(elems);
+    //   if (elems && elems.length !== 0) {
+    //     selectsInter.unsubscribe();
+    //     M.FormSelect.init(elems);
+    //   }
+    // });
   }
 
   changePassword(pass: string) {
@@ -146,17 +163,20 @@ export class DevicesComponent implements OnInit {
   }
 
   getGroups() {
-    this.groupsService.getGroups("all").then((res) => {
-      this.groups = res;
+    this.groupsService.getGroups("all").then((res: DevicesGroupsState) => {
+      if (res.success) {
+        this.groups = res.devicesGroups;
+      } else {
+        console.log(res.error);
+      }
     });
   }
 
   getAllDevices() {
     this.device
       .getDevice("all")
-      .then((res: { devices: Device[]; success: boolean; error: string }) => {
+      .then((res: DevicesState) => {
         if (res.success) {
-          console.log(res.devices);
           this.loading = false;
           this.devices = res.devices;
         } else {
@@ -227,30 +247,27 @@ export class DevicesComponent implements OnInit {
   //     });
   // }
 
-  setDeviceSettings(id: string) {
-    console.log(id);
-    console.log(this.form.getRawValue());
+  setDeviceSettings(device: Device) {
+    this.device
+      .editDevice({
+        ...device,
+        name: this.editDeviceForm.getRawValue()["name"],
+        description: this.editDeviceForm.getRawValue()["desc"],
+        device_config_id: this.editDeviceForm.getRawValue()["config_id"],
+        device_group_id: this.editDeviceForm.getRawValue()["group_id"],
+      })
+      .then((res: SingleDeviceState) => {
+        if (res.success) {
+          this.getAllDevices();
+          console.log("Устройство изменено");
+        } else {
+          console.log(res.error);
+        }
+      });
 
-    this.form.controls["name"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["desc"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["phone"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["imei"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["model"].setErrors({ invalid: "Тестовая ошибка" });
-    // console.log(this.form);
-
-    // const settingsModal =
-    //   this.elementRef.nativeElement.querySelector("#edit_device");
-    // M.Modal.getInstance(settingsModal).close();
-  }
-
-  sortDevices() {
-    this.devices.sort((a, b) => {
-      if (a.name > b.name) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
+    const settingsModal =
+      this.elementRef.nativeElement.querySelector("#edit_device");
+    M.Modal.getInstance(settingsModal).close();
   }
 
   selectUnselectDevices() {
@@ -263,19 +280,19 @@ export class DevicesComponent implements OnInit {
 
   // СОРТИРОВКА
 
-  sortDevicesByStatus() {
+  changeSortStatusDir() {
     this.sortStatusAsc = !this.sortStatusAsc;
   }
-  sortDevicesByDate() {
+  changeSortDateDir() {
     this.sortDateAsc = !this.sortDateAsc;
   }
-  sortDevicesByName() {
+  changeSortNameDir() {
     this.sortNameAsc = !this.sortNameAsc;
   }
-  sortDevicesByGroup() {
+  changeSortGroupDir() {
     this.sortGroupAsc = !this.sortGroupAsc;
   }
-  sortDevicesByPower() {
+  changeSortBatteryDir() {
     this.sortBatteryAsc = !this.sortBatteryAsc;
   }
 
@@ -298,25 +315,25 @@ export class DevicesComponent implements OnInit {
   }
 
   editDevice(device: Device) {
-    this.currID = device.device_id;
-    this.form.controls["name"].setValue(device.name);
-    this.form.controls["desc"].setValue(device.description);
-    this.form.controls["phone"].setValue(device.phone_number);
-    this.form.controls["imei"].setValue(device.imei);
-    this.form.controls["model"].setValue(device.model);
-    this.form.controls["config"].setValue(device.device_config_id);
-    this.form.controls["group"].setValue(device.device_group_id);
+    this.currDevice = device;
+    this.editDeviceForm.controls["name"].setValue(device.name);
+    this.editDeviceForm.controls["desc"].setValue(device.description);
+    // this.editDeviceForm.controls["phone"].setValue(device.phone_number);
+    // this.editDeviceForm.controls["imei"].setValue(device.imei);
+    // this.editDeviceForm.controls["model"].setValue(device.model);
+    this.editDeviceForm.controls["config_id"].setValue(device.device_config_id);
+    this.editDeviceForm.controls["group_id"].setValue(device.device_group_id);
   }
 
   deleteDevice(id: string) {
-    this.device
-      .removeDevice(id)
-      .then((res) => {
-        console.log(res);
-        this.getAllDevices();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // this.device
+    //   .removeDevice(id)
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.getAllDevices();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 }

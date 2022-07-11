@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+
 import { environment } from "../../../environments/environment";
-import { Groups } from "../../interfaces/interfaces";
 
 @Injectable({
   providedIn: "root",
@@ -11,18 +11,10 @@ export class GroupsService {
 
   getGroups(parameter: string) {
     const url = environment.url + "/get_device_group/" + parameter;
-    return new Promise<Groups[]>((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       this.http.get(url).subscribe({
-        next: (
-          res:
-            | {
-                success: boolean;
-                error: string;
-                devicesGroups: Groups[];
-              }
-            | any
-        ) => {
-          resolve(res.devicesGroups);
+        next: (res) => {
+          resolve(res);
         },
         error: (err) => {
           reject(err);

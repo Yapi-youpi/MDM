@@ -29,6 +29,7 @@ import { FilterSidebarComponent } from "./components/common/filter-sidebar/filte
 import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { PageHeaderComponent } from "./components/common/page-header/page-header.component";
+import { InputAlertComponent } from "./components/common/UI/alert/input-alert/input-alert.component";
 
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
 import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
@@ -69,6 +70,7 @@ const routes: Routes = [
     SearchInputComponent,
     PageHeaderComponent,
     AddButtonComponent,
+    InputAlertComponent,
     // PIPES
     DateConverterPipe,
     DevicesFilterPipe,

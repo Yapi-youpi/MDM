@@ -6,101 +6,126 @@
       <div>
         <div
           class="form-group"
-          [class.error]="!!form.controls['name'].errors?.['invalid']"
+          [class.error]="_name && _name.errors"
         >
           <div class="row">
             <label for="name">Название</label>
-            <input formControlName="name" id="name" name="name" type="text" class="w-440" />
+            <input
+              formControlName="name"
+              id="name"
+              name="name"
+              type="text"
+              class="w-440"
+            />
           </div>
-          <span *ngIf="form.controls['name'].invalid" class="alert error">
-            {{ form.controls['name'].errors?.['invalid'] }}
-          </span>
+          <app-input-alert
+            *ngIf="_name && _name.errors"
+            [inputControl]="$any(_name)"
+          ></app-input-alert>
         </div>
         <div
           class="form-group"
-          [class.error]="!!form.controls['desc'].errors?.['invalid']"
+          [class.error]="_desc && _desc.errors"
         >
           <div class="row">
             <label for="desc">Описание</label>
-            <input formControlName="desc" id="desc" name="desc" type="text" class="w-440" />
+            <input
+              formControlName="desc"
+              id="desc"
+              name="desc"
+              type="text"
+              class="w-440"
+            />
           </div>
-          <span *ngIf="form.controls['desc'].invalid" class="alert error">
-            {{ form.controls['desc'].errors?.['invalid'] }}
-          </span>
+          <app-input-alert
+            *ngIf="_desc && _desc.errors"
+            [inputControl]="$any(_desc)"
+          ></app-input-alert>
         </div>
       </div>
-      <div class="divider"></div>
-      <div>
-        <div class="row">
-          <div
-            class="form-group phone"
-            [class.error]="!!form.controls['phone'].errors?.['invalid']"
-          >
-            <div class="row">
-              <label for="phone">Телефон</label>
-              <input formControlName="phone" id="phone" name="phone" type="number" class="w-170" />
-            </div>
-            <span *ngIf="form.controls['phone'].invalid" class="alert error">
-              {{ form.controls['phone'].errors?.['invalid'] }}
-            </span>
-          </div>
-          <div
-            class="form-group imei"
-            [class.error]="!!form.controls['imei'].errors?.['invalid']"
-          >
-            <div class="row">
-              <label for="imei">IMEI</label>
-              <input formControlName="imei" id="imei" name="imei" type="number" class="w-186" />
-            </div>
-            <span *ngIf="form.controls['imei'].invalid" class="alert error">
-              {{ form.controls['imei'].errors?.['invalid'] }}
-            </span>
-          </div>
-        </div>
-        <div
-          class="form-group model"
-          [class.error]="!!form.controls['model'].errors?.['invalid']"
-        >
-          <div class="row">
-            <label for="model">Модель</label>
-            <input formControlName="model" id="model" name="model" type="text" class="w-170" />
-          </div>
-          <span *ngIf="form.controls['model'].invalid" class="alert error">
-            {{ form.controls['model'].errors?.['invalid'] }}
-          </span>
-        </div>
-      </div>
+<!--      <div class="divider"></div>-->
+<!--      <div>-->
+<!--        <div class="row">-->
+<!--          <div-->
+<!--            class="form-group phone"-->
+<!--          >-->
+<!--            <div class="row">-->
+<!--              <label for="phone">Телефон</label>-->
+<!--              <input-->
+<!--                formControlName="phone"-->
+<!--                id="phone"-->
+<!--                name="phone"-->
+<!--                type="number"-->
+<!--                class="w-170"-->
+<!--              />-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="form-group imei"-->
+<!--          >-->
+<!--            <div class="row">-->
+<!--              <label for="imei">IMEI</label>-->
+<!--              <input-->
+<!--                formControlName="imei"-->
+<!--                id="imei"-->
+<!--                name="imei"-->
+<!--                type="number"-->
+<!--                class="w-186"-->
+<!--              />-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div-->
+<!--          class="form-group model"-->
+<!--        >-->
+<!--          <div class="row">-->
+<!--            <label for="model">Модель</label>-->
+<!--            <input-->
+<!--              formControlName="model"-->
+<!--              id="model"-->
+<!--              name="model"-->
+<!--              type="text"-->
+<!--              class="w-170"-->
+<!--            />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="divider"></div>
       <div>
         <div class="row selects">
           <div class="form-group">
             <label for="config">Конфигурация</label>
             <div class="input-field-modal sdm-blue-select">
-              <select id="config" name="config" class="config-select-modal w-170">
-                <option value="0" selected>По умолчанию</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+              <select
+                formControlName="config_id"
+                id="config"
+                name="config"
+                class="config-select-modal w-170"
+              >
+                <ng-container *ngFor="let config of configs">
+                  <option
+                    [value]="config.ID"
+                    [selected]="device && config.ID === device.device_config_id"
+                  >{{ config.name }}</option>
+                </ng-container>
               </select>
             </div>
           </div>
           <div class="form-group">
             <label for="group">Группа</label>
             <div class="input-field-modal sdm-blue-select">
-              <select id="group" name="group" class="config-select-modal w-170" multiple>
-                <option value="0" selected>По умолчанию</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+              <select
+                formControlName="group_id"
+                id="group"
+                name="group"
+                class="config-select-modal w-170"
+              >
+                <ng-container *ngFor="let group of groups">
+                  <option
+                    [value]="group.id"
+                    [selected]="device && group.id === device.device_group_id"
+                  >{{ group.name }}</option>
+                </ng-container>
               </select>
             </div>
           </div>
@@ -115,7 +140,8 @@
           <button
             type="submit"
             class="sdm-big r-14 sdm-dark-blue"
-            (click)="setDeviceSettings(device_id)"
+            [disabled]="form.invalid"
+            (click)="setDeviceSettings(device)"
           >
             Сохранить
           </button>

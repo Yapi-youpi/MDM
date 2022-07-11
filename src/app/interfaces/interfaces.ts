@@ -107,12 +107,6 @@ export interface Device {
   updatedAt: string;
 }
 
-export interface DevicesConfigsState {
-  success: boolean;
-  error: string;
-  devicesConfigs: DevicesConfig[];
-}
-
 export interface DevicesFilter {
   status: boolean | null;
   dateFrom: string | null;

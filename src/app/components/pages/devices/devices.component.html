@@ -40,7 +40,7 @@
             class="sdm-btn-list-sort sort-up font-bold-color"
             [class.sort-up]="!sortStatusAsc"
             [class.sort-down]="sortStatusAsc"
-            (click)="sortDevicesByStatus()"
+            (click)="changeSortStatusDir()"
           >
             Статус <span></span>
           </button>
@@ -48,7 +48,7 @@
             class="sdm-btn-list-sort sort-up font-bold-color"
             [class.sort-up]="!sortDateAsc"
             [class.sort-down]="sortDateAsc"
-            (click)="sortDevicesByDate()"
+            (click)="changeSortDateDir()"
           >
             Дата вкл. <span></span>
           </button>
@@ -56,7 +56,7 @@
             class="sdm-btn-list-sort sort-up font-bold-color"
             [class.sort-up]="!sortNameAsc"
             [class.sort-down]="sortNameAsc"
-            (click)="sortDevicesByName()"
+            (click)="changeSortNameDir()"
           >
             Название <span></span>
           </button>
@@ -70,7 +70,7 @@
             class="sdm-btn-list-sort sort-up font-bold-color"
             [class.sort-up]="!sortGroupAsc"
             [class.sort-down]="sortGroupAsc"
-            (click)="sortDevicesByGroup()"
+            (click)="changeSortGroupDir()"
           >
             Группа <span></span>
           </button>
@@ -78,7 +78,7 @@
             class="sdm-btn-list-sort sort-up font-bold-color"
             [class.sort-up]="!sortBatteryAsc"
             [class.sort-down]="sortBatteryAsc"
-            (click)="sortDevicesByPower()"
+            (click)="changeSortBatteryDir()"
           >
             Заряд <span></span>
           </button>
@@ -187,8 +187,8 @@
   </div>
 </div>
 <app-edit-device
-  [device_id]="currID"
-  [form]="form"
+  [device]="currDevice"
+  [form]="editDeviceForm"
   [groups]="groups"
   [configs]="configs"
   (onSetDeviceSettings)="setDeviceSettings($event)"
