@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
+import { DevicesConfig } from "../../../interfaces/config";
+import { DevicesGroups } from "../../../interfaces/groups";
+import { Device } from "../../../interfaces/devices";
 
 @Component({
   selector: "app-device-item",
@@ -10,7 +12,7 @@ import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
 export class DeviceItemComponent {
   @Input() public device!: Device;
   @Input() public configs!: DevicesConfig[];
-  @Input() public groups!: Groups[];
+  @Input() public groups!: DevicesGroups[];
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
   @Output() onGetDeviceQRCode = new EventEmitter<{

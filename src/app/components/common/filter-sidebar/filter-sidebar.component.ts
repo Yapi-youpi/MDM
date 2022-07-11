@@ -6,10 +6,13 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import M from "materialize-css";
-import { DevicesConfig, Groups } from "../../../interfaces/interfaces";
 import { FormGroup } from "@angular/forms";
 import { interval } from "rxjs";
+
+import M from "materialize-css";
+
+import { DevicesConfig } from "../../../interfaces/config";
+import { DevicesGroups } from "../../../interfaces/groups";
 
 @Component({
   selector: "app-filter-sidebar",
@@ -18,7 +21,7 @@ import { interval } from "rxjs";
 })
 export class FilterSidebarComponent implements OnInit {
   @Input() configs!: DevicesConfig[];
-  @Input() groups!: Groups[];
+  @Input() groups!: DevicesGroups[];
   @Input() form!: FormGroup;
 
   @Output() onSetFilterSettings = new EventEmitter<FormGroup>();

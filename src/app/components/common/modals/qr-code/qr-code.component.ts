@@ -12,6 +12,7 @@ import {
 export class QrCodeComponent {
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+
   @Input() public valueQR!: string;
   @Input() public title!: string;
 

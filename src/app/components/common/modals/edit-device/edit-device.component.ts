@@ -7,13 +7,13 @@ import {
   EventEmitter,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import {
-  Device,
-  DevicesConfig,
-  Groups,
-} from "../../../../interfaces/interfaces";
 import { interval } from "rxjs";
+
 import M from "materialize-css";
+
+import { Device } from "../../../../interfaces/devices";
+import { DevicesGroups } from "../../../../interfaces/groups";
+import { DevicesConfig } from "../../../../interfaces/config";
 
 @Component({
   selector: "app-edit-device",
@@ -23,7 +23,7 @@ import M from "materialize-css";
 export class EditDeviceComponent implements OnInit {
   @Input() public device!: Device;
   @Input() public form!: FormGroup;
-  @Input() public groups!: Groups[];
+  @Input() public groups!: DevicesGroups[];
   @Input() public configs!: DevicesConfig[];
 
   @Output() public onSetDeviceSettings = new EventEmitter<Device>();
@@ -48,15 +48,6 @@ export class EditDeviceComponent implements OnInit {
   public get _desc() {
     return this.form.get("desc");
   }
-  // public get _phone() {
-  //   return this.form.get("phone");
-  // }
-  // public get _imei() {
-  //   return this.form.get("imei");
-  // }
-  // public get _model() {
-  //   return this.form.get("model");
-  // }
 
   setDeviceSettings(device: Device) {
     this.onSetDeviceSettings.emit(device);

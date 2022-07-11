@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
+import { interval } from "rxjs";
+
+import M from "materialize-css";
+
+import { DevicesConfig } from "../../../interfaces/config";
+
 import { DevicesConfigService } from "../../../shared/services/devices-config.service";
 import { UserService } from "../../../shared/services/user.service";
-import { interval } from "rxjs";
-import { DevicesConfig } from "../../../interfaces/interfaces";
-import M from "materialize-css";
 
 @Component({
   selector: "app-configs",

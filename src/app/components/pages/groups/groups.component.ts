@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
+import { interval } from "rxjs";
+
+import M from "materialize-css";
+
+import { DevicesGroups } from "../../../interfaces/groups";
+
 import { GroupsService } from "../../../shared/services/groups.service";
 import { UserService } from "../../../shared/services/user.service";
-import { interval } from "rxjs";
-import { Groups } from "../../../interfaces/interfaces";
-import M from "materialize-css";
 
 @Component({
   selector: "app-groups",
@@ -11,7 +14,7 @@ import M from "materialize-css";
   styleUrls: ["./groups.component.css"],
 })
 export class GroupsComponent implements OnInit {
-  public groups: Groups[] = [];
+  public groups: DevicesGroups[] = [];
   public loading = true;
   public id = "";
   public name = "";

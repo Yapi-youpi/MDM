@@ -1,4 +1,6 @@
-import { Device, DevicesConfig, Groups } from "./interfaces";
+import { Device } from "./devices";
+import { DevicesConfig } from "./config";
+import { DevicesGroups } from "./groups";
 
 interface State {
   success: boolean;
@@ -10,7 +12,7 @@ export interface DevicesConfigsState extends State {
 }
 
 export interface DevicesGroupsState extends State {
-  devicesGroups: Groups[];
+  devicesGroups: DevicesGroups[];
 }
 
 export interface DevicesState extends State {

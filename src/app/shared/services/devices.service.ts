@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+
 import { environment } from "../../../environments/environment";
-import { Device } from "../../interfaces/interfaces";
+
+import { Device } from "../../interfaces/devices";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +11,7 @@ import { Device } from "../../interfaces/interfaces";
 export class DevicesService {
   constructor(private http: HttpClient) {}
 
-  getDevice(param: string, group_id?: string) {
+  get(param: string, group_id?: string) {
     let url = environment.url + "/get_device/" + param;
     if (param === "group") {
       url = url + `/${group_id}`;
@@ -26,7 +28,7 @@ export class DevicesService {
     });
   }
 
-  addDevice(device: Device) {
+  add(device: Device) {
     const url = environment.url + "/add_device";
     const body = {
       ...device,
@@ -43,7 +45,7 @@ export class DevicesService {
     });
   }
 
-  removeDevice(device_id: string) {
+  delete(device_id: string) {
     const url = environment.url + "/remove_device";
     const body = {
       device_id,
@@ -60,7 +62,7 @@ export class DevicesService {
     });
   }
 
-  editDevice(device: Device) {
+  edit(device: Device) {
     const url = environment.url + "/edit_device";
     const body = {
       ...device,

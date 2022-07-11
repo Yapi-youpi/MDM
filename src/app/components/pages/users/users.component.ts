@@ -1,9 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../../shared/services/user.service";
-import M from "materialize-css";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Users } from "../../../interfaces/interfaces";
 import { interval } from "rxjs";
+
+import M from "materialize-css";
+
+import { Users } from "../../../interfaces/users";
+
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: "app-users",

@@ -1,25 +1,20 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
+import * as moment from "moment";
+
 import M from "materialize-css";
+
+import { Device } from "../../../interfaces/devices";
+import { DevicesGroups } from "../../../interfaces/groups";
+import { DevicesConfig } from "../../../interfaces/config";
+import { DevicesFilter } from "../../../interfaces/interfaces";
+import * as states from "../../../interfaces/states";
 
 import { UserService } from "../../../shared/services/user.service";
 import { DevicesService } from "../../../shared/services/devices.service";
-import {
-  Device,
-  DevicesConfig,
-  Groups,
-  DevicesFilter,
-} from "../../../interfaces/interfaces";
 import { GroupsService } from "../../../shared/services/groups.service";
 import { DevicesConfigService } from "../../../shared/services/devices-config.service";
-import * as moment from "moment";
-import {
-  DevicesConfigsState,
-  DevicesGroupsState,
-  DevicesState,
-  SingleDeviceState,
-} from "../../../interfaces/states";
 
 @Component({
   selector: "app-devices",
@@ -28,13 +23,13 @@ import {
 })
 export class DevicesComponent implements OnInit {
   public devices: Device[] = [];
-  public groups: Groups[] = [];
+  public groups: DevicesGroups[] = [];
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
 
   private add_device!: Device; // ???
 
-  // public form: FormGroup;
+  public adminForm: FormGroup;
   public editDeviceForm: FormGroup;
   public filterForm: FormGroup;
 
@@ -65,29 +60,21 @@ export class DevicesComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    private device: DevicesService,
+    private deviceService: DevicesService,
     private elementRef: ElementRef,
     private groupsService: GroupsService,
     private configService: DevicesConfigService // public db: DatabaseService
   ) {
-    // this.form = new FormGroup({
-    //   name: new FormControl("", Validators.required),
-    //   desc: new FormControl("", Validators.required),
-    //   phone: new FormControl("", Validators.required),
-    //   imei: new FormControl("", [Validators.required, Validators.max(15)]),
-    //   model: new FormControl("", Validators.required),
-    //   config_id: new FormControl("", Validators.required),
-    //   group_id: new FormControl("", Validators.required),
-    // });
+    this.adminForm = new FormGroup({
+      password: new FormControl("", Validators.required),
+      confirmPassword: new FormControl("", Validators.required),
+    });
     this.editDeviceForm = new FormGroup({
       name: new FormControl("", Validators.required),
       desc: new FormControl("", [
         Validators.required,
         Validators.maxLength(60),
       ]),
-      // phone: new FormControl({ value: "", disabled: true }),
-      // imei: new FormControl({ value: "", disabled: true }),
-      // model: new FormControl({ value: "", disabled: true }),
       config_id: new FormControl(""),
       group_id: new FormControl(""),
     });
@@ -107,12 +94,13 @@ export class DevicesComponent implements OnInit {
     let closingModal =
       this.elementRef.nativeElement.querySelectorAll(".closing");
 
-    // M.Modal.init(nonClosingModal, {
-    //   dismissible: false,
-    //   onCloseEnd: () => {
-    //     this.form.reset();
-    //   },
-    // });
+    M.Modal.init(nonClosingModal, {
+      dismissible: false,
+      onCloseEnd: () => {
+        this.adminForm.reset();
+      },
+    });
+
     M.Modal.init(closingModal, {
       dismissible: true,
     });
@@ -126,15 +114,7 @@ export class DevicesComponent implements OnInit {
       }
     });
 
-    // let selectsInter = interval(1000).subscribe(() => {
-    //   const elems =
-    //     this.elementRef.nativeElement.querySelectorAll(".config-select");
-    //   // console.log(elems);
-    //   if (elems && elems.length !== 0) {
-    //     selectsInter.unsubscribe();
-    //     M.FormSelect.init(elems);
-    //   }
-    // });
+    // M.Modal.getInstance(nonClosingModal).open();
   }
 
   changePassword(pass: string) {
@@ -153,29 +133,33 @@ export class DevicesComponent implements OnInit {
   // ПЕРВЫЕ ВЫПОЛНЯЕМЫЕ Ф-ЦИИ
 
   getConfigs() {
-    this.configService.getConfig("all").then((res: DevicesConfigsState) => {
-      if (res.success) {
-        this.configs = res.devicesConfigs;
-      } else {
-        console.log(res.error);
-      }
-    });
+    this.configService
+      .getConfig("all")
+      .then((res: states.DevicesConfigsState) => {
+        if (res.success) {
+          this.configs = res.devicesConfigs;
+        } else {
+          console.log(res.error);
+        }
+      });
   }
 
   getGroups() {
-    this.groupsService.getGroups("all").then((res: DevicesGroupsState) => {
-      if (res.success) {
-        this.groups = res.devicesGroups;
-      } else {
-        console.log(res.error);
-      }
-    });
+    this.groupsService
+      .getGroups("all")
+      .then((res: states.DevicesGroupsState) => {
+        if (res.success) {
+          this.groups = res.devicesGroups;
+        } else {
+          console.log(res.error);
+        }
+      });
   }
 
   getAllDevices() {
-    this.device
-      .getDevice("all")
-      .then((res: DevicesState) => {
+    this.deviceService
+      .get("all")
+      .then((res: states.DevicesState) => {
         if (res.success) {
           this.loading = false;
           this.devices = res.devices;
@@ -199,6 +183,7 @@ export class DevicesComponent implements OnInit {
     this.devicesFilters.configsIDs = null;
     this.devicesFilters.groupsIDs = null;
   }
+
   searchDevicesWithParams(form: FormGroup) {
     this.devicesFilters.status =
       (form.getRawValue()["status-on"] && form.getRawValue()["status-off"]) ||
@@ -234,32 +219,19 @@ export class DevicesComponent implements OnInit {
     //   });
   }
 
-  // saveChange() {
-  //   this.device
-  //     .editDevice(this.form.getRawValue())
-  //     .then((res) => {
-  //       console.log(res);
-  //       this.getAllDevices();
-  //       this.edit = false;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
   setDeviceSettings(device: Device) {
-    this.device
-      .editDevice({
+    this.deviceService
+      .edit({
         ...device,
         name: this.editDeviceForm.getRawValue()["name"],
         description: this.editDeviceForm.getRawValue()["desc"],
         device_config_id: this.editDeviceForm.getRawValue()["config_id"],
         device_group_id: this.editDeviceForm.getRawValue()["group_id"],
       })
-      .then((res: SingleDeviceState) => {
+      .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          this.getAllDevices();
           console.log("Устройство изменено");
+          this.getAllDevices();
         } else {
           console.log(res.error);
         }
@@ -318,22 +290,23 @@ export class DevicesComponent implements OnInit {
     this.currDevice = device;
     this.editDeviceForm.controls["name"].setValue(device.name);
     this.editDeviceForm.controls["desc"].setValue(device.description);
-    // this.editDeviceForm.controls["phone"].setValue(device.phone_number);
-    // this.editDeviceForm.controls["imei"].setValue(device.imei);
-    // this.editDeviceForm.controls["model"].setValue(device.model);
     this.editDeviceForm.controls["config_id"].setValue(device.device_config_id);
     this.editDeviceForm.controls["group_id"].setValue(device.device_group_id);
   }
 
   deleteDevice(id: string) {
-    // this.device
-    //   .removeDevice(id)
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.getAllDevices();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    this.deviceService
+      .delete(id)
+      .then((res: states.SingleDeviceState) => {
+        // console.log(res);
+        // this.getAllDevices();
+        if (res.success) {
+          console.log("Устройство удалено");
+          this.getAllDevices();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
