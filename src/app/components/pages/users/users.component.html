@@ -11,7 +11,11 @@
         <button type="button" class="btn btn--outline">Суперадмины</button>
         <button type="button" class="btn btn--outline">Администраторы</button>
         <button type="button" class="btn btn--outline">Оператор</button>
-        <button type="button" class="btn btn--rounded btn--right">
+        <button
+          type="button"
+          class="btn btn--rounded btn--right"
+          data-target="modal-new-user"
+        >
           Добавить пользователя
         </button>
       </div>
@@ -19,7 +23,9 @@
         <div class="user-card">
           <div class="user-card__avatar"></div>
           <div class="user-card__descr">
-            <div class="user-card__name">Константин</div>
+            <div class="user-card__name">
+              Константин Константинович Константинов-Барановский
+            </div>
             <div class="user-card__email">prosto.kostya@mail.ru</div>
             <div class="user-card__group"></div>
             <div class="user-card__role">суперадмин</div>
@@ -72,11 +78,8 @@
     <div class="card card--sidebar">
       <div class="card__header">Настройка доступа</div>
       <div class="user-settings">
-        <fieldset
-          class="user-category"
-          *ngFor="let role of asset.roles | keyvalue"
-        >
-          <legend class="user-category__header">{{ role.value }}</legend>
+        <div class="user-category" *ngFor="let role of asset.roles | keyvalue">
+          <h6 class="user-category__header">{{ role.value }}</h6>
           <div class="user-category__params">
             <label
               for="{{ param }}'-'{{ role.key }}"
@@ -97,14 +100,45 @@
               <span>{{ param }}</span>
             </label>
           </div>
-        </fieldset>
+        </div>
       </div>
-      <div class="card__footer">
-        <button type="button" class="btn btn--big btn--outline">Отмена</button>
+      <div class="btn-wrapper">
         <button type="button" class="btn btn--big">Сохранить</button>
+        <button type="button" class="btn btn--big btn--outline">Отмена</button>
       </div>
     </div>
   </main>
+
+  <!--  MODALS -->
+  <div class="modal-wrapper" id="modal-new-user">
+    <div class="modal-dialog">
+      <h4 class="modal-title">Добавление нового пользователя</h4>
+      Modal here
+      <div class="btn-wrapper">
+        <button class="btn btn--big">Отправить</button>
+        <button class="btn btn--big btn--outline modal-close">Отменить</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-wrapper" id="modal-delete-user">
+    <div class="modal-dialog">
+      <h4 class="modal-title">Удалить пользавателя “Владислав”?</h4>
+      <div class="btn-wrapper">
+        <button class="btn btn--big">Да</button>
+        <button class="btn btn--big btn--outline">Нет</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-wrapper" id="modal-edit-user">
+    <div class="modal-dialog">
+      <h4 class="modal-title">Редактирование данных</h4>
+      Modal here
+      <div class="btn-wrapper">
+        <button class="btn btn--big">Отправить</button>
+        <button class="btn btn--big btn--outline">Отменить</button>
+      </div>
+    </div>
+  </div>
   <!--<div class="container">
   <h3>Пользователи</h3>
   <div class="box">

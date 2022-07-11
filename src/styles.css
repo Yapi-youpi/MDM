@@ -808,3 +808,65 @@ a.active .sdm-menu-icon span,
 .btn--right {
   margin-left: auto;
 }
+/* Обертка для группы кнопок */
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-top: 16px;
+}
+
+/* МОДАЛЬНОЕ ОКНО */
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 15px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s linear;
+}
+.modal-wrapper--open {
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.15s linear;
+}
+.modal-dialog {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 600px;
+  max-width: 100% !important;
+  padding: 30px;
+  background: #fff;
+  border-radius: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(400px);
+  transition: all 0.3s linear;
+}
+.modal-wrapper--open .modal-dialog {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.modal-title {
+  font-weight: 550;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: var(--sdm-dark-blue-grey);
+  padding: 10px 0 24px;
+}

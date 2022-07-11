@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Users } from '../../../interfaces/interfaces';
@@ -10,7 +10,7 @@ import { AssetService } from '../../../services/asset.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public users: Users[] = [];
   public login: string = '';
@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
     ];
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     // let elem = document.querySelectorAll(".modal");
     // const options = {};
     // M.Modal.init(elem, options);
@@ -45,6 +45,9 @@ export class UsersComponent implements OnInit {
         this.getAllUsers();
       }
     });
+  }
+  ngAfterViewInit() {
+    this.asset.modalInit('modal-new-user');
   }
 
   getAllUsers() {
