@@ -10,6 +10,6 @@
   justify-content: center;
 }
 
-#delete_device .action-btns button:nth-child(1) {
+#delete_device .action-btns button:first-child {
   margin-right: 50px;
 }

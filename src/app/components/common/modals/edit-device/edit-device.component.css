@@ -76,12 +76,10 @@
   margin-right: 23px;
 }
 
-#edit_device .form-btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#edit_device .action-btns {
+  padding-left: 144px;
 }
 
-#edit_device .form-btns > *:first-child {
-  margin-right: 34px;
+#edit_device .action-btns > *:first-child {
+  margin-right: 66px;
 }

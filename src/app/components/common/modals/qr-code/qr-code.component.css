@@ -12,6 +12,10 @@
   margin-bottom: 40px;
 }
 
-#qr-code .action-btns button:nth-child(1) {
+#qr-code .action-btns {
+  justify-content: center;
+}
+
+#qr-code .action-btns button:first-child {
   margin-right: 30px;
 }

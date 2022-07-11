@@ -121,10 +121,8 @@
 
 .sidenav.filter .action-btns {
   margin-top: auto;
-
-  justify-content: center;
 }
 
 .sidenav.filter .action-btns button:last-child {
-  margin-left: 20px;
+  margin-left: auto;
 }
