@@ -30,7 +30,10 @@ export class DevicesComponent implements OnInit {
   private add_device!: Device; // ???
 
   public adminForm: FormGroup;
+  public addDeviceForm: FormGroup;
+  public isAddDeviceFormSubmitted: boolean = false;
   public editDeviceForm: FormGroup;
+  public isEditDeviceFormSubmitted: boolean = false;
   public filterForm: FormGroup;
 
   public edit: boolean = false;
@@ -68,6 +71,15 @@ export class DevicesComponent implements OnInit {
     this.adminForm = new FormGroup({
       password: new FormControl("", Validators.required),
       confirmPassword: new FormControl("", Validators.required),
+    });
+    this.addDeviceForm = new FormGroup({
+      name: new FormControl("", Validators.required),
+      desc: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(60),
+      ]),
+      config_id: new FormControl("", Validators.required),
+      group_id: new FormControl("", Validators.required),
     });
     this.editDeviceForm = new FormGroup({
       name: new FormControl("", Validators.required),
@@ -157,6 +169,8 @@ export class DevicesComponent implements OnInit {
   }
 
   getAllDevices() {
+    this.loading = true;
+
     this.deviceService
       .get("all")
       .then((res: states.DevicesState) => {

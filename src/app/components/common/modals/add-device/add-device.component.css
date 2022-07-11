@@ -1,0 +1,85 @@
+#add_device {
+  width: 770px;
+
+  overflow: initial;
+}
+
+#add_device .modal-content {
+  padding: 30px 93px !important;
+}
+
+#add_device .form-group.phone,
+#add_device .form-group.model,
+#add_device .selects .form-group:first-child {
+  width: 314px;
+}
+#add_device .form-group.imei {
+  width: calc(100% - 314px);
+}
+#add_device .form-group.phone input {
+  margin-left: auto;
+}
+#add_device .form-group.imei label {
+  margin-left: 27px;
+}
+
+#add_device input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+#add_device input[type='number']::-webkit-outer-spin-button,
+#add_device input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+
+  -webkit-appearance: none;
+}
+
+#add_device .model {
+  justify-content: start;
+}
+
+#add_device .model input {
+  margin-left: 85px !important;
+}
+
+#add_device .selects {
+  margin-bottom: 50px !important;
+}
+
+#add_device .selects .form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+
+  margin-bottom: 0;
+}
+
+#add_device .input-field-modal {
+  width: 170px;
+}
+
+#add_device .input-field-modal,
+#add_device .input-field-modal .select-wrapper input.select-dropdown {
+  height: 45px;
+}
+
+#add_device .selects .form-group:first-child label {
+  margin-right: 30px;
+}
+
+#add_device .selects .form-group:last-child {
+  margin-left: auto;
+}
+#add_device .selects .form-group:last-child label {
+  margin-right: 23px;
+}
+
+#add_device .action-btns {
+  padding-left: 144px;
+}
+
+#add_device .action-btns > *:first-child {
+  margin-right: 66px;
+}

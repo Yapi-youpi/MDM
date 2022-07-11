@@ -16,7 +16,10 @@
         (onSetFilterSettings)="searchDevicesWithParams($event)"
       ></app-filter-sidebar>
       <div class="add-btn-wrapper">
-        <app-add-button [title]="'Добавить устройство'"></app-add-button>
+        <app-add-button
+          [title]="'Добавить устройство'"
+          [target]="'add_device'"
+        ></app-add-button>
       </div>
     </div>
     <div class="progress" *ngIf="loading">
@@ -186,6 +189,13 @@
     </button>
   </div>
 </div>
+<app-add-device
+  [configs]="configs"
+  [groups]="groups"
+  [form]="addDeviceForm"
+  (onSubmit)="addDevice()"
+  [isAddDeviceFormSubmitted]="isAddDeviceFormSubmitted"
+></app-add-device>
 <app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
 <app-edit-device
   [device]="currDevice"

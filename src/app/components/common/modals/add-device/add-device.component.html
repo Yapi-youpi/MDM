@@ -1,44 +1,44 @@
-<div id="edit_device" class="modal closing">
+<div id="add_device" class="modal closing">
   <div class="modal-content">
-    <h4 class="title">Редактировать устройство</h4>
+    <h4 class="title">Добавить устройство</h4>
     <div class="divider"></div>
-    <form [formGroup]="form" (ngSubmit)="onSubmitHandler(device)">
+    <form [formGroup]="form" (ngSubmit)="onSubmitHandler()">
       <div>
         <div
           class="form-group"
-          [class.error]="isEditDeviceFormSubmitted && _name?.errors"
+          [class.error]="isAddDeviceFormSubmitted && _name?.errors"
         >
           <div class="row">
-            <label for="name">Название</label>
+            <label for="add_name">Название</label>
             <input
               formControlName="name"
-              id="name"
-              name="name"
+              id="add_name"
+              name="add_name"
               type="text"
               class="w-440"
             />
           </div>
           <app-input-alert
-            *ngIf="isEditDeviceFormSubmitted && _name?.errors"
+            *ngIf="isAddDeviceFormSubmitted && _name?.errors"
             [inputControl]="$any(_name)"
           ></app-input-alert>
         </div>
         <div
           class="form-group"
-          [class.error]="isEditDeviceFormSubmitted && _desc?.errors"
+          [class.error]="isAddDeviceFormSubmitted && _desc?.errors"
         >
           <div class="row">
-            <label for="desc">Описание</label>
+            <label for="add_desc">Описание</label>
             <input
               formControlName="desc"
-              id="desc"
-              name="desc"
+              id="add_desc"
+              name="add_desc"
               type="text"
               class="w-440"
             />
           </div>
           <app-input-alert
-            *ngIf="isEditDeviceFormSubmitted && _desc?.errors"
+            *ngIf="isAddDeviceFormSubmitted && _desc?.errors"
             [inputControl]="$any(_desc)"
           ></app-input-alert>
         </div>
@@ -46,57 +46,67 @@
       <div class="divider"></div>
       <div>
         <div class="row selects">
-          <div class="form-group">
-            <label for="config">Конфигурация</label>
+          <div
+            class="form-group"
+            [class.error]="isAddDeviceFormSubmitted && _config?.errors"
+          >
+            <label for="add_config">Конфигурация</label>
             <div class="input-field-modal sdm-blue-select">
               <select
                 formControlName="config_id"
-                id="config"
-                name="config"
+                id="add_config"
+                name="add_config"
                 class="config-select-modal w-170"
               >
                 <ng-container *ngFor="let config of configs">
                   <option
                     [value]="config.ID"
-                    [selected]="device && config.ID === device.device_config_id"
                   >{{ config.name }}</option>
                 </ng-container>
               </select>
             </div>
+            <app-input-alert
+              *ngIf="isAddDeviceFormSubmitted && _config?.errors"
+              [inputControl]="$any(_config)"
+            ></app-input-alert>
           </div>
-          <div class="form-group">
-            <label for="group">Группа</label>
+          <div
+            class="form-group"
+            [class.error]="isAddDeviceFormSubmitted && _group?.errors"
+          >
+            <label for="add_group">Группа</label>
             <div class="input-field-modal sdm-blue-select">
               <select
                 formControlName="group_id"
-                id="group"
-                name="group"
+                id="add_group"
+                name="add_group"
                 class="config-select-modal w-170"
               >
                 <ng-container *ngFor="let group of groups">
                   <option
                     [value]="group.id"
-                    [selected]="device && group.id === device.device_group_id"
                   >{{ group.name }}</option>
                 </ng-container>
               </select>
             </div>
+            <app-input-alert
+              *ngIf="isAddDeviceFormSubmitted && _group?.errors"
+              [inputControl]="$any(_group)"
+            ></app-input-alert>
           </div>
         </div>
         <div class="row action-btns">
           <button
             type="submit"
-            class="sdm-big r-14 sdm-dark-blue"
+            class="sdm-middle sdm-dark-blue r-14"
           >
-            Сохранить
+            Добавить
           </button>
           <button
             type="button"
-            class="modal-close sdm-big r-14"
+            class="modal-close sdm-middle r-14"
             (click)="onCancelHandler()"
-          >
-            Отменить
-          </button>
+          >Отменить</button>
         </div>
       </div>
     </form>

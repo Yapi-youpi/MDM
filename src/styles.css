@@ -172,6 +172,11 @@ body {
   position: absolute;
 }
 
+.selects .form-group .alert {
+  top: 45px;
+  left: 0;
+}
+
 
 /* ИНПУТЫ */
 input {

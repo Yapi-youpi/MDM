@@ -7,6 +7,7 @@ import { Component, Input } from "@angular/core";
 })
 export class AddButtonComponent {
   @Input() public title!: string;
+  @Input() public target: string = "";
 
   constructor() {}
 }

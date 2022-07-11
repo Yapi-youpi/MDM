@@ -1,33 +1,31 @@
 import {
   Component,
-  OnInit,
-  Input,
   ElementRef,
-  Output,
   EventEmitter,
+  Input,
+  OnInit,
+  Output,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { interval } from "rxjs";
 
 import M from "materialize-css";
 
-import { Device } from "../../../../interfaces/devices";
-import { DevicesGroups } from "../../../../interfaces/groups";
 import { DevicesConfig } from "../../../../interfaces/config";
+import { DevicesGroups } from "../../../../interfaces/groups";
 
 @Component({
-  selector: "app-edit-device",
-  templateUrl: "./edit-device.component.html",
-  styleUrls: ["./edit-device.component.css"],
+  selector: "app-add-device",
+  templateUrl: "./add-device.component.html",
+  styleUrls: ["./add-device.component.css"],
 })
-export class EditDeviceComponent implements OnInit {
-  @Input() public device!: Device;
-  @Input() public groups!: DevicesGroups[];
+export class AddDeviceComponent implements OnInit {
   @Input() public configs!: DevicesConfig[];
+  @Input() public groups!: DevicesGroups[];
   @Input() public form!: FormGroup;
-  @Input() public isEditDeviceFormSubmitted: boolean = false;
+  @Input() public isAddDeviceFormSubmitted: boolean = false;
 
-  @Output() public onSetDeviceSettings = new EventEmitter<Device>();
+  @Output() public onSubmit = new EventEmitter();
 
   constructor(private elementRef: ElementRef) {}
 
@@ -43,27 +41,30 @@ export class EditDeviceComponent implements OnInit {
     });
   }
 
-  public get _name() {
+  get _name() {
     return this.form.get("name");
   }
-  public get _desc() {
+  get _desc() {
     return this.form.get("desc");
   }
+  get _config() {
+    return this.form.get("config_id");
+  }
+  get _group() {
+    return this.form.get("group_id");
+  }
 
-  // setDeviceSettings(device: Device) {
-  //   this.onSetDeviceSettings.emit(device);
-  // }
-  onSubmitHandler(device: Device) {
-    this.isEditDeviceFormSubmitted = true;
+  onSubmitHandler() {
+    this.isAddDeviceFormSubmitted = true;
 
     if (this.form.invalid) {
       return;
     } else {
-      this.onSetDeviceSettings.emit(device);
+      this.onSubmit.emit();
     }
   }
   onCancelHandler() {
-    this.isEditDeviceFormSubmitted = false;
+    this.isAddDeviceFormSubmitted = false;
     this.form.reset();
   }
 }

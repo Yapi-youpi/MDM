@@ -47,13 +47,11 @@
 }
 
 #edit_device .selects .form-group {
-  margin-bottom: 0;
-}
-
-#edit_device .selects .form-group {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  margin-bottom: 0;
 }
 
 #edit_device .input-field-modal {
