@@ -1,11 +1,7 @@
-<app-global-container>
-  <div class="card sdm-bg-light-grey">
-    <div class="card-header">
-      <h2>Устройства</h2>
-      <!--    Место для кнопки добавления/редактирования и пр.    -->
-      <app-user></app-user>
-    </div>
-    <div class="divider"></div>
+<app-global-container class="global-container">
+  <app-global-header class="global-header" [title]="'Устройства'">
+  </app-global-header>
+  <div class="global-main card sdm-bg-light-grey">
     <div class="row actions">
       <app-search-input></app-search-input>
       <app-filter-sidebar></app-filter-sidebar>
@@ -83,7 +79,9 @@
           <app-device-item
             [device]="device"
             (onSelectUnselectDevice)="selectUnselectSingleDevice($event)"
-            (onChangeDeviceConfig)="changeDeviceConfig($event.device, $event.$event)"
+            (onChangeDeviceConfig)="
+              changeDeviceConfig($event.device, $event.$event)
+            "
             (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
             (onEditDevice)="editDevice($event)"
             (onDeleteDevice)="deleteDevice($event)"
