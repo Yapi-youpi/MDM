@@ -20,6 +20,10 @@
         </button>
       </div>
       <div class="users-wrapper">
+        <div class="progress" *ngIf="loading">
+          <div class="indeterminate"></div>
+        </div>
+
         <div class="user-card">
           <div class="user-card__avatar"></div>
           <div class="user-card__descr">
@@ -51,9 +55,6 @@
               <i class="material-icons">more_vert</i>
             </button>
           </div>
-        </div>
-        <div class="progress" *ngIf="loading">
-          <div class="indeterminate"></div>
         </div>
         <div class="user-card" *ngFor="let user of users">
           <div class="user-card__avatar"></div>
