@@ -112,7 +112,7 @@
             (onSelectUnselectDevice)="selectUnselectDevice($event)"
             (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
             (onEditDevice)="editDevice($event)"
-            (onDeleteDevice)="deleteDevice($event)"
+            (onDeleteDevice)="setDeviceToDelete($event)"
           ></app-device-item>
         </ng-container>
       </div>
@@ -186,6 +186,7 @@
     </button>
   </div>
 </div>
+<app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
 <app-edit-device
   [device]="currDevice"
   [form]="editDeviceForm"
@@ -193,4 +194,7 @@
   [configs]="configs"
   (onSetDeviceSettings)="setDeviceSettings($event)"
 ></app-edit-device>
-<app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
+<app-delete-device
+  [device]="currDevice"
+  (onDeleteDevice)="deleteDevice($event)"
+></app-delete-device>

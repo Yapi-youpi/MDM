@@ -141,7 +141,7 @@ body {
 }
 
 .modal .action-btns {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .row {

@@ -20,7 +20,7 @@ export class DeviceItemComponent {
     qrcode: any;
   }>();
   @Output() onEditDevice = new EventEmitter<Device>();
-  @Output() onDeleteDevice = new EventEmitter<string>();
+  @Output() onDeleteDevice = new EventEmitter<Device>();
 
   constructor() {}
 
@@ -36,7 +36,7 @@ export class DeviceItemComponent {
     this.onEditDevice.emit(device);
   }
 
-  deleteDevice(id: string) {
-    this.onDeleteDevice.emit(id);
+  deleteDevice(device: Device) {
+    this.onDeleteDevice.emit(device);
   }
 }

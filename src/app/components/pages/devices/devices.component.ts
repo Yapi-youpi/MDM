@@ -294,12 +294,14 @@ export class DevicesComponent implements OnInit {
     this.editDeviceForm.controls["group_id"].setValue(device.device_group_id);
   }
 
-  deleteDevice(id: string) {
+  setDeviceToDelete(device: Device) {
+    this.currDevice = device;
+  }
+
+  deleteDevice(device: Device) {
     this.deviceService
-      .delete(id)
+      .delete(device.device_id)
       .then((res: states.SingleDeviceState) => {
-        // console.log(res);
-        // this.getAllDevices();
         if (res.success) {
           console.log("Устройство удалено");
           this.getAllDevices();

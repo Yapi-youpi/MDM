@@ -41,6 +41,7 @@ import { DatePipe } from "./shared/pipes/sort/devices/date.pipe";
 import { NamePipe } from "./shared/pipes/sort/devices/name.pipe";
 import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
 import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
+import { DeleteDeviceComponent } from './components/common/modals/delete-device/delete-device.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,7 @@ const routes: Routes = [
     NamePipe,
     GroupPipe,
     BatteryPipe,
+    DeleteDeviceComponent,
   ],
   imports: [
     BrowserModule,

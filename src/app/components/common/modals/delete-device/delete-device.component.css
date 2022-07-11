@@ -1,0 +1,15 @@
+#delete_device {
+  width: 500px;
+}
+
+#delete_device .modal-content {
+  padding: 38px 29px !important;
+}
+
+#delete_device .action-btns {
+  justify-content: center;
+}
+
+#delete_device .action-btns button:nth-child(1) {
+  margin-right: 50px;
+}
