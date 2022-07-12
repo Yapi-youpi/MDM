@@ -1,0 +1,114 @@
+<div id="add_device_params" class="modal closing">
+  <div class="modal-content">
+    <h4 class="title">Устройство {{ name }}</h4>
+    <div class="divider"></div>
+<!--    <form [formGroup]="form" (ngSubmit)="onFirstSubmitHandler()">-->
+<!--      <div>-->
+<!--        <div-->
+<!--          class="form-group"-->
+<!--          [class.error]="isAddDeviceFormSubmitted && _name?.errors"-->
+<!--        >-->
+<!--          <div class="row">-->
+<!--            <label for="add_name">Название</label>-->
+<!--            <input-->
+<!--              formControlName="name"-->
+<!--              id="add_name"-->
+<!--              name="add_name"-->
+<!--              type="text"-->
+<!--              class="w-440"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <app-input-alert-->
+<!--            *ngIf="isAddDeviceFormSubmitted && _name?.errors"-->
+<!--            [inputControl]="$any(_name)"-->
+<!--          ></app-input-alert>-->
+<!--        </div>-->
+<!--        <div-->
+<!--          class="form-group"-->
+<!--          [class.error]="isAddDeviceFormSubmitted && _desc?.errors"-->
+<!--        >-->
+<!--          <div class="row">-->
+<!--            <label for="add_desc">Описание</label>-->
+<!--            <input-->
+<!--              formControlName="desc"-->
+<!--              id="add_desc"-->
+<!--              name="add_desc"-->
+<!--              type="text"-->
+<!--              class="w-440"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <app-input-alert-->
+<!--            *ngIf="isAddDeviceFormSubmitted && _desc?.errors"-->
+<!--            [inputControl]="$any(_desc)"-->
+<!--          ></app-input-alert>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="divider"></div>-->
+<!--      <div>-->
+<!--        <div class="row selects">-->
+<!--          <div-->
+<!--            class="form-group"-->
+<!--            [class.error]="isAddDeviceFormSubmitted && _config?.errors"-->
+<!--          >-->
+<!--            <label for="add_config">Конфигурация</label>-->
+<!--            <div class="input-field-modal sdm-blue-select">-->
+<!--              <select-->
+<!--                formControlName="config_id"-->
+<!--                id="add_config"-->
+<!--                name="add_config"-->
+<!--                class="config-select-modal w-170"-->
+<!--              >-->
+<!--                <ng-container *ngFor="let config of configs">-->
+<!--                  <option-->
+<!--                    [value]="config.ID"-->
+<!--                  >{{ config.name }}</option>-->
+<!--                </ng-container>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--            <app-input-alert-->
+<!--              *ngIf="isAddDeviceFormSubmitted && _config?.errors"-->
+<!--              [inputControl]="$any(_config)"-->
+<!--            ></app-input-alert>-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="form-group"-->
+<!--            [class.error]="isAddDeviceFormSubmitted && _group?.errors"-->
+<!--          >-->
+<!--            <label for="add_group">Группа</label>-->
+<!--            <div class="input-field-modal sdm-blue-select">-->
+<!--              <select-->
+<!--                formControlName="group_id"-->
+<!--                id="add_group"-->
+<!--                name="add_group"-->
+<!--                class="config-select-modal w-170"-->
+<!--              >-->
+<!--                <ng-container *ngFor="let group of groups">-->
+<!--                  <option-->
+<!--                    [value]="group.id"-->
+<!--                  >{{ group.name }}</option>-->
+<!--                </ng-container>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--            <app-input-alert-->
+<!--              *ngIf="isAddDeviceFormSubmitted && _group?.errors"-->
+<!--              [inputControl]="$any(_group)"-->
+<!--            ></app-input-alert>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row action-btns">-->
+<!--          <button-->
+<!--            type="submit"-->
+<!--            class="sdm-middle sdm-dark-blue r-14"-->
+<!--          >-->
+<!--            Добавить-->
+<!--          </button>-->
+<!--          <button-->
+<!--            type="button"-->
+<!--            class="modal-close sdm-middle r-14"-->
+<!--            (click)="onCancelHandler()"-->
+<!--          >Отменить</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
+  </div>
+</div>

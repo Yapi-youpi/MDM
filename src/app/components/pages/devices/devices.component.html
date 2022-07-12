@@ -193,14 +193,19 @@
 <app-add-device
   [configs]="configs"
   [groups]="groups"
-  [form]="addDeviceForm"
-  (onSubmit)="addDevice()"
-  [isAddDeviceFormSubmitted]="isAddDeviceFormSubmitted"
+  [form]="addDeviceFirstForm"
+  [isAddDeviceFormSubmitted]="isAddDeviceFirstFormSubmitted"
+  (onFirstSubmit)="setAddDeviceName()"
 ></app-add-device>
-<app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
+<app-add-device-params
+  [name]="currName"
+></app-add-device-params>
+<app-qr-code
+  [title]="currName"
+  [valueQR]="currQR"
+></app-qr-code>
 <app-edit-device
   [device]="currDevice"
-  [form]="editDeviceForm"
   [groups]="groups"
   [configs]="configs"
   (onSetDeviceSettings)="setDeviceSettings($event)"

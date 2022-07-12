@@ -2,11 +2,11 @@
   <div class="modal-content">
     <h4 class="title">Редактировать устройство</h4>
     <div class="divider"></div>
-    <form [formGroup]="form" (ngSubmit)="onSubmitHandler(device)">
+    <form [formGroup]="form.form" (ngSubmit)="onSubmitHandler(device)">
       <div>
         <div
           class="form-group"
-          [class.error]="isEditDeviceFormSubmitted && _name?.errors"
+          [class.error]="_isSubmitted && _name?.errors"
         >
           <div class="row">
             <label for="name">Название</label>
@@ -19,27 +19,27 @@
             />
           </div>
           <app-input-alert
-            *ngIf="isEditDeviceFormSubmitted && _name?.errors"
+            *ngIf="_isSubmitted && _name?.errors"
             [inputControl]="$any(_name)"
           ></app-input-alert>
         </div>
         <div
           class="form-group"
-          [class.error]="isEditDeviceFormSubmitted && _desc?.errors"
+          [class.error]="_isSubmitted && _description?.errors"
         >
           <div class="row">
-            <label for="desc">Описание</label>
+            <label for="description">Описание</label>
             <input
-              formControlName="desc"
-              id="desc"
-              name="desc"
+              formControlName="description"
+              id="description"
+              name="description"
               type="text"
               class="w-440"
             />
           </div>
           <app-input-alert
-            *ngIf="isEditDeviceFormSubmitted && _desc?.errors"
-            [inputControl]="$any(_desc)"
+            *ngIf="_isSubmitted && _description?.errors"
+            [inputControl]="$any(_description)"
           ></app-input-alert>
         </div>
       </div>
@@ -47,12 +47,12 @@
       <div>
         <div class="row selects">
           <div class="form-group">
-            <label for="config">Конфигурация</label>
+            <label for="device_config_id">Конфигурация</label>
             <div class="input-field-modal sdm-blue-select">
               <select
-                formControlName="config_id"
-                id="config"
-                name="config"
+                formControlName="device_config_id"
+                id="device_config_id"
+                name="device_config_id"
                 class="config-select-modal w-170"
               >
                 <ng-container *ngFor="let config of configs">
@@ -65,12 +65,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="group">Группа</label>
+            <label for="device_group_id">Группа</label>
             <div class="input-field-modal sdm-blue-select">
               <select
-                formControlName="group_id"
-                id="group"
-                name="group"
+                formControlName="device_group_id"
+                id="device_group_id"
+                name="device_group_id"
                 class="config-select-modal w-170"
               >
                 <ng-container *ngFor="let group of groups">

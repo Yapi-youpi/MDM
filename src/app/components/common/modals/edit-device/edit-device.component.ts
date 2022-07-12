@@ -6,10 +6,11 @@ import {
   Output,
   EventEmitter,
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { interval } from "rxjs";
 
 import M from "materialize-css";
+
+import { EditDeviceService } from "../../../../shared/services/forms/device/edit-device.service";
 
 import { Device } from "../../../../interfaces/devices";
 import { DevicesGroups } from "../../../../interfaces/groups";
@@ -24,12 +25,10 @@ export class EditDeviceComponent implements OnInit {
   @Input() public device!: Device;
   @Input() public groups!: DevicesGroups[];
   @Input() public configs!: DevicesConfig[];
-  @Input() public form!: FormGroup;
-  @Input() public isEditDeviceFormSubmitted: boolean = false;
 
   @Output() public onSetDeviceSettings = new EventEmitter<Device>();
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, public form: EditDeviceService) {}
 
   ngOnInit(): void {
     let i = interval(2000).subscribe(() => {
@@ -44,26 +43,26 @@ export class EditDeviceComponent implements OnInit {
   }
 
   public get _name() {
-    return this.form.get("name");
+    return this.form.form.get("name");
   }
-  public get _desc() {
-    return this.form.get("desc");
+  public get _description() {
+    return this.form.form.get("description");
+  }
+  public get _isSubmitted() {
+    return this.form.isSubmitted;
   }
 
-  // setDeviceSettings(device: Device) {
-  //   this.onSetDeviceSettings.emit(device);
-  // }
   onSubmitHandler(device: Device) {
-    this.isEditDeviceFormSubmitted = true;
+    this.form.isSubmitted = true;
 
-    if (this.form.invalid) {
+    if (this.form.form.invalid) {
       return;
     } else {
       this.onSetDeviceSettings.emit(device);
     }
   }
   onCancelHandler() {
-    this.isEditDeviceFormSubmitted = false;
-    this.form.reset();
+    this.form.isSubmitted = false;
+    this.form.form.reset();
   }
 }

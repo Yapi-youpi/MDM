@@ -30,6 +30,9 @@ import { SearchInputComponent } from "./components/common/UI/input/search-input/
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { PageHeaderComponent } from "./components/common/page-header/page-header.component";
 import { InputAlertComponent } from "./components/common/UI/alert/input-alert/input-alert.component";
+import { DeleteDeviceComponent } from "./components/common/modals/delete-device/delete-device.component";
+import { AddDeviceComponent } from "./components/common/modals/add-device/add-device.component";
+import { AddDeviceParamsComponent } from "./components/common/modals/add-device-params/add-device-params.component";
 
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
 import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
@@ -41,8 +44,6 @@ import { DatePipe } from "./shared/pipes/sort/devices/date.pipe";
 import { NamePipe } from "./shared/pipes/sort/devices/name.pipe";
 import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
 import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
-import { DeleteDeviceComponent } from './components/common/modals/delete-device/delete-device.component';
-import { AddDeviceComponent } from './components/common/modals/add-device/add-device.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,9 @@ const routes: Routes = [
     PageHeaderComponent,
     AddButtonComponent,
     InputAlertComponent,
+    DeleteDeviceComponent,
+    AddDeviceComponent,
+    AddDeviceParamsComponent,
     // PIPES
     DateConverterPipe,
     DevicesFilterPipe,
@@ -84,8 +88,6 @@ const routes: Routes = [
     NamePipe,
     GroupPipe,
     BatteryPipe,
-    DeleteDeviceComponent,
-    AddDeviceComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ import { UserService } from "../../../shared/services/user.service";
 import { DevicesService } from "../../../shared/services/devices.service";
 import { GroupsService } from "../../../shared/services/groups.service";
 import { DevicesConfigService } from "../../../shared/services/devices-config.service";
+import { EditDeviceService } from "../../../shared/services/forms/device/edit-device.service";
 
 @Component({
   selector: "app-devices",
@@ -30,10 +31,8 @@ export class DevicesComponent implements OnInit {
   private add_device!: Device; // ???
 
   public adminForm: FormGroup;
-  public addDeviceForm: FormGroup;
-  public isAddDeviceFormSubmitted: boolean = false;
-  public editDeviceForm: FormGroup;
-  public isEditDeviceFormSubmitted: boolean = false;
+  public addDeviceFirstForm: FormGroup;
+  public isAddDeviceFirstFormSubmitted: boolean = false;
   public filterForm: FormGroup;
 
   public edit: boolean = false;
@@ -66,13 +65,14 @@ export class DevicesComponent implements OnInit {
     private deviceService: DevicesService,
     private elementRef: ElementRef,
     private groupsService: GroupsService,
-    private configService: DevicesConfigService // public db: DatabaseService
+    private configService: DevicesConfigService, // public db: DatabaseService
+    private editDeviceService: EditDeviceService
   ) {
     this.adminForm = new FormGroup({
       password: new FormControl("", Validators.required),
       confirmPassword: new FormControl("", Validators.required),
     });
-    this.addDeviceForm = new FormGroup({
+    this.addDeviceFirstForm = new FormGroup({
       name: new FormControl("", Validators.required),
       desc: new FormControl("", [
         Validators.required,
@@ -80,15 +80,6 @@ export class DevicesComponent implements OnInit {
       ]),
       config_id: new FormControl("", Validators.required),
       group_id: new FormControl("", Validators.required),
-    });
-    this.editDeviceForm = new FormGroup({
-      name: new FormControl("", Validators.required),
-      desc: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(60),
-      ]),
-      config_id: new FormControl(""),
-      group_id: new FormControl(""),
     });
     this.filterForm = new FormGroup({
       "status-on": new FormControl(false),
@@ -225,19 +216,33 @@ export class DevicesComponent implements OnInit {
     this.devicesFilters.configsIDs = form.getRawValue()["config_ids"];
   }
 
-  addDevice() {
-    // this.add_device = this.form.getRawValue();
-    // this.device
-    //   .addDevice(this.add_device)
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.getAllDevices();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     console.log(err.error.error);
-    //   });
+  setAddDeviceName() {
+    // console.log(this.addDeviceForm.getRawValue());
+    this.currName = this.addDeviceFirstForm.getRawValue()["name"];
+
+    const firstAddModal =
+      this.elementRef.nativeElement.querySelector("#add_device");
+    const secondAddModal =
+      this.elementRef.nativeElement.querySelector("#add_device_params");
+
+    M.Modal.getInstance(firstAddModal).close();
+    M.Modal.getInstance(secondAddModal).open();
   }
+
+  // addDevice() {
+  //   console.log(this.addDeviceForm.getRawValue());
+  //   // this.add_device = this.form.getRawValue();
+  //   // this.device
+  //   //   .addDevice(this.add_device)
+  //   //   .then((res) => {
+  //   //     console.log(res);
+  //   //     this.getAllDevices();
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.log(err);
+  //   //     console.log(err.error.error);
+  //   //   });
+  // }
 
   selectUnselectDevices() {
     this.isAllSelected = !this.isAllSelected;
@@ -304,20 +309,19 @@ export class DevicesComponent implements OnInit {
 
   editDevice(device: Device) {
     this.currDevice = device;
-    this.editDeviceForm.controls["name"].setValue(device.name);
-    this.editDeviceForm.controls["desc"].setValue(device.description);
-    this.editDeviceForm.controls["config_id"].setValue(device.device_config_id);
-    this.editDeviceForm.controls["group_id"].setValue(device.device_group_id);
+    this.editDeviceService.form.patchValue(device);
   }
 
   setDeviceSettings(device: Device) {
     this.deviceService
       .edit({
         ...device,
-        name: this.editDeviceForm.getRawValue()["name"],
-        description: this.editDeviceForm.getRawValue()["desc"],
-        device_config_id: this.editDeviceForm.getRawValue()["config_id"],
-        device_group_id: this.editDeviceForm.getRawValue()["group_id"],
+        name: this.editDeviceService.form.getRawValue()["name"],
+        description: this.editDeviceService.form.getRawValue()["description"],
+        device_config_id:
+          this.editDeviceService.form.getRawValue()["device_config_id"],
+        device_group_id:
+          this.editDeviceService.form.getRawValue()["device_group_id"],
       })
       .then((res: states.SingleDeviceState) => {
         if (res.success) {

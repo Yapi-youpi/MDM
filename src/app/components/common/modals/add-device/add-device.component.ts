@@ -25,7 +25,7 @@ export class AddDeviceComponent implements OnInit {
   @Input() public form!: FormGroup;
   @Input() public isAddDeviceFormSubmitted: boolean = false;
 
-  @Output() public onSubmit = new EventEmitter();
+  @Output() public onFirstSubmit = new EventEmitter();
 
   constructor(private elementRef: ElementRef) {}
 
@@ -54,13 +54,13 @@ export class AddDeviceComponent implements OnInit {
     return this.form.get("group_id");
   }
 
-  onSubmitHandler() {
+  onFirstSubmitHandler() {
     this.isAddDeviceFormSubmitted = true;
 
     if (this.form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      this.onFirstSubmit.emit();
     }
   }
   onCancelHandler() {
