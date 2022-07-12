@@ -5,7 +5,7 @@
         type="checkbox"
         class="filled-in item-checkbox"
         [checked]="device.isSelected"
-        (change)="selectUnselectDevice(device)"
+        (change)="onSelectUnselectDeviceHandler(device)"
       />
       <span></span>
     </label>
@@ -32,28 +32,32 @@
     <p class="font-regular-color">{{ device.battery_percent }}%</p>
     <div class="switch">
       <label>
-        <input type="checkbox" [checked]="device.active_state" />
+        <input
+          type="checkbox"
+          [checked]="device.active_state"
+          (change)="onChangeDeviceStateHandler(device)"
+        />
         <span class="lever"></span>
       </label>
     </div>
     <div class="btns">
       <button
         class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round qr-code"
-        (click)="getDeviceQRCode(device.name, device.qr_code)"
+        (click)="onClickDeviceQRCodeHandler(device.name, device.qr_code)"
         data-target="qr-code"
       >
         <span></span>
       </button>
       <button
         class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round edit"
-        (click)="editDevice(device)"
+        (click)="onClickDeviceEditHandler(device)"
         data-target="edit_device"
       >
         <span></span>
       </button>
       <button
         class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round delete"
-        (click)="deleteDevice(device)"
+        (click)="onClickDeviceDeleteHandler(device)"
         data-target="delete_device"
       >
         <span></span>

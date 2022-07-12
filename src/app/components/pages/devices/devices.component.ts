@@ -153,6 +153,9 @@ export class DevicesComponent implements OnInit {
         } else {
           console.log(res.error);
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -165,6 +168,9 @@ export class DevicesComponent implements OnInit {
         } else {
           console.log(res.error);
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -233,29 +239,6 @@ export class DevicesComponent implements OnInit {
     //   });
   }
 
-  setDeviceSettings(device: Device) {
-    this.deviceService
-      .edit({
-        ...device,
-        name: this.editDeviceForm.getRawValue()["name"],
-        description: this.editDeviceForm.getRawValue()["desc"],
-        device_config_id: this.editDeviceForm.getRawValue()["config_id"],
-        device_group_id: this.editDeviceForm.getRawValue()["group_id"],
-      })
-      .then((res: states.SingleDeviceState) => {
-        if (res.success) {
-          console.log("Устройство изменено");
-          this.getAllDevices();
-        } else {
-          console.log(res.error);
-        }
-      });
-
-    const settingsModal =
-      this.elementRef.nativeElement.querySelector("#edit_device");
-    M.Modal.getInstance(settingsModal).close();
-  }
-
   selectUnselectDevices() {
     this.isAllSelected = !this.isAllSelected;
 
@@ -295,6 +278,25 @@ export class DevicesComponent implements OnInit {
     }
   }
 
+  changeDeviceState(device: Device) {
+    this.deviceService
+      .edit({
+        ...device,
+        active_state: !device.active_state,
+      })
+      .then((res: states.SingleDeviceState) => {
+        if (res.success) {
+          console.log(`Устройство ${device.name} изменено`);
+          this.getAllDevices();
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   getDeviceQRCode(name: string, qr: any) {
     this.currName = name;
     this.currQR = JSON.stringify(qr);
@@ -308,6 +310,32 @@ export class DevicesComponent implements OnInit {
     this.editDeviceForm.controls["group_id"].setValue(device.device_group_id);
   }
 
+  setDeviceSettings(device: Device) {
+    this.deviceService
+      .edit({
+        ...device,
+        name: this.editDeviceForm.getRawValue()["name"],
+        description: this.editDeviceForm.getRawValue()["desc"],
+        device_config_id: this.editDeviceForm.getRawValue()["config_id"],
+        device_group_id: this.editDeviceForm.getRawValue()["group_id"],
+      })
+      .then((res: states.SingleDeviceState) => {
+        if (res.success) {
+          console.log(`Устройство ${device.name} изменено`);
+          this.getAllDevices();
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    const settingsModal =
+      this.elementRef.nativeElement.querySelector("#edit_device");
+    M.Modal.getInstance(settingsModal).close();
+  }
+
   setDeviceToDelete(device: Device) {
     this.currDevice = device;
   }
@@ -317,7 +345,7 @@ export class DevicesComponent implements OnInit {
       .delete(device.device_id)
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          console.log("Устройство удалено");
+          console.log(`Устройство ${device.name} удалено`);
           this.getAllDevices();
         }
       })

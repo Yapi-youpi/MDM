@@ -113,9 +113,10 @@
             [configs]="configs"
             [groups]="groups"
             (onSelectUnselectDevice)="selectUnselectDevice($event)"
-            (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
-            (onEditDevice)="editDevice($event)"
-            (onDeleteDevice)="setDeviceToDelete($event)"
+            (onChangeDeviceState)="changeDeviceState($event)"
+            (onClickDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
+            (onClickDeviceEdit)="editDevice($event)"
+            (onClickDeviceDelete)="setDeviceToDelete($event)"
           ></app-device-item>
         </ng-container>
       </div>

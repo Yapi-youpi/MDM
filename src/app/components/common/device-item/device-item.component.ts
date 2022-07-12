@@ -15,28 +15,33 @@ export class DeviceItemComponent {
   @Input() public groups!: DevicesGroups[];
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
-  @Output() onGetDeviceQRCode = new EventEmitter<{
+  @Output() onChangeDeviceState = new EventEmitter<Device>();
+  @Output() onClickDeviceQRCode = new EventEmitter<{
     name: string;
     qrcode: any;
   }>();
-  @Output() onEditDevice = new EventEmitter<Device>();
-  @Output() onDeleteDevice = new EventEmitter<Device>();
+  @Output() onClickDeviceEdit = new EventEmitter<Device>();
+  @Output() onClickDeviceDelete = new EventEmitter<Device>();
 
   constructor() {}
 
-  selectUnselectDevice(device: Device) {
+  onSelectUnselectDeviceHandler(device: Device) {
     this.onSelectUnselectDevice.emit(device);
   }
 
-  getDeviceQRCode(name: string, qrcode: any) {
-    this.onGetDeviceQRCode.emit({ name, qrcode });
+  onChangeDeviceStateHandler(device: Device) {
+    this.onChangeDeviceState.emit(device);
   }
 
-  editDevice(device: Device) {
-    this.onEditDevice.emit(device);
+  onClickDeviceQRCodeHandler(name: string, qrcode: any) {
+    this.onClickDeviceQRCode.emit({ name, qrcode });
   }
 
-  deleteDevice(device: Device) {
-    this.onDeleteDevice.emit(device);
+  onClickDeviceEditHandler(device: Device) {
+    this.onClickDeviceEdit.emit(device);
+  }
+
+  onClickDeviceDeleteHandler(device: Device) {
+    this.onClickDeviceDelete.emit(device);
   }
 }
