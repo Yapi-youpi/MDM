@@ -94,7 +94,7 @@ export class AssetService {
     }
 
     function outsideClick(e) {
-      if (e.target !== filter) {
+      if (e.target == filter) {
         if (filter) filter.classList.remove('filter--open');
       }
     }
