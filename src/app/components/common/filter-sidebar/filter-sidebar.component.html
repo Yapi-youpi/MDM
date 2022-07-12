@@ -7,7 +7,8 @@
 <form
   id="slide-out"
   class="sidenav sdm-right filter"
-  [formGroup]="form"
+  [formGroup]="_form"
+  (ngSubmit)="onSubmitHandler()"
 >
   <h2>Фильтр</h2>
   <div class="divider"></div>
@@ -16,14 +17,14 @@
     <p>Статус</p>
     <p
       class="sdm-check-btn r-14"
-      [class.checked]="form.controls['status-on'].value"
+      [class.checked]="_isStatusOn"
     >
       <label>
         <input
           name="status-on"
           type="checkbox"
           formControlName="status-on"
-          [checked]="form.controls['status-on'].value"
+          [checked]="_isStatusOn"
           (click)="toggleSearchDevicesOn()"
         />
         <span>вкл</span>
@@ -31,14 +32,14 @@
     </p>
     <p
       class="sdm-check-btn r-14"
-      [class.checked]="form.controls['status-off'].value"
+      [class.checked]="_isStatusOff"
     >
       <label>
         <input
           name="status-off"
           type="checkbox"
           formControlName="status-off"
-          [checked]="form.controls['status-off'].value"
+          [checked]="_isStatusOff"
           (click)="toggleSearchDevicesOff()"
         />
         <span>выкл</span>
@@ -104,14 +105,13 @@
       <button
         type="button"
         class="sidenav-close sdm-middle r-14"
-        (click)="resetFilters()"
+        (click)="onResetHandler()"
       >
         Сброс
       </button>
       <button
-        type="button"
+        type="submit"
         class="sdm-middle sdm-dark-blue r-14"
-        (click)="setFilterSettings()"
       >
         Поиск
       </button>

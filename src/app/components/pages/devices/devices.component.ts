@@ -16,6 +16,7 @@ import { DevicesService } from "../../../shared/services/devices.service";
 import { GroupsService } from "../../../shared/services/groups.service";
 import { DevicesConfigService } from "../../../shared/services/devices-config.service";
 import { EditDeviceService } from "../../../shared/services/forms/device/edit-device.service";
+import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
 
 @Component({
   selector: "app-devices",
@@ -33,7 +34,7 @@ export class DevicesComponent implements OnInit {
   public adminForm: FormGroup;
   public addDeviceFirstForm: FormGroup;
   public isAddDeviceFirstFormSubmitted: boolean = false;
-  public filterForm: FormGroup;
+  // public filterForm: FormGroup;
 
   public edit: boolean = false;
   public password: string = "";
@@ -66,7 +67,8 @@ export class DevicesComponent implements OnInit {
     private elementRef: ElementRef,
     private groupsService: GroupsService,
     private configService: DevicesConfigService, // public db: DatabaseService
-    private editDeviceService: EditDeviceService
+    private editDeviceService: EditDeviceService,
+    private filterDevicesService: FilterDevicesService
   ) {
     this.adminForm = new FormGroup({
       password: new FormControl("", Validators.required),
@@ -81,14 +83,14 @@ export class DevicesComponent implements OnInit {
       config_id: new FormControl("", Validators.required),
       group_id: new FormControl("", Validators.required),
     });
-    this.filterForm = new FormGroup({
-      "status-on": new FormControl(false),
-      "status-off": new FormControl(false),
-      "date-from": new FormControl(null),
-      "date-to": new FormControl(null),
-      config_ids: new FormControl(null),
-      group_ids: new FormControl(null),
-    });
+    // this.filterForm = new FormGroup({
+    //   "status-on": new FormControl(false),
+    //   "status-off": new FormControl(false),
+    //   "date-from": new FormControl(null),
+    //   "date-to": new FormControl(null),
+    //   config_ids: new FormControl(null),
+    //   group_ids: new FormControl(null),
+    // });
   }
 
   ngOnInit(): void {
@@ -195,25 +197,12 @@ export class DevicesComponent implements OnInit {
     this.devicesFilters.groupsIDs = null;
   }
 
-  searchDevicesWithParams(form: FormGroup) {
-    this.devicesFilters.status =
-      (form.getRawValue()["status-on"] && form.getRawValue()["status-off"]) ||
-      (!form.getRawValue()["status-on"] && !form.getRawValue()["status-off"])
-        ? null
-        : form.getRawValue()["status-on"] && !form.getRawValue()["status-off"]
-        ? true
-        : !form.getRawValue()["status-on"] &&
-          form.getRawValue()["status-off"] &&
-          false;
-
-    this.devicesFilters.dateFrom = form.getRawValue()["date-from"]
-      ? moment.utc(form.getRawValue()["date-from"]).format()
-      : null;
-    this.devicesFilters.dateTo = form.getRawValue()["date-to"]
-      ? moment.utc(form.getRawValue()["date-to"]).format()
-      : null;
-    this.devicesFilters.groupsIDs = form.getRawValue()["group_ids"];
-    this.devicesFilters.configsIDs = form.getRawValue()["config_ids"];
+  searchDevicesWithParams() {
+    this.devicesFilters.status = this.filterDevicesService._status;
+    this.devicesFilters.dateFrom = this.filterDevicesService._dateFrom;
+    this.devicesFilters.dateTo = this.filterDevicesService._dateTo;
+    this.devicesFilters.groupsIDs = this.filterDevicesService._groupsIDs;
+    this.devicesFilters.configsIDs = this.filterDevicesService._configsIDs;
   }
 
   setAddDeviceName() {

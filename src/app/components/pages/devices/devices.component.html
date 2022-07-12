@@ -11,9 +11,8 @@
       <app-filter-sidebar
         [configs]="configs"
         [groups]="groups"
-        [form]="filterForm"
-        (onResetFilterSettings)="resetSearchParams()"
-        (onSetFilterSettings)="searchDevicesWithParams($event)"
+        (onReset)="resetSearchParams()"
+        (onSubmit)="searchDevicesWithParams()"
       ></app-filter-sidebar>
       <div class="add-btn-wrapper">
         <app-add-button

@@ -11,6 +11,8 @@ import { interval } from "rxjs";
 
 import M from "materialize-css";
 
+import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
+
 import { DevicesConfig } from "../../../interfaces/config";
 import { DevicesGroups } from "../../../interfaces/groups";
 
@@ -22,12 +24,14 @@ import { DevicesGroups } from "../../../interfaces/groups";
 export class FilterSidebarComponent implements OnInit {
   @Input() configs!: DevicesConfig[];
   @Input() groups!: DevicesGroups[];
-  @Input() form!: FormGroup;
 
-  @Output() onSetFilterSettings = new EventEmitter<FormGroup>();
-  @Output() onResetFilterSettings = new EventEmitter();
+  @Output() onSubmit = new EventEmitter<FormGroup>();
+  @Output() onReset = new EventEmitter();
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    public form: FilterDevicesService
+  ) {}
 
   ngOnInit(): void {
     const sidebar =
@@ -47,28 +51,36 @@ export class FilterSidebarComponent implements OnInit {
     });
   }
 
+  get _form() {
+    return this.form.form;
+  }
+
+  get _isStatusOn() {
+    return this.form.form.controls["status-on"].value;
+  }
+
+  get _isStatusOff() {
+    return this.form.form.controls["status-off"].value;
+  }
+
   toggleSearchDevicesOn() {
-    this.form.controls["status-on"].setValue(
-      !this.form.controls["status-on"].value
+    this.form.form.controls["status-on"].setValue(
+      !this.form.form.controls["status-on"].value
     );
   }
+
   toggleSearchDevicesOff() {
-    this.form.controls["status-off"].setValue(
-      !this.form.controls["status-off"].value
+    this.form.form.controls["status-off"].setValue(
+      !this.form.form.controls["status-off"].value
     );
   }
-  resetFilters() {
-    this.form.reset({
-      "status-on": false,
-      "status-off": false,
-      "date-from": null,
-      "date-to": null,
-      config_ids: null,
-      group_ids: null,
-    });
-    this.onResetFilterSettings.emit();
+
+  onResetHandler() {
+    this.form.reset();
+    this.onReset.emit();
   }
-  setFilterSettings() {
-    this.onSetFilterSettings.emit(this.form);
+
+  onSubmitHandler() {
+    this.onSubmit.emit(this.form.form);
   }
 }
