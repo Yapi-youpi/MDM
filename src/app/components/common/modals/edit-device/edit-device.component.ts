@@ -42,18 +42,24 @@ export class EditDeviceComponent implements OnInit {
     });
   }
 
-  public get _name() {
+  get _form() {
+    return this.form.form;
+  }
+
+  get _name() {
     return this.form.form.get("name");
   }
-  public get _description() {
+
+  get _description() {
     return this.form.form.get("description");
   }
-  public get _isSubmitted() {
+
+  get _isSubmitted() {
     return this.form.isSubmitted;
   }
 
   onSubmitHandler(device: Device) {
-    this.form.isSubmitted = true;
+    this.form.setSubmitted();
 
     if (this.form.form.invalid) {
       return;
@@ -62,7 +68,7 @@ export class EditDeviceComponent implements OnInit {
     }
   }
   onCancelHandler() {
-    this.form.isSubmitted = false;
+    this.form.resetSubmitted();
     this.form.form.reset();
   }
 }

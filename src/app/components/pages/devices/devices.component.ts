@@ -305,12 +305,10 @@ export class DevicesComponent implements OnInit {
     this.deviceService
       .edit({
         ...device,
-        name: this.editDeviceService.form.getRawValue()["name"],
-        description: this.editDeviceService.form.getRawValue()["description"],
-        device_config_id:
-          this.editDeviceService.form.getRawValue()["device_config_id"],
-        device_group_id:
-          this.editDeviceService.form.getRawValue()["device_group_id"],
+        name: this.editDeviceService._name,
+        description: this.editDeviceService._description,
+        device_config_id: this.editDeviceService._config_id,
+        device_group_id: this.editDeviceService._group_id,
       })
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
