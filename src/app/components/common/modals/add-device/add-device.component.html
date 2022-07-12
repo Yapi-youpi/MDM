@@ -2,11 +2,14 @@
   <div class="modal-content">
     <h4 class="title">Добавить устройство</h4>
     <div class="divider"></div>
-    <form [formGroup]="form" (ngSubmit)="onFirstSubmitHandler()">
+    <form
+      [formGroup]="_form"
+      (ngSubmit)="onSubmitHandler()"
+    >
       <div>
         <div
           class="form-group"
-          [class.error]="isAddDeviceFormSubmitted && _name?.errors"
+          [class.error]="_isSubmitted && _name?.errors"
         >
           <div class="row">
             <label for="add_name">Название</label>
@@ -19,18 +22,18 @@
             />
           </div>
           <app-input-alert
-            *ngIf="isAddDeviceFormSubmitted && _name?.errors"
+            *ngIf="_isSubmitted && _name?.errors"
             [inputControl]="$any(_name)"
           ></app-input-alert>
         </div>
         <div
           class="form-group"
-          [class.error]="isAddDeviceFormSubmitted && _desc?.errors"
+          [class.error]="_isSubmitted && _description?.errors"
         >
           <div class="row">
             <label for="add_desc">Описание</label>
             <input
-              formControlName="desc"
+              formControlName="description"
               id="add_desc"
               name="add_desc"
               type="text"
@@ -38,76 +41,54 @@
             />
           </div>
           <app-input-alert
-            *ngIf="isAddDeviceFormSubmitted && _desc?.errors"
-            [inputControl]="$any(_desc)"
+            *ngIf="_isSubmitted && _description?.errors"
+            [inputControl]="$any(_description)"
           ></app-input-alert>
         </div>
       </div>
       <div class="divider"></div>
       <div>
-        <div class="row selects">
-          <div
-            class="form-group"
-            [class.error]="isAddDeviceFormSubmitted && _config?.errors"
-          >
-            <label for="add_config">Конфигурация</label>
-            <div class="input-field-modal sdm-blue-select">
-              <select
-                formControlName="config_id"
-                id="add_config"
-                name="add_config"
-                class="config-select-modal w-170"
-              >
-                <ng-container *ngFor="let config of configs">
-                  <option
-                    [value]="config.ID"
-                  >{{ config.name }}</option>
-                </ng-container>
-              </select>
-            </div>
-            <app-input-alert
-              *ngIf="isAddDeviceFormSubmitted && _config?.errors"
-              [inputControl]="$any(_config)"
-            ></app-input-alert>
-          </div>
-          <div
-            class="form-group"
-            [class.error]="isAddDeviceFormSubmitted && _group?.errors"
-          >
+        <div
+          class="form-group"
+          [class.error]="_isSubmitted && _group?.errors"
+        >
+          <div class="row">
             <label for="add_group">Группа</label>
-            <div class="input-field-modal sdm-blue-select">
+            <div class="input-field-modal sdm-blue-select w-440">
               <select
-                formControlName="group_id"
+                formControlName="device_group_id"
                 id="add_group"
                 name="add_group"
-                class="config-select-modal w-170"
+                class="config-select-modal"
               >
                 <ng-container *ngFor="let group of groups">
-                  <option
-                    [value]="group.id"
-                  >{{ group.name }}</option>
+                  <option [value]="group.id">
+                    {{ group.name }}
+                  </option>
                 </ng-container>
               </select>
             </div>
-            <app-input-alert
-              *ngIf="isAddDeviceFormSubmitted && _group?.errors"
-              [inputControl]="$any(_group)"
-            ></app-input-alert>
           </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _group?.errors"
+            [inputControl]="$any(_group)"
+          ></app-input-alert>
         </div>
-        <div class="row action-btns">
-          <button
-            type="submit"
-            class="sdm-middle sdm-dark-blue r-14"
-          >
-            Добавить
-          </button>
-          <button
-            type="button"
-            class="modal-close sdm-middle r-14"
-            (click)="onCancelHandler()"
-          >Отменить</button>
-        </div>
+      </div>
+      <div class="row action-btns">
+        <button
+          type="submit"
+          class="sdm-middle sdm-dark-blue r-14"
+        >
+          Добавить
+        </button>
+        <button
+          type="button"
+          class="modal-close sdm-middle r-14"
+          (click)="onCancelHandler()"
+        >
+          Отменить
+        </button>
       </div>
     </form>
   </div>

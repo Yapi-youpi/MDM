@@ -6,13 +6,12 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { interval } from "rxjs";
 
 import M from "materialize-css";
 
-import { DevicesConfig } from "../../../../interfaces/config";
 import { DevicesGroups } from "../../../../interfaces/groups";
+import { AddDeviceService } from "../../../../shared/services/forms/device/add-device.service";
 
 @Component({
   selector: "app-add-device",
@@ -20,14 +19,11 @@ import { DevicesGroups } from "../../../../interfaces/groups";
   styleUrls: ["./add-device.component.css"],
 })
 export class AddDeviceComponent implements OnInit {
-  @Input() public configs!: DevicesConfig[];
   @Input() public groups!: DevicesGroups[];
-  @Input() public form!: FormGroup;
-  @Input() public isAddDeviceFormSubmitted: boolean = false;
 
-  @Output() public onFirstSubmit = new EventEmitter();
+  @Output() public onSubmit = new EventEmitter();
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, public form: AddDeviceService) {}
 
   ngOnInit(): void {
     let i = interval(2000).subscribe(() => {
@@ -41,30 +37,37 @@ export class AddDeviceComponent implements OnInit {
     });
   }
 
+  get _form() {
+    return this.form.firstForm;
+  }
+
+  get _isSubmitted() {
+    return this.form.isFirstFormSubmitted;
+  }
+
   get _name() {
-    return this.form.get("name");
+    return this.form.firstForm.get("name");
   }
-  get _desc() {
-    return this.form.get("desc");
+
+  get _description() {
+    return this.form.firstForm.get("description");
   }
-  get _config() {
-    return this.form.get("config_id");
-  }
+
   get _group() {
-    return this.form.get("group_id");
+    return this.form.firstForm.get("device_group_id");
   }
 
-  onFirstSubmitHandler() {
-    this.isAddDeviceFormSubmitted = true;
+  onSubmitHandler() {
+    this.form.setFirstFormSubmitted();
 
-    if (this.form.invalid) {
+    if (this.form.firstForm.invalid) {
       return;
     } else {
-      this.onFirstSubmit.emit();
+      this.onSubmit.emit();
     }
   }
   onCancelHandler() {
-    this.isAddDeviceFormSubmitted = false;
-    this.form.reset();
+    this.form.resetFirstFormSubmitted();
+    this.form.resetFirstForm();
   }
 }

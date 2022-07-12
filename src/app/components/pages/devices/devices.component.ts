@@ -17,6 +17,7 @@ import { GroupsService } from "../../../shared/services/groups.service";
 import { DevicesConfigService } from "../../../shared/services/devices-config.service";
 import { EditDeviceService } from "../../../shared/services/forms/device/edit-device.service";
 import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
+import { AddDeviceService } from "../../../shared/services/forms/device/add-device.service";
 
 @Component({
   selector: "app-devices",
@@ -32,9 +33,6 @@ export class DevicesComponent implements OnInit {
   private add_device!: Device; // ???
 
   public adminForm: FormGroup;
-  public addDeviceFirstForm: FormGroup;
-  public isAddDeviceFirstFormSubmitted: boolean = false;
-  // public filterForm: FormGroup;
 
   public edit: boolean = false;
   public password: string = "";
@@ -68,29 +66,13 @@ export class DevicesComponent implements OnInit {
     private groupsService: GroupsService,
     private configService: DevicesConfigService, // public db: DatabaseService
     private editDeviceService: EditDeviceService,
-    private filterDevicesService: FilterDevicesService
+    private filterDevicesService: FilterDevicesService,
+    private addDeviceService: AddDeviceService
   ) {
     this.adminForm = new FormGroup({
       password: new FormControl("", Validators.required),
       confirmPassword: new FormControl("", Validators.required),
     });
-    this.addDeviceFirstForm = new FormGroup({
-      name: new FormControl("", Validators.required),
-      desc: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(60),
-      ]),
-      config_id: new FormControl("", Validators.required),
-      group_id: new FormControl("", Validators.required),
-    });
-    // this.filterForm = new FormGroup({
-    //   "status-on": new FormControl(false),
-    //   "status-off": new FormControl(false),
-    //   "date-from": new FormControl(null),
-    //   "date-to": new FormControl(null),
-    //   config_ids: new FormControl(null),
-    //   group_ids: new FormControl(null),
-    // });
   }
 
   ngOnInit(): void {
@@ -206,8 +188,7 @@ export class DevicesComponent implements OnInit {
   }
 
   setAddDeviceName() {
-    // console.log(this.addDeviceForm.getRawValue());
-    this.currName = this.addDeviceFirstForm.getRawValue()["name"];
+    this.currName = this.addDeviceService._name;
 
     const firstAddModal =
       this.elementRef.nativeElement.querySelector("#add_device");

@@ -393,6 +393,11 @@ input.w-186 {
   margin-bottom: 10px;
 }
 
+.input-field.w-440,
+.input-field-modal.w-440 {
+  width: 440px !important;
+}
+
 .checkbox-container {
   height: 16px;
 }

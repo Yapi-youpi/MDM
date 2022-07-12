@@ -190,11 +190,8 @@
   </div>
 </div>
 <app-add-device
-  [configs]="configs"
   [groups]="groups"
-  [form]="addDeviceFirstForm"
-  [isAddDeviceFormSubmitted]="isAddDeviceFirstFormSubmitted"
-  (onFirstSubmit)="setAddDeviceName()"
+  (onSubmit)="setAddDeviceName()"
 ></app-add-device>
 <app-add-device-params
   [name]="currName"
