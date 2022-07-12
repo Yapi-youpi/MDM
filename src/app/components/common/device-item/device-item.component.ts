@@ -16,10 +16,7 @@ export class DeviceItemComponent {
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
   @Output() onChangeDeviceState = new EventEmitter<Device>();
-  @Output() onClickDeviceQRCode = new EventEmitter<{
-    name: string;
-    qrcode: any;
-  }>();
+  @Output() onClickDeviceQRCode = new EventEmitter<Device>();
   @Output() onClickDeviceEdit = new EventEmitter<Device>();
   @Output() onClickDeviceDelete = new EventEmitter<Device>();
 
@@ -33,8 +30,8 @@ export class DeviceItemComponent {
     this.onChangeDeviceState.emit(device);
   }
 
-  onClickDeviceQRCodeHandler(name: string, qrcode: any) {
-    this.onClickDeviceQRCode.emit({ name, qrcode });
+  onClickDeviceQRCodeHandler(device: Device) {
+    this.onClickDeviceQRCode.emit(device);
   }
 
   onClickDeviceEditHandler(device: Device) {

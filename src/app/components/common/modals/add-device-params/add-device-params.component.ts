@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { AddDeviceService } from "../../../../shared/services/forms/device/add-device.service";
 
 @Component({
   selector: "app-add-device-params",
@@ -6,7 +7,9 @@ import { Component, Input } from "@angular/core";
   styleUrls: ["./add-device-params.component.css"],
 })
 export class AddDeviceParamsComponent {
-  @Input() public name: string = "";
+  constructor(public form: AddDeviceService) {}
 
-  constructor() {}
+  get _title() {
+    return this.form.secondFormTitle;
+  }
 }

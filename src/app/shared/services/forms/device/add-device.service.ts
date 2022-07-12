@@ -8,6 +8,8 @@ export class AddDeviceService {
   public firstForm: FormGroup;
   public isFirstFormSubmitted: boolean = false;
 
+  public secondFormTitle: string = "";
+
   constructor() {
     this.firstForm = new FormGroup({
       name: new FormControl("", Validators.required),

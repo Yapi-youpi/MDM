@@ -4,6 +4,8 @@ import {
   NgxQrcodeErrorCorrectionLevels,
 } from "@techiediaries/ngx-qrcode";
 
+import { Device } from "../../../../interfaces/devices";
+
 @Component({
   selector: "app-qr-code",
   templateUrl: "./qr-code.component.html",
@@ -13,8 +15,11 @@ export class QrCodeComponent {
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
 
-  @Input() public valueQR!: string;
-  @Input() public title!: string;
+  @Input() public device!: Device;
 
   constructor() {}
+
+  get _qrcode() {
+    return JSON.stringify(this.device?.qr_code);
+  }
 }

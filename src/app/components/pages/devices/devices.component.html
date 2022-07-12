@@ -113,7 +113,7 @@
             [groups]="groups"
             (onSelectUnselectDevice)="selectUnselectDevice($event)"
             (onChangeDeviceState)="changeDeviceState($event)"
-            (onClickDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
+            (onClickDeviceQRCode)="getDeviceQRCode($event)"
             (onClickDeviceEdit)="editDevice($event)"
             (onClickDeviceDelete)="setDeviceToDelete($event)"
           ></app-device-item>
@@ -193,12 +193,9 @@
   [groups]="groups"
   (onSubmit)="setAddDeviceName()"
 ></app-add-device>
-<app-add-device-params
-  [name]="currName"
-></app-add-device-params>
+<app-add-device-params></app-add-device-params>
 <app-qr-code
-  [title]="currName"
-  [valueQR]="currQR"
+  [device]="currDevice"
 ></app-qr-code>
 <app-edit-device
   [device]="currDevice"

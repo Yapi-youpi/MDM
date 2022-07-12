@@ -1,17 +1,27 @@
 <div id="qr-code" class="modal closing">
   <div class="modal-content">
-    <h4 class="title">Устройство "{{ title }}"</h4>
+    <h4 class="title">Устройство "{{ device?.name }}"</h4>
     <div class="divider"></div>
     <ngx-qrcode
+      class="qr-container"
       [elementType]="elementType"
       [errorCorrectionLevel]="correctionLevel"
-      [value]="valueQR"
+      [value]="_qrcode"
       [width]="438"
-      class="qr-container"
     ></ngx-qrcode>
     <div class="row action-btns">
-      <button type="button" class="modal-close sdm-middle r-14">Закрыть</button>
-      <button type="button" class="sdm-middle sdm-dark-blue r-14">Помощь</button>
+      <button
+        type="button"
+        class="modal-close sdm-middle r-14"
+      >
+        Закрыть
+      </button>
+      <button
+        type="button"
+        class="sdm-middle sdm-dark-blue r-14"
+      >
+        Помощь
+      </button>
     </div>
   </div>
 </div>

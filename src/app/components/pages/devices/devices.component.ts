@@ -39,8 +39,8 @@ export class DevicesComponent implements OnInit {
   public new_password: string = "";
 
   public currDevice!: Device;
-  public currQR: string = "";
-  public currName: string = "";
+  // public currQR: string = "";
+  // public currName: string = "";
   public isAllSelected: boolean = false;
 
   public sortStatusAsc: boolean = true;
@@ -188,7 +188,7 @@ export class DevicesComponent implements OnInit {
   }
 
   setAddDeviceName() {
-    this.currName = this.addDeviceService._name;
+    this.addDeviceService.secondFormTitle = this.addDeviceService._name;
 
     const firstAddModal =
       this.elementRef.nativeElement.querySelector("#add_device");
@@ -272,9 +272,8 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  getDeviceQRCode(name: string, qr: any) {
-    this.currName = name;
-    this.currQR = JSON.stringify(qr);
+  getDeviceQRCode(device: Device) {
+    this.currDevice = device;
   }
 
   editDevice(device: Device) {
