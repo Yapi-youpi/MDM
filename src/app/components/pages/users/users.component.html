@@ -8,9 +8,9 @@
         <button type="button" class="btn btn--round">
           <i class="material-icons">search</i>
         </button>
-        <button type="button" class="btn btn--outline">Суперадмины</button>
-        <button type="button" class="btn btn--outline">Администраторы</button>
-        <button type="button" class="btn btn--outline">Оператор</button>
+        <button type="button" class="btn btn--round" data-target="user-filter">
+          <i class="material-icons">filter_list</i>
+        </button>
         <button
           type="button"
           class="btn btn--rounded btn--right"
@@ -25,62 +25,111 @@
         </div>
 
         <div class="user-card">
-          <div class="user-card__avatar"></div>
-          <div class="user-card__descr">
-            <div class="user-card__name">
-              Константин Константинович Константинов-Барановский
-            </div>
-            <div class="user-card__email">prosto.kostya@mail.ru</div>
-            <div class="user-card__group"></div>
-            <div class="user-card__role">суперадмин</div>
-          </div>
-          <div class="user-card__menu">
-            <button class="user-card__menu-btn">
+          <div class="user-card__header">
+            <div class="user-card__role">Администратор</div>
+
+            <button class="user-card__menu-btn test-btn">
               <i class="material-icons">more_vert</i>
             </button>
+
+            <div class="user-card__menu test-menu">
+              <button class="user-card__menu-btn" data-target="modal-edit-user">
+                <i class="material-icons">edit</i>
+              </button>
+              <button
+                class="user-card__menu-btn"
+                data-target="modal-delete-user"
+              >
+                <i class="material-icons">clear</i>
+              </button>
+            </div>
+          </div>
+          <div class="user-card__content">
+            <div class="user-card__avatar"></div>
+            <div class="user-card__descr">
+              <div class="user-card__name">
+                Константин Константинович Константинов-Барановский
+              </div>
+              <div class="user-card__email">prosto.kostya@mail.ru</div>
+              <div class="user-card__group">Отдел тестирования ПО</div>
+            </div>
           </div>
         </div>
         <div class="user-card">
-          <div class="user-card__avatar"></div>
-          <div class="user-card__descr">
-            <div class="user-card__name">Владислав</div>
-            <div class="user-card__email">
-              vlad-super-admin-better-in-the-universe@gmail.com
+          <div class="user-card__header">
+            <div class="user-card__role">Суперадмин</div>
+            <div class="user-card__menu">
+              <div class="user-card__menu-dialog hidden">
+                <button
+                  class="user-card__menu-btn"
+                  data-target="modal-edit-user"
+                >
+                  <i class="material-icons">edit</i>
+                </button>
+                <button
+                  class="user-card__menu-btn"
+                  data-target="modal-delete-user"
+                >
+                  <i class="material-icons">clear</i>
+                </button>
+              </div>
+
+              <button class="user-card__menu-btn">
+                <i class="material-icons">more_vert</i>
+              </button>
             </div>
-            <div class="user-card__group"></div>
-            <div class="user-card__role">суперадмин</div>
           </div>
-          <div class="user-card__menu">
-            <button class="user-card__menu-btn">
-              <i class="material-icons">more_vert</i>
-            </button>
+          <div class="user-card__content">
+            <div class="user-card__avatar"></div>
+            <div class="user-card__descr">
+              <div class="user-card__name">Владислав</div>
+              <div class="user-card__email">
+                vlad-super-admin-better-in-the-universe@gmail.com
+              </div>
+              <div class="user-card__group">Отдел разработки</div>
+            </div>
           </div>
         </div>
         <div class="user-card" *ngFor="let user of users">
-          <div class="user-card__avatar"></div>
-          <div class="user-card__descr">
-            <div class="user-card__name">{{ user.name }}</div>
-            <div class="user-card__email">
-              {{ user.login }}
-            </div>
-            <div class="user-card__group"></div>
+          <div
+            class="user-card__header"
+            style="background-color: {{ asset.roles[user.role].color }}"
+          >
             <div class="user-card__role">
-              {{ asset.roles[user.role].toLowerCase() }}
+              {{ asset.roles[user.role].text }}
+            </div>
+            <div
+              class="user-card__menu"
+              style="color:{{ asset.roles[user.role].color }}"
+            >
+              <button class="user-card__menu-btn">
+                <i class="material-icons">more_vert</i>
+              </button>
             </div>
           </div>
-          <div class="user-card__menu">
-            <button class="user-card__menu-btn">
-              <i class="material-icons">more_vert</i>
-            </button>
+          <div class="user-card__content">
+            <div class="user-card__avatar"></div>
+            <div class="user-card__descr">
+              <div class="user-card__name">{{ user.name }}</div>
+              <div class="user-card__email">
+                {{ user.login }}
+              </div>
+              <div class="user-card__group">Отдел маркетинга</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="card card--sidebar">
-      <div class="card__header">Настройка доступа</div>
+      <div class="card__header">
+        Настройка доступа
+        <button type="button" class="btn btn--round btn--right">
+          <i class="material-icons">edit</i>
+        </button>
+      </div>
       <div class="user-settings">
         <div class="user-category" *ngFor="let role of asset.roles | keyvalue">
-          <h6 class="user-category__header">{{ role.value }}</h6>
+          <h6 class="user-category__header">{{ role.value.text }}</h6>
           <div class="user-category__params">
             <label
               for="{{ param }}'-'{{ role.key }}"
@@ -140,6 +189,31 @@
       </div>
     </div>
   </div>
+
+  <!--  FILTER -->
+  <div class="filter" id="user-filter">
+    <!--    <div class="filter-overlay"></div>-->
+    Фильтр
+    <div>Роль</div>
+    <ul>
+      <li>Суперадмин</li>
+      <li>Администратор</li>
+      <li>Оператор</li>
+    </ul>
+    <div>Структурное подразделение</div>
+    <ul>
+      <li>Общая</li>
+      <li>Резервная</li>
+      <li>Город</li>
+      <li>Область</li>
+    </ul>
+
+    <div class="btn-wrapper">
+      <button class="btn btn--big">Отправить</button>
+      <button class="btn btn--big btn--outline">Отменить</button>
+    </div>
+  </div>
+
   <!--<div class="container">
   <h3>Пользователи</h3>
   <div class="box">

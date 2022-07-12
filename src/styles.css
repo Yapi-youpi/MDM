@@ -59,7 +59,9 @@ ul {
 a {
   text-decoration: none;
 }
-
+.hidden {
+  display: none !important;
+}
 .visually-hidden {
   position: absolute;
   clip: rect(0, 0, 0, 0);
@@ -898,7 +900,6 @@ a.active .sdm-menu-icon span,
 .modal-wrapper--open {
   opacity: 1;
   visibility: visible;
-  transition: all 0.15s linear;
 }
 .modal-dialog {
   position: relative;

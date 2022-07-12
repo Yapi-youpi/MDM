@@ -7,7 +7,7 @@ export interface Users {
   groupsPermissions: GroupPermissions;
 }
 export interface Roles {
-  [key: string]: string;
+  [key: string]: { text: string; color: string };
 }
 export interface GroupPermissions {
   applicationsAdd: boolean;
