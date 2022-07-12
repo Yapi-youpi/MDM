@@ -48,9 +48,7 @@
 
 body {
   font-family: HelveticaNeueCyrRegular, sans-serif;
-  font-weight: 400;
   font-size: 16px;
-  line-height: 19px;
   color: var(--sdm-dark-blue-grey);
 }
 ul {
@@ -59,11 +57,7 @@ ul {
 a {
   text-decoration: none;
 }
-.hidden {
-  display: none !important;
-}
 .visually-hidden {
-  position: absolute;
   clip: rect(0, 0, 0, 0);
   width: 1px;
   height: 1px;
@@ -863,6 +857,16 @@ a.active .sdm-menu-icon span,
   height: 30px;
   flex-shrink: 0;
   border-radius: 50%;
+}
+.btn--action {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  padding: 0;
+}
+.btn--action i {
+  font-size: 16px;
 }
 .btn--right {
   margin-left: auto;

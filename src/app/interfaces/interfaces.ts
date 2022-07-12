@@ -9,6 +9,9 @@ export interface Users {
 export interface Roles {
   [key: string]: { text: string; color: string };
 }
+export interface Permissions {
+  [key: string]: string;
+}
 export interface GroupPermissions {
   applicationsAdd: boolean;
   changeOperatorPassword: boolean;

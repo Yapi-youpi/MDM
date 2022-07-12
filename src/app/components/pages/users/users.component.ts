@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Users } from '../../../interfaces/interfaces';
+import { Permissions, Users } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../services/asset.service';
 
@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public loading: boolean = true;
   public changePas: string = '';
   public rename: string = '';
-  public params: string[];
+  public params: Permissions;
   constructor(public asset: AssetService, public userService: UserService) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -25,20 +25,22 @@ export class UsersComponent implements OnInit, AfterViewInit {
       login: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
     });
-    this.params = [
-      'Просмотр',
-      'Добавление устройств и групп',
-      'Добавление приложений',
-      'Отправка сообщений',
-      'Добавление конфигураций',
-      'Добавление пользователей',
-    ];
+    this.params = {
+      viewDevices: 'Просмотр устройств',
+      applicationsAdd: 'Добавление приложений',
+      createEditConfig: 'Добавление и редактирование конфигураций',
+      createEditDevice: 'Добавление и редактирование устройств',
+      createEditDeviceGroups: 'Добавление и редактирование групп устройств',
+      changeSelfPassword: 'Изменение своего пароля',
+      changeOperatorPassword: 'Изменение пароля оператора',
+      operatorActivateDeactivate: 'Изменение активности операторов',
+      operatorAdd: 'Добавление операторов',
+      deleteOperators: 'Удаление операторов',
+      sendInfoMessages: 'Отправка сообщений',
+    };
   }
 
   ngOnInit() {
-    // let elem = document.querySelectorAll(".modal");
-    // const options = {};
-    // M.Modal.init(elem, options);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
@@ -47,9 +49,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit() {
-    this.asset.modalInit('modal-new-user');
+    this.asset.filterInit('user-filter');
   }
-
+  initModals() {
+    this.asset.modalInit('modal-new-user');
+    this.asset.modalInit('modal-edit-user');
+    this.asset.modalInit('modal-delete-user');
+  }
   getAllUsers() {
     this.userService
       .getUserInfo(undefined, 'all')
@@ -58,6 +64,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
         this.users = res;
         this.loading = false;
         this.sortUsers();
+      })
+      .then(() => {
+        let i = interval(1000).subscribe(() => {
+          this.initModals();
+          i.unsubscribe();
+        });
       })
       .catch((err) => {
         console.log(err);
