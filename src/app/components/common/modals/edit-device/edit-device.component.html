@@ -48,60 +48,96 @@
       </div>
       <div class="divider"></div>
       <div>
-        <div class="row selects">
-          <div class="form-group">
-            <label for="device_config_id">Конфигурация</label>
-            <div class="input-field-modal sdm-blue-select">
-              <select
-                formControlName="device_config_id"
-                id="device_config_id"
-                name="device_config_id"
-                class="config-select-modal w-170"
-              >
-                <ng-container *ngFor="let config of configs">
-                  <option
-                    [value]="config.ID"
-                    [selected]="device && config.ID === device.device_config_id"
-                  >{{ config.name }}</option>
-                </ng-container>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="device_group_id">Группа</label>
-            <div class="input-field-modal sdm-blue-select">
+        <div class="form-group">
+          <div class="row">
+            <label for="add_group">Группа</label>
+            <div class="input-field-modal sdm-blue-select w-440">
               <select
                 formControlName="device_group_id"
-                id="device_group_id"
-                name="device_group_id"
-                class="config-select-modal w-170"
+                id="add_group"
+                name="add_group"
+                class="config-select-modal"
               >
                 <ng-container *ngFor="let group of groups">
-                  <option
-                    [value]="group.id"
-                    [selected]="device && group.id === device.device_group_id"
-                  >{{ group.name }}</option>
+                  <option [value]="group.id">
+                    {{ group.name }}
+                  </option>
                 </ng-container>
               </select>
             </div>
           </div>
         </div>
-        <div class="row action-btns">
-          <button
-            type="submit"
-            class="sdm-big r-14 sdm-dark-blue"
-          >
-            Сохранить
-          </button>
-          <button
-            type="button"
-            class="modal-close sdm-big r-14"
-            (click)="onCancelHandler()"
-          >
-            Отменить
-          </button>
-        </div>
       </div>
+      <div class="row action-btns">
+        <button
+          type="submit"
+          class="sdm-big r-14 sdm-dark-blue"
+        >
+          Сохранить
+        </button>
+        <button
+          type="button"
+          class="modal-close sdm-big r-14"
+          (click)="onCancelHandler()"
+        >
+          Отменить
+        </button>
+      </div>
+<!--      <div>-->
+<!--        <div class="row selects">-->
+<!--          <div class="form-group">-->
+<!--            <label for="device_config_id">Конфигурация</label>-->
+<!--            <div class="input-field-modal sdm-blue-select">-->
+<!--              <select-->
+<!--                formControlName="device_config_id"-->
+<!--                id="device_config_id"-->
+<!--                name="device_config_id"-->
+<!--                class="config-select-modal w-170"-->
+<!--              >-->
+<!--                <ng-container *ngFor="let config of configs">-->
+<!--                  <option-->
+<!--                    [value]="config.ID"-->
+<!--                    [selected]="device && config.ID === device.device_config_id"-->
+<!--                  >{{ config.name }}</option>-->
+<!--                </ng-container>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="device_group_id">Группа</label>-->
+<!--            <div class="input-field-modal sdm-blue-select">-->
+<!--              <select-->
+<!--                formControlName="device_group_id"-->
+<!--                id="device_group_id"-->
+<!--                name="device_group_id"-->
+<!--                class="config-select-modal w-170"-->
+<!--              >-->
+<!--                <ng-container *ngFor="let group of groups">-->
+<!--                  <option-->
+<!--                    [value]="group.id"-->
+<!--                    [selected]="device && group.id === device.device_group_id"-->
+<!--                  >{{ group.name }}</option>-->
+<!--                </ng-container>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row action-btns">-->
+<!--          <button-->
+<!--            type="submit"-->
+<!--            class="sdm-big r-14 sdm-dark-blue"-->
+<!--          >-->
+<!--            Сохранить-->
+<!--          </button>-->
+<!--          <button-->
+<!--            type="button"-->
+<!--            class="modal-close sdm-big r-14"-->
+<!--            (click)="onCancelHandler()"-->
+<!--          >-->
+<!--            Отменить-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
     </form>
   </div>
 </div>

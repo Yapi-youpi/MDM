@@ -4,14 +4,6 @@
   overflow: initial;
 }
 
-#add_device .modal-content {
-  padding: 30px 58px !important;
-}
-
-#add_device .selects {
-  margin-bottom: 50px !important;
-}
-
 #add_device .input-field-modal {
   margin-left: auto;
 }

@@ -112,10 +112,6 @@ body {
   margin: 18px 0;
 }
 
-.modal-content .divider {
-  margin: 35px 0;
-}
-
 .modal {
   max-height: initial !important;
 
@@ -127,8 +123,12 @@ body {
   box-shadow: none !important;
 }
 
+.modal-content .divider {
+  margin: 35px 0;
+}
+
 .modal-content {
-  padding: 30px 88px !important;
+  padding: 30px 58px !important;
 }
 
 .modal-content .title {

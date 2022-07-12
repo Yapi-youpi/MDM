@@ -15,7 +15,6 @@ export class EditDeviceService {
         Validators.required,
         Validators.maxLength(60),
       ]),
-      device_config_id: new FormControl("", Validators.required),
       device_group_id: new FormControl("", Validators.required),
     });
   }
@@ -26,10 +25,6 @@ export class EditDeviceService {
 
   get _description() {
     return this.form.getRawValue()["description"];
-  }
-
-  get _config_id() {
-    return this.form.getRawValue()["device_config_id"];
   }
 
   get _group_id() {

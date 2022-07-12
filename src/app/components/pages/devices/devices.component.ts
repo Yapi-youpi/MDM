@@ -288,7 +288,6 @@ export class DevicesComponent implements OnInit {
         ...device,
         name: this.editDeviceService._name,
         description: this.editDeviceService._description,
-        device_config_id: this.editDeviceService._config_id,
         device_group_id: this.editDeviceService._group_id,
       })
       .then((res: states.SingleDeviceState) => {

@@ -14,7 +14,6 @@ import { EditDeviceService } from "../../../../shared/services/forms/device/edit
 
 import { Device } from "../../../../interfaces/devices";
 import { DevicesGroups } from "../../../../interfaces/groups";
-import { DevicesConfig } from "../../../../interfaces/config";
 
 @Component({
   selector: "app-edit-device",
@@ -24,7 +23,6 @@ import { DevicesConfig } from "../../../../interfaces/config";
 export class EditDeviceComponent implements OnInit {
   @Input() public device!: Device;
   @Input() public groups!: DevicesGroups[];
-  @Input() public configs!: DevicesConfig[];
 
   @Output() public onSetDeviceSettings = new EventEmitter<Device>();
 
