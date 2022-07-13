@@ -25,6 +25,11 @@
       <div class="indeterminate"></div>
     </div>
     <div class="body">
+      <app-selected-devices
+        *ngIf="selectedDevices.length !== 0"
+        [devices]="selectedDevices"
+        (onCloseClick)="cancelSelection()"
+      ></app-selected-devices>
       <div class="sort row">
         <div class="checkbox-container">
           <label>
@@ -84,7 +89,7 @@
           >
             Заряд <span></span>
           </button>
-          <p class="font-bold-color">Состояние</p>
+          <p class="font-bold-color">Блокировка</p>
           <p class="font-bold-color">Действия</p>
         </div>
       </div>
@@ -204,6 +209,10 @@
   [groups]="groups"
   (onSubmit)="setDeviceSettings($event)"
 ></app-edit-device>
+<app-edit-several-devices
+  [groups]="groups"
+  (onSubmit)="setSeveralDevicesSettings()"
+></app-edit-several-devices>
 <app-delete-device
   [device]="currDevice"
   (onSubmit)="deleteDevice($event)"

@@ -1,0 +1,66 @@
+<div id="edit_several_devices" class="modal closing">
+  <div class="modal-content">
+    <h4 class="title">Настройки выбранных устройств</h4>
+    <div class="divider"></div>
+    <form
+      [formGroup]="_form"
+      (ngSubmit)="onSubmitHandler()"
+    >
+      <div>
+        <div
+          class="form-group"
+          [class.error]="_isSubmitted && _group?.errors"
+        >
+          <div class="row group">
+            <label for="edit_several_group">Группа</label>
+            <div class="input-field-modal sdm-blue-select w-440">
+              <select
+                formControlName="device_group_id"
+                id="edit_several_group"
+                name="edit_several_group"
+                class="several-group-select-modal"
+              >
+                <ng-container *ngFor="let group of groups">
+                  <option [value]="group.id">
+                    {{ group.name }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _group?.errors"
+            [inputControl]="$any(_group)"
+          ></app-input-alert>
+        </div>
+        <div class="row switch">
+          <label for="active_state">Блокировка</label>
+          <div class="switch">
+            <label>
+              <input
+                type="checkbox"
+                id="active_state"
+                name="active_state"
+              />
+              <span class="lever"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row action-btns">
+        <button
+          type="submit"
+          class="sdm-big r-14 sdm-dark-blue"
+        >
+          Сохранить
+        </button>
+        <button
+          type="button"
+          class="modal-close sdm-big r-14"
+        >
+          Отменить
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

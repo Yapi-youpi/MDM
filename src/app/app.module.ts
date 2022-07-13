@@ -33,6 +33,9 @@ import { InputAlertComponent } from "./components/common/UI/alert/input-alert/in
 import { DeleteDeviceComponent } from "./components/common/modals/delete-device/delete-device.component";
 import { AddDeviceComponent } from "./components/common/modals/add-device/add-device.component";
 import { AddDeviceParamsComponent } from "./components/common/modals/add-device-params/add-device-params.component";
+import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
+import { SelectedDevicesComponent } from "./components/common/selected-devices/selected-devices.component";
+import { EditSeveralDevicesComponent } from "./components/common/modals/edit-several-devices/edit-several-devices.component";
 
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
 import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
@@ -44,7 +47,6 @@ import { DatePipe } from "./shared/pipes/sort/devices/date.pipe";
 import { NamePipe } from "./shared/pipes/sort/devices/name.pipe";
 import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
 import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
-import { QrTipComponent } from './components/common/qr-tip/qr-tip.component';
 
 const routes: Routes = [
   {
@@ -78,6 +80,9 @@ const routes: Routes = [
     DeleteDeviceComponent,
     AddDeviceComponent,
     AddDeviceParamsComponent,
+    QrTipComponent,
+    SelectedDevicesComponent,
+    EditSeveralDevicesComponent,
     // PIPES
     DateConverterPipe,
     DevicesFilterPipe,
@@ -89,7 +94,6 @@ const routes: Routes = [
     NamePipe,
     GroupPipe,
     BatteryPipe,
-    QrTipComponent,
   ],
   imports: [
     BrowserModule,

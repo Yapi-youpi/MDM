@@ -40,6 +40,7 @@ export class DevicesComponent implements OnInit {
   public new_password: string = "";
 
   public currDevice!: Device;
+  public selectedDevices: Device[] = [];
 
   public isAllSelected: boolean = false;
 
@@ -100,11 +101,6 @@ export class DevicesComponent implements OnInit {
         this.getConfigs();
       }
     });
-
-    // M.Modal.getInstance(nonClosingModal).open();
-    // M.Modal.getInstance(
-    //   this.elementRef.nativeElement.querySelector("#add_device_params")
-    // ).open();
   }
 
   changePassword(pass: string) {
@@ -119,8 +115,6 @@ export class DevicesComponent implements OnInit {
         console.log(res);
       });
   }
-
-  // ПЕРВЫЕ ВЫПОЛНЯЕМЫЕ Ф-ЦИИ
 
   getConfigs() {
     this.configService
@@ -170,6 +164,14 @@ export class DevicesComponent implements OnInit {
       });
   }
 
+  cancelSelection() {
+    this.selectedDevices = [];
+    if (this.isAllSelected) this.isAllSelected = false;
+    this.devices.map((d) => {
+      if (d.isSelected) d.isSelected = false;
+    });
+  }
+
   onChangeSearchInputHandler(value: string) {
     this.searchParam = value;
   }
@@ -183,6 +185,8 @@ export class DevicesComponent implements OnInit {
   }
 
   searchDevicesWithParams() {
+    this.cancelSelection();
+
     this.devicesFilters.status = this.filterDevicesService._status;
     this.devicesFilters.dateFrom = this.filterDevicesService._dateFrom;
     this.devicesFilters.dateTo = this.filterDevicesService._dateTo;
@@ -252,9 +256,10 @@ export class DevicesComponent implements OnInit {
     this.devices.map((d) => {
       d.isSelected = this.isAllSelected;
     });
-  }
 
-  // СОРТИРОВКА
+    if (this.isAllSelected) this.selectedDevices = this.devices;
+    else this.selectedDevices = [];
+  }
 
   changeSortStatusDir() {
     this.sortStatusAsc = !this.sortStatusAsc;
@@ -272,17 +277,23 @@ export class DevicesComponent implements OnInit {
     this.sortBatteryAsc = !this.sortBatteryAsc;
   }
 
-  // ЛОГИКА УПРАВЛЕНИЯ ДЕВАЙСОМ
-
   selectUnselectDevice(device: Device) {
     this.devices.map((d) => {
       if (d.device_id === device.device_id) {
         d.isSelected = !d.isSelected;
+
+        if (d.isSelected && !this.selectedDevices.includes(d))
+          this.selectedDevices.push(d);
+
+        if (!d.isSelected && this.selectedDevices.includes(d))
+          this.selectedDevices = this.selectedDevices.filter((sd) => sd !== d);
       }
     });
     if (!device.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
+    if (this.selectedDevices.length === this.devices.length)
+      this.isAllSelected = true;
   }
 
   changeDeviceState(device: Device) {
@@ -294,7 +305,12 @@ export class DevicesComponent implements OnInit {
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           console.log(`Устройство ${device.name} изменено`);
-          this.getAllDevices();
+
+          this.devices.map((d) => {
+            if (d === device) {
+              d.active_state = !d.active_state;
+            }
+          });
         } else {
           console.log(res.error);
         }
@@ -324,7 +340,14 @@ export class DevicesComponent implements OnInit {
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           console.log(`Устройство ${device.name} изменено`);
-          this.getAllDevices();
+
+          this.devices.map((d) => {
+            if (d === device) {
+              d.name = this.editDeviceService._name;
+              d.description = this.editDeviceService._description;
+              d.device_group_id = this.editDeviceService._group_id;
+            }
+          });
         } else {
           console.log(res.error);
         }
@@ -338,6 +361,8 @@ export class DevicesComponent implements OnInit {
     M.Modal.getInstance(settingsModal).close();
   }
 
+  setSeveralDevicesSettings() {}
+
   setDeviceToDelete(device: Device) {
     this.currDevice = device;
   }
@@ -348,11 +373,14 @@ export class DevicesComponent implements OnInit {
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           console.log(`Устройство ${device.name} удалено`);
-          this.getAllDevices();
+
+          this.devices.filter((d) => d !== device);
         }
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+  deleteSeveralDevices() {}
 }
