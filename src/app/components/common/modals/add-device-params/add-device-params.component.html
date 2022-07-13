@@ -1,114 +1,116 @@
-<div id="add_device_params" class="modal closing">
+<div
+  id="add_device_params"
+  class="modal closing"
+  [style]="isTipHidden ? 'width: 700px' : 'width: 800px'"
+>
   <div class="modal-content">
-    <h4 class="title">Устройство {{ _title }}</h4>
+    <h4 class="title">Устройство "{{ _title }}"</h4>
     <div class="divider"></div>
-<!--    <form [formGroup]="form" (ngSubmit)="onFirstSubmitHandler()">-->
-<!--      <div>-->
-<!--        <div-->
-<!--          class="form-group"-->
-<!--          [class.error]="isAddDeviceFormSubmitted && _name?.errors"-->
-<!--        >-->
-<!--          <div class="row">-->
-<!--            <label for="add_name">Название</label>-->
-<!--            <input-->
-<!--              formControlName="name"-->
-<!--              id="add_name"-->
-<!--              name="add_name"-->
-<!--              type="text"-->
-<!--              class="w-440"-->
-<!--            />-->
-<!--          </div>-->
-<!--          <app-input-alert-->
-<!--            *ngIf="isAddDeviceFormSubmitted && _name?.errors"-->
-<!--            [inputControl]="$any(_name)"-->
-<!--          ></app-input-alert>-->
-<!--        </div>-->
-<!--        <div-->
-<!--          class="form-group"-->
-<!--          [class.error]="isAddDeviceFormSubmitted && _desc?.errors"-->
-<!--        >-->
-<!--          <div class="row">-->
-<!--            <label for="add_desc">Описание</label>-->
-<!--            <input-->
-<!--              formControlName="desc"-->
-<!--              id="add_desc"-->
-<!--              name="add_desc"-->
-<!--              type="text"-->
-<!--              class="w-440"-->
-<!--            />-->
-<!--          </div>-->
-<!--          <app-input-alert-->
-<!--            *ngIf="isAddDeviceFormSubmitted && _desc?.errors"-->
-<!--            [inputControl]="$any(_desc)"-->
-<!--          ></app-input-alert>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="divider"></div>-->
-<!--      <div>-->
-<!--        <div class="row selects">-->
-<!--          <div-->
-<!--            class="form-group"-->
-<!--            [class.error]="isAddDeviceFormSubmitted && _config?.errors"-->
-<!--          >-->
-<!--            <label for="add_config">Конфигурация</label>-->
-<!--            <div class="input-field-modal sdm-blue-select">-->
-<!--              <select-->
-<!--                formControlName="config_id"-->
-<!--                id="add_config"-->
-<!--                name="add_config"-->
-<!--                class="config-select-modal w-170"-->
-<!--              >-->
-<!--                <ng-container *ngFor="let config of configs">-->
-<!--                  <option-->
-<!--                    [value]="config.ID"-->
-<!--                  >{{ config.name }}</option>-->
-<!--                </ng-container>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--            <app-input-alert-->
-<!--              *ngIf="isAddDeviceFormSubmitted && _config?.errors"-->
-<!--              [inputControl]="$any(_config)"-->
-<!--            ></app-input-alert>-->
-<!--          </div>-->
-<!--          <div-->
-<!--            class="form-group"-->
-<!--            [class.error]="isAddDeviceFormSubmitted && _group?.errors"-->
-<!--          >-->
-<!--            <label for="add_group">Группа</label>-->
-<!--            <div class="input-field-modal sdm-blue-select">-->
-<!--              <select-->
-<!--                formControlName="group_id"-->
-<!--                id="add_group"-->
-<!--                name="add_group"-->
-<!--                class="config-select-modal w-170"-->
-<!--              >-->
-<!--                <ng-container *ngFor="let group of groups">-->
-<!--                  <option-->
-<!--                    [value]="group.id"-->
-<!--                  >{{ group.name }}</option>-->
-<!--                </ng-container>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--            <app-input-alert-->
-<!--              *ngIf="isAddDeviceFormSubmitted && _group?.errors"-->
-<!--              [inputControl]="$any(_group)"-->
-<!--            ></app-input-alert>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row action-btns">-->
-<!--          <button-->
-<!--            type="submit"-->
-<!--            class="sdm-middle sdm-dark-blue r-14"-->
-<!--          >-->
-<!--            Добавить-->
-<!--          </button>-->
-<!--          <button-->
-<!--            type="button"-->
-<!--            class="modal-close sdm-middle r-14"-->
-<!--            (click)="onCancelHandler()"-->
-<!--          >Отменить</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </form>-->
+    <form
+      [formGroup]="_form"
+      (ngSubmit)="onSubmitHandler()"
+    >
+      <div class="qr-container">
+        <strong>
+          Отсканируйте QR-код
+          <div class="icon-container">
+            <span (click)="toggleTip()"></span>
+          </div>
+        </strong>
+        <div class="qr-code">
+          <img src="" alt="">
+          <div
+            *ngIf="!isTipHidden"
+            class="tip"
+          >
+            <h6>Чтобы настроить Android-устройство (версии Android 7+) в управляемом (корпоративном) режиме:</h6>
+            <ol>
+              <li>Выполните сброс к заводским настройкам</li>
+              <li> Нажмите 7 раз подряд на любом месте стартового экрана (должен появиться скрытый режим сканирования QR-кода)</li>
+              <li>Следуйте инструкциям устройства: примите условия использования, подключитесь к Wi-Fi, отсканируйте QR-код</li>
+            </ol>
+            <p>
+              Код может содержать также ID устройства в системе Headwind MDM (после настройки его не нужно будет вводить). Для включения ID устройства в QR код, введите его на этом экране и нажмите "Обновить".
+            </p>
+          </div>
+        </div>
+        <strong>Или введите данные самостоятельно</strong>
+      </div>
+      <div class="row phone-model">
+        <div
+          class="form-group"
+          [class.error]="_isSubmitted && _phone?.errors"
+        >
+          <div class="row phone">
+            <label for="phone">Телефон</label>
+            <input
+              formControlName="phone_number"
+              id="phone"
+              name="phone"
+              type="number"
+              class="w-190"
+            />
+          </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _phone?.errors"
+            [inputControl]="$any(_phone)"
+          ></app-input-alert>
+        </div>
+        <div
+          class="form-group"
+          [class.error]="_isSubmitted && _model?.errors"
+        >
+          <div class="row phone">
+            <label for="model">Модель</label>
+            <input
+              formControlName="model"
+              id="model"
+              name="model"
+              type="text"
+              class="w-190"
+            />
+          </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _model?.errors"
+            [inputControl]="$any(_model)"
+          ></app-input-alert>
+        </div>
+      </div>
+      <div class="row imei">
+        <div
+          class="form-group last"
+          [class.error]="_isSubmitted && _imei?.errors"
+        >
+          <div class="row">
+            <label for="imei">IMEI</label>
+            <input
+              formControlName="imei"
+              id="imei"
+              name="imei"
+              type="number"
+              class="w-190"
+            />
+          </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _imei?.errors"
+            [inputControl]="$any(_imei)"
+          ></app-input-alert>
+        </div>
+      </div>
+      <div class="row action-btns">
+        <button
+          type="submit"
+          class="sdm-middle sdm-dark-blue r-14"
+        >
+          Подтвердить
+        </button>
+        <button
+          type="button"
+          class="modal-close sdm-middle r-14"
+        >
+          Заполнить позже
+        </button>
+      </div>
+    </form>
   </div>
 </div>

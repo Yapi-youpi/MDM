@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { Device } from "../../../../interfaces/devices";
+import { Device } from "../../../../shared/interfaces/devices";
 
 @Component({
   selector: "app-delete-device",
@@ -10,11 +10,11 @@ import { Device } from "../../../../interfaces/devices";
 export class DeleteDeviceComponent {
   @Input() public device!: Device;
 
-  @Output() onDeleteDevice = new EventEmitter<Device>();
+  @Output() onSubmit = new EventEmitter<Device>();
 
   constructor() {}
 
-  onDeleteDeviceHandler(device: Device) {
-    this.onDeleteDevice.emit(device);
+  onSubmitHandler(device: Device) {
+    this.onSubmit.emit(device);
   }
 }

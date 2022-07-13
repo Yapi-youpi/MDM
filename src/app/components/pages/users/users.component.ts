@@ -4,7 +4,7 @@ import { interval } from "rxjs";
 
 import M from "materialize-css";
 
-import { Users } from "../../../interfaces/users";
+import { Users } from "../../../shared/interfaces/users";
 
 import { UserService } from "../../../shared/services/user.service";
 

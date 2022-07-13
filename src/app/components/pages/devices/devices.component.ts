@@ -5,11 +5,11 @@ import * as moment from "moment";
 
 import M from "materialize-css";
 
-import { Device } from "../../../interfaces/devices";
-import { DevicesGroups } from "../../../interfaces/groups";
-import { DevicesConfig } from "../../../interfaces/config";
-import { DevicesFilter } from "../../../interfaces/interfaces";
-import * as states from "../../../interfaces/states";
+import { Device } from "../../../shared/interfaces/devices";
+import { DevicesGroups } from "../../../shared/interfaces/groups";
+import { DevicesConfig } from "../../../shared/interfaces/config";
+import { DevicesFilter } from "../../../shared/interfaces/interfaces";
+import * as states from "../../../shared/interfaces/states";
 
 import { UserService } from "../../../shared/services/user.service";
 import { DevicesService } from "../../../shared/services/devices.service";
@@ -39,8 +39,7 @@ export class DevicesComponent implements OnInit {
   public new_password: string = "";
 
   public currDevice!: Device;
-  // public currQR: string = "";
-  // public currName: string = "";
+
   public isAllSelected: boolean = false;
 
   public sortStatusAsc: boolean = true;
@@ -102,6 +101,9 @@ export class DevicesComponent implements OnInit {
     });
 
     // M.Modal.getInstance(nonClosingModal).open();
+    M.Modal.getInstance(
+      this.elementRef.nativeElement.querySelector("#add_device_params")
+    ).open();
   }
 
   changePassword(pass: string) {
@@ -189,6 +191,11 @@ export class DevicesComponent implements OnInit {
 
   setAddDeviceName() {
     this.addDeviceService.secondFormTitle = this.addDeviceService._name;
+
+    // Отправка первоначальных данных устройства и получение в ответ qr-кода
+    console.log(this.addDeviceService._name);
+    console.log(this.addDeviceService._desc);
+    console.log(this.addDeviceService._group);
 
     const firstAddModal =
       this.elementRef.nativeElement.querySelector("#add_device");

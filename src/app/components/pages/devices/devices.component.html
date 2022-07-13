@@ -200,9 +200,9 @@
 <app-edit-device
   [device]="currDevice"
   [groups]="groups"
-  (onSetDeviceSettings)="setDeviceSettings($event)"
+  (onSubmit)="setDeviceSettings($event)"
 ></app-edit-device>
 <app-delete-device
   [device]="currDevice"
-  (onDeleteDevice)="deleteDevice($event)"
+  (onSubmit)="deleteDevice($event)"
 ></app-delete-device>

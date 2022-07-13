@@ -13,8 +13,8 @@ import M from "materialize-css";
 
 import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
 
-import { DevicesConfig } from "../../../interfaces/config";
-import { DevicesGroups } from "../../../interfaces/groups";
+import { DevicesConfig } from "../../../shared/interfaces/config";
+import { DevicesGroups } from "../../../shared/interfaces/groups";
 
 @Component({
   selector: "app-filter-sidebar",

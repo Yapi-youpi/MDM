@@ -53,7 +53,7 @@ body {
   font-family: HelveticaNeueCyrRegular, sans-serif;
   font-weight: 400;
   font-size: 16px !important;
-  line-height: 19px;
+  line-height: 16px;
   color: var(--sdm-dark-blue) !important;
 }
 .content-container {
@@ -124,7 +124,7 @@ body {
 }
 
 .modal-content .divider {
-  margin: 35px 0;
+  margin: 25px 0;
 }
 
 .modal-content {
@@ -211,6 +211,12 @@ input[type="search"]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
   box-shadow: none !important;
 }
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+
+  -webkit-appearance: none;
+}
 input.w-440 {
   width: 440px !important;
 }
@@ -219,6 +225,9 @@ input.w-170 {
 }
 input.w-186 {
   width: 186px !important;
+}
+input.w-190 {
+  width: 190px !important;
 }
 
 /* ПЕРЕКЛЮЧАТЕЛЬ */
@@ -701,6 +710,7 @@ a.active .sdm-menu-icon span,
   color: var(--sdm-error) !important;
 }
 .form-group.error input {
+  border-width: 2px !important;
   border-color: var(--sdm-error) !important;
 }
 .form-group .row {

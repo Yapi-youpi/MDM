@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { Device } from "../../../../interfaces/devices";
-import { DevicesGroups } from "../../../../interfaces/groups";
+import { Device } from "../../../interfaces/devices";
+import { DevicesGroups } from "../../../interfaces/groups";
 
 @Pipe({
   name: "devicesByGroup",
