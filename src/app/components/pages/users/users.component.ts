@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Permissions, Users } from '../../../interfaces/interfaces';
@@ -13,12 +13,20 @@ import { AssetService } from '../../../services/asset.service';
 export class UsersComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public users: Users[] = [];
+  public currentUser!: Users;
   public login: string = '';
   public loading: boolean = true;
   public changePas: string = '';
   public rename: string = '';
   public params: Permissions;
-  constructor(public asset: AssetService, public userService: UserService) {
+  public file_input!: any;
+  public file_placeholder!: Element;
+  public avatar!: Element;
+  constructor(
+    public asset: AssetService,
+    private elementRef: ElementRef,
+    public userService: UserService
+  ) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
@@ -182,6 +190,62 @@ export class UsersComponent implements OnInit, AfterViewInit {
         console.log(err);
         // M.toast({ html: err.error.error });
       });
+  }
+  addFile(event: Event) {
+    this.file_input = event.target;
+    const file = this.file_input.files[0];
+    if (file) {
+      this.file_placeholder = this.elementRef.nativeElement.querySelector(
+        '.avatar__attachment'
+      );
+      console.log(file);
+      this.file_placeholder.innerHTML = `<span>${file.name}</span><button type="button" class="btn btn--outline btn--action clear-file-btn"><i class="tiny material-icons">clear</i></button>`;
+      this.avatar =
+        this.elementRef.nativeElement.querySelector('.avatar__image');
+      this.avatar.setAttribute(
+        'style',
+        `background-image: url(${window.URL.createObjectURL(
+          file
+        )}); background-size: cover;`
+      );
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const img = reader.result
+          ?.toString()
+          .replace(/^data:image\/[a-z]+;base64,/, '');
+        //console.log(img);
+      };
+      /*      this.inputForm.get('file')?.patchValue({
+        file: files[0],
+      });*/
+      // this.inputForm.get('file')?.updateValueAndValidity();
+      document
+        .querySelector('.clear-file-btn')!
+        .addEventListener('click', () => {
+          this.clearInputFile(
+            this.file_input,
+            this.file_placeholder,
+            this.avatar
+          );
+        });
+    }
+  }
+  clearInputFile(
+    input: HTMLInputElement,
+    placeholder: Element,
+    image: Element
+  ) {
+    if (input && placeholder) {
+      let btn = document.querySelector('.clear-file-btn');
+      if (btn !== null) {
+        btn.removeEventListener('click', () => this.clearInputFile);
+      }
+      input.value = '';
+      placeholder.innerHTML = '';
+      image.removeAttribute('style');
+      // this.inputForm.patchValue({ file: null });
+    }
   }
 }
 //VhG2NXs3_
