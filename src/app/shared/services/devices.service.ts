@@ -5,6 +5,8 @@ import { environment } from "../../../environments/environment";
 
 import { Device } from "../interfaces/devices";
 
+import { devicesPaths as api } from "../enums/api";
+
 @Injectable({
   providedIn: "root",
 })
@@ -12,7 +14,7 @@ export class DevicesService {
   constructor(private http: HttpClient) {}
 
   get(param: string, group_id?: string) {
-    let url = environment.url + "/get_device/" + param;
+    let url = environment.url + api.GET + param;
     if (param === "group") {
       url = url + `/${group_id}`;
     }
@@ -29,7 +31,7 @@ export class DevicesService {
   }
 
   add(device: Device) {
-    const url = environment.url + "/add_device";
+    const url = environment.url + api.ADD;
     const body = {
       ...device,
     };
@@ -46,7 +48,7 @@ export class DevicesService {
   }
 
   delete(device_id: string) {
-    const url = environment.url + "/remove_device";
+    const url = environment.url + api.REMOVE;
     const body = {
       device_id,
     };
@@ -63,7 +65,7 @@ export class DevicesService {
   }
 
   edit(device: Device) {
-    const url = environment.url + "/edit_device";
+    const url = environment.url + api.EDIT;
     const body = {
       ...device,
     };
