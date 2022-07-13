@@ -153,6 +153,7 @@ export class DevicesComponent implements OnInit {
       .get("all")
       .then((res: states.DevicesState) => {
         if (res.success) {
+          // console.log(res.devices);
           this.loading = false;
           this.devices = res.devices;
         } else {
@@ -204,7 +205,8 @@ export class DevicesComponent implements OnInit {
       .then((res: SingleDeviceState) => {
         if (res.success) {
           this.currDevice = res.device;
-          console.log(this.currDevice);
+          this.devices.push(res.device);
+
           this.addDeviceService.secondFormTitle = res.device.name;
 
           const firstAddModal =
@@ -348,6 +350,10 @@ export class DevicesComponent implements OnInit {
               d.device_group_id = this.editDeviceService._group_id;
             }
           });
+
+          const modal =
+            this.elementRef.nativeElement.querySelector("#edit_device");
+          M.Modal.getInstance(modal).close();
         } else {
           console.log(res.error);
         }
@@ -374,7 +380,7 @@ export class DevicesComponent implements OnInit {
         if (res.success) {
           console.log(`Устройство ${device.name} удалено`);
 
-          this.devices.filter((d) => d !== device);
+          this.devices = this.devices.filter((d) => d !== device);
         }
       })
       .catch((err) => {

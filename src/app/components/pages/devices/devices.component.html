@@ -200,6 +200,7 @@
 ></app-add-device>
 <app-add-device-params
   (onSubmit)="addDeviceParams()"
+  [device]="currDevice"
 ></app-add-device-params>
 <app-qr-code
   [device]="currDevice"

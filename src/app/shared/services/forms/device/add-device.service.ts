@@ -43,7 +43,7 @@ export class AddDeviceService {
   }
 
   get _phone() {
-    return this.secondForm.getRawValue()["phone_number"];
+    return this.secondForm.getRawValue()["phone_number"].toString();
   }
 
   get _model() {
@@ -51,7 +51,7 @@ export class AddDeviceService {
   }
 
   get _imei() {
-    return this.secondForm.getRawValue()["imei"];
+    return this.secondForm.getRawValue()["imei"].toString();
   }
 
   setFirstFormSubmitted() {

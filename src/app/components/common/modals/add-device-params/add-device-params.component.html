@@ -18,7 +18,13 @@
           </div>
         </strong>
         <div class="qr-code">
-          <img src="" alt="">
+          <ngx-qrcode
+            class="qr-code"
+            [elementType]="elementType"
+            [errorCorrectionLevel]="correctionLevel"
+            [value]="_qrcode"
+            [width]="333"
+          ></ngx-qrcode>
           <app-qr-tip *ngIf="!isTipHidden"></app-qr-tip>
         </div>
         <strong>Или введите данные самостоятельно</strong>

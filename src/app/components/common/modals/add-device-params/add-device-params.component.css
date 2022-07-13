@@ -32,10 +32,10 @@
   justify-content: center;
 }
 
-#add_device_params .qr-code img {
-  height: 333px;
-  width: 333px;
-}
+/*#add_device_params .qr-code img {*/
+/*  height: 333px;*/
+/*  width: 333px;*/
+/*}*/
 
 #add_device_params .phone-model .form-group {
   width: 50%;
