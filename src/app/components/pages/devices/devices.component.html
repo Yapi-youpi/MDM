@@ -26,8 +26,8 @@
     </div>
     <div class="body">
       <app-selected-devices
-        *ngIf="selectedDevices.length !== 0"
-        [devices]="selectedDevices"
+        *ngIf="selectedDevicesIDs.length !== 0"
+        [devicesIDs]="selectedDevicesIDs"
         (onCloseClick)="cancelSelection()"
       ></app-selected-devices>
       <div class="sort row">
@@ -218,3 +218,6 @@
   [device]="currDevice"
   (onSubmit)="deleteDevice($event)"
 ></app-delete-device>
+<app-delete-several-elements
+  (onSubmit)="deleteSeveralDevices()"
+></app-delete-several-elements>

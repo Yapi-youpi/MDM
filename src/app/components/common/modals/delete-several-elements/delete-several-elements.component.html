@@ -1,6 +1,6 @@
-<div id="delete_device" class="modal closing">
+<div id="delete_elements" class="modal closing">
   <div class="modal-content">
-    <h4 class="title">Удалить устройство "{{ device?.name }}"?</h4>
+    <h4 class="title">Удалить выбранные элементы?</h4>
     <div class="row action-btns">
       <button
         type="button"
@@ -11,7 +11,7 @@
       <button
         type="button"
         class="sdm-middle sdm-dark-blue r-14"
-        (click)="onSubmitHandler(device)"
+        (click)="onSubmitHandler()"
       >
         Да
       </button>

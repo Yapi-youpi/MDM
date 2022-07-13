@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
-import * as moment from "moment";
 
 import M from "materialize-css";
 
@@ -9,6 +8,7 @@ import { Device } from "../../../shared/interfaces/devices";
 import { DevicesGroups } from "../../../shared/interfaces/groups";
 import { DevicesConfig } from "../../../shared/interfaces/config";
 import { DevicesFilter } from "../../../shared/interfaces/interfaces";
+import { SingleDeviceState } from "../../../shared/interfaces/states";
 import * as states from "../../../shared/interfaces/states";
 
 import { UserService } from "../../../shared/services/user.service";
@@ -18,7 +18,8 @@ import { DevicesConfigService } from "../../../shared/services/devices-config.se
 import { EditDeviceService } from "../../../shared/services/forms/device/edit-device.service";
 import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
 import { AddDeviceService } from "../../../shared/services/forms/device/add-device.service";
-import { SingleDeviceState } from "../../../shared/interfaces/states";
+
+import { EditSeveralDevicesService } from "../../../shared/services/forms/device/edit-several-devices.service";
 
 @Component({
   selector: "app-devices",
@@ -31,7 +32,7 @@ export class DevicesComponent implements OnInit {
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
 
-  private add_device!: Device; // ???
+  // private add_device!: Device; // ???
 
   public adminForm: FormGroup;
 
@@ -40,7 +41,7 @@ export class DevicesComponent implements OnInit {
   public new_password: string = "";
 
   public currDevice!: Device;
-  public selectedDevices: Device[] = [];
+  public selectedDevicesIDs: string[] = [];
 
   public isAllSelected: boolean = false;
 
@@ -67,6 +68,7 @@ export class DevicesComponent implements OnInit {
     private groupsService: GroupsService,
     private configService: DevicesConfigService, // public db: DatabaseService
     private editDeviceService: EditDeviceService,
+    private editSeveralDevicesService: EditSeveralDevicesService,
     private filterDevicesService: FilterDevicesService,
     private addDeviceService: AddDeviceService
   ) {
@@ -166,7 +168,7 @@ export class DevicesComponent implements OnInit {
   }
 
   cancelSelection() {
-    this.selectedDevices = [];
+    this.selectedDevicesIDs = [];
     if (this.isAllSelected) this.isAllSelected = false;
     this.devices.map((d) => {
       if (d.isSelected) d.isSelected = false;
@@ -259,8 +261,9 @@ export class DevicesComponent implements OnInit {
       d.isSelected = this.isAllSelected;
     });
 
-    if (this.isAllSelected) this.selectedDevices = this.devices;
-    else this.selectedDevices = [];
+    if (this.isAllSelected)
+      this.selectedDevicesIDs = this.devices.map((d) => d.device_id);
+    else this.selectedDevicesIDs = [];
   }
 
   changeSortStatusDir() {
@@ -284,17 +287,19 @@ export class DevicesComponent implements OnInit {
       if (d.device_id === device.device_id) {
         d.isSelected = !d.isSelected;
 
-        if (d.isSelected && !this.selectedDevices.includes(d))
-          this.selectedDevices.push(d);
+        if (d.isSelected && !this.selectedDevicesIDs.includes(d.device_id))
+          this.selectedDevicesIDs.push(d.device_id);
 
-        if (!d.isSelected && this.selectedDevices.includes(d))
-          this.selectedDevices = this.selectedDevices.filter((sd) => sd !== d);
+        if (!d.isSelected && this.selectedDevicesIDs.includes(d.device_id))
+          this.selectedDevicesIDs = this.selectedDevicesIDs.filter(
+            (sd) => sd !== d.device_id
+          );
       }
     });
     if (!device.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
-    if (this.selectedDevices.length === this.devices.length)
+    if (this.selectedDevicesIDs.length === this.devices.length)
       this.isAllSelected = true;
   }
 
@@ -367,7 +372,10 @@ export class DevicesComponent implements OnInit {
     M.Modal.getInstance(settingsModal).close();
   }
 
-  setSeveralDevicesSettings() {}
+  setSeveralDevicesSettings() {
+    console.log(this.selectedDevicesIDs);
+    console.log(this.editSeveralDevicesService.form.getRawValue());
+  }
 
   setDeviceToDelete(device: Device) {
     this.currDevice = device;
@@ -381,6 +389,10 @@ export class DevicesComponent implements OnInit {
           console.log(`Устройство ${device.name} удалено`);
 
           this.devices = this.devices.filter((d) => d !== device);
+
+          const modal =
+            this.elementRef.nativeElement.querySelector("#delete_device");
+          M.Modal.getInstance(modal).close();
         }
       })
       .catch((err) => {
@@ -388,5 +400,7 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  deleteSeveralDevices() {}
+  deleteSeveralDevices() {
+    console.log(this.selectedDevicesIDs);
+  }
 }

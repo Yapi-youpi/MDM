@@ -1,5 +1,7 @@
 #edit_several_devices {
   width: 770px;
+
+  top: calc((100vh - 334px) / 2) !important;
 }
 
 #edit_several_devices .modal-content {

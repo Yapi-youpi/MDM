@@ -1,6 +1,8 @@
 #edit_device {
   width: 700px;
 
+  top: calc((100vh - 434px) / 2) !important;
+
   overflow: initial;
 }
 
