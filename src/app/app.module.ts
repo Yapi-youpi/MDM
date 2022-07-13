@@ -44,6 +44,7 @@ import { DatePipe } from "./shared/pipes/sort/devices/date.pipe";
 import { NamePipe } from "./shared/pipes/sort/devices/name.pipe";
 import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
 import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
+import { QrTipComponent } from './components/common/qr-tip/qr-tip.component';
 
 const routes: Routes = [
   {
@@ -88,6 +89,7 @@ const routes: Routes = [
     NamePipe,
     GroupPipe,
     BatteryPipe,
+    QrTipComponent,
   ],
   imports: [
     BrowserModule,

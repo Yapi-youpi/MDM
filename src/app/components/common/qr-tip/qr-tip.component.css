@@ -1,0 +1,28 @@
+.tip {
+  width: 310px;
+
+  flex-shrink: 0;
+
+  margin-left: 37px;
+
+  font-size: 16px;
+}
+
+.tip h6 {
+  margin: 0 0 20px;
+
+  font-weight: 700;
+}
+
+.tip ol {
+  padding-inline-start: 30px;
+}
+
+.tip p {
+  margin-top: 20px;
+}
+
+.tip ol,
+.tip p {
+  color: var(--sdm-dark-grey);
+}

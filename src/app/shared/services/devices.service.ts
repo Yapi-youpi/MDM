@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
 
-import { Device } from "../interfaces/devices";
+import { AddDevice, Device } from "../interfaces/devices";
 
 import { devicesPaths as api } from "../enums/api";
 
@@ -30,7 +30,7 @@ export class DevicesService {
     });
   }
 
-  add(device: Device) {
+  add(device: AddDevice) {
     const url = environment.url + api.ADD;
     const body = {
       ...device,

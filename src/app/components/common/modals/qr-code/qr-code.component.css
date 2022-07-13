@@ -1,9 +1,14 @@
 #qr-code {
-  height: 695px !important;
-  width: 594px;
+  transition: width .4s ease;
 }
 
 #qr-code .qr-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#qr-code .qr-code {
   display: flex;
   align-items: center;
   justify-content: center;

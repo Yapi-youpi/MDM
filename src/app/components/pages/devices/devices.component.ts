@@ -18,6 +18,7 @@ import { DevicesConfigService } from "../../../shared/services/devices-config.se
 import { EditDeviceService } from "../../../shared/services/forms/device/edit-device.service";
 import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
 import { AddDeviceService } from "../../../shared/services/forms/device/add-device.service";
+import { SingleDeviceState } from "../../../shared/interfaces/states";
 
 @Component({
   selector: "app-devices",
@@ -101,9 +102,9 @@ export class DevicesComponent implements OnInit {
     });
 
     // M.Modal.getInstance(nonClosingModal).open();
-    M.Modal.getInstance(
-      this.elementRef.nativeElement.querySelector("#add_device_params")
-    ).open();
+    // M.Modal.getInstance(
+    //   this.elementRef.nativeElement.querySelector("#add_device_params")
+    // ).open();
   }
 
   changePassword(pass: string) {
@@ -189,37 +190,61 @@ export class DevicesComponent implements OnInit {
     this.devicesFilters.configsIDs = this.filterDevicesService._configsIDs;
   }
 
-  setAddDeviceName() {
-    this.addDeviceService.secondFormTitle = this.addDeviceService._name;
+  addDeviceWithoutParams() {
+    this.deviceService
+      .add({
+        name: this.addDeviceService._name,
+        description: this.addDeviceService._desc,
+        device_group_id: this.addDeviceService._group,
+      })
+      .then((res: SingleDeviceState) => {
+        if (res.success) {
+          this.currDevice = res.device;
+          console.log(this.currDevice);
+          this.addDeviceService.secondFormTitle = res.device.name;
 
-    // Отправка первоначальных данных устройства и получение в ответ qr-кода
-    console.log(this.addDeviceService._name);
-    console.log(this.addDeviceService._desc);
-    console.log(this.addDeviceService._group);
+          const firstAddModal =
+            this.elementRef.nativeElement.querySelector("#add_device");
+          const secondAddModal =
+            this.elementRef.nativeElement.querySelector("#add_device_params");
 
-    const firstAddModal =
-      this.elementRef.nativeElement.querySelector("#add_device");
-    const secondAddModal =
-      this.elementRef.nativeElement.querySelector("#add_device_params");
-
-    M.Modal.getInstance(firstAddModal).close();
-    M.Modal.getInstance(secondAddModal).open();
+          M.Modal.getInstance(firstAddModal).close();
+          this.addDeviceService.resetFirstForm();
+          M.Modal.getInstance(secondAddModal).open();
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  // addDevice() {
-  //   console.log(this.addDeviceForm.getRawValue());
-  //   // this.add_device = this.form.getRawValue();
-  //   // this.device
-  //   //   .addDevice(this.add_device)
-  //   //   .then((res) => {
-  //   //     console.log(res);
-  //   //     this.getAllDevices();
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     console.log(err);
-  //   //     console.log(err.error.error);
-  //   //   });
-  // }
+  addDeviceParams() {
+    this.deviceService
+      .edit({
+        ...this.currDevice,
+        phone_number: this.addDeviceService._phone,
+        model: this.addDeviceService._model,
+        imei: this.addDeviceService._imei,
+      })
+      .then((res: SingleDeviceState) => {
+        if (res.success) {
+          console.log(res.device);
+
+          const secondAddModal =
+            this.elementRef.nativeElement.querySelector("#add_device_params");
+          M.Modal.getInstance(secondAddModal).close();
+
+          this.getAllDevices();
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   selectUnselectDevices() {
     this.isAllSelected = !this.isAllSelected;

@@ -19,20 +19,7 @@
         </strong>
         <div class="qr-code">
           <img src="" alt="">
-          <div
-            *ngIf="!isTipHidden"
-            class="tip"
-          >
-            <h6>Чтобы настроить Android-устройство (версии Android 7+) в управляемом (корпоративном) режиме:</h6>
-            <ol>
-              <li>Выполните сброс к заводским настройкам</li>
-              <li> Нажмите 7 раз подряд на любом месте стартового экрана (должен появиться скрытый режим сканирования QR-кода)</li>
-              <li>Следуйте инструкциям устройства: примите условия использования, подключитесь к Wi-Fi, отсканируйте QR-код</li>
-            </ol>
-            <p>
-              Код может содержать также ID устройства в системе Headwind MDM (после настройки его не нужно будет вводить). Для включения ID устройства в QR код, введите его на этом экране и нажмите "Обновить".
-            </p>
-          </div>
+          <app-qr-tip *ngIf="!isTipHidden"></app-qr-tip>
         </div>
         <strong>Или введите данные самостоятельно</strong>
       </div>
@@ -42,11 +29,11 @@
           [class.error]="_isSubmitted && _phone?.errors"
         >
           <div class="row phone">
-            <label for="phone">Телефон</label>
+            <label for="add_param_phone">Телефон</label>
             <input
               formControlName="phone_number"
-              id="phone"
-              name="phone"
+              id="add_param_phone"
+              name="add_param_phone"
               type="number"
               class="w-190"
             />
@@ -61,11 +48,11 @@
           [class.error]="_isSubmitted && _model?.errors"
         >
           <div class="row phone">
-            <label for="model">Модель</label>
+            <label for="add_param_model">Модель</label>
             <input
               formControlName="model"
-              id="model"
-              name="model"
+              id="add_param_model"
+              name="add_param_model"
               type="text"
               class="w-190"
             />
@@ -82,11 +69,11 @@
           [class.error]="_isSubmitted && _imei?.errors"
         >
           <div class="row">
-            <label for="imei">IMEI</label>
+            <label for="add_param_imei">IMEI</label>
             <input
               formControlName="imei"
-              id="imei"
-              name="imei"
+              id="add_param_imei"
+              name="add_param_imei"
               type="number"
               class="w-190"
             />
@@ -107,6 +94,7 @@
         <button
           type="button"
           class="modal-close sdm-middle r-14"
+          (click)="onCancelHandler()"
         >
           Заполнить позже
         </button>

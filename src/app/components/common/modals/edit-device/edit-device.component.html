@@ -12,11 +12,11 @@
           [class.error]="_isSubmitted && _name?.errors"
         >
           <div class="row">
-            <label for="name">Название</label>
+            <label for="edit_name">Название</label>
             <input
               formControlName="name"
-              id="name"
-              name="name"
+              id="edit_name"
+              name="edit_name"
               type="text"
               class="w-440"
             />
@@ -31,11 +31,11 @@
           [class.error]="_isSubmitted && _description?.errors"
         >
           <div class="row">
-            <label for="description">Описание</label>
+            <label for="edit_description">Описание</label>
             <input
               formControlName="description"
-              id="description"
-              name="description"
+              id="edit_description"
+              name="edit_description"
               type="text"
               class="w-440"
             />
@@ -50,12 +50,12 @@
       <div>
         <div class="form-group">
           <div class="row">
-            <label for="group">Группа</label>
+            <label for="edit_group">Группа</label>
             <div class="input-field-modal sdm-blue-select w-440">
               <select
                 formControlName="device_group_id"
-                id="group"
-                name="group"
+                id="edit_group"
+                name="edit_group"
                 class="config-select-modal"
               >
                 <ng-container *ngFor="let group of groups">
@@ -83,61 +83,6 @@
           Отменить
         </button>
       </div>
-<!--      <div>-->
-<!--        <div class="row selects">-->
-<!--          <div class="form-group">-->
-<!--            <label for="device_config_id">Конфигурация</label>-->
-<!--            <div class="input-field-modal sdm-blue-select">-->
-<!--              <select-->
-<!--                formControlName="device_config_id"-->
-<!--                id="device_config_id"-->
-<!--                name="device_config_id"-->
-<!--                class="config-select-modal w-170"-->
-<!--              >-->
-<!--                <ng-container *ngFor="let config of configs">-->
-<!--                  <option-->
-<!--                    [value]="config.ID"-->
-<!--                    [selected]="device && config.ID === device.device_config_id"-->
-<!--                  >{{ config.name }}</option>-->
-<!--                </ng-container>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label for="device_group_id">Группа</label>-->
-<!--            <div class="input-field-modal sdm-blue-select">-->
-<!--              <select-->
-<!--                formControlName="device_group_id"-->
-<!--                id="device_group_id"-->
-<!--                name="device_group_id"-->
-<!--                class="config-select-modal w-170"-->
-<!--              >-->
-<!--                <ng-container *ngFor="let group of groups">-->
-<!--                  <option-->
-<!--                    [value]="group.id"-->
-<!--                    [selected]="device && group.id === device.device_group_id"-->
-<!--                  >{{ group.name }}</option>-->
-<!--                </ng-container>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row action-btns">-->
-<!--          <button-->
-<!--            type="submit"-->
-<!--            class="sdm-big r-14 sdm-dark-blue"-->
-<!--          >-->
-<!--            Сохранить-->
-<!--          </button>-->
-<!--          <button-->
-<!--            type="button"-->
-<!--            class="modal-close sdm-big r-14"-->
-<!--            (click)="onCancelHandler()"-->
-<!--          >-->
-<!--            Отменить-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
     </form>
   </div>
 </div>

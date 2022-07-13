@@ -12,14 +12,23 @@ import { Device } from "../../../../shared/interfaces/devices";
   styleUrls: ["./qr-code.component.css"],
 })
 export class QrCodeComponent {
+  @Input() public device!: Device;
+
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-
-  @Input() public device!: Device;
+  public isTipHidden: boolean = true;
 
   constructor() {}
 
   get _qrcode() {
     return JSON.stringify(this.device?.qr_code);
+  }
+
+  onHelpClickHandler() {
+    this.isTipHidden = !this.isTipHidden;
+  }
+
+  onCloseClickHandler() {
+    this.isTipHidden = true;
   }
 }

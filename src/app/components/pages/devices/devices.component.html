@@ -191,9 +191,11 @@
 </div>
 <app-add-device
   [groups]="groups"
-  (onSubmit)="setAddDeviceName()"
+  (onSubmit)="addDeviceWithoutParams()"
 ></app-add-device>
-<app-add-device-params></app-add-device-params>
+<app-add-device-params
+  (onSubmit)="addDeviceParams()"
+></app-add-device-params>
 <app-qr-code
   [device]="currDevice"
 ></app-qr-code>

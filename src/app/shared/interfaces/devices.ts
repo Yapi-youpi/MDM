@@ -17,3 +17,9 @@ export interface Device {
   isSelected?: boolean;
   updatedAt: string;
 }
+
+export interface AddDevice {
+  name: string;
+  description: string;
+  device_group_id: string;
+}

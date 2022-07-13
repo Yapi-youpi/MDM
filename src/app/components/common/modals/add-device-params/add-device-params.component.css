@@ -37,30 +37,6 @@
   width: 333px;
 }
 
-#add_device_params .tip {
-  width: 310px;
-
-  flex-shrink: 0;
-
-  margin-left: 37px;
-
-  font-size: 16px;
-}
-
-#add_device_params .tip h6 {
-  margin: 0 0 20px;
-
-  font-weight: 700;
-}
-
-#add_device_params .tip ol {
-  padding-inline-start: 30px;
-}
-
-#add_device_params .tip p {
-  margin-top: 20px;
-}
-
 #add_device_params .phone-model .form-group {
   width: 50%;
 }
