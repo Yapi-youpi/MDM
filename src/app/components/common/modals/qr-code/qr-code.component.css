@@ -1,5 +1,5 @@
 #qr-code {
-  top: calc((100vh - 690px) / 2) !important;
+  top: calc((100vh - 742px) / 2) !important;
 
   transition: width .4s ease;
 }
@@ -21,6 +21,8 @@
 
 #qr-code .action-btns {
   justify-content: center;
+
+  margin-top: 50px;
 }
 
 #qr-code .action-btns button:first-child {

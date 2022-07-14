@@ -1,9 +1,11 @@
 .tip {
-  width: 310px;
+  width: 400px;
 
-  flex-shrink: 0;
+  /*flex-shrink: 0;*/
+  flex-basis: 400px;
+  flex-grow: 1;
 
-  margin-left: 37px;
+  margin-left: 18px;
 
   font-size: 16px;
 }
@@ -15,12 +17,64 @@
 }
 
 .tip ol {
+  font-size: 14px;
+  line-height: 14px;
+
   padding-inline-start: 30px;
 }
 
-.tip p {
-  margin-top: 20px;
+.tip ol li:not(:last-child) {
+  margin-bottom: 10px;
 }
+
+.tip .todo {
+  padding: 8px 14px;
+  margin-top: 24px;
+  margin-left: 28px;
+
+  position: relative;
+
+  font-size: 12px;
+  line-height: 12px;
+
+  background-color: var(--sdm-light-blue);
+}
+
+.tip .todo::before {
+  position: absolute;
+  content: '';
+
+  height: 20px;
+  width: 20px;
+
+  top: 0;
+  left: -28px;
+
+  background-color: var(--sdm-dark-blue);
+
+  border-radius: 10px;
+}
+
+.tip .todo::after {
+  position: absolute;
+
+  top: 4px;
+  left: -21px;
+
+  content: '!';
+  font-size: 16px;
+  font-weight: 700;
+
+  color: var(--sdm-white);
+}
+
+.tip .todo p:first-child {
+  margin-bottom: 10px;
+}
+
+/*.tip p {*/
+/*  margin-top: 20px;*/
+/*}*/
 
 .tip ol,
 .tip p {

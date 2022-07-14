@@ -80,8 +80,6 @@ export class DevicesComponent implements OnInit {
       },
     });
 
-    M.Modal.getInstance(nonClosingModal).open();
-
     M.Modal.init(closingModal, {
       dismissible: true,
     });
