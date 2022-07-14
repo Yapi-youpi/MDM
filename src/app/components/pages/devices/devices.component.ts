@@ -8,7 +8,10 @@ import { Device } from "../../../shared/interfaces/devices";
 import { DevicesGroups } from "../../../shared/interfaces/groups";
 import { DevicesConfig } from "../../../shared/interfaces/config";
 import { DevicesFilter } from "../../../shared/interfaces/interfaces";
-import { SingleDeviceState } from "../../../shared/interfaces/states";
+import {
+  DevicesState,
+  SingleDeviceState,
+} from "../../../shared/interfaces/states";
 import * as states from "../../../shared/interfaces/states";
 
 import { UserService } from "../../../shared/services/user.service";
@@ -281,10 +284,12 @@ export class DevicesComponent implements OnInit {
 
   changeDeviceState(device: Device) {
     this.deviceService
-      .edit({
-        ...device,
-        active_state: !device.active_state,
-      })
+      .edit([
+        {
+          ...device,
+          active_state: !device.active_state,
+        },
+      ])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           console.log(`Устройство ${device.name} изменено`);
@@ -314,12 +319,14 @@ export class DevicesComponent implements OnInit {
 
   setDeviceSettings(device: Device) {
     this.deviceService
-      .edit({
-        ...device,
-        name: this.editDeviceService._name,
-        description: this.editDeviceService._description,
-        device_group_id: this.editDeviceService._group_id,
-      })
+      .edit([
+        {
+          ...device,
+          name: this.editDeviceService._name,
+          description: this.editDeviceService._description,
+          device_group_id: this.editDeviceService._group_id,
+        },
+      ])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           console.log(`Устройство ${device.name} изменено`);
@@ -342,15 +349,49 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
-
-    const settingsModal =
-      this.elementRef.nativeElement.querySelector("#edit_device");
-    M.Modal.getInstance(settingsModal).close();
   }
 
   setSeveralDevicesSettings() {
-    console.log(this.selectedDevicesIDs);
-    console.log(this.editSeveralDevicesService.form.getRawValue());
+    const data: Device[] = this.devices
+      .filter((d) => this.selectedDevicesIDs.includes(d.device_id))
+      .map((d) => {
+        return {
+          ...d,
+          device_group_id: this.editSeveralDevicesService._group,
+          active_state: this.editSeveralDevicesService._state,
+        };
+      });
+
+    this.deviceService
+      .edit(data)
+      .then((res: DevicesState) => {
+        if (res.success) {
+          data.forEach((el) => {
+            this.devices = this.devices.map((d) => {
+              if (d.device_id === el.device_id) {
+                return {
+                  ...d,
+                  device_group_id: el.device_group_id,
+                  active_state: el.active_state,
+                  isSelected: false,
+                };
+              } else return d;
+            });
+          });
+
+          this.selectedDevicesIDs = [];
+
+          const modal = this.elementRef.nativeElement.querySelector(
+            "#edit_several_devices"
+          );
+          M.Modal.getInstance(modal).close();
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   setDeviceToDelete(device: Device) {

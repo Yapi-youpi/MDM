@@ -15,6 +15,14 @@ export class EditSeveralDevicesService {
     });
   }
 
+  get _group() {
+    return this.form.getRawValue()["device_group_id"];
+  }
+
+  get _state() {
+    return this.form.getRawValue()["active_state"];
+  }
+
   setSubmitted() {
     this.isSubmitted = true;
   }

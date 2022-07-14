@@ -64,10 +64,10 @@ export class DevicesService {
     });
   }
 
-  edit(device: Device) {
+  edit(devices: Device[]) {
     const url = environment.url + api.EDIT;
     const body = {
-      ...device,
+      edit: devices,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
