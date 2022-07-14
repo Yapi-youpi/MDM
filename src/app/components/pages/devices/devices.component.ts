@@ -359,7 +359,7 @@ export class DevicesComponent implements OnInit {
 
   deleteDevice(device: Device) {
     this.deviceService
-      .delete(device.device_id)
+      .delete([device.device_id])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           console.log(`Устройство ${device.name} удалено`);
@@ -377,6 +377,26 @@ export class DevicesComponent implements OnInit {
   }
 
   deleteSeveralDevices() {
-    console.log(this.selectedDevicesIDs);
+    this.deviceService
+      .delete(this.selectedDevicesIDs)
+      .then((res: states.SingleDeviceState) => {
+        if (res.success) {
+          console.log(`Устройства удалены`);
+
+          // this.devices = this.devices.filter((d) => d !== device);
+          this.selectedDevicesIDs.forEach((sd) => {
+            this.devices = this.devices.filter((d) => d.device_id !== sd);
+          });
+
+          this.selectedDevicesIDs = [];
+
+          const modal =
+            this.elementRef.nativeElement.querySelector("#delete_elements");
+          M.Modal.getInstance(modal).close();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

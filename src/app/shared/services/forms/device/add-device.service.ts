@@ -9,7 +9,7 @@ export class AddDeviceService {
 
   public isSubmitted: boolean = false;
 
-  constructor(private elementRef: ElementRef) {
+  constructor() {
     this.form = new FormGroup({
       name: new FormControl("", Validators.required),
       description: new FormControl("", [

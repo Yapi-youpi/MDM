@@ -47,10 +47,10 @@ export class DevicesService {
     });
   }
 
-  delete(device_id: string) {
+  delete(device_ids: string[]) {
     const url = environment.url + api.REMOVE;
     const body = {
-      device_id,
+      remove: device_ids,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
