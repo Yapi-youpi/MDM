@@ -4,13 +4,14 @@
   <main class="global-main card-wrapper">
     <div class="card">
       <div class="card__header">
-        <input
-          [(ngModel)]="search"
-          type="search"
-          name="search"
-          id="search"
-          class="search-input"
-        />
+        <span class="search-wrapper">
+          <input
+            [(ngModel)]="search"
+            type="search"
+            name="search"
+            id="search"
+            class="search-input" /><i class="search-icon"></i
+        ></span>
         <button type="button" class="btn btn--round" data-target="user-filter">
           <i class="material-icons">filter_list</i>
         </button>
@@ -115,7 +116,7 @@
 
   <!--  MODALS -->
   <div class="modal-wrapper" id="modal-new-user">
-    <div class="modal-dialog" style="width: 560px">
+    <div class="modal-dialog">
       <h4 class="modal-title">Добавление нового пользователя</h4>
       <form [formGroup]="form" class="form users-form">
         <div class="avatar-wrapper">
@@ -182,18 +183,28 @@
         </div>
         <div class="form__item">
           <label>Подразделение</label>
-          <select class="select-native">
+          <select class="select-native" formControlName="group">
             <option value="sel" disabled="" selected="">Выбрать...</option>
-            <option value="ds">UI/UX Designer</option>
-            <option value="fe">Frontend Engineer</option>
-            <option value="be">Backend Engineer</option>
-            <option value="qa">QA Engineer</option>
-            <option value="un">Unicorn</option>
+            <option value="ds">UI/UX Дизайнер</option>
+            <option value="fe">Отдел IT</option>
+            <option value="be">Маркетинг</option>
+            <option value="qa">Отдел продаж</option>
+            <option value="un">Техподдержка</option>
           </select>
         </div>
       </form>
       <div class="btn-wrapper">
         <button class="btn btn--big" (click)="addUser()">Добавить</button>
+        <button class="btn btn--big btn--outline modal-close">Отменить</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-wrapper" id="modal-edit-user">
+    <div class="modal-dialog">
+      <h4 class="modal-title">Редактирование данных</h4>
+      Modal here
+      <div class="btn-wrapper">
+        <button class="btn btn--big" (click)="editUser()">Сохранить</button>
         <button class="btn btn--big btn--outline modal-close">Отменить</button>
       </div>
     </div>
@@ -206,16 +217,6 @@
           Да
         </button>
         <button class="btn btn--big btn--outline modal-close">Нет</button>
-      </div>
-    </div>
-  </div>
-  <div class="modal-wrapper" id="modal-edit-user">
-    <div class="modal-dialog">
-      <h4 class="modal-title">Редактирование данных</h4>
-      Modal here
-      <div class="btn-wrapper">
-        <button class="btn btn--big">Отправить</button>
-        <button class="btn btn--big btn--outline modal-close">Отменить</button>
       </div>
     </div>
   </div>

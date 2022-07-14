@@ -42,6 +42,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       password: new FormControl('', Validators.required),
       login: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
+      group: new FormControl('', Validators.required),
     });
     this.filterForm = fb.group({
       roles: new FormArray([]),
@@ -143,6 +144,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  editUser() {
+    console.log('user data will update');
   }
 
   deleteUser(id: string) {
