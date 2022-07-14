@@ -4,10 +4,13 @@
   <main class="global-main card-wrapper">
     <div class="card">
       <div class="card__header">
-        <input type="text" name="search" id="search" class="search-input" />
-        <button type="button" class="btn btn--round">
-          <i class="material-icons">search</i>
-        </button>
+        <input
+          [(ngModel)]="search"
+          type="search"
+          name="search"
+          id="search"
+          class="search-input"
+        />
         <button type="button" class="btn btn--round" data-target="user-filter">
           <i class="material-icons">filter_list</i>
         </button>
@@ -24,60 +27,12 @@
           <div class="indeterminate"></div>
         </div>
 
-        <div class="user-card">
-          <div class="user-card__header">
-            <div class="user-card__role">Администратор</div>
-
-            <div class="user-card__menu">
-              <button class="user-card__menu-btn" data-target="modal-edit-user">
-                <i class="material-icons">edit</i>
-              </button>
-              <button
-                class="user-card__menu-btn"
-                data-target="modal-delete-user"
-              >
-                <i class="material-icons">clear</i>
-              </button>
-            </div>
-          </div>
-          <div class="user-card__content">
-            <div class="user-card__avatar"></div>
-            <div class="user-card__descr">
-              <div class="user-card__name">
-                Константин Константинович Константинов-Барановский
-              </div>
-              <div class="user-card__email">prosto.kostya@mail.ru</div>
-              <div class="user-card__group">Отдел тестирования ПО</div>
-            </div>
-          </div>
-        </div>
-        <div class="user-card">
-          <div class="user-card__header">
-            <div class="user-card__role">Суперадмин</div>
-            <div class="user-card__menu">
-              <button class="user-card__menu-btn" data-target="modal-edit-user">
-                <i class="material-icons">edit</i>
-              </button>
-              <button
-                class="user-card__menu-btn"
-                data-target="modal-delete-user"
-              >
-                <i class="material-icons">clear</i>
-              </button>
-            </div>
-          </div>
-          <div class="user-card__content">
-            <div class="user-card__avatar"></div>
-            <div class="user-card__descr">
-              <div class="user-card__name">Владислав</div>
-              <div class="user-card__email">
-                vlad-super-admin-better-in-the-universe@gmail.com
-              </div>
-              <div class="user-card__group">Отдел разработки</div>
-            </div>
-          </div>
-        </div>
-        <div class="user-card" *ngFor="let user of users">
+        <div
+          class="user-card"
+          *ngFor="
+            let user of users | searchUsers: search | filterUsers: filter_roles
+          "
+        >
           <div
             class="user-card__header"
             style="background-color: {{ asset.roles[user.role].color }}"
@@ -125,7 +80,7 @@
           <i class="material-icons">edit</i>
         </button>
       </div>
-      <div class="user-settings">
+      <form class="user-settings">
         <fieldset *ngFor="let role of asset.roles | keyvalue">
           <legend>{{ role.value.text }}</legend>
           <div class="checkbox-group">
@@ -150,7 +105,7 @@
             </label>
           </div>
         </fieldset>
-      </div>
+      </form>
       <div class="btn-wrapper">
         <button type="button" class="btn btn--big">Сохранить</button>
         <button type="button" class="btn btn--big btn--outline">Отмена</button>
@@ -205,7 +160,7 @@
             <label class="custom-radio">
               <input
                 class="visually-hidden"
-                id="admin"
+                id="role-admin"
                 formControlName="role"
                 type="radio"
                 [value]="'admin'"
@@ -216,7 +171,7 @@
             <label class="custom-radio">
               <input
                 class="visually-hidden"
-                id="operator"
+                id="role-operator"
                 formControlName="role"
                 type="radio"
                 [value]="'operator'"
@@ -267,103 +222,112 @@
 
   <!--  FILTER -->
   <div class="filter-overlay" id="user-filter">
-    <div class="filter">
+    <form class="filter" [formGroup]="filterForm" (submit)="applyFilter()">
       <div class="filter__header">Фильтр</div>
       <div class="filter__content">
-        <fieldset>
-          <legend>Роль</legend>
-          <div class="checkbox-group">
-            <label
-              for="{{ role.key }}"
-              class="checkbox-wrapper"
-              *ngFor="let role of asset.roles | keyvalue"
-            >
-              <input
-                type="checkbox"
-                name="role"
-                id="{{ role.key }}"
-                class="visually-hidden"
-              />
-              <div class="input checkbox-custom">
-                <svg width="18" height="18" viewBox="0 0 20 20">
-                  <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                </svg>
-              </div>
-              <span>{{ role.value.text }}</span>
-            </label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Структурное подразделение</legend>
-          <div class="checkbox-group">
-            <label for="1" class="checkbox-wrapper">
-              <input
-                type="checkbox"
-                name="group"
-                id="1"
-                class="visually-hidden"
-              />
-              <div class="input checkbox-custom">
-                <svg width="18" height="18" viewBox="0 0 20 20">
-                  <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                </svg>
-              </div>
-              <span>Общая</span>
-            </label>
-            <label for="2" class="checkbox-wrapper">
-              <input
-                type="checkbox"
-                name="group"
-                id="2"
-                class="visually-hidden"
-              />
-              <div class="input checkbox-custom">
-                <svg width="18" height="18" viewBox="0 0 20 20">
-                  <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                </svg>
-              </div>
-              <span>Резервная</span>
-            </label>
-            <label for="3" class="checkbox-wrapper">
-              <input
-                type="checkbox"
-                name="group"
-                id="3"
-                class="visually-hidden"
-              />
-              <div class="input checkbox-custom">
-                <svg width="18" height="18" viewBox="0 0 20 20">
-                  <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                </svg>
-              </div>
-              <span>Город</span>
-            </label>
-            <label for="4" class="checkbox-wrapper">
-              <input
-                type="checkbox"
-                name="group"
-                id="4"
-                class="visually-hidden"
-              />
-              <div class="input checkbox-custom">
-                <svg width="18" height="18" viewBox="0 0 20 20">
-                  <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                </svg>
-              </div>
-              <span>Область</span>
-            </label>
-          </div>
-        </fieldset>
+        <div>
+          <fieldset>
+            <legend>Роль</legend>
+            <div class="checkbox-group">
+              <label
+                for="{{ role.key }}"
+                class="checkbox-wrapper"
+                *ngFor="let role of asset.roles | keyvalue"
+              >
+                <input
+                  type="checkbox"
+                  name="role"
+                  id="{{ role.key }}"
+                  value="{{ role.key }}"
+                  class="visually-hidden"
+                  formArrayName="roles"
+                  (change)="onCheckboxChange($event)"
+                />
+                <div class="input checkbox-custom">
+                  <svg width="18" height="18" viewBox="0 0 20 20">
+                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+                  </svg>
+                </div>
+                <span>{{ role.value.text }}</span>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Структурное подразделение</legend>
+            <div class="checkbox-group">
+              <label for="1" class="checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  name="group"
+                  id="1"
+                  class="visually-hidden"
+                />
+                <div class="input checkbox-custom">
+                  <svg width="18" height="18" viewBox="0 0 20 20">
+                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+                  </svg>
+                </div>
+                <span>Общая</span>
+              </label>
+              <label for="2" class="checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  name="group"
+                  id="2"
+                  class="visually-hidden"
+                />
+                <div class="input checkbox-custom">
+                  <svg width="18" height="18" viewBox="0 0 20 20">
+                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+                  </svg>
+                </div>
+                <span>Резервная</span>
+              </label>
+              <label for="3" class="checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  name="group"
+                  id="3"
+                  class="visually-hidden"
+                />
+                <div class="input checkbox-custom">
+                  <svg width="18" height="18" viewBox="0 0 20 20">
+                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+                  </svg>
+                </div>
+                <span>Город</span>
+              </label>
+              <label for="4" class="checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  name="group"
+                  id="4"
+                  class="visually-hidden"
+                />
+                <div class="input checkbox-custom">
+                  <svg width="18" height="18" viewBox="0 0 20 20">
+                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+                  </svg>
+                </div>
+                <span>Область</span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
       </div>
       <div class="filter__footer">
         <div class="btn-wrapper">
-          <button class="btn btn--big">Отправить</button>
-          <button class="btn btn--big btn--outline filter-close">
+          <button type="submit" class="btn btn--big">Применить</button>
+          <button
+            (click)="clearFilter()"
+            type="button"
+            class="btn btn--big btn--outline filter-close"
+          >
             Отменить
           </button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 
   <!--<div class="container">

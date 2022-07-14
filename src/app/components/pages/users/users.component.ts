@@ -1,6 +1,12 @@
 import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Permissions, Users } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../services/asset.service';
@@ -12,12 +18,15 @@ import { AssetService } from '../../../services/asset.service';
 })
 export class UsersComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
+  public filterForm: FormGroup;
   public users: Users[] = [];
   public currentUser!: Users;
   public login: string = '';
   public loading: boolean = true;
   public changePas: string = '';
   public rename: string = '';
+  public search!: string;
+  public filter_roles!: Array<string>;
   public params: Permissions;
   public file_input!: any;
   public file_placeholder!: Element;
@@ -25,13 +34,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
   constructor(
     public asset: AssetService,
     private elementRef: ElementRef,
-    public userService: UserService
+    public userService: UserService,
+    fb: FormBuilder
   ) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
       login: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
+    });
+    this.filterForm = fb.group({
+      roles: new FormArray([]),
     });
     this.params = {
       viewDevices: 'Просмотр устройств',
@@ -56,14 +69,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
   ngAfterViewInit() {
     this.asset.filterInit('user-filter');
   }
+
   initModals() {
     this.asset.modalInit('modal-new-user');
     this.asset.modalInit('modal-edit-user');
     this.asset.modalInit('modal-delete-user');
   }
+
   getAllUsers() {
     this.userService
       .getUserInfo(undefined, 'all')
@@ -84,6 +100,32 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
+  onCheckboxChange(event: any) {
+    const roles = this.filterForm.controls['roles'] as FormArray;
+    if (event.target.checked) {
+      roles.push(new FormControl(event.target.value));
+    } else {
+      const index = roles.controls.findIndex(
+        (x) => x.value === event.target.value
+      );
+      roles.removeAt(index);
+    }
+  }
+
+  applyFilter() {
+    console.log(this.filterForm.value.roles);
+    this.filter_roles = this.filterForm.value.roles;
+  }
+
+  clearFilter() {
+    this.filter_roles = [];
+
+    const roles = this.filterForm.controls['roles'] as FormArray;
+    const index = roles.controls.findIndex((x) => x.value);
+    roles.removeAt(index);
+    console.log(this.filterForm.value.roles);
+  }
+
   addUser() {
     const login = this.form.get('login')?.value;
     const name = this.form.get('name')?.value;
@@ -102,6 +144,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         console.log(err);
       });
   }
+
   deleteUser(id: string) {
     this.userService
       .deleteUser(id)

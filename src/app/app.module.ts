@@ -28,6 +28,8 @@ import { GlobalContainerComponent } from './components/common/global-container/g
 import { FilterSidebarComponent } from './components/common/filter-sidebar/filter-sidebar.component';
 import { SearchInputComponent } from './components/common/UI/search-input/search-input.component';
 import { GlobalHeaderComponent } from './components/common/global-header/global-header.component';
+import { SearchUsersPipe } from './services/search-users.pipe';
+import { FilterUsersPipe } from './services/filter-users.pipe';
 
 const routes: Routes = [
   {
@@ -55,6 +57,8 @@ const routes: Routes = [
     FilterSidebarComponent,
     SearchInputComponent,
     GlobalHeaderComponent,
+    SearchUsersPipe,
+    FilterUsersPipe,
   ],
   imports: [
     BrowserModule,

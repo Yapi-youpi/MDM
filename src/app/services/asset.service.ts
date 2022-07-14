@@ -97,6 +97,7 @@ export class AssetService {
       if (e.target == filter) {
         if (filter) filter.classList.remove('filter--open');
       }
+      // console.log(e.target);
     }
   }
 }
