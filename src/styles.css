@@ -621,12 +621,12 @@ button.sdm-btn-list-sort span {
   background-position: center center;
   background-repeat: no-repeat;
 }
-/*button.sdm-btn-list-sort.sort-up span {*/
-/*  background-image: url("/assets/UI/sort_up.svg");*/
-/*}*/
-/*button.sdm-btn-list-sort.sort-down span {*/
-/*  background-image: url("/assets/UI/sort_down.svg");*/
-/*}*/
+button.sdm-btn-list-sort.sort-up span {
+  background-image: url("/assets/UI/sort_up.svg");
+}
+button.sdm-btn-list-sort.sort-down span {
+  background-image: url("/assets/UI/sort_down.svg");
+}
 button.sdm-only-icon,
 .sdm-menu-icon {
   height: 24px;

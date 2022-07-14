@@ -89,39 +89,39 @@ aside .divider {
   mask-size: 24px 24px;
   -webkit-mask-size: 24px 24px;
 }
-/*.sdm-menu-icon.menu span {*/
-/*  mask-image: url("../../../../assets/UI/hamburger.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/hamburger.svg");*/
-/*}*/
-/*.sdm-menu-icon.devices span {*/
-/*  mask-image: url("../../../../assets/UI/mobile.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/mobile.svg");*/
-/*}*/
-/*.sdm-menu-icon.groups span {*/
-/*  mask-image: url("../../../../assets/UI/devices_group.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/devices_group.svg");*/
-/*}*/
-/*.sdm-menu-icon.apps span {*/
-/*  mask-image: url("../../../../assets/UI/apps.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/apps.svg");*/
-/*}*/
-/*.sdm-menu-icon.messages span {*/
-/*  mask-image: url("../../../../assets/UI/mail.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/mail.svg");*/
-/*}*/
-/*.sdm-menu-icon.map span {*/
-/*  mask-image: url("../../../../assets/UI/map.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/map.svg");*/
-/*}*/
-/*.sdm-menu-icon.config span {*/
-/*  mask-image: url("../../../../assets/UI/settings.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/settings.svg");*/
-/*}*/
-/*.sdm-menu-icon.users span {*/
-/*  mask-image: url("../../../../assets/UI/users_group.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/users_group.svg");*/
-/*}*/
-/*.sdm-menu-icon.help span {*/
-/*  mask-image: url("../../../../assets/UI/faq.svg");*/
-/*  -webkit-mask-image: url("../../../../assets/UI/faq.svg");*/
-/*}*/
+.sdm-menu-icon.menu span {
+  mask-image: url("/assets/UI/hamburger.svg");
+  -webkit-mask-image: url("/assets/UI/hamburger.svg");
+}
+.sdm-menu-icon.devices span {
+  mask-image: url("/assets/UI/mobile.svg");
+  -webkit-mask-image: url("/assets/UI/mobile.svg");
+}
+.sdm-menu-icon.groups span {
+  mask-image: url("/assets/UI/devices_group.svg");
+  -webkit-mask-image: url("/assets/UI/devices_group.svg");
+}
+.sdm-menu-icon.apps span {
+  mask-image: url("/assets/UI/apps.svg");
+  -webkit-mask-image: url("/assets/UI/apps.svg");
+}
+.sdm-menu-icon.messages span {
+  mask-image: url("/assets/UI/mail.svg");
+  -webkit-mask-image: url("/assets/UI/mail.svg");
+}
+.sdm-menu-icon.map span {
+  mask-image: url("/assets/UI/map.svg");
+  -webkit-mask-image: url("/assets/UI/map.svg");
+}
+.sdm-menu-icon.config span {
+  mask-image: url("/assets/UI/settings.svg");
+  -webkit-mask-image: url("/assets/UI/settings.svg");
+}
+.sdm-menu-icon.users span {
+  mask-image: url("/assets/UI/users_group.svg");
+  -webkit-mask-image: url("/assets/UI/users_group.svg");
+}
+.sdm-menu-icon.help span {
+  mask-image: url("/assets/UI/faq.svg");
+  -webkit-mask-image: url("/assets/UI/faq.svg");
+}
