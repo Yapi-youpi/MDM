@@ -82,21 +82,24 @@
 
   margin-left: -10px;
 }
-/* Конфигурация */
+/* Группа */
 .sort .content > *:nth-child(8) {
-  width: 120px;
+  width: 97px;
 
   margin-left: -5px;
 }
-/* Обновление */
+/* Конфигурация */
 .sort .content > *:nth-child(9) {
-  width: 80px;
-}
-/* Группа */
-.sort .content > *:nth-child(10) {
-  width: 97px;
+  width: 120px;
 
-  margin-left: -3px;
+  margin-left: -5px;
+  padding-left: 10px;
+}
+/* Обновление */
+.sort .content > *:nth-child(10) {
+  width: 80px;
+
+  padding-left: 11px;
 }
 /* Заряд */
 .sort .content > *:nth-child(11) {
