@@ -32,7 +32,6 @@ import { PageHeaderComponent } from "./components/common/page-header/page-header
 import { InputAlertComponent } from "./components/common/UI/alert/input-alert/input-alert.component";
 import { DeleteDeviceComponent } from "./components/common/modals/delete-device/delete-device.component";
 import { AddDeviceComponent } from "./components/common/modals/add-device/add-device.component";
-import { AddDeviceParamsComponent } from "./components/common/modals/add-device-params/add-device-params.component";
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
 import { SelectedDevicesComponent } from "./components/common/selected-devices/selected-devices.component";
 import { EditSeveralDevicesComponent } from "./components/common/modals/edit-several-devices/edit-several-devices.component";
@@ -80,7 +79,6 @@ const routes: Routes = [
     InputAlertComponent,
     DeleteDeviceComponent,
     AddDeviceComponent,
-    AddDeviceParamsComponent,
     QrTipComponent,
     SelectedDevicesComponent,
     EditSeveralDevicesComponent,

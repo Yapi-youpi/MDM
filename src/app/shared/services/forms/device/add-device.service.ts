@@ -1,20 +1,16 @@
-import { Injectable } from "@angular/core";
+import { ElementRef, Injectable } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Injectable({
   providedIn: "root",
 })
 export class AddDeviceService {
-  public firstForm: FormGroup;
-  public secondForm: FormGroup;
+  public form: FormGroup;
 
-  public isFirstFormSubmitted: boolean = false;
-  public isSecondFormSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
 
-  public secondFormTitle: string = "";
-
-  constructor() {
-    this.firstForm = new FormGroup({
+  constructor(private elementRef: ElementRef) {
+    this.form = new FormGroup({
       name: new FormControl("", Validators.required),
       description: new FormControl("", [
         Validators.required,
@@ -22,59 +18,29 @@ export class AddDeviceService {
       ]),
       device_group_id: new FormControl("", Validators.required),
     });
-
-    this.secondForm = new FormGroup({
-      phone_number: new FormControl("", Validators.required),
-      model: new FormControl("", Validators.required),
-      imei: new FormControl("", Validators.required),
-    });
   }
 
   get _name() {
-    return this.firstForm.getRawValue()["name"];
+    return this.form.getRawValue()["name"];
   }
 
   get _desc() {
-    return this.firstForm.getRawValue()["description"];
+    return this.form.getRawValue()["description"];
   }
 
   get _group() {
-    return this.firstForm.getRawValue()["device_group_id"];
+    return this.form.getRawValue()["device_group_id"];
   }
 
-  get _phone() {
-    return this.secondForm.getRawValue()["phone_number"].toString();
+  setFormSubmitted() {
+    this.isSubmitted = true;
   }
 
-  get _model() {
-    return this.secondForm.getRawValue()["model"];
+  resetFormSubmitted() {
+    this.isSubmitted = false;
   }
 
-  get _imei() {
-    return this.secondForm.getRawValue()["imei"].toString();
-  }
-
-  setFirstFormSubmitted() {
-    this.isFirstFormSubmitted = true;
-  }
-
-  setSecondFormSubmitted() {
-    this.isSecondFormSubmitted = true;
-  }
-
-  resetFirstFormSubmitted() {
-    this.isFirstFormSubmitted = false;
-  }
-
-  resetSecondFormSubmitted() {
-    this.isSecondFormSubmitted = false;
-  }
-
-  resetFirstForm() {
-    this.firstForm.reset();
-  }
-
-  resetSecondForm() {
-    this.secondForm.reset();
+  resetForm() {
+    this.form.reset();
   }
 }

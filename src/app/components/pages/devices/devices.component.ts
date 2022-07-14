@@ -103,6 +103,10 @@ export class DevicesComponent implements OnInit {
         this.getConfigs();
       }
     });
+
+    // M.Modal.getInstance(
+    //   this.elementRef.nativeElement.querySelector("#add_device_params")
+    // ).open();
   }
 
   changePassword(pass: string) {
@@ -197,7 +201,7 @@ export class DevicesComponent implements OnInit {
     this.devicesFilters.configsIDs = this.filterDevicesService._configsIDs;
   }
 
-  addDeviceWithoutParams() {
+  addDevice() {
     this.deviceService
       .add({
         name: this.addDeviceService._name,
@@ -207,44 +211,16 @@ export class DevicesComponent implements OnInit {
       .then((res: SingleDeviceState) => {
         if (res.success) {
           this.currDevice = res.device;
-          this.devices.push(res.device);
+          this.devices = [res.device, ...this.devices];
 
-          this.addDeviceService.secondFormTitle = res.device.name;
-
-          const firstAddModal =
+          const addModal =
             this.elementRef.nativeElement.querySelector("#add_device");
-          const secondAddModal =
-            this.elementRef.nativeElement.querySelector("#add_device_params");
+          const qrModal =
+            this.elementRef.nativeElement.querySelector("#qr-code");
 
-          M.Modal.getInstance(firstAddModal).close();
-          this.addDeviceService.resetFirstForm();
-          M.Modal.getInstance(secondAddModal).open();
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  addDeviceParams() {
-    this.deviceService
-      .edit({
-        ...this.currDevice,
-        phone_number: this.addDeviceService._phone,
-        model: this.addDeviceService._model,
-        imei: this.addDeviceService._imei,
-      })
-      .then((res: SingleDeviceState) => {
-        if (res.success) {
-          console.log(res.device);
-
-          const secondAddModal =
-            this.elementRef.nativeElement.querySelector("#add_device_params");
-          M.Modal.getInstance(secondAddModal).close();
-
-          this.getAllDevices();
+          M.Modal.getInstance(addModal).close();
+          this.addDeviceService.resetForm();
+          M.Modal.getInstance(qrModal).open();
         } else {
           console.log(res.error);
         }

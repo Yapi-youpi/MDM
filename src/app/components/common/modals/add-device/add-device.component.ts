@@ -38,36 +38,36 @@ export class AddDeviceComponent implements OnInit {
   }
 
   get _form() {
-    return this.form.firstForm;
+    return this.form.form;
   }
 
   get _isSubmitted() {
-    return this.form.isFirstFormSubmitted;
+    return this.form.isSubmitted;
   }
 
   get _name() {
-    return this.form.firstForm.get("name");
+    return this.form.form.get("name");
   }
 
   get _description() {
-    return this.form.firstForm.get("description");
+    return this.form.form.get("description");
   }
 
   get _group() {
-    return this.form.firstForm.get("device_group_id");
+    return this.form.form.get("device_group_id");
   }
 
   onSubmitHandler() {
-    this.form.setFirstFormSubmitted();
+    this.form.setFormSubmitted();
 
-    if (this.form.firstForm.invalid) {
+    if (this.form.form.invalid) {
       return;
     } else {
       this.onSubmit.emit();
     }
   }
   onCancelHandler() {
-    this.form.resetFirstFormSubmitted();
-    this.form.resetFirstForm();
+    this.form.resetFormSubmitted();
+    this.form.resetForm();
   }
 }

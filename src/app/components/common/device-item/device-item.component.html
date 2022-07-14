@@ -14,8 +14,8 @@
     <div class="status-container">
       <span
         class="r-round"
-        [class.active]="device.active_state"
-        [class.disabled]="!device.active_state"
+        [class.active]="device.online_state"
+        [class.disabled]="!device.online_state"
       ></span>
     </div>
     <p class="font-regular-color">{{ device.updatedAt | dateConverter }}</p>
