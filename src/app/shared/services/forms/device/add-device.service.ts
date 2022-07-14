@@ -42,5 +42,10 @@ export class AddDeviceService {
 
   resetForm() {
     this.form.reset();
+
+    Object.keys(this.form.controls).forEach((key) => {
+      const control = this.form.controls[key];
+      control.setErrors(null);
+    });
   }
 }

@@ -365,6 +365,9 @@ export class DevicesComponent implements OnInit {
           console.log(`Устройство ${device.name} удалено`);
 
           this.devices = this.devices.filter((d) => d !== device);
+          this.selectedDevicesIDs = this.selectedDevicesIDs.filter(
+            (d) => d !== device.device_id
+          );
 
           const modal =
             this.elementRef.nativeElement.querySelector("#delete_device");
@@ -383,7 +386,6 @@ export class DevicesComponent implements OnInit {
         if (res.success) {
           console.log(`Устройства удалены`);
 
-          // this.devices = this.devices.filter((d) => d !== device);
           this.selectedDevicesIDs.forEach((sd) => {
             this.devices = this.devices.filter((d) => d.device_id !== sd);
           });
