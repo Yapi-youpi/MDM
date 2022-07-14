@@ -12,7 +12,6 @@ import M from "materialize-css";
 
 import { EditDeviceService } from "../../../../shared/services/forms/device/edit-device.service";
 
-import { Device } from "../../../../shared/interfaces/devices";
 import { DevicesGroups } from "../../../../shared/interfaces/groups";
 
 @Component({
@@ -21,10 +20,9 @@ import { DevicesGroups } from "../../../../shared/interfaces/groups";
   styleUrls: ["./edit-device.component.css"],
 })
 export class EditDeviceComponent implements OnInit {
-  @Input() public device!: Device;
   @Input() public groups!: DevicesGroups[];
 
-  @Output() public onSubmit = new EventEmitter<Device>();
+  @Output() public onSubmit = new EventEmitter();
 
   constructor(private elementRef: ElementRef, public form: EditDeviceService) {}
 
@@ -56,13 +54,13 @@ export class EditDeviceComponent implements OnInit {
     return this.form.isSubmitted;
   }
 
-  onSubmitHandler(device: Device) {
+  onSubmitHandler() {
     this.form.setSubmitted();
 
     if (this.form.form.invalid) {
       return;
     } else {
-      this.onSubmit.emit(device);
+      this.onSubmit.emit();
     }
   }
   onCancelHandler() {

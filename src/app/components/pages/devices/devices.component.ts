@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { interval } from "rxjs";
 
 import M from "materialize-css";
@@ -14,15 +13,13 @@ import {
 } from "../../../shared/interfaces/states";
 import * as states from "../../../shared/interfaces/states";
 
-import { UserService } from "../../../shared/services/user.service";
-import { DevicesService } from "../../../shared/services/devices.service";
-import { GroupsService } from "../../../shared/services/groups.service";
-import { DevicesConfigService } from "../../../shared/services/devices-config.service";
-import { EditDeviceService } from "../../../shared/services/forms/device/edit-device.service";
-import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
-import { AddDeviceService } from "../../../shared/services/forms/device/add-device.service";
-
-import { EditSeveralDevicesService } from "../../../shared/services/forms/device/edit-several-devices.service";
+import {
+  device,
+  deviceConfig,
+  form,
+  group,
+  user,
+} from "../../../shared/services";
 
 @Component({
   selector: "app-devices",
@@ -35,17 +32,9 @@ export class DevicesComponent implements OnInit {
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
 
-  // private add_device!: Device; // ???
-
-  public adminForm: FormGroup;
-
-  public edit: boolean = false;
-  public password: string = "";
-  public new_password: string = "";
-
   public currDevice!: Device;
-  public selectedDevicesIDs: string[] = [];
 
+  public selectedDevicesIDs: string[] = [];
   public isAllSelected: boolean = false;
 
   public sortStatusAsc: boolean = true;
@@ -64,22 +53,19 @@ export class DevicesComponent implements OnInit {
     groupsIDs: null,
   };
 
+  // public db: DatabaseService
   constructor(
-    public userService: UserService,
-    private deviceService: DevicesService,
+    public userService: user,
+    private userPasswordService: form.user.changePass,
     private elementRef: ElementRef,
-    private groupsService: GroupsService,
-    private configService: DevicesConfigService, // public db: DatabaseService
-    private editDeviceService: EditDeviceService,
-    private editSeveralDevicesService: EditSeveralDevicesService,
-    private filterDevicesService: FilterDevicesService,
-    private addDeviceService: AddDeviceService
-  ) {
-    this.adminForm = new FormGroup({
-      password: new FormControl("", Validators.required),
-      confirmPassword: new FormControl("", Validators.required),
-    });
-  }
+    private groupsService: group,
+    private configService: deviceConfig,
+    private deviceService: device,
+    private addDeviceService: form.device.add,
+    private editDeviceService: form.device.edit,
+    private editSeveralDevicesService: form.device.editSeveral,
+    private filterDevicesService: form.device.filter
+  ) {}
 
   ngOnInit(): void {
     let nonClosingModal =
@@ -90,9 +76,11 @@ export class DevicesComponent implements OnInit {
     M.Modal.init(nonClosingModal, {
       dismissible: false,
       onCloseEnd: () => {
-        this.adminForm.reset();
+        this.userPasswordService.resetForm();
       },
     });
+
+    M.Modal.getInstance(nonClosingModal).open();
 
     M.Modal.init(closingModal, {
       dismissible: true,
@@ -101,24 +89,18 @@ export class DevicesComponent implements OnInit {
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
-        this.getAllDevices();
         this.getGroups();
         this.getConfigs();
+        this.getDevices();
       }
     });
-
-    // M.Modal.getInstance(
-    //   this.elementRef.nativeElement.querySelector("#add_device_params")
-    // ).open();
   }
 
-  changePassword(pass: string) {
+  changePassword() {
     this.userService
-      .changePassword(pass)
+      .changePassword(this.userPasswordService._pass)
       .then((res) => {
         console.log(res);
-        this.password = "";
-        this.new_password = "";
       })
       .catch((res) => {
         console.log(res);
@@ -155,14 +137,13 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  getAllDevices() {
+  getDevices() {
     this.loading = true;
 
     this.deviceService
       .get("all")
       .then((res: states.DevicesState) => {
         if (res.success) {
-          // console.log(res.devices);
           this.loading = false;
           this.devices = res.devices;
         } else {
@@ -176,7 +157,9 @@ export class DevicesComponent implements OnInit {
 
   cancelSelection() {
     this.selectedDevicesIDs = [];
+
     if (this.isAllSelected) this.isAllSelected = false;
+
     this.devices.map((d) => {
       if (d.isSelected) d.isSelected = false;
     });
@@ -312,16 +295,16 @@ export class DevicesComponent implements OnInit {
     this.currDevice = device;
   }
 
-  editDevice(device: Device) {
+  selectDeviceToEdit(device: Device) {
     this.currDevice = device;
     this.editDeviceService.form.patchValue(device);
   }
 
-  setDeviceSettings(device: Device) {
+  editDevice() {
     this.deviceService
       .edit([
         {
-          ...device,
+          ...this.currDevice,
           name: this.editDeviceService._name,
           description: this.editDeviceService._description,
           device_group_id: this.editDeviceService._group_id,
@@ -329,10 +312,10 @@ export class DevicesComponent implements OnInit {
       ])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          console.log(`Устройство ${device.name} изменено`);
+          console.log(`Устройство ${this.currDevice.name} изменено`);
 
           this.devices.map((d) => {
-            if (d === device) {
+            if (d.device_id === this.currDevice.device_id) {
               d.name = this.editDeviceService._name;
               d.description = this.editDeviceService._description;
               d.device_group_id = this.editDeviceService._group_id;
@@ -351,7 +334,7 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  setSeveralDevicesSettings() {
+  editSeveralDevices() {
     const data: Device[] = this.devices
       .filter((d) => this.selectedDevicesIDs.includes(d.device_id))
       .map((d) => {
@@ -381,6 +364,8 @@ export class DevicesComponent implements OnInit {
 
           this.selectedDevicesIDs = [];
 
+          this.editSeveralDevicesService.resetForm();
+
           const modal = this.elementRef.nativeElement.querySelector(
             "#edit_several_devices"
           );
@@ -394,7 +379,7 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  setDeviceToDelete(device: Device) {
+  selectDeviceToDelete(device: Device) {
     this.currDevice = device;
   }
 

@@ -119,81 +119,17 @@
             (onSelectUnselectDevice)="selectUnselectDevice($event)"
             (onChangeDeviceState)="changeDeviceState($event)"
             (onClickDeviceQRCode)="getDeviceQRCode($event)"
-            (onClickDeviceEdit)="editDevice($event)"
-            (onClickDeviceDelete)="setDeviceToDelete($event)"
+            (onClickDeviceEdit)="selectDeviceToEdit($event)"
+            (onClickDeviceDelete)="selectDeviceToDelete($event)"
           ></app-device-item>
         </ng-container>
       </div>
     </div>
   </div>
 </app-global-container>
-<div id="changePass" class="modal non-closing modal-fixed-footer">
-  <div class="modal-content">
-    <h6>Пароль должен стостоять минимум иметь минимум по 1:</h6>
-    <ul class="collection">
-      <li class="collection-item">
-        Заглавный символ
-        <span *ngIf="userService.upperCase" class="red-text">отсутствует</span>
-      </li>
-      <li class="collection-item">
-        Прописной символ
-        <span *ngIf="userService.lowerCase" class="red-text">отсутствует</span>
-      </li>
-      <li class="collection-item">
-        Цифра
-        <span *ngIf="userService.number" class="red-text">отсутствует</span>
-      </li>
-      <li class="collection-item">
-        Спец. символ
-        <span *ngIf="userService.specialChar" class="red-text"
-          >отсутствует</span
-        >
-      </li>
-      <li class="collection-item">
-        Состоять минимум из 8 символов
-        <span *ngIf="userService.passLength > 0" class="red-text"
-          >{{ userService.passLength }} осталось</span
-        >
-      </li>
-    </ul>
-    <div class="card-content">
-      <div class="formGroup">
-        <input
-          id="pass"
-          type="password"
-          class="formControl"
-          [(ngModel)]="password"
-          required
-        />
-        <label for="pass">Введите новый пароль</label>
-        <small class="helper-text invalid"></small>
-        <small class="helper-text invalid"></small>
-      </div>
-      <div class="formGroup">
-        <input
-          id="ChangePassword"
-          type="password"
-          class="formControl"
-          required
-          [(ngModel)]="new_password"
-        />
-        <label for="ChangePassword">Повторите новый пароль</label>
-        <small class="helper-text invalid"></small>
-        <small class="helper-text invalid"></small>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button
-      [disabled]="password !== new_password"
-      (click)="changePassword(password)"
-      class="btn-flat green-text"
-    >
-      Сменить
-      <i class="material-icons right">send</i>
-    </button>
-  </div>
-</div>
+<app-change-password
+  (onSubmit)="changePassword()"
+></app-change-password>
 <app-add-device
   [groups]="groups"
   (onSubmit)="addDevice()"
@@ -202,13 +138,12 @@
   [device]="currDevice"
 ></app-qr-code>
 <app-edit-device
-  [device]="currDevice"
   [groups]="groups"
-  (onSubmit)="setDeviceSettings($event)"
+  (onSubmit)="editDevice()"
 ></app-edit-device>
 <app-edit-several-devices
   [groups]="groups"
-  (onSubmit)="setSeveralDevicesSettings()"
+  (onSubmit)="editSeveralDevices()"
 ></app-edit-several-devices>
 <app-delete-device
   [device]="currDevice"

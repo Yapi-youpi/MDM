@@ -4,31 +4,28 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 @Injectable({
   providedIn: "root",
 })
-export class EditSeveralDevicesService {
+export class ChangePasswordService {
   public form: FormGroup;
+
   public isSubmitted: boolean = false;
 
   constructor() {
     this.form = new FormGroup({
-      device_group_id: new FormControl("", Validators.required),
-      active_state: new FormControl(false, Validators.required),
+      password: new FormControl("", Validators.required),
+      confirmPassword: new FormControl("", Validators.required),
     });
   }
 
-  get _group() {
-    return this.form.getRawValue()["device_group_id"];
+  get _pass() {
+    return this.form.getRawValue()["password"];
   }
 
-  get _state() {
-    return this.form.getRawValue()["active_state"];
+  get _passConf() {
+    return this.form.getRawValue()["confirmPassword"];
   }
 
   setSubmitted() {
     this.isSubmitted = true;
-  }
-
-  resetSubmitted() {
-    this.isSubmitted = false;
   }
 
   resetForm() {

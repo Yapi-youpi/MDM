@@ -47,10 +47,10 @@ export class DevicesService {
     });
   }
 
-  delete(device_ids: string[]) {
-    const url = environment.url + api.REMOVE;
+  edit(devices: Device[]) {
+    const url = environment.url + api.EDIT;
     const body = {
-      remove: device_ids,
+      edit: devices,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
@@ -64,10 +64,10 @@ export class DevicesService {
     });
   }
 
-  edit(devices: Device[]) {
-    const url = environment.url + api.EDIT;
+  delete(device_ids: string[]) {
+    const url = environment.url + api.REMOVE;
     const body = {
-      edit: devices,
+      remove: device_ids,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({

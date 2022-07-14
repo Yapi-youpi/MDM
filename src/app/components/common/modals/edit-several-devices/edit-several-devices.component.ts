@@ -62,4 +62,9 @@ export class EditSeveralDevicesComponent implements OnInit {
       this.onSubmit.emit();
     }
   }
+
+  onResetHandler() {
+    this.form.resetSubmitted();
+    this.form.resetForm();
+  }
 }

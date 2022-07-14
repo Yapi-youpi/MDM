@@ -47,6 +47,7 @@ import { DatePipe } from "./shared/pipes/sort/devices/date.pipe";
 import { NamePipe } from "./shared/pipes/sort/devices/name.pipe";
 import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
 import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
+import { ChangePasswordComponent } from './components/common/modals/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,7 @@ const routes: Routes = [
     BatteryPipe,
     DeleteSeveralElementsComponent,
     DeleteSeveralElementsComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

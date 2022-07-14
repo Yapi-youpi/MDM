@@ -16,6 +16,9 @@
 <span *ngIf="inputControl.hasError('maxlength')" class="alert error">
   Недопустимый максимальный размер поля
 </span>
+<span *ngIf="inputControl.hasError('pass-mismatch')" class="alert error">
+  Пароли не совпадают
+</span>
 <span *ngIf="inputControl.invalid" class="alert error">
   {{ inputControl.errors?.['invalid'] }}
 </span>
