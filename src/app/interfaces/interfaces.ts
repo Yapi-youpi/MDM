@@ -5,7 +5,7 @@ export interface Users {
   login: string;
   name: string;
   role: string;
-  userTag: string[];
+  userTags: string[];
   groupsPermissions: GroupPermissions;
 }
 export interface Roles {

@@ -49,6 +49,7 @@
                 <button
                   class="user-card__menu-btn"
                   data-target="modal-edit-user"
+                  (click)="setCurrentUser(user)"
                 >
                   <i class="material-icons">edit</i>
                 </button>
@@ -56,7 +57,7 @@
                   [disabled]="user.role === 'super'"
                   class="user-card__menu-btn"
                   data-target="modal-delete-user"
-                  (click)="currentUser = user"
+                  (click)="setCurrentUser(user)"
                 >
                   <i class="material-icons">clear</i>
                 </button>
@@ -72,7 +73,9 @@
                 <div class="user-card__email">
                   {{ user.login }}
                 </div>
-                <div class="user-card__group">Отдел маркетинга</div>
+                <ng-container *ngFor="let tag of user.userTags">
+                  <div class="user-card__group">{{ tag }}</div>
+                </ng-container>
               </div>
             </div>
           </div></ng-container
@@ -160,18 +163,30 @@
                 class="visually-hidden"
                 type="file"
                 id="file"
-                accept=".jpg, .jpeg, .png"
+                accept="image/*"
               /></div
           ></label>
           <div class="avatar__attachment"></div>
         </div>
         <div class="form__item">
           <label for="name">Имя</label>
-          <input formControlName="name" type="text" id="name" class="w-296" />
+          <input
+            formControlName="name"
+            type="text"
+            id="name"
+            class="w-296"
+            required
+          />
         </div>
         <div class="form__item">
           <label for="login">Логин</label>
-          <input formControlName="login" type="text" id="login" class="w-296" />
+          <input
+            formControlName="login"
+            type="text"
+            id="login"
+            class="w-296"
+            required
+          />
         </div>
 
         <div class="form__item">
@@ -192,18 +207,16 @@
             <label class="custom-radio">
               <input
                 class="visually-hidden"
-                id="role-admin"
                 formControlName="role"
                 type="radio"
                 [value]="'admin'"
               />
-              <span class="custom-radio__span"> админ </span>
+              <span class="custom-radio__span"> администратор </span>
             </label>
 
             <label class="custom-radio">
               <input
                 class="visually-hidden"
-                id="role-operator"
                 formControlName="role"
                 type="radio"
                 [value]="'operator'"
@@ -215,17 +228,37 @@
         <div class="form__item">
           <label>Подразделение</label>
           <select class="select-native" formControlName="group">
-            <option value="sel" disabled="" selected="">Выбрать...</option>
-            <option value="Отдел IT">Отдел IT</option>
-            <option value="Тестирование">Тестирование</option>
-            <option value="Отдел продаж">Отдел продаж</option>
-            <option value="Техподдержка">Техподдержка</option>
+            <option value="{{ tag }}" *ngFor="let tag of userTags">
+              {{ tag }}
+            </option>
+            <option value="Другое">Другое</option>
           </select>
+        </div>
+        <div class="form__item" *ngIf="form.get('group')?.value == 'Другое'">
+          <label></label>
+          <input
+            formControlName="other"
+            type="text"
+            id="other"
+            class="w-296"
+            placeholder="Введите название подразделения"
+          />
         </div>
       </form>
       <div class="btn-wrapper">
-        <button class="btn btn--big" (click)="addUser()">Добавить</button>
-        <button class="btn btn--big btn--outline modal-close">Отменить</button>
+        <button
+          class="btn btn--big"
+          (click)="addUser()"
+          [disabled]="form.invalid || form.untouched || form.pristine"
+        >
+          Добавить
+        </button>
+        <button
+          class="btn btn--big btn--outline modal-close"
+          (click)="clearModal()"
+        >
+          Отменить
+        </button>
       </div>
     </div>
   </div>

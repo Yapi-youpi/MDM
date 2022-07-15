@@ -27,6 +27,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public permissionsForm: FormGroup;
   public permissions: GroupPermissions[] = [];
   public users: Users[] = [];
+  public userTags = [];
   public currentUser!: Users;
   public search!: string;
   public loaded: boolean = false;
@@ -48,7 +49,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
       password: new FormControl('', Validators.required),
       login: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
-      group: new FormControl('', Validators.required),
+      group: new FormControl(''),
+      other: new FormControl(''),
     });
     this.filterForm = fb.group({
       roles: new FormArray([]),
@@ -78,6 +80,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         i.unsubscribe();
         this.getAllUsers();
         this.getPermissions();
+        this.getUserTags();
       }
     });
   }
@@ -119,15 +122,25 @@ export class UsersComponent implements OnInit, AfterViewInit {
         });
         this.sortUsers();
       })
-      .then(() => {
-        let i = interval(1000).subscribe(() => {
-          this.initModals();
-          i.unsubscribe();
-        });
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  getUserTags() {
+    this.userService
+      .getUserTags()
+      .then((res) => {
+        console.log(res);
+        this.userTags = res.userTags;
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  setCurrentUser(user: Users) {
+    this.currentUser = user;
   }
 
   addUser() {
@@ -136,19 +149,26 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const name = this.form.get('name')?.value;
     const password = this.form.get('password')?.value;
     const role = this.form.get('role')?.value;
-    const group = [this.form.get('group')?.value];
+    const group =
+      this.form.get('group')?.value === 'Другое'
+        ? [this.form.get('other')?.value]
+        : [this.form.get('group')?.value];
     this.userService
       .addUser(avatar, login, password, name, role, group)
       .then(() => {
-        this.userService.getUserInfo(undefined, 'all').then((res) => {
-          this.users = res;
-          console.log(res);
-          this.sortUsers();
-        });
+        this.clearModal();
+        this.getAllUsers();
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  clearModal() {
+    this.form.reset();
+    document
+      .getElementById('modal-new-user')
+      ?.classList.remove('modal-wrapper--open');
   }
 
   sortUsers() {
@@ -157,6 +177,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
       if (a.role < b.role) return -1;
       if (a.role > b.role) return 1;
       return 0;
+    });
+    let i = interval(1000).subscribe(() => {
+      this.initModals();
+      i.unsubscribe();
     });
   }
 
@@ -169,10 +193,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
       .deleteUser(id)
       .then((res) => {
         console.log(res);
-        this.userService.getUserInfo(undefined, 'all').then((res) => {
-          this.users = res;
-          this.sortUsers();
-        });
+        document
+          .getElementById('modal-delete-user')
+          ?.classList.remove('modal-wrapper--open');
+        this.getAllUsers();
       })
       .catch((err) => {
         if (err.error.error === 'super admin never die') {

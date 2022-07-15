@@ -179,6 +179,20 @@ export class UserService {
     });
   }
 
+  getUserTags() {
+    const url = environment.url + '/get_user_tags';
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
   getPermissions() {
     const url = environment.url + '/super/get_all_permissions';
     return new Promise<GroupPermissions[]>((resolve, reject) => {

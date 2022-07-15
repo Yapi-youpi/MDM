@@ -800,6 +800,7 @@ a.active .sdm-menu-icon span,
 }
 .btn:disabled {
   background: var(--sdm-grey);
+  border-color: var(--sdm-grey);
 }
 .btn--outline {
   background: transparent;
