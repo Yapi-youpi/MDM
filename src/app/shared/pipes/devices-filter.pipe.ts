@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import * as moment from "moment";
 
-import { Device } from "../interfaces/devices";
+import { Device } from "../types/devices";
 
 @Pipe({
   name: "devicesFilter",

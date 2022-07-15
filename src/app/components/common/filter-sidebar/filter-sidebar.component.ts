@@ -13,8 +13,8 @@ import { interval } from "rxjs";
 
 import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
 
-import { DevicesConfig } from "../../../shared/interfaces/config";
-import { DevicesGroups } from "../../../shared/interfaces/groups";
+import { DevicesConfig } from "../../../shared/types/config";
+import { DevicesGroups } from "../../../shared/types/groups";
 
 @Component({
   selector: "app-filter-sidebar",

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { DevicesGroups } from "../interfaces/groups";
+import { DevicesGroups } from "../types/groups";
 
 @Pipe({
   name: "groupConverter",

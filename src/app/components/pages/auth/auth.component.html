@@ -4,19 +4,50 @@
   >
     <form
       class="auth"
+      [formGroup]="_form"
+      (ngSubmit)="login()"
     >
-      ololo
+      <div class="header">
+        <h1 class="text-title text-center">
+          Вход
+        </h1>
+      </div>
+      <hr class="divider">
+      <div class="body">
+        <div class="form-group-wrapper">
+          <app-form-group
+            [control]="$any(_login)"
+            [labelText]="'Логин'"
+            [name]="'login'"
+            [inputWidth]="'w-350'"
+            [isError]="_isSubmitted && !!_login?.errors"
+          >
+          </app-form-group>
+          <app-input-alert
+            *ngIf="_isSubmitted && _login?.errors"
+            [control]="$any(_login)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+        <div class="form-group-wrapper">
+          <app-form-group
+            [control]="$any(_pass)"
+            [labelText]="'Пароль'"
+            [name]="'password'"
+            [inputType]="'password'"
+            [inputWidth]="'w-350'"
+            [isError]="_isSubmitted && !!_pass?.errors"
+          ></app-form-group>
+          <app-input-alert
+            *ngIf="_isSubmitted && _pass?.errors"
+            [control]="$any(_pass)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+        <app-auth-button></app-auth-button>
+      </div>
     </form>
   </app-card>
-<!--  <form-->
-<!--    class="auth"-->
-<!--  >-->
-<!--    <app-card-->
-<!--      [color]="'light-grey'"-->
-<!--    >-->
-<!--      ololo-->
-<!--    </app-card>-->
-<!--  </form>-->
 </app-central-wrapper>
 <!--  <form-->
 <!--    class="card sdm-bg-light-grey"-->

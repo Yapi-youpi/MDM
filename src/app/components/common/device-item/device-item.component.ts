@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { DevicesConfig } from "../../../shared/interfaces/config";
-import { DevicesGroups } from "../../../shared/interfaces/groups";
-import { Device } from "../../../shared/interfaces/devices";
+import { DevicesConfig } from "../../../shared/types/config";
+import { DevicesGroups } from "../../../shared/types/groups";
+import { Device } from "../../../shared/types/devices";
 
 @Component({
   selector: "app-device-item",

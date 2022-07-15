@@ -23,7 +23,7 @@
           </div>
           <app-input-alert
             *ngIf="_isSubmitted && _name?.errors"
-            [inputControl]="$any(_name)"
+            [control]="$any(_name)"
           ></app-input-alert>
         </div>
         <div
@@ -42,7 +42,7 @@
           </div>
           <app-input-alert
             *ngIf="_isSubmitted && _description?.errors"
-            [inputControl]="$any(_description)"
+            [control]="$any(_description)"
           ></app-input-alert>
         </div>
       </div>

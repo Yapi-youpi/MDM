@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { Device } from "../../../interfaces/devices";
+import { Device } from "../../../types/devices";
 
 @Pipe({
   name: "devicesByName",

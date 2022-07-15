@@ -4,7 +4,7 @@ import {
   NgxQrcodeErrorCorrectionLevels,
 } from "@techiediaries/ngx-qrcode";
 
-import { Device } from "../../../../shared/interfaces/devices";
+import { Device } from "../../../../shared/types/devices";
 
 @Component({
   selector: "app-qr-code",

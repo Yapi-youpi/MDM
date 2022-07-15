@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { Device } from "../../../../shared/interfaces/devices";
+import { Device } from "../../../../shared/types/devices";
 
 @Component({
   selector: "app-delete-device",

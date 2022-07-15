@@ -3,7 +3,7 @@ import { interval } from "rxjs";
 
 // import M from "materialize-css";
 
-import { DevicesConfig } from "../../../shared/interfaces/config";
+import { DevicesConfig } from "../../../shared/types/config";
 
 import { DevicesConfigService } from "../../../shared/services/devices-config.service";
 import { UserService } from "../../../shared/services/user.service";

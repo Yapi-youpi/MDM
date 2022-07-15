@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
 
-import { AddDevice, Device } from "../interfaces/devices";
+import { AddDevice, Device } from "../types/devices";
 
 import { devicesPaths as api } from "../enums/api";
 

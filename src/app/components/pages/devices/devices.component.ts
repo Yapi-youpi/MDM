@@ -3,15 +3,12 @@ import { interval } from "rxjs";
 
 // import M from "materialize-css";
 
-import { Device } from "../../../shared/interfaces/devices";
-import { DevicesGroups } from "../../../shared/interfaces/groups";
-import { DevicesConfig } from "../../../shared/interfaces/config";
-import { DevicesFilter } from "../../../shared/interfaces/interfaces";
-import {
-  DevicesState,
-  SingleDeviceState,
-} from "../../../shared/interfaces/states";
-import * as states from "../../../shared/interfaces/states";
+import { Device } from "../../../shared/types/devices";
+import { DevicesGroups } from "../../../shared/types/groups";
+import { DevicesConfig } from "../../../shared/types/config";
+import { DevicesFilter } from "../../../shared/types/interfaces";
+import { DevicesState, SingleDeviceState } from "../../../shared/types/states";
+import * as states from "../../../shared/types/states";
 
 import {
   device,

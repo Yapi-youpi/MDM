@@ -12,7 +12,7 @@ import { interval } from "rxjs";
 
 import { EditDeviceService } from "../../../../shared/services/forms/device/edit-device.service";
 
-import { DevicesGroups } from "../../../../shared/interfaces/groups";
+import { DevicesGroups } from "../../../../shared/types/groups";
 
 @Component({
   selector: "app-edit-device",

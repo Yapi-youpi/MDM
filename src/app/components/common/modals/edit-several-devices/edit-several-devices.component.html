@@ -30,7 +30,7 @@
           </div>
           <app-input-alert
             *ngIf="_isSubmitted && _group?.errors"
-            [inputControl]="$any(_group)"
+            [control]="$any(_group)"
           ></app-input-alert>
         </div>
         <div class="row switch">

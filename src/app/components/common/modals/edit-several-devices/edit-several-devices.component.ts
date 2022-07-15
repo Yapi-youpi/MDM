@@ -10,7 +10,7 @@ import { interval } from "rxjs";
 
 // import M from "materialize-css";
 
-import { DevicesGroups } from "../../../../shared/interfaces/groups";
+import { DevicesGroups } from "../../../../shared/types/groups";
 
 import { EditSeveralDevicesService } from "../../../../shared/services/forms/device/edit-several-devices.service";
 
