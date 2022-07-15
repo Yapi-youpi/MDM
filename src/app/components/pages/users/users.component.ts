@@ -23,9 +23,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public permissionsForm: FormGroup;
   public users: Users[] = [];
   public currentUser!: Users;
-  public login: string = '';
   public loading: boolean = true;
-  public changePas: string = '';
   public rename: string = '';
   public search!: string;
   public filter_roles!: Array<string>;
@@ -107,6 +105,148 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
+  addUser() {
+    const avatar = this.userPhoto;
+    const login = this.form.get('login')?.value;
+    const name = this.form.get('name')?.value;
+    const password = this.form.get('password')?.value;
+    const role = this.form.get('role')?.value;
+    this.userService
+      .addUser(avatar, login, password, name, role)
+      .then(() => {
+        this.userService.getUserInfo(undefined, 'all').then((res) => {
+          this.users = res;
+          console.log(res);
+          this.sortUsers();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  sortUsers() {
+    this.users.sort((a, b) => {
+      if (a.groupsPermissions.super) return -1;
+      if (a.role < b.role) return -1;
+      if (a.role > b.role) return 1;
+      return 0;
+    });
+  }
+
+  editUser() {
+    console.log('user data will update');
+  }
+
+  deleteUser(id: string) {
+    this.userService
+      .deleteUser(id)
+      .then((res) => {
+        console.log(res);
+        this.userService.getUserInfo(undefined, 'all').then((res) => {
+          this.users = res;
+          this.sortUsers();
+        });
+      })
+      .catch((err) => {
+        if (err.error.error === 'super admin never die') {
+          // M.toast({ html: "Пользователя нельзя удалить" });
+        }
+        if (err.error.error === 'api forbidden by user, only for super admin') {
+          // M.toast({ html: "Доступ запрещен" });
+        }
+      });
+  }
+
+  changeUserPassword(login: string, password: string) {
+    this.userService
+      .changeUserPassword(login, password)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  renameUser(login: string, name: string) {
+    this.userService
+      .renameUSer(login, name)
+      .then((res) => {
+        console.log(res);
+        this.getAllUsers();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  addFile(event: Event) {
+    this.file_input = event.target;
+    const file = this.file_input.files[0];
+    if (file) {
+      this.file_placeholder = this.elementRef.nativeElement.querySelector(
+        '.avatar__attachment'
+      );
+      new Compressor(file, {
+        quality: 0.6,
+        maxWidth: 512,
+        maxHeight: 512,
+
+        success() {
+          convertTo64();
+        },
+        error(err) {
+          console.log(err.message);
+        },
+      });
+      this.file_placeholder.innerHTML = `<span>${file.name}</span><button type="button" class="btn btn--outline btn--action clear-file-btn"><i class="tiny material-icons">clear</i></button>`;
+      this.avatar =
+        this.elementRef.nativeElement.querySelector('.avatar__image');
+      this.avatar.setAttribute(
+        'style',
+        `background-image: url(${window.URL.createObjectURL(
+          file
+        )}); background-size: cover;`
+      );
+      const convertTo64 = () => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const img = reader.result
+            ?.toString()
+            .replace(/^data:image\/[a-z]+;base64,/, '');
+          this.userPhoto = img || '';
+        };
+      };
+      document
+        .querySelector('.clear-file-btn')!
+        .addEventListener('click', () => {
+          this.clearInputFile(
+            this.file_input,
+            this.file_placeholder,
+            this.avatar
+          );
+        });
+    }
+  }
+
+  clearInputFile(
+    input: HTMLInputElement,
+    placeholder: Element,
+    image: Element
+  ) {
+    if (input && placeholder) {
+      let btn = document.querySelector('.clear-file-btn');
+      if (btn !== null) {
+        btn.removeEventListener('click', () => this.clearInputFile);
+      }
+      input.value = '';
+      placeholder.innerHTML = '';
+      image.removeAttribute('style');
+    }
+  }
+
   onCheckboxChange(event: any) {
     const roles = this.filterForm.controls['roles'] as FormArray;
     if (event.target.checked) {
@@ -134,187 +274,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const index = roles.controls.findIndex((x) => x.value);
     roles.removeAt(index);
   }
-
-  addUser() {
-    const avatar = this.userPhoto;
-    const login = this.form.get('login')?.value;
-    const name = this.form.get('name')?.value;
-    const password = this.form.get('password')?.value;
-    const role = this.form.get('role')?.value;
-    this.userService
-      .addUser(avatar, login, password, name, role)
-      .then(() => {
-        this.userService.getUserInfo(undefined, 'all').then((res) => {
-          this.users = res;
-          console.log(res);
-          this.sortUsers();
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  editUser() {
-    console.log('user data will update');
-  }
-
-  deleteUser(id: string) {
-    this.userService
-      .deleteUser(id)
-      .then((res) => {
-        console.log(res);
-        this.userService.getUserInfo(undefined, 'all').then((res) => {
-          this.users = res;
-          this.sortUsers();
-        });
-      })
-      .catch((err) => {
-        if (err.error.error === 'super admin never die') {
-          // M.toast({ html: "Пользователя нельзя удалить" });
-        }
-        if (err.error.error === 'api forbidden by user, only for super admin') {
-          // M.toast({ html: "Доступ запрещен" });
-        }
-      });
-  }
-
-  sortUsers() {
-    this.users.sort((a) => {
-      if (a.role === 'admin') {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
-    this.users.sort((a) => {
-      if (a.groupsPermissions.super) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
-  }
-  changeState(id: string, state: boolean, index: number) {
-    this.users[index].activeState = !state;
-    this.userService
-      .changeUserState(id, !state)
-      .then((res) => {
-        if (res) {
-          // M.toast({ html: "Успешно" });
-        }
-      })
-      .catch((err) => {
-        if (err.error.error === 'api forbidden by user') {
-          // M.toast({ html: "Доступ запрещен" });
-        }
-      });
-  }
-
-  getLogin(login: string) {
-    this.userService.lowerCase = false;
-    this.userService.upperCase = false;
-    this.userService.number = false;
-    this.userService.specialChar = false;
-    this.userService.passLength = 0;
-    this.changePas = '';
-    this.login = login;
-  }
-
-  changeUserPassword(login: string, password: string) {
-    this.userService
-      .changeUserPassword(login, password)
-      .then((res) => {
-        // let elem = document.getElementById("changeUserPass");
-        // let inst = M.Modal.getInstance(elem);
-        // inst.close();
-        this.changePas = '';
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  renameUser(login: string, name: string) {
-    this.userService
-      .renameUSer(login, name)
-      .then((res) => {
-        console.log(res);
-        this.getAllUsers();
-      })
-      .catch((err) => {
-        console.log(err);
-        // M.toast({ html: err.error.error });
-      });
-  }
-  addFile(event: Event) {
-    this.file_input = event.target;
-    const file = this.file_input.files[0];
-    if (file) {
-      this.file_placeholder = this.elementRef.nativeElement.querySelector(
-        '.avatar__attachment'
-      );
-      console.log(file);
-      new Compressor(file, {
-        quality: 0.6,
-        maxWidth: 512,
-        maxHeight: 512,
-
-        success(result) {
-          console.log(result);
-          convertTo64();
-        },
-        error(err) {
-          console.log(err.message);
-        },
-      });
-      this.file_placeholder.innerHTML = `<span>${file.name}</span><button type="button" class="btn btn--outline btn--action clear-file-btn"><i class="tiny material-icons">clear</i></button>`;
-      this.avatar =
-        this.elementRef.nativeElement.querySelector('.avatar__image');
-      this.avatar.setAttribute(
-        'style',
-        `background-image: url(${window.URL.createObjectURL(
-          file
-        )}); background-size: cover;`
-      );
-      const convertTo64 = () => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          const img = reader.result
-            ?.toString()
-            .replace(/^data:image\/[a-z]+;base64,/, '');
-          this.userPhoto = img || '';
-          console.log(img);
-        };
-      };
-      document
-        .querySelector('.clear-file-btn')!
-        .addEventListener('click', () => {
-          this.clearInputFile(
-            this.file_input,
-            this.file_placeholder,
-            this.avatar
-          );
-        });
-    }
-  }
-  clearInputFile(
-    input: HTMLInputElement,
-    placeholder: Element,
-    image: Element
-  ) {
-    if (input && placeholder) {
-      let btn = document.querySelector('.clear-file-btn');
-      if (btn !== null) {
-        btn.removeEventListener('click', () => this.clearInputFile);
-      }
-      input.value = '';
-      placeholder.innerHTML = '';
-      image.removeAttribute('style');
-      // this.inputForm.patchValue({ file: null });
-    }
-  }
 }
+
 //VhG2NXs3_
