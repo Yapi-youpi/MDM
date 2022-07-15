@@ -53,6 +53,7 @@ import { CentralWrapperComponent } from "./components/common/central-wrapper/cen
 import { FormGroupComponent } from "./components/common/UI/input/form-group/form-group.component";
 import { InputComponent } from './components/common/UI/input/input/input.component';
 import { AuthButtonComponent } from './components/common/UI/button/auth-button/auth-button.component';
+import { CheckboxComponent } from './components/common/UI/input/checkbox/checkbox.component';
 
 const routes: Routes = [
   {
@@ -107,6 +108,7 @@ const routes: Routes = [
     FormGroupComponent,
     InputComponent,
     AuthButtonComponent,
+    CheckboxComponent,
   ],
   imports: [
     BrowserModule,

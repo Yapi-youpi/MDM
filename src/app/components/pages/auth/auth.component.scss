@@ -16,13 +16,32 @@
 
   .body {
     margin-top: 40px;
+
+    .form-group-wrapper {
+      position: relative;
+    }
+
+    .form-group-wrapper:not(:last-child) {
+      margin-bottom: 30.56px;
+    }
   }
 
-  .form-group-wrapper {
-    position: relative;
-  }
+  .footer {
+    width: 350px;
 
-  .form-group-wrapper:not(:last-child) {
-    margin-bottom: 30.56px;
+    margin-left: auto;
+
+    .row {
+      margin-top: 31px;
+
+      .remember {
+        display: flex;
+        align-items: center;
+
+        p {
+          margin-left: 15px;
+        }
+      }
+    }
   }
 }

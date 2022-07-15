@@ -31,5 +31,10 @@ export class AuthService {
     this.isSubmitted = false;
   }
 
-  resetForm() {}
+  resetForm() {
+    Object.keys(this.form.controls).forEach((key) => {
+      const control = this.form.controls[key];
+      control.setErrors(null);
+    });
+  }
 }

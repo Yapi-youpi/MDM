@@ -50,7 +50,7 @@
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: var(--sdm-dark-blue);
+  background-color: var(--dark-blue);
 }
 
 html, body {
@@ -122,7 +122,7 @@ hr.divider {
 }
 
 // ИНПУТ
-input {
+input:not([type='checkbox']) {
   height: var(--input-height);
 
   padding: 14.44px 31px 11px 11px;
@@ -201,6 +201,11 @@ button {
   }
 }
 
+// ССЫЛКА
+a {
+  color: inherit;
+}
+
 // СПАН-ИКОНКА
 .icon {
   display: block;
@@ -210,4 +215,11 @@ button {
 
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
+}
+
+// КОНТЕЙНЕР-СТРОКА
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
