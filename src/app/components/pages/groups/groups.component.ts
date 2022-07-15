@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { interval } from "rxjs";
 
-import M from "materialize-css";
+// import M from "materialize-css";
 
 import { DevicesGroups } from "../../../shared/interfaces/groups";
 
@@ -26,8 +26,8 @@ export class GroupsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
-    M.Modal.init(elem);
+    // let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
+    // M.Modal.init(elem);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();

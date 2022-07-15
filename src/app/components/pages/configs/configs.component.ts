@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { interval } from "rxjs";
 
-import M from "materialize-css";
+// import M from "materialize-css";
 
 import { DevicesConfig } from "../../../shared/interfaces/config";
 
@@ -27,10 +27,10 @@ export class ConfigsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let rename = this.elementRef.nativeElement.querySelectorAll(".modal");
-    let config = this.elementRef.nativeElement.querySelectorAll(".modal");
-    M.Modal.init(rename);
-    M.Modal.init(config);
+    // let rename = this.elementRef.nativeElement.querySelectorAll(".modal");
+    // let config = this.elementRef.nativeElement.querySelectorAll(".modal");
+    // M.Modal.init(rename);
+    // M.Modal.init(config);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();

@@ -9,7 +9,7 @@ import {
 import { FormGroup } from "@angular/forms";
 import { interval } from "rxjs";
 
-import M from "materialize-css";
+// import M from "materialize-css";
 
 import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
 
@@ -34,21 +34,21 @@ export class FilterSidebarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const sidebar =
-      this.elementRef.nativeElement.querySelector(".sidenav.filter");
-
-    M.Sidenav.init(sidebar, {
-      edge: "right",
-    });
-
-    let filterSelectsInter = interval(2000).subscribe(() => {
-      const filterSelects =
-        this.elementRef.nativeElement.querySelectorAll(".filter-select");
-      if (filterSelects && filterSelects.length !== 0) {
-        filterSelectsInter.unsubscribe();
-        M.FormSelect.init(filterSelects);
-      }
-    });
+    // const sidebar =
+    //   this.elementRef.nativeElement.querySelector(".sidenav.filter");
+    //
+    // M.Sidenav.init(sidebar, {
+    //   edge: "right",
+    // });
+    //
+    // let filterSelectsInter = interval(2000).subscribe(() => {
+    //   const filterSelects =
+    //     this.elementRef.nativeElement.querySelectorAll(".filter-select");
+    //   if (filterSelects && filterSelects.length !== 0) {
+    //     filterSelectsInter.unsubscribe();
+    //     M.FormSelect.init(filterSelects);
+    //   }
+    // });
   }
 
   get _form() {

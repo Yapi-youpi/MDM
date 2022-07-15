@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { interval } from "rxjs";
 
-import M from "materialize-css";
+// import M from "materialize-css";
 
 import { DevicesGroups } from "../../../../shared/interfaces/groups";
 import { AddDeviceService } from "../../../../shared/services/forms/device/add-device.service";
@@ -26,15 +26,15 @@ export class AddDeviceComponent implements OnInit {
   constructor(private elementRef: ElementRef, public form: AddDeviceService) {}
 
   ngOnInit(): void {
-    let i = interval(2000).subscribe(() => {
-      const elems = this.elementRef.nativeElement.querySelectorAll(
-        ".config-select-modal"
-      );
-      if (elems && elems.length !== 0) {
-        i.unsubscribe();
-        M.FormSelect.init(elems);
-      }
-    });
+    // let i = interval(2000).subscribe(() => {
+    //   const elems = this.elementRef.nativeElement.querySelectorAll(
+    //     ".config-select-modal"
+    //   );
+    //   if (elems && elems.length !== 0) {
+    //     i.unsubscribe();
+    //     M.FormSelect.init(elems);
+    //   }
+    // });
   }
 
   get _form() {

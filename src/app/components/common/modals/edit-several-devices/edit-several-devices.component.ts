@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { interval } from "rxjs";
 
-import M from "materialize-css";
+// import M from "materialize-css";
 
 import { DevicesGroups } from "../../../../shared/interfaces/groups";
 
@@ -30,15 +30,15 @@ export class EditSeveralDevicesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let i = interval(2000).subscribe(() => {
-      const elem = this.elementRef.nativeElement.querySelector(
-        ".several-group-select-modal"
-      );
-      if (elem) {
-        i.unsubscribe();
-        M.FormSelect.init(elem);
-      }
-    });
+    // let i = interval(2000).subscribe(() => {
+    //   const elem = this.elementRef.nativeElement.querySelector(
+    //     ".several-group-select-modal"
+    //   );
+    //   if (elem) {
+    //     i.unsubscribe();
+    //     M.FormSelect.init(elem);
+    //   }
+    // });
   }
 
   get _form() {

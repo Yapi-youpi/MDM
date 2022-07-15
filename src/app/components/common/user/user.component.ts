@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import M from "materialize-css";
+// import M from "materialize-css";
 
 import { AuthService } from "../../../shared/services/auth.service";
 import { UserService } from "../../../shared/services/user.service";
@@ -56,11 +56,11 @@ export class UserComponent {
           this.asset.removeFromStorage("name").then();
           this.asset.removeFromStorage("login").then();
         } else {
-          M.toast({ html: "Ошибка" });
+          // M.toast({ html: "Ошибка" });
         }
       })
       .catch((err) => {
-        M.toast({ html: err.error.error });
+        // M.toast({ html: err.error.error });
       });
   }
 }

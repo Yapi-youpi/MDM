@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { interval } from "rxjs";
 
-import M from "materialize-css";
+// import M from "materialize-css";
 
 import { Device } from "../../../shared/interfaces/devices";
 import { DevicesGroups } from "../../../shared/interfaces/groups";
@@ -68,21 +68,21 @@ export class DevicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let nonClosingModal =
-      this.elementRef.nativeElement.querySelector(".non-closing");
-    let closingModal =
-      this.elementRef.nativeElement.querySelectorAll(".closing");
-
-    M.Modal.init(nonClosingModal, {
-      dismissible: false,
-      onCloseEnd: () => {
-        this.userPasswordService.resetForm();
-      },
-    });
-
-    M.Modal.init(closingModal, {
-      dismissible: true,
-    });
+    // let nonClosingModal =
+    //   this.elementRef.nativeElement.querySelector(".non-closing");
+    // let closingModal =
+    //   this.elementRef.nativeElement.querySelectorAll(".closing");
+    //
+    // M.Modal.init(nonClosingModal, {
+    //   dismissible: false,
+    //   onCloseEnd: () => {
+    //     this.userPasswordService.resetForm();
+    //   },
+    // });
+    //
+    // M.Modal.init(closingModal, {
+    //   dismissible: true,
+    // });
 
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
@@ -197,14 +197,14 @@ export class DevicesComponent implements OnInit {
           this.currDevice = res.device;
           this.devices = [res.device, ...this.devices];
 
-          const addModal =
-            this.elementRef.nativeElement.querySelector("#add_device");
-          const qrModal =
-            this.elementRef.nativeElement.querySelector("#qr-code");
-
-          M.Modal.getInstance(addModal).close();
-          this.addDeviceService.resetForm();
-          M.Modal.getInstance(qrModal).open();
+          // const addModal =
+          //   this.elementRef.nativeElement.querySelector("#add_device");
+          // const qrModal =
+          //   this.elementRef.nativeElement.querySelector("#qr-code");
+          //
+          // M.Modal.getInstance(addModal).close();
+          // this.addDeviceService.resetForm();
+          // M.Modal.getInstance(qrModal).open();
         } else {
           console.log(res.error);
         }
@@ -320,9 +320,9 @@ export class DevicesComponent implements OnInit {
             }
           });
 
-          const modal =
-            this.elementRef.nativeElement.querySelector("#edit_device");
-          M.Modal.getInstance(modal).close();
+          // const modal =
+          //   this.elementRef.nativeElement.querySelector("#edit_device");
+          // M.Modal.getInstance(modal).close();
         } else {
           console.log(res.error);
         }
@@ -364,10 +364,10 @@ export class DevicesComponent implements OnInit {
 
           this.editSeveralDevicesService.resetForm();
 
-          const modal = this.elementRef.nativeElement.querySelector(
-            "#edit_several_devices"
-          );
-          M.Modal.getInstance(modal).close();
+          // const modal = this.elementRef.nativeElement.querySelector(
+          //   "#edit_several_devices"
+          // );
+          // M.Modal.getInstance(modal).close();
         } else {
           console.log(res.error);
         }
@@ -393,9 +393,9 @@ export class DevicesComponent implements OnInit {
             (d) => d !== device.device_id
           );
 
-          const modal =
-            this.elementRef.nativeElement.querySelector("#delete_device");
-          M.Modal.getInstance(modal).close();
+          // const modal =
+          //   this.elementRef.nativeElement.querySelector("#delete_device");
+          // M.Modal.getInstance(modal).close();
         }
       })
       .catch((err) => {
@@ -416,9 +416,9 @@ export class DevicesComponent implements OnInit {
 
           this.selectedDevicesIDs = [];
 
-          const modal =
-            this.elementRef.nativeElement.querySelector("#delete_elements");
-          M.Modal.getInstance(modal).close();
+          // const modal =
+          //   this.elementRef.nativeElement.querySelector("#delete_elements");
+          // M.Modal.getInstance(modal).close();
         }
       })
       .catch((err) => {
