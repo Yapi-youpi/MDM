@@ -1,0 +1,171 @@
+.menu-sidebar {
+  height: calc(100vh - 24px);
+  width: 280px;
+
+  position: fixed;
+
+  margin-left: 20px;
+
+  transition: width var(--transition-time) ease;
+
+  &.hidden {
+    width: 76px;
+  }
+
+  .content {
+    padding: 25px 12px;
+
+    transition: padding var(--transition-time) ease;
+
+    &.hidden {
+      padding: 34px 10px;
+    }
+  }
+}
+
+//aside {
+//  height: calc(100vh - 24px);
+//  width: 280px;
+//
+//  margin: 12px 0 12px 18px;
+//
+//  overflow: hidden;
+//
+//  transition: width 0.4s ease;
+//}
+//
+//aside.hidden {
+//  width: 76px;
+//}
+//
+//aside .content {
+//  margin: 0 12px;
+//}
+//
+//aside .header {
+//  height: 44px;
+//
+//  display: flex;
+//  align-items: center;
+//
+//  margin-top: 25px;
+//  margin-bottom: 20px;
+//}
+//
+//aside .header.shift {
+//  margin-bottom: 20px;
+//}
+//
+//aside .header button {
+//  width: 24px;
+//
+//  margin-left: 14px;
+//  margin-right: 12px;
+//
+//  border: none;
+//}
+//
+//aside .header h1 {
+//  display: inline-block;
+//
+//  margin: 0;
+//
+//  font-size: 40px;
+//
+//  transition: all 0.3s ease;
+//}
+//
+//aside li {
+//  height: 54px;
+//
+//  display: flex;
+//  align-items: center;
+//}
+//
+//aside li a:hover,
+//aside li a.active {
+//  background-color: #cbd9f2;
+//
+//  border-radius: 8px;
+//}
+//
+//aside li a {
+//  height: 100%;
+//  width: 100%;
+//
+//  display: flex;
+//  align-items: center;
+//
+//  padding: 0 16px !important;
+//
+//  font-size: 16px !important;
+//  white-space: nowrap;
+//  color: #32485e !important;
+//
+//  overflow: hidden;
+//}
+//
+//aside li a.active {
+//  background-color: #dce4f1;
+//  color: #5d8ce0 !important;
+//}
+//
+//aside li a:not(.active):hover {
+//  background-color: #eceef1;
+//}
+//
+//aside .sdm-menu-icon:not(.menu) {
+//  margin-right: 12px;
+//
+//  flex-shrink: 0;
+//}
+//
+//aside .divider {
+//  margin: 5px 0;
+//}
+//
+//.sdm-menu-icon.menu span,
+//.sdm-menu-icon.apps span,
+//.sdm-menu-icon.config span {
+//  height: 24px;
+//  width: 24px;
+//
+//  mask-size: 24px 24px;
+//  -webkit-mask-size: 24px 24px;
+//}
+//.sdm-menu-icon.menu span {
+//  mask-image: url("../../../../assets/UI/hamburger.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/hamburger.svg");
+//}
+//.sdm-menu-icon.devices span {
+//  mask-image: url("../../../../assets/UI/mobile.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/mobile.svg");
+//}
+//.sdm-menu-icon.groups span {
+//  mask-image: url("../../../../assets/UI/devices_group.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/devices_group.svg");
+//}
+//.sdm-menu-icon.apps span {
+//  mask-image: url("../../../../assets/UI/apps.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/apps.svg");
+//}
+//.sdm-menu-icon.messages span {
+//  mask-image: url("../../../../assets/UI/mail.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/mail.svg");
+//}
+//.sdm-menu-icon.map span {
+//  mask-image: url("../../../../assets/UI/map.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/map.svg");
+//}
+//.sdm-menu-icon.config span {
+//  mask-image: url("../../../../assets/UI/settings.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/settings.svg");
+//}
+//.sdm-menu-icon.users span {
+//  mask-image: url("../../../../assets/UI/users_group.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/users_group.svg");
+//}
+//.sdm-menu-icon.help span {
+//  mask-image: url("../../../../assets/UI/faq.svg");
+//  -webkit-mask-image: url("../../../../assets/UI/faq.svg");
+//}

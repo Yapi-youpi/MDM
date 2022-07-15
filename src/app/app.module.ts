@@ -54,6 +54,7 @@ import { FormGroupComponent } from "./components/common/UI/input/form-group/form
 import { InputComponent } from './components/common/UI/input/input/input.component';
 import { AuthButtonComponent } from './components/common/UI/button/auth-button/auth-button.component';
 import { CheckboxComponent } from './components/common/UI/input/checkbox/checkbox.component';
+import { MenuButtonComponent } from './components/common/UI/button/menu-button/menu-button.component';
 
 const routes: Routes = [
   {
@@ -109,6 +110,7 @@ const routes: Routes = [
     InputComponent,
     AuthButtonComponent,
     CheckboxComponent,
+    MenuButtonComponent,
   ],
   imports: [
     BrowserModule,

@@ -207,7 +207,8 @@ a {
 }
 
 // СПАН-ИКОНКА
-.icon {
+.icon,
+.btn-icon span {
   display: block;
 
   mask-repeat: no-repeat;
@@ -221,5 +222,14 @@ a {
 .row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+
+  &.space-between {
+    justify-content: space-between;
+  }
+  &.flex-start {
+    justify-content: flex-start;
+  }
+  &.center {
+    justify-content: center;
+  }
 }

@@ -96,68 +96,10 @@ export class AuthComponent {
         })
         .catch((err) => {
           console.log(err);
-          // this.error = err.error.error;
         });
 
       this.logForm.resetForm();
       this.logForm.resetSubmitted();
     }
-
-    // this.error = "";
-    // this.auth
-    //   .login(login, password)
-    //   .then(
-    //     (res: {
-    //       success: boolean;
-    //       error: string;
-    //       id: string;
-    //       token: string;
-    //     }) => {
-    //       this.asset.setToStorage("token", res.token).then();
-    //       this.asset.setToStorage("login", login).then();
-    //       this.asset.setToStorage("last_password", password).then();
-    //       this.user.token = res.token;
-    //       this.user.login = login;
-    //       this.user.last_password = password;
-    //       this.db
-    //         .signup(login, password)
-    //         .then((res) => {
-    //           console.log(res, "Log In res");
-    //         })
-    //         .catch((err) => {
-    //           if (err === 400) {
-    //             this.db
-    //               .logIN(login, password)
-    //               .then((res) => {
-    //                 console.log(res, "Log In res");
-    //               })
-    //               .catch((err) => {
-    //                 console.log(err, "Log In err");
-    //               });
-    //           }
-    //         });
-    //       this.router.navigateByUrl("devices").then(() => {
-    //         if (res.error === "change super admin password") {
-    //           // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
-    //           // let i = interval(1000).subscribe(() => {
-    //           //   let elem = document.querySelector(".modal");
-    //           //   const options = {
-    //           //     dismissible: false,
-    //           //   };
-    //           //   if (elem) {
-    //           //     i.unsubscribe();
-    //           //     // M.Modal.init(elem, options);
-    //           //     // let instance = M.Modal.getInstance(elem);
-    //           //     // instance.open();
-    //           //   }
-    //           // });
-    //         }
-    //       });
-    //     }
-    //   )
-    //   .catch((err) => {
-    //     console.log(err);
-    //     this.error = err.error.error;
-    //   });
   }
 }

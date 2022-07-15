@@ -1,88 +1,103 @@
-<aside class="sidenav sidenav-fixed sdm-main-sidenav sdm-bg-light-grey r-14" [class.hidden]="isSidebarHidden">
-  <div class="content">
-    <div class="header" [class.shift]="isSidebarHidden">
-      <button (click)="toggleSidebarView()" [class.shift]="isSidebarHidden">
-        <div class="sdm-menu-icon r-round menu">
-          <span></span>
-        </div>
-      </button>
-      <h1 *ngIf="!isSidebarHidden">SDM</h1>
+<aside
+  class="menu-sidebar"
+  [class.hidden]="isSidebarHidden"
+>
+  <app-card
+    [color]="'light-blue'"
+  >
+    <div
+      class="content"
+      [class.hidden]="isSidebarHidden"
+    >
+      <div class="header row flex-start">
+        <app-menu-button
+          (onClick)="toggleSidebarView()"
+        ></app-menu-button>
+      </div>
+<!--      <div class="header" [class.shift]="isSidebarHidden">-->
+<!--        <button (click)="toggleSidebarView()" [class.shift]="isSidebarHidden">-->
+<!--          <div class="sdm-menu-icon r-round menu">-->
+<!--            <span></span>-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        <h1 *ngIf="!isSidebarHidden">SDM</h1>-->
+<!--      </div>-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <a id="devices" [routerLink]="'/devices'">-->
+<!--            <div class="sdm-menu-icon r-round devices">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Устройства-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a id="groups" [routerLink]="'/groups'">-->
+<!--            <div class="sdm-menu-icon r-round groups">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Группы устройств-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a id="apps" [routerLink]="'/apps'">-->
+<!--            <div class="sdm-menu-icon r-round apps">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Приложения-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a id="messages" [routerLink]="'/messages'">-->
+<!--            <div class="sdm-menu-icon r-round messages">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Сообщения-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a id="map" [routerLink]="'/map'">-->
+<!--            <div class="sdm-menu-icon r-round map">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Карта-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
     </div>
-    <ul>
-      <li>
-        <a id="devices" [routerLink]="'/devices'">
-          <div class="sdm-menu-icon r-round devices">
-            <span></span>
-          </div>
-          Устройства
-        </a>
-      </li>
-      <li>
-        <a id="groups" [routerLink]="'/groups'">
-          <div class="sdm-menu-icon r-round groups">
-            <span></span>
-          </div>
-          Группы устройств
-        </a>
-      </li>
-      <li>
-        <a id="apps" [routerLink]="'/apps'">
-          <div class="sdm-menu-icon r-round apps">
-            <span></span>
-          </div>
-          Приложения
-        </a>
-      </li>
-      <li>
-        <a id="messages" [routerLink]="'/messages'">
-          <div class="sdm-menu-icon r-round messages">
-            <span></span>
-          </div>
-          Сообщения
-        </a>
-      </li>
-      <li>
-        <a id="map" [routerLink]="'/map'">
-          <div class="sdm-menu-icon r-round map">
-            <span></span>
-          </div>
-          Карта
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="divider"></div>
-  <div class="content">
-    <ul>
-      <li>
-        <a id="config" [routerLink]="'/config'">
-          <div class="sdm-menu-icon r-round config">
-            <span></span>
-          </div>
-          Конфигурации
-        </a>
-      </li>
-      <li>
-        <a id="users" [routerLink]="'/users'">
-          <div class="sdm-menu-icon r-round users">
-            <span></span>
-          </div>
-          Пользователи
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="divider"></div>
-  <div class="content">
-    <ul>
-      <li>
-        <a id="help" [routerLink]="'/help'">
-          <div class="sdm-menu-icon r-round help">
-            <span></span>
-          </div>
-          Помощь
-        </a>
-      </li>
-    </ul>
-  </div>
+<!--    <div class="divider"></div>-->
+<!--    <div class="content">-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <a id="config" [routerLink]="'/config'">-->
+<!--            <div class="sdm-menu-icon r-round config">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Конфигурации-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a id="users" [routerLink]="'/users'">-->
+<!--            <div class="sdm-menu-icon r-round users">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Пользователи-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <div class="divider"></div>-->
+<!--    <div class="content">-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <a id="help" [routerLink]="'/help'">-->
+<!--            <div class="sdm-menu-icon r-round help">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--            Помощь-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+  </app-card>
 </aside>
