@@ -132,13 +132,20 @@ export class UserService {
       });
     });
   }
-  addUser(login: string, password: string, name: string, role: string) {
+  addUser(
+    avatar: string,
+    login: string,
+    password: string,
+    name: string,
+    role: string
+  ) {
     const url = environment.url + '/register';
     const body = {
       login,
       password,
       role,
       name,
+      avatar,
     };
     return new Promise((resolve, reject) => {
       this.http.post(url, body).subscribe({

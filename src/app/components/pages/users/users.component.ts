@@ -10,6 +10,7 @@ import {
 import { Permissions, Users } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../services/asset.service';
+import Compressor from 'compressorjs';
 
 @Component({
   selector: 'app-users',
@@ -19,6 +20,7 @@ import { AssetService } from '../../../services/asset.service';
 export class UsersComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public filterForm: FormGroup;
+  public permissionsForm: FormGroup;
   public users: Users[] = [];
   public currentUser!: Users;
   public login: string = '';
@@ -31,11 +33,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public file_input!: any;
   public file_placeholder!: Element;
   public avatar!: Element;
+  public userPhoto!: string;
   constructor(
     public asset: AssetService,
     private elementRef: ElementRef,
     public userService: UserService,
-    fb: FormBuilder
+    private fb: FormBuilder
   ) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -46,6 +49,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
     });
     this.filterForm = fb.group({
       roles: new FormArray([]),
+    });
+    this.permissionsForm = fb.group({
+      permissions: new FormArray([]),
     });
     this.params = {
       viewDevices: 'Просмотр устройств',
@@ -114,26 +120,29 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter() {
-    console.log(this.filterForm.value.roles);
     this.filter_roles = this.filterForm.value.roles;
   }
 
   clearFilter() {
     this.filter_roles = [];
-
+    const checkboxes = document.querySelectorAll(
+      'input[type="checkbox"][name="role"]'
+    );
+    // @ts-ignore
+    checkboxes.forEach((checkbox) => (checkbox.checked = false));
     const roles = this.filterForm.controls['roles'] as FormArray;
     const index = roles.controls.findIndex((x) => x.value);
     roles.removeAt(index);
-    console.log(this.filterForm.value.roles);
   }
 
   addUser() {
+    const avatar = this.userPhoto;
     const login = this.form.get('login')?.value;
     const name = this.form.get('name')?.value;
     const password = this.form.get('password')?.value;
     const role = this.form.get('role')?.value;
     this.userService
-      .addUser(login, password, name, role)
+      .addUser(avatar, login, password, name, role)
       .then(() => {
         this.userService.getUserInfo(undefined, 'all').then((res) => {
           this.users = res;
@@ -247,6 +256,19 @@ export class UsersComponent implements OnInit, AfterViewInit {
         '.avatar__attachment'
       );
       console.log(file);
+      new Compressor(file, {
+        quality: 0.6,
+        maxWidth: 512,
+        maxHeight: 512,
+
+        success(result) {
+          console.log(result);
+          convertTo64();
+        },
+        error(err) {
+          console.log(err.message);
+        },
+      });
       this.file_placeholder.innerHTML = `<span>${file.name}</span><button type="button" class="btn btn--outline btn--action clear-file-btn"><i class="tiny material-icons">clear</i></button>`;
       this.avatar =
         this.elementRef.nativeElement.querySelector('.avatar__image');
@@ -256,18 +278,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
           file
         )}); background-size: cover;`
       );
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const img = reader.result
-          ?.toString()
-          .replace(/^data:image\/[a-z]+;base64,/, '');
-        //console.log(img);
+      const convertTo64 = () => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const img = reader.result
+            ?.toString()
+            .replace(/^data:image\/[a-z]+;base64,/, '');
+          this.userPhoto = img || '';
+          console.log(img);
+        };
       };
-      /*      this.inputForm.get('file')?.patchValue({
-        file: files[0],
-      });*/
-      // this.inputForm.get('file')?.updateValueAndValidity();
       document
         .querySelector('.clear-file-btn')!
         .addEventListener('click', () => {

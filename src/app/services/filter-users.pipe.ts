@@ -6,7 +6,6 @@ import { Users } from '../interfaces/interfaces';
 })
 export class FilterUsersPipe implements PipeTransform {
   transform(users: Users[], filter: Array<string>): Users[] {
-    console.log(filter);
     return !users
       ? []
       : !filter?.length
