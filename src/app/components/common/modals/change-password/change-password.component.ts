@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { form, user } from "src/app/shared/services";
+import { formService, userService } from "src/app/shared/services";
 
 @Component({
   selector: "app-change-password",
@@ -10,8 +10,8 @@ export class ChangePasswordComponent {
   @Output() onSubmit = new EventEmitter();
 
   constructor(
-    public changeForm: form.user.changePass,
-    public userService: user
+    public changeForm: formService.user.changePass,
+    public user: userService
   ) {}
 
   get _form() {

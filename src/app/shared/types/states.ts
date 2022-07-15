@@ -22,3 +22,8 @@ export interface DevicesState extends State {
 export interface SingleDeviceState extends State {
   device: Device;
 }
+
+export interface UserState extends State {
+  id: string;
+  token: string;
+}

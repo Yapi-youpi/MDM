@@ -11,11 +11,11 @@ import { DevicesState, SingleDeviceState } from "../../../shared/types/states";
 import * as states from "../../../shared/types/states";
 
 import {
-  device,
-  deviceConfig,
-  form,
-  group,
-  user,
+  deviceService,
+  deviceConfigService,
+  formService,
+  groupService,
+  userService,
 } from "../../../shared/services";
 
 @Component({
@@ -52,16 +52,16 @@ export class DevicesComponent implements OnInit {
 
   // public db: DatabaseService
   constructor(
-    public userService: user,
-    private userPasswordService: form.user.changePass,
+    public user: userService,
+    private userPasswordService: formService.user.changePass,
     private elementRef: ElementRef,
-    private groupsService: group,
-    private configService: deviceConfig,
-    private deviceService: device,
-    private addDeviceService: form.device.add,
-    private editDeviceService: form.device.edit,
-    private editSeveralDevicesService: form.device.editSeveral,
-    private filterDevicesService: form.device.filter
+    private group: groupService,
+    private config: deviceConfigService,
+    private device: deviceService,
+    private addDeviceForm: formService.device.add,
+    private editDeviceForm: formService.device.edit,
+    private editSeveralDevicesForm: formService.device.editSeveral,
+    private filterForm: formService.device.filter
   ) {}
 
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class DevicesComponent implements OnInit {
     // });
 
     let i = interval(1000).subscribe(() => {
-      if (this.userService.token) {
+      if (this.user.token) {
         i.unsubscribe();
         this.getGroups();
         this.getConfigs();
@@ -92,7 +92,7 @@ export class DevicesComponent implements OnInit {
   }
 
   changePassword() {
-    this.userService
+    this.user
       .changePassword(this.userPasswordService._pass)
       .then((res) => {
         console.log(res);
@@ -103,7 +103,7 @@ export class DevicesComponent implements OnInit {
   }
 
   getConfigs() {
-    this.configService
+    this.config
       .getConfig("all")
       .then((res: states.DevicesConfigsState) => {
         if (res.success) {
@@ -118,7 +118,7 @@ export class DevicesComponent implements OnInit {
   }
 
   getGroups() {
-    this.groupsService
+    this.group
       .getGroups("all")
       .then((res: states.DevicesGroupsState) => {
         if (res.success) {
@@ -135,7 +135,7 @@ export class DevicesComponent implements OnInit {
   getDevices() {
     this.loading = true;
 
-    this.deviceService
+    this.device
       .get("all")
       .then((res: states.DevicesState) => {
         if (res.success) {
@@ -175,19 +175,19 @@ export class DevicesComponent implements OnInit {
   searchDevicesWithParams() {
     this.cancelSelection();
 
-    this.devicesFilters.status = this.filterDevicesService._status;
-    this.devicesFilters.dateFrom = this.filterDevicesService._dateFrom;
-    this.devicesFilters.dateTo = this.filterDevicesService._dateTo;
-    this.devicesFilters.groupsIDs = this.filterDevicesService._groupsIDs;
-    this.devicesFilters.configsIDs = this.filterDevicesService._configsIDs;
+    this.devicesFilters.status = this.filterForm._status;
+    this.devicesFilters.dateFrom = this.filterForm._dateFrom;
+    this.devicesFilters.dateTo = this.filterForm._dateTo;
+    this.devicesFilters.groupsIDs = this.filterForm._groupsIDs;
+    this.devicesFilters.configsIDs = this.filterForm._configsIDs;
   }
 
   addDevice() {
-    this.deviceService
+    this.device
       .add({
-        name: this.addDeviceService._name,
-        description: this.addDeviceService._desc,
-        device_group_id: this.addDeviceService._group,
+        name: this.addDeviceForm._name,
+        description: this.addDeviceForm._desc,
+        device_group_id: this.addDeviceForm._group,
       })
       .then((res: SingleDeviceState) => {
         if (res.success) {
@@ -261,7 +261,7 @@ export class DevicesComponent implements OnInit {
   }
 
   changeDeviceState(device: Device) {
-    this.deviceService
+    this.device
       .edit([
         {
           ...device,
@@ -292,17 +292,17 @@ export class DevicesComponent implements OnInit {
 
   selectDeviceToEdit(device: Device) {
     this.currDevice = device;
-    this.editDeviceService.form.patchValue(device);
+    this.editDeviceForm.form.patchValue(device);
   }
 
   editDevice() {
-    this.deviceService
+    this.device
       .edit([
         {
           ...this.currDevice,
-          name: this.editDeviceService._name,
-          description: this.editDeviceService._description,
-          device_group_id: this.editDeviceService._group_id,
+          name: this.editDeviceForm._name,
+          description: this.editDeviceForm._description,
+          device_group_id: this.editDeviceForm._group_id,
         },
       ])
       .then((res: states.SingleDeviceState) => {
@@ -311,9 +311,9 @@ export class DevicesComponent implements OnInit {
 
           this.devices.map((d) => {
             if (d.device_id === this.currDevice.device_id) {
-              d.name = this.editDeviceService._name;
-              d.description = this.editDeviceService._description;
-              d.device_group_id = this.editDeviceService._group_id;
+              d.name = this.editDeviceForm._name;
+              d.description = this.editDeviceForm._description;
+              d.device_group_id = this.editDeviceForm._group_id;
             }
           });
 
@@ -335,12 +335,12 @@ export class DevicesComponent implements OnInit {
       .map((d) => {
         return {
           ...d,
-          device_group_id: this.editSeveralDevicesService._group,
-          active_state: this.editSeveralDevicesService._state,
+          device_group_id: this.editSeveralDevicesForm._group,
+          active_state: this.editSeveralDevicesForm._state,
         };
       });
 
-    this.deviceService
+    this.device
       .edit(data)
       .then((res: DevicesState) => {
         if (res.success) {
@@ -359,7 +359,7 @@ export class DevicesComponent implements OnInit {
 
           this.selectedDevicesIDs = [];
 
-          this.editSeveralDevicesService.resetForm();
+          this.editSeveralDevicesForm.resetForm();
 
           // const modal = this.elementRef.nativeElement.querySelector(
           //   "#edit_several_devices"
@@ -379,7 +379,7 @@ export class DevicesComponent implements OnInit {
   }
 
   deleteDevice(device: Device) {
-    this.deviceService
+    this.device
       .delete([device.device_id])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
@@ -401,7 +401,7 @@ export class DevicesComponent implements OnInit {
   }
 
   deleteSeveralDevices() {
-    this.deviceService
+    this.device
       .delete(this.selectedDevicesIDs)
       .then((res: states.SingleDeviceState) => {
         if (res.success) {

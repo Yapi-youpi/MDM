@@ -1,13 +1,15 @@
 import { Component } from "@angular/core";
-import { AuthService } from "../../../shared/services/auth.service";
 import { Router } from "@angular/router";
-// import M from "materialize-css";
-import { UserService } from "../../../shared/services/user.service";
-import { AssetService } from "../../../shared/services/asset.service";
-import { interval } from "rxjs";
-import { DatabaseService } from "../../../shared/services/database.service";
-import { ErrorService } from "../../../shared/services/error.service";
-import { form } from "../../../shared/services";
+
+import {
+  assetService,
+  authService,
+  databaseService,
+  formService,
+  userService,
+} from "../../../shared/services";
+
+import { UserState } from "../../../shared/types/states";
 
 @Component({
   selector: "app-auth",
@@ -15,24 +17,14 @@ import { form } from "../../../shared/services";
   styleUrls: ["./auth.component.scss"],
 })
 export class AuthComponent {
-  // public isPasswordVisible: boolean = false;
-  // public error = "";
-
   constructor(
-    // private auth: AuthService,
-    // private router: Router,
-    // public user: UserService,
-    // public asset: AssetService,
-    // public err: ErrorService,
-    // private db: DatabaseService,
-    public logForm: form.user.auth
+    private auth: authService,
+    private router: Router,
+    public user: userService,
+    public asset: assetService,
+    private db: databaseService,
+    public logForm: formService.user.auth
   ) {}
-
-  // ngOnInit(): void {}
-
-  // togglePasswordVisibility() {
-  //   this.isPasswordVisible = !this.isPasswordVisible;
-  // }
 
   get _form() {
     return this.logForm.form;
@@ -56,7 +48,58 @@ export class AuthComponent {
     if (this._form.invalid) {
       return;
     } else {
-      console.log(this._form.getRawValue());
+      this.auth
+        .login(this.logForm._login, this.logForm._pass)
+        .then((res: UserState) => {
+          this.asset.setToStorage("token", res.token).then();
+          this.asset.setToStorage("login", this.logForm._login).then();
+          this.asset.setToStorage("last_password", this.logForm._pass).then();
+
+          this.user.token = res.token;
+          this.user.login = this.logForm._login;
+          this.user.last_password = this.logForm._pass;
+
+          this.db
+            .signup(this.logForm._login, this.logForm._pass)
+            .then((res) => {
+              console.log(res, "Log In res");
+            })
+            .catch((err) => {
+              if (err === 400) {
+                this.db
+                  .logIN(this.logForm._login, this.logForm._pass)
+                  .then((res) => {
+                    console.log(res, "Log In res");
+                  })
+                  .catch((err) => {
+                    console.log(err, "Log In err");
+                  });
+              }
+            });
+          this.router.navigateByUrl("devices").then(() => {
+            if (res.error === "change super admin password") {
+              // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
+              // let i = interval(1000).subscribe(() => {
+              //   let elem = document.querySelector(".modal");
+              //   const options = {
+              //     dismissible: false,
+              //   };
+              //   if (elem) {
+              //     i.unsubscribe();
+              //     // M.Modal.init(elem, options);
+              //     // let instance = M.Modal.getInstance(elem);
+              //     // instance.open();
+              //   }
+              // });
+            }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          // this.error = err.error.error;
+        });
+
+      this.logForm.resetForm();
       this.logForm.resetSubmitted();
     }
 
