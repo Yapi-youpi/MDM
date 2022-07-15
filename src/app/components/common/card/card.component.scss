@@ -1,0 +1,13 @@
+.card {
+  border-radius: var(--border-radius-14);
+
+  &.white {
+    background-color: var(--white);
+  }
+  &.light-blue {
+    background-color: var(--light-blue);
+  }
+  &.light-grey {
+    background-color: var(--light-grey);
+  }
+}

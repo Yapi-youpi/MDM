@@ -11,7 +11,7 @@ import { ErrorService } from "../../../shared/services/error.service";
 @Component({
   selector: "app-auth",
   templateUrl: "./auth.component.html",
-  styleUrls: ["./auth.component.css"],
+  styleUrls: ["./auth.component.scss"],
 })
 export class AuthComponent implements OnInit {
   public isPasswordVisible: boolean = false;
