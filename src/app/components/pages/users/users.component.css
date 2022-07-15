@@ -112,6 +112,8 @@
   background: var(--sdm-light-blue);
   box-shadow: 0 0 10px rgba(133, 133, 133, 0.15);
   flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
 }
 .user-card__descr {
   display: flex;

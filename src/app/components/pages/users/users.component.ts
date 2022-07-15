@@ -7,7 +7,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Permissions, Users } from '../../../interfaces/interfaces';
+import {
+  GroupPermissions,
+  Permissions,
+  Users,
+} from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../services/asset.service';
 import Compressor from 'compressorjs';
@@ -21,13 +25,14 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public filterForm: FormGroup;
   public permissionsForm: FormGroup;
+  public permissions: GroupPermissions[] = [];
   public users: Users[] = [];
   public currentUser!: Users;
-  public loading: boolean = true;
-  public rename: string = '';
   public search!: string;
-  public filter_roles!: Array<string>;
+  public loaded: boolean = false;
+  public edit: boolean = false;
   public params: Permissions;
+  public filter_roles!: Array<string>;
   public file_input!: any;
   public file_placeholder!: Element;
   public avatar!: Element;
@@ -53,6 +58,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     });
     this.params = {
       viewDevices: 'Просмотр устройств',
+      viewUsers: 'Просмотр пользователей',
       applicationsAdd: 'Добавление приложений',
       createEditConfig: 'Добавление и редактирование конфигураций',
       createEditDevice: 'Добавление и редактирование устройств',
@@ -71,6 +77,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       if (this.userService.token) {
         i.unsubscribe();
         this.getAllUsers();
+        this.getPermissions();
       }
     });
   }
@@ -85,13 +92,31 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.asset.modalInit('modal-delete-user');
   }
 
+  getPermissions() {
+    this.userService
+      .getPermissions()
+      .then((res) => {
+        this.permissions = res;
+        this.loaded = true;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   getAllUsers() {
     this.userService
       .getUserInfo(undefined, 'all')
       .then((res) => {
         console.log(res);
         this.users = res;
-        this.loading = false;
+        this.users.forEach((user) => {
+          if (
+            user.avatar.length > 0 &&
+            !user.avatar.includes('data:image/jpeg;base64,')
+          )
+            user.avatar = 'data:image/jpeg;base64,' + user.avatar;
+        });
         this.sortUsers();
       })
       .then(() => {
@@ -111,8 +136,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const name = this.form.get('name')?.value;
     const password = this.form.get('password')?.value;
     const role = this.form.get('role')?.value;
+    const group = [this.form.get('group')?.value];
     this.userService
-      .addUser(avatar, login, password, name, role)
+      .addUser(avatar, login, password, name, role, group)
       .then(() => {
         this.userService.getUserInfo(undefined, 'all').then((res) => {
           this.users = res;
@@ -193,8 +219,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
         maxWidth: 512,
         maxHeight: 512,
 
-        success() {
-          convertTo64();
+        success(res) {
+          convertTo64(res);
         },
         error(err) {
           console.log(err.message);
@@ -209,9 +235,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
           file
         )}); background-size: cover;`
       );
-      const convertTo64 = () => {
+      const convertTo64 = (img) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(img);
         reader.onload = () => {
           const img = reader.result
             ?.toString()
@@ -245,6 +271,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
       placeholder.innerHTML = '';
       image.removeAttribute('style');
     }
+  }
+
+  toggleEdit() {
+    this.edit = !this.edit;
   }
 
   onCheckboxChange(event: any) {

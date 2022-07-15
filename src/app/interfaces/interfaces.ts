@@ -1,9 +1,11 @@
 export interface Users {
+  avatar: string;
   activeState: boolean;
   id: string;
   login: string;
   name: string;
   role: string;
+  userTag: string[];
   groupsPermissions: GroupPermissions;
 }
 export interface Roles {
