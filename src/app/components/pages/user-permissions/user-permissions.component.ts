@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetService } from '../../../services/asset.service';
 import { GroupPermissions, Permissions } from '../../../interfaces/interfaces';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 
@@ -14,13 +13,9 @@ export class UserPermissionsComponent implements OnInit {
   public loaded: boolean = false;
   public edit: boolean = false;
   public params: Permissions;
-  public permissionsForm: FormGroup;
   public permissions: GroupPermissions[] = [];
-  constructor(
-    public asset: AssetService,
-    public userService: UserService,
-    private fb: FormBuilder
-  ) {
+  private initial: GroupPermissions[] = [];
+  constructor(public asset: AssetService, public userService: UserService) {
     this.params = {
       viewDevices: 'Просмотр устройств',
       viewUsers: 'Просмотр пользователей',
@@ -35,9 +30,6 @@ export class UserPermissionsComponent implements OnInit {
       deleteOperators: 'Удаление операторов',
       sendInfoMessages: 'Отправка сообщений',
     };
-    this.permissionsForm = fb.group({
-      permissions: new FormArray([]),
-    });
   }
 
   ngOnInit(): void {
@@ -54,14 +46,30 @@ export class UserPermissionsComponent implements OnInit {
       .getPermissions()
       .then((res) => {
         this.permissions = res;
+        this.initial = JSON.parse(JSON.stringify(res));
         this.loaded = true;
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }
 
   toggleEdit() {
     this.edit = !this.edit;
+  }
+
+  cancelEdit() {
+    this.permissions = JSON.parse(JSON.stringify(this.initial));
+    this.toggleEdit();
+  }
+
+  onCheckboxChange(event: any, role) {
+    this.permissions[role][event.target.value] = !!event.target.checked;
+  }
+
+  editPermissions() {
+    this.userService
+      .changePermissions(this.permissions)
+      .then((res) => console.log(res))
+      .then(() => this.toggleEdit())
+      .catch((err) => console.log(err));
   }
 }
