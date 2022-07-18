@@ -1,0 +1,51 @@
+.search-container {
+  position: relative;
+
+  border: 1px solid var(--light-blue);
+
+  border-radius: 14px;
+
+  transition: border-color var(--transition-time) ease;
+
+  &:hover,
+  &.focused {
+    border-color: var(--dark-blue);
+
+    .icon {
+      background-color: var(--dark-blue);
+    }
+  }
+
+  &.focused {
+    border-width: 2px;
+  }
+
+  .icon {
+    height: 16.04px;
+    width: 16.04px;
+
+    position: absolute;
+
+    top: 8px;
+    left: 9px;
+
+    mask-size: 16.04px 16.04px;
+    mask-image: url("../../../../../../assets/UI/search.svg");
+    -webkit-mask-size: 16.04px 16.04px;
+    -webkit-mask-image: url("../../../../../../assets/UI/search.svg");
+
+    background-color: var(--light-blue);
+
+    transition: background-color var(--transition-time) ease;
+  }
+
+  input {
+    height: 30px;
+    width: 300px;
+
+    padding: 0 8px 0 25.04px;
+
+    background-color: transparent;
+    border-color: transparent;
+  }
+}

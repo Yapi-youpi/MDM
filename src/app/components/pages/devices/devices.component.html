@@ -2,6 +2,28 @@
   <app-page-header
     [title]="'Устройства'"
   ></app-page-header>
+  <app-card
+    [color]="'light-grey'"
+  >
+    <div class="page-content">
+      <div class="top">
+        <app-search-input
+          [value]="searchParam"
+          (onChange)="onChangeSearchInputHandler($event)"
+        ></app-search-input>
+<!--        <app-filter-sidebar-->
+<!--          [groups]="groups"-->
+<!--          [configs]="configs"-->
+<!--          (onReset)="resetSearchParams()"-->
+<!--          (onSubmit)="searchDevicesWithParams()"-->
+<!--        ></app-filter-sidebar>-->
+<!--        <app-add-button-->
+<!--          [title]="'Добавить устройство'"-->
+<!--          [target]="'add_device'"-->
+<!--        ></app-add-button>-->
+      </div>
+    </div>
+  </app-card>
 <!--  <app-page-header [title]="'Устройства'"></app-page-header>-->
 <!--  <div class="card sdm-bg-light-grey">-->
 <!--    <div class="row actions">-->
