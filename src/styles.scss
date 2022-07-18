@@ -170,6 +170,10 @@ button {
     background-color var(--transition-time) ease,
     border-color var(--transition-time) ease;
 
+  &.p-0 {
+    padding: 0;
+  }
+
   &.common {
     color: var(--dark-blue);
     background-color: transparent;

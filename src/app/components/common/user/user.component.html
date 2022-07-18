@@ -1,21 +1,83 @@
-<div class="user">
-  <button #popup_btn class="user-btn" (click)="togglePopup()"></button>
-  <div #popup class="user-popup r-14" *ngIf="isPopupOpen">
-    <div class="top">
-      <img src="assets/c9K2Y9r5Keo.jpg" alt="" class="r-round" />
-      <div class="user-info">
-        <p class="name">Name</p>
-        <p class="email">example@email.ru</p>
+<!--<div class="user">-->
+<!--  <button #popup_btn class="user-btn" (click)="togglePopup()"></button>-->
+<!--  <div #popup class="user-popup r-14" *ngIf="isPopupOpen">-->
+<!--    <div class="top">-->
+<!--      <img src="assets/c9K2Y9r5Keo.jpg" alt="" class="r-round" />-->
+<!--      <div class="user-info">-->
+<!--        <p class="name">Name</p>-->
+<!--        <p class="email">example@email.ru</p>-->
+<!--      </div>-->
+<!--      <button class="user-profile-btn r-round">-->
+<!--        <i class="material-icons tiny">edit</i>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--    <div class="bottom">-->
+<!--      <button class="logout" (click)="logout()">-->
+<!--        <i class="material-icons">exit_to_app</i>-->
+<!--        Выйти-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<app-card>
+  <div class="user">
+    <button
+      #popup_btn
+      class="toggle-btn"
+      [class.no-user]="imgURL === ''"
+      (click)="togglePopup()"
+    >
+      <span
+        *ngIf="imgURL === ''"
+        class="icon"
+      ></span>
+      <img
+        *ngIf="imgURL !== ''"
+        [src]="imgURL"
+        alt=""
+      >
+    </button>
+    <div
+      #popup
+      *ngIf="isPopupOpen"
+      class="user-popup"
+    >
+      <div class="top">
+        <div class="top-left">
+          <div class="avatar">
+            <span
+              *ngIf="imgURL === ''"
+              class="icon"
+            ></span>
+            <img
+              *ngIf="imgURL !== ''"
+              [src]="imgURL"
+              alt=""
+            >
+          </div>
+          <div class="info">
+            <p class="name text-menu-title">Name</p>
+            <p class="company">Company</p>
+          </div>
+        </div>
+        <div class="top-right">
+          <button
+            class="edit p-0"
+          >
+            <span class="icon"></span>
+          </button>
+        </div>
       </div>
-      <button class="user-profile-btn r-round">
-        <i class="material-icons tiny">edit</i>
-      </button>
-    </div>
-    <div class="bottom">
-      <button class="logout" (click)="logout()">
-        <i class="material-icons">exit_to_app</i>
-        Выйти
-      </button>
+      <hr class="divider">
+      <div class="bottom">
+        <button
+          class="logout p-0"
+          (click)="logout()"
+        >
+          <span class="icon"></span>
+          выйти
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</app-card>

@@ -4,6 +4,7 @@ export interface Users {
   login: string;
   name: string;
   role: string;
+  userTags: string[];
   groupsPermissions: GroupPermissions;
 }
 
