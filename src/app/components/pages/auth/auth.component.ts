@@ -59,23 +59,6 @@ export class AuthComponent {
           this.user.login = this.logForm._login;
           this.user.last_password = this.logForm._pass;
 
-          this.db
-            .signup(this.logForm._login, this.logForm._pass)
-            .then((res) => {
-              console.log(res, "Log In res");
-            })
-            .catch((err) => {
-              if (err === 400) {
-                this.db
-                  .logIN(this.logForm._login, this.logForm._pass)
-                  .then((res) => {
-                    console.log(res, "Log In res");
-                  })
-                  .catch((err) => {
-                    console.log(err, "Log In err");
-                  });
-              }
-            });
           this.router.navigateByUrl("devices").then(() => {
             if (res.error === "change super admin password") {
               // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
@@ -93,13 +76,31 @@ export class AuthComponent {
               // });
             }
           });
+
+          this.db
+            .signup(this.user.login, this.user.last_password)
+            .then((res) => {
+              console.log(res);
+              console.log(res, "Log In res");
+              this.logForm.resetForm();
+              this.logForm.resetSubmitted();
+            })
+            .catch((err) => {
+              if (err === 400) {
+                this.db
+                  .logIN(this.logForm._login, this.logForm._pass)
+                  .then((res) => {
+                    console.log(res, "Log In res");
+                  })
+                  .catch((err) => {
+                    console.log(err, "Log In err");
+                  });
+              }
+            });
         })
         .catch((err) => {
           console.log(err);
         });
-
-      this.logForm.resetForm();
-      this.logForm.resetSubmitted();
     }
   }
 }

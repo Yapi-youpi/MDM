@@ -28,7 +28,6 @@ export class AppInterceptor implements HttpInterceptor {
       req.url.includes("registration") ||
       req.url.includes("address")
     ) {
-      console.log(req);
       return next.handle(req).pipe(
         tap({
           next: (req) => {

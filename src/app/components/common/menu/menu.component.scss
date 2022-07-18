@@ -10,6 +10,8 @@
 
   transition: width var(--transition-time) ease;
 
+  z-index: 100;
+
   &.hidden {
     width: 76px;
   }

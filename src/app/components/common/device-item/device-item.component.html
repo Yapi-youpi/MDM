@@ -1,69 +1,54 @@
-<div class="item row">
+<div class="row item">
   <div class="checkbox-container">
-    <label>
-      <input
-        type="checkbox"
-        class="filled-in item-checkbox"
-        [checked]="device.isSelected"
-        (change)="onSelectUnselectDeviceHandler(device)"
-      />
-      <span></span>
-    </label>
+    <app-checkbox
+      [isChecked]="!!device.isSelected"
+      (onChange)="onSelectUnselectDeviceHandler(device)"
+    ></app-checkbox>
   </div>
-  <div class="content b-shadow r-14">
-    <div class="status-container">
-      <span
-        class="r-round"
-        [class.active]="device.online_state"
-        [class.disabled]="!device.online_state"
-      ></span>
+  <div class="content">
+    <div class="icon-wrapper">
+      <app-status-icon
+        [size]="'s18x18'"
+        [controlState]="!device.registration_state"
+        [isOn]="device.active_state"
+        [isOff]="!device.active_state"
+      ></app-status-icon>
     </div>
-    <p class="font-regular-color">{{ device.updatedAt | dateConverter }}</p>
-    <p class="font-bold font-bold-color">{{ device.name }}</p>
-    <p class="font-middle font-regular-color">{{ device.description }}</p>
-    <p class="font-regular-color">{{ device.phone_number }}</p>
-<!--    <p class="font-regular-color">{{ device.imei }}</p>-->
-<!--    <p class="font-regular-color">{{ device.model }}</p>-->
-    <p class="font-regular-color">123456789012345</p>
-    <p class="font-regular-color">Model</p>
-    <p class="font-bold-color">{{ device.device_group_id | groupConverter: groups }}</p>
-    <p class="font-regular-color">{{ device.device_config_id | configConverter: configs }}</p>
-    <div class="status-container update small">
-      <span class="r-round active"></span>
+    <p>{{ device.updatedAt | dateConverter }}</p>
+    <p class="text-choose">{{ device.name }}</p>
+    <p>{{ device.description }}</p>
+<!--    <p>88005553535</p>-->
+<!--    <p>123456789012345</p>-->
+<!--    <p>Ololo Pro</p>-->
+    <p>{{ device.phone_number }}</p>
+    <p>{{ device.imei }}</p>
+    <p>{{ device.model }}</p>
+    <p>{{ device.device_group_id | groupConverter: groups }}</p>
+    <p>{{ device.device_config_id | configConverter: configs }}</p>
+    <div class="icon-wrapper">
+      <app-status-icon
+        [size]="'s14x14'"
+        [isOn]="device.online_state"
+        [isOff]="!device.online_state"
+      ></app-status-icon>
     </div>
-    <p class="font-regular-color">{{ device.battery_percent }}%</p>
-    <div class="switch">
-      <label>
-        <input
-          type="checkbox"
-          [checked]="device.active_state"
-          (change)="onChangeDeviceStateHandler(device)"
-        />
-        <span class="lever"></span>
-      </label>
+    <p>{{ device.battery_percent }}%</p>
+    <div class="switch-wrapper">
+      <app-switch-input
+        [isChecked]="device.active_state"
+        (onChange)="onChangeDeviceStateHandler(device)"
+      ></app-switch-input>
     </div>
-    <div class="btns">
-      <button
-        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round qr-code"
-        (click)="onClickDeviceQRCodeHandler(device)"
-        data-target="qr-code"
-      >
-        <span></span>
-      </button>
-      <button
-        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round edit"
-        (click)="onClickDeviceEditHandler(device)"
-        data-target="edit_device"
-      >
-        <span></span>
-      </button>
-      <button
-        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round delete"
-        (click)="onClickDeviceDeleteHandler(device)"
-        data-target="delete_device"
-      >
-        <span></span>
-      </button>
+    <div class="device-actions-wrapper">
+      <app-device-action-btn
+        [target]="'qr-code'"
+      ></app-device-action-btn>
+      <app-device-action-btn
+        [target]="'edit_device'"
+      ></app-device-action-btn>
+      <app-device-action-btn
+        [target]="'delete_device'"
+      ></app-device-action-btn>
     </div>
   </div>
 </div>

@@ -11,12 +11,6 @@
           [value]="searchParam"
           (onChange)="onChangeSearchInputHandler($event)"
         ></app-search-input>
-<!--        <app-filter-sidebar-->
-<!--          [groups]="groups"-->
-<!--          [configs]="configs"-->
-<!--          (onReset)="resetSearchParams()"-->
-<!--          (onSubmit)="searchDevicesWithParams()"-->
-<!--        ></app-filter-sidebar>-->
         <div class="filter-wrapper">
           <app-filter-btn
             [target]="'filter-devices'"
@@ -26,6 +20,85 @@
           [title]="'Добавить устройство'"
           [target]="'add_device'"
         ></app-add-button>
+      </div>
+      <div class="list">
+        <div class="list-header">
+          <div class="checkbox-wrapper">
+            <app-checkbox></app-checkbox>
+          </div>
+          <div class="sort-headers">
+            <div class="sort-btn-wrapper status">
+              <app-sort-btn
+                [title]="'Статус'"
+                [isSortAsc]="sortStatusAsc"
+                (onCLick)="changeSortStatusDir()"
+              ></app-sort-btn>
+            </div>
+            <div class="sort-btn-wrapper date">
+              <app-sort-btn
+                [title]="'Дата вкл.'"
+                [isSortAsc]="sortDateAsc"
+                (onCLick)="changeSortDateDir()"
+              ></app-sort-btn>
+            </div>
+            <div class="sort-btn-wrapper name">
+              <app-sort-btn
+                [title]="'Название'"
+                [isSortAsc]="sortNameAsc"
+                (onCLick)="changeSortNameDir()"
+              ></app-sort-btn>
+            </div>
+            <p>Описание</p>
+            <p>Телефон</p>
+            <p>IMEI</p>
+            <p>Модель</p>
+            <div class="sort-btn-wrapper group">
+              <app-sort-btn
+                [title]="'Группа'"
+                [isSortAsc]="sortGroupAsc"
+                (onCLick)="changeSortGroupDir()"
+              ></app-sort-btn>
+            </div>
+            <p>Конфигурация</p>
+            <p>Обновление</p>
+            <div class="sort-btn-wrapper battery">
+              <app-sort-btn
+                [title]="'Заряд'"
+                [isSortAsc]="sortBatteryAsc"
+                (onCLick)="changeSortBatteryDir()"
+              ></app-sort-btn>
+            </div>
+            <p>Блокировка</p>
+            <p>Действия</p>
+          </div>
+        </div>
+        <div class="list-body">
+          <app-device-item
+            *ngFor="
+              let device of devices
+                | devicesFilter
+                  : devicesFilters.status
+                  : devicesFilters.dateFrom
+                  : devicesFilters.dateTo
+                  : devicesFilters.configsIDs
+                  : devicesFilters.groupsIDs
+                | search: searchParam:'device'
+                | devicesByStatus: sortStatusAsc
+                | devicesByDate: sortDateAsc
+                | devicesByGroup: groups : sortGroupAsc
+                | devicesByBattery: sortBatteryAsc
+                | devicesByName: sortNameAsc
+              "
+            [device]="device"
+            [groups]="groups"
+            [configs]="configs"
+            (onSelectUnselectDevice)="selectUnselectDevice($event)"
+            (onChangeDeviceState)="changeDeviceState($event)"
+            (onClickDeviceQRCode)="getDeviceQRCode($event)"
+            (onClickDeviceEdit)="selectDeviceToEdit($event)"
+            (onClickDeviceDelete)="deleteDevice($event)"
+          ></app-device-item>
+        </div>
       </div>
     </div>
   </app-card>

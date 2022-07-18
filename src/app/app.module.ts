@@ -58,6 +58,10 @@ import { MenuButtonComponent } from './components/common/UI/button/menu-button/m
 import { ModalComponent } from './components/common/modal/modal.component';
 import { FilterDevicesComponent } from './components/common/modals/filter-devices/filter-devices.component';
 import { FilterBtnComponent } from './components/common/UI/button/filter-btn/filter-btn.component';
+import { SortBtnComponent } from './components/common/UI/button/sort-btn/sort-btn.component';
+import { SwitchInputComponent } from './components/common/UI/input/switch-input/switch-input.component';
+import { DeviceActionBtnComponent } from './components/common/UI/button/device-action-btn/device-action-btn.component';
+import { StatusIconComponent } from './components/common/UI/status/status-icon/status-icon.component';
 
 const routes: Routes = [
   {
@@ -117,6 +121,10 @@ const routes: Routes = [
     ModalComponent,
     FilterDevicesComponent,
     FilterBtnComponent,
+    SortBtnComponent,
+    SwitchInputComponent,
+    DeviceActionBtnComponent,
+    StatusIconComponent,
   ],
   imports: [
     BrowserModule,

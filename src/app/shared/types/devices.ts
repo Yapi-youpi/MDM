@@ -16,6 +16,7 @@ export interface Device {
   objectId: string;
   isSelected?: boolean;
   updatedAt: string;
+  registration_state: boolean;
 }
 
 export interface AddDevice {

@@ -1,0 +1,20 @@
+.status-icon {
+  border-radius: 50%;
+  &.s14x14 {
+    height: 14px;
+    width: 14px;
+  }
+  &.s18x18 {
+    height: 18px;
+    width: 18px;
+  }
+  &.disabled {
+    background-color: var(--grey);
+  }
+  &.on {
+    background-color: var(--green);
+  }
+  &.off {
+    background-color: var(--red);
+  }
+}

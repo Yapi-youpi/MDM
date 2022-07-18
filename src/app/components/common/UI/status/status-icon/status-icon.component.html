@@ -1,0 +1,7 @@
+<span
+  class="icon status-icon"
+  [ngClass]="size"
+  [class.disabled]="controlState"
+  [class.on]="!controlState && isOn"
+  [class.off]="!controlState && isOff"
+></span>
