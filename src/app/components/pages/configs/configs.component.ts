@@ -1,21 +1,21 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
-import { DevicesConfigService } from "../../../services/devices-config.service";
-import { UserService } from "../../../services/user.service";
-import { interval } from "rxjs";
-import { DevicesConfig } from "../../../interfaces/interfaces";
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { DevicesConfigService } from '../../../services/devices-config.service';
+import { UserService } from '../../../services/user.service';
+import { interval } from 'rxjs';
+import { DevicesConfig } from '../../../interfaces/interfaces';
 
 @Component({
-  selector: "app-configs",
-  templateUrl: "./configs.component.html",
-  styleUrls: ["./configs.component.css"],
+  selector: 'app-configs',
+  templateUrl: './configs.component.html',
+  styleUrls: ['./configs.component.css'],
 })
 export class ConfigsComponent implements OnInit {
-  public name = "";
+  public search = '';
   public default_config!: DevicesConfig;
   public configs: DevicesConfig[] = [];
   public loading = true;
-  public rename = "";
-  public id = "";
+  public rename = '';
+  public id = '';
   constructor(
     private configService: DevicesConfigService,
     private userService: UserService,
@@ -38,7 +38,7 @@ export class ConfigsComponent implements OnInit {
 
   getDefaultConfig() {
     this.configService
-      .getConfig("default")
+      .getConfig('default')
       .then(
         (res: {
           devicesConfigs: DevicesConfig[];
@@ -56,7 +56,7 @@ export class ConfigsComponent implements OnInit {
 
   getAllConfigs() {
     this.configService
-      .getConfig("all")
+      .getConfig('all')
       .then(
         (res: {
           devicesConfigs: DevicesConfig[];
@@ -80,7 +80,7 @@ export class ConfigsComponent implements OnInit {
       .then((res) => {
         console.log(res);
         this.getAllConfigs();
-        this.name = "";
+        // this.name = '';
       })
       .catch((err) => {
         console.log(err.error.error);
@@ -105,7 +105,7 @@ export class ConfigsComponent implements OnInit {
       .renameConfig(id, name)
       .then(() => {
         this.getAllConfigs();
-        this.rename = "";
+        this.rename = '';
       })
       .catch((err) => {
         console.log(err.error.error);
@@ -113,7 +113,7 @@ export class ConfigsComponent implements OnInit {
   }
 
   getID(id: string) {
-    console.log("aaaaaa");
+    console.log('aaaaaa');
     this.id = id;
   }
 
