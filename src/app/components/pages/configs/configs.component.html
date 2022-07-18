@@ -13,7 +13,10 @@
             class="search-input" /><i class="search-icon"></i
         ></span>
 
-        <button class="btn btn--rounded btn--right">
+        <button
+          class="btn btn--rounded btn--right"
+          data-target="modal-add-config"
+        >
           Добавить конфигурацию
         </button>
       </div>
@@ -23,42 +26,91 @@
             <div class="indeterminate"></div>
           </div>
         </ng-template>
-        <div class="config-card" *ngFor="let config of configs">
-          <div class="config-card__header">
-            <div class="config-card__title">
-              {{ config.name }}
+        <ng-container *ngIf="configs.length > 0; else loader">
+          <div class="config-card" *ngFor="let config of configs">
+            <div class="config-card__header">
+              <div class="config-card__title">
+                {{ config.name }}
+              </div>
+              <div class="config-card__menu">
+                <button class="config-card__menu-btn">
+                  <i class="material-icons">edit</i>
+                </button>
+                <button
+                  class="config-card__menu-btn"
+                  data-target="modal-delete-config"
+                  (click)="setCurrentConfig(config)"
+                >
+                  <i class="material-icons">clear</i>
+                </button>
+              </div>
             </div>
-            <div class="config-card__menu">
-              <button
-                class="config-card__menu-btn"
-                data-target="modal-new-config"
-              >
-                <i class="material-icons">edit</i>
-              </button>
-              <button
-                class="config-card__menu-btn"
-                data-target="modal-delete-config"
-              >
-                <i class="material-icons">clear</i>
-              </button>
-            </div>
+            <div class="config-card__content">{{ config.description }}</div>
           </div>
-          <div class="config-card__content">{{ config.description }}</div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </main>
 </app-global-container>
 
 <!--  MODALS -->
-<div class="modal-wrapper" id="setting">
-  <div class="modal-dialog">
-    <h4 class="modal-title">Удалить конфигурацию?</h4>
+<div class="modal-wrapper" id="modal-add-config">
+  <div class="modal-dialog" style="width: 700px">
+    <h4 class="modal-title">Добавить конфигурацию</h4>
+    <form [formGroup]="newConfigForm" class="form">
+      <div class="form__item">
+        <label for="name">Название</label>
+        <input
+          formControlName="name"
+          type="text"
+          id="name"
+          class="w-440"
+          required
+        />
+      </div>
+      <div class="form__item">
+        <label for="description">Описание</label>
+        <input
+          formControlName="description"
+          type="text"
+          id="description"
+          class="w-440"
+          required
+        />
+      </div>
+      <div class="form__item">
+        <label>Создать на основе</label>
+        <select class="select-native w-440" formControlName="prototype">
+          <option [ngValue]="'Стандартная конфигурация'" selected>
+            Конфигурация по умолчанию
+          </option>
+          <option value="{{ config.name }}" *ngFor="let config of configs">
+            {{ config.name }}
+          </option>
+        </select>
+      </div>
+    </form>
     <div class="btn-wrapper">
-      <button (click)="removeConfig(id)" class="btn btn-small red lighten-1">
+      <button
+        (click)="
+          addConfig(newConfigForm.value.name, newConfigForm.value.description)
+        "
+        class="btn btn--big"
+      >
+        Добавить
+      </button>
+      <button class="btn btn--big btn--outline modal-close">Отменить</button>
+    </div>
+  </div>
+</div>
+<div class="modal-wrapper" id="modal-delete-config">
+  <div class="modal-dialog" *ngIf="currentConfig">
+    <h4 class="modal-title">Удалить конфигурацию {{ currentConfig.name }}?</h4>
+    <div class="btn-wrapper">
+      <button (click)="removeConfig(currentConfig.ID)" class="btn btn--big">
         Удалить
       </button>
-      <button class="btn btn--big btn--outline modal-close">Нет</button>
+      <button class="btn btn--big btn--outline modal-close">Отменить</button>
     </div>
   </div>
 </div>

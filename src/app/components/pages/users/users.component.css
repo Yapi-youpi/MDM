@@ -112,16 +112,6 @@
 .users-form {
   padding: 0 30px;
 }
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-.form__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .tags-container {
   width: 296px;
   display: flex;
@@ -211,15 +201,4 @@
   gap: 4px;
   align-items: center;
   max-width: 320px;
-}
-.select-native {
-  padding: 11px;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 19px;
-  color: #2f4459;
-  border: 1px solid #d8d8d8;
-  border-radius: 16px;
-  background: white;
-  width: 296px;
 }

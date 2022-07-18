@@ -11,10 +11,18 @@ export class DevicesConfigService {
 
   getConfig(param: string) {
     const url = environment.url + '/get_config/' + param;
-    return new Promise<any>((resolve, reject) => {
+    return new Promise<DevicesConfig[]>((resolve, reject) => {
       this.http.get(url).subscribe({
-        next: (res) => {
-          resolve(res);
+        next: (
+          res:
+            | {
+                devicesConfigs: DevicesConfig[];
+                error: string;
+                success: boolean;
+              }
+            | any
+        ) => {
+          resolve(res.devicesConfigs);
         },
         error: (err) => {
           reject(err);
@@ -23,9 +31,14 @@ export class DevicesConfigService {
     });
   }
 
-  addConfig(config: DevicesConfig | undefined, name: string) {
+  addConfig(
+    config: DevicesConfig | undefined,
+    name: string,
+    description: string
+  ) {
     if (config) {
       config.name = name;
+      config.description = description;
     }
     const url = environment.url + '/add_config';
     const body = {

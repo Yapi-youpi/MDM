@@ -1,18 +1,18 @@
-import { Component, ElementRef, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { interval } from "rxjs";
+import { Component, ElementRef, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { interval } from 'rxjs';
 
-import { UserService } from "../../../services/user.service";
-import { DevicesService } from "../../../services/devices.service";
-import { Device, DevicesConfig, Groups } from "../../../interfaces/interfaces";
-import { GroupsService } from "../../../services/groups.service";
-import { DevicesConfigService } from "../../../services/devices-config.service";
+import { UserService } from '../../../services/user.service';
+import { DevicesService } from '../../../services/devices.service';
+import { Device, DevicesConfig, Groups } from '../../../interfaces/interfaces';
+import { GroupsService } from '../../../services/groups.service';
+import { DevicesConfigService } from '../../../services/devices-config.service';
 // import { DatabaseService } from "../../../services/database.service";
 
 @Component({
-  selector: "app-devices",
-  templateUrl: "./devices.component.html",
-  styleUrls: ["./devices.component.css"],
+  selector: 'app-devices',
+  templateUrl: './devices.component.html',
+  styleUrls: ['./devices.component.css'],
 })
 export class DevicesComponent implements OnInit {
   public devices: Device[] = [];
@@ -24,12 +24,12 @@ export class DevicesComponent implements OnInit {
 
   public form!: FormGroup;
   public edit: boolean = false;
-  public password: string = "";
-  public new_password: string = "";
+  public password: string = '';
+  public new_password: string = '';
 
-  public currID: string = "";
-  public currQR: string = "";
-  public currName: string = "";
+  public currID: string = '';
+  public currQR: string = '';
+  public currName: string = '';
   public isAllSelected: boolean = false;
 
   public sortStatusAsc: boolean = true;
@@ -46,23 +46,23 @@ export class DevicesComponent implements OnInit {
     private configService: DevicesConfigService // public db: DatabaseService
   ) {
     this.form = new FormGroup({
-      name: new FormControl("", Validators.required),
-      desc: new FormControl("", Validators.required),
-      phone: new FormControl("", Validators.required),
-      imei: new FormControl("", Validators.required),
-      model: new FormControl("", Validators.required),
-      config: new FormControl("", Validators.required),
-      group: new FormControl("", Validators.required),
+      name: new FormControl('', Validators.required),
+      desc: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      imei: new FormControl('', Validators.required),
+      model: new FormControl('', Validators.required),
+      config: new FormControl('', Validators.required),
+      group: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit(): void {
     let nonClosingModal =
-      this.elementRef.nativeElement.querySelector(".non-closing");
+      this.elementRef.nativeElement.querySelector('.non-closing');
     let closingModal =
-      this.elementRef.nativeElement.querySelectorAll(".closing");
+      this.elementRef.nativeElement.querySelectorAll('.closing');
 
-/*    M.Modal.init(nonClosingModal, {
+    /*    M.Modal.init(nonClosingModal, {
       dismissible: false,
       onCloseEnd: () => {
         this.form.reset();
@@ -83,7 +83,7 @@ export class DevicesComponent implements OnInit {
 
     let selectsInter = interval(1000).subscribe(() => {
       const elems =
-        this.elementRef.nativeElement.querySelectorAll(".config-select");
+        this.elementRef.nativeElement.querySelectorAll('.config-select');
       // console.log(elems);
       if (elems && elems.length !== 0) {
         selectsInter.unsubscribe();
@@ -100,8 +100,8 @@ export class DevicesComponent implements OnInit {
       .changePassword(pass)
       .then((res) => {
         console.log(res);
-        this.password = "";
-        this.new_password = "";
+        this.password = '';
+        this.new_password = '';
       })
       .catch((res) => {
         console.log(res);
@@ -110,7 +110,7 @@ export class DevicesComponent implements OnInit {
 
   getAllDevices() {
     this.device
-      .getDevice("all")
+      .getDevice('all')
       .then((res: { devices: Device[]; success: boolean; error: string }) => {
         console.log(res);
         this.loading = false;
@@ -153,11 +153,11 @@ export class DevicesComponent implements OnInit {
     console.log(id);
     console.log(this.form.getRawValue());
 
-    this.form.controls["name"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["desc"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["phone"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["imei"].setErrors({ invalid: "Тестовая ошибка" });
-    this.form.controls["model"].setErrors({ invalid: "Тестовая ошибка" });
+    this.form.controls['name'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['desc'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['phone'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['imei'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['model'].setErrors({ invalid: 'Тестовая ошибка' });
     // console.log(this.form);
 
     // const settingsModal =
@@ -166,23 +166,15 @@ export class DevicesComponent implements OnInit {
   }
 
   getGroups() {
-    this.groupsService.getGroups("all").then((res) => {
+    this.groupsService.getGroups('all').then((res) => {
       this.groups = res;
     });
   }
 
   getConfigs() {
-    this.configService
-      .getConfig("all")
-      .then(
-        (res: {
-          success: boolean;
-          error: string;
-          devicesConfigs: DevicesConfig[];
-        }) => {
-          this.configs = res.devicesConfigs;
-        }
-      );
+    this.configService.getConfig('all').then((res) => {
+      this.configs = res;
+    });
   }
 
   sortDevices() {
@@ -249,13 +241,13 @@ export class DevicesComponent implements OnInit {
 
   editDevice(device: Device) {
     this.currID = device.device_id;
-    this.form.controls["name"].setValue(device.name);
-    this.form.controls["desc"].setValue(device.description);
-    this.form.controls["phone"].setValue(device.phone_number);
-    this.form.controls["imei"].setValue(device.imei);
-    this.form.controls["model"].setValue(device.model);
-    this.form.controls["config"].setValue(device.device_config_id);
-    this.form.controls["group"].setValue(device.device_group_id);
+    this.form.controls['name'].setValue(device.name);
+    this.form.controls['desc'].setValue(device.description);
+    this.form.controls['phone'].setValue(device.phone_number);
+    this.form.controls['imei'].setValue(device.imei);
+    this.form.controls['model'].setValue(device.model);
+    this.form.controls['config'].setValue(device.device_config_id);
+    this.form.controls['group'].setValue(device.device_group_id);
   }
 
   deleteDevice(id: string) {

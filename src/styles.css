@@ -284,16 +284,16 @@ input:focus:invalid {
 input:focus:valid {
   outline: 2px solid var(--sdm-dark-blue);
 }
-input.w-440 {
+.w-440 {
   width: 440px !important;
 }
-input.w-170 {
+.w-170 {
   width: 170px !important;
 }
-input.w-186 {
+.w-186 {
   width: 186px !important;
 }
-input.w-296 {
+.w-296 {
   width: 296px !important;
 }
 
@@ -374,6 +374,18 @@ input.w-296 {
 }
 
 /* СЕЛЕКТ */
+
+.select-native {
+  padding: 11px;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2f4459;
+  border: 1px solid #d8d8d8;
+  border-radius: 16px;
+  background: white;
+}
+
 .sdm-light-select .select-wrapper {
   color: var(--sdm-dark-blue) !important;
 }
@@ -1107,4 +1119,17 @@ input[type="checkbox"]:disabled + .checkbox-custom {
 }
 .filter--open .filter {
   transform: translateX(0);
+}
+
+/* FORM */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.form__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

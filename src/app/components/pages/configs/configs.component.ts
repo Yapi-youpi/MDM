@@ -1,8 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DevicesConfigService } from '../../../services/devices-config.service';
 import { UserService } from '../../../services/user.service';
 import { interval } from 'rxjs';
 import { DevicesConfig } from '../../../interfaces/interfaces';
+import { AssetService } from '../../../services/asset.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-configs',
@@ -10,23 +12,30 @@ import { DevicesConfig } from '../../../interfaces/interfaces';
   styleUrls: ['./configs.component.css'],
 })
 export class ConfigsComponent implements OnInit {
+  public newConfigForm: FormGroup;
   public search = '';
   public default_config!: DevicesConfig;
   public configs: DevicesConfig[] = [];
   public loading = true;
   public rename = '';
-  public id = '';
+  public currentConfig!: DevicesConfig;
   constructor(
+    public asset: AssetService,
     private configService: DevicesConfigService,
-    private userService: UserService,
-    private elementRef: ElementRef
-  ) {}
+    private userService: UserService
+  ) {
+    this.newConfigForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      prototype: new FormControl(''),
+    });
+    this.newConfigForm.controls['prototype'].setValue(
+      'Стандартная конфигурация',
+      { onlySelf: true }
+    );
+  }
 
   ngOnInit(): void {
-    // let rename = this.elementRef.nativeElement.querySelectorAll(".modal");
-    // let config = this.elementRef.nativeElement.querySelectorAll(".modal");
-    // M.Modal.init(rename);
-    // M.Modal.init(config);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
@@ -39,16 +48,10 @@ export class ConfigsComponent implements OnInit {
   getDefaultConfig() {
     this.configService
       .getConfig('default')
-      .then(
-        (res: {
-          devicesConfigs: DevicesConfig[];
-          error: string;
-          success: boolean;
-        }) => {
-          this.default_config = Object.assign(res.devicesConfigs[0]);
-          console.log(this.default_config);
-        }
-      )
+      .then((res) => {
+        this.default_config = Object.assign(res[0]);
+        console.log(this.default_config);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -57,26 +60,20 @@ export class ConfigsComponent implements OnInit {
   getAllConfigs() {
     this.configService
       .getConfig('all')
-      .then(
-        (res: {
-          devicesConfigs: DevicesConfig[];
-          error: string;
-          success: boolean;
-        }) => {
-          console.log(res.devicesConfigs);
-          this.loading = false;
-          this.configs = res.devicesConfigs;
-          this.sortConfigs();
-        }
-      )
+      .then((res) => {
+        console.log(res);
+        this.loading = false;
+        this.configs = res;
+        this.sortConfigs();
+      })
       .catch((err) => {
         console.log(err.error.error);
       });
   }
 
-  addConfig(name: string) {
+  addConfig(name: string, description: string) {
     this.configService
-      .addConfig(this.default_config, name)
+      .addConfig(this.default_config, name, description)
       .then((res) => {
         console.log(res);
         this.getAllConfigs();
@@ -112,18 +109,18 @@ export class ConfigsComponent implements OnInit {
       });
   }
 
-  getID(id: string) {
-    console.log('aaaaaa');
-    this.id = id;
+  setCurrentConfig(config) {
+    this.currentConfig = config;
   }
 
   sortConfigs() {
     this.configs.sort((a, b) => {
-      if (a.name > b.name) {
-        return 1;
-      } else {
-        return -1;
-      }
+      return a.name > b.name ? 1 : -1;
+    });
+    let i = interval(1000).subscribe(() => {
+      this.asset.modalInit('modal-add-config');
+      this.asset.modalInit('modal-delete-config');
+      i.unsubscribe();
     });
   }
 }

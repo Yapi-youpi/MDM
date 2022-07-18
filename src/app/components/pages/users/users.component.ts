@@ -20,7 +20,6 @@ import Compressor from 'compressorjs';
 export class UsersComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public filterForm: FormGroup;
-
   public users: Users[] = [];
   public userTags = [];
   public currentUser: Users | undefined; // undefined is need for reset currentUser
