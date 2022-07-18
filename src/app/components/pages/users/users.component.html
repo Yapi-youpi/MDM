@@ -48,8 +48,8 @@
               >
                 <button
                   class="user-card__menu-btn"
-                  data-target="modal-edit-user"
-                  (click)="setCurrentUser(user)"
+                  data-target="modal-new-user"
+                  (click)="setCurrentUser($event, user)"
                 >
                   <i class="material-icons">edit</i>
                 </button>
@@ -57,7 +57,7 @@
                   [disabled]="user.role === 'super'"
                   class="user-card__menu-btn"
                   data-target="modal-delete-user"
-                  (click)="setCurrentUser(user)"
+                  (click)="setCurrentUser($event, user)"
                 >
                   <i class="material-icons">clear</i>
                 </button>
@@ -151,12 +151,31 @@
   <!--  MODALS -->
   <div class="modal-wrapper" id="modal-new-user">
     <div class="modal-dialog">
-      <h4 class="modal-title">Добавление нового пользователя</h4>
+      <h4 class="modal-title">
+        {{
+          currentUser
+            ? "Редактирование данных"
+            : "Добавление нового пользователя"
+        }}
+      </h4>
       <form [formGroup]="form" class="form users-form">
         <div class="avatar-wrapper">
           <label for="file">
             <div class="avatar">
-              <div class="avatar__image"></div>
+              <div
+                class="avatar__image"
+                *ngIf="
+                  currentUser && (currentUser?.avatar)!.length > 0;
+                  else noAvatar
+                "
+                [ngStyle]="{
+                  'background-image': 'url(' + currentUser.avatar + ')',
+                  'background-size': 'cover'
+                }"
+              ></div>
+              <ng-template #noAvatar>
+                <div class="avatar__image"></div>
+              </ng-template>
               <div class="avatar__camera"></div>
               <input
                 (change)="addFile($event)"
@@ -178,7 +197,7 @@
             required
           />
         </div>
-        <div class="form__item">
+        <div class="form__item" *ngIf="!currentUser">
           <label for="login">Логин</label>
           <input
             formControlName="login"
@@ -227,14 +246,14 @@
         </div>
         <div class="form__item">
           <label>Подразделение</label>
-          <select class="select-native" formControlName="group">
+          <select class="select-native" formControlName="userTags">
             <option value="{{ tag }}" *ngFor="let tag of userTags">
               {{ tag }}
             </option>
             <option value="Другое">Другое</option>
           </select>
         </div>
-        <div class="form__item" *ngIf="form.get('group')?.value == 'Другое'">
+        <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
           <label></label>
           <input
             formControlName="other"
@@ -247,12 +266,17 @@
       </form>
       <div class="btn-wrapper">
         <button
+          *ngIf="!currentUser; else editBtn"
           class="btn btn--big"
           (click)="addUser()"
           [disabled]="form.invalid || form.untouched || form.pristine"
         >
           Добавить
         </button>
+        <ng-template #editBtn>
+          <button class="btn btn--big" (click)="editUser()">Сохранить</button>
+        </ng-template>
+
         <button
           class="btn btn--big btn--outline modal-close"
           (click)="clearModal()"
@@ -262,21 +286,11 @@
       </div>
     </div>
   </div>
-  <div class="modal-wrapper" id="modal-edit-user">
-    <div class="modal-dialog">
-      <h4 class="modal-title">Редактирование данных</h4>
-      Modal here
-      <div class="btn-wrapper">
-        <button class="btn btn--big" (click)="editUser()">Сохранить</button>
-        <button class="btn btn--big btn--outline modal-close">Отменить</button>
-      </div>
-    </div>
-  </div>
   <div class="modal-wrapper" id="modal-delete-user">
     <div class="modal-dialog">
       <h4 class="modal-title">Удалить пользователя {{ currentUser?.name }}?</h4>
       <div class="btn-wrapper">
-        <button class="btn btn--big" (click)="deleteUser(currentUser.id)">
+        <button class="btn btn--big" (click)="deleteUser(currentUser!.id)">
           Да
         </button>
         <button class="btn btn--big btn--outline modal-close">Нет</button>

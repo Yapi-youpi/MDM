@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public permissions: GroupPermissions[] = [];
   public users: Users[] = [];
   public userTags = [];
-  public currentUser!: Users;
+  public currentUser: Users | undefined; // undefined is need for reset currentUser
   public search!: string;
   public loaded: boolean = false;
   public edit: boolean = false;
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       password: new FormControl('', Validators.required),
       login: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
-      group: new FormControl(''),
+      userTags: new FormControl(''),
       other: new FormControl(''),
     });
     this.filterForm = fb.group({
@@ -139,8 +139,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  setCurrentUser(user: Users) {
+  setCurrentUser(event: Event, user: Users) {
     this.currentUser = user;
+    // @ts-ignore
+    if (event.target.innerHTML === 'edit') {
+      this.form.patchValue(user);
+      console.log(this.form.value);
+    }
   }
 
   addUser() {
@@ -150,9 +155,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const password = this.form.get('password')?.value;
     const role = this.form.get('role')?.value;
     const group =
-      this.form.get('group')?.value === 'Другое'
+      this.form.get('userTags')?.value === 'Другое'
         ? [this.form.get('other')?.value]
-        : [this.form.get('group')?.value];
+        : [this.form.get('userTags')?.value];
     this.userService
       .addUser(avatar, login, password, name, role, group)
       .then(() => {
@@ -169,6 +174,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     document
       .getElementById('modal-new-user')
       ?.classList.remove('modal-wrapper--open');
+    this.currentUser = undefined;
   }
 
   sortUsers() {
@@ -185,7 +191,62 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   editUser() {
-    console.log('user data will update');
+    const avatar = this.userPhoto;
+    const login = this.form.get('login')?.value;
+    const name = this.form.get('name')?.value;
+    const password = this.form.get('password')?.value;
+    const group =
+      this.form.get('userTags')?.value === 'Другое'
+        ? [this.form.get('other')?.value]
+        : [this.form.get('userTags')?.value];
+    if (password)
+      this.userService
+        .changeUserPassword(login, password)
+        .then((res) => {
+          console.log(res);
+          this.currentUser = undefined;
+          this.clearModal();
+          this.getAllUsers();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    if (avatar && avatar?.length > 0)
+      this.userService
+        .loadAvatar(this.currentUser!.id, avatar)
+        .then((res) => {
+          console.log(res);
+          this.currentUser = undefined;
+          this.clearModal();
+          this.getAllUsers();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    if (group[0][0] !== this.currentUser?.userTags[0])
+      this.userService
+        .changeUserTag(this.currentUser!.id, group)
+        .then((res) => {
+          console.log(res);
+          this.currentUser = undefined;
+          this.clearModal();
+          this.getAllUsers();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    if (name !== this.currentUser!.name)
+      this.userService
+        .renameUSer(login, name)
+        .then((res) => {
+          console.log(res);
+          this.currentUser = undefined;
+          this.clearModal();
+          this.getAllUsers();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }
 
   deleteUser(id: string) {
@@ -196,6 +257,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         document
           .getElementById('modal-delete-user')
           ?.classList.remove('modal-wrapper--open');
+        this.currentUser = undefined;
         this.getAllUsers();
       })
       .catch((err) => {
@@ -208,31 +270,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  changeUserPassword(login: string, password: string) {
-    this.userService
-      .changeUserPassword(login, password)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  renameUser(login: string, name: string) {
-    this.userService
-      .renameUSer(login, name)
-      .then((res) => {
-        console.log(res);
-        this.getAllUsers();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   addFile(event: Event) {
     this.file_input = event.target;
+    console.log(this.file_input);
     const file = this.file_input.files[0];
     if (file) {
       this.file_placeholder = this.elementRef.nativeElement.querySelector(

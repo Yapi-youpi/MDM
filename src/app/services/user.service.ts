@@ -179,6 +179,41 @@ export class UserService {
     });
   }
 
+  loadAvatar(id: string, avatar: string) {
+    const url = environment.url + '/load_avatar';
+    const body = {
+      id,
+      avatar,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+  changeUserTag(id: string, userTags: string[]) {
+    const url = environment.url + '/edit_user_tag';
+    const body = {
+      id,
+      userTags,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
   getUserTags() {
     const url = environment.url + '/get_user_tags';
     return new Promise<any>((resolve, reject) => {
