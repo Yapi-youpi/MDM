@@ -31,6 +31,7 @@ import { GlobalHeaderComponent } from './components/common/global-header/global-
 import { SearchUsersPipe } from './services/search-users.pipe';
 import { FilterUsersPipe } from './services/filter-users.pipe';
 import { UserPermissionsComponent } from './components/pages/user-permissions/user-permissions.component';
+import { ConfigurationComponent } from './components/pages/configuration/configuration.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,7 @@ const routes: Routes = [
     SearchUsersPipe,
     FilterUsersPipe,
     UserPermissionsComponent,
+    ConfigurationComponent,
   ],
   imports: [
     BrowserModule,
