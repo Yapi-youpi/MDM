@@ -1,7 +1,6 @@
 <app-card>
   <div class="user">
     <button
-      #popup_btn
       class="toggle-btn"
       [class.no-user]="imgURL === ''"
       (click)="togglePopup()"
@@ -17,7 +16,6 @@
       >
     </button>
     <div
-      #popup
       *ngIf="isPopupOpen"
       class="user-popup"
     >

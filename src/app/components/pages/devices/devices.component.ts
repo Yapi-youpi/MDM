@@ -146,7 +146,7 @@ export class DevicesComponent implements OnInit {
         }
       })
       .catch((err) => {
-        console.log(err.error.error);
+        console.log(err);
       });
   }
 

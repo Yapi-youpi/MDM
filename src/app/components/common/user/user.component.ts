@@ -13,9 +13,6 @@ import {
   styleUrls: ["./user.component.scss"],
 })
 export class UserComponent {
-  @ViewChild("popup_btn") public btnRef!: ElementRef;
-  @ViewChild("popup") public popupRef!: ElementRef;
-
   public imgURL: string = "";
   public isPopupOpen: boolean = false;
 
