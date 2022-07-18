@@ -71,9 +71,16 @@ export class ConfigsComponent implements OnInit {
       });
   }
 
-  addConfig(name: string, description: string) {
+  addConfig(value: any) {
+    const name = value.name;
+    const description = value.description;
+    const config = value.prototype;
+    const prototype =
+      config === 'Стандартная конфигурация'
+        ? this.default_config
+        : this.configs.find((conf) => conf.name === config);
     this.configService
-      .addConfig(this.default_config, name, description)
+      .addConfig(prototype, name, description)
       .then((res) => {
         console.log(res);
         this.getAllConfigs();

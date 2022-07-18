@@ -91,12 +91,7 @@
       </div>
     </form>
     <div class="btn-wrapper">
-      <button
-        (click)="
-          addConfig(newConfigForm.value.name, newConfigForm.value.description)
-        "
-        class="btn btn--big"
-      >
+      <button (click)="addConfig(newConfigForm.value)" class="btn btn--big">
         Добавить
       </button>
       <button class="btn btn--big btn--outline modal-close">Отменить</button>
