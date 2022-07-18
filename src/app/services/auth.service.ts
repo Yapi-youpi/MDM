@@ -14,7 +14,6 @@ export class AuthService {
       login: login.trim(),
       password: password.trim(),
     };
-    console.log(body);
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
         next: (res) => {
