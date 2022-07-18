@@ -56,6 +56,8 @@ import { AuthButtonComponent } from './components/common/UI/button/auth-button/a
 import { CheckboxComponent } from './components/common/UI/input/checkbox/checkbox.component';
 import { MenuButtonComponent } from './components/common/UI/button/menu-button/menu-button.component';
 import { ModalComponent } from './components/common/modal/modal.component';
+import { FilterDevicesComponent } from './components/common/modals/filter-devices/filter-devices.component';
+import { FilterBtnComponent } from './components/common/UI/button/filter-btn/filter-btn.component';
 
 const routes: Routes = [
   {
@@ -113,6 +115,8 @@ const routes: Routes = [
     CheckboxComponent,
     MenuButtonComponent,
     ModalComponent,
+    FilterDevicesComponent,
+    FilterBtnComponent,
   ],
   imports: [
     BrowserModule,

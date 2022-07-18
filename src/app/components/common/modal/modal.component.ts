@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input } from "@angular/core";
+import { Component, HostListener, Input } from "@angular/core";
 
 @Component({
   selector: "app-modal",
@@ -13,7 +13,7 @@ export class ModalComponent {
 
   @HostListener("document:mousedown", ["$event"])
   onGlobalClick(event): void {
-    if (event.target.classList.contains("modal-bg")) {
+    if (event.target.classList.contains("modal-bg") && this.isClosable) {
       event.target.classList.add("hidden");
     }
   }

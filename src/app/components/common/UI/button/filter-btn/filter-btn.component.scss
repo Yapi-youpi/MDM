@@ -1,0 +1,22 @@
+.filter-btn {
+  height: 30px;
+  width: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  .icon {
+    height: 30px;
+    width: 30px;
+
+    mask-size: 30px 30px;
+    mask-image: url("../../../../../../assets/UI/filter.svg");
+    -webkit-mask-size: 30px 30px;
+    -webkit-mask-image: url("../../../../../../assets/UI/filter.svg");
+
+    background-color: var(--white);
+  }
+}

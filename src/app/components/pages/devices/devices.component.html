@@ -17,6 +17,11 @@
 <!--          (onReset)="resetSearchParams()"-->
 <!--          (onSubmit)="searchDevicesWithParams()"-->
 <!--        ></app-filter-sidebar>-->
+        <div class="filter-wrapper">
+          <app-filter-btn
+            [target]="'filter-devices'"
+          ></app-filter-btn>
+        </div>
         <app-add-button
           [title]="'Добавить устройство'"
           [target]="'add_device'"
@@ -24,9 +29,7 @@
       </div>
     </div>
   </app-card>
-  <app-modal
-    [modalID]="'add_device'"
-  ></app-modal>
+
 <!--  <app-page-header [title]="'Устройства'"></app-page-header>-->
 <!--  <div class="card sdm-bg-light-grey">-->
 <!--    <div class="row actions">-->
@@ -180,3 +183,6 @@
 <!--<app-delete-several-elements-->
 <!--  (onSubmit)="deleteSeveralDevices()"-->
 <!--&gt;</app-delete-several-elements>-->
+
+<app-filter-devices></app-filter-devices>
+<app-add-device></app-add-device>
