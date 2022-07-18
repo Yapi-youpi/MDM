@@ -96,7 +96,7 @@
             (onChangeDeviceState)="changeDeviceState($event)"
             (onClickDeviceQRCode)="getDeviceQRCode($event)"
             (onClickDeviceEdit)="selectDeviceToEdit($event)"
-            (onClickDeviceDelete)="deleteDevice($event)"
+            (onClickDeviceDelete)="selectDeviceToDelete($event)"
           ></app-device-item>
         </div>
       </div>
@@ -257,5 +257,18 @@
 <!--  (onSubmit)="deleteSeveralDevices()"-->
 <!--&gt;</app-delete-several-elements>-->
 
-<app-filter-devices></app-filter-devices>
-<app-add-device></app-add-device>
+<app-filter-devices
+></app-filter-devices>
+<app-add-device
+  [groups]="groups"
+></app-add-device>
+<app-qr-code
+  [device]="currDevice"
+></app-qr-code>
+<app-edit-device
+  [groups]="groups"
+></app-edit-device>
+<app-delete-device
+  [device]="currDevice"
+  (onSubmit)="deleteDevice($event)"
+></app-delete-device>

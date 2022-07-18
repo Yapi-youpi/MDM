@@ -17,7 +17,7 @@ import { DevicesGroups } from "../../../../shared/types/groups";
 @Component({
   selector: "app-edit-device",
   templateUrl: "./edit-device.component.html",
-  styleUrls: ["./edit-device.component.css"],
+  styleUrls: ["./edit-device.component.scss"],
 })
 export class EditDeviceComponent implements OnInit {
   @Input() public groups!: DevicesGroups[];

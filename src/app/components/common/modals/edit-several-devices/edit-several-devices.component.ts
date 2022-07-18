@@ -17,7 +17,7 @@ import { EditSeveralDevicesService } from "../../../../shared/services/forms/dev
 @Component({
   selector: "app-edit-several-devices",
   templateUrl: "./edit-several-devices.component.html",
-  styleUrls: ["./edit-several-devices.component.css"],
+  styleUrls: ["./edit-several-devices.component.scss"],
 })
 export class EditSeveralDevicesComponent implements OnInit {
   @Input() groups!: DevicesGroups[];

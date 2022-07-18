@@ -62,6 +62,7 @@ import { SortBtnComponent } from './components/common/UI/button/sort-btn/sort-bt
 import { SwitchInputComponent } from './components/common/UI/input/switch-input/switch-input.component';
 import { DeviceActionBtnComponent } from './components/common/UI/button/device-action-btn/device-action-btn.component';
 import { StatusIconComponent } from './components/common/UI/status/status-icon/status-icon.component';
+import { ModalActionBtnsComponent } from './components/common/UI/button/modal-action-btns/modal-action-btns.component';
 
 const routes: Routes = [
   {
@@ -125,6 +126,7 @@ const routes: Routes = [
     SwitchInputComponent,
     DeviceActionBtnComponent,
     StatusIconComponent,
+    ModalActionBtnsComponent,
   ],
   imports: [
     BrowserModule,

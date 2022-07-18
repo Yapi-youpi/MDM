@@ -16,7 +16,7 @@ import { AddDeviceService } from "../../../../shared/services/forms/device/add-d
 @Component({
   selector: "app-add-device",
   templateUrl: "./add-device.component.html",
-  styleUrls: ["./add-device.component.css"],
+  styleUrls: ["./add-device.component.scss"],
 })
 export class AddDeviceComponent implements OnInit {
   @Input() public groups!: DevicesGroups[];

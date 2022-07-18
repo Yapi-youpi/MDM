@@ -9,7 +9,7 @@ import { Device } from "../../../../shared/types/devices";
 @Component({
   selector: "app-qr-code",
   templateUrl: "./qr-code.component.html",
-  styleUrls: ["./qr-code.component.css"],
+  styleUrls: ["./qr-code.component.scss"],
 })
 export class QrCodeComponent {
   @Input() public device!: Device;

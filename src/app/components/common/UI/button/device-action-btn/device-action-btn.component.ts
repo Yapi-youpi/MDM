@@ -1,4 +1,6 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+
+import { Device } from "../../../../../shared/types/devices";
 
 @Component({
   selector: "app-device-action-btn",
@@ -7,10 +9,15 @@ import { Component, Input } from "@angular/core";
 })
 export class DeviceActionBtnComponent {
   @Input() target: string = "";
+  @Input() device!: Device;
+
+  @Output() onClick = new EventEmitter<Device>();
 
   constructor() {}
 
-  onClickHandler() {
+  onClickHandler(device: Device) {
+    this.onClick.emit(device);
+
     const modal = document.querySelector(`#${this.target}`);
     modal?.classList.toggle("hidden");
   }

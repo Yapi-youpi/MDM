@@ -4,7 +4,7 @@ import { formService, userService } from "src/app/shared/services";
 @Component({
   selector: "app-change-password",
   templateUrl: "./change-password.component.html",
-  styleUrls: ["./change-password.component.css"],
+  styleUrls: ["./change-password.component.scss"],
 })
 export class ChangePasswordComponent {
   @Output() onSubmit = new EventEmitter();

@@ -1,8 +1,9 @@
-.central-wrapper {
-  height: 100vh;
-  width: 100%;
-
+.action-btns {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
 }

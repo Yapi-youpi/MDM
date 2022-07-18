@@ -41,13 +41,19 @@
     </div>
     <div class="device-actions-wrapper">
       <app-device-action-btn
-        [target]="'qr-code'"
+        [device]="device"
+        [target]="'qr_code'"
+        (onClick)="onClickDeviceQRCodeHandler($event)"
       ></app-device-action-btn>
       <app-device-action-btn
+        [device]="device"
         [target]="'edit_device'"
+        (onClick)="onClickDeviceEditHandler($event)"
       ></app-device-action-btn>
       <app-device-action-btn
+        [device]="device"
         [target]="'delete_device'"
+        (onClick)="onClickDeviceDeleteHandler($event)"
       ></app-device-action-btn>
     </div>
   </div>
