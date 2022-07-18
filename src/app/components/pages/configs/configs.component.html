@@ -27,7 +27,10 @@
           </div>
         </ng-template>
         <ng-container *ngIf="configs.length > 0; else loader">
-          <div class="config-card" *ngFor="let config of configs">
+          <div
+            class="config-card"
+            *ngFor="let config of configs | configSearch: search"
+          >
             <div class="config-card__header">
               <div class="config-card__title">
                 {{ config.name }}

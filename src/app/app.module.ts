@@ -32,6 +32,7 @@ import { SearchUsersPipe } from './services/search-users.pipe';
 import { FilterUsersPipe } from './services/filter-users.pipe';
 import { UserPermissionsComponent } from './components/pages/user-permissions/user-permissions.component';
 import { ConfigurationComponent } from './components/pages/configuration/configuration.component';
+import { ConfigSearchPipe } from './services/config-search.pipe';
 
 const routes: Routes = [
   {
@@ -63,6 +64,7 @@ const routes: Routes = [
     FilterUsersPipe,
     UserPermissionsComponent,
     ConfigurationComponent,
+    ConfigSearchPipe,
   ],
   imports: [
     BrowserModule,
