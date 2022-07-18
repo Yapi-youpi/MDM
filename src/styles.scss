@@ -203,7 +203,14 @@ button {
 
 // ССЫЛКА
 a {
+  display: block;
+
   color: inherit;
+}
+
+// СПИСКИ
+ul, ol {
+  list-style: none;
 }
 
 // СПАН-ИКОНКА
