@@ -30,6 +30,7 @@ import { SearchInputComponent } from './components/common/UI/search-input/search
 import { GlobalHeaderComponent } from './components/common/global-header/global-header.component';
 import { SearchUsersPipe } from './services/search-users.pipe';
 import { FilterUsersPipe } from './services/filter-users.pipe';
+import { UserPermissionsComponent } from './components/pages/user-permissions/user-permissions.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,7 @@ const routes: Routes = [
     GlobalHeaderComponent,
     SearchUsersPipe,
     FilterUsersPipe,
+    UserPermissionsComponent,
   ],
   imports: [
     BrowserModule,

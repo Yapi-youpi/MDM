@@ -7,11 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  GroupPermissions,
-  Permissions,
-  Users,
-} from '../../../interfaces/interfaces';
+import { Users } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../services/asset.service';
 import Compressor from 'compressorjs';
@@ -24,15 +20,12 @@ import Compressor from 'compressorjs';
 export class UsersComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public filterForm: FormGroup;
-  public permissionsForm: FormGroup;
-  public permissions: GroupPermissions[] = [];
+
   public users: Users[] = [];
   public userTags = [];
   public currentUser: Users | undefined; // undefined is need for reset currentUser
   public search!: string;
   public loaded: boolean = false;
-  public edit: boolean = false;
-  public params: Permissions;
   public filter_roles!: Array<string>;
   public file_input!: any;
   public file_placeholder!: Element;
@@ -55,23 +48,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.filterForm = fb.group({
       roles: new FormArray([]),
     });
-    this.permissionsForm = fb.group({
-      permissions: new FormArray([]),
-    });
-    this.params = {
-      viewDevices: 'Просмотр устройств',
-      viewUsers: 'Просмотр пользователей',
-      applicationsAdd: 'Добавление приложений',
-      createEditConfig: 'Добавление и редактирование конфигураций',
-      createEditDevice: 'Добавление и редактирование устройств',
-      createEditDeviceGroups: 'Добавление и редактирование групп устройств',
-      changeSelfPassword: 'Изменение своего пароля',
-      changeOperatorPassword: 'Изменение пароля оператора',
-      operatorActivateDeactivate: 'Изменение активности операторов',
-      operatorAdd: 'Добавление операторов',
-      deleteOperators: 'Удаление операторов',
-      sendInfoMessages: 'Отправка сообщений',
-    };
   }
 
   ngOnInit() {
@@ -79,7 +55,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
       if (this.userService.token) {
         i.unsubscribe();
         this.getAllUsers();
-        this.getPermissions();
         this.getUserTags();
       }
     });
@@ -93,18 +68,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.asset.modalInit('modal-new-user');
     this.asset.modalInit('modal-edit-user');
     this.asset.modalInit('modal-delete-user');
-  }
-
-  getPermissions() {
-    this.userService
-      .getPermissions()
-      .then((res) => {
-        this.permissions = res;
-        this.loaded = true;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   getAllUsers() {
@@ -335,10 +298,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
       placeholder.innerHTML = '';
       image.removeAttribute('style');
     }
-  }
-
-  toggleEdit() {
-    this.edit = !this.edit;
   }
 
   onCheckboxChange(event: any) {

@@ -1,0 +1,57 @@
+<div class="card__header">
+  Настройка доступа
+  <button
+    *ngIf="!edit"
+    type="button"
+    class="btn btn--action btn--right"
+    (click)="toggleEdit()"
+  >
+    <i class="material-icons">edit</i>
+  </button>
+</div>
+<form class="user-settings">
+  <ng-template #loader>
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+  </ng-template>
+  <ng-container *ngIf="loaded; else loader">
+    <fieldset *ngFor="let role of asset.roles | keyvalue">
+      <legend>{{ role.value.text }}</legend>
+      <div class="checkbox-group">
+        <label
+          for="{{ role.key }}-{{ param.key }}"
+          class="checkbox-wrapper"
+          *ngFor="let param of params | keyvalue"
+        >
+          <input
+            type="checkbox"
+            name="params"
+            id="{{ role.key }}-{{ param.key }}"
+            class="visually-hidden"
+            [checked]="
+              role.key === 'super' ? true : permissions[role.key][param.key]
+            "
+            [disabled]="!edit || role.key === 'super'"
+          />
+          <div class="input checkbox-custom">
+            <svg width="18" height="18" viewBox="0 0 20 20">
+              <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+            </svg>
+          </div>
+          <span>{{ param.value }}</span>
+        </label>
+      </div>
+    </fieldset></ng-container
+  >
+</form>
+<div class="btn-wrapper" *ngIf="edit">
+  <button type="button" class="btn btn--big">Сохранить</button>
+  <button
+    type="button"
+    class="btn btn--big btn--outline"
+    (click)="toggleEdit()"
+  >
+    Отмена
+  </button>
+</div>
