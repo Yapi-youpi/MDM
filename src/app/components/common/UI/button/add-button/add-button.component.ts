@@ -10,4 +10,9 @@ export class AddButtonComponent {
   @Input() public target: string = "";
 
   constructor() {}
+
+  onClickHandler() {
+    const modal = document.querySelector(`#${this.target}`);
+    modal?.classList.toggle("hidden");
+  }
 }

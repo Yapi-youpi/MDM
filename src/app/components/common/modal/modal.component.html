@@ -1,11 +1,10 @@
 <div
-  class="modal-bg"
+  class="modal-bg hidden"
   [id]="modalID"
-  [class.hidden]="!isModalOpen"
 >
   <div class="modal-container">
     <app-card>
-      ololo
+      <ng-content></ng-content>
     </app-card>
   </div>
 </div>
