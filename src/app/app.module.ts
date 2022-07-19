@@ -33,7 +33,7 @@ import { InputAlertComponent } from "./components/common/UI/alert/input-alert/in
 import { DeleteDeviceComponent } from "./components/common/modals/delete-device/delete-device.component";
 import { AddDeviceComponent } from "./components/common/modals/add-device/add-device.component";
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
-import { SelectedDevicesComponent } from "./components/common/selected-devices/selected-devices.component";
+import { SelectedElementsComponent } from "./components/common/selected-devices/selected-elements.component";
 import { EditSeveralDevicesComponent } from "./components/common/modals/edit-several-devices/edit-several-devices.component";
 import { DeleteSeveralElementsComponent } from "./components/common/modals/delete-several-elements/delete-several-elements.component";
 
@@ -51,18 +51,18 @@ import { ChangePasswordComponent } from "./components/common/modals/change-passw
 import { CardComponent } from "./components/common/card/card.component";
 import { CentralWrapperComponent } from "./components/common/central-wrapper/central-wrapper.component";
 import { FormGroupComponent } from "./components/common/UI/input/form-group/form-group.component";
-import { InputComponent } from './components/common/UI/input/input/input.component';
-import { AuthButtonComponent } from './components/common/UI/button/auth-button/auth-button.component';
-import { CheckboxComponent } from './components/common/UI/input/checkbox/checkbox.component';
-import { MenuButtonComponent } from './components/common/UI/button/menu-button/menu-button.component';
-import { ModalComponent } from './components/common/modal/modal.component';
-import { FilterDevicesComponent } from './components/common/modals/filter-devices/filter-devices.component';
-import { FilterBtnComponent } from './components/common/UI/button/filter-btn/filter-btn.component';
-import { SortBtnComponent } from './components/common/UI/button/sort-btn/sort-btn.component';
-import { SwitchInputComponent } from './components/common/UI/input/switch-input/switch-input.component';
-import { DeviceActionBtnComponent } from './components/common/UI/button/device-action-btn/device-action-btn.component';
-import { StatusIconComponent } from './components/common/UI/status/status-icon/status-icon.component';
-import { ModalActionBtnsComponent } from './components/common/UI/button/modal-action-btns/modal-action-btns.component';
+import { InputComponent } from "./components/common/UI/input/input/input.component";
+import { AuthButtonComponent } from "./components/common/UI/button/auth-button/auth-button.component";
+import { CheckboxComponent } from "./components/common/UI/input/checkbox/checkbox.component";
+import { MenuButtonComponent } from "./components/common/UI/button/menu-button/menu-button.component";
+import { ModalComponent } from "./components/common/modal/modal.component";
+import { FilterDevicesComponent } from "./components/common/modals/filter-devices/filter-devices.component";
+import { FilterBtnComponent } from "./components/common/UI/button/filter-btn/filter-btn.component";
+import { SortBtnComponent } from "./components/common/UI/button/sort-btn/sort-btn.component";
+import { SwitchInputComponent } from "./components/common/UI/input/switch-input/switch-input.component";
+import { DeviceActionBtnComponent } from "./components/common/UI/button/device-action-btn/device-action-btn.component";
+import { StatusIconComponent } from "./components/common/UI/status/status-icon/status-icon.component";
+import { ModalActionBtnsComponent } from "./components/common/UI/button/modal-action-btns/modal-action-btns.component";
 
 const routes: Routes = [
   {
@@ -96,7 +96,7 @@ const routes: Routes = [
     DeleteDeviceComponent,
     AddDeviceComponent,
     QrTipComponent,
-    SelectedDevicesComponent,
+    SelectedElementsComponent,
     EditSeveralDevicesComponent,
     // PIPES
     DateConverterPipe,

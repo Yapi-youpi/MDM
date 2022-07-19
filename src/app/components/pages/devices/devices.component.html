@@ -21,11 +21,11 @@
           [target]="'add_device'"
         ></app-add-button>
       </div>
-      <app-selected-devices
+      <app-selected-elements
         *ngIf="selectedDevicesIDs.length !== 0"
         [devicesIDs]="selectedDevicesIDs"
         (onCloseClick)="cancelSelection()"
-      ></app-selected-devices>
+      ></app-selected-elements>
       <div class="list">
         <div class="list-header">
           <div class="checkbox-wrapper">

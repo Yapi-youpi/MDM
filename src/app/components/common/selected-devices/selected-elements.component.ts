@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: "app-selected-devices",
-  templateUrl: "./selected-devices.component.html",
-  styleUrls: ["./selected-devices.component.scss"],
+  selector: "app-selected-elements",
+  templateUrl: "./selected-elements.component.html",
+  styleUrls: ["./selected-elements.component.scss"],
 })
-export class SelectedDevicesComponent {
+export class SelectedElementsComponent {
   @Input() devicesIDs: string[] = [];
 
   @Output() onCloseClick = new EventEmitter();
