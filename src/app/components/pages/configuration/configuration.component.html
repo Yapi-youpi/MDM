@@ -1,1 +1,14 @@
-<p>configuration works!</p>
+<app-global-container class="global-container">
+  <app-global-header
+    class="global-header"
+    [title]="'Конфигурации / ' + (config ? config?.name : '')"
+  >
+  </app-global-header>
+  <main class="global-main card-wrapper">
+    <div class="card card--sidebar">
+      <div class="card__header">Настройки</div>
+      <button (click)="goBack()">Назад в конфигурации</button>
+    </div>
+    <div class="card"><div class="card__header">Управление</div></div>
+  </main>
+</app-global-container>

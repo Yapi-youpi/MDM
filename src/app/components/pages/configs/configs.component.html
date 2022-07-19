@@ -36,10 +36,14 @@
                 {{ config.name }}
               </div>
               <div class="config-card__menu">
-                <button class="config-card__menu-btn">
+                <a
+                  class="config-card__menu-btn"
+                  routerLink="/configuration/{{ config.ID }}"
+                >
                   <i class="material-icons">edit</i>
-                </button>
+                </a>
                 <button
+                  type="button"
                   class="config-card__menu-btn"
                   data-target="modal-delete-config"
                   (click)="setCurrentConfig(config)"
