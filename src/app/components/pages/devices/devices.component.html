@@ -21,10 +21,18 @@
           [target]="'add_device'"
         ></app-add-button>
       </div>
+      <app-selected-devices
+        *ngIf="selectedDevicesIDs.length !== 0"
+        [devicesIDs]="selectedDevicesIDs"
+        (onCloseClick)="cancelSelection()"
+      ></app-selected-devices>
       <div class="list">
         <div class="list-header">
           <div class="checkbox-wrapper">
-            <app-checkbox></app-checkbox>
+            <app-checkbox
+              [isChecked]="isAllSelected"
+              (onChange)="selectUnselectDevices()"
+            ></app-checkbox>
           </div>
           <div class="sort-headers">
             <div class="sort-btn-wrapper status">

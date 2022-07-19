@@ -1,21 +1,19 @@
-<div class="selected-devices r-14">
+<div class="selected-devices row space-between">
   <p>{{ devicesIDs.length }} выбран(-о)</p>
   <span
-    class="close"
+    class="icon close"
     (click)="onCloseClickHandler()"
   ></span>
   <button
     type="button"
-    class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round edit"
-    data-target="edit_several_devices"
+    class="p-0 edit"
   >
-    <span></span>
+    <span class="icon"></span>
   </button>
   <button
     type="button"
-    class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round delete"
-    data-target="delete_elements"
+    class="p-0 delete"
   >
-    <span></span>
+    <span class="icon"></span>
   </button>
 </div>

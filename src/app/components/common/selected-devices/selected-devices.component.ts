@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 @Component({
   selector: "app-selected-devices",
   templateUrl: "./selected-devices.component.html",
-  styleUrls: ["./selected-devices.component.css"],
+  styleUrls: ["./selected-devices.component.scss"],
 })
 export class SelectedDevicesComponent {
   @Input() devicesIDs: string[] = [];

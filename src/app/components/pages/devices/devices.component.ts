@@ -1,8 +1,6 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { interval } from "rxjs";
 
-// import M from "materialize-css";
-
 import { Device } from "../../../shared/types/devices";
 import { DevicesGroups } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
@@ -65,23 +63,7 @@ export class DevicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // let nonClosingModal =
-    //   this.elementRef.nativeElement.querySelector(".non-closing");
-    // let closingModal =
-    //   this.elementRef.nativeElement.querySelectorAll(".closing");
-    //
-    // M.Modal.init(nonClosingModal, {
-    //   dismissible: false,
-    //   onCloseEnd: () => {
-    //     this.userPasswordService.resetForm();
-    //   },
-    // });
-    //
-    // M.Modal.init(closingModal, {
-    //   dismissible: true,
-    // });
-
-    let i = interval(1000).subscribe(() => {
+    const i = interval(1000).subscribe(() => {
       if (this.user.token) {
         i.unsubscribe();
         this.getGroups();

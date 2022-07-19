@@ -19,7 +19,7 @@
   ></span>
 </div>
 <input
-  *ngIf="type !== 'select'"
+  *ngIf="type !== 'select' && type !== 'password'"
   [id]="name"
   [name]="name"
   [formControl]="control"
