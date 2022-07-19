@@ -267,6 +267,7 @@
 ></app-qr-code>
 <app-edit-device
   [groups]="groups"
+  (onSubmit)="editDevice()"
 ></app-edit-device>
 <app-delete-device
   [device]="currDevice"

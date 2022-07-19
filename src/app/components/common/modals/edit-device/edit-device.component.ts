@@ -46,14 +46,20 @@ export class EditDeviceComponent {
     });
   }
 
+  closeModal() {
+    const modal = document.querySelector("#edit_device");
+    modal?.classList.toggle("hidden");
+  }
+
   onSubmitHandler() {
-    // console.log(this.form.form.getRawValue());
     this.form.setSubmitted();
 
     if (this.form.form.invalid) {
       return;
     } else {
       this.onSubmit.emit();
+
+      this.closeModal();
     }
   }
 
@@ -61,7 +67,6 @@ export class EditDeviceComponent {
     this.form.resetSubmitted();
     this.form.form.reset();
 
-    const modal = document.querySelector("#edit_device");
-    modal?.classList.toggle("hidden");
+    this.closeModal();
   }
 }

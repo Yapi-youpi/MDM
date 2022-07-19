@@ -316,10 +316,6 @@ export class DevicesComponent implements OnInit {
               d.device_group_id = this.editDeviceForm._group_id;
             }
           });
-
-          // const modal =
-          //   this.elementRef.nativeElement.querySelector("#edit_device");
-          // M.Modal.getInstance(modal).close();
         } else {
           console.log(res.error);
         }
