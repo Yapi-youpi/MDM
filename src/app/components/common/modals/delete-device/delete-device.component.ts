@@ -14,18 +14,12 @@ export class DeleteDeviceComponent {
 
   constructor() {}
 
-  closeModal() {
-    const modal = document.querySelector("#delete_device");
-    modal?.classList.toggle("hidden");
-  }
-
   onSubmitHandler(device: Device) {
     this.onSubmit.emit(device);
-
-    this.closeModal();
   }
 
   onCancelHandler() {
-    this.closeModal();
+    const modal = document.querySelector("#delete_device");
+    modal?.classList.toggle("hidden");
   }
 }

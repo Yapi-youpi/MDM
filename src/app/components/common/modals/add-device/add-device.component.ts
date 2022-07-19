@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { DevicesGroups } from "../../../../shared/types/groups";
+import { DevicesGroup } from "../../../../shared/types/groups";
 import { AddDeviceService } from "../../../../shared/services/forms/device/add-device.service";
 import { Option } from "../../../../shared/types/input";
 
@@ -10,7 +10,7 @@ import { Option } from "../../../../shared/types/input";
   styleUrls: ["./add-device.component.scss"],
 })
 export class AddDeviceComponent {
-  @Input() public groups!: DevicesGroups[];
+  @Input() public groups!: DevicesGroup[];
 
   @Output() public onSubmit = new EventEmitter();
 

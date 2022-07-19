@@ -13,4 +13,9 @@ export class DeleteSeveralElementsComponent {
   onSubmitHandler() {
     this.onSubmit.emit();
   }
+
+  onCancelHandler() {
+    const modal = document.querySelector("#delete_several_elements");
+    modal?.classList.toggle("hidden");
+  }
 }

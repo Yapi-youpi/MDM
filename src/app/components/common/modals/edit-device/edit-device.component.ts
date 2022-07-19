@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 import { EditDeviceService } from "../../../../shared/services/forms/device/edit-device.service";
 
-import { DevicesGroups } from "../../../../shared/types/groups";
+import { DevicesGroup } from "../../../../shared/types/groups";
 import { Option } from "../../../../shared/types/input";
 
 @Component({
@@ -11,7 +11,7 @@ import { Option } from "../../../../shared/types/input";
   styleUrls: ["./edit-device.component.scss"],
 })
 export class EditDeviceComponent {
-  @Input() public groups!: DevicesGroups[];
+  @Input() public groups!: DevicesGroup[];
 
   @Output() public onSubmit = new EventEmitter();
 
@@ -46,11 +46,6 @@ export class EditDeviceComponent {
     });
   }
 
-  closeModal() {
-    const modal = document.querySelector("#edit_device");
-    modal?.classList.toggle("hidden");
-  }
-
   onSubmitHandler() {
     this.form.setSubmitted();
 
@@ -58,8 +53,6 @@ export class EditDeviceComponent {
       return;
     } else {
       this.onSubmit.emit();
-
-      this.closeModal();
     }
   }
 
@@ -67,6 +60,7 @@ export class EditDeviceComponent {
     this.form.resetSubmitted();
     this.form.form.reset();
 
-    this.closeModal();
+    const modal = document.querySelector("#edit_device");
+    modal?.classList.toggle("hidden");
   }
 }

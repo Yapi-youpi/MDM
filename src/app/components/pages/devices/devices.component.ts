@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit } from "@angular/core";
 import { interval } from "rxjs";
 
 import { Device } from "../../../shared/types/devices";
-import { DevicesGroups } from "../../../shared/types/groups";
+import { DevicesGroup } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
 import { DevicesFilter } from "../../../shared/types/interfaces";
 import { DevicesState, SingleDeviceState } from "../../../shared/types/states";
@@ -23,7 +23,7 @@ import {
 })
 export class DevicesComponent implements OnInit {
   public devices: Device[] = [];
-  public groups: DevicesGroups[] = [];
+  public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
 
@@ -292,6 +292,9 @@ export class DevicesComponent implements OnInit {
               d.device_group_id = this.editDeviceForm._group_id;
             }
           });
+
+          const modal = document.querySelector("#edit_device");
+          modal?.classList.toggle("hidden");
         } else {
           console.log(res.error);
         }
@@ -330,6 +333,9 @@ export class DevicesComponent implements OnInit {
           });
 
           this.selectedDevicesIDs = [];
+
+          const modal = document.querySelector("#edit_several_devices");
+          modal?.classList.toggle("hidden");
         } else {
           console.log(res.error);
         }
@@ -355,9 +361,8 @@ export class DevicesComponent implements OnInit {
             (d) => d !== device.device_id
           );
 
-          // const modal =
-          //   this.elementRef.nativeElement.querySelector("#delete_device");
-          // M.Modal.getInstance(modal).close();
+          const modal = document.querySelector("#delete_device");
+          modal?.classList.toggle("hidden");
         }
       })
       .catch((err) => {
@@ -378,9 +383,8 @@ export class DevicesComponent implements OnInit {
 
           this.selectedDevicesIDs = [];
 
-          // const modal =
-          //   this.elementRef.nativeElement.querySelector("#delete_elements");
-          // M.Modal.getInstance(modal).close();
+          const modal = document.querySelector("#delete_several_elements");
+          modal?.classList.toggle("hidden");
         }
       })
       .catch((err) => {

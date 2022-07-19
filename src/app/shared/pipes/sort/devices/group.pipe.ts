@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 import { Device } from "../../../types/devices";
-import { DevicesGroups } from "../../../types/groups";
+import { DevicesGroup } from "../../../types/groups";
 
 @Pipe({
   name: "devicesByGroup",
@@ -9,7 +9,7 @@ import { DevicesGroups } from "../../../types/groups";
 export class GroupPipe implements PipeTransform {
   transform(
     devices: Device[],
-    groups: DevicesGroups[],
+    groups: DevicesGroup[],
     isGroupAsc: boolean
   ): Device[] {
     if (groups && groups.length !== 0) {

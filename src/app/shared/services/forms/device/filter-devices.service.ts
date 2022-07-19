@@ -47,11 +47,21 @@ export class FilterDevicesService {
   }
 
   get _groupsIDs() {
-    return this.form.getRawValue()["group_ids"];
+    return this.form.getRawValue()["group_ids"] &&
+      typeof this.form.getRawValue()["group_ids"] === "string"
+      ? [this.form.getRawValue()["group_ids"]]
+      : Array.isArray(this.form.getRawValue()["group_ids"])
+      ? this.form.getRawValue()["group_ids"]
+      : null;
   }
 
   get _configsIDs() {
-    return this.form.getRawValue()["config_ids"];
+    return this.form.getRawValue()["config_ids"] &&
+      typeof this.form.getRawValue()["config_ids"] === "string"
+      ? [this.form.getRawValue()["config_ids"]]
+      : Array.isArray(this.form.getRawValue()["config_ids"])
+      ? this.form.getRawValue()["config_ids"]
+      : null;
   }
 
   reset() {

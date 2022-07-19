@@ -1,20 +1,18 @@
-<div id="delete_elements" class="modal closing">
-  <div class="modal-content">
-    <h4 class="title">Удалить выбранные элементы?</h4>
-    <div class="row action-btns">
-      <button
-        type="button"
-        class="modal-close sdm-middle r-14"
-      >
-        Нет
-      </button>
-      <button
-        type="button"
-        class="sdm-middle sdm-dark-blue r-14"
-        (click)="onSubmitHandler()"
-      >
-        Да
-      </button>
+<app-modal
+  [modalID]="'delete_several_elements'"
+  [isClosable]="true"
+>
+  <div class="content">
+    <div class="top">
+      <h4 class="text-title text-center">Удалить выбранные элементы?</h4>
     </div>
+    <app-modal-action-btns
+      [isReverse]="true"
+      [submitText]="'Да'"
+      [cancelText]="'Нет'"
+      [margin]="'50px'"
+      (onCancel)="onCancelHandler()"
+      (onSubmit)="onSubmitHandler()"
+    ></app-modal-action-btns>
   </div>
-</div>
+</app-modal>

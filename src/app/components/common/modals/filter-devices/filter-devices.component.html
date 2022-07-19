@@ -1,6 +1,82 @@
 <app-modal
-  [modalID]="'filter-devices'"
+  [modalID]="'filter_devices'"
+  [direction]="'horizontal'"
   [isClosable]="true"
 >
-  Filter device
+  <div class="content">
+    <div class="top">
+      <h4 class="text-title text-center">Фильтры</h4>
+    </div>
+    <hr class="divider">
+    <div class="body">
+      <form
+        [formGroup]="_form"
+      >
+        <div class="row space-between status">
+          <p class="text-menu-title">Статус</p>
+          <button
+            type="button"
+            class="common"
+            [class.clicked]="_status_on?.value"
+            (click)="onStatusOnClick()"
+          >
+            вкл
+          </button>
+          <button
+            type="button"
+            class="common"
+            [class.clicked]="_status_off?.value"
+            (click)="onStatusOffClick()"
+          >
+            выкл
+          </button>
+        </div>
+        <p class="text-menu-title last-date">Последнее включение</p>
+        <div class="form-group-wrapper">
+          <app-form-group
+            [labelText]="'с'"
+            [name]="'date-from'"
+            [control]="$any(_date_from)"
+            [inputType]="'datetime-local'"
+          ></app-form-group>
+        </div>
+        <div class="form-group-wrapper">
+          <app-form-group
+            [labelText]="'по'"
+            [name]="'date-to'"
+            [control]="$any(_date_to)"
+            [inputType]="'datetime-local'"
+          ></app-form-group>
+        </div>
+        <div class="form-group-wrapper">
+          <app-form-group
+            [labelText]="'Конфигурация'"
+            [name]="'config_ids'"
+            [control]="$any(_config_ids)"
+            [inputType]="'select'"
+            [options]="_options_configs"
+          ></app-form-group>
+        </div>
+        <div class="form-group-wrapper">
+          <app-form-group
+            [labelText]="'Группа'"
+            [name]="'group_ids'"
+            [control]="$any(_group_ids)"
+            [inputType]="'select'"
+            [options]="_options_groups"
+          ></app-form-group>
+        </div>
+      </form>
+    </div>
+    <div class="action-btns">
+      <app-modal-action-btns
+        [isReverse]="true"
+        [margin]="'102px'"
+        [submitText]="'Поиск'"
+        [cancelText]="'Сброс'"
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
+  </div>
 </app-modal>

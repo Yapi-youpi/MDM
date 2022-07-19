@@ -22,6 +22,8 @@
   --input-height: 44.44px;
 
   --transition-time: .4s;
+
+  --filter-sidebar-width: 400px;
 }
 
 * {
@@ -123,6 +125,7 @@ input:not([type='checkbox']) {
 
   padding: 14.44px 31px 11px 11px;
 
+  font-family: inherit;
   font-weight: 300;
   font-size: 16px;
   line-height: 18.77px;
@@ -149,6 +152,10 @@ input:not([type='checkbox']) {
   &:disabled {
     background-color: var(--grey);
     border-color: transparent;
+  }
+
+  &[type='datetime-local'] {
+    padding-right: 11px;
   }
 }
 

@@ -25,7 +25,6 @@ import { QrCodeComponent } from "./components/common/modals/qr-code/qr-code.comp
 import { EditDeviceComponent } from "./components/common/modals/edit-device/edit-device.component";
 import { DeviceItemComponent } from "./components/common/device-item/device-item.component";
 import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
-import { FilterSidebarComponent } from "./components/common/filter-sidebar/filter-sidebar.component";
 import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { PageHeaderComponent } from "./components/common/page-header/page-header.component";
@@ -88,7 +87,6 @@ const routes: Routes = [
     QrCodeComponent,
     DeviceItemComponent,
     GlobalContainerComponent,
-    FilterSidebarComponent,
     SearchInputComponent,
     PageHeaderComponent,
     AddButtonComponent,

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { FormControl } from "@angular/forms";
 
 import {
@@ -24,7 +24,7 @@ export class InputComponent {
 
   @Input() isSwitchChecked: boolean = false;
 
-  @Output() onSwitchChange = new EventEmitter();
+  // @Output() onSwitchChange = new EventEmitter();
 
   public isPasswordVisible: boolean = false;
 
@@ -34,7 +34,7 @@ export class InputComponent {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  onSwitchChangeHandler() {
-    this.onSwitchChange.emit();
-  }
+  // onSwitchChangeHandler() {
+  //   this.onSwitchChange.emit();
+  // }
 }

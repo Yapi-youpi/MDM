@@ -1,17 +1,9 @@
-#delete_elements {
+.content {
   width: 500px;
 
-  top: calc((100vh - 166px) / 2) !important;
-}
+  padding: 39px 36px 40px 29px;
 
-#delete_elements .modal-content {
-  padding: 38px 29px !important;
-}
-
-#delete_elements .action-btns {
-  justify-content: center;
-}
-
-#delete_elements .action-btns button:first-child {
-  margin-right: 50px;
+  .top {
+    margin-bottom: 49px;
+  }
 }

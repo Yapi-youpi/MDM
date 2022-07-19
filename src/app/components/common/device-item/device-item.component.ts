@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 import { DevicesConfig } from "../../../shared/types/config";
-import { DevicesGroups } from "../../../shared/types/groups";
+import { DevicesGroup } from "../../../shared/types/groups";
 import { Device } from "../../../shared/types/devices";
 
 @Component({
@@ -12,7 +12,7 @@ import { Device } from "../../../shared/types/devices";
 export class DeviceItemComponent {
   @Input() public device!: Device;
   @Input() public configs!: DevicesConfig[];
-  @Input() public groups!: DevicesGroups[];
+  @Input() public groups!: DevicesGroup[];
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
   @Output() onChangeDeviceState = new EventEmitter<Device>();

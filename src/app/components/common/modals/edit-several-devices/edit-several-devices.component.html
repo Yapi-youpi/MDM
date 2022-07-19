@@ -8,38 +8,42 @@
     </div>
     <hr class="divider"/>
     <div class="body">
-      <div class="form-group-wrapper">
-        <app-form-group
-          [control]="$any(_group_id)"
-          [labelText]="'Группа'"
-          [name]="'device_group_id'"
-          [inputType]="'select'"
-          [inputWidth]="'w-440'"
-          [options]="_options"
-          [isError]="_isSubmitted && !!_group_id?.errors"
-        >
-        </app-form-group>
-        <app-input-alert
-          *ngIf="_isSubmitted && _group_id?.errors"
-          [control]="$any(_group_id)"
-          [type]="'error'"
-        ></app-input-alert>
-      </div>
-      <div class="form-group-wrapper">
-        <app-form-group
-          [control]="$any(_state)"
-          [labelText]="'Блокировка'"
-          [name]="'active_state'"
-          [inputType]="'switch'"
-          [isError]="_isSubmitted && !!_state?.errors"
-        >
-        </app-form-group>
-        <app-input-alert
-          *ngIf="_isSubmitted && _state?.errors"
-          [control]="$any(_state)"
-          [type]="'error'"
-        ></app-input-alert>
-      </div>
+      <form
+        [formGroup]="_form"
+      >
+        <div class="form-group-wrapper">
+          <app-form-group
+            [control]="$any(_group_id)"
+            [labelText]="'Группа'"
+            [name]="'device_group_id'"
+            [inputType]="'select'"
+            [inputWidth]="'w-440'"
+            [options]="_options"
+            [isError]="_isSubmitted && !!_group_id?.errors"
+          >
+          </app-form-group>
+          <app-input-alert
+            *ngIf="_isSubmitted && _group_id?.errors"
+            [control]="$any(_group_id)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+        <div class="form-group-wrapper">
+          <app-form-group
+            [control]="$any(_state)"
+            [labelText]="'Блокировка'"
+            [name]="'active_state'"
+            [inputType]="'switch'"
+            [isError]="_isSubmitted && !!_state?.errors"
+          >
+          </app-form-group>
+          <app-input-alert
+            *ngIf="_isSubmitted && _state?.errors"
+            [control]="$any(_state)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+      </form>
     </div>
     <app-modal-action-btns
       [margin]="'30px'"

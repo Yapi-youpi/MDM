@@ -1,0 +1,58 @@
+.content {
+  width: var(--filter-sidebar-width);
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px 69px 40px 69px;
+
+  .divider {
+    margin: 25px 0;
+  }
+
+  .body {
+    .status {
+      margin-bottom: 39px;
+
+      button {
+        padding: 7px 10px;
+
+        &:nth-of-type(1) {
+          margin-right: 9px;
+          margin-left: auto;
+        }
+
+        &.clicked {
+          background-color: var(--dark-blue);
+          border-color: transparent;
+          color: var(--white);
+
+          &:hover {
+            background-color: var(--blue);
+          }
+        }
+      }
+    }
+
+    p {
+      display: block;
+
+      &.last-date {
+        margin-bottom: 30.56px;
+      }
+    }
+
+    .form-group-wrapper {
+
+
+      &:not(:last-child) {
+        margin-bottom: 21.56px;
+      }
+    }
+  }
+
+  .action-btns {
+    margin-top: auto;
+  }
+}

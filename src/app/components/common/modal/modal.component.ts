@@ -8,6 +8,7 @@ import { Component, HostListener, Input } from "@angular/core";
 export class ModalComponent {
   @Input() modalID: string = "";
   @Input() isClosable: boolean = false;
+  @Input() direction: "vertical" | "horizontal" = "vertical";
 
   constructor() {}
 
