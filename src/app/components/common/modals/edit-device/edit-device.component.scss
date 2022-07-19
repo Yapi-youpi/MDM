@@ -1,24 +1,23 @@
-#edit_device {
+.content {
   width: 700px;
 
-  top: calc((100vh - 434px) / 2) !important;
+  padding: 30px 58px;
 
-  overflow: initial;
-}
+  .divider {
+    margin: 35px 0;
+  }
 
-#edit_device .input-field-modal {
-  margin-left: auto;
-}
+  .body {
+    margin-bottom: 51px;
 
-#edit_device .input-field-modal,
-#edit_device .input-field-modal .select-wrapper input.select-dropdown {
-  height: 45px;
-}
+    .form-group-wrapper {
+      &:not(:last-of-type) {
+        margin-bottom: 30.56px;
+      }
 
-#edit_device .action-btns {
-  padding-left: 144px;
-}
-
-#edit_device .action-btns > *:first-child {
-  margin-right: 66px;
+      &:nth-child(2) {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

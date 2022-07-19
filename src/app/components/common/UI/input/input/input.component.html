@@ -1,5 +1,5 @@
 <div
-  *ngIf="type === 'password'; else common"
+  *ngIf="type === 'password'"
   class="input-password"
 >
   <input
@@ -18,14 +18,31 @@
     (click)="togglePasswordVisibility()"
   ></span>
 </div>
-<ng-template #common>
-  <input
-    class="input"
+<input
+  *ngIf="type !== 'select'"
+  class="input"
+  [formControl]="control"
+  [ngClass]="width"
+  [class.error]="isError"
+  [id]="name"
+  [name]="name"
+  [type]="type"
+/>
+<div
+  *ngIf="type === 'select'"
+  class="select-wrapper"
+>
+  <select
+    class="input-select"
     [formControl]="control"
     [ngClass]="width"
     [class.error]="isError"
     [id]="name"
     [name]="name"
-    [type]="type"
-  />
-</ng-template>
+  >
+    <option
+      *ngFor="let option of options"
+      [value]="option.value"
+    >{{ option.html }}</option>
+  </select>
+</div>

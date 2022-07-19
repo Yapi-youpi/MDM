@@ -1,7 +1,11 @@
 import { Component, Input } from "@angular/core";
+import { FormControl } from "@angular/forms";
 
-import { inputType, inputWidth } from "../../../../../shared/types/input";
-import { AbstractControl, FormControl } from "@angular/forms";
+import {
+  inputType,
+  inputWidth,
+  Option,
+} from "../../../../../shared/types/input";
 
 @Component({
   selector: "app-input",
@@ -14,6 +18,9 @@ export class InputComponent {
   @Input() width: inputWidth = "w-170";
   @Input() control: FormControl = new FormControl(null);
   @Input() isError: boolean = false;
+
+  @Input() options: Option[] = [];
+  @Input() isMultiselect: boolean = false;
 
   public isPasswordVisible: boolean = false;
 

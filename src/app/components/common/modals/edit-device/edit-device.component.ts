@@ -1,42 +1,21 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ElementRef,
-  Output,
-  EventEmitter,
-} from "@angular/core";
-import { interval } from "rxjs";
-
-// import M from "materialize-css";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 import { EditDeviceService } from "../../../../shared/services/forms/device/edit-device.service";
 
 import { DevicesGroups } from "../../../../shared/types/groups";
+import { Option } from "../../../../shared/types/input";
 
 @Component({
   selector: "app-edit-device",
   templateUrl: "./edit-device.component.html",
   styleUrls: ["./edit-device.component.scss"],
 })
-export class EditDeviceComponent implements OnInit {
+export class EditDeviceComponent {
   @Input() public groups!: DevicesGroups[];
 
   @Output() public onSubmit = new EventEmitter();
 
-  constructor(private elementRef: ElementRef, public form: EditDeviceService) {}
-
-  ngOnInit(): void {
-    // let i = interval(2000).subscribe(() => {
-    //   const elems = this.elementRef.nativeElement.querySelectorAll(
-    //     ".config-select-modal"
-    //   );
-    //   if (elems && elems.length !== 0) {
-    //     i.unsubscribe();
-    //     M.FormSelect.init(elems);
-    //   }
-    // });
-  }
+  constructor(public form: EditDeviceService) {}
 
   get _form() {
     return this.form.form;
@@ -50,11 +29,25 @@ export class EditDeviceComponent implements OnInit {
     return this.form.form.get("description");
   }
 
+  get _group_id() {
+    return this.form.form.get("device_group_id");
+  }
+
   get _isSubmitted() {
     return this.form.isSubmitted;
   }
 
+  get _options() {
+    return this.groups.map((g) => {
+      return {
+        value: g.id,
+        html: g.name,
+      } as Option;
+    });
+  }
+
   onSubmitHandler() {
+    // console.log(this.form.form.getRawValue());
     this.form.setSubmitted();
 
     if (this.form.form.invalid) {
@@ -63,8 +56,12 @@ export class EditDeviceComponent implements OnInit {
       this.onSubmit.emit();
     }
   }
+
   onCancelHandler() {
     this.form.resetSubmitted();
     this.form.form.reset();
+
+    const modal = document.querySelector("#edit_device");
+    modal?.classList.toggle("hidden");
   }
 }

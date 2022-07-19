@@ -1,20 +1,4 @@
 .input {
-  &.w-170 {
-    width: 170px;
-  }
-  &.w-296 {
-    width: 296px;
-  }
-  &.w-350 {
-    width: 350px;
-  }
-  &.w-440 {
-    width: 440px;
-  }
-  &.w-457 {
-    width: 457px;
-  }
-
   &-password {
     position: relative;
 
@@ -35,13 +19,60 @@
       cursor: pointer;
 
       &.shown {
-        mask-image: url("../../../../../../assets/UI/eye_hide.svg");
-        -webkit-mask-image: url("../../../../../../assets/UI/eye_hide.svg");
+        mask-image: url("/assets/UI/eye_hide.svg");
+        -webkit-mask-image: url("/assets/UI/eye_hide.svg");
       }
       &.hidden {
-        mask-image: url("../../../../../../assets/UI/eye_show.svg");
-        -webkit-mask-image: url("../../../../../../assets/UI/eye_show.svg");
+        mask-image: url("/assets/UI/eye_show.svg");
+        -webkit-mask-image: url("/assets/UI/eye_show.svg");
       }
     }
+  }
+}
+
+.select-wrapper {
+  position: relative;
+
+  &::after {
+    height: 7.71px;
+    width: 12.86px;
+
+    display: block;
+
+    position: absolute;
+    content: '';
+
+    top: 18.73px;
+    right: 8.14px;
+
+    mask-size: 12.86px 7.71px;
+    mask-position: center center;
+    mask-repeat: no-repeat no-repeat;
+    mask-image: url("/assets/UI/arrow_down.svg");
+    -webkit-mask-size: 12.86px 7.71px;
+    -webkit-mask-position: center center;
+    -webkit-mask-repeat: no-repeat no-repeat;
+    -webkit-mask-image: url("/assets/UI/arrow_down.svg");
+
+    background-color: var(--dark-blue);
+  }
+}
+
+.input,
+.input-select {
+  &.w-170 {
+    width: 170px;
+  }
+  &.w-296 {
+    width: 296px;
+  }
+  &.w-350 {
+    width: 350px;
+  }
+  &.w-440 {
+    width: 440px;
+  }
+  &.w-457 {
+    width: 457px;
   }
 }
