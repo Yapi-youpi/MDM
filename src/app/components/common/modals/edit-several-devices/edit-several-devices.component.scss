@@ -1,31 +1,22 @@
-#edit_several_devices {
+.content {
   width: 770px;
 
-  top: calc((100vh - 334px) / 2) !important;
-}
+  padding: 30px 93px;
 
-#edit_several_devices .modal-content {
-  padding: 30px 93px !important;
-}
+  .divider {
+    margin: 25px 0;
+  }
 
-#edit_several_devices .input-field-modal {
-  margin-left: auto;
-}
+  .body {
+    .form-group-wrapper {
+      &:first-child {
+        margin-bottom: 45px;
+      }
+      &:last-child {
+        width: 171.1px;
+      }
+    }
 
-#edit_several_devices .row.switch {
-  justify-content: flex-start;
-}
-
-#edit_several_devices .row.switch .lever {
-  margin: 0 0 0 58px;
-}
-
-#edit_several_devices .action-btns {
-  justify-content: center;
-
-  margin-top: 60px;
-}
-
-#edit_several_devices .action-btns button:last-child {
-  margin-left: 30px;
+    margin-bottom: 59px;
+  }
 }

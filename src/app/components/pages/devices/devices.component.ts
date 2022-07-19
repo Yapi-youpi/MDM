@@ -330,13 +330,6 @@ export class DevicesComponent implements OnInit {
           });
 
           this.selectedDevicesIDs = [];
-
-          this.editSeveralDevicesForm.resetForm();
-
-          // const modal = this.elementRef.nativeElement.querySelector(
-          //   "#edit_several_devices"
-          // );
-          // M.Modal.getInstance(modal).close();
         } else {
           console.log(res.error);
         }

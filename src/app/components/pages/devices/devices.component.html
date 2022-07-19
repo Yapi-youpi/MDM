@@ -24,6 +24,8 @@
       <app-selected-elements
         *ngIf="selectedDevicesIDs.length !== 0"
         [devicesIDs]="selectedDevicesIDs"
+        [editTarget]="'edit_several_devices'"
+        [deleteTarget]="'delete_several_devices'"
         (onCloseClick)="cancelSelection()"
       ></app-selected-elements>
       <div class="list">
@@ -137,11 +139,11 @@
 <!--      <div class="indeterminate"></div>-->
 <!--    </div>-->
 <!--    <div class="body">-->
-<!--      <app-selected-devices-->
+<!--      <app-selected-elements-->
 <!--        *ngIf="selectedDevicesIDs.length !== 0"-->
 <!--        [devicesIDs]="selectedDevicesIDs"-->
 <!--        (onCloseClick)="cancelSelection()"-->
-<!--      ></app-selected-devices>-->
+<!--      ></app-selected-elements>-->
 <!--      <div class="sort row">-->
 <!--        <div class="checkbox-container">-->
 <!--          <label>-->
@@ -278,6 +280,10 @@
   [groups]="groups"
   (onSubmit)="editDevice()"
 ></app-edit-device>
+<app-edit-several-devices
+  [groups]="groups"
+  (onSubmit)="editSeveralDevices()"
+></app-edit-several-devices>
 <app-delete-device
   [device]="currDevice"
   (onSubmit)="deleteDevice($event)"

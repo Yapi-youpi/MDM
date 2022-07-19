@@ -1,45 +1,21 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from "@angular/core";
-import { interval } from "rxjs";
-
-// import M from "materialize-css";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 import { DevicesGroups } from "../../../../shared/types/groups";
 
 import { EditSeveralDevicesService } from "../../../../shared/services/forms/device/edit-several-devices.service";
+import { Option } from "../../../../shared/types/input";
 
 @Component({
   selector: "app-edit-several-devices",
   templateUrl: "./edit-several-devices.component.html",
   styleUrls: ["./edit-several-devices.component.scss"],
 })
-export class EditSeveralDevicesComponent implements OnInit {
+export class EditSeveralDevicesComponent {
   @Input() groups!: DevicesGroups[];
 
   @Output() onSubmit = new EventEmitter();
 
-  constructor(
-    private elementRef: ElementRef,
-    public form: EditSeveralDevicesService
-  ) {}
-
-  ngOnInit() {
-    // let i = interval(2000).subscribe(() => {
-    //   const elem = this.elementRef.nativeElement.querySelector(
-    //     ".several-group-select-modal"
-    //   );
-    //   if (elem) {
-    //     i.unsubscribe();
-    //     M.FormSelect.init(elem);
-    //   }
-    // });
-  }
+  constructor(public form: EditSeveralDevicesService) {}
 
   get _form() {
     return this.form.form;
@@ -49,8 +25,26 @@ export class EditSeveralDevicesComponent implements OnInit {
     return this.form.isSubmitted;
   }
 
-  get _group() {
-    return this.form.form.get("device_group_id");
+  get _group_id() {
+    return this._form.get("device_group_id");
+  }
+
+  get _state() {
+    return this._form.get("active_state");
+  }
+
+  get _options() {
+    return this.groups.map((g) => {
+      return {
+        value: g.id,
+        html: g.name,
+      } as Option;
+    });
+  }
+
+  closeModal() {
+    const modal = document.querySelector("#edit_several_devices");
+    modal?.classList.toggle("hidden");
   }
 
   onSubmitHandler() {
@@ -60,11 +54,15 @@ export class EditSeveralDevicesComponent implements OnInit {
       return;
     } else {
       this.onSubmit.emit();
+
+      this.closeModal();
     }
   }
 
-  onResetHandler() {
+  onCancelHandler() {
     this.form.resetSubmitted();
     this.form.resetForm();
+
+    this.closeModal();
   }
 }

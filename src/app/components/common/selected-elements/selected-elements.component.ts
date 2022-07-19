@@ -7,6 +7,8 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 })
 export class SelectedElementsComponent {
   @Input() devicesIDs: string[] = [];
+  @Input() editTarget: string = "";
+  @Input() deleteTarget: string = "";
 
   @Output() onCloseClick = new EventEmitter();
 
@@ -14,5 +16,15 @@ export class SelectedElementsComponent {
 
   onCloseClickHandler() {
     this.onCloseClick.emit();
+  }
+
+  onEditClickHandler() {
+    const modal = document.querySelector(`#${this.editTarget}`);
+    modal?.classList.toggle("hidden");
+  }
+
+  onDeleteClickHandler() {
+    const modal = document.querySelector(`#${this.deleteTarget}`);
+    modal?.classList.toggle("hidden");
   }
 }

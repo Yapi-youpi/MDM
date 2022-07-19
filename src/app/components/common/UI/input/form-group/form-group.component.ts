@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 
 import {
@@ -23,5 +23,13 @@ export class FormGroupComponent {
   @Input() options: Option[] = [];
   @Input() isMultiselect: boolean = false;
 
+  @Input() isSwitchChecked: boolean = false;
+
+  @Output() onSwitchChange = new EventEmitter();
+
   constructor() {}
+
+  onSwitchChangeHandler() {
+    this.onSwitchChange.emit();
+  }
 }

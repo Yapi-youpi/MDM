@@ -33,7 +33,7 @@ import { InputAlertComponent } from "./components/common/UI/alert/input-alert/in
 import { DeleteDeviceComponent } from "./components/common/modals/delete-device/delete-device.component";
 import { AddDeviceComponent } from "./components/common/modals/add-device/add-device.component";
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
-import { SelectedElementsComponent } from "./components/common/selected-devices/selected-elements.component";
+import { SelectedElementsComponent } from "./components/common/selected-elements/selected-elements.component";
 import { EditSeveralDevicesComponent } from "./components/common/modals/edit-several-devices/edit-several-devices.component";
 import { DeleteSeveralElementsComponent } from "./components/common/modals/delete-several-elements/delete-several-elements.component";
 

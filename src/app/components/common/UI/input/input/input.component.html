@@ -19,7 +19,7 @@
   ></span>
 </div>
 <input
-  *ngIf="type !== 'select' && type !== 'password'"
+  *ngIf="type !== 'select' && type !== 'password' && type !== 'switch'"
   [id]="name"
   [name]="name"
   [formControl]="control"
@@ -46,3 +46,7 @@
     >{{ option.html }}</option>
   </select>
 </div>
+<app-switch-input
+  *ngIf="type === 'switch'"
+  [control]="control"
+></app-switch-input>
