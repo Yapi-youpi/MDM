@@ -1,41 +1,20 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from "@angular/core";
-import { interval } from "rxjs";
-
-// import M from "materialize-css";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 import { DevicesGroups } from "../../../../shared/types/groups";
 import { AddDeviceService } from "../../../../shared/services/forms/device/add-device.service";
+import { Option } from "../../../../shared/types/input";
 
 @Component({
   selector: "app-add-device",
   templateUrl: "./add-device.component.html",
   styleUrls: ["./add-device.component.scss"],
 })
-export class AddDeviceComponent implements OnInit {
+export class AddDeviceComponent {
   @Input() public groups!: DevicesGroups[];
 
   @Output() public onSubmit = new EventEmitter();
 
-  constructor(private elementRef: ElementRef, public form: AddDeviceService) {}
-
-  ngOnInit(): void {
-    // let i = interval(2000).subscribe(() => {
-    //   const elems = this.elementRef.nativeElement.querySelectorAll(
-    //     ".config-select-modal"
-    //   );
-    //   if (elems && elems.length !== 0) {
-    //     i.unsubscribe();
-    //     M.FormSelect.init(elems);
-    //   }
-    // });
-  }
+  constructor(public form: AddDeviceService) {}
 
   get _form() {
     return this.form.form;
@@ -46,15 +25,29 @@ export class AddDeviceComponent implements OnInit {
   }
 
   get _name() {
-    return this.form.form.get("name");
+    return this._form.get("name");
   }
 
   get _description() {
-    return this.form.form.get("description");
+    return this._form.get("description");
   }
 
-  get _group() {
-    return this.form.form.get("device_group_id");
+  get _group_id() {
+    return this._form.get("device_group_id");
+  }
+
+  get _options() {
+    return this.groups.map((g) => {
+      return {
+        value: g.id,
+        html: g.name,
+      } as Option;
+    });
+  }
+
+  closeModal() {
+    const modal = document.querySelector("#add_device");
+    modal?.classList.toggle("hidden");
   }
 
   onSubmitHandler() {
@@ -64,10 +57,14 @@ export class AddDeviceComponent implements OnInit {
       return;
     } else {
       this.onSubmit.emit();
+
+      this.closeModal();
     }
   }
   onCancelHandler() {
     this.form.resetFormSubmitted();
     this.form.resetForm();
+
+    this.closeModal();
   }
 }

@@ -194,14 +194,8 @@ export class DevicesComponent implements OnInit {
           this.currDevice = res.device;
           this.devices = [res.device, ...this.devices];
 
-          // const addModal =
-          //   this.elementRef.nativeElement.querySelector("#add_device");
-          // const qrModal =
-          //   this.elementRef.nativeElement.querySelector("#qr-code");
-          //
-          // M.Modal.getInstance(addModal).close();
-          // this.addDeviceService.resetForm();
-          // M.Modal.getInstance(qrModal).open();
+          const modal = document.querySelector("#qr_code");
+          modal?.classList.toggle("hidden");
         } else {
           console.log(res.error);
         }

@@ -3,12 +3,12 @@
   class="input-password"
 >
   <input
-    class="input"
     [formControl]="control"
-    [ngClass]="width"
-    [class.error]="isError"
     [id]="name"
     [name]="name"
+    class="input"
+    [ngClass]="width"
+    [class.error]="isError"
     [type]="type === 'password' ? isPasswordVisible ? 'text' : 'password' : type"
   />
   <span
@@ -20,12 +20,12 @@
 </div>
 <input
   *ngIf="type !== 'select'"
-  class="input"
-  [formControl]="control"
-  [ngClass]="width"
-  [class.error]="isError"
   [id]="name"
   [name]="name"
+  [formControl]="control"
+  class="input"
+  [ngClass]="width"
+  [class.error]="isError"
   [type]="type"
 />
 <div
@@ -33,12 +33,12 @@
   class="select-wrapper"
 >
   <select
-    class="input-select"
-    [formControl]="control"
-    [ngClass]="width"
-    [class.error]="isError"
     [id]="name"
     [name]="name"
+    [formControl]="control"
+    class="input-select"
+    [ngClass]="width"
+    [class.error]="isError"
   >
     <option
       *ngFor="let option of options"

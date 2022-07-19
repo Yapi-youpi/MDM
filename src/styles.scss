@@ -186,6 +186,12 @@ select {
   &:focus {
     border: 2px solid var(--dark-blue)
   }
+
+  &.error {
+    border: 2px solid var(--error);
+
+    color: var(--error);
+  }
 }
 
 // КНОПКА

@@ -261,6 +261,7 @@
 ></app-filter-devices>
 <app-add-device
   [groups]="groups"
+  (onSubmit)="addDevice()"
 ></app-add-device>
 <app-qr-code
   [device]="currDevice"

@@ -22,15 +22,15 @@ export class EditDeviceComponent {
   }
 
   get _name() {
-    return this.form.form.get("name");
+    return this._form.get("name");
   }
 
   get _description() {
-    return this.form.form.get("description");
+    return this._form.get("description");
   }
 
   get _group_id() {
-    return this.form.form.get("device_group_id");
+    return this._form.get("device_group_id");
   }
 
   get _isSubmitted() {
@@ -54,7 +54,7 @@ export class EditDeviceComponent {
   onSubmitHandler() {
     this.form.setSubmitted();
 
-    if (this.form.form.invalid) {
+    if (this._form.invalid) {
       return;
     } else {
       this.onSubmit.emit();
