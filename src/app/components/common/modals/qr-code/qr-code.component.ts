@@ -28,7 +28,10 @@ export class QrCodeComponent {
     this.isTipHidden = !this.isTipHidden;
   }
 
-  onCloseClickHandler() {
+  onCancelHandler() {
     this.isTipHidden = true;
+
+    const modal = document.querySelector("#qr_code");
+    modal?.classList.toggle("hidden");
   }
 }
