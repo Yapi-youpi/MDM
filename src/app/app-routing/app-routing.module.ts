@@ -9,10 +9,10 @@ import { MapComponent } from "../components/pages/map/map.component";
 import { ConfigsComponent } from "../components/pages/configs/configs.component";
 
 const routes: Routes = [
-  {
-    path: "users",
-    component: UsersComponent,
-  },
+  // {
+  //   path: "users",
+  //   component: UsersComponent,
+  // },
   {
     path: "auth",
     component: AuthComponent,
@@ -21,18 +21,18 @@ const routes: Routes = [
     path: "devices",
     component: DevicesComponent,
   },
-  {
-    path: "groups",
-    component: GroupsComponent,
-  },
-  {
-    path: "map",
-    component: MapComponent,
-  },
-  {
-    path: "config",
-    component: ConfigsComponent,
-  },
+  // {
+  //   path: "groups",
+  //   component: GroupsComponent,
+  // },
+  // {
+  //   path: "map",
+  //   component: MapComponent,
+  // },
+  // {
+  //   path: "config",
+  //   component: ConfigsComponent,
+  // },
 ];
 
 @NgModule({

@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
-import { GroupsService } from "../../../services/groups.service";
-import { UserService } from "../../../services/user.service";
 import { interval } from "rxjs";
-import { Groups } from "../../../interfaces/interfaces";
-import M from "materialize-css";
+
+// import M from "materialize-css";
+
+import { DevicesGroups } from "../../../shared/types/groups";
+
+import { GroupsService } from "../../../shared/services/groups.service";
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: "app-groups",
@@ -11,7 +14,7 @@ import M from "materialize-css";
   styleUrls: ["./groups.component.css"],
 })
 export class GroupsComponent implements OnInit {
-  public groups: Groups[] = [];
+  public groups: DevicesGroups[] = [];
   public loading = true;
   public id = "";
   public name = "";
@@ -23,8 +26,8 @@ export class GroupsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
-    M.Modal.init(elem);
+    // let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
+    // M.Modal.init(elem);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();

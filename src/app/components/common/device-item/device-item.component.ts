@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { Device } from "../../../interfaces/interfaces";
+import { DevicesConfig } from "../../../shared/types/config";
+import { DevicesGroups } from "../../../shared/types/groups";
+import { Device } from "../../../shared/types/devices";
 
 @Component({
   selector: "app-device-item",
@@ -9,38 +11,34 @@ import { Device } from "../../../interfaces/interfaces";
 })
 export class DeviceItemComponent {
   @Input() public device!: Device;
+  @Input() public configs!: DevicesConfig[];
+  @Input() public groups!: DevicesGroups[];
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
-  @Output() onChangeDeviceConfig = new EventEmitter<{
-    device: Device;
-    $event: Event;
-  }>();
-  @Output() onGetDeviceQRCode = new EventEmitter<{
-    name: string;
-    qrcode: any;
-  }>();
-  @Output() onEditDevice = new EventEmitter<Device>();
-  @Output() onDeleteDevice = new EventEmitter<string>();
+  @Output() onChangeDeviceState = new EventEmitter<Device>();
+  @Output() onClickDeviceQRCode = new EventEmitter<Device>();
+  @Output() onClickDeviceEdit = new EventEmitter<Device>();
+  @Output() onClickDeviceDelete = new EventEmitter<Device>();
 
   constructor() {}
 
-  selectUnselectDevice(device: Device) {
+  onSelectUnselectDeviceHandler(device: Device) {
     this.onSelectUnselectDevice.emit(device);
   }
 
-  changeDeviceConfig(device: Device, $event) {
-    this.onChangeDeviceConfig.emit({ device, $event });
+  onChangeDeviceStateHandler(device: Device) {
+    this.onChangeDeviceState.emit(device);
   }
 
-  getDeviceQRCode(name: string, qrcode: any) {
-    this.onGetDeviceQRCode.emit({ name, qrcode });
+  onClickDeviceQRCodeHandler(device: Device) {
+    this.onClickDeviceQRCode.emit(device);
   }
 
-  editDevice(device: Device) {
-    this.onEditDevice.emit(device);
+  onClickDeviceEditHandler(device: Device) {
+    this.onClickDeviceEdit.emit(device);
   }
 
-  deleteDevice(id: string) {
-    this.onDeleteDevice.emit(id);
+  onClickDeviceDeleteHandler(device: Device) {
+    this.onClickDeviceDelete.emit(device);
   }
 }

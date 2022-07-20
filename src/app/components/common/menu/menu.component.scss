@@ -1,0 +1,173 @@
+.menu-sidebar {
+  height: 100%;
+  width: 280px;
+
+  position: fixed;
+
+  margin-left: 20px;
+
+  overflow: hidden;
+
+  transition: width var(--transition-time) ease;
+
+  &.hidden {
+    width: 76px;
+  }
+
+  .content {
+    height: calc(100vh - 24px);
+
+    padding: 25px 12px;
+
+    transition: padding var(--transition-time) ease;
+
+    .header {
+      padding-left: 14px;
+
+      transition: padding-left var(--transition-time) ease;
+
+      .title {
+        margin-left: 15px;
+
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 39.8px;
+
+        transition: opacity var(--transition-time) ease;
+
+        &.hidden {
+          opacity: 0;
+
+          cursor: default;
+        }
+      }
+    }
+
+    .link-list {
+      margin-top: 20px;
+
+      li {
+        width: 100%;
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+
+        .router-link {
+          height: 40px;
+          width: 100%;
+
+          display: flex;
+          align-items: center;
+
+          padding: 16px 15px;
+
+          text-decoration: none;
+
+          border-radius: 8px;
+
+          overflow: hidden;
+
+          transition:
+            padding-left var(--transition-time) ease,
+            background-color var(--transition-time) ease;
+
+          &:hover {
+            background-color: #C7D5ED;
+          }
+
+          span {
+            height: 24px;
+            width: 24px;
+
+            flex-shrink: 0;
+
+            background-color: var(--dark-blue-grey);
+          }
+
+          p {
+            margin-left: 13px;
+
+            white-space: nowrap;
+          }
+
+          &.active {
+            height: 54px;
+
+            background-color: var(--blue);
+            color: var(--white);
+
+            span {
+              background-color: var(--white);
+            }
+          }
+
+          &.devices span {
+            mask-size: 11px 16px;
+            mask-image: url("../../../../assets/UI/mobile.svg");
+
+            -webkit-mask-size: 11px 16px;
+            -webkit-mask-image: url("../../../../assets/UI/mobile.svg");
+          }
+          &.groups span {
+            mask-size: 19.2px 12.8px;
+            mask-image: url("../../../../assets/UI/devices_group.svg");
+
+            -webkit-mask-size: 19.2px 12.8px;
+            -webkit-mask-image: url("../../../../assets/UI/devices_group.svg");
+          }
+          &.apps span {
+            mask-size: 19.2px 19.2px;
+            mask-image: url("../../../../assets/UI/apps.svg");
+
+            -webkit-mask-size: 19.2px 19.2px;
+            -webkit-mask-image: url("../../../../assets/UI/apps.svg");
+          }
+          &.messages span {
+            mask-size: 16px 11.2px;
+            mask-image: url("../../../../assets/UI/mail.svg");
+
+            -webkit-mask-size: 16px 11.2px;
+            -webkit-mask-image: url("../../../../assets/UI/mail.svg");
+          }
+          &.map span {
+            mask-size: 14.4px 14.4px;
+            mask-image: url("../../../../assets/UI/map.svg");
+
+            -webkit-mask-size: 14.4px 14.4px;
+            -webkit-mask-image: url("../../../../assets/UI/map.svg");
+          }
+          &.config span {
+            mask-size: 23px 23px;
+            mask-image: url("../../../../assets/UI/settings.svg");
+
+            -webkit-mask-size: 23px 23px;
+            -webkit-mask-image: url("../../../../assets/UI/settings.svg");
+          }
+          &.users span {
+            mask-size: 18px 18px;
+            mask-image: url("../../../../assets/UI/users_group.svg");
+
+            -webkit-mask-size: 18px 18px;
+            -webkit-mask-image: url("../../../../assets/UI/users_group.svg");
+          }
+          &.help span {
+            mask-size: 19.2px 19.2px;
+            mask-image: url("../../../../assets/UI/faq.svg");
+
+            -webkit-mask-size: 19.2px 19.2px;
+            -webkit-mask-image: url("../../../../assets/UI/faq.svg");
+          }
+        }
+      }
+
+      .divider {
+        background-color: var(--light-blue-grey);
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<div
+  *ngIf="type === 'password'; else common"
+  class="input-password"
+>
+  <input
+    class="input"
+    [formControl]="control"
+    [ngClass]="width"
+    [class.error]="isError"
+    [id]="name"
+    [name]="name"
+    [type]="type === 'password' ? isPasswordVisible ? 'text' : 'password' : type"
+  />
+  <span
+    class="icon"
+    [class.hidden]="isPasswordVisible"
+    [class.shown]="!isPasswordVisible"
+    (click)="togglePasswordVisibility()"
+  ></span>
+</div>
+<ng-template #common>
+  <input
+    class="input"
+    [formControl]="control"
+    [ngClass]="width"
+    [class.error]="isError"
+    [id]="name"
+    [name]="name"
+    [type]="type"
+  />
+</ng-template>

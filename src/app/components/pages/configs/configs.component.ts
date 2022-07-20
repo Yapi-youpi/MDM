@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
-import { DevicesConfigService } from "../../../services/devices-config.service";
-import { UserService } from "../../../services/user.service";
 import { interval } from "rxjs";
-import { DevicesConfig } from "../../../interfaces/interfaces";
-import M from "materialize-css";
+
+// import M from "materialize-css";
+
+import { DevicesConfig } from "../../../shared/types/config";
+
+import { DevicesConfigService } from "../../../shared/services/devices-config.service";
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: "app-configs",
@@ -24,10 +27,10 @@ export class ConfigsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let rename = this.elementRef.nativeElement.querySelectorAll(".modal");
-    let config = this.elementRef.nativeElement.querySelectorAll(".modal");
-    M.Modal.init(rename);
-    M.Modal.init(config);
+    // let rename = this.elementRef.nativeElement.querySelectorAll(".modal");
+    // let config = this.elementRef.nativeElement.querySelectorAll(".modal");
+    // M.Modal.init(rename);
+    // M.Modal.init(config);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();

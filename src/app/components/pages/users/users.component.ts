@@ -1,9 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../../services/user.service";
-import M from "materialize-css";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Users } from "../../../interfaces/interfaces";
 import { interval } from "rxjs";
+
+// import M from "materialize-css";
+
+import { Users } from "../../../shared/types/users";
+
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: "app-users",
@@ -27,9 +30,9 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let elem = document.querySelectorAll(".modal");
-    const options = {};
-    M.Modal.init(elem, options);
+    // let elem = document.querySelectorAll(".modal");
+    // const options = {};
+    // M.Modal.init(elem, options);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
@@ -81,10 +84,10 @@ export class UsersComponent implements OnInit {
       })
       .catch((err) => {
         if (err.error.error === "super admin never die") {
-          M.toast({ html: "Пользователя нельзя удалить" });
+          // M.toast({ html: "Пользователя нельзя удалить" });
         }
         if (err.error.error === "api forbidden by user, only for super admin") {
-          M.toast({ html: "Доступ запрещен" });
+          // M.toast({ html: "Доступ запрещен" });
         }
       });
   }
@@ -111,12 +114,12 @@ export class UsersComponent implements OnInit {
       .changeUserState(id, !state)
       .then((res) => {
         if (res) {
-          M.toast({ html: "Успешно" });
+          // M.toast({ html: "Успешно" });
         }
       })
       .catch((err) => {
         if (err.error.error === "api forbidden by user") {
-          M.toast({ html: "Доступ запрещен" });
+          // M.toast({ html: "Доступ запрещен" });
         }
       });
   }
@@ -135,9 +138,9 @@ export class UsersComponent implements OnInit {
     this.userService
       .changeUserPassword(login, password)
       .then((res) => {
-        let elem = document.getElementById("changeUserPass");
-        let inst = M.Modal.getInstance(elem);
-        inst.close();
+        // let elem = document.getElementById("changeUserPass");
+        // let inst = M.Modal.getInstance(elem);
+        // inst.close();
         this.changePas = "";
         console.log(res);
       })
@@ -154,7 +157,7 @@ export class UsersComponent implements OnInit {
         this.getAllUsers();
       })
       .catch((err) => {
-        M.toast({ html: err.error.error });
+        // M.toast({ html: err.error.error });
       });
   }
 }

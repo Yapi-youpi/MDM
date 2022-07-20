@@ -11,7 +11,7 @@
   height: 100%;
   width: 400px;
 
-  padding: 30px 27px;
+  padding: 30px 69px;
 
   color: var(--sdm-dark-blue-grey);
 }
@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
 
-  padding: 0 42px;
+  /*padding: 0 42px;*/
 }
 .sidenav.filter .body > * {
   width: 100%;
@@ -40,8 +40,6 @@
 }
 
 .sidenav.filter .row.status {
-  justify-content: flex-end;
-
   margin-bottom: 32px !important;
 }
 
@@ -49,8 +47,11 @@
   height: 30px;
 }
 
-.sidenav.filter .row.status p {
-  margin-right: auto;
+.sidenav.filter .row.status p:nth-child(2) {
+  margin-left: auto;
+}
+.sidenav.filter .row.status p:nth-child(3) {
+  margin-left: 9px;
 }
 
 .sidenav.filter .row.status button:last-child {
@@ -75,20 +76,12 @@
   margin-left: auto !important;
 }
 
-.sidenav.filter .collapsible-header {
-  padding: 0;
-}
-
-.sidenav.filter .collapsible-body {
-  padding: 0 20px;
-}
-
-.sidenav.filter .collapsible .row {
-  margin-bottom: 15px !important;
-}
-
 .sidenav.filter li {
   line-height: 30px;
+}
+
+.sidenav.filter .input-field-filter:not(:last-child) {
+  margin-bottom: 30px;
 }
 
 .accordion-arrow {
@@ -117,10 +110,8 @@
 
 .sidenav.filter .action-btns {
   margin-top: auto;
-
-  justify-content: center;
 }
 
 .sidenav.filter .action-btns button:last-child {
-  margin-left: 20px;
+  margin-left: auto;
 }

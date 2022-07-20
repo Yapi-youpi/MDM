@@ -1,0 +1,31 @@
+#edit_several_devices {
+  width: 770px;
+
+  top: calc((100vh - 334px) / 2) !important;
+}
+
+#edit_several_devices .modal-content {
+  padding: 30px 93px !important;
+}
+
+#edit_several_devices .input-field-modal {
+  margin-left: auto;
+}
+
+#edit_several_devices .row.switch {
+  justify-content: flex-start;
+}
+
+#edit_several_devices .row.switch .lever {
+  margin: 0 0 0 58px;
+}
+
+#edit_several_devices .action-btns {
+  justify-content: center;
+
+  margin-top: 60px;
+}
+
+#edit_several_devices .action-btns button:last-child {
+  margin-left: 30px;
+}

@@ -3,9 +3,6 @@
 # Prettier
 .prettierrc
 
-# Icons
-src/assets
-
 # Compiled output
 /dist
 /tmp

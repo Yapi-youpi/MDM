@@ -1,170 +1,157 @@
 <app-global-container>
-  <div class="card sdm-bg-light-grey">
-    <div class="card-header">
-      <h2>Устройства</h2>
-      <!--    Место для кнопки добавления/редактирования и пр.    -->
-      <app-user></app-user>
-    </div>
-    <div class="divider"></div>
-    <div class="row actions">
-      <app-search-input></app-search-input>
-      <app-filter-sidebar></app-filter-sidebar>
-    </div>
-    <div class="progress" *ngIf="loading">
-      <div class="indeterminate"></div>
-    </div>
-    <div class="body">
-      <div class="sort row">
-        <div class="checkbox-container">
-          <label>
-            <input
-              type="checkbox"
-              class="filled-in main-checkbox"
-              [checked]="isAllSelected"
-              (change)="selectUnselectDevices()"
-            />
-            <span></span>
-          </label>
-        </div>
-        <div class="content">
-          <button
-            class="sdm-btn-list-sort sort-up font-bold-color"
-            [class.sort-up]="sortStatusAsc"
-            [class.sort-down]="!sortStatusAsc"
-            (click)="sortDevicesByStatus()"
-          >
-            Статус <span></span>
-          </button>
-          <button
-            class="sdm-btn-list-sort sort-up font-bold-color"
-            [class.sort-up]="sortDateAsc"
-            [class.sort-down]="!sortDateAsc"
-            (click)="sortDevicesByDate()"
-          >
-            Дата вкл. <span></span>
-          </button>
-          <button
-            class="sdm-btn-list-sort sort-up font-bold-color"
-            [class.sort-up]="sortNameAsc"
-            [class.sort-down]="!sortNameAsc"
-            (click)="sortDevicesByName()"
-          >
-            Название <span></span>
-          </button>
-          <p class="font-bold-color">Описание</p>
-          <p class="font-bold-color">Телефон</p>
-          <p class="font-bold-color">IMEI</p>
-          <p class="font-bold-color">Модель</p>
-          <p class="font-bold-color">Конфигурация</p>
-          <p class="font-bold-color">Обновление</p>
-          <button
-            class="sdm-btn-list-sort sort-up font-bold-color"
-            [class.sort-up]="sortGroupAsc"
-            [class.sort-down]="!sortGroupAsc"
-            (click)="sortDevicesByGroup()"
-          >
-            Группа <span></span>
-          </button>
-          <button
-            class="sdm-btn-list-sort sort-up font-bold-color"
-            [class.sort-up]="sortPowerAsc"
-            [class.sort-down]="!sortPowerAsc"
-            (click)="sortDevicesByPower()"
-          >
-            Заряд <span></span>
-          </button>
-          <p class="font-bold-color">Состояние</p>
-          <p class="font-bold-color">Действия</p>
-        </div>
-      </div>
-      <div class="list">
-        <div *ngIf="devices.length === 0 && !loading">Устройств не найдено</div>
-        <ng-container *ngFor="let device of devices">
-          <app-device-item
-            [device]="device"
-            (onSelectUnselectDevice)="selectUnselectSingleDevice($event)"
-            (onChangeDeviceConfig)="changeDeviceConfig($event.device, $event.$event)"
-            (onGetDeviceQRCode)="getDeviceQRCode($event.name, $event.qrcode)"
-            (onEditDevice)="editDevice($event)"
-            (onDeleteDevice)="deleteDevice($event)"
-          ></app-device-item>
-        </ng-container>
-      </div>
-    </div>
-  </div>
+  <app-page-header
+    [title]="'Устройства'"
+  ></app-page-header>
+<!--  <app-page-header [title]="'Устройства'"></app-page-header>-->
+<!--  <div class="card sdm-bg-light-grey">-->
+<!--    <div class="row actions">-->
+<!--      <div class="search-input-wrapper">-->
+<!--        <app-search-input-->
+<!--          [value]="searchParam"-->
+<!--          (onChange)="onChangeSearchInputHandler($event)"-->
+<!--        ></app-search-input>-->
+<!--      </div>-->
+<!--      <app-filter-sidebar-->
+<!--        [configs]="configs"-->
+<!--        [groups]="groups"-->
+<!--        (onReset)="resetSearchParams()"-->
+<!--        (onSubmit)="searchDevicesWithParams()"-->
+<!--      ></app-filter-sidebar>-->
+<!--      <div class="add-btn-wrapper">-->
+<!--        <app-add-button-->
+<!--          [title]="'Добавить устройство'"-->
+<!--          [target]="'add_device'"-->
+<!--        ></app-add-button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="progress" *ngIf="loading">-->
+<!--      <div class="indeterminate"></div>-->
+<!--    </div>-->
+<!--    <div class="body">-->
+<!--      <app-selected-devices-->
+<!--        *ngIf="selectedDevicesIDs.length !== 0"-->
+<!--        [devicesIDs]="selectedDevicesIDs"-->
+<!--        (onCloseClick)="cancelSelection()"-->
+<!--      ></app-selected-devices>-->
+<!--      <div class="sort row">-->
+<!--        <div class="checkbox-container">-->
+<!--          <label>-->
+<!--            <input-->
+<!--              type="checkbox"-->
+<!--              class="filled-in main-checkbox"-->
+<!--              [checked]="isAllSelected"-->
+<!--              (change)="selectUnselectDevices()"-->
+<!--            />-->
+<!--            <span></span>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <div class="content">-->
+<!--          <button-->
+<!--            class="sdm-btn-list-sort sort-up font-bold-color"-->
+<!--            [class.sort-up]="!sortStatusAsc"-->
+<!--            [class.sort-down]="sortStatusAsc"-->
+<!--            (click)="changeSortStatusDir()"-->
+<!--          >-->
+<!--            Статус <span></span>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="sdm-btn-list-sort sort-up font-bold-color"-->
+<!--            [class.sort-up]="!sortDateAsc"-->
+<!--            [class.sort-down]="sortDateAsc"-->
+<!--            (click)="changeSortDateDir()"-->
+<!--          >-->
+<!--            Дата вкл. <span></span>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="sdm-btn-list-sort sort-up font-bold-color"-->
+<!--            [class.sort-up]="!sortNameAsc"-->
+<!--            [class.sort-down]="sortNameAsc"-->
+<!--            (click)="changeSortNameDir()"-->
+<!--          >-->
+<!--            Название <span></span>-->
+<!--          </button>-->
+<!--          <p class="font-bold-color">Описание</p>-->
+<!--          <p class="font-bold-color">Телефон</p>-->
+<!--          <p class="font-bold-color">IMEI</p>-->
+<!--          <p class="font-bold-color">Модель</p>-->
+<!--          <button-->
+<!--            class="sdm-btn-list-sort sort-up font-bold-color"-->
+<!--            [class.sort-up]="!sortGroupAsc"-->
+<!--            [class.sort-down]="sortGroupAsc"-->
+<!--            (click)="changeSortGroupDir()"-->
+<!--          >-->
+<!--            Группа <span></span>-->
+<!--          </button>-->
+<!--          <p class="font-bold-color">Конфигурация</p>-->
+<!--          <p class="font-bold-color">Обновление</p>-->
+<!--          <button-->
+<!--            class="sdm-btn-list-sort sort-up font-bold-color"-->
+<!--            [class.sort-up]="!sortBatteryAsc"-->
+<!--            [class.sort-down]="sortBatteryAsc"-->
+<!--            (click)="changeSortBatteryDir()"-->
+<!--          >-->
+<!--            Заряд <span></span>-->
+<!--          </button>-->
+<!--          <p class="font-bold-color">Блокировка</p>-->
+<!--          <p class="font-bold-color">Действия</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="list">-->
+<!--        <div *ngIf="devices.length === 0 && !loading">Устройств не найдено</div>-->
+<!--        <ng-container-->
+<!--          *ngFor="-->
+<!--            let device of devices-->
+<!--              | devicesFilter-->
+<!--                : devicesFilters.status-->
+<!--                : devicesFilters.dateFrom-->
+<!--                : devicesFilters.dateTo-->
+<!--                : devicesFilters.configsIDs-->
+<!--                : devicesFilters.groupsIDs-->
+<!--              | search: searchParam:'device'-->
+<!--              | devicesByStatus: sortStatusAsc-->
+<!--              | devicesByDate: sortDateAsc-->
+<!--              | devicesByGroup: groups : sortGroupAsc-->
+<!--              | devicesByBattery: sortBatteryAsc-->
+<!--              | devicesByName: sortNameAsc-->
+<!--          "-->
+<!--        >-->
+<!--          <app-device-item-->
+<!--            [device]="device"-->
+<!--            [configs]="configs"-->
+<!--            [groups]="groups"-->
+<!--            (onSelectUnselectDevice)="selectUnselectDevice($event)"-->
+<!--            (onChangeDeviceState)="changeDeviceState($event)"-->
+<!--            (onClickDeviceQRCode)="getDeviceQRCode($event)"-->
+<!--            (onClickDeviceEdit)="selectDeviceToEdit($event)"-->
+<!--            (onClickDeviceDelete)="selectDeviceToDelete($event)"-->
+<!--          ></app-device-item>-->
+<!--        </ng-container>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </app-global-container>
-<div id="changePass" class="modal non-closing modal-fixed-footer">
-  <div class="modal-content">
-    <h6>Пароль должен стостоять минимум иметь минимум по 1:</h6>
-    <ul class="collection">
-      <li class="collection-item">
-        Заглавный символ
-        <span *ngIf="userService.upperCase" class="red-text">отсутствует</span>
-      </li>
-      <li class="collection-item">
-        Прописной символ
-        <span *ngIf="userService.lowerCase" class="red-text">отсутствует</span>
-      </li>
-      <li class="collection-item">
-        Цифра
-        <span *ngIf="userService.number" class="red-text">отсутствует</span>
-      </li>
-      <li class="collection-item">
-        Спец. символ
-        <span *ngIf="userService.specialChar" class="red-text"
-          >отсутствует</span
-        >
-      </li>
-      <li class="collection-item">
-        Состоять минимум из 8 символов
-        <span *ngIf="userService.passLength > 0" class="red-text"
-          >{{ userService.passLength }} осталось</span
-        >
-      </li>
-    </ul>
-    <div class="card-content">
-      <div class="formGroup">
-        <input
-          id="pass"
-          type="password"
-          class="formControl"
-          [(ngModel)]="password"
-          required
-        />
-        <label for="pass">Введите новый пароль</label>
-        <small class="helper-text invalid"></small>
-        <small class="helper-text invalid"></small>
-      </div>
-      <div class="formGroup">
-        <input
-          id="ChangePassword"
-          type="password"
-          class="formControl"
-          required
-          [(ngModel)]="new_password"
-        />
-        <label for="ChangePassword">Повторите новый пароль</label>
-        <small class="helper-text invalid"></small>
-        <small class="helper-text invalid"></small>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button
-      [disabled]="password !== new_password"
-      (click)="changePassword(password)"
-      class="btn-flat green-text"
-    >
-      Сменить
-      <i class="material-icons right">send</i>
-    </button>
-  </div>
-</div>
-<app-edit-device
-  [device_id]="currID"
-  [form]="form"
-  [groups]="groups"
-  [configs]="configs"
-  (onSetDeviceSettings)="setDeviceSettings($event)"
-></app-edit-device>
-<app-qr-code [title]="currName" [valueQR]="currQR"></app-qr-code>
+<!--<app-change-password-->
+<!--  (onSubmit)="changePassword()"-->
+<!--&gt;</app-change-password>-->
+<!--<app-add-device-->
+<!--  [groups]="groups"-->
+<!--  (onSubmit)="addDevice()"-->
+<!--&gt;</app-add-device>-->
+<!--<app-qr-code-->
+<!--  [device]="currDevice"-->
+<!--&gt;</app-qr-code>-->
+<!--<app-edit-device-->
+<!--  [groups]="groups"-->
+<!--  (onSubmit)="editDevice()"-->
+<!--&gt;</app-edit-device>-->
+<!--<app-edit-several-devices-->
+<!--  [groups]="groups"-->
+<!--  (onSubmit)="editSeveralDevices()"-->
+<!--&gt;</app-edit-several-devices>-->
+<!--<app-delete-device-->
+<!--  [device]="currDevice"-->
+<!--  (onSubmit)="deleteDevice($event)"-->
+<!--&gt;</app-delete-device>-->
+<!--<app-delete-several-elements-->
+<!--  (onSubmit)="deleteSeveralDevices()"-->
+<!--&gt;</app-delete-several-elements>-->

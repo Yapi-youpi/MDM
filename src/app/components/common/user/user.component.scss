@@ -1,0 +1,256 @@
+.user {
+  position: relative;
+
+  .toggle-btn {
+    height: 30px;
+    width: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 15px;
+
+    background-color: var(--dark-blue);
+
+    box-shadow: var(--box-shadow);
+
+    img {
+      height: 30px;
+      width: 30px;
+    }
+
+    &.no-user .icon {
+      height: 24px;
+      width: 24px;
+
+      mask-size: 20px 20px;
+      mask-image: url("../../../../assets/UI/users_group.svg");
+      -webkit-mask-size: 20px 20px;
+      -webkit-mask-image: url("../../../../assets/UI/users_group.svg");
+
+      background-color: var(--white);
+    }
+  }
+
+  .user-popup {
+    width: 250px;
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    padding: 16px 16px 17.54px 16px;
+
+    background-color: var(--white);
+
+    border-radius: 14px;
+
+    box-shadow: var(--box-shadow);
+
+    z-index: 10;
+
+    .divider {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-left {
+
+        display: flex;
+        align-items: center;
+
+        .info {
+          .name {
+            margin-bottom: 12px;
+          }
+        }
+
+        .avatar {
+          height: 40px;
+          width: 40px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border-radius: 20px;
+
+          background-color: var(--dark-blue);
+
+          box-shadow: var(--box-shadow);
+
+          .icon {
+            height: 30px;
+            width: 30px;
+
+            mask-size: 30px 30px;
+            mask-image: url("../../../../assets/UI/users_group.svg");
+            -webkit-mask-size: 30px 30px;
+            -webkit-mask-image: url("../../../../assets/UI/users_group.svg");
+
+            background-color: var(--white);
+          }
+        }
+
+        .info {
+          margin-left: 16px;
+        }
+      }
+
+      &-right {
+        align-self: self-start;
+        
+        .edit {
+          height: 24px;
+          width: 24px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background-color: var(--dark-blue);
+
+          .icon {
+            height: 24px;
+            width: 24px;
+
+            mask-size: 12.8px 12.8px;
+            mask-image: url("../../../../assets/UI/pencil.svg");
+            -webkit-mask-size: 12.8px 12.8px;
+            -webkit-mask-image: url("../../../../assets/UI/pencil.svg");
+
+            background-color: var(--white);
+          }
+        }
+      }
+    }
+
+    .bottom {
+      .logout {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        color: var(--dark-blue);
+
+        background-color: transparent;
+
+        .icon {
+          height: 18.46px;
+          width: 24px;
+
+          margin-right: 13px;
+
+          mask-size: 18.46px 24px;
+          mask-image: url("../../../../assets/UI/leave.svg");
+          -webkit-mask-size: 18.46px 24px;
+          -webkit-mask-image: url("../../../../assets/UI/leave.svg");
+
+          background-color: var(--dark-blue);
+        }
+      }
+    }
+  }
+}
+
+//.user {
+//  position: relative;
+//}
+//
+//.user-btn {
+//  height: 30px;
+//  width: 30px;
+//
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//
+//  font-size: 20px;
+//
+//  border: none;
+//  border-radius: 15px;
+//
+//  background-color: #526c9b;
+//
+//  box-shadow: 0 0 10px 0 #85858540;
+//}
+//
+//.user-popup {
+//  min-width: 210px;
+//
+//  position: absolute;
+//
+//  top: 0;
+//  right: 0;
+//
+//  padding: 16px 17px;
+//
+//  background-color: #fff;
+//
+//  z-index: 10;
+//}
+//
+//.top {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//}
+//
+//.email {
+//  font-size: 12px;
+//}
+//
+//.user-popup img {
+//  height: 30px;
+//  width: 30px;
+//
+//  margin-right: 16px;
+//
+//  box-shadow: 0 0 10px 0 #85858540;
+//}
+//
+//.user-info {
+//  margin-right: auto;
+//}
+//
+//.user-profile-btn {
+//  height: 16px;
+//  width: 16px;
+//
+//  align-self: start;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//
+//  border: none;
+//
+//  background-color: #526c9b;
+//  color: #eaeff8;
+//}
+//
+//.logout {
+//  display: flex;
+//  align-items: center;
+//
+//  margin-top: 18px;
+//
+//  border: none;
+//  background-color: transparent;
+//}
+//
+//.logout i {
+//  margin-right: 13px;
+//}

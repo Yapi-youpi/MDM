@@ -1,0 +1,57 @@
+export interface AllowedClasses {}
+
+export interface DevicesConfig {
+  GPS?: boolean | true;
+  ID: string;
+  appUpdateTime?: string | "02:00";
+  applications?: null;
+  autoBrightness: boolean | false;
+  autoUpdate: boolean | false;
+  backgroundColor: string;
+  backgroundImageUrl: string;
+  baseUrl: string;
+  blockStatusBar: boolean | false;
+  bluetooth: boolean | true;
+  brightness: number | 255;
+  contentAppId: string | "";
+  description: string | "Стандартная конфигурация";
+  desktopHeader: string | "NO_HEADER";
+  desktopHeaderTemplate: string | "";
+  disableScreenshots: boolean | false;
+  eventReceivingComponent: string | "";
+  iconSize: string | "SMALL";
+  keepaliveTime: number | 60000000000;
+  kioskHome: boolean | false;
+  kioskKeyguard: boolean | false;
+  kioskLockButtons: boolean | false;
+  kioskMode: boolean | false;
+  kioskNotifications: boolean | false;
+  kioskRecents: boolean | false;
+  kioskSystemInfo: boolean | false;
+  lockSafeSettings: boolean | true;
+  lockVolume: boolean | false;
+  mainAppId: string | "";
+  manageTimeout: boolean | false;
+  manageVolume: boolean | false;
+  mobileData: boolean | true;
+  mobileEnrollment: boolean | false;
+  name: string;
+  orientation: number | 0;
+  pushOptions: string | "all";
+  restrictions: string | "";
+  scheduleAppUpdate: boolean | false;
+  showWifi: boolean | false;
+  systemUpdateTime: string | "00:00";
+  systemUpdateType: number | 0;
+  textColor: string | "";
+  timeZone: string | "auto";
+  timeout: number | 30000000000;
+  usbStorage: boolean | false;
+  useDefaultDesignSettings: boolean | false;
+  volume: number | 90;
+  wifi: boolean | true;
+  wifiPassword: string | "";
+  wifiSSID: string | "";
+  wifiSecurityType: string | "";
+  allowedClasses: AllowedClasses;
+}

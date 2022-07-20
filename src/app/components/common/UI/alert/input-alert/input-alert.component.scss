@@ -1,0 +1,15 @@
+.alert {
+  position: absolute;
+
+  top: calc(var(--input-height) + 4px);
+  right: 0;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 9.95px;
+  text-align: right;
+
+  &.error {
+    color: var(--error);
+  }
+}
