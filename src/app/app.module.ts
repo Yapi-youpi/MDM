@@ -62,6 +62,7 @@ import { SwitchInputComponent } from "./components/common/UI/input/switch-input/
 import { DeviceActionBtnComponent } from "./components/common/UI/button/device-action-btn/device-action-btn.component";
 import { StatusIconComponent } from "./components/common/UI/status/status-icon/status-icon.component";
 import { ModalActionBtnsComponent } from "./components/common/UI/button/modal-action-btns/modal-action-btns.component";
+import { AppsComponent } from './components/pages/apps/apps.component';
 
 const routes: Routes = [
   {
@@ -125,6 +126,7 @@ const routes: Routes = [
     DeviceActionBtnComponent,
     StatusIconComponent,
     ModalActionBtnsComponent,
+    AppsComponent,
   ],
   imports: [
     BrowserModule,

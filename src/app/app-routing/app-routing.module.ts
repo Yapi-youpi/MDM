@@ -7,6 +7,7 @@ import { DevicesComponent } from "../components/pages/devices/devices.component"
 import { GroupsComponent } from "../components/pages/groups/groups.component";
 import { MapComponent } from "../components/pages/map/map.component";
 import { ConfigsComponent } from "../components/pages/configs/configs.component";
+import { AppsComponent } from "../components/pages/apps/apps.component";
 
 const routes: Routes = [
   // {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: "devices",
     component: DevicesComponent,
+  },
+  {
+    path: "apps",
+    component: AppsComponent,
   },
   // {
   //   path: "groups",

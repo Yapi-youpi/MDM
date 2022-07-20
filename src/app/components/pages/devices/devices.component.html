@@ -6,7 +6,7 @@
     [color]="'light-grey'"
   >
     <div class="page-content">
-      <div class="top">
+      <div class="top row space-between">
         <app-search-input
           [value]="searchParam"
           (onChange)="onChangeSearchInputHandler($event)"
@@ -17,7 +17,7 @@
           ></app-filter-btn>
         </div>
         <app-add-button
-          [title]="'Добавить устройство'"
+          [title]="'добавить устройство'"
           [target]="'add_device'"
         ></app-add-button>
       </div>
@@ -36,7 +36,7 @@
               (onChange)="selectUnselectDevices()"
             ></app-checkbox>
           </div>
-          <div class="sort-headers">
+          <div class="sort-headers row space-between">
             <div class="sort-btn-wrapper status">
               <app-sort-btn
                 [title]="'Статус'"

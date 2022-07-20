@@ -1,0 +1,48 @@
+<app-global-container>
+  <app-page-header
+    [title]="'Приложения'"
+  ></app-page-header>
+  <app-card
+    [color]="'light-grey'"
+  >
+    <div class="page-content">
+      <div class="top row space-between">
+        <app-search-input></app-search-input>
+        <button
+          class="sort-btn p-0 text-body"
+          [class.common]="!isSystemAppsShown"
+          [class.blue]="isSystemAppsShown"
+          (click)="toggleSystemApps()"
+        >
+          системное приложение
+        </button>
+        <app-add-button
+          [title]="'Добавить приложение'"
+        ></app-add-button>
+      </div>
+      <div class="list">
+        <div class="list-header row space-between">
+          <div class="sort-btn-wrapper">
+            <app-sort-btn
+              [title]="'Название'"
+              [isSortAsc]="isNameSortAsc"
+              (onCLick)="toggleNameSortAsc()"
+            ></app-sort-btn>
+          </div>
+          <p>Версия</p>
+          <p>URL</p>
+          <p>ID пакета</p>
+          <div class="sort-btn-wrapper">
+            <app-sort-btn
+              [title]="'Размер'"
+              [isSortAsc]="isSizeSortAsc"
+              (onCLick)="toggleSizeSortAsc()"
+            ></app-sort-btn>
+          </div>
+          <p>Ярлык</p>
+          <p>Действия</p>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</app-global-container>

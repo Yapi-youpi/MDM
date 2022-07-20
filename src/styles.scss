@@ -65,6 +65,12 @@ body {
   // основной текст
   color: var(--dark-blue-grey);
 }
+// тело
+.text-body {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+}
 // подтело
 .text-sub-body {
   font-weight: 400;
