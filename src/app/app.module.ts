@@ -21,20 +21,20 @@ import { GroupsComponent } from "./components/pages/groups/groups.component";
 import { MapComponent } from "./components/pages/map/map.component";
 import { ConfigsComponent } from "./components/pages/configs/configs.component";
 import { UserComponent } from "./components/common/user/user.component";
-import { QrCodeComponent } from "./components/common/modals/qr-code/qr-code.component";
-import { EditDeviceComponent } from "./components/common/modals/edit-device/edit-device.component";
+import { QrCodeComponent } from "./components/common/modals/devices/qr-code/qr-code.component";
+import { EditDeviceComponent } from "./components/common/modals/devices/edit-device/edit-device.component";
 import { DeviceItemComponent } from "./components/common/device-item/device-item.component";
 import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
 import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { PageHeaderComponent } from "./components/common/page-header/page-header.component";
 import { InputAlertComponent } from "./components/common/UI/alert/input-alert/input-alert.component";
-import { DeleteDeviceComponent } from "./components/common/modals/delete-device/delete-device.component";
-import { AddDeviceComponent } from "./components/common/modals/add-device/add-device.component";
+import { DeleteDeviceComponent } from "./components/common/modals/devices/delete-device/delete-device.component";
+import { AddDeviceComponent } from "./components/common/modals/devices/add-device/add-device.component";
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
 import { SelectedElementsComponent } from "./components/common/selected-elements/selected-elements.component";
-import { EditSeveralDevicesComponent } from "./components/common/modals/edit-several-devices/edit-several-devices.component";
-import { DeleteSeveralElementsComponent } from "./components/common/modals/delete-several-elements/delete-several-elements.component";
+import { EditSeveralDevicesComponent } from "./components/common/modals/devices/edit-several-devices/edit-several-devices.component";
+import { DeleteSeveralElementsComponent } from "./components/common/modals/devices/delete-several-elements/delete-several-elements.component";
 
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
 import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
@@ -55,14 +55,14 @@ import { AuthButtonComponent } from "./components/common/UI/button/auth-button/a
 import { CheckboxComponent } from "./components/common/UI/input/checkbox/checkbox.component";
 import { MenuButtonComponent } from "./components/common/UI/button/menu-button/menu-button.component";
 import { ModalComponent } from "./components/common/modal/modal.component";
-import { FilterDevicesComponent } from "./components/common/modals/filter-devices/filter-devices.component";
+import { FilterDevicesComponent } from "./components/common/modals/devices/filter-devices/filter-devices.component";
 import { FilterBtnComponent } from "./components/common/UI/button/filter-btn/filter-btn.component";
 import { SortBtnComponent } from "./components/common/UI/button/sort-btn/sort-btn.component";
 import { SwitchInputComponent } from "./components/common/UI/input/switch-input/switch-input.component";
 import { DeviceActionBtnComponent } from "./components/common/UI/button/device-action-btn/device-action-btn.component";
 import { StatusIconComponent } from "./components/common/UI/status/status-icon/status-icon.component";
 import { ModalActionBtnsComponent } from "./components/common/UI/button/modal-action-btns/modal-action-btns.component";
-import { AppsComponent } from './components/pages/apps/apps.component';
+import { AppsComponent } from "./components/pages/apps/apps.component";
 
 const routes: Routes = [
   {

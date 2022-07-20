@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { DevicesGroup } from "../../../../shared/types/groups";
+import { DevicesGroup } from "../../../../../shared/types/groups";
 
-import { EditSeveralDevicesService } from "../../../../shared/services/forms/device/edit-several-devices.service";
-import { Option } from "../../../../shared/types/input";
+import { EditSeveralDevicesService } from "../../../../../shared/services/forms/device/edit-several-devices.service";
+import { Option } from "../../../../../shared/types/input";
 
 @Component({
   selector: "app-edit-several-devices",

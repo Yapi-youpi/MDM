@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 import { filter } from "src/app/shared/services/forms/device";
-import { DevicesConfig } from "../../../../shared/types/config";
-import { DevicesGroup } from "../../../../shared/types/groups";
-import { Option } from "../../../../shared/types/input";
+import { DevicesConfig } from "../../../../../shared/types/config";
+import { DevicesGroup } from "../../../../../shared/types/groups";
+import { Option } from "../../../../../shared/types/input";
 
 @Component({
   selector: "app-filter-devices",

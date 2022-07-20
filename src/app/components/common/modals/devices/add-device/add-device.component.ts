@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { DevicesGroup } from "../../../../shared/types/groups";
-import { AddDeviceService } from "../../../../shared/services/forms/device/add-device.service";
-import { Option } from "../../../../shared/types/input";
+import { DevicesGroup } from "../../../../../shared/types/groups";
+import { AddDeviceService } from "../../../../../shared/services/forms/device/add-device.service";
+import { Option } from "../../../../../shared/types/input";
 
 @Component({
   selector: "app-add-device",
