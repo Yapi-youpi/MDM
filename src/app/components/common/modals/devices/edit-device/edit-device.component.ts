@@ -15,6 +15,8 @@ export class EditDeviceComponent {
 
   @Output() public onSubmit = new EventEmitter();
 
+  public currentGroup!: Option;
+
   constructor(public form: EditDeviceService) {}
 
   get _form() {
@@ -44,6 +46,24 @@ export class EditDeviceComponent {
         html: g.name,
       } as Option;
     });
+  }
+
+  get _currOption() {
+    return {
+      value: this._group_id?.value,
+      html: this.groups.find((g) => g.id === this._group_id?.value)?.name,
+    } as Option;
+  }
+
+  onSelectHandler(item: Option) {
+    this._form.patchValue({
+      device_group_id: item.value,
+    });
+
+    this.currentGroup = {
+      value: item.value,
+      html: item.html,
+    } as Option;
   }
 
   onSubmitHandler() {

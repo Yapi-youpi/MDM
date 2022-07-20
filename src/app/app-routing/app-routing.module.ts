@@ -10,10 +10,10 @@ import { ConfigsComponent } from "../components/pages/configs/configs.component"
 import { AppsComponent } from "../components/pages/apps/apps.component";
 
 const routes: Routes = [
-  // {
-  //   path: "users",
-  //   component: UsersComponent,
-  // },
+  {
+    path: "users",
+    component: UsersComponent,
+  },
   {
     path: "auth",
     component: AuthComponent,
@@ -26,18 +26,18 @@ const routes: Routes = [
     path: "apps",
     component: AppsComponent,
   },
-  // {
-  //   path: "groups",
-  //   component: GroupsComponent,
-  // },
-  // {
-  //   path: "map",
-  //   component: MapComponent,
-  // },
-  // {
-  //   path: "config",
-  //   component: ConfigsComponent,
-  // },
+  {
+    path: "groups",
+    component: GroupsComponent,
+  },
+  {
+    path: "map",
+    component: MapComponent,
+  },
+  {
+    path: "config",
+    component: ConfigsComponent,
+  },
 ];
 
 @NgModule({

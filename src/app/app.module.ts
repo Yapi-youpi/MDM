@@ -64,6 +64,7 @@ import { StatusIconComponent } from "./components/common/UI/status/status-icon/s
 import { ModalActionBtnsComponent } from "./components/common/UI/button/modal-action-btns/modal-action-btns.component";
 import { AppsComponent } from "./components/pages/apps/apps.component";
 import { AddAppComponent } from './components/common/modals/apps/add-app/add-app.component';
+import { SelectComponent } from './components/common/UI/input/select/select.component';
 
 const routes: Routes = [
   {
@@ -129,6 +130,7 @@ const routes: Routes = [
     ModalActionBtnsComponent,
     AppsComponent,
     AddAppComponent,
+    SelectComponent,
   ],
   imports: [
     BrowserModule,

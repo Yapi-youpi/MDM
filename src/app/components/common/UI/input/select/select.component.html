@@ -1,0 +1,24 @@
+<div
+  class="dropdown"
+  [ngClass]="selectWidth"
+  [class.opened]="!isDropdownHidden"
+>
+  <button
+    [class.filled]="!isDropdownHidden"
+    (click)="toggleDropdown()"
+  >
+    {{ currOption?.html }}
+  </button>
+  <ul
+    class="dropdown-content"
+    [class.hidden]="isDropdownHidden"
+  >
+        <li
+          *ngFor="let item of items; trackBy: identify"
+          class="item"
+          (click)="setCurrentHTML(item)"
+        >
+          <p class="text-menu-title dropdown-item">{{ item.html }}</p>
+        </li>
+  </ul>
+</div>

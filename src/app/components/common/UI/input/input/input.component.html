@@ -28,24 +28,13 @@
   [class.error]="isError"
   [type]="type"
 />
-<div
+<app-select
   *ngIf="type === 'select'"
-  class="select-wrapper"
->
-  <select
-    [id]="name"
-    [name]="name"
-    [formControl]="control"
-    class="input-select"
-    [ngClass]="width"
-    [class.error]="isError"
-  >
-    <option
-      *ngFor="let option of options"
-      [value]="option.value"
-    >{{ option.html }}</option>
-  </select>
-</div>
+  [selectWidth]="width"
+  [items]="options"
+  [currOption]="currOption"
+  (onSelect)="onSelectHandler($event)"
+></app-select>
 <app-switch-input
   *ngIf="type === 'switch'"
   [control]="control"

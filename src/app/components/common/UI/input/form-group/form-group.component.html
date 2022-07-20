@@ -15,8 +15,10 @@
     [control]="control"
     [isError]="isError"
     [options]="options"
+    [currOption]="currOption"
     [isMultiselect]="isMultiselect"
     [isSwitchChecked]="isSwitchChecked"
     (onSwitchChange)="onSwitchChangeHandler()"
+    (onSelect)="onSelectHandler($event)"
   ></app-input>
 </div>

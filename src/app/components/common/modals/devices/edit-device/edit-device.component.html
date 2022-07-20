@@ -50,7 +50,9 @@
             [inputType]="'select'"
             [inputWidth]="'w-440'"
             [options]="_options"
+            [currOption]="!currentGroup ? _currOption : currentGroup"
             [isError]="_isSubmitted && !!_group_id?.errors"
+            (onSelect)="onSelectHandler($event)"
           >
           </app-form-group>
           <app-input-alert
