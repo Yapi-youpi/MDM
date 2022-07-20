@@ -1,20 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { interval } from "rxjs";
-
-// import M from "materialize-css";
-
-import { FilterDevicesService } from "../../../shared/services/forms/device/filter-devices.service";
-
-import { DevicesConfig } from "../../../shared/types/config";
-import { DevicesGroups } from "../../../shared/types/groups";
+import { Component, ElementRef, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-filter-sidebar",
@@ -22,65 +6,29 @@ import { DevicesGroups } from "../../../shared/types/groups";
   styleUrls: ["./filter-sidebar.component.css"],
 })
 export class FilterSidebarComponent implements OnInit {
-  @Input() configs!: DevicesConfig[];
-  @Input() groups!: DevicesGroups[];
+  public isConfigDropdownHidden: boolean = true;
+  public isGroupDropdownHidden: boolean = true;
 
-  @Output() onSubmit = new EventEmitter<FormGroup>();
-  @Output() onReset = new EventEmitter();
-
-  constructor(
-    private elementRef: ElementRef,
-    public form: FilterDevicesService
-  ) {}
+  constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
-    // const sidebar =
-    //   this.elementRef.nativeElement.querySelector(".sidenav.filter");
-    //
-    // M.Sidenav.init(sidebar, {
-    //   edge: "right",
-    // });
-    //
-    // let filterSelectsInter = interval(2000).subscribe(() => {
-    //   const filterSelects =
-    //     this.elementRef.nativeElement.querySelectorAll(".filter-select");
-    //   if (filterSelects && filterSelects.length !== 0) {
-    //     filterSelectsInter.unsubscribe();
-    //     M.FormSelect.init(filterSelects);
-    //   }
-    // });
+    const sidebar =
+      this.elementRef.nativeElement.querySelector(".sidenav.filter");
+    const accordions =
+      this.elementRef.nativeElement.querySelectorAll(".collapsible");
+
+/*    M.Sidenav.init(sidebar, {
+      edge: "right",
+    });
+    M.Collapsible.init(accordions, {
+      accordion: false,
+    });*/
   }
 
-  get _form() {
-    return this.form.form;
+  toggleConfigDropdown() {
+    this.isConfigDropdownHidden = !this.isConfigDropdownHidden;
   }
-
-  get _isStatusOn() {
-    return this.form.form.controls["status-on"].value;
-  }
-
-  get _isStatusOff() {
-    return this.form.form.controls["status-off"].value;
-  }
-
-  toggleSearchDevicesOn() {
-    this.form.form.controls["status-on"].setValue(
-      !this.form.form.controls["status-on"].value
-    );
-  }
-
-  toggleSearchDevicesOff() {
-    this.form.form.controls["status-off"].setValue(
-      !this.form.form.controls["status-off"].value
-    );
-  }
-
-  onResetHandler() {
-    this.form.reset();
-    this.onReset.emit();
-  }
-
-  onSubmitHandler() {
-    this.onSubmit.emit(this.form.form);
+  toggleGroupDropdown() {
+    this.isGroupDropdownHidden = !this.isGroupDropdownHidden;
   }
 }

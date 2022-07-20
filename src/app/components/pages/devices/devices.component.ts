@@ -1,214 +1,190 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
-import { interval } from "rxjs";
+import { Component, ElementRef, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { interval } from 'rxjs';
 
-// import M from "materialize-css";
-
-import { Device } from "../../../shared/types/devices";
-import { DevicesGroups } from "../../../shared/types/groups";
-import { DevicesConfig } from "../../../shared/types/config";
-import { DevicesFilter } from "../../../shared/types/interfaces";
-import { DevicesState, SingleDeviceState } from "../../../shared/types/states";
-import * as states from "../../../shared/types/states";
-
-import {
-  deviceService,
-  deviceConfigService,
-  formService,
-  groupService,
-  userService,
-} from "../../../shared/services";
+import { Device } from '../../../shared/types/devices';
+import { DevicesConfig, Groups } from '../../../shared/types/config';
+import { UserService } from '../../../shared/services/user.service';
+import { DevicesService } from '../../../shared/services/devices.service';
+import { GroupsService } from '../../../shared/services/groups.service';
+import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 
 @Component({
-  selector: "app-devices",
-  templateUrl: "./devices.component.html",
-  styleUrls: ["./devices.component.scss"],
+  selector: 'app-devices',
+  templateUrl: './devices.component.html',
+  styleUrls: ['./devices.component.css'],
 })
 export class DevicesComponent implements OnInit {
   public devices: Device[] = [];
-  public groups: DevicesGroups[] = [];
+  public groups: Groups[] = [];
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
 
-  public currDevice!: Device;
+  private add_device!: Device; // ???
 
-  public selectedDevicesIDs: string[] = [];
+  public form!: FormGroup;
+  public edit: boolean = false;
+  public password: string = '';
+  public new_password: string = '';
+
+  public currID: string = '';
+  public currQR: string = '';
+  public currName: string = '';
   public isAllSelected: boolean = false;
 
   public sortStatusAsc: boolean = true;
   public sortDateAsc: boolean = true;
   public sortNameAsc: boolean = true;
   public sortGroupAsc: boolean = true;
-  public sortBatteryAsc: boolean = true;
+  public sortPowerAsc: boolean = true;
 
-  public searchParam: string = "";
-
-  public devicesFilters: DevicesFilter = {
-    status: null,
-    dateFrom: null,
-    dateTo: null,
-    configsIDs: null,
-    groupsIDs: null,
-  };
-
-  // public db: DatabaseService
   constructor(
-    public user: userService,
-    private userPasswordService: formService.user.changePass,
+    public userService: UserService,
+    private device: DevicesService,
     private elementRef: ElementRef,
-    private group: groupService,
-    private config: deviceConfigService,
-    private device: deviceService,
-    private addDeviceForm: formService.device.add,
-    private editDeviceForm: formService.device.edit,
-    private editSeveralDevicesForm: formService.device.editSeveral,
-    private filterForm: formService.device.filter
-  ) {}
-
-  ngOnInit(): void {
-    // let nonClosingModal =
-    //   this.elementRef.nativeElement.querySelector(".non-closing");
-    // let closingModal =
-    //   this.elementRef.nativeElement.querySelectorAll(".closing");
-    //
-    // M.Modal.init(nonClosingModal, {
-    //   dismissible: false,
-    //   onCloseEnd: () => {
-    //     this.userPasswordService.resetForm();
-    //   },
-    // });
-    //
-    // M.Modal.init(closingModal, {
-    //   dismissible: true,
-    // });
-
-    let i = interval(1000).subscribe(() => {
-      if (this.user.token) {
-        i.unsubscribe();
-        this.getGroups();
-        this.getConfigs();
-        this.getDevices();
-      }
+    private groupsService: GroupsService,
+    private configService: DevicesConfigService // public db: DatabaseService
+  ) {
+    this.form = new FormGroup({
+      name: new FormControl('', Validators.required),
+      desc: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      imei: new FormControl('', Validators.required),
+      model: new FormControl('', Validators.required),
+      config: new FormControl('', Validators.required),
+      group: new FormControl('', Validators.required),
     });
   }
 
-  changePassword() {
-    this.user
-      .changePassword(this.userPasswordService._pass)
+  ngOnInit(): void {
+    let nonClosingModal =
+      this.elementRef.nativeElement.querySelector('.non-closing');
+    let closingModal =
+      this.elementRef.nativeElement.querySelectorAll('.closing');
+
+    /*    M.Modal.init(nonClosingModal, {
+      dismissible: false,
+      onCloseEnd: () => {
+        this.form.reset();
+      },
+    });
+    M.Modal.init(closingModal, {
+      dismissible: true,
+    });*/
+
+    let i = interval(1000).subscribe(() => {
+      if (this.userService.token) {
+        i.unsubscribe();
+        this.getAllDevices();
+        this.getGroups();
+        this.getConfigs();
+      }
+    });
+
+    let selectsInter = interval(1000).subscribe(() => {
+      const elems =
+        this.elementRef.nativeElement.querySelectorAll('.config-select');
+      // console.log(elems);
+      if (elems && elems.length !== 0) {
+        selectsInter.unsubscribe();
+        // M.FormSelect.init(elems, {});
+      }
+    });
+
+    //  Загрузить все возможные варианты конфигураций и групп и
+    //  и подгрузить в селекты
+  }
+
+  changePassword(pass: string) {
+    this.userService
+      .changePassword(pass)
       .then((res) => {
         console.log(res);
+        this.password = '';
+        this.new_password = '';
       })
       .catch((res) => {
         console.log(res);
       });
   }
 
-  getConfigs() {
-    this.config
-      .getConfig("all")
-      .then((res: states.DevicesConfigsState) => {
-        if (res.success) {
-          this.configs = res.devicesConfigs;
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  getGroups() {
-    this.group
-      .getGroups("all")
-      .then((res: states.DevicesGroupsState) => {
-        if (res.success) {
-          this.groups = res.devicesGroups;
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  getDevices() {
-    this.loading = true;
-
+  getAllDevices() {
     this.device
-      .get("all")
-      .then((res: states.DevicesState) => {
-        if (res.success) {
-          this.loading = false;
-          this.devices = res.devices;
-        } else {
-          console.log(res.error);
-        }
+      .getDevice('all')
+      .then((res: { devices: Device[]; success: boolean; error: string }) => {
+        console.log(res);
+        this.loading = false;
+        this.devices = res.devices;
+        this.sortDevices();
       })
       .catch((err) => {
         console.log(err.error.error);
       });
   }
 
-  cancelSelection() {
-    this.selectedDevicesIDs = [];
+  addDevice() {
+    // this.add_device = this.form.getRawValue();
+    // this.device
+    //   .addDevice(this.add_device)
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.getAllDevices();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     console.log(err.error.error);
+    //   });
+  }
 
-    if (this.isAllSelected) this.isAllSelected = false;
+  // saveChange() {
+  //   this.device
+  //     .editDevice(this.form.getRawValue())
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.getAllDevices();
+  //       this.edit = false;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
-    this.devices.map((d) => {
-      if (d.isSelected) d.isSelected = false;
+  setDeviceSettings(id: string) {
+    console.log(id);
+    console.log(this.form.getRawValue());
+
+    this.form.controls['name'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['desc'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['phone'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['imei'].setErrors({ invalid: 'Тестовая ошибка' });
+    this.form.controls['model'].setErrors({ invalid: 'Тестовая ошибка' });
+    // console.log(this.form);
+
+    // const settingsModal =
+    //   this.elementRef.nativeElement.querySelector("#edit_device");
+    // M.Modal.getInstance(settingsModal).close();
+  }
+
+  getGroups() {
+    this.groupsService.getGroups('all').then((res) => {
+      this.groups = res;
     });
   }
 
-  onChangeSearchInputHandler(value: string) {
-    this.searchParam = value;
+  getConfigs() {
+    this.configService.getConfig('all').then((res) => {
+      this.configs = res;
+    });
   }
 
-  resetSearchParams() {
-    this.devicesFilters.status = null;
-    this.devicesFilters.dateFrom = null;
-    this.devicesFilters.dateTo = null;
-    this.devicesFilters.configsIDs = null;
-    this.devicesFilters.groupsIDs = null;
-  }
-
-  searchDevicesWithParams() {
-    this.cancelSelection();
-
-    this.devicesFilters.status = this.filterForm._status;
-    this.devicesFilters.dateFrom = this.filterForm._dateFrom;
-    this.devicesFilters.dateTo = this.filterForm._dateTo;
-    this.devicesFilters.groupsIDs = this.filterForm._groupsIDs;
-    this.devicesFilters.configsIDs = this.filterForm._configsIDs;
-  }
-
-  addDevice() {
-    this.device
-      .add({
-        name: this.addDeviceForm._name,
-        description: this.addDeviceForm._desc,
-        device_group_id: this.addDeviceForm._group,
-      })
-      .then((res: SingleDeviceState) => {
-        if (res.success) {
-          this.currDevice = res.device;
-          this.devices = [res.device, ...this.devices];
-
-          // const addModal =
-          //   this.elementRef.nativeElement.querySelector("#add_device");
-          // const qrModal =
-          //   this.elementRef.nativeElement.querySelector("#qr-code");
-          //
-          // M.Modal.getInstance(addModal).close();
-          // this.addDeviceService.resetForm();
-          // M.Modal.getInstance(qrModal).open();
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  sortDevices() {
+    this.devices.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
   }
 
   selectUnselectDevices() {
@@ -217,206 +193,69 @@ export class DevicesComponent implements OnInit {
     this.devices.map((d) => {
       d.isSelected = this.isAllSelected;
     });
-
-    if (this.isAllSelected)
-      this.selectedDevicesIDs = this.devices.map((d) => d.device_id);
-    else this.selectedDevicesIDs = [];
   }
 
-  changeSortStatusDir() {
+  sortDevicesByStatus() {
     this.sortStatusAsc = !this.sortStatusAsc;
+    //    CODE
   }
-  changeSortDateDir() {
+  sortDevicesByDate() {
     this.sortDateAsc = !this.sortDateAsc;
+    //    CODE
   }
-  changeSortNameDir() {
+  sortDevicesByName() {
     this.sortNameAsc = !this.sortNameAsc;
+    //    CODE
   }
-  changeSortGroupDir() {
+  sortDevicesByGroup() {
     this.sortGroupAsc = !this.sortGroupAsc;
+    //    CODE
   }
-  changeSortBatteryDir() {
-    this.sortBatteryAsc = !this.sortBatteryAsc;
+  sortDevicesByPower() {
+    this.sortPowerAsc = !this.sortPowerAsc;
+    //    CODE
   }
 
-  selectUnselectDevice(device: Device) {
+  // ЛОГИКА УПРАВЛЕНИЯ ДЕВАЙСОМ
+
+  selectUnselectSingleDevice(device: Device) {
     this.devices.map((d) => {
       if (d.device_id === device.device_id) {
         d.isSelected = !d.isSelected;
-
-        if (d.isSelected && !this.selectedDevicesIDs.includes(d.device_id))
-          this.selectedDevicesIDs.push(d.device_id);
-
-        if (!d.isSelected && this.selectedDevicesIDs.includes(d.device_id))
-          this.selectedDevicesIDs = this.selectedDevicesIDs.filter(
-            (sd) => sd !== d.device_id
-          );
       }
     });
     if (!device.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
-    if (this.selectedDevicesIDs.length === this.devices.length)
-      this.isAllSelected = true;
   }
 
-  changeDeviceState(device: Device) {
+  changeDeviceConfig(device: Device, $event) {
+    console.log($event.target.value);
+    console.log(device.device_id);
+  }
+
+  getDeviceQRCode(name: string, qr: any) {
+    this.currName = name;
+    this.currQR = JSON.stringify(qr);
+  }
+
+  editDevice(device: Device) {
+    this.currID = device.device_id;
+    this.form.controls['name'].setValue(device.name);
+    this.form.controls['desc'].setValue(device.description);
+    this.form.controls['phone'].setValue(device.phone_number);
+    this.form.controls['imei'].setValue(device.imei);
+    this.form.controls['model'].setValue(device.model);
+    this.form.controls['config'].setValue(device.device_config_id);
+    this.form.controls['group'].setValue(device.device_group_id);
+  }
+
+  deleteDevice(id: string) {
     this.device
-      .edit([
-        {
-          ...device,
-          active_state: !device.active_state,
-        },
-      ])
-      .then((res: states.SingleDeviceState) => {
-        if (res.success) {
-          console.log(`Устройство ${device.name} изменено`);
-
-          this.devices.map((d) => {
-            if (d === device) {
-              d.active_state = !d.active_state;
-            }
-          });
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  getDeviceQRCode(device: Device) {
-    this.currDevice = device;
-  }
-
-  selectDeviceToEdit(device: Device) {
-    this.currDevice = device;
-    this.editDeviceForm.form.patchValue(device);
-  }
-
-  editDevice() {
-    this.device
-      .edit([
-        {
-          ...this.currDevice,
-          name: this.editDeviceForm._name,
-          description: this.editDeviceForm._description,
-          device_group_id: this.editDeviceForm._group_id,
-        },
-      ])
-      .then((res: states.SingleDeviceState) => {
-        if (res.success) {
-          console.log(`Устройство ${this.currDevice.name} изменено`);
-
-          this.devices.map((d) => {
-            if (d.device_id === this.currDevice.device_id) {
-              d.name = this.editDeviceForm._name;
-              d.description = this.editDeviceForm._description;
-              d.device_group_id = this.editDeviceForm._group_id;
-            }
-          });
-
-          // const modal =
-          //   this.elementRef.nativeElement.querySelector("#edit_device");
-          // M.Modal.getInstance(modal).close();
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  editSeveralDevices() {
-    const data: Device[] = this.devices
-      .filter((d) => this.selectedDevicesIDs.includes(d.device_id))
-      .map((d) => {
-        return {
-          ...d,
-          device_group_id: this.editSeveralDevicesForm._group,
-          active_state: this.editSeveralDevicesForm._state,
-        };
-      });
-
-    this.device
-      .edit(data)
-      .then((res: DevicesState) => {
-        if (res.success) {
-          data.forEach((el) => {
-            this.devices = this.devices.map((d) => {
-              if (d.device_id === el.device_id) {
-                return {
-                  ...d,
-                  device_group_id: el.device_group_id,
-                  active_state: el.active_state,
-                  isSelected: false,
-                };
-              } else return d;
-            });
-          });
-
-          this.selectedDevicesIDs = [];
-
-          this.editSeveralDevicesForm.resetForm();
-
-          // const modal = this.elementRef.nativeElement.querySelector(
-          //   "#edit_several_devices"
-          // );
-          // M.Modal.getInstance(modal).close();
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  selectDeviceToDelete(device: Device) {
-    this.currDevice = device;
-  }
-
-  deleteDevice(device: Device) {
-    this.device
-      .delete([device.device_id])
-      .then((res: states.SingleDeviceState) => {
-        if (res.success) {
-          console.log(`Устройство ${device.name} удалено`);
-
-          this.devices = this.devices.filter((d) => d !== device);
-          this.selectedDevicesIDs = this.selectedDevicesIDs.filter(
-            (d) => d !== device.device_id
-          );
-
-          // const modal =
-          //   this.elementRef.nativeElement.querySelector("#delete_device");
-          // M.Modal.getInstance(modal).close();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  deleteSeveralDevices() {
-    this.device
-      .delete(this.selectedDevicesIDs)
-      .then((res: states.SingleDeviceState) => {
-        if (res.success) {
-          console.log(`Устройства удалены`);
-
-          this.selectedDevicesIDs.forEach((sd) => {
-            this.devices = this.devices.filter((d) => d.device_id !== sd);
-          });
-
-          this.selectedDevicesIDs = [];
-
-          // const modal =
-          //   this.elementRef.nativeElement.querySelector("#delete_elements");
-          // M.Modal.getInstance(modal).close();
-        }
+      .removeDevice(id)
+      .then((res) => {
+        console.log(res);
+        this.getAllDevices();
       })
       .catch((err) => {
         console.log(err);

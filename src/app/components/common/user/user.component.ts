@@ -1,30 +1,27 @@
 import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 
-import {
-  assetService,
-  authService,
-  userService,
-} from "../../../shared/services";
+import { AuthService } from "../../../services/auth.service";
+import { UserService } from "../../../services/user.service";
+import { AssetService } from "../../../services/asset.service";
 
 @Component({
   selector: "app-user",
   templateUrl: "./user.component.html",
-  styleUrls: ["./user.component.scss"],
+  styleUrls: ["./user.component.css"],
 })
 export class UserComponent {
   @ViewChild("popup_btn") public btnRef!: ElementRef;
   @ViewChild("popup") public popupRef!: ElementRef;
 
-  public imgURL: string = "";
   public isPopupOpen: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
-    private auth: authService,
-    public user: userService,
+    private auth: AuthService,
+    public user: UserService,
     public router: Router,
-    public asset: assetService
+    public asset: AssetService
   ) {
     if (!this.user.token) {
       this.asset.getFromStorage("token").then((token: string) => {
@@ -37,7 +34,7 @@ export class UserComponent {
   }
 
   @HostListener("document:mousedown", ["$event"])
-  onGlobalClick(event: Event): void {
+  onGlobalClick(event): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.isPopupOpen = false;
     }
@@ -58,11 +55,12 @@ export class UserComponent {
           this.asset.removeFromStorage("name").then();
           this.asset.removeFromStorage("login").then();
         } else {
-          console.log("Ошибка выхода из системы");
+          // M.toast({ html: "Ошибка" });
         }
       })
       .catch((err) => {
-        console.log(err);
+        // M.toast({ html: err.error.error });
+        console.log(err)
       });
   }
 }

@@ -1,73 +1,62 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../../../services/auth.service";
 import { Router } from "@angular/router";
-
-import {
-  assetService,
-  authService,
-  databaseService,
-  formService,
-  userService,
-} from "../../../shared/services";
-
-import { UserState } from "../../../shared/types/states";
+import { UserService } from "../../../services/user.service";
+import { AssetService } from "../../../services/asset.service";
+import { interval } from "rxjs";
+import { DatabaseService } from "../../../services/database.service";
+import { ErrorService } from "../../../services/error.service";
 
 @Component({
   selector: "app-auth",
   templateUrl: "./auth.component.html",
-  styleUrls: ["./auth.component.scss"],
+  styleUrls: ["./auth.component.css"],
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
+  public isPasswordVisible: boolean = false;
+  public error = "";
+
   constructor(
-    private auth: authService,
+    private auth: AuthService,
     private router: Router,
-    public user: userService,
-    public asset: assetService,
-    private db: databaseService,
-    public logForm: formService.user.auth
+    public user: UserService,
+    public asset: AssetService,
+    public err: ErrorService,
+    private db: DatabaseService
   ) {}
 
-  get _form() {
-    return this.logForm.form;
+  ngOnInit(): void {}
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  get _isSubmitted() {
-    return this.logForm.isSubmitted;
-  }
-
-  get _login() {
-    return this._form.get("login");
-  }
-
-  get _pass() {
-    return this._form.get("password");
-  }
-
-  login() {
-    this.logForm.setSubmitted();
-
-    if (this._form.invalid) {
-      return;
-    } else {
-      this.auth
-        .login(this.logForm._login, this.logForm._pass)
-        .then((res: UserState) => {
+  login(login: string, password: string) {
+    this.error = "";
+    this.auth
+      .login(login, password)
+      .then(
+        (res: {
+          success: boolean;
+          error: string;
+          id: string;
+          token: string;
+        }) => {
           this.asset.setToStorage("token", res.token).then();
-          this.asset.setToStorage("login", this.logForm._login).then();
-          this.asset.setToStorage("last_password", this.logForm._pass).then();
-
+          this.asset.setToStorage("login", login).then();
+          this.asset.setToStorage("last_password", password).then();
           this.user.token = res.token;
-          this.user.login = this.logForm._login;
-          this.user.last_password = this.logForm._pass;
-
+          this.user.login = login;
+          this.user.last_password = password;
           this.db
-            .signup(this.logForm._login, this.logForm._pass)
+            .signup(login, password)
             .then((res) => {
               console.log(res, "Log In res");
             })
             .catch((err) => {
               if (err === 400) {
                 this.db
-                  .logIN(this.logForm._login, this.logForm._pass)
+                  .logIN(login, password)
                   .then((res) => {
                     console.log(res, "Log In res");
                   })
@@ -78,28 +67,25 @@ export class AuthComponent {
             });
           this.router.navigateByUrl("devices").then(() => {
             if (res.error === "change super admin password") {
-              // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
-              // let i = interval(1000).subscribe(() => {
-              //   let elem = document.querySelector(".modal");
-              //   const options = {
-              //     dismissible: false,
-              //   };
-              //   if (elem) {
-              //     i.unsubscribe();
-              //     // M.Modal.init(elem, options);
-              //     // let instance = M.Modal.getInstance(elem);
-              //     // instance.open();
-              //   }
-              // });
+              let i = interval(1000).subscribe(() => {
+                let elem = document.querySelector(".modal");
+                const options = {
+                  dismissible: false,
+                };
+                if (elem) {
+                  i.unsubscribe();
+                  // M.Modal.init(elem, options);
+                  // let instance = M.Modal.getInstance(elem);
+                  // instance.open();
+                }
+              });
             }
           });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      this.logForm.resetForm();
-      this.logForm.resetSubmitted();
-    }
+        }
+      )
+      .catch((err) => {
+        console.log(err);
+        this.error = err.error.error;
+      });
   }
 }

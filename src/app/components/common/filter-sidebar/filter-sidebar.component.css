@@ -1,35 +1,29 @@
 .sdm-only-icon span {
   height: 24px;
   width: 24px;
-
   mask-size: 24px 24px;
-  mask-image: url("../../../../assets/UI/filter.svg");
+  mask-image: url("/assets/UI/filter.svg");
   -webkit-mask-size: 24px 24px;
-  -webkit-mask-image: url("../../../../assets/UI/filter.svg");
+  -webkit-mask-image: url("/assets/UI/filter.svg");
 }
 .sidenav.filter {
   height: 100%;
   width: 400px;
-
-  padding: 30px 69px;
-
+  padding: 30px 27px;
   color: var(--sdm-dark-blue-grey);
 }
 
 .sidenav.filter .body {
   height: calc(100% - 80px);
-
   display: flex;
   flex-direction: column;
-
-  /*padding: 0 42px;*/
+  padding: 0 42px;
 }
 .sidenav.filter .body > * {
   width: 100%;
 }
 .sidenav.filter h2 {
   margin: 0;
-
   font-size: 24px;
   text-align: center;
   font-weight: 550;
@@ -40,6 +34,7 @@
 }
 
 .sidenav.filter .row.status {
+  justify-content: flex-end;
   margin-bottom: 32px !important;
 }
 
@@ -47,11 +42,8 @@
   height: 30px;
 }
 
-.sidenav.filter .row.status p:nth-child(2) {
-  margin-left: auto;
-}
-.sidenav.filter .row.status p:nth-child(3) {
-  margin-left: 9px;
+.sidenav.filter .row.status p {
+  margin-right: auto;
 }
 
 .sidenav.filter .row.status button:last-child {
@@ -68,7 +60,6 @@
 
 .sidenav.filter .date > .row {
   justify-content: flex-end;
-
   margin-bottom: 22px !important;
 }
 
@@ -76,32 +67,36 @@
   margin-left: auto !important;
 }
 
-.sidenav.filter li {
-  line-height: 30px;
+.sidenav.filter .collapsible-header {
+  padding: 0;
 }
 
-.sidenav.filter .input-field-filter:not(:last-child) {
-  margin-bottom: 30px;
+.sidenav.filter .collapsible-body {
+  padding: 0 20px;
+}
+
+.sidenav.filter .collapsible .row {
+  margin-bottom: 15px !important;
+}
+
+.sidenav.filter li {
+  line-height: 30px;
 }
 
 .accordion-arrow {
   height: 30px;
   width: 30px;
-
   margin-left: auto;
-
   mask-size: 13px 13px;
   mask-repeat: no-repeat;
   mask-position: center;
-  mask-image: url("../../../../assets/UI/arrow_down.svg");
+  mask-image: url("/assets/UI/arrow_down.svg");
   -webkit-mask-size: 13px 13px;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  -webkit-mask-image: url("../../../../assets/UI/arrow_down.svg");
-
+  -webkit-mask-image: url("/assets/UI/arrow_down.svg");
   background-color: var(--sdm-dark-blue-grey);
-
-  transition: transform .4s ease;
+  transition: transform 0.4s ease;
 }
 
 .accordion-arrow.up {
@@ -110,8 +105,9 @@
 
 .sidenav.filter .action-btns {
   margin-top: auto;
+  justify-content: center;
 }
 
 .sidenav.filter .action-btns button:last-child {
-  margin-left: auto;
+  margin-left: 20px;
 }

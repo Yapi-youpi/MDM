@@ -1,26 +1,24 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
-
-import { Users } from "../types/users";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { GroupPermissions, Users } from '../interfaces/interfaces';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserService {
-  public token = "";
-  public login = "";
-  public last_password = "";
+  public token = '';
+  public login = '';
+  public last_password = '';
   public upperCase = false;
   public lowerCase = false;
   public number = false;
   public specialChar = false;
   public passLength = 0;
-
   constructor(private http: HttpClient) {}
 
   changePassword(password: string) {
-    const url = environment.url + "/change_password";
+    const url = environment.url + '/change_password';
     const body = {
       login: this.login,
       password: password,
@@ -54,23 +52,23 @@ export class UserService {
           resolve(res);
         },
         error: (err) => {
-          if (err.error.error.includes("lowercase letter missing")) {
+          if (err.error.error.includes('lowercase letter missing')) {
             this.lowerCase = true;
           }
-          if (err.error.error.includes("uppercase letter missing")) {
+          if (err.error.error.includes('uppercase letter missing')) {
             this.upperCase = true;
           }
           if (
-            err.error.error.includes("at least one numeric character required")
+            err.error.error.includes('at least one numeric character required')
           ) {
             this.number = true;
           }
-          if (err.error.error.includes("special character missing")) {
+          if (err.error.error.includes('special character missing')) {
             this.specialChar = true;
           }
           if (
             err.error.error.includes(
-              "password length must be between 8 to 64 character"
+              'password length must be between 8 to 64 character'
             )
           ) {
             this.passLength = 8 - password.length;
@@ -81,7 +79,7 @@ export class UserService {
     });
   }
   changeUserState(id: string, state: boolean) {
-    const url = environment.url + "/change_user_state";
+    const url = environment.url + '/change_user_state';
     const body = {
       id: id,
       activeState: state,
@@ -98,7 +96,7 @@ export class UserService {
     });
   }
   deleteUser(id: string) {
-    const url = environment.url + "/delete_user";
+    const url = environment.url + '/delete_user';
     const body = {
       id,
     };
@@ -115,7 +113,7 @@ export class UserService {
   }
   getUserInfo(id: string | undefined, param: string) {
     if (!id) {
-      id = "";
+      id = '';
     }
     if (!param) {
       param = id;
@@ -134,13 +132,22 @@ export class UserService {
       });
     });
   }
-  addUser(login: string, password: string, name: string, role: string) {
-    const url = environment.url + "/register";
+  addUser(
+    avatar: string,
+    login: string,
+    password: string,
+    name: string,
+    role: string,
+    userTags: string[]
+  ) {
+    const url = environment.url + '/register';
     const body = {
       login,
       password,
       role,
       name,
+      avatar,
+      userTags,
     };
     return new Promise((resolve, reject) => {
       this.http.post(url, body).subscribe({
@@ -155,11 +162,96 @@ export class UserService {
   }
 
   renameUSer(login: string, name: string) {
-    const url = environment.url + "/rename_user";
+    const url = environment.url + '/rename_user';
     const body = {
       login,
       name,
     };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
+  loadAvatar(id: string, avatar: string) {
+    const url = environment.url + '/load_avatar';
+    const body = {
+      id,
+      avatar,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+  changeUserTag(id: string, userTags: string[]) {
+    const url = environment.url + '/edit_user_tag';
+    const body = {
+      id,
+      userTags,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
+  getUserTags() {
+    const url = environment.url + '/get_user_tags';
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
+  getPermissions() {
+    const url = environment.url + '/super/get_all_permissions';
+    return new Promise<GroupPermissions[]>((resolve, reject) => {
+      this.http.get(url).subscribe({
+        next: (
+          res:
+            | {
+                permissions: GroupPermissions[];
+                success: boolean;
+                error: string;
+              }
+            | any
+        ) => {
+          resolve(res.permissions);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
+  changePermissions(body: object) {
+    const url = environment.url + '/super/edit_permissions';
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
         next: (res) => {

@@ -11,9 +11,6 @@
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
-        },
-        "@schematics/angular:component": {
-          "style": "scss"
         }
       },
       "root": "",
@@ -33,7 +30,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css",
+              "node_modules/normalize.css/normalize.css"
+            ],
+            "scripts": [
             ]
           },
           "configurations": {
@@ -105,11 +105,6 @@
           }
         }
       }
-    }
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "style": "scss"
     }
   },
   "defaultProject": "mdm"

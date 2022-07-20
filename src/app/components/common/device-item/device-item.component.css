@@ -129,15 +129,15 @@
   justify-content: space-between;
 }
 
-.content .qr-code span {
-  mask-image: url("../../../../assets/UI/qr_code.svg");
-  -webkit-mask-image: url("../../../../assets/UI/qr_code.svg");
-}
-.content .edit span {
-  mask-image: url("../../../../assets/UI/pencil.svg");
-  -webkit-mask-image: url("../../../../assets/UI/pencil.svg");
-}
-.content .delete span {
-  mask-image: url("../../../../assets/UI/cross.svg");
-  -webkit-mask-image: url("../../../../assets/UI/cross.svg");
-}
+/*.content .qr-code span {*/
+/*  mask-image: url("../../../../assets/UI/qr_code.svg");*/
+/*  -webkit-mask-image: url("../../../../assets/UI/qr_code.svg");*/
+/*}*/
+/*.content .edit span {*/
+/*  mask-image: url("../../../../assets/UI/pencil.svg");*/
+/*  -webkit-mask-image: url("../../../../assets/UI/pencil.svg");*/
+/*}*/
+/*.content .delete span {*/
+/*  mask-image: url("../../../../assets/UI/cross.svg");*/
+/*  -webkit-mask-image: url("../../../../assets/UI/cross.svg");*/
+/*}*/

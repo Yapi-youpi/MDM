@@ -1,6 +1,69 @@
-.setting-card {
-  cursor: pointer;
+.config-wrapper {
+  height: calc(100% - 30px);
+  padding: 15px 0;
+  display: flex;
+  align-content: flex-start;
+  gap: 15px 12px;
+  flex-wrap: wrap;
+  overflow: auto;
 }
-.col.s1 {
-  margin: 0.5rem;
+.config-card {
+  min-width: 285px;
+  max-width: 385px;
+  background: white;
+  border-radius: 14px;
+  flex: 1;
+  border: 2px solid transparent;
+}
+.config-card:hover {
+  border: 2px solid #557ebe;
+}
+.config-card__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 16px;
+  background-color: var(--sdm-dark-blue);
+  color: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.config-card__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+}
+.config-card__content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 15px 28px;
+  font-size: 12px;
+  line-height: 12px;
+}
+.config-card__menu {
+  display: flex;
+  gap: 7px;
+  color: var(--sdm-dark-blue);
+}
+.config-card__menu-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: white;
+  color: inherit;
+  border-radius: 50%;
+  border: none;
+}
+.config-card__menu-btn i {
+  font-size: 18px;
+}
+.config-card__menu-btn:focus,
+.config-card__menu-btn:hover {
+  color: var(--sdm-blue);
 }
