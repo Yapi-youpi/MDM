@@ -15,7 +15,7 @@ export class EditDeviceComponent {
 
   @Output() public onSubmit = new EventEmitter();
 
-  public currentGroup!: Option;
+  public currOption!: Option;
 
   constructor(public form: EditDeviceService) {}
 
@@ -60,7 +60,7 @@ export class EditDeviceComponent {
       device_group_id: item.value,
     });
 
-    this.currentGroup = {
+    this.currOption = {
       value: item.value,
       html: item.html,
     } as Option;

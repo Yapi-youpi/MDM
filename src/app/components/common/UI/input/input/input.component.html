@@ -31,8 +31,9 @@
 <app-select
   *ngIf="type === 'select'"
   [selectWidth]="width"
-  [items]="options"
+  [options]="options"
   [currOption]="currOption"
+  [isError]="isError"
   (onSelect)="onSelectHandler($event)"
 ></app-select>
 <app-switch-input

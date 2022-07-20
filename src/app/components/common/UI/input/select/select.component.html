@@ -2,6 +2,7 @@
   class="dropdown"
   [ngClass]="selectWidth"
   [class.opened]="!isDropdownHidden"
+  [class.error]="isError"
 >
   <button
     [class.filled]="!isDropdownHidden"
@@ -13,12 +14,12 @@
     class="dropdown-content"
     [class.hidden]="isDropdownHidden"
   >
-        <li
-          *ngFor="let item of items; trackBy: identify"
-          class="item"
-          (click)="setCurrentHTML(item)"
-        >
-          <p class="text-menu-title dropdown-item">{{ item.html }}</p>
-        </li>
+    <li
+      *ngFor="let option of options; trackBy: identify"
+      class="item"
+      (click)="setCurrentHTML(option)"
+    >
+      <p class="text-menu-title dropdown-item">{{ option.html }}</p>
+    </li>
   </ul>
 </div>

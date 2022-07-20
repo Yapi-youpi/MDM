@@ -15,13 +15,13 @@ import { inputWidth, Option } from "../../../../../shared/types/input";
 })
 export class SelectComponent {
   @Input() selectWidth: inputWidth = "w-170";
-  @Input() items: Option[] = [];
+  @Input() options: Option[] = [];
   @Input() currOption!: Option;
+  @Input() isError: boolean = false;
 
   @Output() onSelect = new EventEmitter<Option>();
 
   public isDropdownHidden: boolean = true;
-  public isFilled: boolean = false;
   public copy: Option[] = [];
 
   constructor() {}

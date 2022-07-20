@@ -26,14 +26,9 @@ export class FormGroupComponent {
 
   @Input() isSwitchChecked: boolean = false;
 
-  @Output() onSwitchChange = new EventEmitter();
   @Output() onSelect = new EventEmitter<Option>();
 
   constructor() {}
-
-  onSwitchChangeHandler() {
-    this.onSwitchChange.emit();
-  }
 
   onSelectHandler(item: Option) {
     this.onSelect.emit(item);

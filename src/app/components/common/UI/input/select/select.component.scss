@@ -10,6 +10,10 @@
     border-color: var(--dark-blue);
   }
 
+  &.error {
+    border: 2px solid var(--error);
+  }
+
   button {
     height: 44.44px;
     width: calc(100% + 1px);
@@ -27,6 +31,7 @@
     text-align: left;
 
     background-color: transparent;
+    color: var(--dark-blue-grey);
 
     z-index: 2;
 

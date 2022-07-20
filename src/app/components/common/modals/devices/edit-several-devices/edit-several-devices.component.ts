@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { DevicesGroup } from "../../../../../shared/types/groups";
 
 import { EditSeveralDevicesService } from "../../../../../shared/services/forms/device/edit-several-devices.service";
+
 import { Option } from "../../../../../shared/types/input";
 
 @Component({
@@ -14,6 +15,8 @@ export class EditSeveralDevicesComponent {
   @Input() groups!: DevicesGroup[];
 
   @Output() onSubmit = new EventEmitter();
+
+  public currOption: Option = { value: "", html: "" };
 
   constructor(public form: EditSeveralDevicesService) {}
 
@@ -42,6 +45,24 @@ export class EditSeveralDevicesComponent {
     });
   }
 
+  get _currOption() {
+    return {
+      value: this._group_id?.value,
+      html: this.groups.find((g) => g.id === this._group_id?.value)?.name,
+    } as Option;
+  }
+
+  onSelectHandler(item: Option) {
+    this._form.patchValue({
+      device_group_id: item.value,
+    });
+
+    this.currOption = {
+      value: item.value,
+      html: item.html,
+    } as Option;
+  }
+
   onSubmitHandler() {
     this.form.setSubmitted();
 
@@ -55,6 +76,11 @@ export class EditSeveralDevicesComponent {
   onCancelHandler() {
     this.form.resetSubmitted();
     this.form.resetForm();
+
+    this._form.patchValue({
+      device_group_id: "",
+    });
+    this.currOption = { value: "", html: "" };
 
     const modal = document.querySelector("#edit_several_devices");
     modal?.classList.toggle("hidden");

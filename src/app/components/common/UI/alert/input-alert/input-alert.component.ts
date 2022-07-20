@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { AbstractControl, FormControl } from "@angular/forms";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-input-alert",
@@ -9,6 +9,7 @@ import { AbstractControl, FormControl } from "@angular/forms";
 export class InputAlertComponent {
   @Input() control: FormControl = new FormControl(null);
   @Input() type: "success" | "error" = "error";
+  @Input() message!: string;
 
   constructor() {}
 }

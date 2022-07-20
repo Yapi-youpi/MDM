@@ -26,4 +26,6 @@
   <ng-container *ngIf="control.invalid" class="alert error">
     {{ control.errors?.['invalid'] }}
   </ng-container>
+
+  <ng-container *ngIf="message">{{ message }}</ng-container>
 </span>

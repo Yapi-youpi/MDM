@@ -44,22 +44,14 @@
         <hr class="divider">
         <div class="form-group-wrapper">
           <app-form-group
-            [control]="$any(_group_id)"
             [labelText]="'Группа'"
-            [name]="'device_group_id'"
             [inputType]="'select'"
             [inputWidth]="'w-440'"
             [options]="_options"
-            [currOption]="!currentGroup ? _currOption : currentGroup"
-            [isError]="_isSubmitted && !!_group_id?.errors"
+            [currOption]="!currOption ? _currOption : currOption"
             (onSelect)="onSelectHandler($event)"
           >
           </app-form-group>
-          <app-input-alert
-            *ngIf="_isSubmitted && _group_id?.errors"
-            [control]="$any(_group_id)"
-            [type]="'error'"
-          ></app-input-alert>
         </div>
       </form>
     </div>

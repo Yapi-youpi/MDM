@@ -23,8 +23,6 @@ export class InputComponent {
   @Input() currOption!: Option;
   @Input() isMultiselect: boolean = false;
 
-  @Input() isSwitchChecked: boolean = false;
-
   @Output() onSelect = new EventEmitter<Option>();
 
   public isPasswordVisible: boolean = false;
