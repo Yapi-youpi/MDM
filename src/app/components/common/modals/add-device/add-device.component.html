@@ -1,0 +1,95 @@
+<div id="add_device" class="modal closing">
+  <div class="modal-content">
+    <h4 class="title">Добавить устройство</h4>
+    <div class="divider"></div>
+    <form
+      [formGroup]="_form"
+      (ngSubmit)="onSubmitHandler()"
+    >
+      <div>
+        <div
+          class="form-group"
+          [class.error]="_isSubmitted && _name?.errors"
+        >
+          <div class="row">
+            <label for="add_name">Название</label>
+            <input
+              formControlName="name"
+              id="add_name"
+              name="add_name"
+              type="text"
+              class="w-440"
+            />
+          </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _name?.errors"
+            [control]="$any(_name)"
+          ></app-input-alert>
+        </div>
+        <div
+          class="form-group"
+          [class.error]="_isSubmitted && _description?.errors"
+        >
+          <div class="row">
+            <label for="add_desc">Описание</label>
+            <input
+              formControlName="description"
+              id="add_desc"
+              name="add_desc"
+              type="text"
+              class="w-440"
+            />
+          </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _description?.errors"
+            [control]="$any(_description)"
+          ></app-input-alert>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div
+          class="form-group"
+          [class.error]="_isSubmitted && _group?.errors"
+        >
+          <div class="row">
+            <label for="add_group">Группа</label>
+            <div class="input-field-modal sdm-blue-select w-440">
+              <select
+                formControlName="device_group_id"
+                id="add_group"
+                name="add_group"
+                class="config-select-modal"
+              >
+                <ng-container *ngFor="let group of groups">
+                  <option [value]="group.id">
+                    {{ group.name }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <app-input-alert
+            *ngIf="_isSubmitted && _group?.errors"
+            [control]="$any(_group)"
+          ></app-input-alert>
+        </div>
+      </div>
+      <div class="row action-btns">
+        <button
+          type="submit"
+          class="sdm-middle sdm-dark-blue r-14"
+        >
+          Добавить
+        </button>
+        <button
+          type="button"
+          class="modal-close sdm-middle r-14"
+          (click)="onCancelHandler()"
+        >
+          Отменить
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

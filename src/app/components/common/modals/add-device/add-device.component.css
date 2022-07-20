@@ -1,0 +1,24 @@
+#add_device {
+  width: 700px;
+
+  top: calc((100vh - 430px) / 2) !important;
+
+  overflow: initial;
+}
+
+#add_device .input-field-modal {
+  margin-left: auto;
+}
+
+#add_device .input-field-modal,
+#add_device .input-field-modal .select-wrapper input.select-dropdown {
+  height: 45px;
+}
+
+#add_device .action-btns {
+  padding-left: 144px;
+}
+
+#add_device .action-btns > *:first-child {
+  margin-right: 66px;
+}

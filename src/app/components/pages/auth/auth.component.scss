@@ -1,0 +1,47 @@
+.auth {
+  width: 754px;
+
+  margin: 0 auto;
+  padding: 40px 174px 48px 100px;
+
+  .divider {
+    width: 350px;
+
+    margin-left: auto;
+  }
+
+  .header {
+    margin-bottom: 11px;
+  }
+
+  .body {
+    margin-top: 40px;
+
+    .form-group-wrapper {
+      position: relative;
+    }
+
+    .form-group-wrapper:not(:last-child) {
+      margin-bottom: 30.56px;
+    }
+  }
+
+  .footer {
+    width: 350px;
+
+    margin-left: auto;
+
+    .row {
+      margin-top: 31px;
+
+      .remember {
+        display: flex;
+        align-items: center;
+
+        p {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}
