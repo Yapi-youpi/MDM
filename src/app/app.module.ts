@@ -26,13 +26,13 @@ import { EditDeviceComponent } from './components/common/modals/edit-device/edit
 import { DeviceItemComponent } from './components/common/device-item/device-item.component';
 import { GlobalContainerComponent } from './components/common/global-container/global-container.component';
 import { FilterSidebarComponent } from './components/common/filter-sidebar/filter-sidebar.component';
+import { SearchInputComponent } from './components/common/UI/search-input/search-input.component';
 import { GlobalHeaderComponent } from './components/common/global-header/global-header.component';
 import { SearchUsersPipe } from './services/search-users.pipe';
 import { FilterUsersPipe } from './services/filter-users.pipe';
 import { UserPermissionsComponent } from './components/pages/user-permissions/user-permissions.component';
 import { ConfigurationComponent } from './components/pages/configuration/configuration.component';
 import { ConfigSearchPipe } from './services/config-search.pipe';
-import { SearchInputComponent } from './components/common/UI/input/search-input/search-input.component';
 
 const routes: Routes = [
   {

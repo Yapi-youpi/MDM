@@ -2,12 +2,12 @@ import { Component, ElementRef, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 
-import { Device } from '../../../shared/types/devices';
-import { DevicesConfig, Groups } from '../../../shared/types/config';
-import { UserService } from '../../../shared/services/user.service';
-import { DevicesService } from '../../../shared/services/devices.service';
-import { GroupsService } from '../../../shared/services/groups.service';
-import { DevicesConfigService } from '../../../shared/services/devices-config.service';
+import { UserService } from '../../../services/user.service';
+import { DevicesService } from '../../../services/devices.service';
+import { Device, DevicesConfig, Groups } from '../../../interfaces/interfaces';
+import { GroupsService } from '../../../services/groups.service';
+import { DevicesConfigService } from '../../../services/devices-config.service';
+// import { DatabaseService } from "../../../services/database.service";
 
 @Component({
   selector: 'app-devices',
