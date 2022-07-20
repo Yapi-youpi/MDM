@@ -166,7 +166,7 @@
         </div>
         <div class="form__item">
           <label>Роль</label>
-          <div class="tags-container">
+          <div class="tags-container w-296">
             <label class="custom-radio">
               <input
                 class="visually-hidden"
@@ -190,7 +190,7 @@
         </div>
         <div class="form__item">
           <label>Подразделение</label>
-          <select class="select-native" formControlName="userTags">
+          <select class="select-native w-296" formControlName="userTags">
             <option value="{{ tag }}" *ngFor="let tag of userTags">
               {{ tag }}
             </option>

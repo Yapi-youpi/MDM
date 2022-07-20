@@ -112,25 +112,7 @@
 .users-form {
   padding: 0 30px;
 }
-.tags-container {
-  width: 296px;
-  display: flex;
-  gap: 14px;
-}
-.custom-radio {
-}
-.custom-radio__span {
-  padding: 4px 14px;
-  border: 1px solid var(--sdm-dark-blue);
-  border-radius: 14px;
-  font-size: 12px;
-  line-height: 12px;
-  color: var(--sdm-dark-blue);
-}
-.custom-radio input:checked + .custom-radio__span {
-  color: white;
-  background: var(--sdm-dark-blue);
-}
+
 .avatar-wrapper {
   display: flex;
   align-items: center;
