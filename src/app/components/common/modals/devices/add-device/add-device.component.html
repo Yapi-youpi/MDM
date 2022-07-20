@@ -44,19 +44,19 @@
         <hr class="divider">
         <div class="form-group-wrapper">
           <app-form-group
-            [control]="$any(_group_id)"
             [labelText]="'Группа'"
-            [name]="'device_group_id'"
             [inputType]="'select'"
             [inputWidth]="'w-440'"
             [options]="_options"
-            [isError]="_isSubmitted && !!_group_id?.errors"
+            [currOption]="currOption.value === '' ? _currOption : currOption"
+            [isError]="_isSubmitted && currOption.value === ''"
+            (onSelect)="onSelectHandler($event)"
           >
           </app-form-group>
           <app-input-alert
-            *ngIf="_isSubmitted && _group_id?.errors"
-            [control]="$any(_group_id)"
+            *ngIf="_isSubmitted && currOption.value === ''"
             [type]="'error'"
+            [message]="'Данное поле должно быть заполнено'"
           ></app-input-alert>
         </div>
       </form>

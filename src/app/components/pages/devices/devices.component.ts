@@ -176,8 +176,11 @@ export class DevicesComponent implements OnInit {
           this.currDevice = res.device;
           this.devices = [res.device, ...this.devices];
 
-          const modal = document.querySelector("#qr_code");
-          modal?.classList.toggle("hidden");
+          const modalAdd = document.querySelector("#add_device");
+          modalAdd?.classList.toggle("hidden");
+
+          const modalQR = document.querySelector("#qr_code");
+          modalQR?.classList.toggle("hidden");
         } else {
           console.log(res.error);
         }

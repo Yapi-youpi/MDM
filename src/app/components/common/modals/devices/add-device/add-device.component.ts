@@ -14,6 +14,8 @@ export class AddDeviceComponent {
 
   @Output() public onSubmit = new EventEmitter();
 
+  public currOption: Option = { value: "", html: "" };
+
   constructor(public form: AddDeviceService) {}
 
   get _form() {
@@ -45,9 +47,19 @@ export class AddDeviceComponent {
     });
   }
 
-  closeModal() {
-    const modal = document.querySelector("#add_device");
-    modal?.classList.toggle("hidden");
+  get _currOption() {
+    return {
+      value: this._group_id?.value,
+      html: this.groups.find((g) => g.id === this._group_id?.value)?.name,
+    } as Option;
+  }
+
+  onSelectHandler(item: Option) {
+    this._form.patchValue({
+      device_group_id: item.value,
+    });
+
+    this.currOption = item;
   }
 
   onSubmitHandler() {
@@ -57,14 +69,18 @@ export class AddDeviceComponent {
       return;
     } else {
       this.onSubmit.emit();
-
-      this.closeModal();
     }
   }
   onCancelHandler() {
     this.form.resetFormSubmitted();
     this.form.resetForm();
 
-    this.closeModal();
+    this._form.patchValue({
+      device_group_id: "",
+    });
+    this.currOption = { value: "", html: "" };
+
+    const modal = document.querySelector("#add_device");
+    modal?.classList.toggle("hidden");
   }
 }

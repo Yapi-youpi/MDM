@@ -57,10 +57,7 @@ export class EditSeveralDevicesComponent {
       device_group_id: item.value,
     });
 
-    this.currOption = {
-      value: item.value,
-      html: item.html,
-    } as Option;
+    this.currOption = item;
   }
 
   onSubmitHandler() {
