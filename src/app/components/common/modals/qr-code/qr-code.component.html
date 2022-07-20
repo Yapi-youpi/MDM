@@ -1,18 +1,36 @@
-<div id="qr-code" class="modal closing">
+<div
+  id="qr-code"
+  class="modal closing"
+  [style]="isTipHidden ? 'width: 592px' : 'width: 950px'"
+>
   <div class="modal-content">
-    <h4 class="title">Устройство "{{ title }}"</h4>
+    <h4 class="title">Устройство "{{ device?.name }}"</h4>
     <div class="divider"></div>
-    <ngx-qrcode
-      [elementType]="elementType"
-      [errorCorrectionLevel]="correctionLevel"
-      [value]="valueQR"
-      [width]="438"
-      class="qr-container"
-    ></ngx-qrcode>
+    <div class="qr-container">
+      <ngx-qrcode
+        class="qr-code"
+        [elementType]="elementType"
+        [errorCorrectionLevel]="correctionLevel"
+        [value]="_qrcode"
+        [width]="420"
+      ></ngx-qrcode>
+      <app-qr-tip *ngIf="!isTipHidden"></app-qr-tip>
+    </div>
     <div class="row action-btns">
-      <button class="r-14">Обновить код</button>
-      <button class="r-14">Получить JSON</button>
-      <button class="r-14">Помощь</button>
+      <button
+        type="button"
+        class="modal-close sdm-middle r-14"
+        (click)="onCloseClickHandler()"
+      >
+        Закрыть
+      </button>
+      <button
+        type="button"
+        class="sdm-middle sdm-dark-blue r-14"
+        (click)="onHelpClickHandler()"
+      >
+        Помощь
+      </button>
     </div>
   </div>
 </div>

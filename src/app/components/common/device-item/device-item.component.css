@@ -20,13 +20,13 @@
 }
 /* Статус */
 .item .content > *:nth-child(1) {
-  width: 38px;
+  width: 33px;
 
   margin-right: 5px;
 }
 /* Дата вкл. */
 .item .content > *:nth-child(2) {
-  width: 80px;
+  width: 85px;
 
   margin-right: 5px;
 }
@@ -60,21 +60,21 @@
 
   margin-right: 5px;
 }
-/* Конфигурация */
-.item .content > *:nth-child(8) {
-  width: 120px;
-}
-/* Обновление */
-.item .content > *:nth-child(9) {
-  width: 75px;
-
-  margin-right: 10px;
-}
 /* Группа */
-.item .content > *:nth-child(10) {
+.item .content > *:nth-child(8) {
   width: 100px;
 
   margin-right: 5px;
+}
+/* Конфигурация */
+.item .content > *:nth-child(9) {
+  width: 120px;
+}
+/* Обновление */
+.item .content > *:nth-child(10) {
+  width: 75px;
+
+  margin-right: 10px;
 }
 /* Заряд */
 .item .content > *:nth-child(11) {

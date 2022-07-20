@@ -5,7 +5,7 @@
         type="checkbox"
         class="filled-in item-checkbox"
         [checked]="device.isSelected"
-        (change)="selectUnselectDevice(device)"
+        (change)="onSelectUnselectDeviceHandler(device)"
       />
       <span></span>
     </label>
@@ -14,55 +14,53 @@
     <div class="status-container">
       <span
         class="r-round"
-        [class.active]="device.active_state"
-        [class.disabled]="!device.active_state"
+        [class.active]="device.online_state"
+        [class.disabled]="!device.online_state"
       ></span>
     </div>
-    <p class="font-regular-color">14 сент, 14:20</p>
+    <p class="font-regular-color">{{ device.updatedAt | dateConverter }}</p>
     <p class="font-bold font-bold-color">{{ device.name }}</p>
     <p class="font-middle font-regular-color">{{ device.description }}</p>
     <p class="font-regular-color">{{ device.phone_number }}</p>
-<!--                        <p class="font-regular-color">012345678912345</p>-->
-<!--                        <p class="font-regular-color">Meizu 10</p>-->
-    <p class="font-regular-color">{{ device.imei }}</p>
-    <p class="font-regular-color">{{ device.model }}</p>
-    <div class="input-field sdm-light-select">
-      <select class="config-select" (change)="changeDeviceConfig(device, $event)">
-        <option value="0" selected>По умолчанию</option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-      </select>
-    </div>
+<!--    <p class="font-regular-color">{{ device.imei }}</p>-->
+<!--    <p class="font-regular-color">{{ device.model }}</p>-->
+    <p class="font-regular-color">123456789012345</p>
+    <p class="font-regular-color">Model</p>
+    <p class="font-bold-color">{{ device.device_group_id | groupConverter: groups }}</p>
+    <p class="font-regular-color">{{ device.device_config_id | configConverter: configs }}</p>
     <div class="status-container update small">
       <span class="r-round active"></span>
     </div>
-    <p class="font-bold-color">Санкт-Петербург</p>
     <p class="font-regular-color">{{ device.battery_percent }}%</p>
     <div class="switch">
       <label>
-        <input type="checkbox" [checked]="device.active_state" />
+        <input
+          type="checkbox"
+          [checked]="device.active_state"
+          (change)="onChangeDeviceStateHandler(device)"
+        />
         <span class="lever"></span>
       </label>
     </div>
     <div class="btns">
       <button
         class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round qr-code"
-        (click)="getDeviceQRCode(device.name, device.qr_code)"
+        (click)="onClickDeviceQRCodeHandler(device)"
         data-target="qr-code"
       >
         <span></span>
       </button>
       <button
         class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round edit"
-        (click)="editDevice(device)"
+        (click)="onClickDeviceEditHandler(device)"
         data-target="edit_device"
       >
         <span></span>
       </button>
       <button
         class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round delete"
-        (click)="deleteDevice(device.device_id)"
+        (click)="onClickDeviceDeleteHandler(device)"
+        data-target="delete_device"
       >
         <span></span>
       </button>
