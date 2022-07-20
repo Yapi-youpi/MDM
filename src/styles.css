@@ -124,6 +124,7 @@ legend {
 .card__header {
   height: 48px;
   width: 100%;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -283,6 +284,9 @@ input:focus:invalid {
 }
 input:focus:valid {
   outline: 2px solid var(--sdm-dark-blue);
+}
+input[type="range"]:focus {
+  outline: none;
 }
 .w-500 {
   width: 500px;

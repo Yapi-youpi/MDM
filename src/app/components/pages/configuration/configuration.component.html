@@ -7,517 +7,577 @@
   <main class="global-main card-wrapper">
     <div class="card card--sidebar">
       <div class="card__header">Настройки</div>
+      <div class="tabs-wrapper" (click)="setActive($event)">
+        <div class="tab tab--active">Общие</div>
+        <div class="tab">Использование функций</div>
+        <div class="tab">Дизайн</div>
+        <div class="tab">Приложения</div>
+        <div class="tab">Управление</div>
+      </div>
       <div class="btn-wrapper">
-        <button (click)="goBack()">Назад в конфигурации</button>
+        <button class="btn btn--big" (click)="goBack()">
+          Назад в конфигурации
+        </button>
       </div>
     </div>
+
+    <ng-template #loader>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </ng-template>
+
     <div class="card">
-      <div class="card__header">Все настройки</div>
-      <ng-template #loader>
-        <div class="progress">
-          <div class="indeterminate"></div>
-        </div>
-      </ng-template>
-      <form
-        [formGroup]="configForm"
-        class="form config-settings"
-        *ngIf="config; else loader"
-      >
+      <form [formGroup]="configForm" *ngIf="config; else loader">
         <!--        ОБЩИЕ           -->
-        <div class="font-bold">Общие</div>
-        <div class="form__item">
-          <label for="name">Название</label>
-          <input
-            formControlName="name"
-            type="text"
-            id="name"
-            class="w-500"
-            required
-          />
-        </div>
-        <div class="form__item">
-          <label for="description">Описание</label>
-          <input
-            formControlName="description"
-            type="text"
-            id="description"
-            class="w-500"
-            required
-          />
-        </div>
-        <div class="form__item">
-          <label for="keepaliveTime">Время Keep-Alive</label>
-          <input
-            type="range"
-            min="1"
-            max="15"
-            formControlName="keepaliveTime"
-            id="keepaliveTime"
-            class="w-500"
-          />
-        </div>
-        <div class="form__item">
-          <label>Обновление системы</label>
-          <div class="tags-container w-500">
-            <label class="custom-radio">
+        <div class="form__tab">
+          <div class="card__header">Общие</div>
+          <div class="config-settings form__elems">
+            <div class="form__item">
+              <label for="name">Название</label>
               <input
-                class="visually-hidden"
-                formControlName="systemUpdateType"
-                type="radio"
-                [value]="2"
+                formControlName="name"
+                type="text"
+                id="name"
+                class="w-500"
+                required
               />
-              <span class="custom-radio__span">по расписанию</span>
-            </label>
-            <label class="custom-radio">
+            </div>
+            <div class="form__item">
+              <label for="description">Описание</label>
               <input
-                class="visually-hidden"
-                formControlName="systemUpdateType"
-                type="radio"
-                [value]="3"
+                formControlName="description"
+                type="text"
+                id="description"
+                class="w-500"
+                required
               />
-              <span class="custom-radio__span">по запросу</span>
-            </label>
+            </div>
+            <div class="form__item">
+              <label for="keepaliveTime">Время Keep-Alive</label>
+              <input
+                type="range"
+                style="--min: 1; --max: 15; --val: 15"
+                min="1"
+                max="15"
+                formControlName="keepaliveTime"
+                id="keepaliveTime"
+                class="w-500"
+              />
+            </div>
+            <div class="form__item">
+              <label>Обновление системы</label>
+              <div class="tags-container w-500">
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="systemUpdateType"
+                    type="radio"
+                    [value]="2"
+                  />
+                  <span class="custom-radio__span">по расписанию</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="systemUpdateType"
+                    type="radio"
+                    [value]="3"
+                  />
+                  <span class="custom-radio__span">по запросу</span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <!--        Использование функций           -->
-        <div class="font-bold">Использование функций</div>
-        <div class="form__item settings-card-wrapper">
-          <div class="settings-card">
-            <div class="settings-card__content">
-              <div
-                class="settings-card__img settings-card__img--location"
-              ></div>
-              <div class="settings-card__text">
-                <div class="settings-card__title">GPS</div>
-                <div class="settings-card__description">
-                  Определение местоположения
+        <div class="form__tab" style="display: none">
+          <div class="card__header">Использование функций</div>
+          <div class="config-settings form__elems">
+            <div class="form__item settings-card-wrapper">
+              <div class="settings-card">
+                <div class="settings-card__content">
+                  <div
+                    class="settings-card__img settings-card__img--location"
+                  ></div>
+                  <div class="settings-card__text">
+                    <div class="settings-card__title">GPS</div>
+                    <div class="settings-card__description">
+                      Определение местоположения
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-card__btns">
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="GPS"
+                      type="radio"
+                      [value]="null"
+                    />
+                    <span class="custom-radio__span">разрешено</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="GPS"
+                      type="radio"
+                      [value]="true"
+                    />
+                    <span class="custom-radio__span">вкл</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="GPS"
+                      type="radio"
+                      [value]="false"
+                    />
+                    <span class="custom-radio__span">выкл</span>
+                  </label>
+                </div>
+              </div>
+              <div class="settings-card">
+                <div class="settings-card__content">
+                  <div
+                    class="settings-card__img settings-card__img--bluetooth"
+                  ></div>
+                  <div class="settings-card__text">
+                    <div class="settings-card__title">Bluetooth</div>
+                    <div class="settings-card__description">
+                      Передача файлов
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-card__btns">
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="bluetooth"
+                      type="radio"
+                      [value]="null"
+                    />
+                    <span class="custom-radio__span">разрешено</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="bluetooth"
+                      type="radio"
+                      [value]="true"
+                    />
+                    <span class="custom-radio__span">вкл</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="bluetooth"
+                      type="radio"
+                      [value]="false"
+                    />
+                    <span class="custom-radio__span">выкл</span>
+                  </label>
+                </div>
+              </div>
+              <div class="settings-card">
+                <div class="settings-card__content">
+                  <div
+                    class="settings-card__img settings-card__img--wifi"
+                  ></div>
+                  <div class="settings-card__text">
+                    <div class="settings-card__title">WI-FI</div>
+                    <div class="settings-card__description">
+                      Подключение к сети
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-card__btns">
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="wifi"
+                      type="radio"
+                      [value]="null"
+                    />
+                    <span class="custom-radio__span">разрешено</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="wifi"
+                      type="radio"
+                      [value]="true"
+                    />
+                    <span class="custom-radio__span">вкл</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="wifi"
+                      type="radio"
+                      [value]="false"
+                    />
+                    <span class="custom-radio__span">выкл</span>
+                  </label>
+                </div>
+              </div>
+              <div class="settings-card">
+                <div class="settings-card__content">
+                  <div
+                    class="settings-card__img settings-card__img--network"
+                  ></div>
+                  <div class="settings-card__text">
+                    <div class="settings-card__title">Интернет</div>
+                    <div class="settings-card__description">Мобильная сеть</div>
+                  </div>
+                </div>
+                <div class="settings-card__btns">
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="mobileData"
+                      type="radio"
+                      [value]="null"
+                    />
+                    <span class="custom-radio__span">разрешено</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="mobileData"
+                      type="radio"
+                      [value]="true"
+                    />
+                    <span class="custom-radio__span">вкл</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="mobileData"
+                      type="radio"
+                      [value]="false"
+                    />
+                    <span class="custom-radio__span">выкл</span>
+                  </label>
                 </div>
               </div>
             </div>
-            <div class="settings-card__btns">
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="GPS"
-                  type="radio"
-                  [value]="null"
-                />
-                <span class="custom-radio__span">разрешено</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="GPS"
-                  type="radio"
-                  [value]="true"
-                />
-                <span class="custom-radio__span">вкл</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="GPS"
-                  type="radio"
-                  [value]="false"
-                />
-                <span class="custom-radio__span">выкл</span>
-              </label>
-            </div>
-          </div>
-          <div class="settings-card">
-            <div class="settings-card__content">
-              <div
-                class="settings-card__img settings-card__img--bluetooth"
-              ></div>
-              <div class="settings-card__text">
-                <div class="settings-card__title">Bluetooth</div>
-                <div class="settings-card__description">Передача файлов</div>
+            <div class="two-columns">
+              <div class="form__elems">
+                <div class="font-bold">Громкость:</div>
+                <div class="form__item">
+                  <label class="switch">
+                    Блокировка громкости
+                    <input
+                      formControlName="lockVolume"
+                      id="lockVolume"
+                      type="checkbox"
+                    />
+                    <span aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div class="form__item">
+                  <label class="switch">
+                    Управление громкостью
+                    <input
+                      formControlName="manageVolume"
+                      id="manageVolume"
+                      type="checkbox"
+                    />
+                    <span aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div class="form__item">
+                  <label for="volume">Громкость</label>
+                  <input
+                    type="range"
+                    style="--min: 0; --max: 100; --val: 90"
+                    min="0"
+                    max="100"
+                    formControlName="volume"
+                    id="volume"
+                    class="w-500"
+                  />
+                </div>
+              </div>
+              <div class="form__elems">
+                <div class="font-bold">Экран:</div>
+                <div class="form__item">
+                  <label class="switch">
+                    Разрешить скриншоты
+                    <input
+                      formControlName="disableScreenshots"
+                      id="disableScreenshots"
+                      type="checkbox"
+                    />
+                    <span aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div class="form__item">
+                  <label class="switch">
+                    Управление таймаутом экрана
+                    <input
+                      formControlName="manageTimeout"
+                      id="manageTimeout"
+                      type="checkbox"
+                    />
+                    <span aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div class="form__item">
+                  <label for="timeout">Таймаут</label>
+                  <input
+                    type="range"
+                    style="--min: 15; --max: 1800; --val: 500"
+                    min="15"
+                    max="1800"
+                    formControlName="timeout"
+                    id="timeout"
+                    class="w-500"
+                  />
+                </div>
               </div>
             </div>
-            <div class="settings-card__btns">
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="bluetooth"
-                  type="radio"
-                  [value]="null"
-                />
-                <span class="custom-radio__span">разрешено</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="bluetooth"
-                  type="radio"
-                  [value]="true"
-                />
-                <span class="custom-radio__span">вкл</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="bluetooth"
-                  type="radio"
-                  [value]="false"
-                />
-                <span class="custom-radio__span">выкл</span>
-              </label>
-            </div>
           </div>
-          <div class="settings-card">
-            <div class="settings-card__content">
-              <div class="settings-card__img settings-card__img--wifi"></div>
-              <div class="settings-card__text">
-                <div class="settings-card__title">WI-FI</div>
-                <div class="settings-card__description">Подключение к сети</div>
-              </div>
-            </div>
-            <div class="settings-card__btns">
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="wifi"
-                  type="radio"
-                  [value]="null"
-                />
-                <span class="custom-radio__span">разрешено</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="wifi"
-                  type="radio"
-                  [value]="true"
-                />
-                <span class="custom-radio__span">вкл</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="wifi"
-                  type="radio"
-                  [value]="false"
-                />
-                <span class="custom-radio__span">выкл</span>
-              </label>
-            </div>
-          </div>
-          <div class="settings-card">
-            <div class="settings-card__content">
-              <div class="settings-card__img settings-card__img--network"></div>
-              <div class="settings-card__text">
-                <div class="settings-card__title">Интернет</div>
-                <div class="settings-card__description">Мобильная сеть</div>
-              </div>
-            </div>
-            <div class="settings-card__btns">
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="mobileData"
-                  type="radio"
-                  [value]="null"
-                />
-                <span class="custom-radio__span">разрешено</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="mobileData"
-                  type="radio"
-                  [value]="true"
-                />
-                <span class="custom-radio__span">вкл</span>
-              </label>
-              <label class="custom-radio">
-                <input
-                  class="visually-hidden"
-                  formControlName="mobileData"
-                  type="radio"
-                  [value]="false"
-                />
-                <span class="custom-radio__span">выкл</span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="">Громкость:</div>
-        <div class="form__item">
-          <label class="switch">
-            Блокировка громкости
-            <input
-              formControlName="lockVolume"
-              id="lockVolume"
-              type="checkbox"
-            />
-            <span aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="form__item">
-          <label class="switch">
-            Управление громкостью
-            <input
-              formControlName="manageVolume"
-              id="manageVolume"
-              type="checkbox"
-            />
-            <span aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="form__item">
-          <label for="volume">Громкость</label>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            formControlName="volume"
-            id="volume"
-            class="w-500"
-          />
-        </div>
-        <div class="">Экран:</div>
-        <div class="form__item">
-          <label class="switch">
-            Разрешить скриншоты
-            <input
-              formControlName="disableScreenshots"
-              id="disableScreenshots"
-              type="checkbox"
-            />
-            <span aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="form__item">
-          <label class="switch">
-            Управление таймаутом экрана
-            <input
-              formControlName="manageTimeout"
-              id="manageTimeout"
-              type="checkbox"
-            />
-            <span aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="form__item">
-          <label for="timeout">Таймаут</label>
-          <input
-            type="range"
-            min="15"
-            max="1800"
-            formControlName="timeout"
-            id="timeout"
-            class="w-500"
-          />
         </div>
         <!--        Дизайн           -->
-        <div class="font-bold">Дизайн</div>
-        <div class="form__item">
-          <label class="switch">
-            Использовать дизайн по умолчанию
-            <input
-              formControlName="useDefaultDesignSettings"
-              id="useDefaultDesignSettings"
-              type="checkbox"
-            />
-            <span aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="form__item">
-          <label for="desktopHeader">Заголовок рабочего стола</label>
-          <input
-            formControlName="desktopHeader"
-            type="text"
-            id="desktopHeader"
-            class="w-500"
-            value="Название устройства"
-          />
-        </div>
-        <div class="">Цвет</div>
-        <div class="form__item">
-          <label for="backgroundColor">Фон</label>
-          <input
-            type="color"
-            formControlName="backgroundColor"
-            id="backgroundColor"
-          />
-        </div>
-        <div class="form__item">
-          <label for="textColor">Надписи</label>
-          <input type="color" formControlName="textColor" id="textColor" />
-        </div>
-        <div class="">Размер значков</div>
-        <div class="form__item">
-          <div class="tags-container">
-            <label class="custom-radio">
+        <div class="form__tab" style="display: none">
+          <div class="card__header">Дизайн</div>
+          <div class="config-settings form__elems">
+            <div class="form__item">
+              <label class="switch">
+                Использовать дизайн по умолчанию
+                <input
+                  formControlName="useDefaultDesignSettings"
+                  id="useDefaultDesignSettings"
+                  type="checkbox"
+                />
+                <span aria-hidden="true"></span>
+              </label>
+            </div>
+            <div class="form__item">
+              <label for="desktopHeader">Заголовок рабочего стола</label>
               <input
-                class="visually-hidden"
-                formControlName="iconSize"
-                type="radio"
-                [value]="'SMALL'"
+                formControlName="desktopHeader"
+                type="text"
+                id="desktopHeader"
+                class="w-500"
+                value="Название устройства"
               />
-              <span class="custom-radio__span">Маленькие</span>
-            </label>
-            <label class="custom-radio">
+            </div>
+            <div class="font-bold">Цвет</div>
+            <div class="form__item">
+              <label for="backgroundColor">Фон</label>
               <input
-                class="visually-hidden"
-                formControlName="iconSize"
-                type="radio"
-                [value]="'MEDIUM'"
+                type="color"
+                formControlName="backgroundColor"
+                id="backgroundColor"
               />
-              <span class="custom-radio__span">Средние + 20%</span>
-            </label>
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="iconSize"
-                type="radio"
-                [value]="'LARGE'"
-              />
-              <span class="custom-radio__span">Большие + 40%</span>
-            </label>
+            </div>
+            <div class="form__item">
+              <label for="textColor">Надписи</label>
+              <input type="color" formControlName="textColor" id="textColor" />
+            </div>
+            <div class="font-bold">Размер значков</div>
+            <div class="form__item">
+              <div class="tags-container">
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="iconSize"
+                    type="radio"
+                    [value]="'SMALL'"
+                  />
+                  <span class="custom-radio__span">Маленькие</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="iconSize"
+                    type="radio"
+                    [value]="'MEDIUM'"
+                  />
+                  <span class="custom-radio__span">Средние + 20%</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="iconSize"
+                    type="radio"
+                    [value]="'LARGE'"
+                  />
+                  <span class="custom-radio__span">Большие + 40%</span>
+                </label>
+              </div>
+            </div>
+            <div class="font-bold">Ориентация</div>
+            <div class="form__item">
+              <div class="tags-container">
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="orientation"
+                    type="radio"
+                    [value]="0"
+                  />
+                  <span class="custom-radio__span">Поворот</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="orientation"
+                    type="radio"
+                    [value]="1"
+                  />
+                  <span class="custom-radio__span">Вертикально</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="orientation"
+                    type="radio"
+                    [value]="2"
+                  />
+                  <span class="custom-radio__span">Горизонтально</span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="">Цвет</div>
-        <div class="form__item">
-          <div class="tags-container">
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="orientation"
-                type="radio"
-                [value]="0"
-              />
-              <span class="custom-radio__span">Поворот</span>
-            </label>
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="orientation"
-                type="radio"
-                [value]="1"
-              />
-              <span class="custom-radio__span">Вертикально</span>
-            </label>
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="orientation"
-                type="radio"
-                [value]="2"
-              />
-              <span class="custom-radio__span">Горизонтально</span>
-            </label>
-          </div>
+        <!--        Приложения           -->
+        <div class="form__tab" style="display: none">
+          <div class="card__header">Приложения</div>
+          <div class="config-settings form__elems"></div>
         </div>
         <!--        Управление           -->
-        <div class="font-bold">Управление</div>
-        <div class="form__item">
-          <label class="switch">
-            Безопасные настройки
-            <input
-              formControlName="lockSafeSettings"
-              id="lockSafeSettings"
-              type="checkbox"
-            />
-            <span aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="form__item">
-          <label class="switch">
-            Режим киоска
-            <input formControlName="kioskMode" id="kioskMode" type="checkbox" />
-            <span aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="">Настройки WIFI:</div>
-        <div class="form__item">
-          <label for="wifiSSID">Имя сети (SSID)</label>
-          <input
-            type="text"
-            formControlName="wifiSSID"
-            id="wifiSSID"
-            class="w-500"
-          />
-        </div>
-        <div class="form__item">
-          <label for="wifiPassword">Пароль</label>
-          <input
-            type="password"
-            formControlName="wifiPassword"
-            id="wifiPassword"
-            class="w-500"
-          />
-        </div>
-        <div class="form__item">
-          <label>Тип защиты</label>
-          <div class="tags-container">
-            <label class="custom-radio">
+        <div class="form__tab" style="display: none">
+          <div class="card__header">Управление</div>
+          <div class="config-settings form__elems">
+            <div class="form__item">
+              <label class="switch">
+                Безопасные настройки
+                <input
+                  formControlName="lockSafeSettings"
+                  id="lockSafeSettings"
+                  type="checkbox"
+                />
+                <span aria-hidden="true"></span>
+              </label>
+            </div>
+            <div class="form__item">
+              <label class="switch">
+                Режим киоска
+                <input
+                  formControlName="kioskMode"
+                  id="kioskMode"
+                  type="checkbox"
+                />
+                <span aria-hidden="true"></span>
+              </label>
+            </div>
+            <div class="font-bold">Настройки WIFI:</div>
+            <div class="form__item">
+              <label for="wifiSSID">Имя сети (SSID)</label>
               <input
-                class="visually-hidden"
-                formControlName="wifiSecurityType"
-                type="radio"
-                [value]="'WPA'"
+                type="text"
+                formControlName="wifiSSID"
+                id="wifiSSID"
+                class="w-500"
               />
-              <span class="custom-radio__span">WPA</span>
-            </label>
-            <label class="custom-radio">
+            </div>
+            <div class="form__item">
+              <label for="wifiPassword">Пароль</label>
               <input
-                class="visually-hidden"
-                formControlName="wifiSecurityType"
-                type="radio"
-                [value]="'WEP'"
+                type="password"
+                formControlName="wifiPassword"
+                id="wifiPassword"
+                class="w-500"
               />
-              <span class="custom-radio__span">WEP</span>
-            </label>
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="wifiSecurityType"
-                type="radio"
-                [value]="'EAP'"
-              />
-              <span class="custom-radio__span">EAP</span>
-            </label>
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="wifiSecurityType"
-                type="radio"
-                [value]="'NONE'"
-              />
-              <span class="custom-radio__span">NONE</span>
-            </label>
+            </div>
+            <div class="form__item">
+              <label>Тип защиты</label>
+              <div class="tags-container">
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="wifiSecurityType"
+                    type="radio"
+                    [value]="'WPA'"
+                  />
+                  <span class="custom-radio__span">WPA</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="wifiSecurityType"
+                    type="radio"
+                    [value]="'WEP'"
+                  />
+                  <span class="custom-radio__span">WEP</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="wifiSecurityType"
+                    type="radio"
+                    [value]="'EAP'"
+                  />
+                  <span class="custom-radio__span">EAP</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="wifiSecurityType"
+                    type="radio"
+                    [value]="'NONE'"
+                  />
+                  <span class="custom-radio__span">NONE</span>
+                </label>
+              </div>
+            </div>
+            <div class="two-columns">
+              <div class="form__elems">
+                <div class="font-bold">Дополнительные разрешения:</div>
+                <div class="form__item">
+                  <label>загрузка файлов</label>
+                  <input type="checkbox" />
+                </div>
+                <div class="form__item">
+                  <label>блокировка</label>
+                  <input type="checkbox" />
+                </div>
+                <div class="form__item">
+                  <label>отправка смс</label>
+                  <input type="checkbox" />
+                </div>
+                <div class="form__item">
+                  <label>подключение наушников</label>
+                  <input type="checkbox" />
+                </div>
+              </div>
+              <div class="form__elems">
+                <div class="font-bold">Дополнительные ограничения:</div>
+                <div class="form__item">
+                  <label>отправка смс</label>
+                  <input type="checkbox" />
+                </div>
+                <div class="form__item">
+                  <label>исходящие звонки</label>
+                  <input type="checkbox" />
+                </div>
+                <div class="form__item">
+                  <label>3 минуты</label>
+                  <input type="checkbox" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="">Дополнительные разрешения:</div>
-        <div class="form__item">
-          <label>загрузка файлов</label>
-          <input type="checkbox" class="w-500" />
-        </div>
-        <div class="form__item">
-          <label>блокировка</label>
-          <input type="checkbox" class="w-500" />
-        </div>
-        <div class="form__item">
-          <label>отправка смс</label>
-          <input type="checkbox" class="w-500" />
-        </div>
-        <div class="form__item">
-          <label>подключение наушников</label>
-          <input type="checkbox" class="w-500" />
-        </div>
-        <div class="">Дополнительные ограничения:</div>
-        <div class="form__item">
-          <label>отправка смс</label>
-          <input type="checkbox" class="w-500" />
-        </div>
-        <div class="form__item">
-          <label>исходящие звонки</label>
-          <input type="checkbox" class="w-500" />
-        </div>
-        <div class="form__item">
-          <label>3 минуты</label>
-          <input type="checkbox" class="w-500" />
+        <div class="btn-wrapper">
+          <button type="button" class="btn btn--big">Сохранить</button>
+          <button type="button" class="btn btn--big btn--outline">
+            Отменить
+          </button>
         </div>
       </form>
     </div>
