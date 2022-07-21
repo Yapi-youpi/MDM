@@ -4,7 +4,7 @@ import { DevicesConfigService } from '../../../services/devices-config.service';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
-import { UserService } from '../../../services/user.service';
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-configuration',

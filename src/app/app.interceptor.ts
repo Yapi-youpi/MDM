@@ -4,12 +4,12 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
 import { ErrorService } from './services/error.service';
+import { UserService } from "./shared/services/user.service";
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {

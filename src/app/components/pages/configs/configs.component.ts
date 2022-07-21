@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DevicesConfigService } from '../../../services/devices-config.service';
-import { UserService } from '../../../services/user.service';
 import { interval } from 'rxjs';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { AssetService } from '../../../services/asset.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-configs',

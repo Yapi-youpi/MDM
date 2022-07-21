@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+
 import {
   FormArray,
   FormBuilder,
@@ -11,6 +11,7 @@ import { Users } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../services/asset.service';
 import Compressor from 'compressorjs';
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-users',

@@ -1,9 +1,9 @@
 import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { AuthService } from "../../../services/auth.service";
-import { UserService } from "../../../services/user.service";
 import { AssetService } from "../../../services/asset.service";
+import { authService } from "../../../shared/services";
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: "app-user",
@@ -18,7 +18,7 @@ export class UserComponent {
 
   constructor(
     private elementRef: ElementRef,
-    private auth: AuthService,
+    private auth: authService,
     public user: UserService,
     public router: Router,
     public asset: AssetService
