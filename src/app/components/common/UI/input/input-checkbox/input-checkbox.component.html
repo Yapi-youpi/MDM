@@ -1,0 +1,22 @@
+<label
+  *ngIf="!control"
+  class="checkbox-container"
+>
+  <input
+    type="checkbox"
+    [checked]="value"
+    (change)="onChangeHandler(value)"
+  >
+  <span class="checkmark"></span>
+</label>
+
+<label
+  *ngIf="control"
+  class="checkbox-container"
+>
+  <input
+    type="checkbox"
+    [formControl]="control"
+  >
+  <span class="checkmark"></span>
+</label>

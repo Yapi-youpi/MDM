@@ -20,6 +20,6 @@ export class InputTextComponent {
   constructor() {}
 
   onChangeHandler(value: string) {
-    this.onChange.emit(this.value);
+    this.onChange.emit(value);
   }
 }

@@ -76,6 +76,7 @@ import { GlobalHeaderComponent } from "./components/common/global-header/global-
 import { ButtonComponent } from './components/common/UI/button/button/button.component';
 import { InputPasswordComponent } from './components/common/UI/input/input-password/input-password.component';
 import { InputTextComponent } from './components/common/UI/input/input-text/input-text.component';
+import { InputCheckboxComponent } from './components/common/UI/input/input-checkbox/input-checkbox.component';
 
 const routes: Routes = [
   {
@@ -147,6 +148,7 @@ const routes: Routes = [
     ButtonComponent,
     InputPasswordComponent,
     InputTextComponent,
+    InputCheckboxComponent,
   ],
   imports: [
     BrowserModule,
