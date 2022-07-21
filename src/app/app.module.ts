@@ -77,6 +77,7 @@ import { ButtonComponent } from './components/common/UI/button/button/button.com
 import { InputPasswordComponent } from './components/common/UI/input/input-password/input-password.component';
 import { InputTextComponent } from './components/common/UI/input/input-text/input-text.component';
 import { InputCheckboxComponent } from './components/common/UI/input/input-checkbox/input-checkbox.component';
+import { InputSelectComponent } from './components/common/UI/input/input-select/input-select.component';
 
 const routes: Routes = [
   {
@@ -149,6 +150,7 @@ const routes: Routes = [
     InputPasswordComponent,
     InputTextComponent,
     InputCheckboxComponent,
+    InputSelectComponent,
   ],
   imports: [
     BrowserModule,
