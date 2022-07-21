@@ -1,0 +1,22 @@
+<ng-container *ngIf="control">
+  <input
+    [class.error]="isError"
+    [ngClass]="width"
+    type="text"
+    [id]="name"
+    [name]="name"
+    [formControl]="control"
+  />
+</ng-container>
+
+<ng-container *ngIf="!control">
+  <input
+    [class.error]="isError"
+    [ngClass]="width"
+    type="text"
+    [id]="name"
+    [name]="name"
+    [value]="value"
+    (change)="onChangeHandler(value)"
+  />
+</ng-container>

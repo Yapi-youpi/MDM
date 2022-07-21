@@ -75,6 +75,7 @@ import { SelectComponent } from "./components/common/UI/input/select/select.comp
 import { GlobalHeaderComponent } from "./components/common/global-header/global-header.component";
 import { ButtonComponent } from './components/common/UI/button/button/button.component';
 import { InputPasswordComponent } from './components/common/UI/input/input-password/input-password.component';
+import { InputTextComponent } from './components/common/UI/input/input-text/input-text.component';
 
 const routes: Routes = [
   {
@@ -144,7 +145,8 @@ const routes: Routes = [
     GroupPipe,
     BatteryPipe,
     ButtonComponent,
-    InputPasswordComponent
+    InputPasswordComponent,
+    InputTextComponent,
   ],
   imports: [
     BrowserModule,
