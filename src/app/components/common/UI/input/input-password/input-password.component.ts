@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { inputWidth } from "../../../../../shared/types/input";
 
 @Component({
   selector: 'app-input-password',
@@ -11,6 +12,7 @@ export class InputPasswordComponent {
   @Input() value: string = ''
 
   @Input() name: string = '';
+  @Input() width: inputWidth = 'w-170';
   @Input() isError: boolean = false;
 
   public isPasswordVisible: boolean = false;
