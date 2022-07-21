@@ -32,7 +32,6 @@ import { ConfigurationComponent } from './components/pages/configuration/configu
 import { ConfigSearchPipe } from './services/config-search.pipe';
 import { CardComponent } from "./components/common/card/card.component";
 import { CentralWrapperComponent } from "./components/common/central-wrapper/central-wrapper.component";
-import { PageHeaderComponent } from "./components/common/page-header/page-header.component";
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
 import { ChangePasswordComponent } from "./components/common/modals/change-password/change-password.component";
 import { ModalComponent } from "./components/common/modal/modal.component";
@@ -75,6 +74,7 @@ import { InputComponent } from "./components/common/UI/input/input/input.compone
 import { SelectComponent } from "./components/common/UI/input/select/select.component";
 import { GlobalHeaderComponent } from "./components/common/global-header/global-header.component";
 import { ButtonComponent } from './components/common/UI/button/button/button.component';
+import { InputPasswordComponent } from './components/common/UI/input/input-password/input-password.component';
 
 const routes: Routes = [
   {
@@ -109,7 +109,6 @@ const routes: Routes = [
     AddDeviceComponent,
     DeleteSeveralElementsComponent,
     EditSeveralDevicesComponent,
-    PageHeaderComponent,
     QrTipComponent,
     CentralWrapperComponent,
     CardComponent,
@@ -144,7 +143,8 @@ const routes: Routes = [
     DatePipe,
     GroupPipe,
     BatteryPipe,
-    ButtonComponent
+    ButtonComponent,
+    InputPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,24 @@
-<label class="checkbox-container">
+<label
+  *ngIf="!control"
+  class="checkbox-container"
+>
   <input
     type="checkbox"
     class="checkbox"
     [checked]="isChecked"
     (change)="onChangeHandler()"
+  >
+  <span class="checkmark"></span>
+</label>
+
+<label
+  *ngIf="control"
+  class="checkbox-container"
+>
+  <input
+    type="checkbox"
+    class="checkbox"
+    [formControl]="control"
   >
   <span class="checkmark"></span>
 </label>
