@@ -1,0 +1,8 @@
+.global-header__title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 24px;
+  line-height: 24px;
+  color: var(--sdm-dark-blue-grey);
+}

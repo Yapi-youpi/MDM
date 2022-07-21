@@ -73,6 +73,7 @@ import { StatusIconComponent } from "./components/common/UI/status/status-icon/s
 import { SwitchInputComponent } from "./components/common/UI/input/switch-input/switch-input.component";
 import { InputComponent } from "./components/common/UI/input/input/input.component";
 import { SelectComponent } from "./components/common/UI/input/select/select.component";
+import { GlobalHeaderComponent } from "./components/common/global-header/global-header.component";
 
 const routes: Routes = [
   {
@@ -84,6 +85,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    GlobalHeaderComponent,
     SelectComponent,
     InputComponent,
     SwitchInputComponent,
