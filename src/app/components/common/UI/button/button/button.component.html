@@ -1,0 +1,19 @@
+<button
+  class="button"
+  [ngClass]="[color, textLike]"
+  [type]="type"
+  [style.height]="height"
+  [style.width]="width"
+  [style.border-radius]="radius"
+  [style.padding]="padding"
+  (click)="onClickHandler()"
+>
+<!-- текст, если есть -->
+  <ng-container
+    *ngIf="text !== ''"
+  >
+    {{ text }}
+  </ng-container>
+<!-- содержимое, напр. иконка -->
+  <ng-content></ng-content>
+</button>

@@ -1,12 +1,15 @@
-<button
-  type="button"
-  class="sort-btn"
-  (click)="onClickHandler()"
+<app-button
+  [text]="title"
+  [textLike]="'like-body'"
+  [height]="'20px'"
+  [color]="'transparent'"
+  [padding]="'0'"
+  [radius]="'0'"
+  (onCLick)="onClickHandler()"
 >
-  {{ title }}
   <span
-    class="icon"
+    class="icon icon-sort"
     [class.asc]="isSortAsc"
     [class.desc]="!isSortAsc"
   ></span>
-</button>
+</app-button>

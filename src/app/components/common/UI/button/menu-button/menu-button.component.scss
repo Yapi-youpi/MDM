@@ -1,28 +1,15 @@
-.btn-icon {
+.icon-menu-hamburger {
   height: 24px;
   width: 24px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  mask-size: 24px 24px;
+  mask-image: url("/assets/UI/hamburger.svg");
+  -webkit-mask-size: 24px 24px;
+  -webkit-mask-image: url("/assets/UI/hamburger.svg");
 
-  padding: 0;
+  background-color: var(--dark-blue);
 
-  background-color: transparent;
-
-  span {
-    height: 24px;
-    width: 24px;
-
-    mask-size: 24px 24px;
-    mask-image: url("/assets/UI/hamburger.svg");
-    -webkit-mask-size: 24px 24px;
-    -webkit-mask-image: url("/assets/UI/hamburger.svg");
-
-    background-color: var(--dark-blue);
-
-    &:hover {
-      background-color: var(--blue);
-    }
+  &:hover {
+    background-color: var(--blue);
   }
 }

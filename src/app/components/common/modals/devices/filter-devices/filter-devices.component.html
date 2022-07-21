@@ -14,22 +14,42 @@
       >
         <div class="row space-between status">
           <p class="text-menu-title">Статус</p>
-          <button
-            type="button"
-            class="common"
-            [class.clicked]="_status_on?.value"
-            (click)="onStatusOnClick()"
-          >
-            вкл
-          </button>
-          <button
-            type="button"
-            class="common"
-            [class.clicked]="_status_off?.value"
-            (click)="onStatusOffClick()"
-          >
-            выкл
-          </button>
+          <div class="filter-btn-wrapper">
+            <app-button
+              [text]="'вкл'"
+              [height]="'auto'"
+              [padding]="'7px 10px'"
+              [radius]="'14px'"
+              [color]="_status_on?.value ? 'blue' : 'common'"
+              (onCLick)="onStatusOnClick()"
+            ></app-button>
+          </div>
+          <div class="filter-btn-wrapper">
+            <app-button
+              [text]="'выкл'"
+              [height]="'auto'"
+              [padding]="'7px 10px'"
+              [radius]="'14px'"
+              [color]="_status_off?.value ? 'blue' : 'common'"
+              (onCLick)="onStatusOffClick()"
+            ></app-button>
+          </div>
+<!--          <button-->
+<!--            type="button"-->
+<!--            class="common"-->
+<!--            [class.clicked]="_status_on?.value"-->
+<!--            (click)="onStatusOnClick()"-->
+<!--          >-->
+<!--            вкл-->
+<!--          </button>-->
+<!--          <button-->
+<!--            type="button"-->
+<!--            class="common"-->
+<!--            [class.clicked]="_status_off?.value"-->
+<!--            (click)="onStatusOffClick()"-->
+<!--          >-->
+<!--            выкл-->
+<!--          </button>-->
         </div>
         <p class="text-menu-title last-date">Последнее включение</p>
         <div class="form-group-wrapper">

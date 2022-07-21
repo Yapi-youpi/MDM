@@ -4,12 +4,12 @@
   [class.opened]="!isDropdownHidden"
   [class.error]="isError"
 >
-  <button
+  <div
     [class.filled]="!isDropdownHidden"
     (click)="toggleDropdown()"
   >
     {{ currOption?.html }}
-  </button>
+  </div>
   <ul
     class="dropdown-content"
     [class.hidden]="isDropdownHidden"

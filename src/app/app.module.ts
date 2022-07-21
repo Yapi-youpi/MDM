@@ -74,6 +74,7 @@ import { SwitchInputComponent } from "./components/common/UI/input/switch-input/
 import { InputComponent } from "./components/common/UI/input/input/input.component";
 import { SelectComponent } from "./components/common/UI/input/select/select.component";
 import { GlobalHeaderComponent } from "./components/common/global-header/global-header.component";
+import { ButtonComponent } from './components/common/UI/button/button/button.component';
 
 const routes: Routes = [
   {
@@ -142,7 +143,8 @@ const routes: Routes = [
     NamePipe,
     DatePipe,
     GroupPipe,
-    BatteryPipe
+    BatteryPipe,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

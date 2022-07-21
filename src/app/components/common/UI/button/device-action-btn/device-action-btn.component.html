@@ -1,10 +1,13 @@
-<button
-  type="button"
-  class="action-btn blue p-0"
-  (click)="onClickHandler(device)"
+<app-button
+  [height]="'24px'"
+  [width]="'24px'"
+  [padding]="'0'"
+  [color]="'blue'"
+  [radius]="'12px'"
+  (onCLick)="onClickHandler(device)"
 >
   <span
-    class="icon"
+    class="icon icon-d-item"
     [ngClass]="target"
   ></span>
-</button>
+</app-button>

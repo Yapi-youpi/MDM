@@ -15,22 +15,10 @@
     .status {
       margin-bottom: 39px;
 
-      button {
-        padding: 7px 10px;
-
+      .filter-btn-wrapper {
         &:nth-of-type(1) {
           margin-right: 9px;
           margin-left: auto;
-        }
-
-        &.clicked {
-          background-color: var(--dark-blue);
-          border-color: transparent;
-          color: var(--white);
-
-          &:hover {
-            background-color: var(--blue);
-          }
         }
       }
     }
@@ -44,8 +32,6 @@
     }
 
     .form-group-wrapper {
-
-
       &:not(:last-child) {
         margin-bottom: 21.56px;
       }

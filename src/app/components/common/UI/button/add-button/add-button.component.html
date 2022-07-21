@@ -1,7 +1,10 @@
-<button
-  type="button"
-  class="add-btn blue p-0"
-  (click)="onClickHandler()"
->
-  {{ title }}
-</button>
+<app-button
+  [text]="title"
+  [textLike]="'like-body'"
+  [height]="'30px'"
+  [width]="'148px'"
+  [padding]="'0'"
+  [color]="'blue'"
+  [radius]="'8px'"
+  (onCLick)="onClickHandler()"
+></app-button>

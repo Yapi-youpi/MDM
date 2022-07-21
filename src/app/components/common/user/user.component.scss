@@ -1,0 +1,140 @@
+.user-popup {
+  position: relative;
+
+  .popup-btn-wrapper {
+    height: 30px;
+    width: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: var(--box-shadow);
+
+    &.no-img {
+      .icon-user {
+        height: 24px;
+        width: 24px;
+
+        mask-size: 20px 20px;
+        mask-image: url("/assets/UI/users_group.svg");
+        -webkit-mask-size: 20px 20px;
+        -webkit-mask-image: url("/assets/UI/users_group.svg");
+
+        background-color: var(--white);
+      }
+    }
+  }
+
+  .user-popup {
+    width: 250px;
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    padding: 16px 16px 17.54px 16px;
+
+    background-color: var(--white);
+
+    border-radius: 14px;
+
+    box-shadow: var(--box-shadow);
+
+    z-index: 10;
+
+    .divider {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-left {
+        display: flex;
+        align-items: center;
+
+        .info {
+          .name {
+            margin-bottom: 12px;
+          }
+        }
+
+        .avatar {
+          height: 40px;
+          width: 40px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border-radius: 20px;
+
+          background-color: var(--dark-blue);
+
+          box-shadow: var(--box-shadow);
+
+          .icon {
+            height: 30px;
+            width: 30px;
+
+            mask-size: 30px 30px;
+            mask-image: url("/assets/UI/users_group.svg");
+            -webkit-mask-size: 30px 30px;
+            -webkit-mask-image: url("/assets/UI/users_group.svg");
+
+            background-color: var(--white);
+          }
+        }
+
+        .info {
+          margin-left: 16px;
+        }
+      }
+
+      &-right {
+        align-self: self-start;
+
+        .icon-edit {
+          height: 24px;
+          width: 24px;
+
+          mask-size: 12.8px 12.8px;
+          mask-image: url("/assets/UI/pencil.svg");
+          -webkit-mask-size: 12.8px 12.8px;
+          -webkit-mask-image: url("/assets/UI/pencil.svg");
+
+          background-color: var(--white);
+        }
+      }
+    }
+
+    .bottom {
+      .logout-wrapper {
+        width: 100%;
+
+        color: var(--dark-blue);
+
+        .icon-logout {
+          height: 18.46px;
+          width: 24px;
+
+          margin-right: 13px;
+
+          mask-size: 18.46px 24px;
+          mask-image: url("/assets/UI/leave.svg");
+          -webkit-mask-size: 18.46px 24px;
+          -webkit-mask-image: url("/assets/UI/leave.svg");
+
+          background-color: var(--dark-blue);
+        }
+
+        p {
+          color: var(--dark-blue);
+        }
+      }
+    }
+  }
+}

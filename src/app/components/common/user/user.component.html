@@ -1,21 +1,77 @@
-<div class="user">
-  <button #popup_btn class="user-btn" (click)="togglePopup()"></button>
-  <div #popup class="user-popup r-14" *ngIf="isPopupOpen">
-    <div class="top">
-      <img src="assets/c9K2Y9r5Keo.jpg" alt="" class="r-round" />
-      <div class="user-info">
-        <p class="name">Name</p>
-        <p class="email">example@email.ru</p>
-      </div>
-      <button class="user-profile-btn r-round">
-        <i class="material-icons tiny">edit</i>
-      </button>
+<app-card>
+  <div class="user-popup">
+    <div
+      class="popup-btn-wrapper"
+      [class.no-img]="imgURL === ''"
+    >
+      <app-button
+        [height]="'30px'"
+        [width]="'30px'"
+        [padding]="'0'"
+        [radius]="'15px'"
+        [color]="'blue'"
+        (onCLick)="togglePopup()"
+      >
+        <span
+          *ngIf="imgURL === ''"
+          class="icon icon-user"
+        ></span>
+        <img
+          *ngIf="imgURL !== ''"
+          [src]="imgURL"
+          alt=""
+        >
+      </app-button>
     </div>
-    <div class="bottom">
-      <button class="logout" (click)="logout()">
-        <i class="material-icons">exit_to_app</i>
-        Выйти
-      </button>
+    <div
+      *ngIf="isPopupOpen"
+      class="user-popup"
+    >
+      <div class="top">
+        <div class="top-left">
+          <div class="avatar">
+            <span
+              *ngIf="imgURL === ''"
+              class="icon"
+            ></span>
+            <img
+              *ngIf="imgURL !== ''"
+              [src]="imgURL"
+              alt=""
+            >
+          </div>
+          <div class="info">
+            <p class="name text-menu-title">Name</p>
+            <p class="company">Company</p>
+          </div>
+        </div>
+        <div class="top-right">
+          <app-button
+            [height]="'24px'"
+            [width]="'24px'"
+            [padding]="'0'"
+            [radius]="'12px'"
+            [color]="'blue'"
+          >
+            <span class="icon icon-edit"></span>
+          </app-button>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="bottom">
+        <div class="logout-wrapper row">
+          <span class="icon icon-logout"></span>
+          <app-button
+            [height]="'24px'"
+            [padding]="'0'"
+            [radius]="'0'"
+            [color]="'transparent'"
+            (onCLick)="logout()"
+          >
+            <p>выйти</p>
+          </app-button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</app-card>

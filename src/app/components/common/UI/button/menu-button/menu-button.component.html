@@ -1,7 +1,11 @@
-<button
-  class="btn-icon"
-  type="button"
-  (click)="onClickHandler()"
+<app-button
+  [type]="'button'"
+  [height]="'24px'"
+  [width]="'24px'"
+  [padding]="'0'"
+  [color]="'transparent'"
+  [radius]="'0'"
+  (onCLick)="onClickHandler()"
 >
-  <span></span>
-</button>
+  <span class="icon icon-menu-hamburger"></span>
+</app-button>

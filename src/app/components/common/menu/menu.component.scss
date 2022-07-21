@@ -1,10 +1,10 @@
 .menu-sidebar {
-  height: 100%;
+  height: calc(100vh - 24px);
   width: 280px;
 
-  position: fixed;
+  //position: fixed;
 
-  margin-left: 20px;
+  //margin-left: 20px;
 
   overflow: hidden;
 
