@@ -1,71 +1,60 @@
-<div class="item row">
+<div class="row item">
   <div class="checkbox-container">
-    <label>
-      <input
-        type="checkbox"
-        class="filled-in item-checkbox"
-        [checked]="device.isSelected"
-        (change)="selectUnselectDevice(device)"
-      />
-      <span></span>
-    </label>
+    <app-checkbox
+      [isChecked]="!!device.isSelected"
+      (onChange)="onSelectUnselectDeviceHandler(device)"
+    ></app-checkbox>
   </div>
-  <div class="content b-shadow r-14">
-    <div class="status-container">
-      <span
-        class="r-round"
-        [class.active]="device.active_state"
-        [class.disabled]="!device.active_state"
-      ></span>
+  <div class="content">
+    <div class="icon-wrapper">
+      <app-status-icon
+        [size]="'s18x18'"
+        [controlState]="!device.registration_state"
+        [isOn]="device.active_state"
+        [isOff]="!device.active_state"
+      ></app-status-icon>
     </div>
-    <p class="font-regular-color">14 сент, 14:20</p>
-    <p class="font-bold font-bold-color">{{ device.name }}</p>
-    <p class="font-middle font-regular-color">{{ device.description }}</p>
-    <p class="font-regular-color">{{ device.phone_number }}</p>
-<!--                        <p class="font-regular-color">012345678912345</p>-->
-<!--                        <p class="font-regular-color">Meizu 10</p>-->
-    <p class="font-regular-color">{{ device.imei }}</p>
-    <p class="font-regular-color">{{ device.model }}</p>
-    <div class="input-field sdm-light-select">
-      <select class="config-select" (change)="changeDeviceConfig(device, $event)">
-        <option value="0" selected>По умолчанию</option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-      </select>
+    <p>{{ device.updatedAt | dateConverter }}</p>
+    <p class="text-choose">{{ device.name }}</p>
+    <p>{{ device.description }}</p>
+<!--    <p>88005553535</p>-->
+<!--    <p>123456789012345</p>-->
+<!--    <p>Ololo Pro</p>-->
+    <p>{{ device.phone_number }}</p>
+    <p>{{ device.imei }}</p>
+    <p>{{ device.model }}</p>
+    <p>{{ device.device_group_id | groupConverter: groups }}</p>
+    <p>{{ device.device_config_id | configConverter: configs }}</p>
+    <div class="icon-wrapper">
+      <app-status-icon
+        [size]="'s14x14'"
+        [isOn]="device.online_state"
+        [isOff]="!device.online_state"
+      ></app-status-icon>
     </div>
-    <div class="status-container update small">
-      <span class="r-round active"></span>
+    <p>{{ device.battery_percent }}%</p>
+    <div class="switch-wrapper">
+      <app-switch-input
+        [isChecked]="device.active_state"
+        (onChange)="onChangeDeviceStateHandler(device)"
+      ></app-switch-input>
     </div>
-    <p class="font-bold-color">Санкт-Петербург</p>
-    <p class="font-regular-color">{{ device.battery_percent }}%</p>
-    <div class="switch">
-      <label>
-        <input type="checkbox" [checked]="device.active_state" />
-        <span class="lever"></span>
-      </label>
-    </div>
-    <div class="btns">
-      <button
-        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round qr-code"
-        (click)="getDeviceQRCode(device.name, device.qr_code)"
-        data-target="qr-code"
-      >
-        <span></span>
-      </button>
-      <button
-        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round edit"
-        (click)="editDevice(device)"
-        data-target="edit_device"
-      >
-        <span></span>
-      </button>
-      <button
-        class="modal-trigger sdm-only-icon sdm-dark-blue sdm-no-border r-round delete"
-        (click)="deleteDevice(device.device_id)"
-      >
-        <span></span>
-      </button>
+    <div class="device-actions-wrapper">
+      <app-device-action-btn
+        [device]="device"
+        [target]="'qr_code'"
+        (onClick)="onClickDeviceQRCodeHandler($event)"
+      ></app-device-action-btn>
+      <app-device-action-btn
+        [device]="device"
+        [target]="'edit_device'"
+        (onClick)="onClickDeviceEditHandler($event)"
+      ></app-device-action-btn>
+      <app-device-action-btn
+        [device]="device"
+        [target]="'delete_device'"
+        (onClick)="onClickDeviceDeleteHandler($event)"
+      ></app-device-action-btn>
     </div>
   </div>
 </div>

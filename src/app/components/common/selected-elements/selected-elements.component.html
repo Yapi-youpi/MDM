@@ -1,0 +1,21 @@
+<div class="selected-devices row space-between">
+  <p>{{ devicesIDs.length }} выбран(-о)</p>
+  <span
+    class="icon close"
+    (click)="onCloseClickHandler()"
+  ></span>
+  <button
+    type="button"
+    class="p-0 edit"
+    (click)="onEditClickHandler()"
+  >
+    <span class="icon"></span>
+  </button>
+  <button
+    type="button"
+    class="p-0 delete"
+    (click)="onDeleteClickHandler()"
+  >
+    <span class="icon"></span>
+  </button>
+</div>

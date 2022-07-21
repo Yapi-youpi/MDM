@@ -1,0 +1,20 @@
+<div
+  class="action-btns"
+  [class.reverse]="isReverse"
+>
+  <button
+    type="submit"
+    class="blue"
+    (click)="onSubmitHandler()"
+  >
+    {{ submitText }}
+  </button>
+  <button
+    type="button"
+    class="common"
+    (click)="onCancelHandler()"
+    [ngStyle]="{'margin-left': !isReverse ? margin : 0, 'margin-right': isReverse ? margin : 0}"
+  >
+    {{ cancelText }}
+  </button>
+</div>

@@ -1,0 +1,121 @@
+.item {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 10px;
+
+  .checkbox-container {
+    margin-right: 10px;
+  }
+
+  .content {
+    height: 60px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    background-color: var(--white);
+    color: var(--dark-grey);
+
+    border-radius: 14px;
+
+    .icon-wrapper {
+      &:nth-of-type(2) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .switch-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    // статус
+    > *:nth-child(1) {
+      width: 34px;
+
+      margin-right: 5px;
+    }
+    // дата вкл
+    > *:nth-child(2) {
+      width: 90px;
+
+      margin-right: 10px;
+    }
+    // название
+    > *:nth-child(3) {
+      width: 70px;
+
+      margin-right: 10px;
+    }
+    // описание
+    > *:nth-child(4) {
+      width: 195px;
+
+      margin-right: 5px;
+    }
+    // телефон
+    > *:nth-child(5) {
+      width: 90px;
+
+      margin-right: 10px;
+    }
+    // imei
+    > *:nth-child(6) {
+      width: 105px;
+
+      margin-right: 5px;
+    }
+    // модель
+    > *:nth-child(7) {
+      width: 70px;
+
+      margin-right: 5px;
+    }
+    // группа
+    > *:nth-child(8) {
+      width: 105px;
+
+      margin-right: 5px;
+    }
+    // конфигурация
+    > *:nth-child(9) {
+      width: 110px;
+    }
+    // обновление
+    > *:nth-child(10) {
+      width: 70px;
+
+      margin-right: 5px;
+    }
+    // заряд
+    > *:nth-child(11) {
+      width: 51px;
+
+      margin-right: 5px;
+    }
+    // блокировка
+    > *:nth-child(12) {
+      width: 70px;
+
+      margin-right: 6px;
+    }
+    // действия
+    > *:nth-child(13) {
+      width: 96px;
+    }
+
+    .device-actions-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

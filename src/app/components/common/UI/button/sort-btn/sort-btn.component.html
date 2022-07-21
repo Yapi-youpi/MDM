@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="sort-btn"
+  (click)="onClickHandler()"
+>
+  {{ title }}
+  <span
+    class="icon"
+    [class.asc]="isSortAsc"
+    [class.desc]="!isSortAsc"
+  ></span>
+</button>

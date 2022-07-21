@@ -1,0 +1,22 @@
+<div
+  class="form-group"
+  [class.error]="isError"
+>
+  <label
+    class="text-menu-title"
+    [for]="name"
+  >
+    {{ labelText }}
+  </label>
+  <app-input
+    [name]="name"
+    [type]="inputType"
+    [width]="inputWidth"
+    [control]="control"
+    [isError]="isError"
+    [options]="options"
+    [currOption]="currOption"
+    [isMultiselect]="isMultiselect"
+    (onSelect)="onSelectHandler($event)"
+  ></app-input>
+</div>

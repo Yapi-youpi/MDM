@@ -1,0 +1,120 @@
+.page-content {
+  min-height: calc(100vh - 76px - 34px);
+  height: 100%;
+
+  padding: 12px 23px 12px 22px;
+
+  .top {
+    margin-bottom: 16px;
+
+    .filter-wrapper {
+      margin-left: 12px;
+      margin-right: auto;
+    }
+  }
+
+  .list {
+    &-header {
+      display: flex;
+      align-items: center;
+
+      margin-bottom: 24px;
+      padding-right: 16px;
+
+      .sort-headers {
+        width: 100%;
+
+        margin-left: 10px;
+
+        p {
+          display: inline-block;
+        }
+
+        // статус
+        > *:nth-child(1) {
+          width: 50px;
+
+          margin-right: 5px;
+        }
+        // дата вкл
+        > *:nth-child(2) {
+          width: 80px;
+
+          margin-right: 10px;
+        }
+        // название
+        > *:nth-child(3) {
+          width: 70px;
+
+          margin-right: 10px;
+          padding-left: 5px;
+        }
+        // описание
+        > *:nth-child(4) {
+          width: 195px;
+
+          margin-right: 5px;
+          padding-left: 5px;
+        }
+        // телефон
+        > *:nth-child(5) {
+          width: 90px;
+
+          margin-right: 10px;
+          padding-left: 7px;
+        }
+        // imei
+        > *:nth-child(6) {
+          width: 105px;
+
+          margin-right: 5px;
+          padding-left: 6px;
+        }
+        // модель
+        > *:nth-child(7) {
+          width: 70px;
+
+          margin-right: 5px;
+          padding-left: 5px;
+        }
+        // группа
+        > *:nth-child(8) {
+          width: 105px;
+
+          margin-right: 5px;
+          padding-left: 2px;
+        }
+        // конфигурация
+        > *:nth-child(9) {
+          width: 110px;
+
+          padding-left: 2px;
+        }
+        // обновление
+        > *:nth-child(10) {
+          width: 70px;
+
+          margin-right: 5px;
+          padding-left: 5px;
+        }
+        // заряд
+        > *:nth-child(11) {
+          width: 51px;
+
+          margin-right: 5px;
+        }
+        // блокировка
+        > *:nth-child(12) {
+          width: 70px;
+
+          margin-right: 6px;
+          padding-left: 5px;
+        }
+        // действия
+        > *:nth-child(13) {
+          width: 96px;
+        }
+      }
+    }
+  }
+}

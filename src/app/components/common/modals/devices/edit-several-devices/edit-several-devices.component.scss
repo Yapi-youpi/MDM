@@ -1,0 +1,22 @@
+.content {
+  width: 770px;
+
+  padding: 30px 93px;
+
+  .divider {
+    margin: 25px 0;
+  }
+
+  .body {
+    .form-group-wrapper {
+      &:first-child {
+        margin-bottom: 45px;
+      }
+      &:last-child {
+        width: 171.1px;
+      }
+    }
+
+    margin-bottom: 59px;
+  }
+}

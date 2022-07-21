@@ -1,0 +1,30 @@
+.sort-btn {
+  display: flex;
+  align-items: center;
+
+  padding: 0;
+
+  font-size: 12px;
+  line-height: 12px;
+
+  background-color: transparent;
+  color: var(--dark-grey);
+
+  border-radius: 0;
+
+  .icon {
+    height: 17px;
+    width: 14px;
+
+    background-size: 17px 14px;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &.asc {
+      background-image: url('/assets/UI/sort_down.svg');
+    }
+    &.desc {
+      background-image: url('/assets/UI/sort_up.svg');
+    }
+  }
+}

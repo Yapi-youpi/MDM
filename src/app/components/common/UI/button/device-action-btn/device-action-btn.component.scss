@@ -1,0 +1,31 @@
+.action-btn {
+  height: 24px;
+  width: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    height: 14px;
+    width: 14px;
+
+    mask-size: 14px 14px;
+    -webkit-mask-size: 14px 14px;
+
+    background-color: var(--white);
+
+    &.qr_code {
+      mask-image: url("/assets/UI/qr_code.svg");
+      -webkit-mask-image: url("/assets/UI/qr_code.svg");
+    }
+    &.edit_device {
+      mask-image: url("/assets/UI/pencil.svg");
+      -webkit-mask-image: url("/assets/UI/pencil.svg");
+    }
+    &.delete_device {
+      mask-image: url("/assets/UI/trash.svg");
+      -webkit-mask-image: url("/assets/UI/trash.svg");
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<app-modal
+  [modalID]="'edit_several_devices'"
+  [isClosable]="true"
+>
+  <div class="content">
+    <div class="top">
+      <h4 class="text-title text-center">Настройки выбранных устройств</h4>
+    </div>
+    <hr class="divider"/>
+    <div class="body">
+      <form
+        [formGroup]="_form"
+      >
+        <div class="form-group-wrapper">
+          <app-form-group
+            [labelText]="'Группа'"
+            [inputType]="'select'"
+            [inputWidth]="'w-440'"
+            [options]="_options"
+            [currOption]="currOption.value === '' ? _currOption : currOption"
+            [isError]="_isSubmitted && currOption.value === ''"
+            (onSelect)="onSelectHandler($event)"
+          >
+          </app-form-group>
+          <app-input-alert
+            *ngIf="_isSubmitted && currOption.value === ''"
+            [type]="'error'"
+            [message]="'Данное поле должно быть заполнено'"
+          ></app-input-alert>
+        </div>
+        <div class="form-group-wrapper">
+          <app-form-group
+            [control]="$any(_state)"
+            [labelText]="'Блокировка'"
+            [name]="'active_state'"
+            [inputType]="'switch'"
+            [isError]="_isSubmitted && !!_state?.errors"
+          >
+          </app-form-group>
+          <app-input-alert
+            *ngIf="_isSubmitted && _state?.errors"
+            [control]="$any(_state)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+      </form>
+    </div>
+    <app-modal-action-btns
+      [margin]="'30px'"
+      [submitText]="'Сохранить'"
+      [cancelText]="'Отменить'"
+      (onSubmit)="onSubmitHandler()"
+      (onCancel)="onCancelHandler()"
+    ></app-modal-action-btns>
+  </div>
+</app-modal>

@@ -1,0 +1,11 @@
+<div
+  [id]="modalID"
+  class="modal-bg hidden"
+  [ngClass]="direction"
+>
+  <div class="modal-container">
+    <app-card>
+      <ng-content></ng-content>
+    </app-card>
+  </div>
+</div>

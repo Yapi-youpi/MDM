@@ -1,0 +1,53 @@
+@keyframes appearance-vertical {
+  from {
+    padding-top: 100vh
+  }
+  to {
+    padding-top: 0;
+  }
+}
+
+@keyframes appearance-horizontal {
+  from {
+    padding-left: calc(100vw + var(--filter-sidebar-width))
+  }
+  to {
+    padding-left: calc(100vw - var(--filter-sidebar-width));
+  }
+}
+
+.modal {
+  &-bg {
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 9990;
+
+    background-color: rgba(0, 0, 0, .2);
+
+    &.vertical {
+      animation: appearance-vertical var(--transition-time) ease;
+    }
+    &.horizontal {
+      padding-left: calc(100vw - var(--filter-sidebar-width));
+
+      animation: appearance-horizontal var(--transition-time) ease;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+  &-container {
+    z-index: 9999;
+  }
+}
