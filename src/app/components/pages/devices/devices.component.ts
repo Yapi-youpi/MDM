@@ -88,6 +88,7 @@ export class DevicesComponent implements OnInit {
     this.config
       .getConfig("all")
       .then((res: states.DevicesConfigsState) => {
+        console.log(res)
         if (res.success) {
           this.configs = res.devicesConfigs;
         } else {

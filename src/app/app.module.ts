@@ -78,6 +78,7 @@ import { InputFileComponent } from './components/common/UI/input/input-file/inpu
 import { InputSwitchComponent } from './components/common/UI/input/input-switch/input-switch.component';
 import { InputDatetimeComponent } from './components/common/UI/input/input-datetime/input-datetime.component';
 import { InputSearchComponent } from './components/common/UI/input/input-search/input-search.component';
+import { SystemPipe } from './shared/pipes/sort/apps/system.pipe';
 
 const routes: Routes = [
   {
@@ -151,6 +152,7 @@ const routes: Routes = [
     InputSwitchComponent,
     InputDatetimeComponent,
     InputSearchComponent,
+    SystemPipe,
   ],
   imports: [
     BrowserModule,
