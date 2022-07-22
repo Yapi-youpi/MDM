@@ -4,3 +4,8 @@ export enum devicesPaths {
   REMOVE = "/remove_device",
   EDIT = "/edit_device",
 }
+
+export enum appsPaths {
+  GET = "/get_app/",
+  UPLOAD = '/upload_file'
+}

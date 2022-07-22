@@ -1,0 +1,36 @@
+.input-file-wrapper {
+  display: flex;
+  align-items: center;
+
+  .input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+
+    & + label {
+      padding: 7px 14px;
+
+      border-radius: 14px;
+
+      border: 1px solid var(--dark-blue);
+
+      background-color: var(--white);
+      color: var(--dark-blue);
+
+      cursor: pointer;
+    }
+
+    &:focus + label,
+    & + label:hover {
+      background-color: var(--light-grey);
+    }
+  }
+
+  p:nth-of-type(1) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

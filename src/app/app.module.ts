@@ -78,6 +78,9 @@ import { InputPasswordComponent } from './components/common/UI/input/input-passw
 import { InputTextComponent } from './components/common/UI/input/input-text/input-text.component';
 import { InputCheckboxComponent } from './components/common/UI/input/input-checkbox/input-checkbox.component';
 import { InputSelectComponent } from './components/common/UI/input/input-select/input-select.component';
+import { AppsComponent } from './components/pages/apps/apps.component';
+import { AddAppComponent } from "./components/common/modals/apps/add-app/add-app.component";
+import { InputFileComponent } from './components/common/UI/input/input-file/input-file.component';
 
 const routes: Routes = [
   {
@@ -151,6 +154,9 @@ const routes: Routes = [
     InputTextComponent,
     InputCheckboxComponent,
     InputSelectComponent,
+    AppsComponent,
+    AddAppComponent,
+    InputFileComponent
   ],
   imports: [
     BrowserModule,

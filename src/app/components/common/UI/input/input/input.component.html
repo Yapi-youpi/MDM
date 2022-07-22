@@ -18,8 +18,9 @@
     (click)="togglePasswordVisibility()"
   ></span>
 </div>
+
 <input
-  *ngIf="type !== 'select' && type !== 'password' && type !== 'switch'"
+  *ngIf="type !== 'select' && type !== 'password' && type !== 'switch' && type !== 'file'"
   [id]="name"
   [name]="name"
   [formControl]="control"
@@ -28,6 +29,7 @@
   [class.error]="isError"
   [type]="type"
 />
+
 <app-select
   *ngIf="type === 'select'"
   [selectWidth]="width"
@@ -36,6 +38,7 @@
   [isError]="isError"
   (onSelect)="onSelectHandler($event)"
 ></app-select>
+
 <app-switch-input
   *ngIf="type === 'switch'"
   [control]="control"

@@ -22,6 +22,11 @@
           [target]="'add_device'"
         ></app-add-button>
       </div>
+      <ng-container *ngIf="loading">
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </ng-container>
       <app-selected-elements
         *ngIf="selectedDevicesIDs.length !== 0"
         [devicesIDs]="selectedDevicesIDs"

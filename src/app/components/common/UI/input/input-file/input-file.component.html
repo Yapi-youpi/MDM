@@ -1,0 +1,24 @@
+<div class="input-file-wrapper">
+  <input
+    [id]="name"
+    [name]="name"
+    type="file"
+    class="input-file"
+    [class.error]="isError"
+    [ngClass]="width"
+    (change)="onChangeHandler($event)"
+  />
+  <label [for]="name">загрузить</label>
+  <p
+    *ngIf="file"
+    class="text-menu-title"
+  >
+    {{ file.name }}
+  </p>
+  <p
+    *ngIf="_size"
+    class="text-menu-title"
+  >
+    {{ _size }}
+  </p>
+</div>

@@ -1,0 +1,35 @@
+<app-global-container class="global-container">
+  <app-global-header
+    class="global-header" [title]="'Приложения'"
+  ></app-global-header>
+  <main class="global-main card-wrapper">
+<!--    <app-card-->
+<!--      [color]="'light-grey'"-->
+<!--    >-->
+      <div class="card page-content">
+        <div class="top row space-between">
+          <app-search-input></app-search-input>
+          <div class="filter-btn-wrapper">
+            <app-button
+              [text]="'системное приложение'"
+              [textLike]="'like-body'"
+              [height]="'30px'"
+              [padding]="'9px 14px'"
+              [radius]="'15px'"
+              [color]="'common'"
+            ></app-button>
+          </div>
+          <app-add-button
+            [title]="'Добавить приложение'"
+            [target]="'add_app'"
+          ></app-add-button>
+        </div>
+      </div>
+<!--    </app-card>-->
+  </main>
+</app-global-container>
+
+<app-add-app
+  [title]="'Добавить приложение'"
+  (onSubmit)="uploadApp()"
+></app-add-app>

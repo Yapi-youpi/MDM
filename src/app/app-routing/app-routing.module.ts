@@ -8,6 +8,7 @@ import { GroupsComponent } from '../components/pages/groups/groups.component';
 import { MapComponent } from '../components/pages/map/map.component';
 import { ConfigsComponent } from '../components/pages/configs/configs.component';
 import { ConfigurationComponent } from '../components/pages/configuration/configuration.component';
+import { AppsComponent } from "../components/pages/apps/apps.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'groups',
     component: GroupsComponent,
+  },
+  {
+    path: 'apps',
+    component: AppsComponent
   },
   {
     path: 'map',
