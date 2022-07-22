@@ -8,6 +8,11 @@ interface State {
   error: string;
 }
 
+export interface UserState extends State {
+  id: string;
+  token: string;
+}
+
 export interface DevicesConfigsState extends State {
   devicesConfigs: DevicesConfig[];
 }
@@ -28,7 +33,6 @@ export interface AppState extends State {
   app: App[];
 }
 
-export interface UserState extends State {
-  id: string;
-  token: string;
+export interface UploadAppState extends State {
+  app: App;
 }

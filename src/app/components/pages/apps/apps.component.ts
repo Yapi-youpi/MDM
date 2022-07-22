@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { appsService, userService } from "../../../shared/services";
 import { interval } from "rxjs";
-import { AppState } from "../../../shared/types/states";
+import { AppState, UploadAppState } from "../../../shared/types/states";
 import { add } from "../../../shared/services/forms/app";
 
 @Component({
@@ -41,8 +41,15 @@ export class AppsComponent {
   uploadApp() {
     this.appsService
       .upload(this.addAppForm._file)
-      .then(res => {
-        console.log(res)
+      .then((res: UploadAppState) => {
+        if (res.success) {
+          console.log(res.app)
+
+          const modal = document.querySelector("#add_app");
+          modal?.classList.toggle("hidden");
+        } else {
+          console.log(res.error)
+        }
       })
       .catch(err => {
         console.log(err);

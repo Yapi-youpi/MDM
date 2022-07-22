@@ -4,18 +4,26 @@
     class="icon close"
     (click)="onCloseClickHandler()"
   ></span>
-  <button
-    type="button"
-    class="p-0 edit"
-    (click)="onEditClickHandler()"
+  <app-button
+    [height]="'24px'"
+    [width]="'24px'"
+    [padding]="'0'"
+    [radius]="'12px'"
+    [color]="'dark'"
+    (onCLick)="onEditClickHandler()"
   >
-    <span class="icon"></span>
-  </button>
-  <button
-    type="button"
-    class="p-0 delete"
-    (click)="onDeleteClickHandler()"
-  >
-    <span class="icon"></span>
-  </button>
+    <span class="icon icon-edit"></span>
+  </app-button>
+  <div class="wrapper">
+    <app-button
+      [height]="'24px'"
+      [width]="'24px'"
+      [padding]="'0'"
+      [radius]="'12px'"
+      [color]="'dark'"
+      (onCLick)="onDeleteClickHandler()"
+    >
+      <span class="icon icon-delete"></span>
+    </app-button>
+  </div>
 </div>

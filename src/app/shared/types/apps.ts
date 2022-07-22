@@ -11,6 +11,7 @@ export interface App {
   iconText: string;
   iconPath: string;
   iconUID: string;
+  fileSize: string;
   showIcon: boolean;
   availableInStorage: boolean;
   useKiosk: boolean;
