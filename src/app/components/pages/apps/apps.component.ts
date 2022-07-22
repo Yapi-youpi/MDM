@@ -3,6 +3,7 @@ import { appsService, userService } from "../../../shared/services";
 import { interval } from "rxjs";
 import { AppState, UploadAppState } from "../../../shared/types/states";
 import { add } from "../../../shared/services/forms/app";
+import { App } from "../../../shared/types/apps";
 
 @Component({
   selector: 'app-apps',
@@ -10,7 +11,15 @@ import { add } from "../../../shared/services/forms/app";
   styleUrls: ['./apps.component.scss']
 })
 export class AppsComponent {
+  public loading: boolean = false;
+  public apps: App[] = [];
+
+  public searchParam: string = '';
+
   public isOnlySystemApps: boolean = false;
+
+  public isNameSortAsc: boolean = true;
+  public isSizeSortAsc: boolean = true;
 
   constructor(private user: userService, private appsService: appsService, private addAppForm: add) { }
 
@@ -24,10 +33,16 @@ export class AppsComponent {
   }
 
   getApps() {
+    this.loading = true;
+
     this.appsService
       .get('all')
       .then((res: AppState) => {
+        console.log(res);
         if (res.success) {
+          this.loading = false;
+          this.apps = res.app
+
           console.log(res.app);
         } else {
           console.log(res.error);
@@ -56,7 +71,19 @@ export class AppsComponent {
       })
   }
 
+  onChangeSearchInputHandler(value: string) {
+    this.searchParam = value;
+  }
+
   toggleSystemApps() {
     this.isOnlySystemApps = !this.isOnlySystemApps;
+  }
+
+  toggleNameSortDir() {
+    this.isNameSortAsc = !this.isNameSortAsc;
+  }
+
+  toggleSizeSortDir() {
+    this.isSizeSortAsc = !this.isSizeSortAsc;
   }
 }

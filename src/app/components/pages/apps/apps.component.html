@@ -8,7 +8,10 @@
 <!--    >-->
       <div class="card page-content">
         <div class="top row space-between">
-          <app-input-search></app-input-search>
+          <app-input-search
+            [value]="searchParam"
+            (onChange)="onChangeSearchInputHandler($event)"
+          ></app-input-search>
           <div class="filter-btn-wrapper">
             <app-button
               [text]="'системное приложение'"
@@ -16,13 +19,48 @@
               [height]="'30px'"
               [padding]="'9px 14px'"
               [radius]="'15px'"
-              [color]="'common'"
+              [color]="isOnlySystemApps ? 'blue' : 'common'"
+              (onCLick)="toggleSystemApps()"
             ></app-button>
           </div>
           <app-add-button
-            [title]="'Добавить приложение'"
+            [title]="'добавить приложение'"
             [target]="'add_app'"
           ></app-add-button>
+        </div>
+        <ng-container *ngIf="loading">
+          <div class="progress">
+            <div class="indeterminate"></div>
+          </div>
+        </ng-container>
+        <div class="list">
+          <div class="list-header row space-between">
+            <div class="sort-btn-wrapper name">
+              <app-sort-btn
+                [title]="'Название'"
+                [isSortAsc]="isNameSortAsc"
+                (onCLick)="toggleNameSortDir()"
+              ></app-sort-btn>
+            </div>
+            <p>Версия</p>
+            <p>URL</p>
+            <p>ID пакета</p>
+            <div class="sort-btn-wrapper size">
+              <app-sort-btn
+                [title]="'Размер'"
+                [isSortAsc]="isSizeSortAsc"
+                (onCLick)="toggleSizeSortDir()"
+              ></app-sort-btn>
+            </div>
+            <p>Ярлык</p>
+            <p>Действия</p>
+          </div>
+          <div class="list-body">
+            <app-app-item
+              *ngFor="let app of apps | search: searchParam: 'app'"
+              [app]="app"
+            ></app-app-item>
+          </div>
         </div>
       </div>
 <!--    </app-card>-->

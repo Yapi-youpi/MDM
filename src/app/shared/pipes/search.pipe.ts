@@ -23,7 +23,10 @@ export class SearchPipe implements PipeTransform {
         value !== "" ? el.name.toLowerCase().includes(value.toLowerCase()) : el
       );
     if (arrayType === "group") return [];
-    if (arrayType === "app") return [];
+    if (arrayType === "app")
+      return array.filter((el) =>
+        value !== "" ? el.name.toLowerCase().includes(value.toLowerCase()) : el
+      );
     if (arrayType === "message") return [];
     if (arrayType === "mapMark") return [];
     if (arrayType === "config") return [];

@@ -22,7 +22,7 @@ import { MapComponent } from './components/pages/map/map.component';
 import { ConfigsComponent } from './components/pages/configs/configs.component';
 import { UserComponent } from './components/common/user/user.component';
 
-import { DeviceItemComponent } from './components/common/device-item/device-item.component';
+import { DeviceItemComponent } from './components/common/list-item/device-item/device-item.component';
 import { GlobalContainerComponent } from './components/common/global-container/global-container.component';
 import { FilterSidebarComponent } from './components/common/filter-sidebar/filter-sidebar.component';
 import { SearchUsersPipe } from './services/search-users.pipe';
@@ -79,6 +79,7 @@ import { InputSwitchComponent } from './components/common/UI/input/input-switch/
 import { InputDatetimeComponent } from './components/common/UI/input/input-datetime/input-datetime.component';
 import { InputSearchComponent } from './components/common/UI/input/input-search/input-search.component';
 import { SystemPipe } from './shared/pipes/sort/apps/system.pipe';
+import { AppItemComponent } from './components/common/list-item/app-item/app-item.component';
 
 const routes: Routes = [
   {
@@ -153,6 +154,7 @@ const routes: Routes = [
     InputDatetimeComponent,
     InputSearchComponent,
     SystemPipe,
+    AppItemComponent,
   ],
   imports: [
     BrowserModule,

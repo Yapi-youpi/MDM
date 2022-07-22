@@ -87,13 +87,14 @@ export class DevicesComponent implements OnInit {
   getConfigs() {
     this.config
       .getConfig("all")
-      .then((res: states.DevicesConfigsState) => {
-        console.log(res)
-        if (res.success) {
-          this.configs = res.devicesConfigs;
-        } else {
-          console.log(res.error);
-        }
+      .then(res => {
+        this.configs = res;
+        // console.log(res)
+        // if (res.success) {
+        //   this.configs = res.devicesConfigs;
+        // } else {
+        //   console.log(res.error);
+        // }
       })
       .catch((err) => {
         console.log(err);

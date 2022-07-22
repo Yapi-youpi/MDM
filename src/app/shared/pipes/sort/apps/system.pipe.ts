@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { App } from "../../../types/apps";
 
 @Pipe({
-  name: 'system'
+  name: 'systemAppsView'
 })
 export class SystemPipe implements PipeTransform {
   transform(apps: App[], isSystem: boolean = false): App[] {
