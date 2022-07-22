@@ -5,11 +5,11 @@ import { EditDeviceService } from "../../../../../shared/services/forms/device/e
 import { Device } from "../../../../../shared/types/devices";
 
 @Component({
-  selector: "app-device-action-btn",
-  templateUrl: "./device-action-btn.component.html",
-  styleUrls: ["./device-action-btn.component.scss"],
+  selector: "app-item-action-btn",
+  templateUrl: "./item-action-btn.component.html",
+  styleUrls: ["./item-action-btn.component.scss"],
 })
-export class DeviceActionBtnComponent {
+export class ItemActionBtnComponent {
   @Input() target: string = "";
   @Input() device!: Device;
 

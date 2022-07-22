@@ -7,5 +7,6 @@ export enum devicesPaths {
 
 export enum appsPaths {
   GET = "/get_app/",
-  UPLOAD = '/upload_file'
+  UPLOAD = '/upload_file',
+  GET_ICON = '/get_icon_by_app_id/'
 }

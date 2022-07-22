@@ -47,7 +47,7 @@ import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
 import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { AuthButtonComponent } from "./components/common/UI/button/auth-button/auth-button.component";
-import { DeviceActionBtnComponent } from "./components/common/UI/button/device-action-btn/device-action-btn.component";
+import { ItemActionBtnComponent } from "./components/common/UI/button/item-action-btn/item-action-btn.component";
 import { FilterBtnComponent } from "./components/common/UI/button/filter-btn/filter-btn.component";
 import { MenuButtonComponent } from "./components/common/UI/button/menu-button/menu-button.component";
 import { ModalActionBtnsComponent } from "./components/common/UI/button/modal-action-btns/modal-action-btns.component";
@@ -99,7 +99,7 @@ const routes: Routes = [
     ModalActionBtnsComponent,
     FilterBtnComponent,
     MenuButtonComponent,
-    DeviceActionBtnComponent,
+    ItemActionBtnComponent,
     AddButtonComponent,
     SortBtnComponent,
     AuthButtonComponent,
