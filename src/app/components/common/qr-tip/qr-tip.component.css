@@ -37,7 +37,7 @@
   font-size: 12px;
   line-height: 12px;
 
-  background-color: var(--sdm-light-blue);
+  background-color: var(--light-blue);
 }
 
 .tip .todo::before {
@@ -50,7 +50,7 @@
   top: 0;
   left: -28px;
 
-  background-color: var(--sdm-dark-blue);
+  background-color: var(--dark-blue);
 
   border-radius: 10px;
 }
@@ -65,7 +65,7 @@
   font-size: 16px;
   font-weight: 700;
 
-  color: var(--sdm-white);
+  color: var(--white);
 }
 
 .tip .todo p:first-child {
@@ -74,5 +74,5 @@
 
 .tip ol,
 .tip p {
-  color: var(--sdm-dark-grey);
+  color: var(--dark-grey);
 }

@@ -10,7 +10,7 @@
   height: 100%;
   width: 400px;
   padding: 30px 27px;
-  color: var(--sdm-dark-blue-grey);
+  color: var(--dark-blue-grey);
 }
 
 .sidenav.filter .body {
@@ -95,7 +95,7 @@
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-image: url("/assets/UI/arrow_down.svg");
-  background-color: var(--sdm-dark-blue-grey);
+  background-color: var(--dark-blue-grey);
   transition: transform 0.4s ease;
 }
 
