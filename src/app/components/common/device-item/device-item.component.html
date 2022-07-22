@@ -1,9 +1,9 @@
 <div class="row item">
   <div class="checkbox-container">
-    <app-checkbox
-      [isChecked]="!!device.isSelected"
+    <app-input-checkbox
+      [value]="!!device.isSelected"
       (onChange)="onSelectUnselectDeviceHandler(device)"
-    ></app-checkbox>
+    ></app-input-checkbox>
   </div>
   <div class="content">
     <div class="icon-wrapper">
@@ -34,10 +34,10 @@
     </div>
     <p>{{ device.battery_percent }}%</p>
     <div class="switch-wrapper">
-      <app-switch-input
-        [isChecked]="device.active_state"
+      <app-input-switch
+        [value]="device.active_state"
         (onChange)="onChangeDeviceStateHandler(device)"
-      ></app-switch-input>
+      ></app-input-switch>
     </div>
     <div class="device-actions-wrapper">
       <app-device-action-btn

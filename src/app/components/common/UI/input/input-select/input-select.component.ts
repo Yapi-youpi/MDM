@@ -7,7 +7,7 @@ import { inputWidth, Option } from "../../../../../shared/types/input";
   styleUrls: ['./input-select.component.scss']
 })
 export class InputSelectComponent {
-  @Input() selectWidth: inputWidth = "w-170";
+  @Input() width: inputWidth = "w-170";
   @Input() options: Option[] = [];
   @Input() currOption!: Option;
   @Input() isError: boolean = false;

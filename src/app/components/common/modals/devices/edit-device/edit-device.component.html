@@ -12,14 +12,15 @@
         [formGroup]="_form"
       >
         <div class="form-group-wrapper">
-          <app-form-group
+          <label for="name" class="text-menu-title">
+            Название
+          </label>
+          <app-input-text
             [control]="$any(_name)"
-            [labelText]="'Название'"
             [name]="'name'"
-            [inputWidth]="'w-440'"
+            [width]="'w-440'"
             [isError]="_isSubmitted && !!_name?.errors"
-          >
-          </app-form-group>
+          ></app-input-text>
           <app-input-alert
             *ngIf="_isSubmitted && _name?.errors"
             [control]="$any(_name)"
@@ -27,14 +28,15 @@
           ></app-input-alert>
         </div>
         <div class="form-group-wrapper">
-          <app-form-group
+          <label for="description" class="text-menu-title">
+            Описание
+          </label>
+          <app-input-text
             [control]="$any(_description)"
-            [labelText]="'Описание'"
             [name]="'description'"
-            [inputWidth]="'w-440'"
+            [width]="'w-440'"
             [isError]="_isSubmitted && !!_description?.errors"
-          >
-          </app-form-group>
+          ></app-input-text>
           <app-input-alert
             *ngIf="_isSubmitted && _description?.errors"
             [control]="$any(_description)"
@@ -43,15 +45,15 @@
         </div>
         <hr class="divider">
         <div class="form-group-wrapper">
-          <app-form-group
-            [labelText]="'Группа'"
-            [inputType]="'select'"
-            [inputWidth]="'w-440'"
+          <label class="text-menu-title">
+            Группа
+          </label>
+          <app-input-select
+            [width]="'w-440'"
             [options]="_options"
             [currOption]="!currOption ? _currOption : currOption"
             (onSelect)="onSelectHandler($event)"
-          >
-          </app-form-group>
+          ></app-input-select>
         </div>
       </form>
     </div>

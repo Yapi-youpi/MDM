@@ -37,38 +37,38 @@
         </div>
         <p class="text-menu-title last-date">Последнее включение</p>
         <div class="form-group-wrapper">
-          <app-form-group
-            [labelText]="'с'"
+          <label for="date-from" class="text-menu-title">
+            с
+          </label>
+          <app-input-datetime
             [name]="'date-from'"
             [control]="$any(_date_from)"
-            [inputType]="'datetime-local'"
-          ></app-form-group>
+          ></app-input-datetime>
         </div>
         <div class="form-group-wrapper">
-          <app-form-group
-            [labelText]="'по'"
+          <label for="date-to" class="text-menu-title">
+            по
+          </label>
+          <app-input-datetime
             [name]="'date-to'"
             [control]="$any(_date_to)"
-            [inputType]="'datetime-local'"
-          ></app-form-group>
+          ></app-input-datetime>
         </div>
         <div class="form-group-wrapper">
-          <app-form-group
-            [labelText]="'Конфигурация'"
-            [name]="'config_ids'"
-            [control]="$any(_config_ids)"
-            [inputType]="'select'"
+          <label for="config_ids" class="text-menu-title">
+            Конфигурация
+          </label>
+          <app-input-select
             [options]="_options_configs"
-          ></app-form-group>
+          ></app-input-select>
         </div>
         <div class="form-group-wrapper">
-          <app-form-group
-            [labelText]="'Группа'"
-            [name]="'group_ids'"
-            [control]="$any(_group_ids)"
-            [inputType]="'select'"
+          <label for="group_ids" class="text-menu-title">
+            Группа
+          </label>
+          <app-input-select
             [options]="_options_groups"
-          ></app-form-group>
+          ></app-input-select>
         </div>
       </form>
     </div>

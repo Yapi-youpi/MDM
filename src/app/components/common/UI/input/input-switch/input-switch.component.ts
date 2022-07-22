@@ -2,13 +2,14 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 
 @Component({
-  selector: "app-switch-input",
-  templateUrl: "./switch-input.component.html",
-  styleUrls: ["./switch-input.component.scss"],
+  selector: 'app-input-switch',
+  templateUrl: './input-switch.component.html',
+  styleUrls: ['./input-switch.component.scss']
 })
-export class SwitchInputComponent {
+export class InputSwitchComponent {
   @Input() control!: FormControl;
-  @Input() isChecked: boolean = false;
+  @Input() name: string = '';
+  @Input() value: boolean = false;
 
   @Output() onChange = new EventEmitter();
 

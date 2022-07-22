@@ -8,10 +8,10 @@
   >
     <div class="page-content">
       <div class="top row space-between">
-        <app-search-input
+        <app-input-search
           [value]="searchParam"
           (onChange)="onChangeSearchInputHandler($event)"
-        ></app-search-input>
+        ></app-input-search>
         <div class="filter-wrapper">
           <app-filter-btn
             [target]="'filter_devices'"
@@ -37,10 +37,10 @@
       <div class="list">
         <div class="list-header">
           <div class="checkbox-wrapper">
-            <app-checkbox
-              [isChecked]="isAllSelected"
+            <app-input-checkbox
+              [value]="isAllSelected"
               (onChange)="selectUnselectDevices()"
-            ></app-checkbox>
+            ></app-input-checkbox>
           </div>
           <div class="sort-headers row space-between">
             <div class="sort-btn-wrapper status">

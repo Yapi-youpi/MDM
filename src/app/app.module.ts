@@ -36,7 +36,6 @@ import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
 import { ChangePasswordComponent } from "./components/common/modals/change-password/change-password.component";
 import { ModalComponent } from "./components/common/modal/modal.component";
 import { GroupConverterPipe } from "./shared/pipes/group-converter.pipe";
-import { SearchInputComponent } from "./components/common/UI/input/search-input/search-input.component";
 import { SearchPipe } from "./shared/pipes/search.pipe";
 import { ConfigConverterPipe } from "./shared/pipes/config-converter.pipe";
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
@@ -64,14 +63,9 @@ import {
 import { EditDeviceComponent } from "./components/common/modals/devices/edit-device/edit-device.component";
 import { QrCodeComponent } from "./components/common/modals/devices/qr-code/qr-code.component";
 import { FilterDevicesComponent } from "./components/common/modals/devices/filter-devices/filter-devices.component";
-import { FormGroupComponent } from "./components/common/UI/input/form-group/form-group.component";
 import { SelectedElementsComponent } from "./components/common/selected-elements/selected-elements.component";
-import { CheckboxComponent } from "./components/common/UI/input/checkbox/checkbox.component";
 import { InputAlertComponent } from "./components/common/UI/alert/input-alert/input-alert.component";
 import { StatusIconComponent } from "./components/common/UI/status/status-icon/status-icon.component";
-import { SwitchInputComponent } from "./components/common/UI/input/switch-input/switch-input.component";
-import { InputComponent } from "./components/common/UI/input/input/input.component";
-import { SelectComponent } from "./components/common/UI/input/select/select.component";
 import { GlobalHeaderComponent } from "./components/common/global-header/global-header.component";
 import { ButtonComponent } from './components/common/UI/button/button/button.component';
 import { InputPasswordComponent } from './components/common/UI/input/input-password/input-password.component';
@@ -81,6 +75,9 @@ import { InputSelectComponent } from './components/common/UI/input/input-select/
 import { AppsComponent } from './components/pages/apps/apps.component';
 import { AddAppComponent } from "./components/common/modals/apps/add-app/add-app.component";
 import { InputFileComponent } from './components/common/UI/input/input-file/input-file.component';
+import { InputSwitchComponent } from './components/common/UI/input/input-switch/input-switch.component';
+import { InputDatetimeComponent } from './components/common/UI/input/input-datetime/input-datetime.component';
+import { InputSearchComponent } from './components/common/UI/input/input-search/input-search.component';
 
 const routes: Routes = [
   {
@@ -93,14 +90,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     GlobalHeaderComponent,
-    SelectComponent,
-    InputComponent,
-    SwitchInputComponent,
     StatusIconComponent,
     InputAlertComponent,
-    CheckboxComponent,
     SelectedElementsComponent,
-    FormGroupComponent,
     FilterDevicesComponent,
     ModalActionBtnsComponent,
     FilterBtnComponent,
@@ -132,7 +124,6 @@ const routes: Routes = [
     DeviceItemComponent,
     GlobalContainerComponent,
     FilterSidebarComponent,
-    SearchInputComponent,
     SearchUsersPipe,
     FilterUsersPipe,
     UserPermissionsComponent,
@@ -156,7 +147,10 @@ const routes: Routes = [
     InputSelectComponent,
     AppsComponent,
     AddAppComponent,
-    InputFileComponent
+    InputFileComponent,
+    InputSwitchComponent,
+    InputDatetimeComponent,
+    InputSearchComponent,
   ],
   imports: [
     BrowserModule,

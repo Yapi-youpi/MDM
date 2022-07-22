@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: "app-search-input",
-  templateUrl: "./search-input.component.html",
-  styleUrls: ["./search-input.component.scss"],
+  selector: 'app-input-search',
+  templateUrl: './input-search.component.html',
+  styleUrls: ['./input-search.component.scss']
 })
-export class SearchInputComponent {
+export class InputSearchComponent {
   @Input() public value: string = "";
 
   @Output() onChange = new EventEmitter<string>();
@@ -16,12 +16,5 @@ export class SearchInputComponent {
 
   onChangeHandler(value: string) {
     this.onChange.emit(value);
-  }
-
-  setSearchFocus() {
-    this.isSearchFocused = true;
-  }
-  resetSearchFocus() {
-    this.isSearchFocused = false;
   }
 }

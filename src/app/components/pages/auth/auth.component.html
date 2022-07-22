@@ -15,14 +15,15 @@
       <hr class="divider">
       <div class="body">
         <div class="form-group-wrapper">
-          <app-form-group
-            [control]="$any(_login)"
-            [labelText]="'Логин'"
+          <label for="login" class="text-menu-title">
+            Логин
+          </label>
+          <app-input-text
             [name]="'login'"
-            [inputWidth]="'w-350'"
+            [width]="'w-350'"
+            [control]="$any(_login)"
             [isError]="_isSubmitted && !!_login?.errors"
-          >
-          </app-form-group>
+          ></app-input-text>
           <app-input-alert
             *ngIf="_isSubmitted && _login?.errors"
             [control]="$any(_login)"
@@ -30,14 +31,15 @@
           ></app-input-alert>
         </div>
         <div class="form-group-wrapper">
-          <app-form-group
-            [control]="$any(_pass)"
-            [labelText]="'Пароль'"
+          <label for="password" class="text-menu-title">
+            Пароль
+          </label>
+          <app-input-password
             [name]="'password'"
-            [inputType]="'password'"
-            [inputWidth]="'w-350'"
+            [width]="'w-350'"
+            [control]="$any(_pass)"
             [isError]="_isSubmitted && !!_pass?.errors"
-          ></app-form-group>
+          ></app-input-password>
           <app-input-alert
             *ngIf="_isSubmitted && _pass?.errors"
             [control]="$any(_pass)"
@@ -48,7 +50,7 @@
           <app-auth-button></app-auth-button>
           <div class="row space-between">
             <div class="remember">
-              <app-checkbox></app-checkbox>
+              <app-input-checkbox></app-input-checkbox>
               <p class="text-menu-title">Запомнить меня</p>
             </div>
             <a
@@ -63,49 +65,3 @@
     </form>
   </app-card>
 </app-central-wrapper>
-<!--  <form-->
-<!--    class="card sdm-bg-light-grey"-->
-<!--    (ngSubmit)="login(user.login, user.last_password)"-->
-<!--  >-->
-<!--    <div class="row">-->
-<!--      <label for="login"> Логин </label>-->
-<!--      <input-->
-<!--        [(ngModel)]="user.login"-->
-<!--        id="login"-->
-<!--        type="text"-->
-<!--        name="login"-->
-<!--        required-->
-<!--      />-->
-<!--    </div>-->
-<!--    <div class="row">-->
-<!--      <label for="password">Пароль</label>-->
-<!--      <div class="password">-->
-<!--        <input-->
-<!--          class="auth-password"-->
-<!--          [(ngModel)]="user.last_password"-->
-<!--          name="password"-->
-<!--          id="password"-->
-<!--          [attr.type]="isPasswordVisible ? 'text' : 'password'"-->
-<!--          required-->
-<!--        />-->
-<!--        <i (click)="togglePasswordVisibility()" class="small material-icons">-->
-<!--          {{ isPasswordVisible ? "visibility" : "visibility_off" }}-->
-<!--        </i>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <ng-container>-->
-<!--      <p *ngIf="err.error" class="center-align helper-text red-text invalid">-->
-<!--        {{ err.error }}-->
-<!--      </p>-->
-<!--    </ng-container>-->
-<!--    <div class="row btns-row">-->
-<!--      <a class="sdm-btn sdm-middle r-14" href=""> Зарегистрироваться </a>-->
-<!--      <button-->
-<!--        class="center-align sdm-middle sdm-dark r-14"-->
-<!--        type="submit"-->
-<!--        [disabled]="user.login.trim() === '' || user.last_password.trim() === ''"-->
-<!--      >-->
-<!--        Войти-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </form>-->
