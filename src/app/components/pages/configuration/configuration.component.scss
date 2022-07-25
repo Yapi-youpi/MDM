@@ -109,9 +109,9 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-.two-columns:first-child {
-  padding-right: 50px;
-}
+//.two-columns div:first-child {
+//  margin-right: 50px;
+//}
 
 /* RANGE */
 
@@ -496,18 +496,48 @@ input[type="color"]::-webkit-color-swatch {
   align-items: center;
 }
 
+/* ОРИЕНТАЦИЯ */
+
+.orientation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__card {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    background: white;
+    border-radius: 6px;
+  }
+  &__span {
+    padding: 14px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  & input:checked + .orientation__card {
+    border: 3px solid var(--dark-blue);
+  }
+}
+
+/* ИНТЕРФЕЙС (ДЕМО) */
+
 .interface {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
 .interface-sample {
-  width: 188px;
-  height: 333px;
+  width: 200px;
+  height: 340px;
   background: #8fa7cb;
-  border: 15.0591px solid #2f4459;
-  border-radius: 12.0473px;
+  border: 12px solid #2f4459;
+  border-radius: 20px;
 }
 
 .w-740 {

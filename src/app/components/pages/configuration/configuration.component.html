@@ -708,32 +708,41 @@
                 <div class="font-bold">Ориентация</div>
                 <div class="form__item">
                   <div class="tags-container">
-                    <label class="custom-radio">
+                    <label class="orientation">
                       <input
                         class="visually-hidden"
                         formControlName="orientation"
                         type="radio"
                         [value]="0"
                       />
-                      <span class="custom-radio__span">Поворот</span>
+                      <div class="orientation__card">
+                        <img src="/assets/config-images/rotate.svg" alt="" />
+                      </div>
+                      <span class="orientation__span">Поворот</span>
                     </label>
-                    <label class="custom-radio">
+                    <label class="orientation">
                       <input
                         class="visually-hidden"
                         formControlName="orientation"
                         type="radio"
                         [value]="1"
                       />
-                      <span class="custom-radio__span">Вертикально</span>
+                      <div class="orientation__card">
+                        <img src="/assets/config-images/portrait.svg" alt="" />
+                      </div>
+                      <span class="orientation__span">Вертикально</span>
                     </label>
-                    <label class="custom-radio">
+                    <label class="orientation">
                       <input
                         class="visually-hidden"
                         formControlName="orientation"
                         type="radio"
                         [value]="2"
                       />
-                      <span class="custom-radio__span">Горизонтально</span>
+                      <div class="orientation__card">
+                        <img src="/assets/config-images/landscape.svg" alt="" />
+                      </div>
+                      <span class="orientation__span">Горизонтально</span>
                     </label>
                   </div>
                 </div>
