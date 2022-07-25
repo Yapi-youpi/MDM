@@ -74,13 +74,13 @@ export class MapComponent implements OnInit, AfterViewInit {
           </filter>
           </defs>
           <text
-            y="34"
+            y="35"
             x="58"
-            font-family="HelveticaNeue"
-            font-size="13"
+            font-family="HelveticaNeueRoman"
+            font-size="12"
             text-anchor="middle"
             fill="#343841">
-              255
+              234
           </text>
          </svg>
       `,
