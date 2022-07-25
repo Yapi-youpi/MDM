@@ -1,0 +1,14 @@
+.nodata {
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background-color: var(--white);
+  color: var(--blue);
+
+  box-shadow: var(--box-shadow);
+}

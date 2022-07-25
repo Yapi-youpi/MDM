@@ -86,31 +86,36 @@
           </div>
         </div>
         <div class="list-body">
-          <app-device-item
-            *ngFor="
-              let device of devices
-                | devicesFilter
-                  : devicesFilters.status
-                  : devicesFilters.dateFrom
-                  : devicesFilters.dateTo
-                  : devicesFilters.configsIDs
-                  : devicesFilters.groupsIDs
-                | search: searchParam:'device'
-                | devices_status: sortStatusAsc
-                | devices_date: sortDateAsc
-                | devices_group: groups : sortGroupAsc
-                | devices_battery: sortBatteryAsc
-                | devices_name: sortNameAsc
-              "
-            [device]="device"
-            [groups]="groups"
-            [configs]="configs"
-            (onSelectUnselectDevice)="selectUnselectDevice($event)"
-            (onChangeDeviceState)="changeDeviceState($event)"
-            (onClickDeviceQRCode)="getDeviceQRCode($event)"
-            (onClickDeviceEdit)="selectDeviceToEdit($event)"
-            (onClickDeviceDelete)="selectDeviceToDelete($event)"
-          ></app-device-item>
+          <ng-container *ngIf="devices; else nodata">
+            <app-device-item
+              *ngFor="
+                let device of devices
+                  | devicesFilter
+                    : devicesFilters.status
+                    : devicesFilters.dateFrom
+                    : devicesFilters.dateTo
+                    : devicesFilters.configsIDs
+                    : devicesFilters.groupsIDs
+                  | search: searchParam:'device'
+                  | devices_status: sortStatusAsc
+                  | devices_date: sortDateAsc
+                  | devices_group: groups : sortGroupAsc
+                  | devices_battery: sortBatteryAsc
+                  | devices_name: sortNameAsc
+                "
+              [device]="device"
+              [groups]="groups"
+              [configs]="configs"
+              (onSelectUnselectDevice)="selectUnselectDevice($event)"
+              (onChangeDeviceState)="changeDeviceState($event)"
+              (onClickDeviceQRCode)="getDeviceQRCode($event)"
+              (onClickDeviceEdit)="selectDeviceToEdit($event)"
+              (onClickDeviceDelete)="selectDeviceToDelete($event)"
+            ></app-device-item>
+          </ng-container>
+          <ng-template #nodata>
+            <app-no-list-data></app-no-list-data>
+          </ng-template>
         </div>
       </div>
     </div>
