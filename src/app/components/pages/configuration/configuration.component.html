@@ -356,7 +356,10 @@
                     <span aria-hidden="true"></span>
                   </label>
                 </div>
-                <div class="form__item">
+                <div
+                  *ngIf="configForm.get('manageVolume')?.value == true"
+                  class="form__item"
+                >
                   <!--                  <label for="volume">Громкость</label>-->
                   <div class="range-wrapper w-500">
                     <div class="range">
@@ -433,7 +436,10 @@
                     <span aria-hidden="true"></span>
                   </label>
                 </div>
-                <div class="form__item">
+                <div
+                  *ngIf="configForm.get('manageTimeout')?.value == true"
+                  class="form__item"
+                >
                   <!--                  <label for="timeout">Таймаут</label>-->
                   <div class="range-slider timeout-slider">
                     <input
@@ -537,7 +543,10 @@
                     <span aria-hidden="true"></span>
                   </label>
                 </div>
-                <div class="form__item">
+                <div
+                  *ngIf="configForm.get('autoBrightness')?.value == false"
+                  class="form__item"
+                >
                   <!--                  <label for="brightness">Яркость</label>-->
                   <div class="range-wrapper">
                     <div class="range">

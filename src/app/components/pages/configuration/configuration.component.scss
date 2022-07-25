@@ -109,7 +109,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-.two-columns .form__elems {
+.two-columns:first-child {
   padding-right: 50px;
 }
 
