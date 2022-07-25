@@ -1452,29 +1452,32 @@ input {
     border-width: 2px;
     border-color: var(--error);
   }
-
-  &.w-170 {
-    width: 170px;
-  }
-  .w-186 {
-    width: 186px;
-  }
-  &.w-296 {
-    width: 296px;
-  }
-  &.w-350 {
-    width: 350px;
-  }
-  &.w-440 {
-    width: 440px;
-  }
-  &.w-457 {
-    width: 457px;
-  }
-  .w-500 {
-    width: 500px;
-  }
 }
+.w-170 {
+  width: 170px;
+}
+.w-186 {
+  width: 186px;
+}
+.w-267 {
+  width: 267px;
+}
+.w-296 {
+  width: 296px;
+}
+.w-350 {
+  width: 350px;
+}
+.w-440 {
+  width: 440px;
+}
+.w-457 {
+  width: 457px;
+}
+.w-500 {
+  width: 500px;
+}
+
 //input[type='text'],
 //input[type='email'],
 //input[type='password'],
