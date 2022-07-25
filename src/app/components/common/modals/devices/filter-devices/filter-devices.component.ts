@@ -52,6 +52,7 @@ export class FilterDevicesComponent {
       return {
         value: c.ID,
         html: c.name,
+        isSelected: false,
       } as Option;
     });
   }
@@ -61,6 +62,7 @@ export class FilterDevicesComponent {
       return {
         value: g.id,
         html: g.name,
+        isSelected: false,
       } as Option;
     });
   }
@@ -71,6 +73,26 @@ export class FilterDevicesComponent {
 
   onStatusOffClick() {
     this._form.controls["status-off"].setValue(!this._status_off?.value);
+  }
+
+  onConfigSelectHandler(options: Option[]) {
+    let data: string[] = [];
+
+    options.forEach((o) => {
+      if (o.isSelected) data.push(o.value);
+    });
+
+    this._form.controls["config_ids"].setValue(data);
+  }
+
+  onGroupSelectHandler(options: Option[]) {
+    let data: string[] = [];
+
+    options.forEach((o) => {
+      if (o.isSelected) data.push(o.value);
+    });
+
+    this._form.controls["group_ids"].setValue(data);
   }
 
   onCancelHandler() {
@@ -84,5 +106,7 @@ export class FilterDevicesComponent {
 
   onSubmitHandler() {
     this.onSubmit.emit();
+
+    console.log(this._form.getRawValue());
   }
 }

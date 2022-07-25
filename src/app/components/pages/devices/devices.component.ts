@@ -51,7 +51,7 @@ export class DevicesComponent implements OnInit {
   // public db: DatabaseService
   constructor(
     public user: userService,
-    private userPasswordService: formService.user.changePass,
+    // private userPasswordService: formService.user.changePass,
     private elementRef: ElementRef,
     private group: groupService,
     private config: deviceConfigService,
@@ -73,21 +73,21 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  changePassword() {
-    this.user
-      .changePassword(this.userPasswordService._pass)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((res) => {
-        console.log(res);
-      });
-  }
+  // changePassword() {
+  //   this.user
+  //     .changePassword(this.userPasswordService._pass)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((res) => {
+  //       console.log(res);
+  //     });
+  // }
 
   getConfigs() {
     this.config
       .getConfig("all")
-      .then(res => {
+      .then((res) => {
         this.configs = res;
         // console.log(res)
         // if (res.success) {

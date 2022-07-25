@@ -24,10 +24,12 @@
     <app-app-action-btn
       [app]="app"
       [target]="'edit_app'"
+      (onClick)="onEditClickHandler(app)"
     ></app-app-action-btn>
     <app-app-action-btn
       [app]="app"
       [target]="'delete_app'"
+      (onClick)="onDeleteClickHandler(app)"
     ></app-app-action-btn>
   </div>
 </div>

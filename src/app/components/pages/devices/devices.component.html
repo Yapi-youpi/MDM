@@ -96,11 +96,11 @@
                   : devicesFilters.configsIDs
                   : devicesFilters.groupsIDs
                 | search: searchParam:'device'
-                | devicesByStatus: sortStatusAsc
-                | devicesByDate: sortDateAsc
-                | devicesByGroup: groups : sortGroupAsc
-                | devicesByBattery: sortBatteryAsc
-                | devicesByName: sortNameAsc
+                | devices_status: sortStatusAsc
+                | devices_date: sortDateAsc
+                | devices_group: groups : sortGroupAsc
+                | devices_battery: sortBatteryAsc
+                | devices_name: sortNameAsc
               "
             [device]="device"
             [groups]="groups"

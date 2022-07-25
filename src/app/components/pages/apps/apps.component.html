@@ -56,10 +56,13 @@
         </div>
         <div class="list-body">
           <app-app-item
-            *ngFor="let app of apps
-            | systemAppsView: isOnlySystemApps
-            | search: searchParam:'app'"
+            *ngFor=
+              "let app of apps
+                | apps_system: isOnlySystemApps
+                | apps_name: isNameSortAsc
+              "
             [app]="app"
+            (onEditClick)="setAppToEdit($event)"
           ></app-app-item>
         </div>
       </div>
@@ -68,6 +71,9 @@
 </app-global-container>
 
 <app-add-app
-  [title]="'Добавить приложение'"
   (onSubmit)="uploadApp()"
 ></app-add-app>
+<app-edit-app
+  [app]="currApp"
+  (onSubmit)="editApp()"
+></app-edit-app>
