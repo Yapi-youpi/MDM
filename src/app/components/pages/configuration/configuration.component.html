@@ -606,7 +606,7 @@
         <div class="form__tab" style="display: none">
           <div class="card__header">Дизайн</div>
           <div class="config-settings form__elems">
-            <div class="form__item">
+            <div class="form__item w-500">
               <label class="switch">
                 Использовать дизайн по умолчанию
                 <input
@@ -617,10 +617,10 @@
                 <span aria-hidden="true"></span>
               </label>
             </div>
-            <div class="form__item">
+            <div class="form__item w-500">
               <label>Заголовок рабочего стола</label>
               <select
-                class="select-native w-500"
+                class="select-native w-267"
                 formControlName="desktopHeader"
               >
                 <option [ngValue]="'NO_HEADER'">Нет</option>
@@ -630,7 +630,7 @@
               </select>
             </div>
             <div
-              class="form__item"
+              class="form__item w-500"
               *ngIf="configForm.get('desktopHeader')?.value == 'TEMPLATE'"
             >
               <label for="desktopHeaderTemplate">Шаблон заголовка</label>
@@ -638,14 +638,14 @@
                 formControlName="desktopHeaderTemplate"
                 type="text"
                 id="desktopHeaderTemplate"
-                class="w-500"
-                placeholder="Используйте переменные deviceId, description, custom1, custom2, custom3"
+                class="w-267"
+                placeholder="Используйте deviceId, description, custom1..."
               />
             </div>
             <div class="two-columns">
               <div class="form__elems">
                 <div class="font-bold">Цвет</div>
-                <div class="form__item">
+                <div class="form__item w-500">
                   <div class="colors-wrapper">
                     <div class="colors">
                       <label for="backgroundColor">Фон</label>
@@ -763,7 +763,7 @@
         <div class="form__tab" style="display: none">
           <div class="card__header">Управление</div>
           <div class="config-settings form__elems w-740">
-            <div class="form__item">
+            <div class="form__item w-267">
               <label class="switch">
                 Безопасные настройки
                 <input
@@ -774,7 +774,7 @@
                 <span aria-hidden="true"></span>
               </label>
             </div>
-            <div class="form__item">
+            <div class="form__item w-267">
               <label class="switch">
                 Режим киоска
                 <input
