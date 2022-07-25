@@ -1359,7 +1359,15 @@ hr.divider {
 
 // КОНТЕЙНЕР ИНПУТ СТРОКИ
 .form-group-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   position: relative;
+
+  > label {
+    margin-right: auto;
+  }
 }
 
 // КОНТЕЙНЕР-СТРОКА
