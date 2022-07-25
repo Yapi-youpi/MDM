@@ -4,16 +4,30 @@
     [src]="url + app.ID"
   >
   <div class="title">
-    <p>{{ app.name }}</p>
+    <p class="text-choose">{{ app.name }}</p>
     <p *ngIf="app.system" class="text-note">Системное приложение</p>
   </div>
   <p>{{ app.version }}</p>
   <p>123</p>
   <p>{{ app.pkg }}</p>
   <p>{{ app.fileSize }}</p>
-  <div class="label">
-    <span class="icon"></span>
+  <div class="row center">
+    <div class="icon-container">
+      <span
+        class="icon"
+        [class.on]="app.showIcon"
+        [class.off]="!app.showIcon"
+      ></span>
+    </div>
   </div>
-  <div class="app-actions-wrapper"></div>
-  <div class="app-actions-wrapper"></div>
+  <div class="row space-between">
+    <app-app-action-btn
+      [app]="app"
+      [target]="'edit_app'"
+    ></app-app-action-btn>
+    <app-app-action-btn
+      [app]="app"
+      [target]="'delete_app'"
+    ></app-app-action-btn>
+  </div>
 </div>

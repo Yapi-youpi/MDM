@@ -47,7 +47,7 @@ import { GroupPipe } from "./shared/pipes/sort/devices/group.pipe";
 import { BatteryPipe } from "./shared/pipes/sort/devices/battery.pipe";
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { AuthButtonComponent } from "./components/common/UI/button/auth-button/auth-button.component";
-import { ItemActionBtnComponent } from "./components/common/UI/button/item-action-btn/item-action-btn.component";
+import { DeviceActionBtnComponent } from "./components/common/UI/button/item-action-btn/device/device-action-btn.component";
 import { FilterBtnComponent } from "./components/common/UI/button/filter-btn/filter-btn.component";
 import { MenuButtonComponent } from "./components/common/UI/button/menu-button/menu-button.component";
 import { ModalActionBtnsComponent } from "./components/common/UI/button/modal-action-btns/modal-action-btns.component";
@@ -80,6 +80,7 @@ import { InputDatetimeComponent } from './components/common/UI/input/input-datet
 import { InputSearchComponent } from './components/common/UI/input/input-search/input-search.component';
 import { SystemPipe } from './shared/pipes/sort/apps/system.pipe';
 import { AppItemComponent } from './components/common/list-item/app-item/app-item.component';
+import { AppActionBtnComponent } from './components/common/UI/button/item-action-btn/app/app-action-btn.component';
 
 const routes: Routes = [
   {
@@ -99,7 +100,7 @@ const routes: Routes = [
     ModalActionBtnsComponent,
     FilterBtnComponent,
     MenuButtonComponent,
-    ItemActionBtnComponent,
+    DeviceActionBtnComponent,
     AddButtonComponent,
     SortBtnComponent,
     AuthButtonComponent,
@@ -155,6 +156,7 @@ const routes: Routes = [
     InputSearchComponent,
     SystemPipe,
     AppItemComponent,
+    AppActionBtnComponent,
   ],
   imports: [
     BrowserModule,

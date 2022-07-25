@@ -13,45 +13,51 @@
   .list {
     &-header {
       margin-top: 24px;
-      padding: 0 16px 0 56px;
+      padding: 0 16px;
 
       > *:nth-child(1) {
-        width: 165px;
+        width: 30px;
 
-        margin-right: 2px;
+        margin-right: 10px;
       }
 
       > *:nth-child(2) {
-        width: 50px;
+        width: 165px;
 
         margin-right: 5px;
       }
 
       > *:nth-child(3) {
+        width: 50px;
+
+        margin-right: 5px;
+      }
+
+      > *:nth-child(4) {
         width: 505px;
 
         margin-right: 10px;
       }
 
-      > *:nth-child(4) {
+      > *:nth-child(5) {
         width: 230px;
 
         margin-right: 10px;
       }
 
-      > *:nth-child(5) {
+      > *:nth-child(6) {
         width: 56px;
 
         margin-right: 21px;
       }
 
-      > *:nth-child(6) {
+      > *:nth-child(7) {
         width: 40px;
 
         margin-right: 46px;
       }
 
-      > *:nth-child(7) {
+      > *:nth-child(8) {
         width: 60px;
       }
     }

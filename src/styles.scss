@@ -190,14 +190,14 @@ legend {
   width: 100%;
 }
 
-//.card {
-//  height: calc(100vh - var(--header-height) - 32px /*paddings*/);
-//  padding: 22px;
-//  background-color: var(--sdm-light-grey);
-//  border-radius: 14px;
-//  flex: 1;
-//  overflow-y: hidden;
-//}
+.card {
+  height: calc(100vh - var(--header-height) - 32px /*paddings*/);
+  padding: 22px;
+  background-color: var(--sdm-light-grey);
+  border-radius: 14px;
+  flex: 1;
+  overflow-y: hidden;
+}
 
 .card--sidebar {
   max-width: 350px;
@@ -1380,6 +1380,10 @@ hr.divider {
 
 // КОНТЕЙНЕР ИНПУТ СТРОКИ
 .form-group-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   position: relative;
 }
 

@@ -26,21 +26,6 @@ export class AppsService {
     });
   }
 
-  getIcon(id: string) {
-    const url = environment.url + api.GET_ICON + id;
-
-    return new Promise<any>((resolve, reject) => {
-      this.http.get(url).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
-
   upload(file: FormData) {
     const url = environment.url + api.UPLOAD
 

@@ -11,7 +11,7 @@ import { App } from "../../../shared/types/apps";
   styleUrls: ["./apps.component.scss"],
 })
 export class AppsComponent {
-  public loading: boolean = false;
+  public loading: boolean = true;
   public apps: App[] = [];
 
   public searchParam: string = "";
@@ -46,15 +46,6 @@ export class AppsComponent {
         if (res.success) {
           this.loading = false;
           this.apps = res.app;
-
-          console.log(res.app);
-
-          this.apps.forEach((a) => {
-            this.appsService
-              .getIcon(a.ID)
-              .then((res) => res.log)
-              .catch((err) => console.log(err));
-          });
         } else {
           console.log(res.error);
         }
