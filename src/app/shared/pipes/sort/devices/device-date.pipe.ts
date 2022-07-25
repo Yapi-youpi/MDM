@@ -3,9 +3,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { Device } from "../../../types/devices";
 
 @Pipe({
-  name: "devicesByDate",
+  name: "devices_date",
 })
-export class DatePipe implements PipeTransform {
+export class DeviceDatePipe implements PipeTransform {
   transform(devices: Device[], isDateAsc: boolean): Device[] {
     if (isDateAsc)
       return devices.sort((a, b) => -a.updatedAt.localeCompare(b.updatedAt));

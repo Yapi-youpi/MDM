@@ -35,23 +35,23 @@
 }
 
 :root {
-  --dark-blue-grey: #2f4459;
+  --dark-blue-grey: #2F4459;
   --dark-grey: #667389;
-  --dark-blue: #557ebe;
-  --blue: #739cdd;
-  --light-blue: #dae3f4;
-  --light-blue-darker: #c7d5ed;
-  --light-blue-grey: #eceef1;
-  --light-grey: #f7f7f7;
-  --grey: #d8d8d8;
-  --white: #ffffff;
-  --green: #afd9a1;
-  --red: #fca3a3;
-  --error: #eb4f4f;
+  --dark-blue: #557EBE;
+  --blue: #739CDD;
+  --light-blue: #DAE3F4;
+  --light-blue-darker: #C7D5ED;
+  --light-blue-grey: #ECEEF1;
+  --light-grey: #F7F7F7;
+  --grey: #D8D8D8;
+  --white: #FFFFFF;
+  --green: #AFD9A1;
+  --red: #FCA3A3;
+  --error: #EB4F4F;
   --box-shadow: 0px 0px 10px rgba(133, 133, 133, 0.15);
   --header-height: 70px;
   --input-height: 44.44px;
-  --transition-time: 0.4s;
+  --transition-time: .4s;
   --filter-sidebar-width: 400px;
 }
 * {
@@ -1150,27 +1150,26 @@ input[type="checkbox"]:disabled + .checkbox-custom {
   align-items: center;
 }
 /*// СПАН-ИКОНКА*/
-.icon,
-.btn-icon span {
-  display: block;
+   .icon,
+   .btn-icon span {
+     display: block;
 
-  mask-repeat: no-repeat;
-  mask-position: center center;
+     mask-repeat: no-repeat;
+     mask-position: center center;
 
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center center;
-}
+     -webkit-mask-repeat: no-repeat;
+     -webkit-mask-position: center center;
+   }
 /*// СПИСКИ*/
-ul,
-ol {
-  list-style: none;
-}
+   ul, ol {
+     list-style: none;
+   }
 /*// ССЫЛКА*/
-a {
-  display: block;
+   a {
+     display: block;
 
-  color: inherit;
-}
+     color: inherit;
+   }
 ///*// СЕЛЕКТ*/
 //   select {
 //     height: var(--input-height);
@@ -1312,11 +1311,11 @@ a {
 
 body {
   // основной текст
-  font-family: "HelveticaNeueCyr", sans-serif;
+  font-family: 'HelveticaNeueCyr', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 1;
+  line-height: 12px;
   // основной текст
   color: var(--dark-blue-grey);
 }
@@ -1334,7 +1333,7 @@ body {
 }
 // примечание
 .text-note {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 10px;
 }
@@ -1375,15 +1374,19 @@ body {
 // РАЗДЕЛИТЕЛЬ
 hr.divider {
   height: 2px;
+
   background-color: var(--light-blue);
+
   border: none;
 }
 
 // СПАН-ИКОНКА
 .icon {
   display: block;
+
   mask-repeat: no-repeat;
   mask-position: center center;
+
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
 }
@@ -1393,8 +1396,14 @@ hr.divider {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   position: relative;
+
+  > label {
+    margin-right: auto;
+  }
 }
+
 // КОНТЕЙНЕР-СТРОКА
 .row {
   display: flex;
@@ -1418,46 +1427,52 @@ input {
   font-size: 16px !important;
   line-height: 18.77px !important;
   color: var(--dark-blue-grey);
+
   background-color: var(--white);
+
   transition: border-color var(--transition-time) ease;
 
-  &[type="text"],
-  &[type="email"],
-  &[type="password"],
-  &[type="datetime-local"],
-  &[type="search"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='password'],
+  &[type='datetime-local'],
+  &[type='search'] {
     border: 1px solid var(--grey);
   }
 
-  &[type="text"],
-  &[type="email"],
-  &[type="password"],
-  &[type="datetime-local"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='password'],
+  &[type='datetime-local'] {
     height: var(--input-height);
 
     border-radius: 16px;
   }
 
-  &[type="text"],
-  &[type="email"],
-  &[type="datetime-local"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='datetime-local'] {
     padding: 11px;
   }
 
-  &[type="search"] {
+  &[type='search'] {
     height: 30px;
     width: 300px;
+
     padding: 8px;
+
     background-color: transparent;
+
     border-radius: 15px;
 
     &:focus + .icon {
       display: none;
+
       padding-left: 8px;
     }
   }
 
-  &[type="password"] {
+  &[type='password'] {
     padding: 11px 31px 11px 11px;
   }
 

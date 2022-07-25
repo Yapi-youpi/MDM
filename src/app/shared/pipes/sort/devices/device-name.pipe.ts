@@ -3,9 +3,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { Device } from "../../../types/devices";
 
 @Pipe({
-  name: "devicesByName",
+  name: "devices_name",
 })
-export class NamePipe implements PipeTransform {
+export class DeviceNamePipe implements PipeTransform {
   transform(devices: Device[], isNameAsc: boolean): Device[] {
     if (isNameAsc)
       return devices.sort((a, b) =>

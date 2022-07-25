@@ -4,9 +4,9 @@ import { Device } from "../../../types/devices";
 import { DevicesGroup } from "../../../types/groups";
 
 @Pipe({
-  name: "devicesByGroup",
+  name: "devices_group",
 })
-export class GroupPipe implements PipeTransform {
+export class DeviceGroupPipe implements PipeTransform {
   transform(
     devices: Device[],
     groups: DevicesGroup[],

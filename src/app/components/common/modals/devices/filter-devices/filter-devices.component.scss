@@ -35,6 +35,13 @@
       &:not(:last-child) {
         margin-bottom: 21.56px;
       }
+
+    }
+
+    .wrapper {
+      &-config {
+        margin-bottom: 25px;
+      }
     }
   }
 
