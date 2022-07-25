@@ -18,7 +18,7 @@ export class DatabaseService {
   }
 
   async logIN(login: string, password: string) {
-    return await Parse.User.logIn(login, password, { usePost: true });
+    return await Parse.User.logIn(login, password);
   }
 
   signup(login: string, password: string) {

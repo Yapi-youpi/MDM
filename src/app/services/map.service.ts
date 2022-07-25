@@ -20,5 +20,9 @@ export class MapService {
       }
     );
     tiles.addTo(this.map);
+    let elem = document.querySelector('.leaflet-control-attribution')
+    if (elem) {
+      elem.remove()
+    }
   }
 }

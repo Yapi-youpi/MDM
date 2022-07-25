@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { appsService, userService } from "../../../shared/services";
 import { interval } from "rxjs";
 import { AppState, UploadAppState } from "../../../shared/types/states";
-import { add } from "../../../shared/services/forms/app";
+import { add, edit } from "../../../shared/services/forms/app";
 import { App } from "../../../shared/types/apps";
 
 @Component({
@@ -11,8 +11,9 @@ import { App } from "../../../shared/types/apps";
   styleUrls: ["./apps.component.scss"],
 })
 export class AppsComponent {
-  public loading: boolean = false;
+  public loading: boolean = true;
   public apps: App[] = [];
+  public currApp!: App;
 
   public searchParam: string = "";
 
@@ -24,7 +25,8 @@ export class AppsComponent {
   constructor(
     private user: userService,
     private appsService: appsService,
-    private addAppForm: add
+    private addAppForm: add,
+    private editAppForm: edit
   ) {}
 
   ngOnInit(): void {
@@ -46,15 +48,6 @@ export class AppsComponent {
         if (res.success) {
           this.loading = false;
           this.apps = res.app;
-
-          console.log(res.app);
-
-          this.apps.forEach((a) => {
-            this.appsService
-              .getIcon(a.ID)
-              .then((res) => res.log)
-              .catch((err) => console.log(err));
-          });
         } else {
           console.log(res.error);
         }
@@ -69,7 +62,7 @@ export class AppsComponent {
       .upload(this.addAppForm._file)
       .then((res: UploadAppState) => {
         if (res.success) {
-          console.log(res.app);
+          // console.log(res.app);
 
           const modal = document.querySelector("#add_app");
           modal?.classList.toggle("hidden");
@@ -96,5 +89,36 @@ export class AppsComponent {
 
   toggleSizeSortDir() {
     this.isSizeSortAsc = !this.isSizeSortAsc;
+  }
+
+  setAppToEdit(app: App) {
+    this.currApp = app;
+    this.editAppForm.form.patchValue(app);
+  }
+
+  editApp() {
+    this.appsService
+      .edit({
+        ID: this.currApp.ID,
+        ...this.editAppForm.form.getRawValue(),
+      })
+      .then((res: { success: boolean; error: string }) => {
+        if (res.success) {
+          this.apps = this.apps.map((a) => {
+            if (a.ID === this.currApp.ID) {
+              return {
+                ...a,
+                ...this.editAppForm.form.getRawValue(),
+              };
+            } else return a;
+          });
+
+          const modal = document.querySelector("#edit_app");
+          modal?.classList.toggle("hidden");
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => console.log(err));
   }
 }

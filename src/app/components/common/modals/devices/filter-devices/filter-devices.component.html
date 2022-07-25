@@ -54,21 +54,21 @@
             [control]="$any(_date_to)"
           ></app-input-datetime>
         </div>
-        <div class="form-group-wrapper">
-          <label for="config_ids" class="text-menu-title">
-            Конфигурация
-          </label>
-          <app-input-select
+        <div class="wrapper-config">
+          <app-input-select-accordion
+            [title]="'Конфигурация'"
+            [control]="$any(_config_ids)"
             [options]="_options_configs"
-          ></app-input-select>
+            (onSelect)="onConfigSelectHandler($event)"
+          ></app-input-select-accordion>
         </div>
-        <div class="form-group-wrapper">
-          <label for="group_ids" class="text-menu-title">
-            Группа
-          </label>
-          <app-input-select
+        <div class="wrapper-group">
+          <app-input-select-accordion
+            [title]="'Группа'"
+            [control]="$any(_group_ids)"
             [options]="_options_groups"
-          ></app-input-select>
+            (onSelect)="onGroupSelectHandler($event)"
+          ></app-input-select-accordion>
         </div>
       </form>
     </div>

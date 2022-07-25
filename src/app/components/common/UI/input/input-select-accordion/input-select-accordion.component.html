@@ -1,0 +1,33 @@
+<div
+  class="input-select-accordion"
+>
+  <div
+    class="header"
+    (click)="toggleDropdown()"
+  >
+    <p class="text-menu-title">
+      {{ title }}
+      <span
+        class="icon"
+        [class.down]="!isDropdownHidden"
+      ></span>
+    </p>
+  </div>
+  <ul
+    class="select-content"
+    [class.hidden]="isDropdownHidden"
+  >
+    <li
+      *ngFor="let option of options; trackBy: identify"
+      class="item"
+    >
+      <div class="checkbox-wrapper">
+        <app-input-checkbox
+          [value]="option.isSelected ? option.isSelected : false"
+          (onChange)="onOptionSelectHandler(option)"
+        ></app-input-checkbox>
+      </div>
+      <p class="text-menu-title dropdown-item">{{ option.html }}</p>
+    </li>
+  </ul>
+</div>

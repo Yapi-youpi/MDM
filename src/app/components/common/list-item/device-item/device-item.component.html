@@ -40,21 +40,21 @@
       ></app-input-switch>
     </div>
     <div class="device-actions-wrapper">
-      <app-item-action-btn
+      <app-device-action-btn
         [device]="device"
         [target]="'qr_code'"
         (onClick)="onClickDeviceQRCodeHandler($event)"
-      ></app-item-action-btn>
-      <app-item-action-btn
+      ></app-device-action-btn>
+      <app-device-action-btn
         [device]="device"
         [target]="'edit_device'"
         (onClick)="onClickDeviceEditHandler($event)"
-      ></app-item-action-btn>
-      <app-item-action-btn
+      ></app-device-action-btn>
+      <app-device-action-btn
         [device]="device"
         [target]="'delete_device'"
         (onClick)="onClickDeviceDeleteHandler($event)"
-      ></app-item-action-btn>
+      ></app-device-action-btn>
     </div>
   </div>
 </div>

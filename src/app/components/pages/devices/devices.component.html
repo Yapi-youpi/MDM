@@ -2,11 +2,8 @@
   <app-global-header
     class="global-header" [title]="'Устройства'"
   ></app-global-header>
-
-  <app-card class="global-main"
-    [color]="'light-grey'"
-  >
-    <div class="page-content">
+  <main class="global-main card-wrapper">
+    <div class="card page-content">
       <div class="top row space-between">
         <app-input-search
           [value]="searchParam"
@@ -99,11 +96,11 @@
                   : devicesFilters.configsIDs
                   : devicesFilters.groupsIDs
                 | search: searchParam:'device'
-                | devicesByStatus: sortStatusAsc
-                | devicesByDate: sortDateAsc
-                | devicesByGroup: groups : sortGroupAsc
-                | devicesByBattery: sortBatteryAsc
-                | devicesByName: sortNameAsc
+                | devices_status: sortStatusAsc
+                | devices_date: sortDateAsc
+                | devices_group: groups : sortGroupAsc
+                | devices_battery: sortBatteryAsc
+                | devices_name: sortNameAsc
               "
             [device]="device"
             [groups]="groups"
@@ -117,7 +114,7 @@
         </div>
       </div>
     </div>
-  </app-card>
+  </main>
 </app-global-container>
 
 <app-filter-devices

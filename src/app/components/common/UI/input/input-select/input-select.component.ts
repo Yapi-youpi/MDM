@@ -1,10 +1,16 @@
-import { Component, EventEmitter, HostListener, Input, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from "@angular/core";
 import { inputWidth, Option } from "../../../../../shared/types/input";
 
 @Component({
-  selector: 'app-input-select',
-  templateUrl: './input-select.component.html',
-  styleUrls: ['./input-select.component.scss']
+  selector: "app-input-select",
+  templateUrl: "./input-select.component.html",
+  styleUrls: ["./input-select.component.scss"],
 })
 export class InputSelectComponent {
   @Input() width: inputWidth = "w-170";
@@ -30,15 +36,15 @@ export class InputSelectComponent {
     this.isDropdownHidden = !this.isDropdownHidden;
   }
 
-  setCurrentHTML(item: any) {
-    this.currOption = item;
+  setCurrentHTML(option: Option) {
+    this.currOption = option;
 
-    this.onSelect.emit(item);
+    this.onSelect.emit(option);
 
     this.toggleDropdown();
   }
 
-  identify(index, item) {
-    return item.html;
+  identify(index, option) {
+    return option.html;
   }
 }
