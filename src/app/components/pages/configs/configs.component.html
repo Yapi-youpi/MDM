@@ -44,12 +44,10 @@
                 </a>
                 <button
                   type="button"
-                  class="config-card__menu-btn"
+                  class="config-card__menu-btn btn--delete"
                   data-target="modal-delete-config"
                   (click)="setCurrentConfig(config)"
-                >
-                  <i class="material-icons">clear</i>
-                </button>
+                ></button>
               </div>
             </div>
             <div class="config-card__content">{{ config.description }}</div>

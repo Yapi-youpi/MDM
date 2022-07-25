@@ -899,6 +899,13 @@ button {
 .btn--right {
   margin-left: auto;
 }
+.btn--edit {
+  background: url("/assets/UI/pencil.svg") no-repeat center;
+  background-size: contain;
+}
+.btn--delete {
+  background: url("/assets/UI/trash.svg") no-repeat center;
+}
 /* Обертка для группы кнопок */
 .btn-wrapper {
   display: flex;
