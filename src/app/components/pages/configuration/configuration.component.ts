@@ -9,7 +9,7 @@ import { UserService } from '../../../shared/services/user.service';
 @Component({
   selector: 'app-configuration',
   templateUrl: './configuration.component.html',
-  styleUrls: ['./configuration.component.css'],
+  styleUrls: ['./configuration.component.scss'],
 })
 export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
@@ -23,10 +23,12 @@ export class ConfigurationComponent implements OnInit {
     this.configForm = new FormGroup({
       GPS: new FormControl(true, Validators.required),
       autoUpdate: new FormControl(false, Validators.required),
+      autoBrightness: new FormControl(false, Validators.required),
       backgroundColor: new FormControl('', Validators.required),
       backgroundImageUrl: new FormControl('', Validators.required),
       blockStatusBar: new FormControl(false, Validators.required),
       bluetooth: new FormControl(true, Validators.required),
+      brightness: new FormControl(255, Validators.required),
       description: new FormControl('', Validators.required),
       desktopHeader: new FormControl('', Validators.required),
       desktopHeaderTemplate: new FormControl('', Validators.required),
@@ -37,6 +39,7 @@ export class ConfigurationComponent implements OnInit {
       systemUpdateTime: new FormControl('00:00', Validators.required),
       lockSafeSettings: new FormControl(true, Validators.required),
       kioskMode: new FormControl(false, Validators.required),
+      mainApp: new FormControl('', Validators.required),
       lockVolume: new FormControl(false, Validators.required),
       manageTimeout: new FormControl(false, Validators.required),
       manageVolume: new FormControl(false, Validators.required),
@@ -86,6 +89,9 @@ export class ConfigurationComponent implements OnInit {
           if (!this.configForm.value.backgroundColor) {
             this.configForm.patchValue({ backgroundColor: '#557ebe' });
           }
+          if (!this.configForm.value.wifiSecurityType) {
+            this.configForm.patchValue({ wifiSecurityType: 'NONE' });
+          }
           console.log(this.configForm.value);
         });
       })
@@ -134,5 +140,9 @@ export class ConfigurationComponent implements OnInit {
       tabsContent[i].style.display = 'flex';
       tabs[i].classList.add('tab--active');
     }
+  }
+
+  asd(e) {
+    console.log(e.target.value);
   }
 }
