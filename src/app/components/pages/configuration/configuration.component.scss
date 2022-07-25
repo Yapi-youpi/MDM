@@ -106,11 +106,12 @@
 }
 
 .two-columns {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
 }
-.two-columns div:first-child {
-  margin-right: 50px;
+.two-columns .form__elems {
+  min-width: 428px;
 }
 
 /* RANGE */

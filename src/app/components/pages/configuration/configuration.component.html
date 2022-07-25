@@ -785,7 +785,10 @@
                 <span aria-hidden="true"></span>
               </label>
             </div>
-            <div class="form__item">
+            <div
+              class="form__item"
+              *ngIf="configForm.get('kioskMode')?.value == true"
+            >
               <label for="mainApp">Приложение-киоск</label>
               <input
                 type="text"
