@@ -288,7 +288,7 @@
                   </label>
                 </div>
                 <div class="form__item">
-                  <label for="volume">Громкость</label>
+                  <!--                  <label for="volume">Громкость</label>-->
                   <input
                     type="range"
                     style="--min: 0; --max: 100; --val: 90"
@@ -325,7 +325,7 @@
                   </label>
                 </div>
                 <div class="form__item">
-                  <label for="timeout">Таймаут</label>
+                  <!--                  <label for="timeout">Таймаут</label>-->
                   <input
                     type="range"
                     style="--min: 15; --max: 1800; --val: 500"
@@ -333,6 +333,29 @@
                     max="1800"
                     formControlName="timeout"
                     id="timeout"
+                    class="w-500"
+                  />
+                </div>
+                <div class="form__item">
+                  <label class="switch">
+                    Автоматическая яркость экрана
+                    <input
+                      formControlName="autoBrightness"
+                      id="autoBrightness"
+                      type="checkbox"
+                    />
+                    <span aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div class="form__item">
+                  <!--                  <label for="brightness">Яркость</label>-->
+                  <input
+                    type="range"
+                    style="--min: 15; --max: 1800; --val: 500"
+                    min="15"
+                    max="1800"
+                    formControlName="brightness"
+                    id="brightness"
                     class="w-500"
                   />
                 </div>
@@ -367,16 +390,32 @@
             </div>
             <div class="font-bold">Цвет</div>
             <div class="form__item">
-              <label for="backgroundColor">Фон</label>
-              <input
-                type="color"
-                formControlName="backgroundColor"
-                id="backgroundColor"
-              />
-            </div>
-            <div class="form__item">
-              <label for="textColor">Надписи</label>
-              <input type="color" formControlName="textColor" id="textColor" />
+              <div class="colors-wrapper">
+                <div class="colors">
+                  <label for="backgroundColor">Фон</label>
+                  <div class="input-color">
+                    <input
+                      type="color"
+                      formControlName="backgroundColor"
+                      id="backgroundColor"
+                      [value]="'#557ebe'"
+                    />
+                    <span>{{ configForm.value.backgroundColor }}</span>
+                  </div>
+                </div>
+                <div class="colors">
+                  <label for="textColor">Надписи</label>
+                  <div class="input-color">
+                    <input
+                      type="color"
+                      formControlName="textColor"
+                      id="textColor"
+                      value="#ffffff"
+                    />
+                    <span>{{ configForm.value.textColor }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="font-bold">Размер значков</div>
             <div class="form__item">

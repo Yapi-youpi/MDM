@@ -4,7 +4,7 @@ import { DevicesConfigService } from '../../../services/devices-config.service';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
-import { UserService } from "../../../shared/services/user.service";
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-configuration',
@@ -70,7 +70,6 @@ export class ConfigurationComponent implements OnInit {
 
   getConfig() {
     const id = this.route.snapshot.paramMap.get('id') || 'default';
-    console.log(id);
     this.configService
       .getConfig(id)
       .then((res) => {
@@ -81,7 +80,24 @@ export class ConfigurationComponent implements OnInit {
         let i = interval(200).subscribe(() => {
           i.unsubscribe();
           this.configForm.patchValue(this.config);
+          if (!this.configForm.value.textColor) {
+            this.configForm.patchValue({ textColor: '#ffffff' });
+          }
+          if (!this.configForm.value.backgroundColor) {
+            this.configForm.patchValue({ backgroundColor: '#557ebe' });
+          }
+          console.log(this.configForm.value);
         });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  editConfig(config) {
+    this.configService
+      .editConfig(config)
+      .then((res) => {
+        console.log(res);
+        // this.configForm.reset();
       })
       .catch((err) => console.log(err));
   }
@@ -114,7 +130,6 @@ export class ConfigurationComponent implements OnInit {
     }
 
     function showTabContent(i = 0) {
-      console.log(tabsContent[i]);
       // @ts-ignore
       tabsContent[i].style.display = 'flex';
       tabs[i].classList.add('tab--active');

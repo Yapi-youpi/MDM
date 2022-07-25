@@ -56,6 +56,23 @@ export class DevicesConfigService {
     });
   }
 
+  editConfig(config: DevicesConfig) {
+    const url = environment.url + '/edit_config';
+    const body = {
+      ...config,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
   renameConfig(id: string, name: string) {
     const url = environment.url + '/rename_config';
     const body = {

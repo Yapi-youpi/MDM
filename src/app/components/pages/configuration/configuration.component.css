@@ -11,6 +11,8 @@
   align-items: center;
   padding: 12px 18px;
   border-radius: 8px;
+  font-size: 16px;
+  line-height: 16px;
 }
 .tab:hover {
   background: #eceef1;
@@ -28,6 +30,8 @@
 .form__tab {
   display: flex;
   flex-direction: column;
+  font-size: 16px;
+  line-height: 16px;
 }
 .form__elems {
   display: flex;
@@ -88,7 +92,7 @@
 .settings-card__title {
   font-weight: 550;
   font-size: 20px;
-  color: var(--sdm-dark-blue-grey);
+  color: var(--dark-blue-grey);
 }
 .settings-card__description {
   font-size: 12px;
@@ -190,4 +194,100 @@
 }
 [type="range"]::-ms-tooltip {
   display: none;
+}
+
+/* ПЕРЕКЛЮЧАТЕЛЬ */
+.switch {
+  display: flex;
+  gap: 12px;
+}
+.switch span {
+  width: 27px;
+  display: inline-block;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.switch span:before,
+.switch span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.switch span:after {
+  background: var(--dark-grey);
+  border-radius: 100%;
+  height: 11px;
+  right: 14px;
+  transition: right 0.1825s ease-in-out;
+  width: 11px;
+}
+.switch span:before {
+  background: var(--grey);
+  border-radius: 1.75em;
+  height: 16px;
+  right: 0;
+  transition: background 0.2s ease-in-out;
+  width: 27px;
+}
+
+.switch input {
+  height: 1px;
+  width: 1px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.switch:hover span:before {
+  background: var(--light-blue);
+}
+.switch:hover span:after {
+  background: var(--dark-blue);
+}
+.switch input:checked + span:after {
+  right: 0.25em;
+  background: var(--light-blue);
+}
+
+.switch input:checked + span:before {
+  background: var(--dark-blue);
+}
+
+/* INPUT COLOR */
+input[type="color"] {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--light-blue);
+  -webkit-appearance: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+.input-color {
+  width: 138px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  color: var(--dark-blue);
+}
+
+.colors-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+}
+.colors {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }

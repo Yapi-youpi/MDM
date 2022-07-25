@@ -11,8 +11,8 @@
   cursor: pointer;
 
   transition: color var(--transition-time) ease,
-    background-color var(--transition-time) ease,
-    border-color var(--transition-time) ease;
+  background-color var(--transition-time) ease,
+  border-color var(--transition-time) ease;
 
   &.like {
     &-button {
@@ -43,15 +43,6 @@
 
     &:hover {
       background-color: var(--blue);
-    }
-  }
-
-  &.dark {
-    background-color: var(--dark-blue-grey);
-    color: var(--white);
-
-    &:hover {
-      background-color: var(--dark-grey);
     }
   }
 
