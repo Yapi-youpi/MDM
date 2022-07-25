@@ -81,6 +81,7 @@ import { EditAppComponent } from "./components/common/modals/apps/edit-app/edit-
 import { AppsNamePipe } from "./shared/pipes/sort/apps/apps-name.pipe";
 import { AppsSizePipe } from './shared/pipes/sort/apps/apps-size.pipe';
 import { InputSelectAccordionComponent } from './components/common/UI/input/input-select-accordion/input-select-accordion.component';
+import { NoListDataComponent } from './components/common/UI/no-list-data/no-list-data.component';
 
 const routes: Routes = [
   {
@@ -162,6 +163,7 @@ const routes: Routes = [
     AppsSystemPipe,
     AppsSizePipe,
     InputSelectAccordionComponent,
+    NoListDataComponent,
   ],
   imports: [
     BrowserModule,

@@ -55,15 +55,20 @@
           <p>Действия</p>
         </div>
         <div class="list-body">
-          <app-app-item
-            *ngFor=
-              "let app of apps
-                | apps_system: isOnlySystemApps
-                | apps_name: isNameSortAsc
-              "
-            [app]="app"
-            (onEditClick)="setAppToEdit($event)"
-          ></app-app-item>
+          <ng-container *ngIf="apps; else nodata">
+            <app-app-item
+              *ngFor=
+                "let app of apps
+                  | apps_system: isOnlySystemApps
+                  | apps_name: isNameSortAsc
+                "
+              [app]="app"
+              (onEditClick)="setAppToEdit($event)"
+            ></app-app-item>
+          </ng-container>
+          <ng-template #nodata>
+            <app-no-list-data></app-no-list-data>
+          </ng-template>
         </div>
       </div>
     </div>
