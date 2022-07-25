@@ -54,41 +54,83 @@
               />
             </div>
             <div class="form__item">
-              <label for="keepaliveTime">Время Keep-Alive</label>
-              <div class="range-wrapper w-500">
-                <div class="range">
+              <label>Время Keep-Alive</label>
+              <div class="w-500">
+                <div class="range-slider">
                   <input
-                    type="range"
-                    min="1"
-                    max="15"
+                    type="radio"
                     formControlName="keepaliveTime"
-                    id="keepaliveTime"
-                    list="keepalive"
-                    (change)="asd($event)"
+                    [value]="60"
+                    class="visually-hidden"
+                    id="60"
+                    checked
                   />
-                  <datalist class="range__list" id="keepalive">
-                    <option value="1" class="range__opt" label="1 мин">
-                      1 мин
-                    </option>
-                    <option value="3" class="range__opt" label="3 мин">
-                      3 мин
-                    </option>
-                    <option value="5" class="range__opt" label="5 мин">
-                      5 мин
-                    </option>
-                    <option value="8" class="range__opt" label="8 мин">
-                      8 мин
-                    </option>
-                    <option value="10" class="range__opt" label="10 мин">
-                      10 мин
-                    </option>
-                    <option value="12" class="range__opt" label="12 мин">
-                      12 мин
-                    </option>
-                    <option value="15" class="range__opt" label="15 мин">
-                      15 мин
-                    </option>
-                  </datalist>
+                  <label
+                    class="range-slider__label"
+                    data-label="1 мин"
+                    for="60"
+                  ></label>
+                  <input
+                    type="radio"
+                    formControlName="keepaliveTime"
+                    [value]="120"
+                    class="visually-hidden"
+                    id="120"
+                  />
+                  <label
+                    class="range-slider__label"
+                    data-label="2 мин"
+                    for="120"
+                  ></label>
+                  <input
+                    type="radio"
+                    formControlName="keepaliveTime"
+                    [value]="180"
+                    class="visually-hidden"
+                    id="180"
+                  />
+                  <label
+                    class="range-slider__label"
+                    data-label="3 мин"
+                    for="180"
+                  ></label>
+                  <input
+                    type="radio"
+                    formControlName="keepaliveTime"
+                    [value]="300"
+                    class="visually-hidden"
+                    id="300"
+                  />
+                  <label
+                    class="range-slider__label"
+                    data-label="5 мин"
+                    for="300"
+                  ></label>
+                  <input
+                    type="radio"
+                    formControlName="keepaliveTime"
+                    [value]="600"
+                    class="visually-hidden"
+                    id="600"
+                  />
+                  <label
+                    class="range-slider__label"
+                    data-label="10 мин"
+                    for="600"
+                  ></label>
+                  <input
+                    type="radio"
+                    formControlName="keepaliveTime"
+                    [value]="900"
+                    class="visually-hidden"
+                    id="900"
+                  />
+                  <label
+                    class="range-slider__label"
+                    data-label="15 мин"
+                    for="900"
+                  ></label>
+                  <div class="range-slider__progress"></div>
                 </div>
               </div>
             </div>
@@ -314,7 +356,10 @@
                     <span aria-hidden="true"></span>
                   </label>
                 </div>
-                <div class="form__item">
+                <div
+                  *ngIf="configForm.get('manageVolume')?.value == true"
+                  class="form__item"
+                >
                   <!--                  <label for="volume">Громкость</label>-->
                   <div class="range-wrapper w-500">
                     <div class="range">
@@ -391,56 +436,100 @@
                     <span aria-hidden="true"></span>
                   </label>
                 </div>
-                <div class="form__item">
+                <div
+                  *ngIf="configForm.get('manageTimeout')?.value == true"
+                  class="form__item"
+                >
                   <!--                  <label for="timeout">Таймаут</label>-->
-                  <div class="range-wrapper w-500">
-                    <div class="range">
-                      <input
-                        type="range"
-                        min="15"
-                        max="1800"
-                        step="162"
-                        formControlName="timeout"
-                        id="timeout"
-                        list="timelist"
-                        (change)="asd($event)"
-                      />
-                      <datalist class="range__list" id="timelist">
-                        <option value="0" class="range__opt" label="0">
-                          0
-                        </option>
-                        <option value="10" class="range__opt" label="10">
-                          10
-                        </option>
-                        <option value="20" class="range__opt" label="20">
-                          20
-                        </option>
-                        <option value="30" class="range__opt" label="30">
-                          30
-                        </option>
-                        <option value="40" class="range__opt" label="40">
-                          40
-                        </option>
-                        <option value="50" class="range__opt" label="50">
-                          50
-                        </option>
-                        <option value="60" class="range__opt" label="60">
-                          60
-                        </option>
-                        <option value="70" class="range__opt" label="70">
-                          70
-                        </option>
-                        <option value="80" class="range__opt" label="80">
-                          80
-                        </option>
-                        <option value="90" class="range__opt" label="90">
-                          90
-                        </option>
-                        <option value="100" class="range__opt" label="100">
-                          100
-                        </option>
-                      </datalist>
-                    </div>
+                  <div class="range-slider timeout-slider">
+                    <input
+                      type="radio"
+                      formControlName="timeout"
+                      [value]="15"
+                      class="visually-hidden"
+                      id="15t"
+                      checked
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="15 сек"
+                      for="15t"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="timeout"
+                      [value]="30"
+                      class="visually-hidden"
+                      id="30t"
+                      checked
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="30 сек"
+                      for="30t"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="timeout"
+                      [value]="60"
+                      class="visually-hidden"
+                      id="60t"
+                      checked
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="1 мин"
+                      for="60t"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="timeout"
+                      [value]="120"
+                      class="visually-hidden"
+                      id="120t"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="2 мин"
+                      for="120t"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="timeout"
+                      [value]="300"
+                      class="visually-hidden"
+                      id="300t"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="5 мин"
+                      for="300t"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="timeout"
+                      [value]="600"
+                      class="visually-hidden"
+                      id="600t"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="10 мин"
+                      for="600t"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="timeout"
+                      [value]="1800"
+                      class="visually-hidden"
+                      id="1800t"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="30 мин"
+                      for="1800t"
+                    ></label>
+                    <div class="range-slider__progress"></div>
                   </div>
                 </div>
                 <div class="form__item">
@@ -454,9 +543,12 @@
                     <span aria-hidden="true"></span>
                   </label>
                 </div>
-                <div class="form__item">
+                <div
+                  *ngIf="configForm.get('autoBrightness')?.value == false"
+                  class="form__item"
+                >
                   <!--                  <label for="brightness">Яркость</label>-->
-                  <div class="range-wrapper w-500">
+                  <div class="range-wrapper">
                     <div class="range">
                       <input
                         type="range"
@@ -616,32 +708,41 @@
                 <div class="font-bold">Ориентация</div>
                 <div class="form__item">
                   <div class="tags-container">
-                    <label class="custom-radio">
+                    <label class="orientation">
                       <input
                         class="visually-hidden"
                         formControlName="orientation"
                         type="radio"
                         [value]="0"
                       />
-                      <span class="custom-radio__span">Поворот</span>
+                      <div class="orientation__card">
+                        <img src="/assets/config-images/rotate.svg" alt="" />
+                      </div>
+                      <span class="orientation__span">Поворот</span>
                     </label>
-                    <label class="custom-radio">
+                    <label class="orientation">
                       <input
                         class="visually-hidden"
                         formControlName="orientation"
                         type="radio"
                         [value]="1"
                       />
-                      <span class="custom-radio__span">Вертикально</span>
+                      <div class="orientation__card">
+                        <img src="/assets/config-images/portrait.svg" alt="" />
+                      </div>
+                      <span class="orientation__span">Вертикально</span>
                     </label>
-                    <label class="custom-radio">
+                    <label class="orientation">
                       <input
                         class="visually-hidden"
                         formControlName="orientation"
                         type="radio"
                         [value]="2"
                       />
-                      <span class="custom-radio__span">Горизонтально</span>
+                      <div class="orientation__card">
+                        <img src="/assets/config-images/landscape.svg" alt="" />
+                      </div>
+                      <span class="orientation__span">Горизонтально</span>
                     </label>
                   </div>
                 </div>

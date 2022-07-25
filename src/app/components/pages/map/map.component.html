@@ -1,4 +1,27 @@
-<app-menu></app-menu>
-<div class="container">
-  <div id="map-container"></div>
-</div>
+<app-global-container class="global-container">
+  <app-global-header
+    class="global-header" [title]="'Карта'"
+  ></app-global-header>
+
+  <app-card class="global-main"
+            [color]="'light-grey'"
+  >
+    <div class="page-content">
+      <div style="display: flex">
+        <input type="text">
+        <app-input-select
+          style="z-index: 99999"
+          [options]="option"
+        >
+        </app-input-select>
+        <app-input-select>
+
+        </app-input-select>
+        <app-input-select>
+
+        </app-input-select>
+      </div>
+      <div id="map-container"></div>
+    </div>
+  </app-card>
+</app-global-container>
