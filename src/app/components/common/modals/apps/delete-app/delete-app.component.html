@@ -1,0 +1,18 @@
+<app-modal
+  [modalID]="'delete_app'"
+  [isClosable]="true"
+>
+  <div class="content">
+    <div class="top">
+      <h4 class="text-title text-center">Удалить приложение "{{ app?.name }}"?</h4>
+    </div>
+    <app-modal-action-btns
+      [isReverse]="true"
+      [submitText]="'Да'"
+      [cancelText]="'Нет'"
+      [margin]="'50px'"
+      (onCancel)="onCancelHandler()"
+      (onSubmit)="onSubmitHandler()"
+    ></app-modal-action-btns>
+  </div>
+</app-modal>

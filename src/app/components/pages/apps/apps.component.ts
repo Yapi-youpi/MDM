@@ -91,7 +91,7 @@ export class AppsComponent {
     this.isSizeSortAsc = !this.isSizeSortAsc;
   }
 
-  setAppToEdit(app: App) {
+  selectAppToEdit(app: App) {
     this.currApp = app;
     this.editAppForm.form.patchValue(app);
   }
@@ -104,6 +104,7 @@ export class AppsComponent {
       })
       .then((res: { success: boolean; error: string }) => {
         if (res.success) {
+          console.log(`Приложение ${this.currApp.name} изменено`);
           this.apps = this.apps.map((a) => {
             if (a.ID === this.currApp.ID) {
               return {
@@ -117,6 +118,26 @@ export class AppsComponent {
           modal?.classList.toggle("hidden");
         } else {
           console.log(res.error);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  selectAppToDelete(app: App) {
+    this.currApp = app;
+  }
+
+  deleteApp() {
+    this.appsService
+      .delete(this.currApp)
+      .then((res: { success: boolean; error: string }) => {
+        if (res.success) {
+          console.log(`Приложение ${this.currApp.name} удалено`);
+
+          this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
+
+          const modal = document.querySelector("#delete_app");
+          modal?.classList.toggle("hidden");
         }
       })
       .catch((err) => console.log(err));

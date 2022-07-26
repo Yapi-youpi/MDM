@@ -40,4 +40,15 @@ export class AppsService {
       });
     });
   }
+
+  delete(app: App) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.DELETE, { app_id: app.ID })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
+    });
+  }
 }

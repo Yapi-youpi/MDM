@@ -1,7 +1,7 @@
 <div class="app-item">
   <img
     class="app-img"
-    [src]="url + app.ID"
+    [src]="app.iconUID !== '' ? url + app.ID : ''"
   >
   <div class="title">
     <p class="text-choose">{{ app.name }}</p>

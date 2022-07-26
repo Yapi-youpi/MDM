@@ -63,7 +63,8 @@
                   | apps_name: isNameSortAsc
                 "
               [app]="app"
-              (onEditClick)="setAppToEdit($event)"
+              (onEditClick)="selectAppToEdit($event)"
+              (onDeleteClick)="selectAppToDelete($event)"
             ></app-app-item>
           </ng-container>
           <ng-template #nodata>
@@ -82,3 +83,7 @@
   [app]="currApp"
   (onSubmit)="editApp()"
 ></app-edit-app>
+<app-delete-app
+  [app]="currApp"
+  (onSubmit)="deleteApp()"
+></app-delete-app>
