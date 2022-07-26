@@ -32,6 +32,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   public device_marker!: L.Marker;
   public devices: Device[] = [];
   public devices_geo: DeviceGeo[] = [];
+  public open = false;
   constructor(
     private mapService: MapService,
     private groupService: GroupsService,
@@ -162,7 +163,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       ${device.battery_percent}%
       </h4>
       <h4 style="font-weight: normal; margin-bottom: 0.5rem">
-      ${device.battery_percent}
+      ${device.signalLevel ? device.signalLevel : 'Нет сигнала'}
       </h4>
     </div>
   </div>
@@ -232,6 +233,14 @@ export class MapComponent implements OnInit, AfterViewInit {
         });
       });
     });
+  }
+
+  openSelect() {
+    let elem = document.querySelector('.select__head');
+    if (elem) {
+      elem.classList.toggle('open');
+    }
+    this.open = !this.open;
   }
 }
 // <svg id="${device.name}" style="display: block" width="195" height="160" viewBox="0 0 195 160" fill="none" xmlns="http://www.w3.org/2000/svg">

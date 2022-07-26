@@ -19,6 +19,7 @@ export interface Device {
   registration_state: boolean;
   gps_location: Parse.GeoPoint;
   group_name: string;
+  signalLevel: string;
 }
 
 export interface AddDevice {
