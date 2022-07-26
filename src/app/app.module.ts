@@ -24,7 +24,6 @@ import { UserComponent } from "./components/common/user/user.component";
 
 import { DeviceItemComponent } from "./components/common/list-item/device-item/device-item.component";
 import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
-import { FilterSidebarComponent } from "./components/common/filter-sidebar/filter-sidebar.component";
 import { SearchUsersPipe } from "./services/search-users.pipe";
 import { FilterUsersPipe } from "./services/filter-users.pipe";
 import { UserPermissionsComponent } from "./components/pages/user-permissions/user-permissions.component";
@@ -79,10 +78,12 @@ import { AppItemComponent } from "./components/common/list-item/app-item/app-ite
 import { AppActionBtnComponent } from "./components/common/UI/button/item-action-btn/app/app-action-btn.component";
 import { EditAppComponent } from "./components/common/modals/apps/edit-app/edit-app.component";
 import { AppsNamePipe } from "./shared/pipes/sort/apps/apps-name.pipe";
-import { AppsSizePipe } from './shared/pipes/sort/apps/apps-size.pipe';
-import { InputSelectAccordionComponent } from './components/common/UI/input/input-select-accordion/input-select-accordion.component';
-import { NoListDataComponent } from './components/common/UI/no-list-data/no-list-data.component';
-import { DeleteAppComponent } from './components/common/modals/apps/delete-app/delete-app.component';
+import { AppsSizePipe } from "./shared/pipes/sort/apps/apps-size.pipe";
+import { InputSelectAccordionComponent } from "./components/common/UI/input/input-select-accordion/input-select-accordion.component";
+import { NoListDataComponent } from "./components/common/UI/no-list-data/no-list-data.component";
+import { DeleteAppComponent } from "./components/common/modals/apps/delete-app/delete-app.component";
+import { DatetimePickerComponent } from "./components/common/modals/datetime-picker/datetime-picker.component";
+import { MomentPipe } from "./shared/pipes/moment.pipe";
 
 const routes: Routes = [
   {
@@ -129,7 +130,6 @@ const routes: Routes = [
     QrCodeComponent,
     DeviceItemComponent,
     GlobalContainerComponent,
-    FilterSidebarComponent,
     SearchUsersPipe,
     FilterUsersPipe,
     UserPermissionsComponent,
@@ -148,6 +148,10 @@ const routes: Routes = [
     AppItemComponent,
     AppActionBtnComponent,
     EditAppComponent,
+    InputSelectAccordionComponent,
+    NoListDataComponent,
+    DeleteAppComponent,
+    DatetimePickerComponent,
     // pipe
     GroupConverterPipe,
     ConfigSearchPipe,
@@ -163,9 +167,7 @@ const routes: Routes = [
     AppsNamePipe,
     AppsSystemPipe,
     AppsSizePipe,
-    InputSelectAccordionComponent,
-    NoListDataComponent,
-    DeleteAppComponent,
+    MomentPipe,
   ],
   imports: [
     BrowserModule,

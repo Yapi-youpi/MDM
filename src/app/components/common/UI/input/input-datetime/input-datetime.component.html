@@ -1,9 +1,18 @@
-<input
-  [id]="name"
-  [name]="name"
-  type="datetime-local"
-  [formControl]="control"
-  class="input-datetime"
-  [ngClass]="width"
-  [class.error]="isError"
-/>
+<div class="datetime-wrapper">
+  <input
+    [id]="name"
+    [name]="name"
+    type="text"
+    class="input-datetime"
+    [ngClass]="width"
+  />
+<!--  [formControl]="control"-->
+  <!--type="datetime-local"-->
+<!--  [class.error]="isError"-->
+  <span
+    class="icon icon-datetime"
+    (click)="ShowDatetimePicker()"
+  ></span>
+</div>
+
+<app-datetime-picker></app-datetime-picker>

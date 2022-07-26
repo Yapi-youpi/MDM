@@ -1,0 +1,35 @@
+.content {
+  min-width: 328px;
+  width: 100%;
+
+  padding: 20px 30px 40px 30px;
+
+  .divider {
+    &:first-of-type {
+      margin: 23px 0 21px 0;
+    }
+    &:last-of-type {
+      margin: 29.48px 0 28px 0;
+    }
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    text-transform: capitalize;
+
+    > p:not(.curr) {
+      cursor: pointer;
+    }
+
+    .prev, .next {
+      color: var(--grey);
+
+      &:hover {
+        color: var(--blue);
+      }
+    }
+  }
+}

@@ -36,6 +36,11 @@
         margin-bottom: 21.56px;
       }
 
+      &.date {
+        justify-content: flex-start;
+
+        padding-left: 20px;
+      }
     }
 
     .wrapper {
