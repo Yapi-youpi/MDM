@@ -17,6 +17,8 @@ export interface Device {
   isSelected?: boolean;
   updatedAt: string;
   registration_state: boolean;
+  gps_location: Parse.GeoPoint;
+  group_name: string;
 }
 
 export interface AddDevice {
