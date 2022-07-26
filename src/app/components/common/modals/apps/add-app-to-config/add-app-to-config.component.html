@@ -1,0 +1,47 @@
+<app-modal [modalID]="'add_app_config'" [isClosable]="true">
+  <div class="content">
+    <div class="top">
+      <h4 class="text-title text-center">Добавить приложения в конфигурацию</h4>
+    </div>
+    <hr class="divider" />
+    <div class="body">
+      <ng-template #loader>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="apps.length > 0; else loader">
+        <div class="checkbox-group">
+          <label
+            for="{{ app.ID }}"
+            class="checkbox-wrapper"
+            *ngFor="let app of apps"
+          >
+            <input
+              type="checkbox"
+              name="apps"
+              class="visually-hidden"
+              id="{{ app.ID }}"
+              value="{{ app.ID }}"
+              [checked]=""
+              (change)="onCheckboxChange($event)"
+            />
+            <div class="input checkbox-custom">
+              <svg width="18" height="18" viewBox="0 0 20 20">
+                <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+              </svg>
+            </div>
+            <span>{{ app.name }}{{ app.version }}</span>
+          </label>
+        </div>
+      </ng-container>
+    </div>
+    <app-modal-action-btns
+      [submitText]="'Добавить'"
+      [cancelText]="'Отменить'"
+      [margin]="'66px'"
+      (onSubmit)="onSubmitHandler()"
+      (onCancel)="onCancelHandler()"
+    ></app-modal-action-btns>
+  </div>
+</app-modal>

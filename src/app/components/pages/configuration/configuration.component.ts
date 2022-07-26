@@ -5,6 +5,9 @@ import { DevicesConfig } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
+import { App } from '../../../shared/types/apps';
+import { AppState } from '../../../shared/types/states';
+import { AppsService } from '../../../shared/services/apps.service';
 
 @Component({
   selector: 'app-configuration',
@@ -14,10 +17,18 @@ import { UserService } from '../../../shared/services/user.service';
 export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
   public configForm: FormGroup;
+  public apps: App[] = [];
+  public search: string = '';
+  public isOnlySystemApps: boolean = false;
+  public isNameSortAsc: boolean = true;
+  public isSizeSortAsc: boolean = true;
+  public isPositionSortAsc: boolean = true;
+
   constructor(
     private route: ActivatedRoute,
     private configService: DevicesConfigService,
     public userService: UserService,
+    public appsService: AppsService,
     private router: Router
   ) {
     this.configForm = new FormGroup({
@@ -67,8 +78,25 @@ export class ConfigurationComponent implements OnInit {
       if (this.userService.token) {
         i.unsubscribe();
         this.getConfig();
+        this.getApps();
       }
     });
+  }
+
+  getApps() {
+    this.appsService
+      .get('all')
+      .then((res: AppState) => {
+        console.log(res);
+        if (res.success) {
+          this.apps = res.app;
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   getConfig() {
@@ -140,6 +168,26 @@ export class ConfigurationComponent implements OnInit {
       tabsContent[i].style.display = 'flex';
       tabs[i].classList.add('tab--active');
     }
+  }
+
+  toggleSystemApps() {
+    this.isOnlySystemApps = !this.isOnlySystemApps;
+  }
+
+  toggleNameSortDir() {
+    this.isNameSortAsc = !this.isNameSortAsc;
+  }
+
+  toggleSizeSortDir() {
+    this.isSizeSortAsc = !this.isSizeSortAsc;
+  }
+  togglePositionSortDir() {
+    this.isPositionSortAsc = !this.isPositionSortAsc;
+  }
+
+  addApp(addedApps: string[]) {
+    console.log(addedApps);
+    this.config.applications = addedApps;
   }
 
   asd(e) {

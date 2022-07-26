@@ -39,7 +39,7 @@ export interface DevicesConfig {
   GPS?: boolean | true;
   ID: string;
   appUpdateTime?: string | '02:00';
-  applications?: null;
+  applications?: string[] | null;
   autoBrightness: boolean | false;
   autoUpdate: boolean | false;
   backgroundColor: string;

@@ -84,6 +84,8 @@ import { NoListDataComponent } from './components/common/UI/no-list-data/no-list
 import { DeleteAppComponent } from './components/common/modals/apps/delete-app/delete-app.component';
 import { DatetimePickerComponent } from './components/common/modals/datetime-picker/datetime-picker.component';
 import { MomentPipe } from './shared/pipes/moment.pipe';
+import { AddAppToConfigComponent } from './components/common/modals/apps/add-app-to-config/add-app-to-config.component';
+import { AppsConfigPipe } from './shared/pipes/sort/apps/apps-config.pipe';
 
 const routes: Routes = [
   {
@@ -124,6 +126,7 @@ const routes: Routes = [
     DevicesComponent,
     GroupsComponent,
     MapComponent,
+    AddAppToConfigComponent,
     ConfigsComponent,
     UserComponent,
     EditDeviceComponent,
@@ -167,6 +170,7 @@ const routes: Routes = [
     AppsNamePipe,
     AppsSystemPipe,
     AppsSizePipe,
+    AppsConfigPipe,
     MomentPipe,
   ],
   imports: [

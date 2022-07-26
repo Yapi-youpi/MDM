@@ -757,7 +757,78 @@
         <!--        Приложения           -->
         <div class="form__tab" style="display: none">
           <div class="card__header">Приложения</div>
-          <div class="config-settings form__elems"></div>
+          <div class="config-settings">
+            <div class="top row space-between">
+              <app-input-search [(ngModel)]="search"></app-input-search>
+              <div class="filter-btn-wrapper">
+                <app-button
+                  [text]="'системное приложение'"
+                  [textLike]="'like-body'"
+                  [height]="'30px'"
+                  [padding]="'9px 14px'"
+                  [radius]="'15px'"
+                  [color]="isOnlySystemApps ? 'blue' : 'common'"
+                  (onCLick)="toggleSystemApps()"
+                ></app-button>
+              </div>
+              <app-add-button
+                [title]="'добавить приложение'"
+                [target]="'add_app_config'"
+              ></app-add-button>
+            </div>
+
+            <ng-container
+              *ngIf="
+                config.applications && config.applications!.length > 0;
+                else nodata
+              "
+            >
+              <div class="app-list-header row space-between">
+                <div class="empty"></div>
+                <div class="sort-btn-wrapper">
+                  <app-sort-btn
+                    [title]="'Название'"
+                    [isSortAsc]="isNameSortAsc"
+                    (onCLick)="toggleNameSortDir()"
+                  ></app-sort-btn>
+                </div>
+                <p>Версия</p>
+                <p>ID пакета</p>
+                <div class="sort-btn-wrapper">
+                  <app-sort-btn
+                    [title]="'Размер'"
+                    [isSortAsc]="isSizeSortAsc"
+                    (onCLick)="toggleSizeSortDir()"
+                  ></app-sort-btn>
+                </div>
+                <p>Действия</p>
+                <p>Ярлык</p>
+                <div class="sort-btn-wrapper">
+                  <app-sort-btn
+                    [title]="'Порядок'"
+                    [isSortAsc]="isPositionSortAsc"
+                    (onCLick)="togglePositionSortDir()"
+                  ></app-sort-btn>
+                </div>
+                <p>Закреп снизу</p>
+              </div>
+
+              <app-app-item
+                *ngFor="
+                  let app of apps
+                    | apps_system: isOnlySystemApps
+                    | apps_name: isNameSortAsc
+                    | appsConfig: config.applications
+                "
+                [app]="app"
+              ></app-app-item>
+            </ng-container>
+            <ng-template #nodata>
+              <div style="margin-top: 32px; text-align: center">
+                Нет приложений
+              </div>
+            </ng-template>
+          </div>
         </div>
         <!--        Управление           -->
         <div class="form__tab" style="display: none">
@@ -898,3 +969,8 @@
     </div>
   </main>
 </app-global-container>
+
+<app-add-app-to-config
+  [apps]="apps"
+  (onSubmit)="addApp($event)"
+></app-add-app-to-config>
