@@ -1,27 +1,83 @@
 <app-modal
-  [modalID]="'datetime_picker'"
+  [modalID]="'datetime_picker_' + name"
   [direction]="'vertical'"
   [isClosable]="true"
 >
   <div class="content">
     <div class="top text-menu-title">
-      <p
+      <div
         class="prev"
-        (click)="go(-1)"
+        (click)="go(-1, dateService.date.value)"
       >
-        {{ _prev | moment: "MMMM" }}
-      </p>
-      <p class="curr">{{ dateService.date | async | moment: "MMMM" }}</p>
-      <p
+        <p class="text-menu-title">{{ _prev | moment: "MMMM" }}</p>
+        <p class="text-note text-center">{{ _prev | moment: "YYYY" }}</p>
+      </div>
+      <div class="curr">
+        <p class="text-menu-title">{{ dateService.date | async | moment: "MMMM" }}</p>
+        <p class="text-note text-center">{{ dateService.date | async | moment: "YYYY" }}</p>
+      </div>
+      <div
         class="next"
-        (click)="go(1)"
+        (click)="go(1, dateService.date.value)"
       >
-        {{ _next | moment: "MMMM" }}
-      </p>
+        <p class="text-menu-title">{{ _next | moment: "MMMM" }}</p>
+        <p class="text-note text-center">{{ _next | moment: "YYYY" }}</p>
+      </div>
     </div>
-    <hr class="divider">
-    <div class="body">body</div>
-    <hr class="divider">
-    <div class="bottom">bottom</div>
+    <hr class="divider" />
+    <table class="body">
+      <thead>
+        <tr>
+          <th class="text-body">Пн</th>
+          <th class="text-body">Вт</th>
+          <th class="text-body">Ср</th>
+          <th class="text-body">Чт</th>
+          <th class="text-body">Пт</th>
+          <th class="text-body">Сб</th>
+          <th class="text-body">Вс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let week of calendar">
+          <td
+            *ngFor="let day of week.days"
+            [class.disabled]="day.disabled"
+            [class.selected]="day.selected"
+            [class.active]="day.active"
+            (click)="select(day.value)"
+          >
+            {{ day.value | moment: "D" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr class="divider" />
+    <div class="bottom">
+      <div class="time-picker-wrapper row center">
+        <label class="text-menu-title">Время:</label>
+        <input
+          class="time-picker"
+          type="text"
+          [(ngModel)]="hour"
+          (ngModelChange)="setHour(hour)"
+
+          maxlength="2"
+        >
+        <span class="text-title">:</span>
+        <input
+          class="time-picker"
+          type="text"
+          [(ngModel)]="minute"
+          (ngModelChange)="setMinute(minute)"
+          maxlength="2"
+        >
+      </div>
+      <app-button
+        [text]="'Выбрать'"
+        [padding]="'12px 16px'"
+        [color]="'blue'"
+        (onCLick)="onSubmitHandler()"
+      ></app-button>
+    </div>
   </div>
 </app-modal>

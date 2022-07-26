@@ -1484,8 +1484,8 @@ input {
     padding: 11px 31px 11px 11px;
   }
 
-  &:hover,
-  &:focus {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
     border-color: var(--dark-blue);
   }
 

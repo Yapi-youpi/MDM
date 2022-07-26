@@ -1,6 +1,8 @@
 import { Component, Input } from "@angular/core";
-import { inputWidth } from "../../../../../shared/types/input";
 import { FormControl } from "@angular/forms";
+import * as moment from "moment";
+
+import { inputWidth } from "../../../../../shared/types/input";
 
 @Component({
   selector: "app-input-datetime",
@@ -13,10 +15,18 @@ export class InputDatetimeComponent {
   @Input() control: FormControl = new FormControl(null);
   @Input() isError: boolean = false;
 
+  public currDay!: moment.Moment;
+
   constructor() {}
 
-  ShowDatetimePicker() {
-    const modal = document.querySelector("#datetime_picker");
+  showDatetimePicker() {
+    const modal = document.querySelector(`#datetime_picker_${this.name}`);
     modal?.classList.toggle("hidden");
+  }
+
+  selectDay(day: moment.Moment) {
+    this.currDay = day;
+
+    this.control.setValue(moment(day).format());
   }
 }

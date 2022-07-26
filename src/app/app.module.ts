@@ -86,6 +86,7 @@ import { DatetimePickerComponent } from './components/common/modals/datetime-pic
 import { MomentPipe } from './shared/pipes/moment.pipe';
 import { AddAppToConfigComponent } from './components/common/modals/apps/add-app-to-config/add-app-to-config.component';
 import { AppsConfigPipe } from './shared/pipes/sort/apps/apps-config.pipe';
+import { FileSizePipe } from './shared/pipes/file-size.pipe';
 
 const routes: Routes = [
   {
@@ -172,6 +173,7 @@ const routes: Routes = [
     AppsSizePipe,
     AppsConfigPipe,
     MomentPipe,
+    FileSizePipe,
   ],
   imports: [
     BrowserModule,

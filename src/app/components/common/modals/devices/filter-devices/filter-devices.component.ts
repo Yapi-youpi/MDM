@@ -105,8 +105,6 @@ export class FilterDevicesComponent {
   }
 
   onSubmitHandler() {
-    // this.onSubmit.emit();
-
-    console.log(this._form.getRawValue());
+    this.onSubmit.emit();
   }
 }
