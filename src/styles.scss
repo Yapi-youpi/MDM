@@ -1319,7 +1319,7 @@ a {
 
 body {
   // основной текст
-  font-family: "HelveticaNeueCyr", sans-serif;
+  font-family: 'HelveticaNeueCyr', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -1341,7 +1341,7 @@ body {
 }
 // примечание
 .text-note {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 10px;
 }
@@ -1440,30 +1440,30 @@ input {
 
   transition: border-color var(--transition-time) ease;
 
-  &[type="text"],
-  &[type="email"],
-  &[type="password"],
-  &[type="datetime-local"],
-  &[type="search"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='password'],
+  &[type='datetime-local'],
+  &[type='search'] {
     border: 1px solid var(--grey);
   }
 
-  &[type="text"],
-  &[type="email"],
-  &[type="password"],
-  &[type="datetime-local"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='password'],
+  &[type='datetime-local'] {
     height: var(--input-height);
 
     border-radius: 16px;
   }
 
-  &[type="text"],
-  &[type="email"],
-  &[type="datetime-local"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='datetime-local'] {
     padding: 11px;
   }
 
-  &[type="search"] {
+  &[type='search'] {
     height: 30px;
     width: 300px;
 
@@ -1480,7 +1480,7 @@ input {
     }
   }
 
-  &[type="password"] {
+  &[type='password'] {
     padding: 11px 31px 11px 11px;
   }
 

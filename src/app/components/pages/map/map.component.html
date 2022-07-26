@@ -1,25 +1,37 @@
 <app-global-container class="global-container">
   <app-global-header
-    class="global-header" [title]="'Карта'"
+    class="global-header"
+    [title]="'Карта'"
   ></app-global-header>
 
-  <app-card class="global-main"
-            [color]="'light-grey'"
-  >
+  <app-card class="global-main" [color]="'light-grey'">
     <div class="page-content">
-      <div style="display: flex">
-        <input type="text">
-        <app-input-select
-          style="z-index: 99999"
-          [options]="option"
-        >
-        </app-input-select>
-        <app-input-select>
-
-        </app-input-select>
-        <app-input-select>
-
-        </app-input-select>
+      <div style="display: flex; justify-content: flex-start">
+        <app-input-search style="margin-right: 7px"></app-input-search>
+        <div class="select">
+          <input class="select__input" type="hidden" name="" />
+          <div class="select__head" (click)="openSelect()">Выберите</div>
+          <ul class="select__list" *ngIf="open">
+            <ng-container *ngFor="let group of option">
+              <li class="select__item">{{ group.html }}</li>
+            </ng-container>
+          </ul>
+        </div>
+        <select name="" id="d">
+          <option value="">Группа</option>
+          <option value="">Группа</option>
+          <option value="">Группа</option>
+        </select>
+        <select name="" id="a">
+          <option value="">Группа</option>
+          <option value="">Группа</option>
+          <option value="">Группа</option>
+        </select>
+        <select name="" id="s">
+          <option value="">Группа</option>
+          <option value="">Группа</option>
+          <option value="">Группа</option>
+        </select>
       </div>
       <div id="map-container"></div>
     </div>
