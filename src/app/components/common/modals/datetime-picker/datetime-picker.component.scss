@@ -6,7 +6,7 @@
 
   .divider {
     &:first-of-type {
-      margin: 23px 0 21px 0;
+      margin-top: 23px;
     }
     &:last-of-type {
       margin: 29.48px 0 28px 0;
@@ -20,8 +20,12 @@
 
     text-transform: capitalize;
 
-    > p:not(.curr) {
-      cursor: pointer;
+    > p {
+      transition: color var(--transition-time) ease;
+
+      &:not(.curr) {
+        cursor: pointer;
+      }
     }
 
     .prev, .next {
@@ -29,6 +33,94 @@
 
       &:hover {
         color: var(--blue);
+      }
+    }
+  }
+
+  .body {
+    width: 100%;
+
+    border-collapse: separate;
+    border-spacing: 7px 15px;
+
+    thead th {
+      color: var(--blue);
+    }
+
+    tbody td {
+      height: 30px;
+      width: 35px;
+
+      text-align: center;
+
+      border-radius: 8px;
+
+      border: 1px solid transparent;
+
+      cursor: pointer;
+
+      transition:
+        background-color var(--transition-time) ease,
+        color var(--transition-time) ease;
+
+      &.disabled {
+        color: var(--grey);
+      }
+
+      &.selected {
+        background-color: var(--dark-blue-grey);
+        color: var(--white);
+      }
+
+      &.active:not(.selected) {
+        border: 1px solid var(--blue);
+        color: var(--blue);
+      }
+
+      &:not(.selected):hover {
+        background-color: var(--light-blue-grey);
+      }
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .time-picker-wrapper {
+      margin-bottom: 50px;
+
+      label {
+        margin-right: 35px;
+      }
+
+      span {
+        color: var(--dark-blue);
+      }
+
+      .time-picker {
+        height: 24px;
+        width: 30px;
+
+        padding: 0;
+
+        font-weight: 550 !important;
+        font-size: 24px !important;
+        line-height: 24px !important;
+
+        border: none;
+        border-radius: 0;
+
+        color: var(--dark-blue);
+
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
       }
     }
   }

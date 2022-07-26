@@ -5,14 +5,19 @@
     type="text"
     class="input-datetime"
     [ngClass]="width"
+    [formControl]="control"
+    [value]="currDay ? (currDay | moment: 'DD/MM/YY HH:mm') : ''"
   />
 <!--  [formControl]="control"-->
   <!--type="datetime-local"-->
 <!--  [class.error]="isError"-->
+<!--  [value]="currDay ? (currDay | moment: 'DD/MM/YY HH:mm') : ''"-->
   <span
     class="icon icon-datetime"
-    (click)="ShowDatetimePicker()"
+    (click)="showDatetimePicker()"
   ></span>
 </div>
 
-<app-datetime-picker></app-datetime-picker>
+<app-datetime-picker
+  (onSubmit)="selectDay($event)"
+></app-datetime-picker>

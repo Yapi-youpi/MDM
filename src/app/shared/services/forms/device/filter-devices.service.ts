@@ -13,8 +13,8 @@ export class FilterDevicesService {
     this.form = new FormGroup({
       "status-on": new FormControl(false),
       "status-off": new FormControl(false),
-      "date-from": new FormControl(null),
-      "date-to": new FormControl(null),
+      "date-from": new FormControl({ value: null, disabled: true }),
+      "date-to": new FormControl({ value: null, disabled: true }),
       config_ids: new FormControl(null),
       group_ids: new FormControl(null),
     });
