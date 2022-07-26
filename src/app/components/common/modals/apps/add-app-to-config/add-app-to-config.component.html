@@ -31,7 +31,15 @@
                 <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
               </svg>
             </div>
-            <span>{{ app.name }}{{ app.version }}</span>
+            <div class="app">
+              <img
+                class="app__img"
+                src="{{ app.iconPath }}"
+                alt="{{ app.iconText }}"
+              />
+              <span class="app__name">{{ app.name }}</span>
+              <div class="app__version">{{ app.version }}</div>
+            </div>
           </label>
         </div>
       </ng-container>

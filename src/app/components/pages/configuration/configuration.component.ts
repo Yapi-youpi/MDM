@@ -18,7 +18,7 @@ export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
   public configForm: FormGroup;
   public apps: App[] = [];
-  public search: string = '';
+  public searchParam: string = '';
   public isOnlySystemApps: boolean = false;
   public isNameSortAsc: boolean = true;
   public isSizeSortAsc: boolean = true;
@@ -78,7 +78,6 @@ export class ConfigurationComponent implements OnInit {
       if (this.userService.token) {
         i.unsubscribe();
         this.getConfig();
-        this.getApps();
       }
     });
   }
@@ -120,13 +119,14 @@ export class ConfigurationComponent implements OnInit {
           if (!this.configForm.value.wifiSecurityType) {
             this.configForm.patchValue({ wifiSecurityType: 'NONE' });
           }
-          console.log(this.configForm.value);
+          this.getApps();
         });
       })
       .catch((err) => console.log(err));
   }
 
-  editConfig(config) {
+  editConfig() {
+    const config = this.config;
     this.configService
       .editConfig(config)
       .then((res) => {
@@ -168,6 +168,10 @@ export class ConfigurationComponent implements OnInit {
       tabsContent[i].style.display = 'flex';
       tabs[i].classList.add('tab--active');
     }
+  }
+
+  onChangeSearchInputHandler(value: string) {
+    this.searchParam = value;
   }
 
   toggleSystemApps() {

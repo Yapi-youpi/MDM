@@ -758,8 +758,11 @@
         <div class="form__tab" style="display: none">
           <div class="card__header">Приложения</div>
           <div class="config-settings">
-            <div class="top row space-between">
-              <app-input-search [(ngModel)]="search"></app-input-search>
+            <div class="app-header">
+              <app-input-search
+                [value]="searchParam"
+                (onChange)="onChangeSearchInputHandler($event)"
+              ></app-input-search>
               <div class="filter-btn-wrapper">
                 <app-button
                   [text]="'системное приложение'"
@@ -801,8 +804,8 @@
                     (onCLick)="toggleSizeSortDir()"
                   ></app-sort-btn>
                 </div>
-                <p>Действия</p>
                 <p>Ярлык</p>
+                <p>Действия</p>
                 <div class="sort-btn-wrapper">
                   <app-sort-btn
                     [title]="'Порядок'"
@@ -819,8 +822,10 @@
                     | apps_system: isOnlySystemApps
                     | apps_name: isNameSortAsc
                     | appsConfig: config.applications
+                    | search: searchParam:'app'
                 "
                 [app]="app"
+                [forConfig]="true"
               ></app-app-item>
             </ng-container>
             <ng-template #nodata>
@@ -960,7 +965,9 @@
           </div>
         </div>
         <div class="btn-wrapper">
-          <button type="button" class="btn btn--big">Сохранить</button>
+          <button type="button" class="btn btn--big" (click)="editConfig()">
+            Сохранить
+          </button>
           <button type="button" class="btn btn--big btn--outline">
             Отменить
           </button>
@@ -971,6 +978,8 @@
 </app-global-container>
 
 <app-add-app-to-config
+  *ngIf="config"
   [apps]="apps"
+  [appsInConfig]="config.applications ? config.applications : []"
   (onSubmit)="addApp($event)"
 ></app-add-app-to-config>
