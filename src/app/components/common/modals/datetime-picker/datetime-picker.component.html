@@ -1,25 +1,28 @@
 <app-modal
-  [modalID]="'datetime_picker'"
+  [modalID]="'datetime_picker_' + name"
   [direction]="'vertical'"
   [isClosable]="true"
 >
   <div class="content">
     <div class="top text-menu-title">
-      <p
+      <div
         class="prev"
         (click)="go(-1, dateService.date.value)"
       >
-        {{ _prev | moment: "MMMM" }}
-      </p>
-      <p class="curr">
-        {{ dateService.date | async | moment: "MMMM" }}
-      </p>
-      <p
+        <p class="text-menu-title">{{ _prev | moment: "MMMM" }}</p>
+        <p class="text-note text-center">{{ _prev | moment: "YYYY" }}</p>
+      </div>
+      <div class="curr">
+        <p class="text-menu-title">{{ dateService.date | async | moment: "MMMM" }}</p>
+        <p class="text-note text-center">{{ dateService.date | async | moment: "YYYY" }}</p>
+      </div>
+      <div
         class="next"
         (click)="go(1, dateService.date.value)"
       >
-        {{ _next | moment: "MMMM" }}
-      </p>
+        <p class="text-menu-title">{{ _next | moment: "MMMM" }}</p>
+        <p class="text-note text-center">{{ _next | moment: "YYYY" }}</p>
+      </div>
     </div>
     <hr class="divider" />
     <table class="body">

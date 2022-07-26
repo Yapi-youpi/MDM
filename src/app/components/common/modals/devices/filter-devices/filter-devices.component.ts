@@ -4,7 +4,6 @@ import { filter } from "src/app/shared/services/forms/device";
 import { DevicesConfig } from "../../../../../shared/types/config";
 import { DevicesGroup } from "../../../../../shared/types/groups";
 import { Option } from "../../../../../shared/types/input";
-import * as moment from "moment";
 
 @Component({
   selector: "app-filter-devices",
@@ -106,12 +105,6 @@ export class FilterDevicesComponent {
   }
 
   onSubmitHandler() {
-    // this.onSubmit.emit();
-
-    console.log(this._form.getRawValue());
+    this.onSubmit.emit();
   }
-
-  // selectDay(day: moment.Moment) {
-  //   console.log(day);
-  // }
 }

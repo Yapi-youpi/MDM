@@ -61,6 +61,7 @@
                 "let app of apps
                   | apps_system: isOnlySystemApps
                   | apps_name: isNameSortAsc
+                  | search: searchParam: 'app'
                 "
               [app]="app"
               (onEditClick)="selectAppToEdit($event)"

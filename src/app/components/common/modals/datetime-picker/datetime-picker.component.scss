@@ -6,7 +6,7 @@
 
   .divider {
     &:first-of-type {
-      margin-top: 23px;
+      margin-top: 8px;
     }
     &:last-of-type {
       margin: 29.48px 0 28px 0;
@@ -20,16 +20,14 @@
 
     text-transform: capitalize;
 
-    > p {
+    p {
       transition: color var(--transition-time) ease;
-
-      &:not(.curr) {
-        cursor: pointer;
-      }
     }
 
     .prev, .next {
       color: var(--grey);
+
+      cursor: pointer;
 
       &:hover {
         color: var(--blue);
