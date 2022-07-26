@@ -84,6 +84,7 @@ import { NoListDataComponent } from './components/common/UI/no-list-data/no-list
 import { DeleteAppComponent } from './components/common/modals/apps/delete-app/delete-app.component';
 import { DatetimePickerComponent } from './components/common/modals/datetime-picker/datetime-picker.component';
 import { MomentPipe } from './shared/pipes/moment.pipe';
+import { FileSizePipe } from './shared/pipes/file-size.pipe';
 
 const routes: Routes = [
   {
@@ -168,6 +169,7 @@ const routes: Routes = [
     AppsSystemPipe,
     AppsSizePipe,
     MomentPipe,
+    FileSizePipe,
   ],
   imports: [
     BrowserModule,
