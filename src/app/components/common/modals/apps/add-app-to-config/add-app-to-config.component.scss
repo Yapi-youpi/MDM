@@ -1,0 +1,50 @@
+.content {
+  width: 700px;
+  padding: 30px 58px;
+
+  .divider {
+    margin: 25px 0;
+  }
+
+  .body {
+    margin-bottom: 50px;
+  }
+
+  .form-group-wrapper {
+    height: 30px;
+    justify-content: flex-start;
+
+    label {
+      margin-right: 103.06px;
+    }
+  }
+}
+
+.app {
+  padding: 15px 16px;
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--light-grey);
+  box-shadow: var(--box-shadow);
+  border-radius: 14px;
+  &__img {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0px 0px 10px rgba(133, 133, 133, 0.15));
+  }
+  &__name {
+    flex: 1;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  &__version {
+    width: 97px;
+    padding: 8px;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+}

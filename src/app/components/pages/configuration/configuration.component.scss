@@ -544,6 +544,26 @@ input[type="color"]::-webkit-color-swatch {
   border-radius: 20px;
 }
 
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 17px;
+}
+.filter-btn-wrapper {
+  flex: 1;
+}
+
+.app-list-header {
+  display: grid;
+  grid-template-columns: 4fr 12fr 4fr 15fr 4fr 8fr 4fr 4fr 5fr;
+  width: 100%;
+  margin-top: 24px;
+  //padding: 0 16px;
+  font-size: 12px;
+  line-height: 12px;
+}
+
 .w-740 {
   max-width: 740px;
 }

@@ -35,23 +35,23 @@
 }
 
 :root {
-  --dark-blue-grey: #2F4459;
+  --dark-blue-grey: #2f4459;
   --dark-grey: #667389;
-  --dark-blue: #557EBE;
-  --blue: #739CDD;
-  --light-blue: #DAE3F4;
-  --light-blue-darker: #C7D5ED;
-  --light-blue-grey: #ECEEF1;
-  --light-grey: #F7F7F7;
-  --grey: #D8D8D8;
-  --white: #FFFFFF;
-  --green: #AFD9A1;
-  --red: #FCA3A3;
-  --error: #EB4F4F;
+  --dark-blue: #557ebe;
+  --blue: #739cdd;
+  --light-blue: #dae3f4;
+  --light-blue-darker: #c7d5ed;
+  --light-blue-grey: #eceef1;
+  --light-grey: #f7f7f7;
+  --grey: #d8d8d8;
+  --white: #ffffff;
+  --green: #afd9a1;
+  --red: #fca3a3;
+  --error: #eb4f4f;
   --box-shadow: 0px 0px 10px rgba(133, 133, 133, 0.15);
   --header-height: 70px;
   --input-height: 44.44px;
-  --transition-time: .4s;
+  --transition-time: 0.4s;
   --filter-sidebar-width: 400px;
 }
 * {
@@ -1157,26 +1157,27 @@ input[type="checkbox"]:disabled + .checkbox-custom {
   align-items: center;
 }
 /*// СПАН-ИКОНКА*/
-   .icon,
-   .btn-icon span {
-     display: block;
+.icon,
+.btn-icon span {
+  display: block;
 
-     mask-repeat: no-repeat;
-     mask-position: center center;
+  mask-repeat: no-repeat;
+  mask-position: center center;
 
-     -webkit-mask-repeat: no-repeat;
-     -webkit-mask-position: center center;
-   }
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+}
 /*// СПИСКИ*/
-   ul, ol {
-     list-style: none;
-   }
+ul,
+ol {
+  list-style: none;
+}
 /*// ССЫЛКА*/
-   a {
-     display: block;
+a {
+  display: block;
 
-     color: inherit;
-   }
+  color: inherit;
+}
 ///*// СЕЛЕКТ*/
 //   select {
 //     height: var(--input-height);
@@ -1322,7 +1323,7 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 12px;
+  line-height: 1;
   // основной текст
   color: var(--dark-blue-grey);
 }
