@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { MapService } from '../../../services/map.service';
-import { Option } from '../../../shared/types/input';
-import { GroupsService } from '../../../shared/services/groups.service';
-import { DatabaseService } from '../../../shared/services/database.service';
-import { timer } from 'rxjs';
-import { LiveQuerySubscription } from 'parse';
-import { DivIcon, Marker } from 'leaflet';
-import * as L from 'leaflet';
-import { Device } from '../../../shared/types/devices';
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { MapService } from "../../../services/map.service";
+import { Option } from "../../../shared/types/input";
+import { GroupsService } from "../../../shared/services/groups.service";
+import { DatabaseService } from "../../../shared/services/database.service";
+import { timer } from "rxjs";
+import { LiveQuerySubscription } from "parse";
+import { DivIcon, Marker } from "leaflet";
+import * as L from "leaflet";
+import { Device } from "../../../shared/types/devices";
 
 interface DeviceGeo {
   device_id: string;
@@ -15,15 +15,15 @@ interface DeviceGeo {
 }
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
+  selector: "app-map",
+  templateUrl: "./map.component.html",
+  styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit, AfterViewInit {
   public option: Option[] = [
     {
-      value: '',
-      html: 'Группа',
+      value: "",
+      html: "Группа",
       isSelected: true,
     },
   ];
@@ -47,7 +47,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     let t = timer(1000).subscribe(() => {
       this.eventListener();
-      this.groupService.getGroups('all').then((res) => {
+      this.groupService.get("all").then((res) => {
         res.devicesGroups.map((item) => {
           let option = {
             value: item.id,
@@ -62,10 +62,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   async deviceSub() {
-    let query = this.db.query('Device');
+    let query = this.db.query("Device");
     this.sub = await query.subscribe();
     let device: Device | any;
-    this.sub.on('update', (item) => {
+    this.sub.on("update", (item) => {
       device = item.attributes;
       console.log(
         item.attributes,
@@ -86,8 +86,8 @@ export class MapComponent implements OnInit, AfterViewInit {
         });
       }
     });
-    this.sub.on('open', (item) => {
-      console.log(item, 'open');
+    this.sub.on("open", (item) => {
+      console.log(item, "open");
     });
     query.findAll().then((res) => {
       res.map((item) => {
@@ -107,9 +107,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   addMarkers(lat: number, lng: number, device: Device) {
     let color: string;
     if (device.active_state) {
-      color = '#AFD9A1';
+      color = "#AFD9A1";
     } else {
-      color = '#FCA3A3';
+      color = "#FCA3A3";
     }
     this.icon = L.divIcon({
       html: `<div
@@ -157,13 +157,13 @@ export class MapComponent implements OnInit, AfterViewInit {
     </div>
     <div style="width: 50%">
       <h4 style="font-weight: normal; margin-bottom: 0.5rem">
-        ${device.group_name ? device.group_name : 'Без группы'}
+        ${device.group_name ? device.group_name : "Без группы"}
       </h4>
       <h4 style="font-weight: normal; margin-bottom: 0.5rem">
       ${device.battery_percent}%
       </h4>
       <h4 style="font-weight: normal; margin-bottom: 0.5rem">
-      ${device.signalLevel ? device.signalLevel : 'Нет сигнала'}
+      ${device.signalLevel ? device.signalLevel : "Нет сигнала"}
       </h4>
     </div>
   </div>
@@ -187,17 +187,17 @@ export class MapComponent implements OnInit, AfterViewInit {
   </text>
 </svg>
 `,
-      className: '',
+      className: "",
       iconSize: [60, 30],
     });
     this.device_marker = L.marker([lat, lng], { icon: this.icon });
-    this.device_marker.on('click', (e) => {
+    this.device_marker.on("click", (e) => {
       let id = e.target._icon.firstElementChild.id;
       let elem = document.getElementById(id);
-      let icon = document.getElementById('icon_' + id);
+      let icon = document.getElementById("icon_" + id);
       if (elem && icon) {
-        elem.style.display = 'block';
-        icon.style.display = 'none';
+        elem.style.display = "block";
+        icon.style.display = "none";
       }
     });
     let device_geo = {
@@ -211,24 +211,24 @@ export class MapComponent implements OnInit, AfterViewInit {
   closePanel(id: string) {
     let elem = document.getElementById(id);
     if (elem) {
-      elem.style.display = 'none';
+      elem.style.display = "none";
     }
   }
 
   eventListener() {
-    let elems = document.querySelectorAll('.marker-event');
+    let elems = document.querySelectorAll(".marker-event");
     console.log(elems);
     elems.forEach((elem) => {
-      elem.addEventListener('click', () => {
+      elem.addEventListener("click", () => {
         let el = document.getElementById(elem.id);
-        let icon = document.getElementById('icon_' + elem.id);
+        let icon = document.getElementById("icon_" + elem.id);
         let t = timer(100).subscribe(() => {
           if (el) {
-            el.style.display = 'none';
+            el.style.display = "none";
           }
           console.log(icon);
           if (icon) {
-            icon.style.display = 'block';
+            icon.style.display = "block";
           }
         });
       });
@@ -236,9 +236,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   openSelect() {
-    let elem = document.querySelector('.select__head');
+    let elem = document.querySelector(".select__head");
     if (elem) {
-      elem.classList.toggle('open');
+      elem.classList.toggle("open");
     }
     this.open = !this.open;
   }

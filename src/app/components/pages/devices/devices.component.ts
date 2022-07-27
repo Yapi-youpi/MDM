@@ -5,7 +5,11 @@ import { Device } from "../../../shared/types/devices";
 import { DevicesGroup } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
 import { DevicesFilter } from "../../../shared/types/interfaces";
-import { DevicesState, SingleDeviceState } from "../../../shared/types/states";
+import {
+  DevicesConfigsState,
+  DevicesState,
+  SingleDeviceState,
+} from "../../../shared/types/states";
 import * as states from "../../../shared/types/states";
 
 import {
@@ -86,15 +90,13 @@ export class DevicesComponent implements OnInit {
 
   getConfigs() {
     this.config
-      .getConfig("all")
-      .then((res) => {
-        this.configs = res;
-        // console.log(res)
-        // if (res.success) {
-        //   this.configs = res.devicesConfigs;
-        // } else {
-        //   console.log(res.error);
-        // }
+      .get("all")
+      .then((res: DevicesConfigsState) => {
+        if (res.success) {
+          this.configs = res.devicesConfigs;
+        } else {
+          console.log(res.error);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -103,7 +105,7 @@ export class DevicesComponent implements OnInit {
 
   getGroups() {
     this.group
-      .getGroups("all")
+      .get("all")
       .then((res: states.DevicesGroupsState) => {
         if (res.success) {
           this.groups = res.devicesGroups;

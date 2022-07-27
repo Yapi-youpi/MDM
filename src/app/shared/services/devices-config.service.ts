@@ -1,93 +1,65 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { DevicesConfig } from '../../interfaces/interfaces';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { DevicesConfig } from "../../interfaces/interfaces";
+import { configsPaths as api } from "../enums/api";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class DevicesConfigService {
   constructor(private http: HttpClient) {}
 
-  getConfig(param: string) {
-    const url = environment.url + '/get_config/' + param;
+  get(param: string) {
     return new Promise<any>((resolve, reject) => {
-      this.http.get(url).subscribe({
-        next: (
-          res:
-            | {
-                devicesConfigs: DevicesConfig[];
-                error: string;
-                success: boolean;
-              }
-            | any
-        ) => {
-          resolve(res.devicesConfigs);
-        },
-        error: (err) => {
-          reject(err);
-        },
+      this.http.get(environment.url + api.GET + param).subscribe({
+        next: (res) => resolve(res),
+        error: (err) => reject(err),
       });
     });
   }
 
-  addConfig(
-    config: DevicesConfig | undefined,
-    name: string,
-    description: string
-  ) {
+  add(config: DevicesConfig | undefined, name: string, description: string) {
     if (config) {
       config.name = name;
       config.description = description;
     }
-    const url = environment.url + '/add_config';
-    const body = {
-      ...config,
-    };
     return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+      this.http
+        .post(environment.url + api.ADD, {
+          ...config,
+        })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
     });
   }
 
-  renameConfig(id: string, name: string) {
-    const url = environment.url + '/rename_config';
+  rename(id: string, name: string) {
+    const url = environment.url + api.RENAME;
     const body = {
       id,
       name,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
+        next: (res) => resolve(res),
+        error: (err) => reject(err),
       });
     });
   }
 
-  removeConfig(id: string) {
-    const url = environment.url + '/remove_config';
-    const body = {
-      id,
-    };
+  delete(id: string) {
     return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+      this.http
+        .post(environment.url + api.DELETE, {
+          id,
+        })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
     });
   }
 }
