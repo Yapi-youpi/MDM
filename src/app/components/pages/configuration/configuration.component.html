@@ -780,54 +780,110 @@
               ></app-add-button>
             </div>
 
-            <ng-container
+            <table
               *ngIf="
                 config.applications && config.applications!.length > 0;
                 else nodata
               "
             >
-              <div class="app-list-header row space-between">
-                <div class="empty"></div>
-                <div class="sort-btn-wrapper">
-                  <app-sort-btn
-                    [title]="'Название'"
-                    [isSortAsc]="isNameSortAsc"
-                    (onCLick)="toggleNameSortDir()"
-                  ></app-sort-btn>
-                </div>
-                <p>Версия</p>
-                <p>ID пакета</p>
-                <div class="sort-btn-wrapper">
-                  <app-sort-btn
-                    [title]="'Размер'"
-                    [isSortAsc]="isSizeSortAsc"
-                    (onCLick)="toggleSizeSortDir()"
-                  ></app-sort-btn>
-                </div>
-                <p>Ярлык</p>
-                <p>Действия</p>
-                <div class="sort-btn-wrapper">
-                  <app-sort-btn
-                    [title]="'Порядок'"
-                    [isSortAsc]="isPositionSortAsc"
-                    (onCLick)="togglePositionSortDir()"
-                  ></app-sort-btn>
-                </div>
-                <p>Закреп снизу</p>
-              </div>
-
-              <app-app-item
-                *ngFor="
-                  let app of apps
-                    | apps_system: isOnlySystemApps
-                    | apps_name: isNameSortAsc
-                    | appsConfig: config.applications
-                    | search: searchParam:'app'
-                "
-                [app]="app"
-                [forConfig]="true"
-              ></app-app-item>
-            </ng-container>
+              <thead>
+                <tr class="table-row">
+                  <th class="sort-btn-wrapper" style="padding-left: 50px">
+                    <app-sort-btn
+                      [title]="'Название'"
+                      [isSortAsc]="isNameSortAsc"
+                      (onCLick)="toggleNameSortDir()"
+                    ></app-sort-btn>
+                  </th>
+                  <th>Версия</th>
+                  <th>ID пакета</th>
+                  <th class="sort-btn-wrapper">
+                    <app-sort-btn
+                      [title]="'Размер'"
+                      [isSortAsc]="isSizeSortAsc"
+                      (onCLick)="toggleSizeSortDir()"
+                    ></app-sort-btn>
+                  </th>
+                  <th>Действия</th>
+                  <th style="justify-content: center">Ярлык</th>
+                  <th class="sort-btn-wrapper">
+                    <app-sort-btn
+                      [title]="'Порядок'"
+                      [isSortAsc]="isPositionSortAsc"
+                      (onCLick)="togglePositionSortDir()"
+                    ></app-sort-btn>
+                  </th>
+                  <th>Закреп снизу</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="app-item table-row"
+                  *ngFor="
+                    let app of apps
+                      | apps_system: isOnlySystemApps
+                      | apps_name: isNameSortAsc
+                      | appsConfig: config.applications
+                      | search: searchParam:'app'
+                  "
+                >
+                  <td class="app-item__title">
+                    <img
+                      class="app-item__img"
+                      [src]="app.iconUID !== '' ? url + app.ID : ''"
+                      alt="{{ app.iconText }}"
+                    />
+                    <div class="title app-item__name">
+                      <p class="text-choose">{{ app.name }}</p>
+                      <p *ngIf="app.system" class="text-note">
+                        Системное приложение
+                      </p>
+                    </div>
+                  </td>
+                  <td class="app-item__version">{{ app.version }}</td>
+                  <td class="app-item__pkg">{{ app.pkg }}</td>
+                  <td class="app-item__file-size">
+                    {{ app.fileByteSize | fileSize }}
+                  </td>
+                  <td>
+                    <select name="action" id="action" class="select-app-action">
+                      <option [value]="0">Блокировать</option>
+                      <option [value]="1" selected>Разрешить</option>
+                      <option [value]="2">Удалить</option>
+                    </select>
+                  </td>
+                  <td class="row center app-item__icon">
+                    <div class="icon-container">
+                      <span
+                        class="icon"
+                        [class.on]="app.showIcon"
+                        [class.off]="!app.showIcon"
+                      ></span>
+                    </div>
+                  </td>
+                  <td class="app-item__order">
+                    <input
+                      *ngIf="app.showIcon"
+                      type="number"
+                      name="order"
+                      id="order"
+                      class="input-number"
+                      min="0"
+                      max="12"
+                    />
+                  </td>
+                  <td class="row center app-item__icon">
+                    <div class="icon-container" *ngIf="app.showIcon">
+                      <span
+                        class="icon"
+                        [class.on]="app.bottom"
+                        [class.off]="!app.bottom"
+                      ></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <ng-template #nodata>
               <div style="margin-top: 32px; text-align: center">
                 Нет приложений
