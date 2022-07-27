@@ -6,17 +6,15 @@ import {
   groupService,
   userService,
 } from "../../../shared/services";
+import { group } from "src/app/shared/services/forms";
 
 import { DevicesGroup } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
-
-import {
-  DevicesConfigsState,
-  DevicesGroupsState,
-} from "../../../shared/types/states";
+import * as states from "../../../shared/types/states";
+import { GroupFilter } from "../../../shared/types/filters";
 
 @Component({
-  selector: "app-groups",
+  selector: "app-group",
   templateUrl: "./groups.component.html",
   styleUrls: ["./groups.component.scss"],
 })
@@ -27,10 +25,18 @@ export class GroupsComponent implements OnInit {
 
   public searchParam: string = "";
 
+  public filter: GroupFilter = {
+    status: null,
+    dateFrom: null,
+    dateTo: null,
+    configsIDs: null,
+  };
+
   constructor(
     private groupService: groupService,
     private configService: deviceConfigService,
-    private userService: userService
+    private userService: userService,
+    private filterForm: group.filter
   ) {}
 
   ngOnInit() {
@@ -48,7 +54,7 @@ export class GroupsComponent implements OnInit {
 
     this.groupService
       .get(param)
-      .then((res: DevicesGroupsState) => {
+      .then((res: states.DevicesGroupsState) => {
         console.log(res);
         this.groups = res.devicesGroups;
         this.loading = false;
@@ -63,7 +69,7 @@ export class GroupsComponent implements OnInit {
 
     this.configService
       .get(param)
-      .then((res: DevicesConfigsState) => {
+      .then((res: states.DevicesConfigsState) => {
         console.log(res);
         this.configs = res.devicesConfigs;
         this.loading = false;
@@ -75,5 +81,23 @@ export class GroupsComponent implements OnInit {
 
   onChangeSearchInputHandler(value: string) {
     this.searchParam = value;
+  }
+
+  resetSearchParams() {
+    this.filter.status = null;
+    this.filter.dateFrom = null;
+    this.filter.dateTo = null;
+    this.filter.configsIDs = null;
+  }
+
+  searchGroupsWithParams() {
+    // this.cancelSelection();
+
+    this.filter.status = this.filterForm._status;
+    this.filter.dateFrom = this.filterForm._dateFrom;
+    this.filter.dateTo = this.filterForm._dateTo;
+    this.filter.configsIDs = this.filterForm._configsIDs;
+
+    console.log(this.filter);
   }
 }
