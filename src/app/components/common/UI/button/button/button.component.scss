@@ -46,6 +46,15 @@
     }
   }
 
+  &.dark {
+    background-color: var(--dark-blue-grey);
+    color: var(--white);
+
+    &:hover {
+      background-color: var(--dark-grey);
+    }
+  }
+
   &.transparent {
     background-color: transparent;
     color: inherit;
