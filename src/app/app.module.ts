@@ -38,7 +38,7 @@ import { GroupConverterPipe } from "./shared/pipes/group-converter.pipe";
 import { SearchPipe } from "./shared/pipes/search.pipe";
 import { ConfigConverterPipe } from "./shared/pipes/config-converter.pipe";
 import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
-import { DevicesFilterPipe } from "./shared/pipes/devices-filter.pipe";
+import { DevicesFilterPipe } from "./shared/pipes/filters/devices-filter.pipe";
 import { DeviceStatusPipe } from "./shared/pipes/sort/devices/device-status.pipe";
 import { DeviceNamePipe } from "./shared/pipes/sort/devices/device-name.pipe";
 import { DeviceDatePipe } from "./shared/pipes/sort/devices/device-date.pipe";
@@ -89,6 +89,9 @@ import { AppsConfigPipe } from "./shared/pipes/sort/apps/apps-config.pipe";
 import { FileSizePipe } from "./shared/pipes/file-size.pipe";
 import { GroupItemComponent } from "./components/common/list-item/group-item/group-item.component";
 import { GroupActionBtnComponent } from "./components/common/UI/button/item-action-btn/group/group-action-btn.component";
+import { AppsConfigComponent } from "./components/pages/configuration/apps-config/apps-config.component";
+import { GroupFilterPipe } from "./shared/pipes/filters/group-filter.pipe";
+import { FilterGroupsComponent } from "./components/common/modals/groups/filter-groups/filter-groups.component";
 
 const routes: Routes = [
   {
@@ -158,6 +161,10 @@ const routes: Routes = [
     NoListDataComponent,
     DeleteAppComponent,
     DatetimePickerComponent,
+    AppsConfigComponent,
+    GroupItemComponent,
+    FilterGroupsComponent,
+    GroupActionBtnComponent,
     // pipe
     GroupConverterPipe,
     ConfigSearchPipe,
@@ -176,8 +183,7 @@ const routes: Routes = [
     AppsConfigPipe,
     MomentPipe,
     FileSizePipe,
-    GroupItemComponent,
-    GroupActionBtnComponent,
+    GroupFilterPipe,
   ],
   imports: [
     BrowserModule,
