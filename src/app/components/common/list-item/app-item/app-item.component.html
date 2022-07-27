@@ -9,9 +9,7 @@
     <p *ngIf="app.system" class="text-note">Системное приложение</p>
   </div>
   <p class="app-item__version">{{ app.version }}</p>
-  <ng-container *ngIf="!forConfig">
-    <p class="app-item__url">123</p>
-  </ng-container>
+  <p class="app-item__url">123</p>
   <p class="app-item__pkg">{{ app.pkg }}</p>
   <p class="app-item__file-size">{{ app.fileByteSize | fileSize }}</p>
   <div class="row center app-item__icon">
@@ -23,10 +21,7 @@
       ></span>
     </div>
   </div>
-  <div
-    class="row space-between app-item__action"
-    *ngIf="!forConfig; else configActions"
-  >
+  <div class="row space-between app-item__action">
     <app-app-action-btn
       [app]="app"
       [target]="'edit_app'"
@@ -38,21 +33,4 @@
       (onClick)="onDeleteClickHandler(app)"
     ></app-app-action-btn>
   </div>
-  <ng-template #configActions>
-    <p>Разрешить</p>
-  </ng-template>
-  <ng-container *ngIf="forConfig">
-    <div class="app-item__order">
-      <input type="number" name="order" id="order" style="width: 40px" />
-    </div>
-    <div class="row center app-item__icon">
-      <div class="icon-container">
-        <span
-          class="icon"
-          [class.on]="app.bottom"
-          [class.off]="!app.bottom"
-        ></span>
-      </div>
-    </div>
-  </ng-container>
 </div>
