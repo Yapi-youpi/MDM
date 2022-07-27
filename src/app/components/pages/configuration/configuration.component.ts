@@ -8,6 +8,8 @@ import { UserService } from '../../../shared/services/user.service';
 import { App } from '../../../shared/types/apps';
 import { AppState } from '../../../shared/types/states';
 import { AppsService } from '../../../shared/services/apps.service';
+import { environment } from '../../../../environments/environment';
+import { appsPaths as api } from '../../../shared/enums/api';
 
 @Component({
   selector: 'app-configuration',
@@ -18,6 +20,7 @@ export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
   public configForm: FormGroup;
   public apps: App[] = [];
+  public url: string = environment.url + api.GET_ICON;
   public searchParam: string = '';
   public isOnlySystemApps: boolean = false;
   public isNameSortAsc: boolean = true;
