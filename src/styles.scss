@@ -1319,7 +1319,7 @@ a {
 
 body {
   // основной текст
-  font-family: 'HelveticaNeueRoman', sans-serif;
+  font-family: "HelveticaNeueRoman", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -1341,13 +1341,13 @@ body {
 }
 // примечание
 .text-note {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
   font-size: 10px;
 }
 // выбор
 .text-choose {
-  font-family: 'HelveticaNeueBold', sans-serif;
+  font-family: "HelveticaNeueBold", sans-serif;
   font-weight: 700;
   font-size: 12px;
   line-height: 12px;
@@ -1360,7 +1360,7 @@ body {
 }
 // заголовок вкладки
 .text-title {
-  font-family: 'HelveticaNeueBold', sans-serif;
+  font-family: "HelveticaNeueBold", sans-serif;
   font-weight: 550;
   font-size: 24px;
   line-height: 24px;
@@ -1446,31 +1446,31 @@ input {
   //transition: border-color var(--transition-time) ease;
   transition: outline-color var(--transition-time) ease;
 
-  &[type='text'],
-  &[type='email'],
-  &[type='password'],
-  &[type='datetime-local'],
-  &[type='search'] {
+  &[type="text"],
+  &[type="email"],
+  &[type="password"],
+  &[type="datetime-local"],
+  &[type="search"] {
     //border: 1px solid var(--grey);
     outline: 1px solid var(--grey);
   }
 
-  &[type='text'],
-  &[type='email'],
-  &[type='password'],
-  &[type='datetime-local'] {
+  &[type="text"],
+  &[type="email"],
+  &[type="password"],
+  &[type="datetime-local"] {
     //height: var(--input-height);
 
     border-radius: 16px;
   }
 
-  &[type='text'],
-  &[type='email'],
-  &[type='datetime-local'] {
+  &[type="text"],
+  &[type="email"],
+  &[type="datetime-local"] {
     padding: 11px;
   }
 
-  &[type='search'] {
+  &[type="search"] {
     //height: 30px;
     width: 300px;
 
@@ -1487,7 +1487,7 @@ input {
     }
   }
 
-  &[type='password'] {
+  &[type="password"] {
     padding: 11px 31px 11px 11px;
   }
 
@@ -1617,4 +1617,20 @@ input {
   box-shadow: 0 0 10px rgba(133, 133, 133, 0.95);
   //filter: drop-shadow(0px 0px 10px rgba(133, 133, 133, 0.15);
   -webkit-box-shadow: 0 0 100px rgba(133, 133, 133, 0.95);
+}
+.leaflet-control {
+  float: right !important;
+  background-color: #fbfbfb;
+}
+.leaflet-left {
+  right: 10px;
+}
+.leaflet-bar a {
+  color: #fbfbfb;
+}
+.leaflet-bar span {
+  background-color: #557ebe;
+  border-radius: 50%;
+  height: 24px !important;
+  width: 50px !important;
 }

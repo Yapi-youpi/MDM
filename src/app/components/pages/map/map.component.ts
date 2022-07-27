@@ -120,23 +120,10 @@ export class MapComponent implements OnInit, AfterViewInit {
                 class="marker-header"
               >
                 <svg viewBox="0 0 200 60">
-                <rect
-                  class="marker-icon"
-                  x="35"
-                  y="22"
-                  width="80"
-                  height="17"
-                  rx="3.5332"
-                  fill="white"
-                  stroke="rgba(133, 133, 133, 0.95)"
-                  stroke-opacity="0.1"
-                  stroke-width="1"
-                  stroke-opacity="0.5"
-                />
                 <circle
                   class="marker-icon"
-                  cx="31"
-                  cy="31"
+                  cx="28"
+                  cy="25"
                   r="14.5"
                   fill="${color}"
                   stroke="white"
@@ -145,11 +132,11 @@ export class MapComponent implements OnInit, AfterViewInit {
                   stroke-opacity="0.5"
                 />
                 <text
-                  y="28"
-                  x="60"
+                  y="30"
+                  x="50"
                   font-family="HelveticaNeueRoman"
-                  font-size="12"
-                  text-anchor="middle"
+                  font-size="12px"
+                  text-anchor="start"
                   fill="#343841"
                 >
                   ${device.name}
@@ -181,7 +168,7 @@ export class MapComponent implements OnInit, AfterViewInit {
                 class="marker-icon"
                 x="35"
                 y="22"
-                width="80"
+                width="48"
                 height="17"
                 rx="3.5332"
                 fill="white"
@@ -200,13 +187,12 @@ export class MapComponent implements OnInit, AfterViewInit {
                 stroke-opacity="0.5"
                 stroke-width="1"
                />
-              <path d="M31 23L39 31L31 39L23 31L31 23Z" fill="white" />
               <text
                 y="35"
-                x="80"
+                x="50"
                 font-family="HelveticaNeueRoman"
-                font-size="12"
-                text-anchor="middle"
+                font-size="12px"
+                text-anchor="start"
                 fill="#343841"
               >
               ${device.name}
@@ -243,7 +229,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   eventListener() {
     let elems = document.querySelectorAll('.marker-event');
-    console.log(elems);
     elems.forEach((elem) => {
       elem.addEventListener('click', () => {
         let el = document.getElementById(elem.id);
@@ -252,10 +237,10 @@ export class MapComponent implements OnInit, AfterViewInit {
           if (el) {
             el.style.display = 'none';
           }
-          console.log(icon);
           if (icon) {
             icon.style.display = 'block';
           }
+          t.unsubscribe();
         });
       });
     });
