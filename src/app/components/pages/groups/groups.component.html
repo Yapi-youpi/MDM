@@ -1,85 +1,77 @@
-<app-menu></app-menu>
-<div class="container">
-  <div class="">
-    <h3>Группы устройств</h3>
-    <div class="row" style="padding: 5px">
-      <div class="col s4">
-        <b>Название</b>
+<app-global-container class="global-container">
+  <app-global-header
+    class="global-header"
+    [title]="'Группы устройств'"
+  ></app-global-header>
+  <main class="global-main card-wrapper">
+    <div class="card page-content">
+      <div class="top row space-between">
+        <app-input-search
+          [value]="searchParam"
+          (onChange)="onChangeSearchInputHandler($event)"
+        ></app-input-search>
+        <div class="filter-wrapper">
+          <app-filter-btn
+            [target]="'filter_groups'"
+          ></app-filter-btn>
+        </div>
+        <app-add-button
+          [title]="'добавить группу'"
+          [target]="'add_group'"
+        ></app-add-button>
       </div>
-      <div class="col s4"><b>Состояние</b></div>
-    </div>
-    <div class="box">
-      <div class="progress" *ngIf="loading">
-        <div class="indeterminate"></div>
-      </div>
-      <ng-container *ngFor="let group of groups">
-        <div class="row">
-          <div class="col s4">{{ group.name }}</div>
-          <div class="col s4">
-            <div class="switch">
-              <label>
-                <input
-                  (click)="changeState(!group.activeState, group.id)"
-                  [checked]="group.activeState"
-                  type="checkbox"
-                />
-                <span class="lever"></span>
-              </label>
-            </div>
-          </div>
-          <div class="col s4">
-            <button
-              (click)="getID(group.id)"
-              data-target="rename"
-              class="btn btn-small blue lighten-1 modal-trigger"
-            >
-              Переименовать
-            </button>
-            <button
-              (click)="removeGroup(group.id)"
-              class="btn btn-small red lighten-1"
-            >
-              Удалить
-            </button>
-            <button
-              (click)="removeGroupWithDevices(group.id)"
-              class="btn btn-small red lighten-1"
-            >
-              Удалить с устройствами
-            </button>
-          </div>
+      <ng-container *ngIf="loading">
+        <div class="progress">
+          <div class="indeterminate"></div>
         </div>
       </ng-container>
-    </div>
-    <div class="row">
-      <div class="col s6">
-        <input [(ngModel)]="name" id="name" type="text" />
+      <div class="list">
+        <div class="list-header row">
+          <div class="checkbox-wrapper">
+            <app-input-checkbox></app-input-checkbox>
+          </div>
+          <div class="sort-headers row space-between">
+            <div class="sort-btn-wrapper status">
+              <app-sort-btn
+                [title]="'Название'"
+              ></app-sort-btn>
+            </div>
+            <p>Описание</p>
+            <p>Обозначение</p>
+            <div class="sort-btn-wrapper status">
+              <app-sort-btn
+                [title]="'Количество устройств'"
+              ></app-sort-btn>
+            </div>
+            <div class="sort-btn-wrapper status">
+              <app-sort-btn
+                [title]="'Конфигурация'"
+              ></app-sort-btn>
+            </div>
+            <div class="sort-btn-wrapper status">
+              <app-sort-btn
+                [title]="'Дата обновления'"
+              ></app-sort-btn>
+            </div>
+            <p>Состояние</p>
+            <p>Действия</p>
+          </div>
+        </div>
+        <div class="list-box">
+          <ng-container *ngIf="groups; else nodata">
+            <app-group-item
+              *ngFor="let group of groups
+              | search: searchParam : 'group'
+              "
+              [group]="group"
+              [configs]="configs"
+            ></app-group-item>
+          </ng-container>
+          <ng-template #nodata>
+            <app-no-list-data></app-no-list-data>
+          </ng-template>
+        </div>
       </div>
-      <div class="col s6">
-        <button
-          (click)="addGroup(name)"
-          [disabled]="!name"
-          class="btn btn-small blue lighten-1"
-        >
-          Добавить
-        </button>
-      </div>
     </div>
-  </div>
-</div>
-<div id="rename" class="modal">
-  <div class="row" style="padding: 10px">
-    <div class="col s6">
-      <input type="text" [(ngModel)]="rename" />
-    </div>
-    <div class="col s6">
-      <button
-        (click)="renameGroup(id, rename)"
-        class="btn btn-small blue lighten-1 modal-close"
-      >
-        Сохранить
-      </button>
-      <button class="btn btn-small red lighten-1 modal-close">Отмена</button>
-    </div>
-  </div>
-</div>
+  </main>
+</app-global-container>

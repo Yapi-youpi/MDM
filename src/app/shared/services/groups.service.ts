@@ -3,16 +3,17 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
 
+import { groupsPaths as api } from "../enums/api";
+
 @Injectable({
   providedIn: "root",
 })
 export class GroupsService {
   constructor(private http: HttpClient) {}
 
-  getGroups(parameter: string) {
-    const url = environment.url + "/get_device_group/" + parameter;
+  get(parameter: string) {
     return new Promise<any>((resolve, reject) => {
-      this.http.get(url).subscribe({
+      this.http.get(environment.url + api.GET + parameter).subscribe({
         next: (res) => {
           resolve(res);
         },
@@ -23,13 +24,9 @@ export class GroupsService {
     });
   }
 
-  addGroups(name: string) {
-    const url = environment.url + "/add_device_group";
-    const body = {
-      name,
-    };
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body).subscribe({
+  add(name: string) {
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(environment.url + api.ADD, { name }).subscribe({
         next: (res) => {
           resolve(res);
         },
@@ -41,72 +38,72 @@ export class GroupsService {
   }
 
   changeState(activeState: boolean, id: string) {
-    const url = environment.url + "/change_active_state_device_group";
-    const body = {
-      id,
-      activeState,
-    };
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
-
-  removeGroup(id: string) {
-    const url = environment.url + "/remove_device_group";
-    const body = {
-      id,
-    };
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
-
-  renameGroup(id: string, name: string) {
-    const url = environment.url + "/rename_device_group";
-    const body = {
-      id,
-      name,
-    };
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
-
-  removeGroupWithDevices(id: string) {
-    const url = environment.url + "/remove_device_group_and_all_devices";
-    const body = {
-      id,
-    };
     return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+      this.http
+        .post(environment.url + api.CHANGE_STATE, {
+          id,
+          activeState,
+        })
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
+    });
+  }
+
+  delete(id: string) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.DELETE, {
+          id,
+        })
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
+    });
+  }
+
+  rename(id: string, name: string) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.RENAME, {
+          id,
+          name,
+        })
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
+    });
+  }
+
+  deleteWithDevices(id: string) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.DELETE_WITH_DEVICES, {
+          id,
+        })
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
     });
   }
 }

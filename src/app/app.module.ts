@@ -22,6 +22,8 @@ import { MapComponent } from './components/pages/map/map.component';
 import { ConfigsComponent } from './components/pages/configs/configs.component';
 import { UserComponent } from './components/common/user/user.component';
 
+import { GroupItemComponent } from "./components/common/list-item/group-item/group-item.component";
+import { GroupActionBtnComponent } from "./components/common/UI/button/item-action-btn/group/group-action-btn.component";
 import { DeviceItemComponent } from './components/common/list-item/device-item/device-item.component';
 import { GlobalContainerComponent } from './components/common/global-container/global-container.component';
 import { SearchUsersPipe } from './services/search-users.pipe';
@@ -87,6 +89,7 @@ import { MomentPipe } from './shared/pipes/moment.pipe';
 import { AddAppToConfigComponent } from './components/common/modals/apps/add-app-to-config/add-app-to-config.component';
 import { AppsConfigPipe } from './shared/pipes/sort/apps/apps-config.pipe';
 import { FileSizePipe } from './shared/pipes/file-size.pipe';
+import { AppsConfigComponent } from './components/pages/configuration/apps-config/apps-config.component';
 
 const routes: Routes = [
   {
@@ -174,6 +177,9 @@ const routes: Routes = [
     AppsConfigPipe,
     MomentPipe,
     FileSizePipe,
+    AppsConfigComponent,
+    GroupItemComponent,
+    GroupActionBtnComponent,
   ],
   imports: [
     BrowserModule,

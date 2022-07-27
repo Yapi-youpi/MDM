@@ -6,9 +6,9 @@ import { DevicesConfig } from "../types/config";
   name: "configConverter",
 })
 export class ConfigConverterPipe implements PipeTransform {
-  transform(id: string, groups: DevicesConfig[]): string {
-    const idx = groups.map((e) => e.ID).indexOf(id);
-    if (idx >= 0) return groups[idx].name;
+  transform(id: string, configs: DevicesConfig[]): string {
+    const idx = configs.map((e) => e.ID).indexOf(id);
+    if (idx >= 0) return configs[idx].name;
     else return "";
   }
 }

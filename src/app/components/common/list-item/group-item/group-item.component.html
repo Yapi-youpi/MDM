@@ -1,0 +1,28 @@
+<div class="row space-between item">
+  <div class="checkbox-wrapper">
+    <app-input-checkbox></app-input-checkbox>
+  </div>
+  <div class="row space-between content">
+    <p>{{ group.name }}</p>
+    <p>{{ group.description }}</p>
+    <div class="icon-wrapper">123</div>
+    <p>{{ group.capacity || _dLength }} шт.</p>
+    <p>{{ group.deviceConfigID | configConverter: configs }}</p>
+    <p>{{ group.updateTime | dateConverter }}</p>
+    <div class="switch-wrapper">
+      <app-input-switch
+        [value]="group.activeState"
+      ></app-input-switch>
+    </div>
+    <div class="row space-between device-actions-wrapper">
+      <app-group-action-btn
+        [group]="group"
+        [target]="'edit_group'"
+      ></app-group-action-btn>
+      <app-group-action-btn
+        [group]="group"
+        [target]="'delete_group'"
+      ></app-group-action-btn>
+    </div>
+  </div>
+</div>

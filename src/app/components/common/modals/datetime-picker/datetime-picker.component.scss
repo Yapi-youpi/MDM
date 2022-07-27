@@ -6,7 +6,8 @@
 
   .divider {
     &:first-of-type {
-      margin-top: 23px;
+      //margin-top: 23px;
+      margin: 10px 0 14px 0;
     }
     &:last-of-type {
       margin: 29.48px 0 28px 0;
@@ -103,12 +104,14 @@
 
         padding: 0;
 
+        font-family: "HelveticaNeueBold", sans-serif;
         font-weight: 550 !important;
         font-size: 24px !important;
         line-height: 24px !important;
 
         border: none;
         border-radius: 0;
+        outline: none;
 
         color: var(--dark-blue);
 

@@ -1,43 +1,56 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
-import { GroupsService } from "../../../services/groups.service";
+import { Component, OnInit } from "@angular/core";
 import { interval } from "rxjs";
-import { Groups } from "../../../interfaces/interfaces";
-import { UserService } from "../../../shared/services/user.service";
+
+import {
+  deviceConfigService,
+  groupService,
+  userService,
+} from "../../../shared/services";
+
+import { DevicesGroup } from "../../../shared/types/groups";
+import { DevicesConfig } from "../../../shared/types/config";
+
+import {
+  DevicesConfigsState,
+  DevicesGroupsState,
+} from "../../../shared/types/states";
 
 @Component({
   selector: "app-groups",
   templateUrl: "./groups.component.html",
-  styleUrls: ["./groups.component.css"],
+  styleUrls: ["./groups.component.scss"],
 })
 export class GroupsComponent implements OnInit {
-  public groups: Groups[] = [];
-  public loading = true;
-  public id = "";
-  public name = "";
-  public rename = "";
+  public groups: DevicesGroup[] = [];
+  public configs: DevicesConfig[] = [];
+  public loading: boolean = true;
+
+  public searchParam: string = "";
+
   constructor(
-    private groupService: GroupsService,
-    private userService: UserService,
-    private elementRef: ElementRef
+    private groupService: groupService,
+    private configService: deviceConfigService,
+    private userService: userService
   ) {}
 
   ngOnInit() {
-    let elem = this.elementRef.nativeElement.querySelectorAll(".modal");
-    // M.Modal.init(elem);
     let i = interval(1000).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
         this.getGroups("all");
+        this.getConfigs("all");
       }
     });
   }
 
   getGroups(param: string) {
+    this.loading = true;
+
     this.groupService
-      .getGroups(param)
-      .then((res) => {
+      .get(param)
+      .then((res: DevicesGroupsState) => {
         console.log(res);
-        this.groups = res;
+        this.groups = res.devicesGroups;
         this.loading = false;
       })
       .catch((err) => {
@@ -45,62 +58,22 @@ export class GroupsComponent implements OnInit {
       });
   }
 
-  addGroup(name: string) {
-    this.groupService
-      .addGroups(name)
-      .then((res) => {
+  getConfigs(param: string) {
+    this.loading = true;
+
+    this.configService
+      .get(param)
+      .then((res: DevicesConfigsState) => {
         console.log(res);
-        this.name = "";
-        this.getGroups("all");
+        this.configs = res.devicesConfigs;
+        this.loading = false;
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  changeState(state: boolean, id: string) {
-    this.groupService
-      .changeState(state, id)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  removeGroup(id: string) {
-    this.groupService
-      .removeGroup(id)
-      .then((res) => {
-        console.log(res);
-        this.getGroups("all");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  renameGroup(id: string, name: string) {
-    this.groupService.renameGroup(id, name).then((res) => {
-      console.log(res);
-      this.rename = "";
-      this.getGroups("all");
-    });
-  }
-
-  getID(id: string) {
-    this.id = id;
-  }
-
-  removeGroupWithDevices(id: string) {
-    this.groupService
-      .removeGroupWithDevices(id)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  onChangeSearchInputHandler(value: string) {
+    this.searchParam = value;
   }
 }
