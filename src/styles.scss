@@ -1568,3 +1568,37 @@ input {
 //    padding-right: 11px;
 //  }
 //}
+.info-panel {
+  padding: 15px !important;
+  display: flex !important;
+}
+.marker-event {
+  display: none;
+  height: 140px;
+  width: 175px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  z-index: 9999;
+}
+.marker-header {
+  height: 40px;
+  width: 175px;
+  background-color: #dae3f4;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+.marker-text {
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+}
+.marker-attributes {
+  width: 45%;
+}
+.marker-attributes-values {
+  width: 50%;
+}
+.marker-icon {
+  box-shadow: 0 0 10px rgba(133, 133, 133, 0.95);
+  //filter: drop-shadow(0px 0px 10px rgba(133, 133, 133, 0.15);
+  -webkit-box-shadow: 0 0 100px rgba(133, 133, 133, 0.95);
+}

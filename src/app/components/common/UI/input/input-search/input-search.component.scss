@@ -26,3 +26,6 @@
     transition: all var(--transition-time) ease;
   }
 }
+input[type="search"]::-webkit-search-cancel-button {
+  cursor: pointer;
+}

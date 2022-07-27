@@ -1,12 +1,12 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
-import { interval } from "rxjs";
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 
-import { Device } from "../../../shared/types/devices";
-import { DevicesGroup } from "../../../shared/types/groups";
-import { DevicesConfig } from "../../../shared/types/config";
-import { DevicesFilter } from "../../../shared/types/interfaces";
-import { DevicesState, SingleDeviceState } from "../../../shared/types/states";
-import * as states from "../../../shared/types/states";
+import { Device } from '../../../shared/types/devices';
+import { DevicesGroup } from '../../../shared/types/groups';
+import { DevicesConfig } from '../../../shared/types/config';
+import { DevicesFilter } from '../../../shared/types/interfaces';
+import { DevicesState, SingleDeviceState } from '../../../shared/types/states';
+import * as states from '../../../shared/types/states';
 
 import {
   deviceService,
@@ -14,12 +14,12 @@ import {
   formService,
   groupService,
   userService,
-} from "../../../shared/services";
+} from '../../../shared/services';
 
 @Component({
-  selector: "app-devices",
-  templateUrl: "./devices.component.html",
-  styleUrls: ["./devices.component.scss"],
+  selector: 'app-devices',
+  templateUrl: './devices.component.html',
+  styleUrls: ['./devices.component.scss'],
 })
 export class DevicesComponent implements OnInit {
   public devices: Device[] = [];
@@ -38,7 +38,7 @@ export class DevicesComponent implements OnInit {
   public sortGroupAsc: boolean = true;
   public sortBatteryAsc: boolean = true;
 
-  public searchParam: string = "";
+  public searchParam: string = '';
 
   public devicesFilters: DevicesFilter = {
     status: null,
@@ -86,7 +86,7 @@ export class DevicesComponent implements OnInit {
 
   getConfigs() {
     this.config
-      .getConfig("all")
+      .getConfig('all')
       .then((res) => {
         this.configs = res;
         // console.log(res)
@@ -103,7 +103,7 @@ export class DevicesComponent implements OnInit {
 
   getGroups() {
     this.group
-      .getGroups("all")
+      .getGroups('all')
       .then((res: states.DevicesGroupsState) => {
         if (res.success) {
           this.groups = res.devicesGroups;
@@ -120,8 +120,9 @@ export class DevicesComponent implements OnInit {
     this.loading = true;
 
     this.device
-      .get("all")
+      .get('all')
       .then((res: states.DevicesState) => {
+        console.log(res);
         if (res.success) {
           this.loading = false;
           this.devices = res.devices;
@@ -178,11 +179,11 @@ export class DevicesComponent implements OnInit {
           this.currDevice = res.device;
           this.devices = [res.device, ...this.devices];
 
-          const modalAdd = document.querySelector("#add_device");
-          modalAdd?.classList.toggle("hidden");
+          const modalAdd = document.querySelector('#add_device');
+          modalAdd?.classList.toggle('hidden');
 
-          const modalQR = document.querySelector("#qr_code");
-          modalQR?.classList.toggle("hidden");
+          const modalQR = document.querySelector('#qr_code');
+          modalQR?.classList.toggle('hidden');
         } else {
           console.log(res.error);
         }
@@ -298,8 +299,8 @@ export class DevicesComponent implements OnInit {
             }
           });
 
-          const modal = document.querySelector("#edit_device");
-          modal?.classList.toggle("hidden");
+          const modal = document.querySelector('#edit_device');
+          modal?.classList.toggle('hidden');
         } else {
           console.log(res.error);
         }
@@ -339,8 +340,8 @@ export class DevicesComponent implements OnInit {
 
           this.selectedDevicesIDs = [];
 
-          const modal = document.querySelector("#edit_several_devices");
-          modal?.classList.toggle("hidden");
+          const modal = document.querySelector('#edit_several_devices');
+          modal?.classList.toggle('hidden');
         } else {
           console.log(res.error);
         }
@@ -366,8 +367,8 @@ export class DevicesComponent implements OnInit {
             (d) => d !== device.device_id
           );
 
-          const modal = document.querySelector("#delete_device");
-          modal?.classList.toggle("hidden");
+          const modal = document.querySelector('#delete_device');
+          modal?.classList.toggle('hidden');
         }
       })
       .catch((err) => {
@@ -388,8 +389,8 @@ export class DevicesComponent implements OnInit {
 
           this.selectedDevicesIDs = [];
 
-          const modal = document.querySelector("#delete_several_elements");
-          modal?.classList.toggle("hidden");
+          const modal = document.querySelector('#delete_several_elements');
+          modal?.classList.toggle('hidden');
         }
       })
       .catch((err) => {
