@@ -1,24 +1,20 @@
 .app-item {
   height: 60px;
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 16px;
   margin-bottom: 10px;
-
+  font-size: 12px;
+  line-height: 12px;
   background-color: var(--white);
-
   border-radius: 14px;
-
   box-shadow: var(--box-shadow);
 
   img {
     height: 30px;
     width: 30px;
-
     border-radius: 8px;
   }
 
@@ -27,50 +23,42 @@
 
     &.text-note {
       margin-top: 7px;
-
       color: var(--dark-grey);
     }
   }
 
   > *:nth-child(1) {
     width: 30px;
-
     margin-right: 10px;
   }
 
   > *:nth-child(2) {
     width: 165px;
-
     margin-right: 5px;
   }
 
   > *:nth-child(3) {
     width: 50px;
-
     margin-right: 5px;
   }
 
   > *:nth-child(4) {
     width: 505px;
-
     margin-right: 10px;
   }
 
   > *:nth-child(5) {
     width: 230px;
-
     margin-right: 10px;
   }
 
   > *:nth-child(6) {
     width: 56px;
-
     margin-right: 21px;
   }
 
   > *:nth-child(7) {
     width: 40px;
-
     margin-right: 46px;
   }
 
@@ -81,17 +69,13 @@
   .icon-container {
     height: 16px;
     width: 16px;
-
     background-color: var(--dark-blue);
-
     border-radius: 8px;
 
     .icon {
       height: 16px;
       width: 16px;
-
       display: block;
-
       background-color: var(--white);
 
       &.on {

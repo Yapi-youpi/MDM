@@ -12,7 +12,6 @@ import { environment } from '../../../../../environments/environment';
 })
 export class AppItemComponent {
   @Input() app!: App;
-  @Input() forConfig!: boolean | false;
 
   @Output() onEditClick = new EventEmitter<App>();
   @Output() onDeleteClick = new EventEmitter<App>();
