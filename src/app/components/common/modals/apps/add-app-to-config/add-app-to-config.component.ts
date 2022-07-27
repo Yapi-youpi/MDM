@@ -1,19 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { App } from '../../../../../shared/types/apps';
+import { environment } from '../../../../../../environments/environment';
+import { appsPaths as api } from '../../../../../shared/enums/api';
 
 @Component({
   selector: 'app-add-app-to-config',
   templateUrl: './add-app-to-config.component.html',
   styleUrls: ['./add-app-to-config.component.scss'],
 })
-export class AddAppToConfigComponent implements OnInit {
+export class AddAppToConfigComponent {
   @Input() apps: App[] = [];
+  @Input() appsInConfig: string[] = [];
+
   public addedApps: string[] = [];
   public isSubmitted: boolean = false;
+  public url: string = environment.url + api.GET_ICON;
+
   @Output() onSubmit = new EventEmitter();
   constructor() {}
-
-  ngOnInit(): void {}
 
   onCheckboxChange(event: any) {
     if (event.target.checked) {

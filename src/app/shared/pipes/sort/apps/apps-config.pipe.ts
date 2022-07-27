@@ -5,10 +5,12 @@ import { App } from '../../../types/apps';
   name: 'appsConfig',
 })
 export class AppsConfigPipe implements PipeTransform {
-  transform(apps: App[], inConfig: string[]): App[] {
+  transform(apps: App[], inConfig: string[], param: boolean = false): App[] {
     if (inConfig) {
       const filterSet = new Set(inConfig);
-      return apps.filter((app) => filterSet.has(app.ID));
+      return param
+        ? apps.filter((app) => !filterSet.has(app.ID))
+        : apps.filter((app) => filterSet.has(app.ID));
     } else return apps;
   }
 }

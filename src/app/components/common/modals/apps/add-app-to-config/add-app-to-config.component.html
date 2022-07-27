@@ -15,7 +15,7 @@
           <label
             for="{{ app.ID }}"
             class="checkbox-wrapper"
-            *ngFor="let app of apps"
+            *ngFor="let app of apps | appsConfig: appsInConfig:true"
           >
             <input
               type="checkbox"
@@ -34,7 +34,7 @@
             <div class="app">
               <img
                 class="app__img"
-                src="{{ app.iconPath }}"
+                src="{{ app.iconUID !== '' ? url + app.ID : '' }}"
                 alt="{{ app.iconText }}"
               />
               <span class="app__name">{{ app.name }}</span>

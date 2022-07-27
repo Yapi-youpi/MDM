@@ -190,8 +190,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   addApp(addedApps: string[]) {
-    console.log(addedApps);
-    this.config.applications = addedApps;
+    this.config.applications = this.config.applications?.concat(addedApps);
   }
 
   asd(e) {
