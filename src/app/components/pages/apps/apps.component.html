@@ -59,9 +59,10 @@
             <app-app-item
               *ngFor=
                 "let app of apps
+                  | search: searchParam: 'app'
                   | apps_system: isOnlySystemApps
                   | apps_name: isNameSortAsc
-                  | search: searchParam: 'app'
+                  | apps_size: isSizeSortAsc
                 "
               [app]="app"
               (onEditClick)="selectAppToEdit($event)"

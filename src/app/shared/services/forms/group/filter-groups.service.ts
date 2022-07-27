@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
-
-import * as moment from "moment";
+import * as moment from "moment/moment";
 
 @Injectable({
   providedIn: "root",
 })
-export class FilterDevicesService {
+export class FilterGroupsService {
   public form: FormGroup;
 
   constructor() {
@@ -22,7 +21,6 @@ export class FilterDevicesService {
         disabled: true,
       }),
       config_ids: new FormControl(null),
-      group_ids: new FormControl(null),
     });
   }
 
@@ -52,10 +50,6 @@ export class FilterDevicesService {
       : null;
   }
 
-  get _groupsIDs() {
-    return this.form.getRawValue()["group_ids"];
-  }
-
   get _configsIDs() {
     return this.form.getRawValue()["config_ids"];
   }
@@ -67,7 +61,6 @@ export class FilterDevicesService {
       "date-from": null,
       "date-to": null,
       config_ids: null,
-      group_ids: null,
     });
   }
 }

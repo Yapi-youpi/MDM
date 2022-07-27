@@ -47,6 +47,10 @@
       display: flex;
       align-items: center;
 
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
       &:hover p {
         color: var(--blue);
       }

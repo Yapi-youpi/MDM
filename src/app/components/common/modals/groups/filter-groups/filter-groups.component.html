@@ -1,5 +1,5 @@
 <app-modal
-  [modalID]="'filter_devices'"
+  [modalID]="'filter_groups'"
   [direction]="'horizontal'"
   [isClosable]="true"
 >
@@ -62,14 +62,6 @@
             [control]="$any(_config_ids)"
             [options]="_options_configs"
             (onSelect)="onConfigSelectHandler($event)"
-          ></app-input-select-accordion>
-        </div>
-        <div class="wrapper-group">
-          <app-input-select-accordion
-            [title]="'Группа'"
-            [control]="$any(_group_ids)"
-            [options]="_options_groups"
-            (onSelect)="onGroupSelectHandler($event)"
           ></app-input-select-accordion>
         </div>
       </form>

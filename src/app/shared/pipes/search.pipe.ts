@@ -8,7 +8,7 @@ import { DevicesGroup } from "../types/groups";
 })
 export class SearchPipe implements PipeTransform {
   transform(
-    array: Device[] | App[] | DevicesGroup[] | any[],
+    array: any[],
     value: string,
     arrayType:
       | "device"
@@ -19,7 +19,7 @@ export class SearchPipe implements PipeTransform {
       | "config"
       | "user"
       | "question"
-  ): Device[] | any[] {
+  ): any[] {
     if (arrayType === "device")
       return array.filter((el) =>
         value !== "" ? el.name.toLowerCase().includes(value.toLowerCase()) : el

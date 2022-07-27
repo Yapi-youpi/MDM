@@ -3,13 +3,11 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { App } from "../../../types/apps";
 
 @Pipe({
-  name: "appsSize",
+  name: "apps_size",
 })
 export class AppsSizePipe implements PipeTransform {
-  transform(devices: App[], isBatteryAsc: boolean): App[] {
-    // if (isBatteryAsc)
-    //   return devices.sort((a, b) => a.fileSize - b.fileSize);
-    // else return devices.sort((a, b) => b.fileSize - a.fileSize);
-    return [];
+  transform(apps: App[], isSizeAsc: boolean): App[] {
+    if (isSizeAsc) return apps.sort((a, b) => a.fileByteSize - b.fileByteSize);
+    else return apps.sort((a, b) => b.fileByteSize - a.fileByteSize);
   }
 }
