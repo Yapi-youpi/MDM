@@ -13,37 +13,28 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { AppInterceptor } from "./app.interceptor";
 
 import { AppComponent } from "./app.component";
+
+// СТРАНИЦЫ
 import { AuthComponent } from "./components/pages/auth/auth.component";
 import { UsersComponent } from "./components/pages/users/users.component";
-import { MenuComponent } from "./components/common/menu/menu.component";
 import { DevicesComponent } from "./components/pages/devices/devices.component";
 import { GroupsComponent } from "./components/pages/groups/groups.component";
 import { MapComponent } from "./components/pages/map/map.component";
 import { ConfigsComponent } from "./components/pages/configs/configs.component";
-import { UserComponent } from "./components/common/user/user.component";
 
+// КОМПОНЕНТЫ ПОМЕНБШЕ
+import { UserComponent } from "./components/common/user/user.component";
+import { MenuComponent } from "./components/common/menu/menu.component";
 import { DeviceItemComponent } from "./components/common/list-item/device-item/device-item.component";
 import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
-import { SearchUsersPipe } from "./services/search-users.pipe";
-import { FilterUsersPipe } from "./services/filter-users.pipe";
 import { UserPermissionsComponent } from "./components/pages/user-permissions/user-permissions.component";
 import { ConfigurationComponent } from "./components/pages/configuration/configuration.component";
-import { ConfigSearchPipe } from "./services/config-search.pipe";
 import { CardComponent } from "./components/common/card/card.component";
 import { CentralWrapperComponent } from "./components/common/central-wrapper/central-wrapper.component";
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
 import { ChangePasswordComponent } from "./components/common/modals/change-password/change-password.component";
 import { ModalComponent } from "./components/common/modal/modal.component";
-import { GroupConverterPipe } from "./shared/pipes/group-converter.pipe";
-import { SearchPipe } from "./shared/pipes/search.pipe";
-import { ConfigConverterPipe } from "./shared/pipes/config-converter.pipe";
-import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
-import { DevicesFilterPipe } from "./shared/pipes/filters/devices-filter.pipe";
-import { DeviceStatusPipe } from "./shared/pipes/sort/devices/device-status.pipe";
-import { DeviceNamePipe } from "./shared/pipes/sort/devices/device-name.pipe";
-import { DeviceDatePipe } from "./shared/pipes/sort/devices/device-date.pipe";
-import { DeviceGroupPipe } from "./shared/pipes/sort/devices/device-group.pipe";
-import { DeviceBatteryPipe } from "./shared/pipes/sort/devices/device-battery.pipe";
+
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { AuthButtonComponent } from "./components/common/UI/button/auth-button/auth-button.component";
 import { DeviceActionBtnComponent } from "./components/common/UI/button/item-action-btn/device/device-action-btn.component";
@@ -73,25 +64,40 @@ import { InputFileComponent } from "./components/common/UI/input/input-file/inpu
 import { InputSwitchComponent } from "./components/common/UI/input/input-switch/input-switch.component";
 import { InputDatetimeComponent } from "./components/common/UI/input/input-datetime/input-datetime.component";
 import { InputSearchComponent } from "./components/common/UI/input/input-search/input-search.component";
-import { AppsSystemPipe } from "./shared/pipes/sort/apps/apps-system.pipe";
 import { AppItemComponent } from "./components/common/list-item/app-item/app-item.component";
 import { AppActionBtnComponent } from "./components/common/UI/button/item-action-btn/app/app-action-btn.component";
 import { EditAppComponent } from "./components/common/modals/apps/edit-app/edit-app.component";
-import { AppsNamePipe } from "./shared/pipes/sort/apps/apps-name.pipe";
-import { AppsSizePipe } from "./shared/pipes/sort/apps/apps-size.pipe";
 import { InputSelectAccordionComponent } from "./components/common/UI/input/input-select-accordion/input-select-accordion.component";
 import { NoListDataComponent } from "./components/common/UI/no-list-data/no-list-data.component";
 import { DeleteAppComponent } from "./components/common/modals/apps/delete-app/delete-app.component";
 import { DatetimePickerComponent } from "./components/common/modals/datetime-picker/datetime-picker.component";
-import { MomentPipe } from "./shared/pipes/moment.pipe";
 import { AddAppToConfigComponent } from "./components/common/modals/apps/add-app-to-config/add-app-to-config.component";
-import { AppsConfigPipe } from "./shared/pipes/sort/apps/apps-config.pipe";
-import { FileSizePipe } from "./shared/pipes/file-size.pipe";
 import { GroupItemComponent } from "./components/common/list-item/group-item/group-item.component";
 import { GroupActionBtnComponent } from "./components/common/UI/button/item-action-btn/group/group-action-btn.component";
 import { AppsConfigComponent } from "./components/pages/configuration/apps-config/apps-config.component";
-import { GroupFilterPipe } from "./shared/pipes/filters/group-filter.pipe";
 import { FilterGroupsComponent } from "./components/common/modals/groups/filter-groups/filter-groups.component";
+
+// ПАЙПЫ
+import { GroupFilterPipe } from "./shared/pipes/filters/group-filter.pipe";
+import { SearchUsersPipe } from "./services/search-users.pipe";
+import { FilterUsersPipe } from "./services/filter-users.pipe";
+import { ConfigSearchPipe } from "./services/config-search.pipe";
+import { GroupConverterPipe } from "./shared/pipes/group-converter.pipe";
+import { SearchPipe } from "./shared/pipes/search.pipe";
+import { ConfigConverterPipe } from "./shared/pipes/config-converter.pipe";
+import { DateConverterPipe } from "./shared/pipes/date-converter.pipe";
+import { DevicesFilterPipe } from "./shared/pipes/filters/devices-filter.pipe";
+import { DeviceStatusPipe } from "./shared/pipes/sort/devices/device-status.pipe";
+import { DeviceNamePipe } from "./shared/pipes/sort/devices/device-name.pipe";
+import { DeviceDatePipe } from "./shared/pipes/sort/devices/device-date.pipe";
+import { DeviceGroupPipe } from "./shared/pipes/sort/devices/device-group.pipe";
+import { DeviceBatteryPipe } from "./shared/pipes/sort/devices/device-battery.pipe";
+import { AppsSystemPipe } from "./shared/pipes/sort/apps/apps-system.pipe";
+import { AppsNamePipe } from "./shared/pipes/sort/apps/apps-name.pipe";
+import { AppsSizePipe } from "./shared/pipes/sort/apps/apps-size.pipe";
+import { MomentPipe } from "./shared/pipes/moment.pipe";
+import { AppsConfigPipe } from "./shared/pipes/sort/apps/apps-config.pipe";
+import { FileSizePipe } from "./shared/pipes/file-size.pipe";
 
 const routes: Routes = [
   {
@@ -103,7 +109,14 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    // component
+    // СТРАНИЦЫ
+    AuthComponent,
+    UsersComponent,
+    DevicesComponent,
+    GroupsComponent,
+    MapComponent,
+    ConfigsComponent,
+    // КОМПОНЕНТЫ ПОМЕНБШЕ
     GlobalHeaderComponent,
     StatusIconComponent,
     InputAlertComponent,
@@ -126,14 +139,8 @@ const routes: Routes = [
     CentralWrapperComponent,
     CardComponent,
     AppComponent,
-    UsersComponent,
-    AuthComponent,
     MenuComponent,
-    DevicesComponent,
-    GroupsComponent,
-    MapComponent,
     AddAppToConfigComponent,
-    ConfigsComponent,
     UserComponent,
     EditDeviceComponent,
     QrCodeComponent,
@@ -165,7 +172,7 @@ const routes: Routes = [
     GroupItemComponent,
     FilterGroupsComponent,
     GroupActionBtnComponent,
-    // pipe
+    //ПАЙПЫ
     GroupConverterPipe,
     ConfigSearchPipe,
     SearchPipe,
