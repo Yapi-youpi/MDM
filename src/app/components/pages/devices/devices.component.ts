@@ -1,24 +1,19 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { interval } from "rxjs";
 
-import { Device } from "../../../shared/types/devices";
-import { DevicesGroup } from "../../../shared/types/groups";
-import { DevicesConfig } from "../../../shared/types/config";
-import { DevicesFilter } from "../../../shared/types/interfaces";
-import {
-  DevicesConfigsState,
-  DevicesState,
-  SingleDeviceState,
-} from "../../../shared/types/states";
-import * as states from "../../../shared/types/states";
-
 import {
   deviceService,
   deviceConfigService,
-  formService,
   groupService,
   userService,
 } from "../../../shared/services";
+import { device } from "src/app/shared/services/forms";
+
+import { Device } from "../../../shared/types/devices";
+import { DevicesGroup } from "../../../shared/types/groups";
+import { DevicesConfig } from "../../../shared/types/config";
+import { DevicesFilter } from "../../../shared/types/filters";
+import * as states from "../../../shared/types/states";
 
 @Component({
   selector: "app-devices",
@@ -44,7 +39,7 @@ export class DevicesComponent implements OnInit {
 
   public searchParam: string = "";
 
-  public devicesFilters: DevicesFilter = {
+  public filter: DevicesFilter = {
     status: null,
     dateFrom: null,
     dateTo: null,
@@ -60,10 +55,10 @@ export class DevicesComponent implements OnInit {
     private group: groupService,
     private config: deviceConfigService,
     private device: deviceService,
-    private addDeviceForm: formService.device.add,
-    private editDeviceForm: formService.device.edit,
-    private editSeveralDevicesForm: formService.device.editSeveral,
-    private filterForm: formService.device.filter
+    private addDeviceForm: device.add,
+    private editDeviceForm: device.edit,
+    private editSeveralDevicesForm: device.editSeveral,
+    private filterForm: device.filter
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +86,7 @@ export class DevicesComponent implements OnInit {
   getConfigs() {
     this.config
       .get("all")
-      .then((res: DevicesConfigsState) => {
+      .then((res: states.DevicesConfigsState) => {
         if (res.success) {
           this.configs = res.devicesConfigs;
         } else {
@@ -151,21 +146,21 @@ export class DevicesComponent implements OnInit {
   }
 
   resetSearchParams() {
-    this.devicesFilters.status = null;
-    this.devicesFilters.dateFrom = null;
-    this.devicesFilters.dateTo = null;
-    this.devicesFilters.configsIDs = null;
-    this.devicesFilters.groupsIDs = null;
+    this.filter.status = null;
+    this.filter.dateFrom = null;
+    this.filter.dateTo = null;
+    this.filter.configsIDs = null;
+    this.filter.groupsIDs = null;
   }
 
   searchDevicesWithParams() {
     this.cancelSelection();
 
-    this.devicesFilters.status = this.filterForm._status;
-    this.devicesFilters.dateFrom = this.filterForm._dateFrom;
-    this.devicesFilters.dateTo = this.filterForm._dateTo;
-    this.devicesFilters.groupsIDs = this.filterForm._groupsIDs;
-    this.devicesFilters.configsIDs = this.filterForm._configsIDs;
+    this.filter.status = this.filterForm._status;
+    this.filter.dateFrom = this.filterForm._dateFrom;
+    this.filter.dateTo = this.filterForm._dateTo;
+    this.filter.groupsIDs = this.filterForm._groupsIDs;
+    this.filter.configsIDs = this.filterForm._configsIDs;
   }
 
   addDevice() {
@@ -175,7 +170,7 @@ export class DevicesComponent implements OnInit {
         description: this.addDeviceForm._desc,
         device_group_id: this.addDeviceForm._group,
       })
-      .then((res: SingleDeviceState) => {
+      .then((res: states.SingleDeviceState) => {
         if (res.success) {
           this.currDevice = res.device;
           this.devices = [res.device, ...this.devices];
@@ -324,7 +319,7 @@ export class DevicesComponent implements OnInit {
 
     this.device
       .edit(data)
-      .then((res: DevicesState) => {
+      .then((res: states.DevicesState) => {
         if (res.success) {
           data.forEach((el) => {
             this.devices = this.devices.map((d) => {

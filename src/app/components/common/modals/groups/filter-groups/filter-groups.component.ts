@@ -1,19 +1,17 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { filter } from "src/app/shared/services/forms/device";
-
 import { DevicesConfig } from "../../../../../shared/types/config";
-import { DevicesGroup } from "../../../../../shared/types/groups";
 import { Option } from "../../../../../shared/types/input";
 
+import { filter } from "../../../../../shared/services/forms/group";
+
 @Component({
-  selector: "app-filter-devices",
-  templateUrl: "./filter-devices.component.html",
-  styleUrls: ["./filter-devices.component.scss"],
+  selector: "app-filter-group",
+  templateUrl: "./filter-groups.component.html",
+  styleUrls: ["./filter-groups.component.scss"],
 })
-export class FilterDevicesComponent {
+export class FilterGroupsComponent {
   @Input() configs!: DevicesConfig[];
-  @Input() groups!: DevicesGroup[];
 
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();
@@ -44,25 +42,11 @@ export class FilterDevicesComponent {
     return this._form.get("config_ids");
   }
 
-  get _group_ids() {
-    return this._form.get("group_ids");
-  }
-
   get _options_configs() {
     return this.configs.map((c) => {
       return {
         value: c.ID,
         html: c.name,
-        isSelected: false,
-      } as Option;
-    });
-  }
-
-  get _options_groups() {
-    return this.groups.map((g) => {
-      return {
-        value: g.id,
-        html: g.name,
         isSelected: false,
       } as Option;
     });
@@ -86,20 +70,10 @@ export class FilterDevicesComponent {
     this._form.controls["config_ids"].setValue(data);
   }
 
-  onGroupSelectHandler(options: Option[]) {
-    let data: string[] = [];
-
-    options.forEach((o) => {
-      if (o.isSelected) data.push(o.value);
-    });
-
-    this._form.controls["group_ids"].setValue(data);
-  }
-
   onCancelHandler() {
     this.form.reset();
 
-    const modal = document.querySelector("#filter_devices");
+    const modal = document.querySelector("#filter_groups");
     modal?.classList.toggle("hidden");
 
     this.onCancel.emit();
