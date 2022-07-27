@@ -6,9 +6,9 @@
 .page-content {
   min-height: calc(100vh - 76px - 34px);
   height: 100%;
-
   padding: 12px 23px 12px 22px;
 }
+
 h4 {
   margin-bottom: 1rem;
 }
@@ -30,13 +30,14 @@ h4 {
     display: none !important;
   }
 }
+
 select {
   height: 30px !important;
   border: 1px solid #557ebe;
   color: #557ebe;
   border-radius: 8px;
   background: none;
-  padding: 0 14px;
+  padding: 0 10px;
   margin: 0 7px;
 }
 
@@ -52,15 +53,15 @@ select::after {
   max-width: 400px;
   height: 30px;
 }
+
 .select__head {
   width: 100%;
   max-width: 100%;
   border: 1px solid #557ebe;
   color: #557ebe;
   height: 30px;
-  //box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  padding: 7px 14px;
+  padding: 7px 10px;
   font-size: 12px;
   line-height: 18px;
   cursor: pointer;
@@ -89,15 +90,13 @@ select::after {
 .select__head.open::after {
   transform: translateY(50%) rotate(180deg);
 }
+
 .select__list {
-  //display: none;
   position: absolute;
-  top: 25px;
+  top: 20px;
   background: #fdfdfd;
   border: 1px solid #557ebe;
   border-top: none;
-  //box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  //border-radius: 10px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   max-height: 205px;
@@ -105,7 +104,7 @@ select::after {
   overflow-y: auto;
   z-index: 999;
   //margin: 0;
-  padding-top: 10px;
+  padding: 10px 0;
   font-size: 12px;
   font-family: "HelveticaNeueRoman", sans-serif;
   color: #557ebe;
@@ -125,14 +124,13 @@ select::after {
 }
 
 .select__list .select__item {
-  z-index: 9999999999999999999999999;
+  z-index: 999;
   position: relative;
-  //border-top: 1px solid rgba(224, 229, 231, 0.5);
-  padding: 10px;
+  padding: 10px 10px 0;
   cursor: pointer;
   list-style-type: none;
 }
 
 .select__list .select__item:hover {
-  background-color: rgba(224, 229, 231, 0.5);
+  background-color: #e0e5e77f;
 }
