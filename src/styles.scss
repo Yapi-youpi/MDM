@@ -617,6 +617,7 @@ button {
 .btn--round {
   width: 30px;
   height: 30px;
+  padding: 0;
   flex-shrink: 0;
   border-radius: 50%;
 }
@@ -644,6 +645,13 @@ button {
   height: 14px;
   mask: url("/assets/UI/trash.svg") no-repeat center;
   mask-size: contain;
+}
+.btn--filter {
+  width: 30px;
+  height: 30px;
+  mask: url("/assets/UI/filter.svg") no-repeat center;
+  mask-size: contain;
+  background-color: white;
 }
 /* Обертка для группы кнопок */
 .btn-wrapper {
