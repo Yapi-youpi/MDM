@@ -15,22 +15,20 @@ export class DevicesFilterPipe implements PipeTransform {
     configIDs: string[] | null,
     groupIDs: string[] | null
   ): Device[] {
-    if (!status && !dateFrom && !dateTo && !configIDs && !groupIDs) {
-      return devices;
-    } else {
-      return devices.filter((d) => {
-        return (
-          (status ? d.active_state : !d.active_state) &&
-          (dateFrom ? d.updatedAt > dateFrom : d.updatedAt > "") &&
-          (dateTo ? d.updatedAt < dateTo : moment.utc(Infinity).format()) &&
-          (configIDs && configIDs.length !== 0
-            ? configIDs.some((el) => d.device_config_id.includes(el))
-            : d) &&
-          (groupIDs && groupIDs.length !== 0
-            ? groupIDs.some((el) => d.device_group_id.includes(el))
-            : d)
-        );
-      });
-    }
+    return devices.filter((d) => {
+      return (
+        (status !== null ? d.active_state === status : d) &&
+        (dateFrom ? d.updatedAt > dateFrom : d.updatedAt > "") &&
+        (dateTo
+          ? d.updatedAt < dateTo
+          : d.updatedAt < moment.utc(Infinity).format()) &&
+        (configIDs && configIDs.length !== 0
+          ? configIDs.some((el) => d.device_config_id === el)
+          : d) &&
+        (groupIDs && groupIDs.length !== 0
+          ? groupIDs.some((el) => d.device_group_id === el)
+          : d)
+      );
+    });
   }
 }

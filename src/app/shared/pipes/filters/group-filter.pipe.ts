@@ -14,20 +14,17 @@ export class GroupFilterPipe implements PipeTransform {
     dateTo: string | null,
     configIDs: string[] | null
   ): DevicesGroup[] {
-    if (!status && !dateFrom && !dateTo && !configIDs) {
-      return groups;
-    } else {
-      console.log(status, dateFrom, dateTo, configIDs);
-      return groups.filter((g) => {
-        return (
-          (status ? g.activeState : !g.activeState) &&
-          (dateFrom ? g.updateTime > dateFrom : g.updateTime > "") &&
-          (dateTo ? g.updateTime < dateTo : moment.utc(Infinity).format()) &&
-          (configIDs && configIDs.length !== 0
-            ? configIDs.some((el) => g.deviceConfigID.includes(el))
-            : g)
-        );
-      });
-    }
+    return groups.filter((g) => {
+      return (
+        (status !== null ? g.activeState === status : g) &&
+        (dateFrom ? g.updateTime > dateFrom : g.updateTime > "") &&
+        (dateTo
+          ? g.updateTime < dateTo
+          : g.updateTime < moment.utc(Infinity).format()) &&
+        (configIDs && configIDs.length !== 0
+          ? configIDs.some((el) => g.deviceConfigID === el)
+          : g)
+      );
+    });
   }
 }

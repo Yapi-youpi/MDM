@@ -61,12 +61,13 @@
           <ng-container *ngIf="groups; else nodata">
             <app-group-item
               *ngFor="let group of groups
+              | search: searchParam : 'group'
               | groupFilter
                     : filter.status
                     : filter.dateFrom
                     : filter.dateTo
                     : filter.configsIDs
-              | search: searchParam : 'group'"
+"
               [group]="group"
               [configs]="configs"
             ></app-group-item>

@@ -97,7 +97,5 @@ export class GroupsComponent implements OnInit {
     this.filter.dateFrom = this.filterForm._dateFrom;
     this.filter.dateTo = this.filterForm._dateTo;
     this.filter.configsIDs = this.filterForm._configsIDs;
-
-    console.log(this.filter);
   }
 }
