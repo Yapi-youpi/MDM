@@ -7,12 +7,12 @@ import {
   userService,
 } from "../../../shared/services";
 import { group } from "src/app/shared/services/forms";
+import { edit, editSeveral } from "../../../shared/services/forms/group";
 
 import { DevicesGroup } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
 import * as states from "../../../shared/types/states";
 import { GroupFilter } from "../../../shared/types/filters";
-import { edit } from "../../../shared/services/forms/group";
 
 @Component({
   selector: "app-group",
@@ -43,7 +43,8 @@ export class GroupsComponent implements OnInit {
     private configService: deviceConfigService,
     private userService: userService,
     private filterForm: group.filter,
-    private editForm: edit
+    private editForm: edit,
+    private editSeveralForm: editSeveral
   ) {}
 
   ngOnInit() {
@@ -209,6 +210,26 @@ export class GroupsComponent implements OnInit {
     this.loading = false;
   }
 
+  editSeveralGroups() {
+    this.loading = true;
+
+    const data: DevicesGroup[] = this.groups
+      .filter((g) => this.selectedGroupsIDs.includes(g.id))
+      .map((g) => {
+        return {
+          ...g,
+          deviceConfigID: this.editSeveralForm._config,
+          activeState: this.editSeveralForm._state,
+        };
+      });
+
+    // CODE
+
+    console.log(data);
+
+    this.loading = false;
+  }
+
   selectGroupToDelete(group: DevicesGroup) {
     this.currGroup = group;
   }
@@ -235,6 +256,14 @@ export class GroupsComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
+  }
+
+  deleteSeveralGroups() {
+    this.loading = true;
+
+    // CODE
 
     this.loading = false;
   }

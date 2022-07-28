@@ -27,7 +27,7 @@
       </ng-container>
       <app-selected-elements
         [selectedIDs]="selectedGroupsIDs"
-        [editTarget]="'edit_several_devices'"
+        [editTarget]="'edit_several_groups'"
         [deleteTarget]="'delete_several_elements'"
         (onCloseClick)="cancelSelection()"
       ></app-selected-elements>
@@ -103,7 +103,14 @@
   [configs]="configs"
   (onSubmit)="editGroup()"
 ></app-edit-group>
+<app-edit-several-groups
+  [configs]="configs"
+  (onSubmit)="editSeveralGroups()"
+></app-edit-several-groups>
 <app-delete-group
   [group]="currGroup"
   (onSubmit)="deleteGroup()"
 ></app-delete-group>
+<app-delete-several-elements
+  (onSubmit)="deleteSeveralGroups()"
+></app-delete-several-elements>
