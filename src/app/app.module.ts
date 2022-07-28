@@ -48,7 +48,6 @@ import { ModalActionBtnsComponent } from './components/common/UI/button/modal-ac
 import { SortBtnComponent } from './components/common/UI/button/sort-btn/sort-btn.component';
 import { DeleteDeviceComponent } from './components/common/modals/devices/delete-device/delete-device.component';
 import { AddDeviceComponent } from './components/common/modals/devices/add-device/add-device.component';
-import { DeleteSeveralElementsComponent } from './components/common/modals/devices/delete-several-elements/delete-several-elements.component';
 import { EditSeveralDevicesComponent } from './components/common/modals/devices/edit-several-devices/edit-several-devices.component';
 import { EditDeviceComponent } from './components/common/modals/devices/edit-device/edit-device.component';
 import { QrCodeComponent } from './components/common/modals/devices/qr-code/qr-code.component';
@@ -138,7 +137,6 @@ const routes: Routes = [
     DeleteDeviceComponent,
     ChangePasswordComponent,
     AddDeviceComponent,
-    DeleteSeveralElementsComponent,
     EditSeveralDevicesComponent,
     QrTipComponent,
     CentralWrapperComponent,
