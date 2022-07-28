@@ -10,6 +10,7 @@ export type inputType =
   | "file";
 export type inputWidth =
   | "w-170"
+  | "w-180"
   | "w-186"
   | "w-296"
   | "w-350"

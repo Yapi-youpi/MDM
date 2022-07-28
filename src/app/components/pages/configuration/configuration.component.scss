@@ -527,23 +527,6 @@ input[type="color"]::-webkit-color-swatch {
   }
 }
 
-/* ИНТЕРФЕЙС (ДЕМО) */
-
-.interface {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.interface-sample {
-  width: 200px;
-  height: 340px;
-  background: #8fa7cb;
-  border: 12px solid #2f4459;
-  border-radius: 20px;
-}
-
 .w-740 {
   max-width: 740px;
 }

@@ -35,6 +35,10 @@ import { QrTipComponent } from './components/common/qr-tip/qr-tip.component';
 import { ChangePasswordComponent } from './components/common/modals/change-password/change-password.component';
 import { ModalComponent } from './components/common/modal/modal.component';
 
+import { EditGroupComponent } from './components/common/modals/groups/edit-group/edit-group.component';
+import { DeleteGroupComponent } from './components/common/modals/groups/delete-group/delete-group.component';
+import { EditSeveralGroupsComponent } from './components/common/modals/groups/edit-several-groups/edit-several-groups.component';
+import { MiniSelectComponent } from './components/common/UI/mini-select/mini-select.component';
 import { AddButtonComponent } from './components/common/UI/button/add-button/add-button.component';
 import { AuthButtonComponent } from './components/common/UI/button/auth-button/auth-button.component';
 import { DeviceActionBtnComponent } from './components/common/UI/button/item-action-btn/device/device-action-btn.component';
@@ -44,7 +48,6 @@ import { ModalActionBtnsComponent } from './components/common/UI/button/modal-ac
 import { SortBtnComponent } from './components/common/UI/button/sort-btn/sort-btn.component';
 import { DeleteDeviceComponent } from './components/common/modals/devices/delete-device/delete-device.component';
 import { AddDeviceComponent } from './components/common/modals/devices/add-device/add-device.component';
-import { DeleteSeveralElementsComponent } from './components/common/modals/devices/delete-several-elements/delete-several-elements.component';
 import { EditSeveralDevicesComponent } from './components/common/modals/devices/edit-several-devices/edit-several-devices.component';
 import { EditDeviceComponent } from './components/common/modals/devices/edit-device/edit-device.component';
 import { QrCodeComponent } from './components/common/modals/devices/qr-code/qr-code.component';
@@ -98,9 +101,7 @@ import { AppsSizePipe } from './shared/pipes/sort/apps/apps-size.pipe';
 import { MomentPipe } from './shared/pipes/moment.pipe';
 import { AppsConfigPipe } from './shared/pipes/sort/apps/apps-config.pipe';
 import { FileSizePipe } from './shared/pipes/file-size.pipe';
-import { MiniSelectComponent } from './components/common/UI/mini-select/mini-select.component';
-import { EditGroupComponent } from './components/common/modals/groups/edit-group/edit-group.component';
-import { DeleteGroupComponent } from './components/common/modals/groups/delete-group/delete-group.component';
+import { InterfaceComponent } from './components/pages/configuration/interface/interface.component';
 
 const routes: Routes = [
   {
@@ -136,7 +137,6 @@ const routes: Routes = [
     DeleteDeviceComponent,
     ChangePasswordComponent,
     AddDeviceComponent,
-    DeleteSeveralElementsComponent,
     EditSeveralDevicesComponent,
     QrTipComponent,
     CentralWrapperComponent,
@@ -177,6 +177,8 @@ const routes: Routes = [
     GroupActionBtnComponent,
     EditGroupComponent,
     DeleteGroupComponent,
+    EditSeveralGroupsComponent,
+    MiniSelectComponent,
     //ПАЙПЫ
     GroupConverterPipe,
     ConfigSearchPipe,
@@ -196,7 +198,7 @@ const routes: Routes = [
     MomentPipe,
     FileSizePipe,
     GroupFilterPipe,
-    MiniSelectComponent,
+    InterfaceComponent,
   ],
   imports: [
     BrowserModule,

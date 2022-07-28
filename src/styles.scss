@@ -634,11 +634,16 @@ button {
   margin-left: auto;
 }
 .btn--edit {
-  background: url("/assets/UI/pencil.svg") no-repeat center;
-  background-size: contain;
+  width: 12px;
+  height: 12px;
+  mask: url("/assets/UI/pencil.svg") no-repeat center;
+  mask-size: contain;
 }
 .btn--delete {
-  background: url("/assets/UI/trash.svg") no-repeat center;
+  width: 14px;
+  height: 14px;
+  mask: url("/assets/UI/trash.svg") no-repeat center;
+  mask-size: contain;
 }
 /* Обертка для группы кнопок */
 .btn-wrapper {
@@ -1210,6 +1215,9 @@ input {
 // ШИРИНА
 .w-170 {
   width: 170px;
+}
+.w-180 {
+  width: 180px;
 }
 .w-186 {
   width: 186px;

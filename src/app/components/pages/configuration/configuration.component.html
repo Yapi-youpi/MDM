@@ -371,7 +371,6 @@
                         formControlName="volume"
                         id="volume"
                         list="volumelist"
-                        (change)="asd($event)"
                       />
                       <datalist class="range__list" id="volumelist">
                         <option value="0" class="range__opt" label="0">
@@ -558,7 +557,6 @@
                         formControlName="brightness"
                         id="brightness"
                         list="bright"
-                        (change)="asd($event)"
                       />
                       <datalist class="range__list" id="bright">
                         <option value="0" class="range__opt" label="0">
@@ -605,45 +603,47 @@
         <!--        Дизайн           -->
         <div class="form__tab" style="display: none">
           <div class="card__header">Дизайн</div>
-          <div class="config-settings form__elems">
-            <div class="form__item w-500">
-              <label class="switch">
-                Использовать дизайн по умолчанию
-                <input
-                  formControlName="useDefaultDesignSettings"
-                  id="useDefaultDesignSettings"
-                  type="checkbox"
-                />
-                <span aria-hidden="true"></span>
-              </label>
-            </div>
-            <div class="form__item w-500">
-              <label>Заголовок рабочего стола</label>
-              <select
-                class="select-native w-267"
-                formControlName="desktopHeader"
+          <div class="config-settings two-columns">
+            <div class="form__elems">
+              <div class="form__item w-500">
+                <label class="switch">
+                  Использовать дизайн по умолчанию
+                  <input
+                    formControlName="useDefaultDesignSettings"
+                    id="useDefaultDesignSettings"
+                    type="checkbox"
+                  />
+                  <span aria-hidden="true"></span>
+                </label>
+              </div>
+              <ng-container
+                *ngIf="!configForm.get('useDefaultDesignSettings')?.value"
               >
-                <option [ngValue]="'NO_HEADER'">Нет</option>
-                <option [ngValue]="'DEVICE_ID'">ID устройства</option>
-                <option [ngValue]="'DESCRIPTION'">Описание</option>
-                <option [ngValue]="'TEMPLATE'">Шаблон</option>
-              </select>
-            </div>
-            <div
-              class="form__item w-500"
-              *ngIf="configForm.get('desktopHeader')?.value == 'TEMPLATE'"
-            >
-              <label for="desktopHeaderTemplate">Шаблон заголовка</label>
-              <input
-                formControlName="desktopHeaderTemplate"
-                type="text"
-                id="desktopHeaderTemplate"
-                class="w-267"
-                placeholder="Используйте deviceId, description, custom1..."
-              />
-            </div>
-            <div class="two-columns">
-              <div class="form__elems">
+                <div class="form__item w-500">
+                  <label>Заголовок рабочего стола</label>
+                  <select
+                    class="select-native w-267"
+                    formControlName="desktopHeader"
+                  >
+                    <option [ngValue]="'NO_HEADER'">Нет</option>
+                    <option [ngValue]="'DEVICE_ID'">ID устройства</option>
+                    <option [ngValue]="'DESCRIPTION'">Описание</option>
+                    <option [ngValue]="'TEMPLATE'">Шаблон</option>
+                  </select>
+                </div>
+                <div
+                  class="form__item w-500"
+                  *ngIf="configForm.get('desktopHeader')?.value == 'TEMPLATE'"
+                >
+                  <label for="desktopHeaderTemplate">Шаблон заголовка</label>
+                  <input
+                    formControlName="desktopHeaderTemplate"
+                    type="text"
+                    id="desktopHeaderTemplate"
+                    class="w-267"
+                    placeholder="Используйте deviceId, description, custom1..."
+                  />
+                </div>
                 <div class="font-bold">Цвет</div>
                 <div class="form__item w-500">
                   <div class="colors-wrapper">
@@ -705,53 +705,63 @@
                     </label>
                   </div>
                 </div>
-                <div class="font-bold">Ориентация</div>
-                <div class="form__item">
-                  <div class="tags-container">
-                    <label class="orientation">
-                      <input
-                        class="visually-hidden"
-                        formControlName="orientation"
-                        type="radio"
-                        [value]="0"
-                      />
-                      <div class="orientation__card">
-                        <img src="/assets/config-images/rotate.svg" alt="" />
-                      </div>
-                      <span class="orientation__span">Поворот</span>
-                    </label>
-                    <label class="orientation">
-                      <input
-                        class="visually-hidden"
-                        formControlName="orientation"
-                        type="radio"
-                        [value]="1"
-                      />
-                      <div class="orientation__card">
-                        <img src="/assets/config-images/portrait.svg" alt="" />
-                      </div>
-                      <span class="orientation__span">Вертикально</span>
-                    </label>
-                    <label class="orientation">
-                      <input
-                        class="visually-hidden"
-                        formControlName="orientation"
-                        type="radio"
-                        [value]="2"
-                      />
-                      <div class="orientation__card">
-                        <img src="/assets/config-images/landscape.svg" alt="" />
-                      </div>
-                      <span class="orientation__span">Горизонтально</span>
-                    </label>
-                  </div>
+              </ng-container>
+              <div class="font-bold">Ориентация</div>
+              <div class="form__item">
+                <div class="tags-container">
+                  <label class="orientation">
+                    <input
+                      class="visually-hidden"
+                      formControlName="orientation"
+                      type="radio"
+                      [value]="0"
+                    />
+                    <div class="orientation__card">
+                      <img src="/assets/config-images/rotate.svg" alt="" />
+                    </div>
+                    <span class="orientation__span">Поворот</span>
+                  </label>
+                  <label class="orientation">
+                    <input
+                      class="visually-hidden"
+                      formControlName="orientation"
+                      type="radio"
+                      [value]="1"
+                    />
+                    <div class="orientation__card">
+                      <img src="/assets/config-images/portrait.svg" alt="" />
+                    </div>
+                    <span class="orientation__span">Вертикально</span>
+                  </label>
+                  <label class="orientation">
+                    <input
+                      class="visually-hidden"
+                      formControlName="orientation"
+                      type="radio"
+                      [value]="2"
+                    />
+                    <div class="orientation__card">
+                      <img src="/assets/config-images/landscape.svg" alt="" />
+                    </div>
+                    <span class="orientation__span">Горизонтально</span>
+                  </label>
                 </div>
               </div>
-              <div class="interface">
-                <label>Интерфейс</label>
-                <div class="interface-sample"></div>
-              </div>
             </div>
+
+            <app-interface
+              [title]="
+                configForm.get('desktopHeader')?.value === 'DESCRIPTION'
+                  ? configForm.get('description')?.value
+                  : configForm.get('desktopHeader')?.value === 'TEMPLATE'
+                  ? configForm.get('desktopHeaderTemplate')?.value
+                  : configForm.get('desktopHeader')?.value || ''
+              "
+              [bgColor]="configForm.get('backgroundColor')?.value || ''"
+              [textColor]="configForm.get('textColor')?.value || ''"
+              [iconSize]="configForm.get('iconSize')?.value || ''"
+              [orientation]="configForm.get('orientation')?.value || 0"
+            ></app-interface>
           </div>
         </div>
         <!--        Приложения           -->
@@ -874,17 +884,9 @@
                   <label>загрузка файлов</label>
                   <input type="checkbox" />
                 </div>
-                <div class="form__item">
-                  <label>блокировка</label>
-                  <input type="checkbox" />
-                </div>
               </div>
               <div class="form__elems">
                 <div class="font-bold">Дополнительные ограничения:</div>
-                <div class="form__item">
-                  <label>отправка смс</label>
-                  <input type="checkbox" />
-                </div>
                 <div class="form__item">
                   <label>исходящие звонки</label>
                   <input type="checkbox" />

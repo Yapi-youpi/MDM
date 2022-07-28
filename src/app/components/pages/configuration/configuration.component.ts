@@ -169,8 +169,4 @@ export class ConfigurationComponent implements OnInit {
   addApp(addedApps: string[]) {
     this.config.applications = this.config.applications?.concat(addedApps);
   }
-
-  asd(e) {
-    console.log(e.target.value);
-  }
 }
