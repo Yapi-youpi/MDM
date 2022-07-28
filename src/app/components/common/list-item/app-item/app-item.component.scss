@@ -69,27 +69,35 @@
   .icon-container {
     height: 16px;
     width: 16px;
-    background-color: var(--dark-blue);
+
     border-radius: 8px;
 
     .icon {
       height: 16px;
       width: 16px;
-      display: block;
-      background-color: var(--white);
 
-      &.on {
+      background-color: var(--white);
+    }
+
+    &.on {
+      background-color: var(--dark-blue);
+
+      .icon {
         mask-size: 10px 10px;
         mask-image: url("/assets/UI/check.svg");
         -webkit-mask-size: 10px 10px;
         -webkit-mask-image: url("/assets/UI/check.svg");
       }
+    }
 
-      &.off {
-        mask-size: 10px 10px;
-        mask-image: url("/assets/UI/check.svg");
-        -webkit-mask-size: 10px 10px;
-        -webkit-mask-image: url("/assets/UI/check.svg");
+    &.off {
+      background-color: var(--grey);
+
+      .icon {
+        mask-size: 14px 14px;
+        mask-image: url("/assets/UI/minus.svg");
+        -webkit-mask-size: 14px 14px;
+        -webkit-mask-image: url("/assets/UI/minus.svg");
       }
     }
   }

@@ -67,9 +67,10 @@
                     : filter.dateFrom
                     : filter.dateTo
                     : filter.configsIDs
-"
+              "
               [group]="group"
               [configs]="configs"
+              (onSwitchChange)="changeGroupState($event)"
             ></app-group-item>
           </ng-container>
           <ng-template #nodata>

@@ -23,6 +23,9 @@ export class GroupsComponent implements OnInit {
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
 
+  public currGroup!: DevicesGroup;
+  public selectedIDs: DevicesGroup[] = [];
+
   public searchParam: string = "";
 
   public filter: GroupFilter = {
@@ -97,5 +100,26 @@ export class GroupsComponent implements OnInit {
     this.filter.dateFrom = this.filterForm._dateFrom;
     this.filter.dateTo = this.filterForm._dateTo;
     this.filter.configsIDs = this.filterForm._configsIDs;
+  }
+
+  changeGroupState(group: DevicesGroup) {
+    this.groupService
+      .changeState(group.id, !group.activeState)
+      .then((res: { success: boolean; error: string }) => {
+        if (res.success) {
+          console.log(`Группа ${group.name} изменена`);
+
+          this.groups = this.groups.map((g) => {
+            return g.id === group.id
+              ? { ...g, activeState: !g.activeState }
+              : g;
+          });
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

@@ -12,6 +12,7 @@
     <div class="switch-wrapper">
       <app-input-switch
         [value]="group.activeState"
+        (onChange)="onSwitchChangeHandler(group)"
       ></app-input-switch>
     </div>
     <div class="row space-between device-actions-wrapper">
