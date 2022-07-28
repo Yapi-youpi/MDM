@@ -8,15 +8,18 @@
     <div class="page-content">
       <div style="display: flex; justify-content: flex-start">
         <app-input-search style="margin-right: 7px"></app-input-search>
-        <div class="select">
-          <input class="select__input" type="hidden" name="" />
-          <div class="select__head" (click)="openSelect()">Выберите</div>
-          <ul class="select__list" *ngIf="open">
-            <ng-container *ngFor="let group of option">
-              <li class="select__item">{{ group.html }}</li>
-            </ng-container>
-          </ul>
-        </div>
+        <app-mini-select
+          [header]="'статус'"
+          [options]="status_option"
+        ></app-mini-select>
+        <app-mini-select
+          [header]="'группа'"
+          [options]="group_option"
+        ></app-mini-select>
+        <app-mini-select
+          [header]="'конфигурация'"
+          [options]="config_option"
+        ></app-mini-select>
       </div>
       <div id="map-container"></div>
     </div>
