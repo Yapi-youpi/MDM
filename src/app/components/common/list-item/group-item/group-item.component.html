@@ -1,6 +1,9 @@
 <div class="row space-between item">
   <div class="checkbox-wrapper">
-    <app-input-checkbox></app-input-checkbox>
+    <app-input-checkbox
+      [value]="!!group.isSelected"
+      (onChange)="onSelectUnselectDeviceHandler(group)"
+    ></app-input-checkbox>
   </div>
   <div class="row space-between content">
     <p class="text-choose">{{ group.name }}</p>

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   styleUrls: ["./selected-elements.component.scss"],
 })
 export class SelectedElementsComponent {
-  @Input() devicesIDs: string[] = [];
+  @Input() selectedIDs: string[] = [];
   @Input() editTarget: string = "";
   @Input() deleteTarget: string = "";
 
