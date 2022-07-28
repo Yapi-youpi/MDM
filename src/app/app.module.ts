@@ -44,7 +44,6 @@ import { ModalActionBtnsComponent } from "./components/common/UI/button/modal-ac
 import { SortBtnComponent } from "./components/common/UI/button/sort-btn/sort-btn.component";
 import { DeleteDeviceComponent } from "./components/common/modals/devices/delete-device/delete-device.component";
 import { AddDeviceComponent } from "./components/common/modals/devices/add-device/add-device.component";
-import { DeleteSeveralElementsComponent } from "./components/common/modals/devices/delete-several-elements/delete-several-elements.component";
 import { EditSeveralDevicesComponent } from "./components/common/modals/devices/edit-several-devices/edit-several-devices.component";
 import { EditDeviceComponent } from "./components/common/modals/devices/edit-device/edit-device.component";
 import { QrCodeComponent } from "./components/common/modals/devices/qr-code/qr-code.component";
@@ -76,6 +75,11 @@ import { GroupItemComponent } from "./components/common/list-item/group-item/gro
 import { GroupActionBtnComponent } from "./components/common/UI/button/item-action-btn/group/group-action-btn.component";
 import { AppsConfigComponent } from "./components/pages/configuration/apps-config/apps-config.component";
 import { FilterGroupsComponent } from "./components/common/modals/groups/filter-groups/filter-groups.component";
+import { EditGroupComponent } from "./components/common/modals/groups/edit-group/edit-group.component";
+import { DeleteGroupComponent } from "./components/common/modals/groups/delete-group/delete-group.component";
+import { DeleteSeveralElementsComponent } from "./components/common/modals/delete-several-elements/delete-several-elements.component";
+import { EditSeveralGroupsComponent } from "./components/common/modals/groups/edit-several-groups/edit-several-groups.component";
+import { MiniSelectComponent } from "./components/common/UI/mini-select/mini-select.component";
 
 // ПАЙПЫ
 import { GroupFilterPipe } from "./shared/pipes/filters/group-filter.pipe";
@@ -98,8 +102,6 @@ import { AppsSizePipe } from "./shared/pipes/sort/apps/apps-size.pipe";
 import { MomentPipe } from "./shared/pipes/moment.pipe";
 import { AppsConfigPipe } from "./shared/pipes/sort/apps/apps-config.pipe";
 import { FileSizePipe } from "./shared/pipes/file-size.pipe";
-import { EditGroupComponent } from './components/common/modals/groups/edit-group/edit-group.component';
-import { DeleteGroupComponent } from './components/common/modals/groups/delete-group/delete-group.component';
 
 const routes: Routes = [
   {
@@ -174,6 +176,10 @@ const routes: Routes = [
     GroupItemComponent,
     FilterGroupsComponent,
     GroupActionBtnComponent,
+    EditGroupComponent,
+    DeleteGroupComponent,
+    EditSeveralGroupsComponent,
+    MiniSelectComponent,
     //ПАЙПЫ
     GroupConverterPipe,
     ConfigSearchPipe,
@@ -193,8 +199,6 @@ const routes: Routes = [
     MomentPipe,
     FileSizePipe,
     GroupFilterPipe,
-    EditGroupComponent,
-    DeleteGroupComponent,
   ],
   imports: [
     BrowserModule,
