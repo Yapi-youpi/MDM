@@ -47,16 +47,16 @@
               <div class="user-card__role">
                 {{ asset.roles[user.role].text }}
               </div>
-              <div
-                class="user-card__menu"
-                [ngStyle]="{ color: asset.roles[user.role].color }"
-              >
+              <div class="user-card__menu">
                 <button
                   class="user-card__menu-btn"
                   data-target="modal-new-user"
                   (click)="setCurrentUser($event, user)"
                 >
-                  <i class="material-icons">edit</i>
+                  <span
+                    class="btn--edit"
+                    [style.background-color]="asset.roles[user.role].color"
+                  ></span>
                 </button>
                 <button
                   [disabled]="user.role === 'super'"
@@ -64,7 +64,10 @@
                   data-target="modal-delete-user"
                   (click)="setCurrentUser($event, user)"
                 >
-                  <i class="material-icons">delete</i>
+                  <span
+                    class="btn--delete"
+                    [style.background-color]="asset.roles[user.role].color"
+                  ></span>
                 </button>
               </div>
             </div>
