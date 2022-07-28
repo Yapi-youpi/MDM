@@ -48,6 +48,10 @@
     }
   }
   &-container {
+    background-color: var(--white);
+
+    border-radius: 14px;
+
     z-index: 9999;
   }
 }

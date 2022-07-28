@@ -3,16 +3,16 @@
   [direction]="'horizontal'"
   [isClosable]="true"
 >
-  <div class="content">
-    <div class="top">
+  <div class="modal-form-filter w-400">
+    <div class="modal-form-filter-header">
       <h4 class="text-title text-center">Фильтры</h4>
     </div>
     <hr class="divider">
-    <div class="body">
+    <div class="modal-form-filter-body">
       <form
         [formGroup]="_form"
       >
-        <div class="row space-between status">
+        <div class="form-group-wrapper status">
           <p class="text-menu-title">Состояние</p>
           <div class="filter-btn-wrapper">
             <app-button
@@ -35,7 +35,9 @@
             ></app-button>
           </div>
         </div>
-        <p class="text-menu-title last-date">Последнее обновление</p>
+        <div class="form-group-wrapper">
+          <p class="text-menu-title last-date">Последнее обновление</p>
+        </div>
         <div class="form-group-wrapper date">
           <label class="text-menu-title">
             с
@@ -56,7 +58,7 @@
             [control]="$any(_date_to)"
           ></app-input-datetime>
         </div>
-        <div class="wrapper-config">
+        <div class="accordion-wrapper">
           <app-input-select-accordion
             [title]="'Конфигурация'"
             [control]="$any(_config_ids)"
@@ -66,7 +68,7 @@
         </div>
       </form>
     </div>
-    <div class="action-btns">
+    <div class="modal-form-filter-footer">
       <app-modal-action-btns
         [isReverse]="true"
         [margin]="'102px'"

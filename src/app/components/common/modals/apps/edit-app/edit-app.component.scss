@@ -1,50 +1,30 @@
-.content {
-  width: 700px;
+.modal-form-header {
+  position: relative;
 
-  padding: 30px 58px;
+  .btn-wrapper {
+    position: absolute;
 
-  .divider {
-    margin: 25px 0;
+    top: -14px;
+    right: 0;
   }
+}
 
-  .top {
-    position: relative;
-
-    .btn-wrapper {
-      position: absolute;
-
-      top: -12px;
-      right: 0;
-    }
+.inner-wrapper {
+  > label {
+    margin-right: 33px;
   }
+}
 
-  .body {
-    margin-bottom: 51.2px;
+.boot {
+  > label {
+    margin-right: 0;
+  }
+}
 
-    .form-group-wrapper {
-      .inner-wrapper {
-        label {
-          margin-right: 33px;
-        }
-      }
+.icon {
+  justify-content: flex-start;
 
-      &:not(:last-of-type) {
-        margin-bottom: 40px;
-      }
-
-      &.boot {
-        label {
-          margin-right: 0;
-        }
-      }
-
-      &.icon {
-        justify-content: flex-start;
-
-        label {
-          margin-right: 95px;
-        }
-      }
-    }
+  label {
+    margin-right: 95px;
   }
 }

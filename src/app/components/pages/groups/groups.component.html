@@ -99,6 +99,10 @@
   (onSubmit)="searchGroupsWithParams()"
   (onCancel)="resetSearchParams()"
 ></app-filter-group>
+<app-add-group
+  [configs]="configs"
+  (onSubmit)="addGroup()"
+></app-add-group>
 <app-edit-group
   [configs]="configs"
   (onSubmit)="editGroup()"

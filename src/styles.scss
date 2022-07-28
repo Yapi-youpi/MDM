@@ -1220,33 +1220,127 @@ input {
   }
 }
 
+// ФОРМЫ В МОДАЛЬНЫХ ОКНАХ (САША)
+.modal-form {
+  padding: 30px 58px;
+
+  &-header {
+    margin-bottom: 25px;
+  }
+
+  &-body {
+    margin-top: 37.56px;
+
+    .form-group-wrapper {
+      &:not(:last-child) {
+        margin-bottom: 30.56px;
+      }
+
+      &.switch {
+        width: 171.1px;
+      }
+    }
+  }
+
+  &-footer {
+    margin-top: 50px;
+  }
+
+  // МОДАЛЬНАЯ ФОРМА ФИЛЬТРА
+  &-filter {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px 69px;
+
+    &-header {
+      margin-bottom: 25px;
+    }
+
+    &-body {
+      margin-top: 23px;
+
+      .form-group-wrapper {
+        &:not(:last-child) {
+          margin-bottom: 21.56px;
+        }
+
+        &.status {
+          .filter-btn-wrapper {
+            &:nth-of-type(1) {
+              margin-right: 9px;
+              margin-left: auto;
+            }
+          }
+        }
+
+        &.date {
+          padding-left: 10px;
+        }
+      }
+
+      .accordion-wrapper {
+        &:not(:last-child) {
+          margin-bottom: 25px;
+        }
+      }
+    }
+
+    &-footer {
+      margin-top: auto;
+    }
+  }
+}
+
 // ШИРИНА
-.w-170 {
-  width: 170px;
-}
-.w-180 {
-  width: 180px;
-}
-.w-186 {
-  width: 186px;
-}
-.w-267 {
-  width: 267px;
-}
-.w-296 {
-  width: 296px;
-}
-.w-350 {
-  width: 350px;
-}
-.w-440 {
-  width: 440px;
-}
-.w-457 {
-  width: 457px;
-}
-.w-500 {
-  width: 500px;
+.w {
+  &-170 {
+    width: 170px;
+  }
+  &-180 {
+    width: 180px;
+  }
+  &-186 {
+    width: 186px;
+  }
+  &-226 {
+    width: 226px;
+  }
+  &-267 {
+    width: 267px;
+  }
+  &-296 {
+    width: 296px;
+  }
+  &-350 {
+    width: 350px;
+  }
+  &-400 {
+    width: 400px;
+  }
+  &-440 {
+    width: 440px;
+  }
+  &-457 {
+    width: 457px;
+  }
+  &-500 {
+    width: 500px;
+  }
+  &-536 {
+    width: 546px;
+  }
+  &-700 {
+    width: 700px;
+  }
+  &-770 {
+    width: 770px;
+  }
+  &-900 {
+    width: 900px;
+  }
 }
 
 //input[type='text'],

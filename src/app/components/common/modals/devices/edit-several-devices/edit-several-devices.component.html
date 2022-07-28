@@ -2,12 +2,12 @@
   [modalID]="'edit_several_devices'"
   [isClosable]="true"
 >
-  <div class="content">
-    <div class="top">
+  <div class="modal-form w-700">
+    <div class="modal-form-header">
       <h4 class="text-title text-center">Настройки выбранных устройств</h4>
     </div>
-    <hr class="divider"/>
-    <div class="body">
+    <hr class="divider">
+    <div class="modal-form-body">
       <form
         [formGroup]="_form"
       >
@@ -28,7 +28,7 @@
             [message]="'Данное поле должно быть заполнено'"
           ></app-input-alert>
         </div>
-        <div class="form-group-wrapper">
+        <div class="form-group-wrapper switch">
           <label for="active_state" class="text-menu-title">
             Блокировка
           </label>
@@ -39,12 +39,14 @@
         </div>
       </form>
     </div>
-    <app-modal-action-btns
-      [margin]="'30px'"
-      [submitText]="'Сохранить'"
-      [cancelText]="'Отменить'"
-      (onSubmit)="onSubmitHandler()"
-      (onCancel)="onCancelHandler()"
-    ></app-modal-action-btns>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [margin]="'30px'"
+        [submitText]="'Сохранить'"
+        [cancelText]="'Отменить'"
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
   </div>
 </app-modal>
