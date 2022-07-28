@@ -11,7 +11,7 @@ import { Users } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../services/asset.service';
 import Compressor from 'compressorjs';
-import { UserService } from "../../../shared/services/user.service";
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -141,11 +141,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   sortUsers() {
-    this.users.sort((a, b) => {
-      if (a.groupsPermissions.super) return -1;
-      if (a.role < b.role) return -1;
-      if (a.role > b.role) return 1;
-      return 0;
+    this.users.sort((a) => {
+      return a.role === 'admin' ? -1 : 1;
+    });
+    this.users.sort((a) => {
+      return a.groupsPermissions.super ? -1 : 1;
     });
     let i = interval(1000).subscribe(() => {
       this.initModals();

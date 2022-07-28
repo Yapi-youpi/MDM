@@ -1,0 +1,71 @@
+.interface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.interface-sample {
+  width: 17vw;
+  height: 28vw;
+  min-width: 240px;
+  min-height: 420px;
+  background: #8fa7cb;
+  border: 12px solid #2f4459;
+  border-radius: 20px;
+  transition: all 0.6s ease;
+  &__title {
+    padding: 16px 18px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  &__apps {
+    padding: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 12px;
+    gap: 12px;
+    justify-items: center;
+  }
+  &__app {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__app-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.3s ease-in-out;
+  }
+  &__app-name {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+.orientation--landscape {
+  width: 28vw;
+  height: 17vw;
+  min-width: 420px;
+  min-height: 240px;
+}
+.app-icon--s {
+  width: 42px;
+  height: 42px;
+}
+.app-icon--l {
+  width: 56px;
+  height: 56px;
+}
