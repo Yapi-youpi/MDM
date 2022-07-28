@@ -68,28 +68,45 @@ th {
   }
 }
 
-.icon-container {
+.checkbox-round {
   height: 16px;
   width: 16px;
-  background-color: var(--dark-blue);
+  background-color: var(--grey);
   border-radius: 8px;
-  .icon {
-    height: 16px;
-    width: 16px;
-    display: block;
-    background-color: var(--white);
-    &.on {
-      mask-size: 10px 10px;
-      mask-image: url("/assets/UI/check.svg");
-      -webkit-mask-size: 10px 10px;
-      -webkit-mask-image: url("/assets/UI/check.svg");
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  & .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  & svg polyline {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.3;
+    stroke-dasharray: 20;
+    stroke-dashoffset: 27;
+    transition: all 0.3s ease;
+  }
+}
+
+input[type="checkbox"] {
+  &:hover + .checkbox-round,
+  &:focus-visible + .checkbox-round {
+    background-color: var(--light-blue);
+  }
+
+  &:checked + .checkbox-round {
+    background-color: var(--dark-blue);
+    & svg polyline {
+      stroke-dasharray: 19.7;
+      stroke-dashoffset: 6.8;
     }
-    &.off {
-      mask-size: 10px 10px;
-      mask-image: url("/assets/UI/check.svg");
-      -webkit-mask-size: 10px 10px;
-      -webkit-mask-image: url("/assets/UI/check.svg");
-    }
+  }
+
+  &:checked:hover + .checkbox-round,
+  &:checked:focus-visible + .checkbox-round {
+    background-color: var(--blue);
   }
 }
 
