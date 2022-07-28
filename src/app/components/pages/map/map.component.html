@@ -11,14 +11,17 @@
         <app-mini-select
           [header]="'статус'"
           [options]="status_option"
+          (onSelect)="devicesFilter($event, 'status')"
         ></app-mini-select>
         <app-mini-select
           [header]="'группа'"
           [options]="group_option"
+          (onSelect)="devicesFilter($event, 'group')"
         ></app-mini-select>
         <app-mini-select
           [header]="'конфигурация'"
           [options]="config_option"
+          (onSelect)="devicesFilter($event, 'config')"
         ></app-mini-select>
       </div>
       <div id="map-container"></div>

@@ -10,9 +10,10 @@ import * as L from 'leaflet';
 import { Device } from '../../../shared/types/devices';
 import { DevicesConfigService } from '../../../services/devices-config.service';
 import { UserService } from '../../../shared/services/user.service';
+import * as moment from 'moment';
 
 interface DeviceGeo {
-  device_id: string;
+  device: Device;
   marker: Marker;
 }
 
@@ -36,6 +37,11 @@ export class MapComponent implements OnInit, AfterViewInit {
       isSelected: false,
     },
   ];
+  public filter = {
+    active_state: '',
+    device_group_id: '',
+    device_config_id: '',
+  };
   public sub!: LiveQuerySubscription;
   public icon!: DivIcon;
   public device_marker!: L.Marker;
@@ -89,10 +95,13 @@ export class MapComponent implements OnInit, AfterViewInit {
     let query = this.db.query('Device');
     this.sub = await query.subscribe();
     let device: Device | any;
+    this.sub.on('open', () => {
+      console.log('OPEN PARSE CONN');
+    });
     this.sub.on('update', (item) => {
       device = item.attributes;
       let index = this.devices_geo.findIndex((item) => {
-        if (item.device_id === device.device_id) {
+        if (item.device.device_id === device.device_id) {
           return item;
         } else {
           return -1;
@@ -105,8 +114,9 @@ export class MapComponent implements OnInit, AfterViewInit {
         });
       }
     });
-    this.sub.on('open', () => {
-      console.log('OPEN PARSE CONN');
+    this.sub.on('create', (item) => {
+      console.log(item.attributes);
+      console.log('NEW OBJECT WAS CREATED');
     });
     query.findAll().then((res) => {
       res.map((item) => {
@@ -114,8 +124,8 @@ export class MapComponent implements OnInit, AfterViewInit {
         console.log(device);
         if (device.gps_location._latitude && device.gps_location._longitude) {
           this.addMarkers(
-            device.gps_location._latitude,
-            device.gps_location._longitude,
+            device.gps_location.latitude,
+            device.gps_location.longitude,
             device
           );
         }
@@ -232,7 +242,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       }
     });
     let device_geo = {
-      device_id: device.device_id,
+      device: device,
       marker: this.device_marker,
     };
     this.devices_geo.push(device_geo);
@@ -264,4 +274,60 @@ export class MapComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
+  devicesFilter(event: Option, filter: string) {
+    switch (filter) {
+      case 'status':
+        this.filter.active_state = event.value;
+        this.filterDevices();
+        break;
+      case 'group':
+        this.filter.device_group_id = event.value;
+        this.filterDevices();
+        break;
+      case 'config':
+        this.filter.device_config_id = event.value;
+        this.filterDevices();
+        break;
+    }
+  }
+
+  filterDevices() {
+    let arr = this.devices_geo.filter((device) => {
+      device.marker.remove();
+      return (
+        (this.filter.active_state !== ''
+          ? device.device.active_state.toString() === this.filter.active_state
+          : device) &&
+        (this.filter.device_config_id !== ''
+          ? device.device.device_config_id === this.filter.device_config_id
+          : device) &&
+        (this.filter.device_group_id !== ''
+          ? device.device.device_group_id === this.filter.device_group_id
+          : device)
+      );
+    });
+    arr.map((d) => {
+      d.marker.addTo(this.mapService.map);
+      d.marker.setLatLng({
+        lat: d.device.gps_location.latitude,
+        lng: d.device.gps_location.longitude,
+      });
+    });
+  }
 }
+// if (device.device.)
+// if (
+//   device.device.device_config_id === this.filter.config &&
+//   this.filter.config !== ''
+// ) {
+//   device.marker.addTo(this.mapService.map);
+//   device.marker.setLatLng(
+// {
+//   lat: device.device.gps_location.latitude,
+//     lng: device.device.gps_location.longitude,
+// }
+//   );
+// } else {
+//   device.marker.remove();
+// }
