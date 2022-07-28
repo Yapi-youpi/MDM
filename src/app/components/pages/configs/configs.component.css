@@ -1,19 +1,18 @@
 .config-wrapper {
   height: calc(100% - 30px);
   padding: 15px 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  justify-content: stretch;
   align-content: flex-start;
   gap: 15px 12px;
-  flex-wrap: wrap;
   overflow: auto;
 }
 .config-card {
-  min-width: 285px;
-  max-width: 385px;
   background: white;
   border-radius: 14px;
-  flex: 1;
   border: 2px solid transparent;
+  box-shadow: var(--box-shadow);
 }
 .config-card:hover {
   border: 2px solid #557ebe;
@@ -60,10 +59,10 @@
   border-radius: 50%;
   border: none;
 }
-.config-card__menu-btn i {
-  font-size: 18px;
+.config-card__menu-btn span {
+  background-color: var(--dark-blue);
 }
-.config-card__menu-btn:focus,
-.config-card__menu-btn:hover {
-  color: var(--blue);
+.config-card__menu-btn:focus span,
+.config-card__menu-btn:hover span {
+  background-color: var(--blue);
 }

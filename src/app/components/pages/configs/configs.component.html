@@ -20,12 +20,12 @@
           Добавить конфигурацию
         </button>
       </div>
+      <ng-template #loader>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </ng-template>
       <div class="config-wrapper">
-        <ng-template #loader>
-          <div class="progress">
-            <div class="indeterminate"></div>
-          </div>
-        </ng-template>
         <ng-container *ngIf="configs.length > 0; else loader">
           <div
             class="config-card"
@@ -40,14 +40,16 @@
                   class="config-card__menu-btn"
                   routerLink="/configuration/{{ config.ID }}"
                 >
-                  <i class="material-icons">edit</i>
+                  <span class="btn--edit"></span>
                 </a>
                 <button
                   type="button"
-                  class="config-card__menu-btn btn--delete"
+                  class="config-card__menu-btn"
                   data-target="modal-delete-config"
                   (click)="setCurrentConfig(config)"
-                ></button>
+                >
+                  <span class="btn--delete"></span>
+                </button>
               </div>
             </div>
             <div class="config-card__content">{{ config.description }}</div>
