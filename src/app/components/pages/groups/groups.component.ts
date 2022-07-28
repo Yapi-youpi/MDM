@@ -12,6 +12,7 @@ import { DevicesGroup } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
 import * as states from "../../../shared/types/states";
 import { GroupFilter } from "../../../shared/types/filters";
+import { Device } from "../../../shared/types/devices";
 
 @Component({
   selector: "app-group",
@@ -22,6 +23,11 @@ export class GroupsComponent implements OnInit {
   public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
+
+  public currGroup!: DevicesGroup;
+
+  public isAllSelected: boolean = false;
+  public selectedGroupsIDs: string[] = [];
 
   public searchParam: string = "";
 
@@ -97,5 +103,59 @@ export class GroupsComponent implements OnInit {
     this.filter.dateFrom = this.filterForm._dateFrom;
     this.filter.dateTo = this.filterForm._dateTo;
     this.filter.configsIDs = this.filterForm._configsIDs;
+  }
+
+  selectUnselectGroups() {
+    this.isAllSelected = !this.isAllSelected;
+
+    this.groups.map((g) => {
+      g.isSelected = this.isAllSelected;
+    });
+
+    if (this.isAllSelected)
+      this.selectedGroupsIDs = this.groups.map((g) => g.id);
+    else this.selectedGroupsIDs = [];
+  }
+
+  selectUnselectGroup(group: DevicesGroup) {
+    this.groups.map((g) => {
+      if (g.id === group.id) {
+        g.isSelected = !g.isSelected;
+
+        if (g.isSelected && !this.selectedGroupsIDs.includes(g.id))
+          this.selectedGroupsIDs.push(g.id);
+
+        if (!g.isSelected && this.selectedGroupsIDs.includes(g.id))
+          this.selectedGroupsIDs = this.selectedGroupsIDs.filter(
+            (sg) => sg !== g.id
+          );
+      }
+    });
+    if (!group.isSelected && this.isAllSelected) {
+      this.isAllSelected = !this.isAllSelected;
+    }
+    if (this.selectedGroupsIDs.length === this.groups.length)
+      this.isAllSelected = true;
+  }
+
+  changeGroupState(group: DevicesGroup) {
+    this.groupService
+      .changeState(group.id, !group.activeState)
+      .then((res: { success: boolean; error: string }) => {
+        if (res.success) {
+          console.log(`Группа ${group.name} изменена`);
+
+          this.groups = this.groups.map((g) => {
+            return g.id === group.id
+              ? { ...g, activeState: !g.activeState }
+              : g;
+          });
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

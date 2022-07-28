@@ -10,4 +10,5 @@ export interface DevicesGroup {
   updateTime: string;
   devices: Device[];
   capacity: number;
+  isSelected?: boolean;
 }

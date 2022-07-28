@@ -105,6 +105,7 @@ export class AppsComponent {
       .then((res: { success: boolean; error: string }) => {
         if (res.success) {
           console.log(`Приложение ${this.currApp.name} изменено`);
+
           this.apps = this.apps.map((a) => {
             if (a.ID === this.currApp.ID) {
               return {

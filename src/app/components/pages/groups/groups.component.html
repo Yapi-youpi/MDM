@@ -25,10 +25,19 @@
           <div class="indeterminate"></div>
         </div>
       </ng-container>
+<!--      *ngIf="selectedGroupsIDs.length !== 0"-->
+      <app-selected-elements
+        [selectedIDs]="selectedGroupsIDs"
+        [editTarget]="'edit_several_devices'"
+        [deleteTarget]="'delete_several_elements'"
+      ></app-selected-elements>
       <div class="list">
         <div class="list-header row">
           <div class="checkbox-wrapper">
-            <app-input-checkbox></app-input-checkbox>
+            <app-input-checkbox
+              [value]="isAllSelected"
+              (onChange)="selectUnselectGroups()"
+            ></app-input-checkbox>
           </div>
           <div class="sort-headers row space-between">
             <div class="sort-btn-wrapper status">
@@ -67,9 +76,11 @@
                     : filter.dateFrom
                     : filter.dateTo
                     : filter.configsIDs
-"
+              "
               [group]="group"
               [configs]="configs"
+              (onSelectUnselectGroup)="selectUnselectGroup($event)"
+              (onSwitchChange)="changeGroupState($event)"
             ></app-group-item>
           </ng-container>
           <ng-template #nodata>

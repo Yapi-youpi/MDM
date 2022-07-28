@@ -37,7 +37,7 @@ export class GroupsService {
     });
   }
 
-  changeState(activeState: boolean, id: string) {
+  changeState(id: string, activeState: boolean) {
     return new Promise<any>((resolve, reject) => {
       this.http
         .post(environment.url + api.CHANGE_STATE, {

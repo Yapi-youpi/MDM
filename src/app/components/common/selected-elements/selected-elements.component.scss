@@ -1,13 +1,27 @@
 .selected-devices {
   height: 40px;
+  width: 100%;
 
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding: 9px 16px 7px 28px;
 
   background-color: var(--light-blue);
   color: var(--dark-blue-grey);
 
   border-radius: 14px;
+
+  overflow: hidden;
+
+  transition: all var(--transition-time) ease;
+
+  &.hidden {
+    height: 0;
+
+    padding-top: 0;
+    padding-bottom: 0;
+
+    opacity: 0;
+  }
 
   .wrapper {
     margin-left: 12px;

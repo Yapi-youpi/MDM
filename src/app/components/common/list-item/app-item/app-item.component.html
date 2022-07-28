@@ -13,12 +13,11 @@
   <p class="app-item__pkg">{{ app.pkg }}</p>
   <p class="app-item__file-size">{{ app.fileByteSize | fileSize }}</p>
   <div class="row center app-item__icon">
-    <div class="icon-container">
-      <span
-        class="icon"
-        [class.on]="app.showIcon"
-        [class.off]="!app.showIcon"
-      ></span>
+    <div
+      class="icon-container"
+      [class.on]="app.showIcon"
+      [class.off]="!app.showIcon">
+      <span class="icon"></span>
     </div>
   </div>
   <div class="row space-between app-item__action">
