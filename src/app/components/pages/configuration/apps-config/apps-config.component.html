@@ -1,7 +1,7 @@
 <div class="app-header">
   <app-input-search
     [value]="searchParam"
-    (onChange)="onChangeSearchInputHandler($event)"
+    (onChange)="onChangeSearch($event)"
   ></app-input-search>
   <div class="filter-btn-wrapper">
     <app-button
@@ -27,7 +27,7 @@
         <app-sort-btn
           [title]="'Название'"
           [isSortAsc]="isNameSortAsc"
-          (onCLick)="toggleNameSortDir()"
+          (onCLick)="toggleName()"
         ></app-sort-btn>
       </th>
       <th>Версия</th>
@@ -36,7 +36,7 @@
         <app-sort-btn
           [title]="'Размер'"
           [isSortAsc]="isSizeSortAsc"
-          (onCLick)="toggleSizeSortDir()"
+          (onCLick)="toggleSize()"
         ></app-sort-btn>
       </th>
       <th>Действия</th>
@@ -45,7 +45,7 @@
         <app-sort-btn
           [title]="'Порядок'"
           [isSortAsc]="isPositionSortAsc"
-          (onCLick)="togglePositionSortDir()"
+          (onCLick)="togglePosition()"
         ></app-sort-btn>
       </th>
       <th>Закреп снизу</th>
@@ -56,10 +56,11 @@
       class="app-item table-row"
       *ngFor="
         let app of apps
-          | apps_system: isOnlySystemApps
-          | apps_name: isNameSortAsc
           | appsConfig: appsInConfig
           | search: searchParam:'app'
+          | apps_system: isOnlySystemApps
+          | apps_name: isNameSortAsc
+          | apps_size: isSizeSortAsc
       "
     >
       <td class="app-item__title">
@@ -86,13 +87,25 @@
         </select>
       </td>
       <td class="row center app-item__icon">
-        <div class="icon-container">
-          <span
-            class="icon"
-            [class.on]="app.showIcon"
-            [class.off]="!app.showIcon"
-          ></span>
-        </div>
+        <label class="checkbox-wrapper" for="icon-{{ app.ID }}">
+          <input
+            type="checkbox"
+            name="params"
+            class="visually-hidden"
+            id="icon-{{ app.ID }}"
+            [checked]="app.showIcon"
+            (change)="toggleIcon(app.ID)"
+          />
+          <div class="checkbox-round">
+            <span class="icon">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <polyline
+                  points="12.67,4.33 6.5,10.67 3.33,8 12.67,8"
+                ></polyline>
+              </svg>
+            </span>
+          </div>
+        </label>
       </td>
       <td class="app-item__order">
         <input
@@ -103,16 +116,33 @@
           class="input-number"
           min="0"
           max="12"
+          (change)="changeOrder(app.ID, $event)"
         />
       </td>
       <td class="row center app-item__icon">
-        <div class="icon-container" *ngIf="app.showIcon">
-          <span
-            class="icon"
-            [class.on]="app.bottom"
-            [class.off]="!app.bottom"
-          ></span>
-        </div>
+        <label
+          class="checkbox-wrapper"
+          for="fix-{{ app.ID }}"
+          *ngIf="app.showIcon"
+        >
+          <input
+            type="checkbox"
+            name="params"
+            class="visually-hidden"
+            id="fix-{{ app.ID }}"
+            [checked]="app.bottom"
+            (change)="toggleFix(app.ID)"
+          />
+          <div class="checkbox-round">
+            <span class="icon">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <polyline
+                  points="12.67,4.33 6.5,10.67 3.33,8 12.67,8"
+                ></polyline>
+              </svg>
+            </span>
+          </div>
+        </label>
       </td>
     </tr>
   </tbody>
