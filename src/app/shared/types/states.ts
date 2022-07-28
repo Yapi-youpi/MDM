@@ -3,7 +3,7 @@ import { DevicesConfig } from "./config";
 import { DevicesGroup } from "./groups";
 import { App } from "./apps";
 
-interface State {
+export interface State {
   success: boolean;
   error: string;
 }

@@ -14,6 +14,8 @@ export class GroupItemComponent {
 
   @Output() onSelectUnselectGroup = new EventEmitter<DevicesGroup>();
   @Output() onSwitchChange = new EventEmitter<DevicesGroup>();
+  @Output() onEditClick = new EventEmitter<DevicesGroup>();
+  @Output() onDeleteClick = new EventEmitter<DevicesGroup>();
 
   constructor() {}
 
@@ -27,5 +29,13 @@ export class GroupItemComponent {
 
   onSwitchChangeHandler(group: DevicesGroup) {
     this.onSwitchChange.emit(group);
+  }
+
+  onEditCLickHandler(group: DevicesGroup) {
+    this.onEditClick.emit(group);
+  }
+
+  onDeleteClickHandler(group: DevicesGroup) {
+    this.onDeleteClick.emit(group);
   }
 }

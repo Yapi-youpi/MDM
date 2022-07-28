@@ -35,6 +35,10 @@ import { QrTipComponent } from './components/common/qr-tip/qr-tip.component';
 import { ChangePasswordComponent } from './components/common/modals/change-password/change-password.component';
 import { ModalComponent } from './components/common/modal/modal.component';
 
+import { EditGroupComponent } from './components/common/modals/groups/edit-group/edit-group.component';
+import { DeleteGroupComponent } from './components/common/modals/groups/delete-group/delete-group.component';
+import { EditSeveralGroupsComponent } from './components/common/modals/groups/edit-several-groups/edit-several-groups.component';
+import { MiniSelectComponent } from './components/common/UI/mini-select/mini-select.component';
 import { AddButtonComponent } from './components/common/UI/button/add-button/add-button.component';
 import { AuthButtonComponent } from './components/common/UI/button/auth-button/auth-button.component';
 import { DeviceActionBtnComponent } from './components/common/UI/button/item-action-btn/device/device-action-btn.component';
@@ -173,6 +177,10 @@ const routes: Routes = [
     GroupItemComponent,
     FilterGroupsComponent,
     GroupActionBtnComponent,
+    EditGroupComponent,
+    DeleteGroupComponent,
+    EditSeveralGroupsComponent,
+    MiniSelectComponent,
     //ПАЙПЫ
     GroupConverterPipe,
     ConfigSearchPipe,

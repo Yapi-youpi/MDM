@@ -25,11 +25,11 @@
           <div class="indeterminate"></div>
         </div>
       </ng-container>
-<!--      *ngIf="selectedGroupsIDs.length !== 0"-->
       <app-selected-elements
         [selectedIDs]="selectedGroupsIDs"
-        [editTarget]="'edit_several_devices'"
+        [editTarget]="'edit_several_groups'"
         [deleteTarget]="'delete_several_elements'"
+        (onCloseClick)="cancelSelection()"
       ></app-selected-elements>
       <div class="list">
         <div class="list-header row">
@@ -81,6 +81,8 @@
               [configs]="configs"
               (onSelectUnselectGroup)="selectUnselectGroup($event)"
               (onSwitchChange)="changeGroupState($event)"
+              (onEditClick)="selectGroupToEdit($event)"
+              (onDeleteClick)="selectGroupToDelete($event)"
             ></app-group-item>
           </ng-container>
           <ng-template #nodata>
@@ -97,3 +99,18 @@
   (onSubmit)="searchGroupsWithParams()"
   (onCancel)="resetSearchParams()"
 ></app-filter-group>
+<app-edit-group
+  [configs]="configs"
+  (onSubmit)="editGroup()"
+></app-edit-group>
+<app-edit-several-groups
+  [configs]="configs"
+  (onSubmit)="editSeveralGroups()"
+></app-edit-several-groups>
+<app-delete-group
+  [group]="currGroup"
+  (onSubmit)="deleteGroup()"
+></app-delete-group>
+<app-delete-several-elements
+  (onSubmit)="deleteSeveralGroups()"
+></app-delete-several-elements>
