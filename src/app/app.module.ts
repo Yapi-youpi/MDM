@@ -99,6 +99,7 @@ import { MomentPipe } from "./shared/pipes/moment.pipe";
 import { AppsConfigPipe } from "./shared/pipes/sort/apps/apps-config.pipe";
 import { FileSizePipe } from "./shared/pipes/file-size.pipe";
 import { EditGroupComponent } from './components/common/modals/groups/edit-group/edit-group.component';
+import { DeleteGroupComponent } from './components/common/modals/groups/delete-group/delete-group.component';
 
 const routes: Routes = [
   {
@@ -193,6 +194,7 @@ const routes: Routes = [
     FileSizePipe,
     GroupFilterPipe,
     EditGroupComponent,
+    DeleteGroupComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,6 @@ import { DevicesGroup } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
 import * as states from "../../../shared/types/states";
 import { GroupFilter } from "../../../shared/types/filters";
-import { Device } from "../../../shared/types/devices";
 import { edit } from "../../../shared/services/forms/group";
 
 @Component({
@@ -157,7 +156,7 @@ export class GroupsComponent implements OnInit {
 
     this.groupService
       .changeState(group.id, !group.activeState)
-      .then((res: { success: boolean; error: string }) => {
+      .then((res: states.State) => {
         if (res.success) {
           console.log(`Группа ${group.name} изменена`);
 
@@ -177,7 +176,7 @@ export class GroupsComponent implements OnInit {
     this.loading = false;
   }
 
-  setGroupToEdit(group: DevicesGroup) {
+  selectGroupToEdit(group: DevicesGroup) {
     this.currGroup = group;
     this.editForm.form.patchValue(group);
   }
@@ -198,6 +197,36 @@ export class GroupsComponent implements OnInit {
           });
 
           const modal = document.querySelector("#edit_group");
+          modal?.classList.toggle("hidden");
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    this.loading = false;
+  }
+
+  selectGroupToDelete(group: DevicesGroup) {
+    this.currGroup = group;
+  }
+
+  deleteGroup() {
+    this.loading = true;
+
+    this.groupService
+      .delete(this.currGroup.id)
+      .then((res: states.State) => {
+        if (res.success) {
+          console.log(`Группа ${this.currGroup.name} удалена`);
+
+          this.groups = this.groups.filter((g) => {
+            return g.id !== this.currGroup.id;
+          });
+
+          const modal = document.querySelector("#delete_group");
           modal?.classList.toggle("hidden");
         } else {
           console.log(res.error);

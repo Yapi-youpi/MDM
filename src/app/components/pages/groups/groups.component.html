@@ -81,7 +81,8 @@
               [configs]="configs"
               (onSelectUnselectGroup)="selectUnselectGroup($event)"
               (onSwitchChange)="changeGroupState($event)"
-              (onEditClick)="setGroupToEdit($event)"
+              (onEditClick)="selectGroupToEdit($event)"
+              (onDeleteClick)="selectGroupToDelete($event)"
             ></app-group-item>
           </ng-container>
           <ng-template #nodata>
@@ -102,3 +103,7 @@
   [configs]="configs"
   (onSubmit)="editGroup()"
 ></app-edit-group>
+<app-delete-group
+  [group]="currGroup"
+  (onSubmit)="deleteGroup()"
+></app-delete-group>

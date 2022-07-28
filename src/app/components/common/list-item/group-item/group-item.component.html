@@ -27,6 +27,7 @@
       <app-group-action-btn
         [group]="group"
         [target]="'delete_group'"
+        (onClick)="onDeleteClickHandler(group)"
       ></app-group-action-btn>
     </div>
   </div>
