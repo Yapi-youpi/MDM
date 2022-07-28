@@ -19,6 +19,7 @@ export enum groupsPaths {
   CHANGE_STATE = "/change_active_state_device_group",
   DELETE = "/remove_device_group",
   RENAME = "/rename_device_group",
+  EDIT = "/edit_device_group",
   DELETE_WITH_DEVICES = "/remove_device_group_and_all_devices",
 }
 

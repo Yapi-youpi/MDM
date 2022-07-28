@@ -1077,6 +1077,12 @@ body {
   font-size: 16px;
   line-height: 16px;
 }
+// текст инпутов
+.text-field {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+}
 .text-center {
   text-align: center;
 }
@@ -1165,7 +1171,7 @@ input {
   &[type="search"] {
     width: 300px;
 
-    padding: 8px;
+    padding: 6px 8px;
 
     background-color: transparent;
 

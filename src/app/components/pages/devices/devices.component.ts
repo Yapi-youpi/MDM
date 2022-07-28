@@ -84,6 +84,8 @@ export class DevicesComponent implements OnInit {
   // }
 
   getConfigs() {
+    this.loading = true;
+
     this.config
       .get("all")
       .then((res: states.DevicesConfigsState) => {
@@ -96,9 +98,13 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   getGroups() {
+    this.loading = true;
+
     this.group
       .get("all")
       .then((res: states.DevicesGroupsState) => {
@@ -111,6 +117,8 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   getDevices() {
@@ -120,7 +128,6 @@ export class DevicesComponent implements OnInit {
       .get("all")
       .then((res: states.DevicesState) => {
         if (res.success) {
-          this.loading = false;
           this.devices = res.devices;
         } else {
           console.log(res.error);
@@ -129,6 +136,8 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   cancelSelection() {
@@ -164,6 +173,8 @@ export class DevicesComponent implements OnInit {
   }
 
   addDevice() {
+    this.loading = true;
+
     this.device
       .add({
         name: this.addDeviceForm._name,
@@ -187,6 +198,8 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   selectUnselectDevices() {
@@ -239,6 +252,8 @@ export class DevicesComponent implements OnInit {
   }
 
   changeDeviceState(device: Device) {
+    this.loading = true;
+
     this.device
       .edit([
         {
@@ -262,6 +277,8 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   getDeviceQRCode(device: Device) {
@@ -274,6 +291,8 @@ export class DevicesComponent implements OnInit {
   }
 
   editDevice() {
+    this.loading = true;
+
     this.device
       .edit([
         {
@@ -304,9 +323,13 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   editSeveralDevices() {
+    this.loading = true;
+
     const data: Device[] = this.devices
       .filter((d) => this.selectedDevicesIDs.includes(d.device_id))
       .map((d) => {
@@ -345,6 +368,8 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   selectDeviceToDelete(device: Device) {
@@ -352,6 +377,8 @@ export class DevicesComponent implements OnInit {
   }
 
   deleteDevice(device: Device) {
+    this.loading = true;
+
     this.device
       .delete([device.device_id])
       .then((res: states.SingleDeviceState) => {
@@ -370,9 +397,13 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   deleteSeveralDevices() {
+    this.loading = true;
+
     this.device
       .delete(this.selectedDevicesIDs)
       .then((res: states.SingleDeviceState) => {
@@ -392,5 +423,7 @@ export class DevicesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 }

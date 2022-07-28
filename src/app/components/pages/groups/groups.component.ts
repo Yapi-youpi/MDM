@@ -13,6 +13,7 @@ import { DevicesConfig } from "../../../shared/types/config";
 import * as states from "../../../shared/types/states";
 import { GroupFilter } from "../../../shared/types/filters";
 import { Device } from "../../../shared/types/devices";
+import { edit } from "../../../shared/services/forms/group";
 
 @Component({
   selector: "app-group",
@@ -42,7 +43,8 @@ export class GroupsComponent implements OnInit {
     private groupService: groupService,
     private configService: deviceConfigService,
     private userService: userService,
-    private filterForm: group.filter
+    private filterForm: group.filter,
+    private editForm: edit
   ) {}
 
   ngOnInit() {
@@ -63,11 +65,12 @@ export class GroupsComponent implements OnInit {
       .then((res: states.DevicesGroupsState) => {
         console.log(res);
         this.groups = res.devicesGroups;
-        this.loading = false;
       })
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   getConfigs(param: string) {
@@ -78,11 +81,12 @@ export class GroupsComponent implements OnInit {
       .then((res: states.DevicesConfigsState) => {
         console.log(res);
         this.configs = res.devicesConfigs;
-        this.loading = false;
       })
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
   }
 
   onChangeSearchInputHandler(value: string) {
@@ -97,7 +101,7 @@ export class GroupsComponent implements OnInit {
   }
 
   searchGroupsWithParams() {
-    // this.cancelSelection();
+    this.cancelSelection();
 
     this.filter.status = this.filterForm._status;
     this.filter.dateFrom = this.filterForm._dateFrom;
@@ -138,7 +142,19 @@ export class GroupsComponent implements OnInit {
       this.isAllSelected = true;
   }
 
+  cancelSelection() {
+    this.selectedGroupsIDs = [];
+
+    if (this.isAllSelected) this.isAllSelected = false;
+
+    this.groups.map((g) => {
+      if (g.isSelected) g.isSelected = false;
+    });
+  }
+
   changeGroupState(group: DevicesGroup) {
+    this.loading = true;
+
     this.groupService
       .changeState(group.id, !group.activeState)
       .then((res: { success: boolean; error: string }) => {
@@ -157,5 +173,40 @@ export class GroupsComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+
+    this.loading = false;
+  }
+
+  setGroupToEdit(group: DevicesGroup) {
+    this.currGroup = group;
+    this.editForm.form.patchValue(group);
+  }
+
+  editGroup() {
+    this.loading = true;
+
+    this.groupService
+      .edit({ ...this.currGroup, ...this.editForm.form.getRawValue() })
+      .then((res: { success: boolean; error: string }) => {
+        if (res.success) {
+          console.log(`Группа ${this.currGroup.name} изменена`);
+
+          this.groups = this.groups.map((g) => {
+            return g.id === this.currGroup.id
+              ? { ...g, ...this.editForm.form.getRawValue() }
+              : g;
+          });
+
+          const modal = document.querySelector("#edit_group");
+          modal?.classList.toggle("hidden");
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    this.loading = false;
   }
 }

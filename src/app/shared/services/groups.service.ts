@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 
 import { groupsPaths as api } from "../enums/api";
+import { DevicesGroup } from "../types/groups";
 
 @Injectable({
   providedIn: "root",
@@ -87,6 +88,15 @@ export class GroupsService {
             reject(err);
           },
         });
+    });
+  }
+
+  edit(group: DevicesGroup) {
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(environment.url + api.EDIT, group).subscribe({
+        next: (res) => resolve(res),
+        error: (err) => reject(err),
+      });
     });
   }
 
