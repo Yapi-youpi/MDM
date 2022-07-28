@@ -2,8 +2,8 @@
   [modalID]="'edit_app'"
   [isClosable]="true"
 >
-  <div class="content">
-    <div class="top">
+  <div class="modal-form w-700">
+    <div class="modal-form-header">
       <h4 class="text-title text-center">Приложение</h4>
       <div class="btn-wrapper">
         <app-button
@@ -18,7 +18,7 @@
       </div>
     </div>
     <hr class="divider">
-    <div class="body">
+    <div class="modal-form-body">
       <form
         [formGroup]="_form"
       >
@@ -68,12 +68,14 @@
         </div>
       </form>
     </div>
-    <app-modal-action-btns
-      [submitText]="'Сохранить'"
-      [cancelText]="'Отменить'"
-      [margin]="'66px'"
-      (onSubmit)="onSubmitHandler()"
-      (onCancel)="onCancelHandler()"
-    ></app-modal-action-btns>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [submitText]="'Сохранить'"
+        [cancelText]="'Отменить'"
+        [margin]="'66px'"
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
   </div>
 </app-modal>

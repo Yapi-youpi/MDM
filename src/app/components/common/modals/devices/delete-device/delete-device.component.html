@@ -2,17 +2,19 @@
   [modalID]="'delete_device'"
   [isClosable]="true"
 >
-  <div class="content">
-    <div class="top">
+  <div class="modal-form w-500">
+    <div class="modal-form-header">
       <h4 class="text-title text-center">Удалить устройство "{{ device?.name }}"?</h4>
     </div>
-    <app-modal-action-btns
-      [isReverse]="true"
-      [submitText]="'Да'"
-      [cancelText]="'Нет'"
-      [margin]="'50px'"
-      (onCancel)="onCancelHandler()"
-      (onSubmit)="onSubmitHandler(device)"
-    ></app-modal-action-btns>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [isReverse]="true"
+        [submitText]="'Да'"
+        [cancelText]="'Нет'"
+        [margin]="'50px'"
+        (onCancel)="onCancelHandler()"
+        (onSubmit)="onSubmitHandler(device)"
+      ></app-modal-action-btns>
+    </div>
   </div>
 </app-modal>

@@ -2,12 +2,12 @@
   [modalID]="'qr_code'"
   [isClosable]="true"
 >
-  <div class="content">
-    <div class="top">
+  <div class="modal-form">
+    <div class="modal-form-header">
       <h4 class="text-title text-center">Устройство "{{ device?.name }}"</h4>
     </div>
     <hr class="divider">
-    <div class="body">
+    <div class="modal-form-body row">
       <ngx-qrcode
         class="qr-code"
         [elementType]="elementType"
@@ -17,12 +17,14 @@
       ></ngx-qrcode>
       <app-qr-tip *ngIf="!isTipHidden"></app-qr-tip>
     </div>
-    <app-modal-action-btns
-      [margin]="'66px'"
-      [submitText]="'Помощь'"
-      [cancelText]="'Закрыть'"
-      (onSubmit)="onHelpClickHandler()"
-      (onCancel)="onCancelHandler()"
-    ></app-modal-action-btns>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [margin]="'66px'"
+        [submitText]="'Помощь'"
+        [cancelText]="'Закрыть'"
+        (onSubmit)="onHelpClickHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
   </div>
 </app-modal>

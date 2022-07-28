@@ -1,0 +1,77 @@
+.tip {
+  width: 400px;
+
+  flex-basis: 400px;
+  flex-grow: 1;
+
+  margin-left: 18px;
+
+  font-size: 16px;
+
+  h6 {
+    margin: 0 0 20px;
+
+    font-weight: 700;
+  }
+
+  ol {
+    font-size: 14px;
+    line-height: 14px;
+
+    padding-inline-start: 30px;
+
+    color: var(--dark-grey);
+
+    li:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .todo {
+    padding: 8px 14px;
+    margin-top: 24px;
+    margin-left: 28px;
+
+    position: relative;
+
+    font-size: 12px;
+    line-height: 12px;
+
+    background-color: var(--light-blue);
+    color: var(--dark-grey);
+
+    border-radius: 8px;
+
+    &::before {
+      position: absolute;
+      content: '';
+
+      height: 20px;
+      width: 20px;
+
+      top: 0;
+      left: -28px;
+
+      background-color: var(--dark-blue);
+
+      border-radius: 10px;
+    }
+
+    &::after {
+      position: absolute;
+
+      top: 6px;
+      left: -20.5px;
+
+      content: '!';
+      font-size: 16px;
+      font-weight: 700;
+
+      color: var(--white);
+    }
+
+    p:first-child {
+      margin-bottom: 10px;
+    }
+  }
+}

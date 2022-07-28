@@ -7,7 +7,7 @@ import {
   userService,
 } from "../../../shared/services";
 import { group } from "src/app/shared/services/forms";
-import { edit, editSeveral } from "../../../shared/services/forms/group";
+import { add, edit, editSeveral } from "../../../shared/services/forms/group";
 
 import { DevicesGroup } from "../../../shared/types/groups";
 import { DevicesConfig } from "../../../shared/types/config";
@@ -44,7 +44,8 @@ export class GroupsComponent implements OnInit {
     private userService: userService,
     private filterForm: group.filter,
     private editForm: edit,
-    private editSeveralForm: editSeveral
+    private editSeveralForm: editSeveral,
+    private addForm: add
   ) {}
 
   ngOnInit() {
@@ -150,6 +151,14 @@ export class GroupsComponent implements OnInit {
     this.groups.map((g) => {
       if (g.isSelected) g.isSelected = false;
     });
+  }
+
+  addGroup() {
+    this.loading = true;
+
+    console.log(this.addForm.form.getRawValue());
+
+    this.loading = false;
   }
 
   changeGroupState(group: DevicesGroup) {

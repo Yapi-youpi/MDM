@@ -102,6 +102,7 @@ import { AppsSizePipe } from "./shared/pipes/sort/apps/apps-size.pipe";
 import { MomentPipe } from "./shared/pipes/moment.pipe";
 import { AppsConfigPipe } from "./shared/pipes/sort/apps/apps-config.pipe";
 import { FileSizePipe } from "./shared/pipes/file-size.pipe";
+import { AddGroupComponent } from './components/common/modals/groups/add-group/add-group.component';
 
 const routes: Routes = [
   {
@@ -199,6 +200,7 @@ const routes: Routes = [
     MomentPipe,
     FileSizePipe,
     GroupFilterPipe,
+    AddGroupComponent,
   ],
   imports: [
     BrowserModule,

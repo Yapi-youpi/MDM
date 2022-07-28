@@ -2,16 +2,16 @@
   [modalID]="'add_app'"
   [isClosable]="true"
 >
-  <div class="content">
-    <div class="top">
+  <div class="modal-form w-700">
+    <div class="modal-form-header">
       <h4 class="text-title text-center">Добавить приложение</h4>
     </div>
     <hr class="divider">
-    <div class="body">
+    <div class="modal-form-body">
       <form
         [formGroup]="_form"
       >
-        <div class="form-group-wrapper">
+        <div class="form-group-wrapper w-226">
           <label for="file" class="text-menu-title">
             Файл
           </label>
@@ -29,12 +29,14 @@
         </div>
       </form>
     </div>
-    <app-modal-action-btns
-      [submitText]="'Сохранить'"
-      [cancelText]="'Отменить'"
-      [margin]="'66px'"
-      (onSubmit)="onSubmitHandler()"
-      (onCancel)="onCancelHandler()"
-    ></app-modal-action-btns>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [submitText]="'Сохранить'"
+        [cancelText]="'Отменить'"
+        [margin]="'66px'"
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
   </div>
 </app-modal>

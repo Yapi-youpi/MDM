@@ -2,14 +2,14 @@
   [modalID]="'edit_group'"
   [isClosable]="true"
 >
-  <div class="content">
-    <div class="top">
+  <div class="modal-form w-700">
+    <div class="modal-form-header">
       <h4 class="text-title text-center">Редактировать группу</h4>
     </div>
     <hr class="divider">
-    <div class="body">
+    <div class="modal-form-body">
       <form
-        [formGroup]="_form"
+      [formGroup]="_form"
       >
         <div class="form-group-wrapper">
           <label for="name" class="text-menu-title">
@@ -56,12 +56,14 @@
         </div>
       </form>
     </div>
-    <app-modal-action-btns
-      [margin]="'66px'"
-      [submitText]="'Сохранить'"
-      [cancelText]="'Отменить'"
-      (onSubmit)="onSubmitHandler()"
-      (onCancel)="onCancelHandler()"
-    ></app-modal-action-btns>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [margin]="'66px'"
+        [submitText]="'Сохранить'"
+        [cancelText]="'Отменить'"
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
   </div>
 </app-modal>

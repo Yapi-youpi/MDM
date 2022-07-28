@@ -4,7 +4,7 @@
   position: relative;
 
   border: 1px solid var(--grey);
-  border-radius: 14px;
+  border-radius: 16px;
 
   &:hover {
     border-color: var(--dark-blue);
@@ -33,7 +33,7 @@
     background-color: transparent;
     color: var(--dark-blue-grey);
 
-    border-radius: 14px;
+    border-radius: 16px;
 
     cursor: pointer;
 
@@ -61,7 +61,7 @@
 
     border: 1px solid var(--dark-blue);
 
-    border-radius: 14px;
+    border-radius: 16px;
 
     box-shadow: var(--box-shadow);
 
@@ -88,7 +88,7 @@
       }
 
       &:last-child {
-        border-radius: 0 0 12px 12px;
+        border-radius: 0 0 14px 14px;
       }
 
       &:hover {
@@ -142,21 +142,5 @@
 
       transform: rotate(180deg);
     }
-  }
-
-  &.w-170 {
-    width: 170px;
-  }
-  &.w-296 {
-    width: 296px;
-  }
-  &.w-350 {
-    width: 350px;
-  }
-  &.w-440 {
-    width: 440px;
-  }
-  &.w-457 {
-    width: 457px;
   }
 }
