@@ -34,7 +34,6 @@ import { CentralWrapperComponent } from "./components/common/central-wrapper/cen
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
 import { ChangePasswordComponent } from "./components/common/modals/change-password/change-password.component";
 import { ModalComponent } from "./components/common/modal/modal.component";
-
 import { AddButtonComponent } from "./components/common/UI/button/add-button/add-button.component";
 import { AuthButtonComponent } from "./components/common/UI/button/auth-button/auth-button.component";
 import { DeviceActionBtnComponent } from "./components/common/UI/button/item-action-btn/device/device-action-btn.component";
@@ -80,6 +79,8 @@ import { DeleteGroupComponent } from "./components/common/modals/groups/delete-g
 import { DeleteSeveralElementsComponent } from "./components/common/modals/delete-several-elements/delete-several-elements.component";
 import { EditSeveralGroupsComponent } from "./components/common/modals/groups/edit-several-groups/edit-several-groups.component";
 import { MiniSelectComponent } from "./components/common/UI/mini-select/mini-select.component";
+import { AddGroupComponent } from "./components/common/modals/groups/add-group/add-group.component";
+import { InterfaceComponent } from "./components/pages/configuration/interface/interface.component";
 
 // ПАЙПЫ
 import { GroupFilterPipe } from "./shared/pipes/filters/group-filter.pipe";
@@ -102,7 +103,6 @@ import { AppsSizePipe } from "./shared/pipes/sort/apps/apps-size.pipe";
 import { MomentPipe } from "./shared/pipes/moment.pipe";
 import { AppsConfigPipe } from "./shared/pipes/sort/apps/apps-config.pipe";
 import { FileSizePipe } from "./shared/pipes/file-size.pipe";
-import { AddGroupComponent } from './components/common/modals/groups/add-group/add-group.component';
 
 const routes: Routes = [
   {
@@ -181,6 +181,7 @@ const routes: Routes = [
     DeleteGroupComponent,
     EditSeveralGroupsComponent,
     MiniSelectComponent,
+    InterfaceComponent,
     //ПАЙПЫ
     GroupConverterPipe,
     ConfigSearchPipe,
