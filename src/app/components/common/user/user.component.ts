@@ -16,7 +16,6 @@ import { interval } from 'rxjs';
 export class UserComponent implements OnInit {
   public imgURL: string = '';
   public userName: string = '';
-  public userRole: string = '';
   public userGroup: string = '';
   private id: string = '';
   public isPopupOpen: boolean = false;
@@ -46,9 +45,9 @@ export class UserComponent implements OnInit {
           i.unsubscribe();
           this.user.getUserInfo(this.id, 'uid').then((res) => {
             this.userName = res[0].name;
-            this.userRole = res[0].role;
             this.userGroup = res[0].userTags[0];
             this.imgURL = res[0].avatar;
+            this.asset.setToStorage('user-role', res[0].role).then();
           });
         }
       });

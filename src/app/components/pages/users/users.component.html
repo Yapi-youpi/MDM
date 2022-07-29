@@ -47,7 +47,13 @@
               <div class="user-card__role">
                 {{ asset.roles[user.role].text }}
               </div>
-              <div class="user-card__menu">
+              <div
+                *ngIf="
+                  userRole === 'super' ||
+                  (userRole === 'admin' && user.role === 'operator')
+                "
+                class="user-card__menu"
+              >
                 <button
                   class="user-card__menu-btn"
                   data-target="modal-new-user"
@@ -92,7 +98,10 @@
     </div>
 
     <!--   ПРАВЫЙ САЙДБАР    -->
-    <app-user-permissions class="card card--sidebar"></app-user-permissions>
+    <app-user-permissions
+      *ngIf="userRole === 'super'"
+      class="card card--sidebar"
+    ></app-user-permissions>
   </main>
 
   <!--  MODALS -->

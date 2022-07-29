@@ -23,6 +23,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public filterForm: FormGroup;
   public users: Users[] = [];
   public userTags = [];
+  public userRole = '';
   public currentUser: Users | undefined; // undefined is need for reset currentUser
   public search!: string;
   public loaded: boolean = false;
@@ -58,6 +59,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
         i.unsubscribe();
         this.getAllUsers();
         this.getUserTags();
+        this.asset.getFromStorage('user-role').then((role: string) => {
+          this.userRole = role;
+        });
       }
     });
   }
