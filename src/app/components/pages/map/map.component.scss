@@ -31,3 +31,25 @@ h4 {
     display: none !important;
   }
 }
+.search-list {
+  padding-top: 20px;
+  overscroll-behavior: contain;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: 2px solid var(--dark-blue);
+  border-top: none;
+  position: absolute;
+  top: 116px;
+  z-index: 999;
+  height: auto;
+  background-color: var(--white);
+  width: 300px;
+}
+.search-item {
+  padding: 8px;
+  font-size: 16px;
+  font-family: "HelveticaNeueRoman", sans-serif;
+}
+input[type="search"] {
+  background-color: var(--white) !important;
+}
