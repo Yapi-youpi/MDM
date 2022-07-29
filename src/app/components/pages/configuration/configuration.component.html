@@ -771,6 +771,7 @@
             <app-apps-config
               [apps]="apps"
               [appsInConfig]="config.applications ? config.applications : []"
+              (onSave)="editApp($event)"
             ></app-apps-config>
           </div>
         </div>
@@ -790,8 +791,14 @@
               </label>
             </div>
             <div class="form__item w-267">
-              <label class="switch">
-                Режим киоска
+              <label
+                class="switch"
+                title="Функция выбора одного приложения на устройстве, без доступа к остальному интерфейсу"
+              >
+                <div>
+                  Режим киоска
+                  <p class="hint">?</p>
+                </div>
                 <input
                   formControlName="kioskMode"
                   id="kioskMode"

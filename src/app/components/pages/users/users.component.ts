@@ -104,6 +104,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
+  deleteUserTag(tag: string) {
+    this.userService
+      .deleteUserTag(tag)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   setCurrentUser(event: Event, user: Users) {
     this.currentUser = user;
     // @ts-ignore

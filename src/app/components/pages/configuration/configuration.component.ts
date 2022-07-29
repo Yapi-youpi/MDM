@@ -18,6 +18,7 @@ export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
   public configForm: FormGroup;
   public apps: App[] = [];
+  private editedApps: App[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -130,6 +131,19 @@ export class ConfigurationComponent implements OnInit {
         // this.configForm.reset();
       })
       .catch((err) => console.log(err));
+    this.editedApps.map((app) => {
+      this.appsService
+        .edit(app)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+  }
+
+  editApp(id: string) {
+    const currentApp = this.apps.find((app) => app.ID === id);
+    if (currentApp) {
+      this.editedApps.push(currentApp);
+    }
   }
 
   goBack() {

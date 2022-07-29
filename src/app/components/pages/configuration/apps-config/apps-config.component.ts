@@ -1,7 +1,13 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { appsPaths as api } from '../../../../shared/enums/api';
-import { appsService } from '../../../../shared/services';
 import { App } from '../../../../shared/types/apps';
 
 @Component({
@@ -13,7 +19,7 @@ import { App } from '../../../../shared/types/apps';
 export class AppsConfigComponent implements OnInit {
   @Input() apps: App[] = [];
   @Input() appsInConfig: string[] = [];
-  private editedApps: App[] = [];
+
   public url: string = environment.url + api.GET_ICON;
   public searchParam: string = '';
   public isOnlySystemApps: boolean = false;
@@ -21,7 +27,9 @@ export class AppsConfigComponent implements OnInit {
   public isSizeSortAsc: boolean = true;
   public isPositionSortAsc: boolean = true;
 
-  constructor(private appsService: appsService) {}
+  @Output() onSave = new EventEmitter<string>();
+
+  constructor() {}
 
   ngOnInit() {}
 
@@ -49,7 +57,7 @@ export class AppsConfigComponent implements OnInit {
     const currentApp = this.apps.find((app) => app.ID === id);
     if (currentApp) {
       currentApp!.showIcon = !currentApp!.showIcon;
-      this.editedApps.push(currentApp);
+      this.onSave.emit(id);
     }
   }
 
@@ -57,7 +65,7 @@ export class AppsConfigComponent implements OnInit {
     const currentApp = this.apps.find((app) => app.ID === id);
     if (currentApp) {
       currentApp!.screenOrder = event.target.value;
-      this.editedApps.push(currentApp);
+      this.onSave.emit(id);
     }
   }
 
@@ -65,16 +73,7 @@ export class AppsConfigComponent implements OnInit {
     const currentApp = this.apps.find((app) => app.ID === id);
     if (currentApp) {
       currentApp!.bottom = !currentApp!.bottom;
-      this.editedApps.push(currentApp);
+      this.onSave.emit(id);
     }
-  }
-
-  editApp() {
-    this.editedApps.map((app) => {
-      this.appsService
-        .edit(app)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    });
   }
 }
