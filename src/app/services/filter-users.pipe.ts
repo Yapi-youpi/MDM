@@ -5,17 +5,16 @@ import { Users } from '../interfaces/interfaces';
   name: 'filterUsers',
 })
 export class FilterUsersPipe implements PipeTransform {
-  transform(users: Users[], filter: Array<string>): Users[] {
-    return !users
-      ? []
-      : !filter?.length
-      ? users
-      : users.filter((item) => {
-          if (filter.includes(item.role)) {
-            return item.role;
-          } else {
-            return;
-          }
-        });
+  transform(
+    users: Users[],
+    roles: Array<string>,
+    groups: Array<string>
+  ): Users[] {
+    return users.filter((user) => {
+      return (
+        (!roles?.length ? user : roles.includes(user.role)) &&
+        (!groups?.length ? user : groups.includes(user.userTags[0]))
+      );
+    });
   }
 }

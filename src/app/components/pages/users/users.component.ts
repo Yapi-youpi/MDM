@@ -27,6 +27,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public search!: string;
   public loaded: boolean = false;
   public filter_roles!: Array<string>;
+  public filter_groups!: Array<string>;
   public file_input!: any;
   public file_placeholder!: Element;
   public avatar!: Element;
@@ -47,6 +48,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     });
     this.filterForm = fb.group({
       roles: new FormArray([]),
+      groups: new FormArray([]),
     });
   }
 
@@ -300,32 +302,39 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onCheckboxChange(event: any) {
-    const roles = this.filterForm.controls['roles'] as FormArray;
+  onCheckboxChange(event: any, arr: string) {
+    const checkArr = this.filterForm.controls[arr] as FormArray;
     if (event.target.checked) {
-      roles.push(new FormControl(event.target.value));
+      checkArr.push(new FormControl(event.target.value));
     } else {
-      const index = roles.controls.findIndex(
+      const index = checkArr.controls.findIndex(
         (x) => x.value === event.target.value
       );
-      roles.removeAt(index);
+      checkArr.removeAt(index);
     }
   }
 
   applyFilter() {
     this.filter_roles = this.filterForm.value.roles;
+    this.filter_groups = this.filterForm.value.groups;
   }
 
   clearFilter() {
     this.filter_roles = [];
-    const checkboxes = document.querySelectorAll(
-      'input[type="checkbox"][name="role"]'
-    );
-    // @ts-ignore
-    checkboxes.forEach((checkbox) => (checkbox.checked = false));
-    const roles = this.filterForm.controls['roles'] as FormArray;
-    const index = roles.controls.findIndex((x) => x.value);
-    roles.removeAt(index);
+    this.filter_groups = [];
+    clearCheck('role', this.filterForm);
+    clearCheck('group', this.filterForm);
+
+    function clearCheck(arr: string, form: any) {
+      const checkboxes = document.querySelectorAll(
+        `input[type="checkbox"][name=${arr}]`
+      );
+      // @ts-ignore
+      checkboxes.forEach((checkbox) => (checkbox.checked = false));
+      const checkArr = form.controls[arr + 's'] as FormArray;
+      const index = checkArr.controls.findIndex((x) => x.value);
+      checkArr.removeAt(index);
+    }
   }
 }
 

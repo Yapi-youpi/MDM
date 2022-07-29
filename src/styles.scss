@@ -357,66 +357,6 @@ legend {
   background-color: transparent;
 }
 
-///* ПЕРЕКЛЮЧАТЕЛЬ */
-//.switch {
-//  display: flex;
-//  gap: 12px;
-//}
-//.switch span {
-//  width: 27px;
-//  display: inline-block;
-//  position: relative;
-//  border-radius: 10px;
-//  cursor: pointer;
-//}
-//
-//.switch span:before,
-//.switch span:after {
-//  content: "";
-//  position: absolute;
-//  top: 50%;
-//  transform: translateY(-50%);
-//}
-//.switch span:after {
-//  background: var(--dark-grey);
-//  border-radius: 100%;
-//  height: 11px;
-//  right: 14px;
-//  transition: right 0.1825s ease-in-out;
-//  width: 11px;
-//}
-//.switch span:before {
-//  background: var(--grey);
-//  border-radius: 1.75em;
-//  height: 16px;
-//  right: 0;
-//  transition: background 0.2s ease-in-out;
-//  width: 27px;
-//}
-//
-//.switch input {
-//  height: 1px;
-//  width: 1px;
-//  top: 0;
-//  left: 0;
-//  opacity: 0;
-//}
-//
-//.switch:hover span:before {
-//  background: var(--light-blue);
-//}
-//.switch:hover span:after {
-//  background: var(--dark-blue);
-//}
-//.switch input:checked + span:after {
-//  right: 0.25em;
-//  background: var(--light-blue);
-//}
-//
-//.switch input:checked + span:before {
-//  background: var(--dark-blue);
-//}
-
 /* СЕЛЕКТ */
 
 .select-native {
@@ -442,22 +382,6 @@ button {
   cursor: pointer;
   transition: background-color 0.4s ease;
 }
-//.form-group {
-//  height: fit-content;
-//}
-//.form-group.error label,
-//.form-group.error input {
-//  color: var(--error) !important;
-//}
-//.form-group.error input {
-//  border-color: var(--error) !important;
-//}
-//.form-group .row {
-//  justify-content: space-between;
-//}
-//.form-group .row input {
-//  margin-left: auto !important;
-//}
 
 .alert {
   width: 100%;
@@ -1150,14 +1074,10 @@ input {
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-
   background-color: var(--white);
   color: var(--dark-blue-grey);
-
   border: none;
-
   outline: 1px solid transparent;
-
   transition: outline-color var(--transition-time) ease;
 
   &[type="text"],
@@ -1183,11 +1103,8 @@ input {
 
   &[type="search"] {
     width: 300px;
-
     padding: 6px 8px;
-
     background-color: transparent;
-
     border-radius: 15px;
 
     &:focus + .icon {
@@ -1203,6 +1120,10 @@ input {
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     outline-color: var(--dark-blue);
+  }
+
+  &::placeholder {
+    line-height: 24px;
   }
 
   &:focus {
@@ -1343,49 +1264,6 @@ input {
   }
 }
 
-//input[type='text'],
-//input[type='email'],
-//input[type='password'],
-//input[type='search']
-//{
-//  height: var(--input-height);
-//
-//  padding: 14.44px 31px 11px 11px;
-//
-//  font-family: inherit;
-//  font-weight: 300;
-//  font-size: 16px;
-//  line-height: 18.77px;
-//  color: var(--dark-blue-grey);
-//
-//  //border: 1px solid var(--grey);
-//  outline: 1px solid var(--grey);
-//  border-radius: 16px;
-//
-//  transition: border var(--transition-time) ease;
-//
-//  &:hover {
-//    border-color: var(--dark-blue);
-//  }
-//  &:focus {
-//    border: 2px solid var(--dark-blue);
-//  }
-//
-//  &.error {
-//    border: 2px solid var(--error);
-//
-//    color: var(--error);
-//  }
-//
-//  &:disabled {
-//    background-color: var(--grey);
-//    border-color: transparent;
-//  }
-//
-//  &[type='datetime-local'] {
-//    padding-right: 11px;
-//  }
-//}
 .info-panel {
   padding: 15px !important;
   display: flex !important;
