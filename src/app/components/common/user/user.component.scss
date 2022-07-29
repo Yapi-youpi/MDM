@@ -4,21 +4,17 @@
   .popup-btn-wrapper {
     height: 30px;
     width: 30px;
-
     border-radius: 15px;
-
     box-shadow: var(--box-shadow);
 
     &.no-img {
       .icon-user {
         height: 24px;
         width: 24px;
-
         mask-size: 20px 20px;
         mask-image: url("/assets/UI/users_group.svg");
         -webkit-mask-size: 20px 20px;
         -webkit-mask-image: url("/assets/UI/users_group.svg");
-
         background-color: var(--white);
       }
     }
@@ -26,20 +22,13 @@
 
   .user-popup {
     width: 250px;
-
     position: absolute;
-
     top: 0;
     right: 0;
-
     padding: 16px 16px 17.54px 16px;
-
     background-color: var(--white);
-
     border-radius: 14px;
-
     box-shadow: var(--box-shadow);
-
     z-index: 10;
 
     .divider {
@@ -65,26 +54,22 @@
         .avatar {
           height: 40px;
           width: 40px;
-
           display: flex;
           align-items: center;
           justify-content: center;
-
           border-radius: 20px;
-
           background-color: var(--dark-blue);
-
           box-shadow: var(--box-shadow);
+          background-size: cover;
+          background-position: center;
 
           .icon {
             height: 30px;
             width: 30px;
-
             mask-size: 30px 30px;
             mask-image: url("/assets/UI/users_group.svg");
             -webkit-mask-size: 30px 30px;
             -webkit-mask-image: url("/assets/UI/users_group.svg");
-
             background-color: var(--white);
           }
         }

@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   assetService,
@@ -7,14 +7,14 @@ import {
   databaseService,
   formService,
   userService,
-} from "../../../shared/services";
+} from '../../../shared/services';
 
-import { UserState } from "../../../shared/types/states";
+import { UserState } from '../../../shared/types/states';
 
 @Component({
-  selector: "app-auth",
-  templateUrl: "./auth.component.html",
-  styleUrls: ["./auth.component.scss"],
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
   constructor(
@@ -35,11 +35,11 @@ export class AuthComponent {
   }
 
   get _login() {
-    return this._form.get("login");
+    return this._form.get('login');
   }
 
   get _pass() {
-    return this._form.get("password");
+    return this._form.get('password');
   }
 
   login() {
@@ -51,16 +51,17 @@ export class AuthComponent {
       this.auth
         .login(this.logForm._login, this.logForm._pass)
         .then((res: UserState) => {
-          this.asset.setToStorage("token", res.token).then();
-          this.asset.setToStorage("login", this.logForm._login).then();
-          this.asset.setToStorage("last_password", this.logForm._pass).then();
+          this.asset.setToStorage('token', res.token).then();
+          this.asset.setToStorage('id', res.id).then();
+          this.asset.setToStorage('login', this.logForm._login).then();
+          this.asset.setToStorage('last_password', this.logForm._pass).then();
 
           this.user.token = res.token;
           this.user.login = this.logForm._login;
           this.user.last_password = this.logForm._pass;
 
-          this.router.navigateByUrl("devices").then(() => {
-            if (res.error === "change super admin password") {
+          this.router.navigateByUrl('devices').then(() => {
+            if (res.error === 'change super admin password') {
               // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
               // let i = interval(1000).subscribe(() => {
               //   let elem = document.querySelector(".modal");
@@ -81,7 +82,7 @@ export class AuthComponent {
             .signup(this.user.login, this.user.last_password)
             .then((res) => {
               console.log(res);
-              console.log(res, "Log In res");
+              console.log(res, 'Log In res');
               this.logForm.resetForm();
               this.logForm.resetSubmitted();
             })
@@ -90,10 +91,10 @@ export class AuthComponent {
                 this.db
                   .logIN(this.logForm._login, this.logForm._pass)
                   .then((res) => {
-                    console.log(res, "Log In res");
+                    console.log(res, 'Log In res');
                   })
                   .catch((err) => {
-                    console.log(err, "Log In err");
+                    console.log(err, 'Log In err');
                   });
               }
             });

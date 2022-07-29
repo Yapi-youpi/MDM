@@ -277,6 +277,17 @@ legend {
   margin: 0.3rem;
 }
 
+.avatar--small {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+}
+
 .form-group {
   position: relative;
   margin-bottom: 30px;

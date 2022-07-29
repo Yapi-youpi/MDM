@@ -112,13 +112,11 @@ export class UserService {
     });
   }
   getUserInfo(id: string | undefined, param: string) {
-    if (!id) {
-      id = '';
-    }
+    id = id ? '/' + id : '';
     if (!param) {
       param = id;
     }
-    const url = environment.url + `/get_user/${param}`;
+    const url = environment.url + `/get_user/${param}${id}`;
     return new Promise<Users[]>((resolve, reject) => {
       this.http.get(url).subscribe({
         next: (

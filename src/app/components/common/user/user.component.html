@@ -1,9 +1,6 @@
 <app-card>
   <div class="user-popup">
-    <div
-      class="popup-btn-wrapper"
-      [class.no-img]="imgURL === ''"
-    >
+    <div class="popup-btn-wrapper" [class.no-img]="imgURL === ''">
       <app-button
         [height]="'30px'"
         [width]="'30px'"
@@ -12,37 +9,34 @@
         [color]="'blue'"
         (onCLick)="togglePopup()"
       >
+        <span *ngIf="imgURL === ''" class="icon icon-user"></span>
         <span
-          *ngIf="imgURL === ''"
-          class="icon icon-user"
-        ></span>
-        <img
+          class="avatar--small"
           *ngIf="imgURL !== ''"
-          [src]="imgURL"
-          alt=""
-        >
+          [style.background-image]="
+            imgURL !== ''
+              ? 'url(data:image/jpeg;base64,' + imgURL + ')'
+              : 'none'
+          "
+        ></span>
       </app-button>
     </div>
-    <div
-      *ngIf="isPopupOpen"
-      class="user-popup"
-    >
+    <div *ngIf="isPopupOpen" class="user-popup">
       <div class="top">
         <div class="top-left">
-          <div class="avatar">
-            <span
-              *ngIf="imgURL === ''"
-              class="icon"
-            ></span>
-            <img
-              *ngIf="imgURL !== ''"
-              [src]="imgURL"
-              alt=""
-            >
+          <div
+            class="avatar"
+            [style.background-image]="
+              imgURL !== ''
+                ? 'url(data:image/jpeg;base64,' + imgURL + ')'
+                : 'none'
+            "
+          >
+            <span *ngIf="imgURL === ''" class="icon"></span>
           </div>
           <div class="info">
-            <p class="name text-menu-title">Name</p>
-            <p class="company">Company</p>
+            <p class="name text-menu-title">{{ userName }}</p>
+            <p class="company">{{ userGroup }}</p>
           </div>
         </div>
         <div class="top-right">
@@ -57,7 +51,7 @@
           </app-button>
         </div>
       </div>
-      <hr class="divider">
+      <hr class="divider" />
       <div class="bottom">
         <div class="logout-wrapper row">
           <span class="icon icon-logout"></span>
