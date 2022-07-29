@@ -6,6 +6,7 @@ import {
   authService,
   userService,
 } from '../../../shared/services';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -40,12 +41,16 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.asset.getFromStorage('id').then((id: string) => {
       this.id = id;
-      this.user.getUserInfo(this.id, 'uid').then((res) => {
-        console.log(res);
-        this.userName = res[0].name;
-        this.userRole = res[0].role;
-        this.userGroup = res[0].userTags[0];
-        this.imgURL = res[0].avatar;
+      let i = interval(500).subscribe(() => {
+        if (this.user.token) {
+          i.unsubscribe();
+          this.user.getUserInfo(this.id, 'uid').then((res) => {
+            this.userName = res[0].name;
+            this.userRole = res[0].role;
+            this.userGroup = res[0].userTags[0];
+            this.imgURL = res[0].avatar;
+          });
+        }
       });
     });
   }
