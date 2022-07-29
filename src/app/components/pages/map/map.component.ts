@@ -46,8 +46,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   public icon!: DivIcon;
   public device_marker!: L.Marker;
   public devices: Device[] = [];
+  public devices_res: Device[] = [];
   public devices_geo: DeviceGeo[] = [];
   public open = false;
+  public search = '';
   constructor(
     private mapService: MapService,
     private groupService: GroupsService,
@@ -121,7 +123,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     query.findAll().then((res) => {
       res.map((item) => {
         device = item.attributes;
-        console.log(device);
         if (device.gps_location._latitude && device.gps_location._longitude) {
           this.addMarkers(
             device.gps_location.latitude,
@@ -130,6 +131,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           );
         }
         this.devices.push(device);
+        this.devices_res.push(device);
       });
     });
   }
@@ -313,6 +315,26 @@ export class MapComponent implements OnInit, AfterViewInit {
         lat: d.device.gps_location.latitude,
         lng: d.device.gps_location.longitude,
       });
+    });
+  }
+  getValue(event) {
+    if (event === '') {
+      this.devices = Array.from(this.devices_res);
+    }
+    this.search = event;
+    this.devices = this.devices.filter((device) => {
+      if (device.name.toLowerCase().includes(event.toLowerCase())) {
+        return device;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  setView(device: Device) {
+    this.mapService.map.setView({
+      lat: device.gps_location.latitude,
+      lng: device.gps_location.longitude,
     });
   }
 }
