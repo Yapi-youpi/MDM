@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from "../../../environments/environment";
-import { GroupPermissions, Users } from "../../interfaces/interfaces";
+import { environment } from '../../../environments/environment';
+import { GroupPermissions, Users } from '../../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -201,6 +201,23 @@ export class UserService {
     const body = {
       id,
       userTags,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
+  deleteUserTag(userTags: string) {
+    const url = environment.url + '/delete_tag';
+    const body = {
+      userTags: userTags,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({
