@@ -85,23 +85,23 @@
           </div>
         </div>
         <div class="list-body">
-          <ng-container *ngIf="devices; else nodata">
+          <ng-container *ngIf="!loading && devices; else nodata">
             <app-device-item
               *ngFor="
-                let device of devices
-                  | devicesFilter
+               let device of devices
+               | search: searchParam: 'device'
+               | devicesFilter
                     : filter.status
                     : filter.dateFrom
                     : filter.dateTo
                     : filter.configsIDs
                     : filter.groupsIDs
-                  | search: searchParam:'device'
-                  | devices_status: sortStatusAsc
-                  | devices_date: sortDateAsc
-                  | devices_group: groups : sortGroupAsc
-                  | devices_battery: sortBatteryAsc
-                  | devices_name: sortNameAsc
-                "
+               | devices_status: sortStatusAsc
+               | devices_date: sortDateAsc
+               | devices_group: groups : sortGroupAsc
+               | devices_battery: sortBatteryAsc
+               | devices_name: sortNameAsc
+               "
               [device]="device"
               [groups]="groups"
               [configs]="configs"

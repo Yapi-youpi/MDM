@@ -21,6 +21,9 @@
       width: 119px;
 
       margin-right: 10px;
+
+      overflow-wrap: break-word;
+      overflow-y: auto;
     }
 
     > *:nth-child(2) {

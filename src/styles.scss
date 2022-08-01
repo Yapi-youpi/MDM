@@ -170,10 +170,10 @@ legend {
   margin: 15px 0;
 }
 
-.divider {
-  height: 2px !important;
-  background-color: var(--light-blue) !important;
-}
+//.divider {
+//  height: 2px !important;
+//  background-color: var(--light-blue) !important;
+//}
 
 .content-container .divider {
   margin: 18px 0;
@@ -1042,7 +1042,7 @@ body {
 }
 
 // РАЗДЕЛИТЕЛЬ
-hr.divider {
+.divider {
   height: 2px;
   background-color: var(--light-blue);
   border: none;

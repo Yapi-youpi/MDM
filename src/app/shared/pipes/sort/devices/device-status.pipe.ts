@@ -7,6 +7,7 @@ import { Device } from "../../../types/devices";
 })
 export class DeviceStatusPipe implements PipeTransform {
   transform(devices: Device[], isStatusAsc: boolean): Device[] {
+    // TODO: ADD COMPARISON WITH UNREGISTERED STATE
     if (isStatusAsc)
       return devices.sort((a, b) =>
         a.active_state > b.active_state

@@ -1,13 +1,15 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
 import { interval } from "rxjs";
+import { LiveQuerySubscription } from "parse";
 
 import {
-  deviceService,
   deviceConfigService,
+  deviceService,
   groupService,
   userService,
 } from "../../../shared/services";
 import { device } from "src/app/shared/services/forms";
+import { DatabaseService } from "../../../shared/services/database.service";
 
 import { Device } from "../../../shared/types/devices";
 import { DevicesGroup } from "../../../shared/types/groups";
@@ -20,7 +22,10 @@ import * as states from "../../../shared/types/states";
   templateUrl: "./devices.component.html",
   styleUrls: ["./devices.component.scss"],
 })
-export class DevicesComponent implements OnInit {
+export class DevicesComponent implements OnInit, OnDestroy {
+  private query!: Parse.Query;
+  private sub!: LiveQuerySubscription;
+
   public devices: Device[] = [];
   public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];
@@ -46,11 +51,9 @@ export class DevicesComponent implements OnInit {
     configsIDs: null,
     groupsIDs: null,
   };
-
-  // public db: DatabaseService
   constructor(
-    public user: userService,
-    // private userPasswordService: formService.user.changePass,
+    private db: DatabaseService,
+    private user: userService,
     private elementRef: ElementRef,
     private group: groupService,
     private config: deviceConfigService,
@@ -61,27 +64,24 @@ export class DevicesComponent implements OnInit {
     private filterForm: device.filter
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     const i = interval(1000).subscribe(() => {
       if (this.user.token) {
         i.unsubscribe();
         this.getGroups();
         this.getConfigs();
         this.getDevices();
+
+        this.subscribeOnServer().then();
       }
     });
+
+    this.query = this.db.query("Device");
   }
 
-  // changePassword() {
-  //   this.user
-  //     .changePassword(this.userPasswordService._pass)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((res) => {
-  //       console.log(res);
-  //     });
-  // }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
   getConfigs() {
     this.loading = true;
@@ -140,6 +140,45 @@ export class DevicesComponent implements OnInit {
     this.loading = false;
   }
 
+  async subscribeOnServer() {
+    this.sub = await this.query.subscribe();
+
+    this.sub.on("open", () => {
+      console.log("Соединение открыто");
+    });
+    this.sub.on("close", () => {
+      console.log("Соединение Закрыто");
+    });
+
+    this.sub.on("update", (item) => {
+      const device: Device = item.attributes as Device;
+      console.log(`Обновление списка устройств. Обновление "${device.name}"`);
+
+      this.devices = [
+        ...this.devices.map((d) => {
+          if (d.device_id === device.device_id) return device;
+          else return d;
+        }),
+      ];
+    });
+
+    this.sub.on("delete", (item) => {
+      const device: Device = item.attributes as Device;
+      console.log(`Обновление списка устройств. Удалено "${device.name}"`);
+
+      this.devices = this.devices.filter(
+        (d) => d.device_id !== device.device_id
+      );
+    });
+
+    this.sub.on("create", (item) => {
+      const device: Device = item.attributes as Device;
+      console.log(`Обновление списка устройств. Добавлено "${device.name}"`);
+
+      this.devices = [device, ...this.devices];
+    });
+  }
+
   cancelSelection() {
     this.selectedDevicesIDs = [];
 
@@ -152,6 +191,22 @@ export class DevicesComponent implements OnInit {
 
   onChangeSearchInputHandler(value: string) {
     this.searchParam = value;
+  }
+
+  changeSortStatusDir() {
+    this.sortStatusAsc = !this.sortStatusAsc;
+  }
+  changeSortDateDir() {
+    this.sortDateAsc = !this.sortDateAsc;
+  }
+  changeSortNameDir() {
+    this.sortNameAsc = !this.sortNameAsc;
+  }
+  changeSortGroupDir() {
+    this.sortGroupAsc = !this.sortGroupAsc;
+  }
+  changeSortBatteryDir() {
+    this.sortBatteryAsc = !this.sortBatteryAsc;
   }
 
   resetSearchParams() {
@@ -184,7 +239,6 @@ export class DevicesComponent implements OnInit {
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           this.currDevice = res.device;
-          this.devices = [res.device, ...this.devices];
 
           const modalAdd = document.querySelector("#add_device");
           modalAdd?.classList.toggle("hidden");
@@ -212,22 +266,6 @@ export class DevicesComponent implements OnInit {
     if (this.isAllSelected)
       this.selectedDevicesIDs = this.devices.map((d) => d.device_id);
     else this.selectedDevicesIDs = [];
-  }
-
-  changeSortStatusDir() {
-    this.sortStatusAsc = !this.sortStatusAsc;
-  }
-  changeSortDateDir() {
-    this.sortDateAsc = !this.sortDateAsc;
-  }
-  changeSortNameDir() {
-    this.sortNameAsc = !this.sortNameAsc;
-  }
-  changeSortGroupDir() {
-    this.sortGroupAsc = !this.sortGroupAsc;
-  }
-  changeSortBatteryDir() {
-    this.sortBatteryAsc = !this.sortBatteryAsc;
   }
 
   selectUnselectDevice(device: Device) {
@@ -262,17 +300,7 @@ export class DevicesComponent implements OnInit {
         },
       ])
       .then((res: states.SingleDeviceState) => {
-        if (res.success) {
-          console.log(`Устройство ${device.name} изменено`);
-
-          this.devices.map((d) => {
-            if (d === device) {
-              d.active_state = !d.active_state;
-            }
-          });
-        } else {
-          console.log(res.error);
-        }
+        if (res.error) console.log(res.error);
       })
       .catch((err) => {
         console.log(err);
@@ -304,16 +332,6 @@ export class DevicesComponent implements OnInit {
       ])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          console.log(`Устройство ${this.currDevice.name} изменено`);
-
-          this.devices.map((d) => {
-            if (d.device_id === this.currDevice.device_id) {
-              d.name = this.editDeviceForm._name;
-              d.description = this.editDeviceForm._description;
-              d.device_group_id = this.editDeviceForm._group_id;
-            }
-          });
-
           const modal = document.querySelector("#edit_device");
           modal?.classList.toggle("hidden");
         } else {
@@ -344,19 +362,6 @@ export class DevicesComponent implements OnInit {
       .edit(data)
       .then((res: states.DevicesState) => {
         if (res.success) {
-          data.forEach((el) => {
-            this.devices = this.devices.map((d) => {
-              if (d.device_id === el.device_id) {
-                return {
-                  ...d,
-                  device_group_id: el.device_group_id,
-                  active_state: el.active_state,
-                  isSelected: false,
-                };
-              } else return d;
-            });
-          });
-
           this.selectedDevicesIDs = [];
 
           const modal = document.querySelector("#edit_several_devices");
@@ -383,16 +388,10 @@ export class DevicesComponent implements OnInit {
       .delete([device.device_id])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          console.log(`Устройство ${device.name} удалено`);
-
-          this.devices = this.devices.filter((d) => d !== device);
-          this.selectedDevicesIDs = this.selectedDevicesIDs.filter(
-            (d) => d !== device.device_id
-          );
-
           const modal = document.querySelector("#delete_device");
           modal?.classList.toggle("hidden");
         }
+        if (res.error) console.log(res.error);
       })
       .catch((err) => {
         console.log(err);
@@ -408,16 +407,12 @@ export class DevicesComponent implements OnInit {
       .delete(this.selectedDevicesIDs)
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          console.log(`Устройства удалены`);
-
-          this.selectedDevicesIDs.forEach((sd) => {
-            this.devices = this.devices.filter((d) => d.device_id !== sd);
-          });
-
           this.selectedDevicesIDs = [];
 
           const modal = document.querySelector("#delete_several_elements");
           modal?.classList.toggle("hidden");
+        } else {
+          console.log(res.error);
         }
       })
       .catch((err) => {

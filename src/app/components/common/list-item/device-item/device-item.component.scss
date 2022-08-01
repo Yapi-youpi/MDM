@@ -54,6 +54,9 @@
       width: 70px;
 
       margin-right: 10px;
+
+      overflow-wrap: break-word;
+      overflow-y: auto;
     }
     // описание
     > *:nth-child(4) {
