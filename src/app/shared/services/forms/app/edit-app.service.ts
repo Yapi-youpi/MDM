@@ -10,7 +10,10 @@ export class EditAppService {
 
   constructor() {
     this.form = new FormGroup({
-      name: new FormControl("", Validators.required),
+      name: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(20),
+      ]),
       showIcon: new FormControl(false),
       useKiosk: new FormControl(false),
       system: new FormControl(false),
