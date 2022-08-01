@@ -6,10 +6,64 @@
   max-width: 200px;
   height: 30px;
   margin: 0 7px;
+  &::after {
+    height: 7.71px;
+    width: 12.86px;
+
+    display: block;
+
+    position: absolute;
+    content: "";
+
+    top: 11.73px;
+    right: 0.5rem;
+
+    mask-size: 12.86px 7.71px;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+    mask-image: url("/assets/UI/arrow_down.svg");
+    -webkit-mask-size: 12.86px 7.71px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+    -webkit-mask-image: url("/assets/UI/arrow_down.svg");
+
+    background-color: var(--dark-blue-grey);
+
+    transition: transform var(--transition-time) ease,
+      top var(--transition-time) ease,
+      background-color var(--transition-time) ease;
+
+    z-index: 2;
+  }
+}
+
+.select.opened::after {
+  height: 7.71px;
+  width: 12.86px;
+  display: block;
+  position: absolute;
+  content: "";
+  top: 11.86px;
+  right: 0.5rem;
+  mask-size: 12.86px 7.71px;
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  mask-image: url("/assets/UI/arrow_down.svg");
+  -webkit-mask-size: 12.86px 7.71px;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+  -webkit-mask-image: url("/assets/UI/arrow_down.svg");
+
+  transition: transform var(--transition-time) ease,
+    top var(--transition-time) ease,
+    background-color var(--transition-time) ease;
+  background-color: var(--white) !important;
+  transform: rotate(180deg);
+  z-index: 9999;
 }
 
 .select__head {
-  width: 100%;
+  width: 150px;
   max-width: 100%;
   border: 1px solid var(--dark-blue);
   color: var(--dark-blue);
@@ -23,21 +77,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  &:hover {
-    :after {
-      width: 10px;
-      height: 6px;
-      position: absolute;
-      right: 20px;
-      bottom: 50%;
-      transform: translateY(50%);
-      content: "";
-      display: block;
-      transition: 0.2s ease-in;
-      font-size: 12px;
-      font-family: "HelveticaNeueRoman", sans-serif;
-    }
-  }
   &.open {
     background-color: var(--dark-blue);
     color: var(--white);

@@ -10,7 +10,6 @@ import * as L from 'leaflet';
 import { Device } from '../../../shared/types/devices';
 import { DevicesConfigService } from '../../../services/devices-config.service';
 import { UserService } from '../../../shared/services/user.service';
-import * as moment from 'moment';
 
 interface DeviceGeo {
   device: Device;
@@ -318,12 +317,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
   }
   getValue(event) {
-    if (event === '') {
-      this.devices = Array.from(this.devices_res);
-    }
+    this.devices = Array.from(this.devices_res);
     this.search = event;
     this.devices = this.devices.filter((device) => {
-      if (device.name.toLowerCase().includes(event.toLowerCase())) {
+      if (device.name.toLowerCase().includes(this.search.toLowerCase())) {
         return device;
       } else {
         return false;
@@ -332,6 +329,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   setView(device: Device) {
+    this.devices = Array.from(this.devices_res);
+    this.search = '';
     this.mapService.map.setView({
       lat: device.gps_location.latitude,
       lng: device.gps_location.longitude,
