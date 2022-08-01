@@ -131,12 +131,14 @@ export class ConfigurationComponent implements OnInit {
         // this.configForm.reset();
       })
       .catch((err) => console.log(err));
-    this.editedApps.map((app) => {
-      this.appsService
-        .edit(app)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    });
+    if (this.editedApps.length > 0) {
+      this.editedApps.map((app) => {
+        this.appsService
+          .edit(app)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      });
+    }
   }
 
   editApp(id: string) {
