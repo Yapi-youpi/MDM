@@ -140,7 +140,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
-  async subscribeOnServer(): Promise<void> {
+  async subscribeOnServer() {
     this.sub = await this.query.subscribe();
 
     this.sub.on("open", () => {
