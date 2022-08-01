@@ -57,7 +57,7 @@
                 <button
                   class="user-card__menu-btn"
                   data-target="modal-new-user"
-                  (click)="setCurrentUser($event, user)"
+                  (click)="setCurrentUser(user, true)"
                 >
                   <span
                     class="btn--edit"
@@ -68,7 +68,7 @@
                   [disabled]="user.role === 'super'"
                   class="user-card__menu-btn"
                   data-target="modal-delete-user"
-                  (click)="setCurrentUser($event, user)"
+                  (click)="setCurrentUser(user)"
                 >
                   <span
                     class="btn--delete"
@@ -185,6 +185,7 @@
                 formControlName="role"
                 type="radio"
                 [value]="'admin'"
+                [attr.disabled]="currentUser ? '' : null"
               />
               <span class="custom-radio__span"> администратор </span>
             </label>
@@ -195,6 +196,7 @@
                 formControlName="role"
                 type="radio"
                 [value]="'operator'"
+                [attr.disabled]="currentUser ? '' : null"
               />
               <span class="custom-radio__span"> оператор </span>
             </label>

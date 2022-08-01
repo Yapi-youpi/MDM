@@ -119,10 +119,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  setCurrentUser(event: Event, user: Users) {
+  setCurrentUser(user: Users, edit?: boolean | false) {
     this.currentUser = user;
     // @ts-ignore
-    if (event.target.innerHTML === 'edit') {
+    if (edit) {
       this.form.patchValue(user);
       console.log(this.form.value);
     }

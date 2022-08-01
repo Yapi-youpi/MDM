@@ -667,20 +667,27 @@ input[type="checkbox"]:disabled + .checkbox-custom {
   gap: 14px;
 }
 .custom-radio {
+  &__span {
+    padding: 4px 14px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 14px;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--dark-blue);
+  }
+  & input:disabled + .custom-radio__span {
+    color: var(--grey);
+    background: white;
+    border: 1px solid var(--grey);
+  }
+  & input:checked + .custom-radio__span {
+    color: white;
+    background: var(--dark-blue);
+  }
+  & input:checked:disabled + .custom-radio__span {
+    background: var(--grey);
+  }
 }
-.custom-radio__span {
-  padding: 4px 14px;
-  border: 1px solid var(--dark-blue);
-  border-radius: 14px;
-  font-size: 12px;
-  line-height: 12px;
-  color: var(--dark-blue);
-}
-.custom-radio input:checked + .custom-radio__span {
-  color: white;
-  background: var(--dark-blue);
-}
-
 /* МОДАЛЬНОЕ ОКНО */
 .modal-wrapper {
   position: fixed;
