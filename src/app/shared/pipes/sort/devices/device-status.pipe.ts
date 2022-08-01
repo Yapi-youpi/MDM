@@ -7,21 +7,38 @@ import { Device } from "../../../types/devices";
 })
 export class DeviceStatusPipe implements PipeTransform {
   transform(devices: Device[], isStatusAsc: boolean): Device[] {
-    // TODO: ADD COMPARISON WITH UNREGISTERED STATE
+    // FROM REGISTERED AND ACTIVE TO INACTIVE AND UNREGISTERED
     if (isStatusAsc)
       return devices.sort((a, b) =>
-        a.active_state > b.active_state
-          ? 1
-          : a.active_state < b.active_state
+        !b.registration_state && !a.registration_state
+          ? 0
+          : !b.registration_state && a.registration_state
           ? -1
+          : b.registration_state && !a.registration_state
+          ? 1
+          : b.registration_state && a.registration_state
+          ? b.active_state > a.active_state
+            ? 1
+            : b.active_state < a.active_state
+            ? -1
+            : 0
           : 0
       );
+    // FORM UNREGISTERED AND INACTIVE TO REGISTERED AND ACTIVE
     else
       return devices.sort((a, b) =>
-        a.active_state < b.active_state
-          ? 1
-          : a.active_state > b.active_state
+        !a.registration_state && !b.registration_state
+          ? 0
+          : !a.registration_state && b.registration_state
           ? -1
+          : a.registration_state && !b.registration_state
+          ? 1
+          : a.registration_state && b.registration_state
+          ? a.active_state > b.active_state
+            ? 1
+            : a.active_state < b.active_state
+            ? -1
+            : 0
           : 0
       );
   }
