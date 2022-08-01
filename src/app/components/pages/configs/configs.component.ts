@@ -4,7 +4,7 @@ import { interval } from 'rxjs';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { AssetService } from '../../../services/asset.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from "../../../shared/services/user.service";
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-configs',
@@ -17,7 +17,6 @@ export class ConfigsComponent implements OnInit {
   public default_config!: DevicesConfig;
   public configs: DevicesConfig[] = [];
   public loading = true;
-  public rename = '';
   public currentConfig!: DevicesConfig;
   constructor(
     public asset: AssetService,
@@ -71,51 +70,6 @@ export class ConfigsComponent implements OnInit {
       });
   }
 
-  addConfig(value: any) {
-    const name = value.name;
-    const description = value.description;
-    const config = value.prototype;
-    const prototype =
-      config === 'Стандартная конфигурация'
-        ? this.default_config
-        : this.configs.find((conf) => conf.name === config);
-    this.configService
-      .addConfig(prototype, name, description)
-      .then((res) => {
-        console.log(res);
-        this.getAllConfigs();
-        // this.name = '';
-      })
-      .catch((err) => {
-        console.log(err.error.error);
-        this.getAllConfigs();
-      });
-  }
-
-  removeConfig(id: string) {
-    this.configService
-      .removeConfig(id)
-      .then((res) => {
-        console.log(res);
-        this.getAllConfigs();
-      })
-      .catch((err) => {
-        console.log(err.error.error);
-      });
-  }
-
-  renameConfig(id: string, name: string) {
-    this.configService
-      .renameConfig(id, name)
-      .then(() => {
-        this.getAllConfigs();
-        this.rename = '';
-      })
-      .catch((err) => {
-        console.log(err.error.error);
-      });
-  }
-
   setCurrentConfig(config) {
     this.currentConfig = config;
   }
@@ -123,11 +77,6 @@ export class ConfigsComponent implements OnInit {
   sortConfigs() {
     this.configs.sort((a, b) => {
       return a.name > b.name ? 1 : -1;
-    });
-    let i = interval(1000).subscribe(() => {
-      this.asset.modalInit('modal-add-config');
-      this.asset.modalInit('modal-delete-config');
-      i.unsubscribe();
     });
   }
 }

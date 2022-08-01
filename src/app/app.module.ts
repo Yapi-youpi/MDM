@@ -108,6 +108,8 @@ import { AddUserComponent } from './components/common/modals/users/add-user/add-
 import { CardMenuBtnComponent } from './components/common/UI/button/card-menu-btn/card-menu-btn.component';
 import { DeleteUserComponent } from './components/common/modals/users/delete-user/delete-user.component';
 import { FilterUserComponent } from './components/common/modals/users/filter-user/filter-user.component';
+import { AddConfigComponent } from './components/common/modals/configs/add-config/add-config.component';
+import { DeleteConfigComponent } from './components/common/modals/configs/delete-config/delete-config.component';
 
 const routes: Routes = [
   {
@@ -211,6 +213,8 @@ const routes: Routes = [
     CardMenuBtnComponent,
     DeleteUserComponent,
     FilterUserComponent,
+    AddConfigComponent,
+    DeleteConfigComponent,
   ],
   imports: [
     BrowserModule,
