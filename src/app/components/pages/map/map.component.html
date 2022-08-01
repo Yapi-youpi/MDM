@@ -9,17 +9,25 @@
       <div style="display: flex; justify-content: flex-start">
         <app-input-search
           (onChange)="getValue($event)"
+          [value]="search"
           style="margin-right: 7px; z-index: 999999999999999"
         >
         </app-input-search>
-        <div class="search-list" *ngIf="search !== '' && devices.length !== 0">
-          <ul>
-            <ng-container *ngFor="let device of devices">
-              <li (click)="setView(device)" class="search-item">
-                {{ device.name }}
-              </li>
-            </ng-container>
-          </ul>
+        <div class="search-list" *ngIf="search !== ''">
+          <ng-container *ngIf="devices.length !== 0; else nothing">
+            <ul>
+              <ng-container *ngFor="let device of devices">
+                <li (click)="setView(device)" class="search-item">
+                  {{ device.name }}
+                </li>
+              </ng-container>
+            </ul>
+          </ng-container>
+          <ng-template #nothing>
+            <ul>
+              <li class="search-item">Ничего не найдено</li>
+            </ul>
+          </ng-template>
         </div>
         <app-mini-select
           [header]="'статус'"

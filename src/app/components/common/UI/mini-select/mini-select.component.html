@@ -1,5 +1,4 @@
-<div class="select">
-  <input class="select__input" type="hidden" name="" />
+<div [id]="'select_' + header" class="select">
   <div [id]="header" class="select__head" (click)="openSelect()">
     {{ currentValue }}
   </div>

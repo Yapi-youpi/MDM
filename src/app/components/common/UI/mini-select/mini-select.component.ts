@@ -33,9 +33,10 @@ export class MiniSelectComponent implements OnInit {
 
   openSelect() {
     let elem = document.getElementById(this.header);
-    if (elem) {
-      elem.classList.toggle('open');
-    }
+    let el = document.getElementById('select_' + this.header);
+    console.log(el);
+    el?.classList.toggle('opened');
+    elem?.classList.toggle('open');
     this.open = !this.open;
   }
 
