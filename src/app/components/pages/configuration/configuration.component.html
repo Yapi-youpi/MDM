@@ -906,8 +906,12 @@
           <button type="button" class="btn btn--big" (click)="editConfig()">
             Сохранить
           </button>
-          <button type="button" class="btn btn--big btn--outline">
-            Отменить
+          <button
+            type="button"
+            class="btn btn--big btn--outline"
+            (click)="setConfig()"
+          >
+            Сбросить
           </button>
         </div>
       </form>

@@ -105,16 +105,7 @@ export class ConfigurationComponent implements OnInit {
       .then(() => {
         let i = interval(200).subscribe(() => {
           i.unsubscribe();
-          this.configForm.patchValue(this.config);
-          if (!this.configForm.value.textColor) {
-            this.configForm.patchValue({ textColor: '#ffffff' });
-          }
-          if (!this.configForm.value.backgroundColor) {
-            this.configForm.patchValue({ backgroundColor: '#557ebe' });
-          }
-          if (!this.configForm.value.wifiSecurityType) {
-            this.configForm.patchValue({ wifiSecurityType: 'NONE' });
-          }
+          this.setConfig();
           this.getApps();
         });
       })
@@ -150,6 +141,19 @@ export class ConfigurationComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('config');
+  }
+
+  setConfig() {
+    this.configForm.patchValue(this.config);
+    if (!this.configForm.value.textColor) {
+      this.configForm.patchValue({ textColor: '#ffffff' });
+    }
+    if (!this.configForm.value.backgroundColor) {
+      this.configForm.patchValue({ backgroundColor: '#557ebe' });
+    }
+    if (!this.configForm.value.wifiSecurityType) {
+      this.configForm.patchValue({ wifiSecurityType: 'NONE' });
+    }
   }
 
   setActive(event) {
