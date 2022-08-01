@@ -25,9 +25,9 @@ export class GroupsService {
     });
   }
 
-  add(name: string) {
+  add(group: DevicesGroup) {
     return new Promise<any>((resolve, reject) => {
-      this.http.post(environment.url + api.ADD, { name }).subscribe({
+      this.http.post(environment.url + api.ADD, group).subscribe({
         next: (res) => {
           resolve(res);
         },
@@ -56,6 +56,7 @@ export class GroupsService {
     });
   }
 
+  // TODO: DELETE ARRAY OF GROUPS
   delete(id: string) {
     return new Promise<any>((resolve, reject) => {
       this.http
@@ -91,6 +92,7 @@ export class GroupsService {
     });
   }
 
+  // TODO: EDIT ARRAY OF GROUPS
   edit(group: DevicesGroup) {
     return new Promise<any>((resolve, reject) => {
       this.http.post(environment.url + api.EDIT, group).subscribe({

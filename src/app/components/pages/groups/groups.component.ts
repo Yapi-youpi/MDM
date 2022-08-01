@@ -156,7 +156,24 @@ export class GroupsComponent implements OnInit {
   addGroup() {
     this.loading = true;
 
-    console.log(this.addForm.form.getRawValue());
+    // console.log(this.addForm.form.getRawValue());
+    this.groupService
+      .add(this.addForm.form.getRawValue())
+      .then((res: states.State) => {
+        if (res.success) {
+          console.log(
+            `Устройство ${this.addForm.form.getRawValue()["name"]} добавлено`
+          );
+
+          //  TODO: PUSH TO ARRAY
+
+          const modal = document.querySelector("#add_group");
+          modal?.classList.toggle("hidden");
+        } else {
+          console.log(res.error);
+        }
+      })
+      .catch((err) => console.log(err));
 
     this.loading = false;
   }
