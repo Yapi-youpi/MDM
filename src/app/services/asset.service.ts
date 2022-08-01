@@ -75,29 +75,4 @@ export class AssetService {
       }
     }
   }
-  filterInit(id: string) {
-    const filter = document.getElementById(id);
-    const openBtn = document.querySelectorAll(`button[data-target='${id}']`);
-    const closeBtn = document.querySelectorAll('.filter-close');
-
-    openBtn?.forEach((btn) => btn.addEventListener('click', openFilter));
-    closeBtn?.forEach((btn) => btn.addEventListener('click', closeFilter));
-    window.addEventListener('click', outsideClick);
-
-    function openFilter(e) {
-      e.stopPropagation();
-      if (filter) filter.classList.add('filter--open');
-    }
-
-    function closeFilter() {
-      if (filter) filter.classList.remove('filter--open');
-    }
-
-    function outsideClick(e) {
-      if (e.target == filter) {
-        if (filter) filter.classList.remove('filter--open');
-      }
-      // console.log(e.target);
-    }
-  }
 }

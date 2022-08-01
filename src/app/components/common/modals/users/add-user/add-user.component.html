@@ -1,0 +1,138 @@
+<app-modal [modalID]="'modal-new-user'" [isClosable]="true">
+  <div class="modal-form w-600">
+    <h4 class="modal-title">
+      {{
+        currentUser ? "Редактирование данных" : "Добавление нового пользователя"
+      }}
+    </h4>
+
+    <form [formGroup]="form" class="form users-form">
+      <div class="avatar-wrapper">
+        <label for="file">
+          <div class="avatar">
+            <div
+              class="avatar__image"
+              *ngIf="
+                currentUser && (currentUser?.avatar)!.length > 0;
+                else noAvatar
+              "
+              [ngStyle]="{
+                'background-image': 'url(' + currentUser?.avatar + ')',
+                'background-size': 'cover'
+              }"
+            ></div>
+            <ng-template #noAvatar>
+              <div class="avatar__image"></div>
+            </ng-template>
+            <div class="avatar__camera"></div>
+            <input
+              (change)="addFile($event)"
+              class="visually-hidden"
+              type="file"
+              id="file"
+              accept="image/*"
+            /></div
+        ></label>
+        <div class="avatar__attachment"></div>
+      </div>
+      <div class="form__item">
+        <label for="name">Имя</label>
+        <input
+          formControlName="name"
+          type="text"
+          id="name"
+          class="w-296"
+          required
+        />
+      </div>
+      <div class="form__item" *ngIf="!currentUser">
+        <label for="login">Логин</label>
+        <input
+          formControlName="login"
+          type="text"
+          id="login"
+          class="w-296"
+          required
+        />
+      </div>
+
+      <div class="form__item">
+        <label for="password">Пароль</label>
+        <input
+          formControlName="password"
+          type="text"
+          id="password"
+          class="w-296"
+          maxlength="64"
+          pattern="^(?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\/\\.,:;\[\]{} \x22-]).{8,64}$"
+          required
+        />
+      </div>
+      <div class="form__item">
+        <label>Роль</label>
+        <div class="tags-container w-296">
+          <label class="custom-radio">
+            <input
+              class="visually-hidden"
+              formControlName="role"
+              type="radio"
+              [value]="'admin'"
+              [attr.disabled]="currentUser ? '' : null"
+            />
+            <span class="custom-radio__span"> администратор </span>
+          </label>
+
+          <label class="custom-radio">
+            <input
+              class="visually-hidden"
+              formControlName="role"
+              type="radio"
+              [value]="'operator'"
+              [attr.disabled]="currentUser ? '' : null"
+            />
+            <span class="custom-radio__span"> оператор </span>
+          </label>
+        </div>
+      </div>
+      <div class="form__item">
+        <label>Подразделение</label>
+        <select class="select-native w-296" formControlName="userTags">
+          <option value="{{ tag }}" *ngFor="let tag of userTags">
+            {{ tag }}
+          </option>
+          <option value="Другое">Другое</option>
+        </select>
+      </div>
+      <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
+        <label></label>
+        <input
+          formControlName="other"
+          type="text"
+          id="other"
+          class="w-296"
+          placeholder="Введите название подразделения"
+        />
+      </div>
+    </form>
+
+    <div class="modal-form-footer btn-wrapper">
+      <button
+        *ngIf="!currentUser; else editBtn"
+        class="btn btn--big"
+        (click)="addUser()"
+        [disabled]="form.invalid || form.untouched || form.pristine"
+      >
+        Добавить
+      </button>
+      <ng-template #editBtn>
+        <button class="btn btn--big" (click)="editUser()">Сохранить</button>
+      </ng-template>
+      <button
+        class="btn btn--big btn--outline modal-close"
+        (click)="clearModal()"
+      >
+        Отменить
+      </button>
+    </div>
+  </div>
+</app-modal>

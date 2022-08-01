@@ -1,0 +1,16 @@
+.card-menu-btn {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background-color: white;
+  color: inherit;
+  border-radius: 50%;
+  border: none;
+}
+.card-menu-btn span {
+  background-color: var(--dark-blue);
+}
+.card-menu-btn:focus span,
+.card-menu-btn:hover span {
+  background-color: var(--blue) !important;
+}

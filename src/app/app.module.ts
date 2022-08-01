@@ -1,26 +1,26 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 
-import { BrowserModule } from "@angular/platform-browser";
-import { RouterModule, Routes } from "@angular/router";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { LocationStrategy, PathLocationStrategy } from "@angular/common";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { IonicStorageModule } from "@ionic/storage-angular";
-import { NgxQRCodeModule } from "@techiediaries/ngx-qrcode";
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
-import { AppRoutingModule } from "./app-routing/app-routing.module";
-import { AppInterceptor } from "./app.interceptor";
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppInterceptor } from './app.interceptor';
 
-import { AppComponent } from "./app.component";
+import { AppComponent } from './app.component';
 
 // СТРАНИЦЫ
-import { AuthComponent } from "./components/pages/auth/auth.component";
-import { UsersComponent } from "./components/pages/users/users.component";
-import { DevicesComponent } from "./components/pages/devices/devices.component";
-import { GroupsComponent } from "./components/pages/groups/groups.component";
-import { MapComponent } from "./components/pages/map/map.component";
-import { ConfigsComponent } from "./components/pages/configs/configs.component";
+import { AuthComponent } from './components/pages/auth/auth.component';
+import { UsersComponent } from './components/pages/users/users.component';
+import { DevicesComponent } from './components/pages/devices/devices.component';
+import { GroupsComponent } from './components/pages/groups/groups.component';
+import { MapComponent } from './components/pages/map/map.component';
+import { ConfigsComponent } from './components/pages/configs/configs.component';
 
 // КОМПОНЕНТЫ ПОМЕНБШЕ
 import { UserComponent } from './components/common/user/user.component';
@@ -104,6 +104,10 @@ import { MomentPipe } from './shared/pipes/moment.pipe';
 import { AppsConfigPipe } from './shared/pipes/sort/apps/apps-config.pipe';
 import { FileSizePipe } from './shared/pipes/file-size.pipe';
 import { AddGroupComponent } from './components/common/modals/groups/add-group/add-group.component';
+import { AddUserComponent } from './components/common/modals/users/add-user/add-user.component';
+import { CardMenuBtnComponent } from './components/common/UI/button/card-menu-btn/card-menu-btn.component';
+import { DeleteUserComponent } from './components/common/modals/users/delete-user/delete-user.component';
+import { FilterUserComponent } from './components/common/modals/users/filter-user/filter-user.component';
 
 const routes: Routes = [
   {
@@ -203,6 +207,10 @@ const routes: Routes = [
     FileSizePipe,
     GroupFilterPipe,
     AddGroupComponent,
+    AddUserComponent,
+    CardMenuBtnComponent,
+    DeleteUserComponent,
+    FilterUserComponent,
   ],
   imports: [
     BrowserModule,

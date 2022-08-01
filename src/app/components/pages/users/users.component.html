@@ -12,16 +12,14 @@
             id="search"
             class="search-input" /><i class="search-icon"></i
         ></span>
-        <button type="button" class="btn btn--round" data-target="user-filter">
-          <span class="btn--filter"></span>
-        </button>
-        <button
-          type="button"
-          class="btn btn--rounded btn--right"
-          data-target="modal-new-user"
+        <app-filter-btn [target]="'filter-user'"></app-filter-btn>
+        <app-add-button
+          class="btn--right"
+          [target]="'modal-new-user'"
+          [title]="'Добавить пользователя'"
+          (click)="setCurrentUser()"
         >
-          Добавить пользователя
-        </button>
+        </app-add-button>
       </div>
       <ng-template #loader>
         <div class="progress">
@@ -54,27 +52,25 @@
                 "
                 class="user-card__menu"
               >
-                <button
-                  class="user-card__menu-btn"
-                  data-target="modal-new-user"
-                  (click)="setCurrentUser(user, true)"
+                <app-card-menu-btn
+                  [target]="'modal-new-user'"
+                  (onClick)="setCurrentUser(user)"
                 >
                   <span
                     class="btn--edit"
                     [style.background-color]="asset.roles[user.role].color"
                   ></span>
-                </button>
-                <button
+                </app-card-menu-btn>
+                <app-card-menu-btn
                   [disabled]="user.role === 'super'"
-                  class="user-card__menu-btn"
-                  data-target="modal-delete-user"
+                  [target]="'modal-delete-user'"
                   (click)="setCurrentUser(user)"
                 >
                   <span
                     class="btn--delete"
                     [style.background-color]="asset.roles[user.role].color"
                   ></span>
-                </button>
+                </app-card-menu-btn>
               </div>
             </div>
             <div class="user-card__content">
@@ -103,249 +99,15 @@
       class="card card--sidebar"
     ></app-user-permissions>
   </main>
-
-  <!--  MODALS -->
-  <div class="modal-wrapper" id="modal-new-user">
-    <div class="modal-dialog">
-      <h4 class="modal-title">
-        {{
-          currentUser
-            ? "Редактирование данных"
-            : "Добавление нового пользователя"
-        }}
-      </h4>
-      <form [formGroup]="form" class="form users-form">
-        <div class="avatar-wrapper">
-          <label for="file">
-            <div class="avatar">
-              <div
-                class="avatar__image"
-                *ngIf="
-                  currentUser && (currentUser?.avatar)!.length > 0;
-                  else noAvatar
-                "
-                [ngStyle]="{
-                  'background-image': 'url(' + currentUser?.avatar + ')',
-                  'background-size': 'cover'
-                }"
-              ></div>
-              <ng-template #noAvatar>
-                <div class="avatar__image"></div>
-              </ng-template>
-              <div class="avatar__camera"></div>
-              <input
-                (change)="addFile($event)"
-                class="visually-hidden"
-                type="file"
-                id="file"
-                accept="image/*"
-              /></div
-          ></label>
-          <div class="avatar__attachment"></div>
-        </div>
-        <div class="form__item">
-          <label for="name">Имя</label>
-          <input
-            formControlName="name"
-            type="text"
-            id="name"
-            class="w-296"
-            required
-          />
-        </div>
-        <div class="form__item" *ngIf="!currentUser">
-          <label for="login">Логин</label>
-          <input
-            formControlName="login"
-            type="text"
-            id="login"
-            class="w-296"
-            required
-          />
-        </div>
-
-        <div class="form__item">
-          <label for="password">Пароль</label>
-          <input
-            formControlName="password"
-            type="text"
-            id="password"
-            class="w-296"
-            maxlength="64"
-            pattern="^(?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\/\\.,:;\[\]{} \x22-]).{8,64}$"
-            required
-          />
-        </div>
-        <div class="form__item">
-          <label>Роль</label>
-          <div class="tags-container w-296">
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="role"
-                type="radio"
-                [value]="'admin'"
-                [attr.disabled]="currentUser ? '' : null"
-              />
-              <span class="custom-radio__span"> администратор </span>
-            </label>
-
-            <label class="custom-radio">
-              <input
-                class="visually-hidden"
-                formControlName="role"
-                type="radio"
-                [value]="'operator'"
-                [attr.disabled]="currentUser ? '' : null"
-              />
-              <span class="custom-radio__span"> оператор </span>
-            </label>
-          </div>
-        </div>
-        <div class="form__item">
-          <label>Подразделение</label>
-          <select class="select-native w-296" formControlName="userTags">
-            <option value="{{ tag }}" *ngFor="let tag of userTags">
-              {{ tag }}
-            </option>
-            <option value="Другое">Другое</option>
-          </select>
-        </div>
-        <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
-          <label></label>
-          <input
-            formControlName="other"
-            type="text"
-            id="other"
-            class="w-296"
-            placeholder="Введите название подразделения"
-          />
-        </div>
-      </form>
-      <div class="btn-wrapper">
-        <button
-          *ngIf="!currentUser; else editBtn"
-          class="btn btn--big"
-          (click)="addUser()"
-          [disabled]="form.invalid || form.untouched || form.pristine"
-        >
-          Добавить
-        </button>
-        <ng-template #editBtn>
-          <button class="btn btn--big" (click)="editUser()">Сохранить</button>
-        </ng-template>
-
-        <button
-          class="btn btn--big btn--outline modal-close"
-          (click)="clearModal()"
-        >
-          Отменить
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="modal-wrapper" id="modal-delete-user">
-    <div class="modal-dialog">
-      <h4 class="modal-title">Удалить пользователя {{ currentUser?.name }}?</h4>
-      <div class="btn-wrapper">
-        <button class="btn btn--big" (click)="deleteUser(currentUser!.id)">
-          Да
-        </button>
-        <button class="btn btn--big btn--outline modal-close">Нет</button>
-      </div>
-    </div>
-  </div>
-
-  <!--  FILTER -->
-  <div class="filter-overlay" id="user-filter">
-    <form class="filter" [formGroup]="filterForm" (submit)="applyFilter()">
-      <div class="filter__header">Фильтр</div>
-      <div class="filter__content">
-        <div>
-          <fieldset>
-            <legend>Роль</legend>
-            <div class="checkbox-group">
-              <label
-                for="{{ role.key }}"
-                class="checkbox-wrapper"
-                *ngFor="let role of asset.roles | keyvalue"
-              >
-                <input
-                  type="checkbox"
-                  name="role"
-                  id="{{ role.key }}"
-                  value="{{ role.key }}"
-                  class="visually-hidden"
-                  formArrayName="roles"
-                  (change)="onCheckboxChange($event, 'roles')"
-                />
-                <div class="input checkbox-custom">
-                  <svg width="18" height="18" viewBox="0 0 20 20">
-                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                  </svg>
-                </div>
-                <span>{{ role.value.text }}</span>
-              </label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Структурное подразделение</legend>
-            <div class="checkbox-group">
-              <label
-                for="{{ tag }}"
-                class="checkbox-wrapper"
-                *ngFor="let tag of userTags"
-              >
-                <input
-                  type="checkbox"
-                  name="group"
-                  id="{{ tag }}"
-                  value="{{ tag }}"
-                  class="visually-hidden"
-                  formArrayName="groups"
-                  (change)="onCheckboxChange($event, 'groups')"
-                />
-                <div class="input checkbox-custom">
-                  <svg width="18" height="18" viewBox="0 0 20 20">
-                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                  </svg>
-                </div>
-                <span>{{ tag }}</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <!--          DELETE USERS GROUP -->
-          <!--          <div style="display: flex; flex-wrap: wrap; gap: 10px">
-            <h3>Для удаления подразделения нажми на тег:</h3>
-            <label class="checkbox-wrapper" *ngFor="let tag of userTags">
-              <span
-                style="
-                  border: 1px solid red;
-                  min-width: 100px;
-                  min-height: 20px;
-                  padding: 8px;
-                  font-size: 12px;
-                "
-                (click)="deleteUserTag(tag)"
-                >{{ tag }}</span
-              >
-            </label>
-          </div>-->
-        </div>
-      </div>
-      <div class="filter__footer">
-        <div class="btn-wrapper">
-          <button type="submit" class="btn btn--big">Применить</button>
-          <button
-            (click)="clearFilter()"
-            type="button"
-            class="btn btn--big btn--outline filter-close"
-          >
-            Отменить
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
 </app-global-container>
+
+<!--  MODALS -->
+<app-add-user [currentUser]="currentUser" (onClose)="closeModal($event)">
+</app-add-user>
+<app-delete-user
+  [currentUser]="currentUser"
+  (onClose)="closeModal($event)"
+></app-delete-user>
+
+<!--  FILTER -->
+<app-filter-user (onSubmit)="applyFilter($event)"></app-filter-user>
