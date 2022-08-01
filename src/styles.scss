@@ -667,20 +667,27 @@ input[type="checkbox"]:disabled + .checkbox-custom {
   gap: 14px;
 }
 .custom-radio {
+  &__span {
+    padding: 4px 14px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 14px;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--dark-blue);
+  }
+  & input:disabled + .custom-radio__span {
+    color: var(--grey);
+    background: white;
+    border: 1px solid var(--grey);
+  }
+  & input:checked + .custom-radio__span {
+    color: white;
+    background: var(--dark-blue);
+  }
+  & input:checked:disabled + .custom-radio__span {
+    background: var(--grey);
+  }
 }
-.custom-radio__span {
-  padding: 4px 14px;
-  border: 1px solid var(--dark-blue);
-  border-radius: 14px;
-  font-size: 12px;
-  line-height: 12px;
-  color: var(--dark-blue);
-}
-.custom-radio input:checked + .custom-radio__span {
-  color: white;
-  background: var(--dark-blue);
-}
-
 /* МОДАЛЬНОЕ ОКНО */
 .modal-wrapper {
   position: fixed;
@@ -736,26 +743,26 @@ input[type="checkbox"]:disabled + .checkbox-custom {
 /* filter */
 
 .filter {
-  position: fixed;
-  width: 400px;
-  right: 0;
-  top: 0;
-  margin: 0;
-  transform: translateX(100%);
+  //position: fixed;
+  //width: 400px;
+  //right: 0;
+  //top: 0;
+  //margin: 0;
+  //transform: translateX(100%);
   height: 100%;
-  padding: 0 27px;
-  background-color: #fff;
-  z-index: 800;
+  //padding: 0 27px;
+  //background-color: #fff;
+  //z-index: 800;
   overflow-y: auto;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: all 0.15s linear;
-  border-radius: 14px;
+  //transition: all 0.15s linear;
+  //border-radius: 14px;
   display: flex;
   flex-direction: column;
 }
 .filter__header {
-  padding: 30px 0 25px;
+  padding-bottom: 25px;
   font-size: 24px;
   text-align: center;
   font-weight: 550;
@@ -764,11 +771,10 @@ input[type="checkbox"]:disabled + .checkbox-custom {
 .filter__content {
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 30px 0;
 }
 .filter__footer {
   margin-top: auto;
-  padding-bottom: 48px;
 }
 .filter-overlay {
   position: fixed;
@@ -1264,6 +1270,9 @@ input {
   }
   &-536 {
     width: 546px;
+  }
+  &-600 {
+    width: 600px;
   }
   &-700 {
     width: 700px;

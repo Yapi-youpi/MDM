@@ -105,16 +105,7 @@ export class ConfigurationComponent implements OnInit {
       .then(() => {
         let i = interval(200).subscribe(() => {
           i.unsubscribe();
-          this.configForm.patchValue(this.config);
-          if (!this.configForm.value.textColor) {
-            this.configForm.patchValue({ textColor: '#ffffff' });
-          }
-          if (!this.configForm.value.backgroundColor) {
-            this.configForm.patchValue({ backgroundColor: '#557ebe' });
-          }
-          if (!this.configForm.value.wifiSecurityType) {
-            this.configForm.patchValue({ wifiSecurityType: 'NONE' });
-          }
+          this.setConfig();
           this.getApps();
         });
       })
@@ -131,12 +122,14 @@ export class ConfigurationComponent implements OnInit {
         // this.configForm.reset();
       })
       .catch((err) => console.log(err));
-    this.editedApps.map((app) => {
-      this.appsService
-        .edit(app)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    });
+    if (this.editedApps.length > 0) {
+      this.editedApps.map((app) => {
+        this.appsService
+          .edit(app)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      });
+    }
   }
 
   editApp(id: string) {
@@ -148,6 +141,19 @@ export class ConfigurationComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('config');
+  }
+
+  setConfig() {
+    this.configForm.patchValue(this.config);
+    if (!this.configForm.value.textColor) {
+      this.configForm.patchValue({ textColor: '#ffffff' });
+    }
+    if (!this.configForm.value.backgroundColor) {
+      this.configForm.patchValue({ backgroundColor: '#557ebe' });
+    }
+    if (!this.configForm.value.wifiSecurityType) {
+      this.configForm.patchValue({ wifiSecurityType: 'NONE' });
+    }
   }
 
   setActive(event) {

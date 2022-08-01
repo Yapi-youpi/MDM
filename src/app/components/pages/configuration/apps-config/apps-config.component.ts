@@ -64,7 +64,7 @@ export class AppsConfigComponent implements OnInit {
   changeOrder(id, event) {
     const currentApp = this.apps.find((app) => app.ID === id);
     if (currentApp) {
-      currentApp!.screenOrder = event.target.value;
+      currentApp!.screenOrder = +event.target.value;
       this.onSave.emit(id);
     }
   }
