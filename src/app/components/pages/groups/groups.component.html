@@ -43,6 +43,8 @@
             <div class="sort-btn-wrapper status">
               <app-sort-btn
                 [title]="'Название'"
+                [isSortAsc]="isNamesSortAsc"
+                (onCLick)="changeSortNameDir()"
               ></app-sort-btn>
             </div>
             <p>Описание</p>
@@ -50,16 +52,22 @@
             <div class="sort-btn-wrapper status">
               <app-sort-btn
                 [title]="'Количество устройств'"
+                [isSortAsc]="isDevicesCountSortAsc"
+                (onCLick)="changeSortDevicesCountDir()"
               ></app-sort-btn>
             </div>
             <div class="sort-btn-wrapper status">
               <app-sort-btn
                 [title]="'Конфигурация'"
+                [isSortAsc]="isConfigSortAsc"
+                (onCLick)="changeSortConfigDir()"
               ></app-sort-btn>
             </div>
             <div class="sort-btn-wrapper status">
               <app-sort-btn
                 [title]="'Дата обновления'"
+                [isSortAsc]="isDateSortAsc"
+                (onCLick)="changeSortDateDir()"
               ></app-sort-btn>
             </div>
             <p>Состояние</p>
@@ -69,14 +77,19 @@
         <div class="list-box">
           <ng-container *ngIf="groups; else nodata">
             <app-group-item
-              *ngFor="let group of groups
-              | search: searchParam : 'group'
-              | groupFilter
-                    : filter.status
-                    : filter.dateFrom
-                    : filter.dateTo
-                    : filter.configsIDs
-              "
+              *ngFor=
+                "let group of groups
+                  | search: searchParam : 'group'
+                  | groupFilter
+                        : filter.status
+                        : filter.dateFrom
+                        : filter.dateTo
+                        : filter.configsIDs
+                  | group_name: isNamesSortAsc
+                  | group_devices_count: isDevicesCountSortAsc
+                  | group_config: configsNV : isConfigSortAsc
+                  | group_date: isDateSortAsc
+                "
               [group]="group"
               [configs]="configs"
               (onSelectUnselectGroup)="selectUnselectGroup($event)"

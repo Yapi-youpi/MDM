@@ -30,14 +30,14 @@
   > *:nth-child(1) {
     width: 30px;
     margin-right: 10px;
-
-    overflow-wrap: break-word;
-    overflow-y: auto;
   }
 
   > *:nth-child(2) {
     width: 165px;
     margin-right: 5px;
+
+    overflow-wrap: break-word;
+    overflow-y: auto;
   }
 
   > *:nth-child(3) {

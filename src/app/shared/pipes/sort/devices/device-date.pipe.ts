@@ -10,15 +10,21 @@ export class DeviceDatePipe implements PipeTransform {
   transform(devices: Device[], isDateAsc: boolean): Device[] {
     // FROM NEW TO OLD
     if (isDateAsc)
-      return devices.sort((a, b) => {
-        if (moment(b.updatedAt) > moment(a.updatedAt)) return 1;
-        else return -1;
-      });
+      return devices.sort((a, b) =>
+        moment(b.updatedAt) > moment(a.updatedAt)
+          ? 1
+          : moment(b.updatedAt) < moment(a.updatedAt)
+          ? -1
+          : 0
+      );
     // FROM OLD TO NEW
     else
-      return devices.sort((a, b) => {
-        if (moment(a.updatedAt) > moment(b.updatedAt)) return 1;
-        else return -1;
-      });
+      return devices.sort((a, b) =>
+        moment(a.updatedAt) > moment(b.updatedAt)
+          ? 1
+          : moment(a.updatedAt) < moment(b.updatedAt)
+          ? -1
+          : 0
+      );
   }
 }

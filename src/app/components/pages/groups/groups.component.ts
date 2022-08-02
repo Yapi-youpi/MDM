@@ -31,6 +31,12 @@ export class GroupsComponent implements OnInit {
 
   public searchParam: string = "";
 
+  public isNamesSortAsc: boolean = true;
+  public isDevicesCountSortAsc: boolean = true;
+  public isConfigSortAsc: boolean = true;
+  public configsNV: { name: string; value: string }[] = [];
+  public isDateSortAsc: boolean = true;
+
   public filter: GroupFilter = {
     status: null,
     dateFrom: null,
@@ -82,6 +88,10 @@ export class GroupsComponent implements OnInit {
       .then((res: states.DevicesConfigsState) => {
         console.log(res);
         this.configs = res.devicesConfigs;
+
+        this.configs.forEach((c) => {
+          this.configsNV.push({ name: c.name, value: c.ID });
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -108,6 +118,19 @@ export class GroupsComponent implements OnInit {
     this.filter.dateFrom = this.filterForm._dateFrom;
     this.filter.dateTo = this.filterForm._dateTo;
     this.filter.configsIDs = this.filterForm._configsIDs;
+  }
+
+  changeSortNameDir() {
+    this.isNamesSortAsc = !this.isNamesSortAsc;
+  }
+  changeSortDevicesCountDir() {
+    this.isDevicesCountSortAsc = !this.isDevicesCountSortAsc;
+  }
+  changeSortConfigDir() {
+    this.isConfigSortAsc = !this.isConfigSortAsc;
+  }
+  changeSortDateDir() {
+    this.isDateSortAsc = !this.isDateSortAsc;
   }
 
   selectUnselectGroups() {

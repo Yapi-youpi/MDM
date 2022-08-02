@@ -108,6 +108,10 @@ import { AddUserComponent } from './components/common/modals/users/add-user/add-
 import { CardMenuBtnComponent } from './components/common/UI/button/card-menu-btn/card-menu-btn.component';
 import { DeleteUserComponent } from './components/common/modals/users/delete-user/delete-user.component';
 import { FilterUserComponent } from './components/common/modals/users/filter-user/filter-user.component';
+import { GroupNamePipe } from './shared/pipes/sort/groups/group-name.pipe';
+import { GroupDevicesCountPipe } from './shared/pipes/sort/groups/group-devices-count.pipe';
+import { GroupDatePipe } from './shared/pipes/sort/groups/group-date.pipe';
+import { GroupConfigPipe } from './shared/pipes/sort/groups/group-config.pipe';
 
 const routes: Routes = [
   {
@@ -211,6 +215,10 @@ const routes: Routes = [
     CardMenuBtnComponent,
     DeleteUserComponent,
     FilterUserComponent,
+    GroupNamePipe,
+    GroupDevicesCountPipe,
+    GroupDatePipe,
+    GroupConfigPipe,
   ],
   imports: [
     BrowserModule,
