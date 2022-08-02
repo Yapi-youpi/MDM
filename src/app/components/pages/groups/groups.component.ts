@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { interval } from "rxjs";
 
 import {
+  alertService,
   deviceConfigService,
   groupService,
   userService,
@@ -51,7 +52,8 @@ export class GroupsComponent implements OnInit {
     private filterForm: group.filter,
     private editForm: edit,
     private editSeveralForm: editSeveral,
-    private addForm: add
+    private addForm: add,
+    private alert: alertService
   ) {}
 
   ngOnInit() {
@@ -70,11 +72,20 @@ export class GroupsComponent implements OnInit {
     this.groupService
       .get(param)
       .then((res: states.DevicesGroupsState) => {
-        console.log(res);
-        this.groups = res.devicesGroups;
+        if (res.success) {
+          this.groups = res.devicesGroups;
+        } else {
+          this.alert.show({
+            title: "GET GROUPS ERROR",
+            content: res.error,
+          });
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -86,15 +97,25 @@ export class GroupsComponent implements OnInit {
     this.configService
       .get(param)
       .then((res: states.DevicesConfigsState) => {
-        console.log(res);
-        this.configs = res.devicesConfigs;
+        if (res.success) {
+          console.log(res);
+          this.configs = res.devicesConfigs;
 
-        this.configs.forEach((c) => {
-          this.configsNV.push({ name: c.name, value: c.ID });
-        });
+          this.configs.forEach((c) => {
+            this.configsNV.push({ name: c.name, value: c.ID });
+          });
+        } else {
+          this.alert.show({
+            title: "GET CONFIGS ERROR",
+            content: res.error,
+          });
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -179,7 +200,6 @@ export class GroupsComponent implements OnInit {
   addGroup() {
     this.loading = true;
 
-    // console.log(this.addForm.form.getRawValue());
     this.groupService
       .add(this.addForm.form.getRawValue())
       .then((res: states.State) => {
@@ -188,15 +208,21 @@ export class GroupsComponent implements OnInit {
             `Устройство ${this.addForm.form.getRawValue()["name"]} добавлено`
           );
 
-          //  TODO: PUSH TO ARRAY
-
           const modal = document.querySelector("#add_group");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "ADD GROUP ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err: Error) =>
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        })
+      );
 
     this.loading = false;
   }
@@ -216,11 +242,17 @@ export class GroupsComponent implements OnInit {
               : g;
           });
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "CHANGE GROUP STATE ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -249,11 +281,17 @@ export class GroupsComponent implements OnInit {
           const modal = document.querySelector("#edit_group");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "EDIT GROUP ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -299,11 +337,17 @@ export class GroupsComponent implements OnInit {
           const modal = document.querySelector("#delete_group");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "DELETE GROUP ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;

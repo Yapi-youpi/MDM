@@ -1,5 +1,9 @@
 import { Component } from "@angular/core";
-import { appsService, userService } from "../../../shared/services";
+import {
+  alertService,
+  appsService,
+  userService,
+} from "../../../shared/services";
 import { interval } from "rxjs";
 import { AppState, UploadAppState } from "../../../shared/types/states";
 import { add, edit } from "../../../shared/services/forms/app";
@@ -26,7 +30,8 @@ export class AppsComponent {
     private user: userService,
     private appsService: appsService,
     private addAppForm: add,
-    private editAppForm: edit
+    private editAppForm: edit,
+    private alert: alertService
   ) {}
 
   ngOnInit(): void {
@@ -49,11 +54,17 @@ export class AppsComponent {
           this.loading = false;
           this.apps = res.app;
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "GET APPS ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
   }
 
@@ -62,16 +73,20 @@ export class AppsComponent {
       .upload(this.addAppForm._file)
       .then((res: UploadAppState) => {
         if (res.success) {
-          // console.log(res.app);
-
           const modal = document.querySelector("#add_app");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "UPLOAD APP ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
   }
 
@@ -118,10 +133,18 @@ export class AppsComponent {
           const modal = document.querySelector("#edit_app");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "EDIT APP ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err: Error) =>
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        })
+      );
   }
 
   selectAppToDelete(app: App) {
@@ -139,8 +162,18 @@ export class AppsComponent {
 
           const modal = document.querySelector("#delete_app");
           modal?.classList.toggle("hidden");
+        } else {
+          this.alert.show({
+            title: "DELETE APP ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err: Error) =>
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        })
+      );
   }
 }
