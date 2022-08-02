@@ -9,6 +9,8 @@
 
   background-color: var(--dark-blue);
 
+  transition: background-color var(--transition-time) ease;
+
   &:hover {
     background-color: var(--blue);
   }

@@ -29,8 +29,6 @@ import { DeviceItemComponent } from "./components/common/list-item/device-item/d
 import { GlobalContainerComponent } from "./components/common/global-container/global-container.component";
 import { UserPermissionsComponent } from "./components/pages/user-permissions/user-permissions.component";
 import { ConfigurationComponent } from "./components/pages/configuration/configuration.component";
-import { CardComponent } from "./components/common/card/card.component";
-import { CentralWrapperComponent } from "./components/common/central-wrapper/central-wrapper.component";
 import { QrTipComponent } from "./components/common/qr-tip/qr-tip.component";
 import { ChangePasswordComponent } from "./components/common/modals/change-password/change-password.component";
 import { ModalComponent } from "./components/common/modal/modal.component";
@@ -152,8 +150,6 @@ const routes: Routes = [
     DeleteSeveralElementsComponent,
     EditSeveralDevicesComponent,
     QrTipComponent,
-    CentralWrapperComponent,
-    CardComponent,
     AppComponent,
     MenuComponent,
     AddAppToConfigComponent,

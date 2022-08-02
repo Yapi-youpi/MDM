@@ -4,8 +4,9 @@
     [title]="'Карта'"
   ></app-global-header>
 
-  <app-card class="global-main" [color]="'light-grey'">
-    <div class="page-content">
+  <main class="global-main card-wrapper">
+<!--  <app-card class="global-main" [color]="'light-grey'">-->
+    <div class="card page-content">
       <div style="display: flex; justify-content: flex-start">
         <app-input-search
           (onChange)="getValue($event)"
@@ -47,5 +48,6 @@
       </div>
       <div id="map-container"></div>
     </div>
-  </app-card>
+<!--  </app-card>-->
+  </main>
 </app-global-container>

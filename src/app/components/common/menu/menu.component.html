@@ -2,109 +2,104 @@
   class="menu-sidebar"
   [class.hidden]="isSidebarHidden"
 >
-  <app-card
-    [color]="'light-blue'"
-  >
-    <div class="content">
-      <div
-        class="header row flex-start"
+  <div class="content">
+    <div
+      class="header row flex-start"
+      [class.hidden]="isSidebarHidden"
+    >
+      <app-menu-button
+        (onClick)="toggleSidebarView()"
+      ></app-menu-button>
+      <img
+        src="/assets/UI/logo.svg"
+        alt="Logo"
+        class="logo"
         [class.hidden]="isSidebarHidden"
-      >
-        <app-menu-button
-          (onClick)="toggleSidebarView()"
-        ></app-menu-button>
-        <h3
-          class="title"
-          [class.hidden]="isSidebarHidden"
-          draggable="false"
-        >
-          SDM
-        </h3>
-      </div>
-      <ul class="link-list">
-        <li>
-          <a
-            id="devices"
-            class="router-link text-menu-title devices"
-            [routerLink]="'/devices'"
-          >
-            <span class="icon"></span>
-            <p>Устройства</p>
-          </a>
-        </li>
-        <li>
-          <a
-            id="groups"
-            class="router-link text-menu-title groups"
-            [routerLink]="'/groups'"
-          >
-            <span class="icon"></span>
-            <p>Группы устройств</p>
-          </a>
-        </li>
-        <li>
-          <a
-            id="apps"
-            class="router-link text-menu-title apps"
-            [routerLink]="'/apps'"
-          >
-            <span class="icon"></span>
-            <p>Приложения</p>
-          </a>
-        </li>
-<!--        <li>-->
-<!--          <a-->
-<!--            id="messages"-->
-<!--            class="router-link text-menu-title messages"-->
-<!--            [routerLink]="'/messages'"-->
-<!--          >-->
-<!--            <span class="icon"></span>-->
-<!--            <p>Сообщения</p>-->
-<!--          </a>-->
-<!--        </li>-->
-        <li>
-          <a
-            id="map"
-            class="router-link text-menu-title map"
-            [routerLink]="'/map'"
-          >
-            <span class="icon"></span>
-            <p>Карта</p>
-          </a>
-        </li>
-        <hr class="divider">
-        <li>
-          <a
-            id="config"
-            class="router-link text-menu-title config"
-            [routerLink]="'/config'"
-          >
-            <span class="icon"></span>
-            <p>Конфигурации</p>
-          </a>
-        </li>
-        <li>
-          <a
-            id="users"
-            class="router-link text-menu-title users"
-            [routerLink]="'/users'"
-          >
-            <span class="icon"></span>
-            <p>Пользователи</p>
-          </a>
-        </li>
-<!--        <hr class="divider">-->
-<!--        <li>-->
-<!--          <a-->
-<!--            id="help"-->
-<!--            class="router-link text-menu-title help"-->
-<!--            [routerLink]="'/help'"-->
-<!--          >-->
-<!--            <span class="icon"></span>-->
-<!--            <p>Справка</p>-->
-<!--          </a>-->
-<!--        </li>-->
-      </ul>
+      />
     </div>
-  </app-card>
+    <ul class="link-list">
+      <li>
+        <a
+          id="devices"
+          class="router-link text-menu-title devices"
+          [routerLink]="'/devices'"
+        >
+          <span class="icon"></span>
+          <p>Устройства</p>
+        </a>
+      </li>
+      <li>
+        <a
+          id="groups"
+          class="router-link text-menu-title groups"
+          [routerLink]="'/groups'"
+        >
+          <span class="icon"></span>
+          <p>Группы устройств</p>
+        </a>
+      </li>
+      <li>
+        <a
+          id="apps"
+          class="router-link text-menu-title apps"
+          [routerLink]="'/apps'"
+        >
+          <span class="icon"></span>
+          <p>Приложения</p>
+        </a>
+      </li>
+      <!--        <li>-->
+      <!--          <a-->
+      <!--            id="messages"-->
+      <!--            class="router-link text-menu-title messages"-->
+      <!--            [routerLink]="'/messages'"-->
+      <!--          >-->
+      <!--            <span class="icon"></span>-->
+      <!--            <p>Сообщения</p>-->
+      <!--          </a>-->
+      <!--        </li>-->
+      <li>
+        <a
+          id="map"
+          class="router-link text-menu-title map"
+          [routerLink]="'/map'"
+        >
+          <span class="icon"></span>
+          <p>Карта</p>
+        </a>
+      </li>
+      <hr class="divider" />
+      <li>
+        <a
+          id="config"
+          class="router-link text-menu-title config"
+          [routerLink]="'/config'"
+        >
+          <span class="icon"></span>
+          <p>Конфигурации</p>
+        </a>
+      </li>
+      <li>
+        <a
+          id="users"
+          class="router-link text-menu-title users"
+          [routerLink]="'/users'"
+        >
+          <span class="icon"></span>
+          <p>Пользователи</p>
+        </a>
+      </li>
+      <!--        <hr class="divider">-->
+      <!--        <li>-->
+      <!--          <a-->
+      <!--            id="help"-->
+      <!--            class="router-link text-menu-title help"-->
+      <!--            [routerLink]="'/help'"-->
+      <!--          >-->
+      <!--            <span class="icon"></span>-->
+      <!--            <p>Справка</p>-->
+      <!--          </a>-->
+      <!--        </li>-->
+    </ul>
+  </div>
 </aside>
