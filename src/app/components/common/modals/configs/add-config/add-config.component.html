@@ -1,0 +1,46 @@
+<app-modal [modalID]="'modal-add-config'" [isClosable]="true">
+  <div class="modal-form w-700">
+    <h4 class="modal-title">Добавить конфигурацию</h4>
+    <form [formGroup]="newConfigForm" class="form">
+      <div class="form__item">
+        <label for="name">Название</label>
+        <input
+          formControlName="name"
+          type="text"
+          id="name"
+          class="w-440"
+          required
+        />
+      </div>
+      <div class="form__item">
+        <label for="description">Описание</label>
+        <input
+          formControlName="description"
+          type="text"
+          id="description"
+          class="w-440"
+          required
+        />
+      </div>
+      <div class="form__item">
+        <label>Создать на основе</label>
+        <select class="select-native w-440" formControlName="prototype">
+          <option [ngValue]="'Стандартная конфигурация'" selected>
+            Конфигурация по умолчанию
+          </option>
+          <option value="{{ config.name }}" *ngFor="let config of configs">
+            {{ config.name }}
+          </option>
+        </select>
+      </div>
+    </form>
+    <div class="modal-form-footer btn-wrapper">
+      <button (click)="addConfig(newConfigForm.value)" class="btn btn--big">
+        Добавить
+      </button>
+      <button class="btn btn--big btn--outline" (click)="closeModal()">
+        Отменить
+      </button>
+    </div>
+  </div>
+</app-modal>

@@ -51,28 +51,4 @@ export class AssetService {
         });
     });
   }
-
-  modalInit(id: string) {
-    const modal = document.getElementById(id);
-    const modalBtn = document.querySelectorAll(`button[data-target='${id}']`);
-    const closeBtn = document.querySelectorAll('.modal-close');
-
-    modalBtn?.forEach((btn) => btn.addEventListener('click', openModal));
-    closeBtn?.forEach((btn) => btn.addEventListener('click', closeModal));
-    window.addEventListener('click', outsideClick);
-
-    function openModal() {
-      if (modal) modal.classList.add('modal-wrapper--open');
-    }
-
-    function closeModal() {
-      if (modal) modal.classList.remove('modal-wrapper--open');
-    }
-
-    function outsideClick(e) {
-      if (e.target == modal) {
-        if (modal) modal.classList.remove('modal-wrapper--open');
-      }
-    }
-  }
 }

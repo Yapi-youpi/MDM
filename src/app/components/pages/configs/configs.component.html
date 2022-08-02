@@ -13,12 +13,12 @@
             class="search-input" /><i class="search-icon"></i
         ></span>
 
-        <button
-          class="btn btn--rounded btn--right"
-          data-target="modal-add-config"
+        <app-add-button
+          class="btn--right"
+          [target]="'modal-add-config'"
+          [title]="'Добавить конфигурацию'"
         >
-          Добавить конфигурацию
-        </button>
+        </app-add-button>
       </div>
       <ng-template #loader>
         <div class="progress">
@@ -42,14 +42,12 @@
                 >
                   <span class="btn--edit"></span>
                 </a>
-                <button
-                  type="button"
-                  class="config-card__menu-btn"
-                  data-target="modal-delete-config"
+                <app-card-menu-btn
+                  [target]="'modal-delete-config'"
                   (click)="setCurrentConfig(config)"
                 >
                   <span class="btn--delete"></span>
-                </button>
+                </app-card-menu-btn>
               </div>
             </div>
             <div class="config-card__content">{{ config.description }}</div>
@@ -61,58 +59,12 @@
 </app-global-container>
 
 <!--  MODALS -->
-<div class="modal-wrapper" id="modal-add-config">
-  <div class="modal-dialog" style="width: 700px">
-    <h4 class="modal-title">Добавить конфигурацию</h4>
-    <form [formGroup]="newConfigForm" class="form">
-      <div class="form__item">
-        <label for="name">Название</label>
-        <input
-          formControlName="name"
-          type="text"
-          id="name"
-          class="w-440"
-          required
-        />
-      </div>
-      <div class="form__item">
-        <label for="description">Описание</label>
-        <input
-          formControlName="description"
-          type="text"
-          id="description"
-          class="w-440"
-          required
-        />
-      </div>
-      <div class="form__item">
-        <label>Создать на основе</label>
-        <select class="select-native w-440" formControlName="prototype">
-          <option [ngValue]="'Стандартная конфигурация'" selected>
-            Конфигурация по умолчанию
-          </option>
-          <option value="{{ config.name }}" *ngFor="let config of configs">
-            {{ config.name }}
-          </option>
-        </select>
-      </div>
-    </form>
-    <div class="btn-wrapper">
-      <button (click)="addConfig(newConfigForm.value)" class="btn btn--big">
-        Добавить
-      </button>
-      <button class="btn btn--big btn--outline modal-close">Отменить</button>
-    </div>
-  </div>
-</div>
-<div class="modal-wrapper" id="modal-delete-config">
-  <div class="modal-dialog" *ngIf="currentConfig">
-    <h4 class="modal-title">Удалить конфигурацию {{ currentConfig.name }}?</h4>
-    <div class="btn-wrapper">
-      <button (click)="removeConfig(currentConfig.ID)" class="btn btn--big">
-        Удалить
-      </button>
-      <button class="btn btn--big btn--outline modal-close">Отменить</button>
-    </div>
-  </div>
-</div>
+<app-add-config
+  [configs]="configs"
+  [default_config]="default_config"
+  (onSubmit)="getAllConfigs()"
+></app-add-config>
+<app-delete-config
+  [currentConfig]="currentConfig"
+  (onSubmit)="getAllConfigs()"
+></app-delete-config>
