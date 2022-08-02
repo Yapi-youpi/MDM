@@ -3,6 +3,7 @@ import { interval } from "rxjs";
 import { LiveQuerySubscription } from "parse";
 
 import {
+  alertService,
   deviceConfigService,
   deviceService,
   groupService,
@@ -61,7 +62,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private addDeviceForm: device.add,
     private editDeviceForm: device.edit,
     private editSeveralDevicesForm: device.editSeveral,
-    private filterForm: device.filter
+    private filterForm: device.filter,
+    private alert: alertService
   ) {}
 
   ngOnInit() {
@@ -92,11 +94,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
         if (res.success) {
           this.configs = res.devicesConfigs;
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "GET CONFIGS ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -111,11 +119,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
         if (res.success) {
           this.groups = res.devicesGroups;
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "GET GROUPS ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -130,11 +144,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
         if (res.success) {
           this.devices = res.devices;
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "GET DEVICES ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -246,11 +266,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
           const modalQR = document.querySelector("#qr_code");
           modalQR?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "ADD DEVICE ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -300,10 +326,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
         },
       ])
       .then((res: states.SingleDeviceState) => {
-        if (res.error) console.log(res.error);
+        if (res.error)
+          this.alert.show({
+            title: "CHANGE DEVICE STATE ERROR",
+            content: res.error,
+          });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -335,11 +368,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
           const modal = document.querySelector("#edit_device");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "EDIT DEVICE ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -367,11 +406,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
           const modal = document.querySelector("#edit_several_devices");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "EDIT SEVERAL DEVICES ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -391,10 +436,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
           const modal = document.querySelector("#delete_device");
           modal?.classList.toggle("hidden");
         }
-        if (res.error) console.log(res.error);
+        if (res.error)
+          this.alert.show({
+            title: "DELETE DEVICE ERROR",
+            content: res.error,
+          });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;
@@ -412,11 +464,17 @@ export class DevicesComponent implements OnInit, OnDestroy {
           const modal = document.querySelector("#delete_several_elements");
           modal?.classList.toggle("hidden");
         } else {
-          console.log(res.error);
+          this.alert.show({
+            title: "DELETE SEVERAL DEVICES ERROR",
+            content: res.error,
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: Error) => {
+        this.alert.show({
+          title: err.name,
+          content: err.message,
+        });
       });
 
     this.loading = false;

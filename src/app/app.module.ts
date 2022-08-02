@@ -5,6 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LocationStrategy, PathLocationStrategy } from "@angular/common";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { IonicStorageModule } from "@ionic/storage-angular";
 import { NgxQRCodeModule } from "@techiediaries/ngx-qrcode";
@@ -86,6 +87,7 @@ import { DeleteUserComponent } from "./components/common/modals/users/delete-use
 import { FilterUserComponent } from "./components/common/modals/users/filter-user/filter-user.component";
 import { AddConfigComponent } from "./components/common/modals/configs/add-config/add-config.component";
 import { DeleteConfigComponent } from "./components/common/modals/configs/delete-config/delete-config.component";
+import { AlertComponent } from "./components/common/UI/alert/alert/alert.component";
 
 // ПАЙПЫ
 import { GroupFilterPipe } from "./shared/pipes/filters/group-filter.pipe";
@@ -196,6 +198,7 @@ const routes: Routes = [
     FilterUserComponent,
     AddConfigComponent,
     DeleteConfigComponent,
+    AlertComponent,
     //ПАЙПЫ
     GroupConverterPipe,
     ConfigSearchPipe,
@@ -230,6 +233,7 @@ const routes: Routes = [
     IonicStorageModule.forRoot(),
     NgxQRCodeModule,
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },

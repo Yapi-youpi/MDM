@@ -11,3 +11,4 @@ export { GroupsService as groupService } from "./groups.service";
 export { MapService as mapService } from "./map.service";
 export { UserService as userService } from "./user.service";
 export { AppsService as appsService } from "./apps.service";
+export { AlertService as alertService } from "./alert.service";

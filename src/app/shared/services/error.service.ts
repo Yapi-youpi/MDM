@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-// import M from 'materialize-css';
+import { alertService } from "./index";
 
 export interface Error {
   eng: string;
@@ -97,9 +97,11 @@ export class ErrorService {
     eng: "not empty group, some devices in this group, move devices before remove group",
     rus: "Невозможно удалить. Группа содержит устройства",
   };
+
   public error = "";
   public Errors: Error[] = [];
-  constructor() {
+
+  constructor(private alert: alertService) {
     this.Errors.push(this.ChangeSuperAdminPassword);
     this.Errors.push(this.NotFound);
     this.Errors.push(this.LoginOrPasswordIsEmpty);
@@ -130,7 +132,10 @@ export class ErrorService {
     this.Errors.map((err) => {
       if (error === err.eng) {
         this.error = err.rus;
-        // M.toast({ html: this.error });
+        this.alert.show({
+          title: err.eng,
+          content: err.rus,
+        });
         console.log(this.error);
       }
     });
