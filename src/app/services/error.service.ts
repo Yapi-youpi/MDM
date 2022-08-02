@@ -97,6 +97,7 @@ export class ErrorService {
     rus: 'Невозможно удалить. Группа содержит устройства',
   };
   public error = '';
+  public errWrapper!: HTMLElement;
   public Errors: Error[] = [];
   constructor() {
     this.Errors.push(this.ChangeSuperAdminPassword);
@@ -126,12 +127,34 @@ export class ErrorService {
   }
 
   errorCatch(error: string) {
+    this.createErrWrapper();
     this.Errors.map((err) => {
       if (error === err.eng) {
         this.error = err.rus;
-        // M.toast({ html: this.error });
+        this.showError(this.error);
         console.log(this.error);
       }
     });
+  }
+
+  createErrWrapper() {
+    const errWrapper = document.createElement('div');
+    errWrapper.classList.add('error-wrapper');
+    document.body.appendChild(errWrapper);
+    this.errWrapper = errWrapper;
+  }
+
+  showError(err) {
+    let toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.innerHTML = err;
+    this.errWrapper.appendChild(toast);
+    const removeToast = () => {
+      this.errWrapper.removeChild(toast);
+      toast.removeEventListener('click', removeToast);
+      clearTimeout(t);
+    };
+    toast.addEventListener('click', removeToast);
+    const t = setTimeout(removeToast, 5000);
   }
 }
