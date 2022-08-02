@@ -11,6 +11,7 @@ export class GroupConfigPipe implements PipeTransform {
     configs: { name: string; value: string }[],
     isConfigsAsc: boolean
   ): DevicesGroup[] {
+    if (configs.length === 0) return groups;
     if (isConfigsAsc)
       // FROM A ENG TO A RU
       return groups.sort((a, b) => {
