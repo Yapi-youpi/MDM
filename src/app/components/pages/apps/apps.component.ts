@@ -65,6 +65,8 @@ export class AppsComponent {
       .upload(this.addAppForm._file)
       .then((res: UploadAppState) => {
         if (res.success) {
+          this.apps = [{ ...res.app, name: res.app["appName"] }, ...this.apps];
+
           const modal = document.querySelector("#add_app");
           modal?.classList.toggle("hidden");
         } else {
