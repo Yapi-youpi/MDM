@@ -51,4 +51,31 @@ export class AppsService {
         });
     });
   }
+
+  addAppToInstall(configId, appId) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.ADD_TO_INST, {
+          configId: configId,
+          appId: appId,
+        })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
+    });
+  }
+  removeAppFromInstall(configId, appId) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.REMOVE_FROM_INST, {
+          configId: configId,
+          appId: appId,
+        })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
+    });
+  }
 }

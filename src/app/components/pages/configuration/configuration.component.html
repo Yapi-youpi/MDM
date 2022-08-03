@@ -770,6 +770,7 @@
           <div class="config-settings">
             <app-apps-config
               [apps]="apps"
+              [configId]="config.ID"
               [appsInConfig]="config.applications ? config.applications : []"
               (onSave)="editApp($event)"
             ></app-apps-config>

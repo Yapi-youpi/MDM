@@ -13,10 +13,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CardMenuBtnComponent {
-  @Input() public target: string = '';
-  @Input() public disabled?: boolean = false;
-  @Input() public bg: string = '';
-  @Output() public onClick = new EventEmitter();
+  @Input() target: string = '';
+  @Input() disabled?: boolean = false;
+  @Input() bg: string = '';
+  @Output() onClick = new EventEmitter();
   constructor() {}
 
   onClickHandler() {
