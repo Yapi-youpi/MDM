@@ -10,13 +10,36 @@ export class AddAppService {
 
   constructor() {
     this.form = new FormGroup({
+      // name: new FormControl("", [
+      //   Validators.required,
+      //   Validators.maxLength(20),
+      // ]),
       file: new FormControl(null, Validators.required),
+      // runAfterInstall: new FormControl(false),
+      // runAtBoot: new FormControl(false),
+      // showIcon: new FormControl(false),
     });
   }
 
   get _file() {
     return this.form.getRawValue()["file"];
   }
+
+  // get _name() {
+  //   return this.form.getRawValue()['name'];
+  // }
+
+  // get _runAfterInstall() {
+  //   return this.form.getRawValue()['runAfterInstall'];
+  // }
+
+  // get _runAtBoot() {
+  //   return this.form.getRawValue()['runAtBoot'];
+  // }
+
+  // get _showIcon() {
+  //   return this.form.getRawValue()['showIcon'];
+  // }
 
   setFormSubmitted() {
     this.isSubmitted = true;
@@ -27,12 +50,7 @@ export class AddAppService {
   }
 
   resetForm() {
-    this.resetFormSubmitted();
     this.form.reset();
-
-    Object.keys(this.form.controls).forEach((key) => {
-      const control = this.form.controls[key];
-      control.setErrors(null);
-    });
+    this.resetFormSubmitted();
   }
 }

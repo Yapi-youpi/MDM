@@ -70,9 +70,9 @@ export class AddDeviceComponent {
     } else {
       this.onSubmit.emit();
       this.currOption = { value: "", html: "" };
-      this.form.resetForm();
     }
   }
+
   onCancelHandler() {
     this.form.resetForm();
 

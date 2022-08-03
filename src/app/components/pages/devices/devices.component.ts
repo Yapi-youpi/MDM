@@ -238,6 +238,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
           const modalQR = document.querySelector("#qr_code");
           modalQR?.classList.toggle("hidden");
+
+          this.addDeviceForm.resetForm();
         } else {
           this.alert.show({
             title: "ADD DEVICE ERROR",

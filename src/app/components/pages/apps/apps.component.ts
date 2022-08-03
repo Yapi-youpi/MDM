@@ -49,7 +49,6 @@ export class AppsComponent {
     this.appsService.get("all").then((res: AppState) => {
       console.log(res);
       if (res.success) {
-        this.loading = false;
         this.apps = res.app;
       } else {
         this.alert.show({
@@ -58,24 +57,8 @@ export class AppsComponent {
         });
       }
     });
-  }
 
-  uploadApp() {
-    this.appsService
-      .upload(this.addAppForm._file)
-      .then((res: UploadAppState) => {
-        if (res.success) {
-          this.apps = [{ ...res.app, name: res.app["appName"] }, ...this.apps];
-
-          const modal = document.querySelector("#add_app");
-          modal?.classList.toggle("hidden");
-        } else {
-          this.alert.show({
-            title: "UPLOAD APP ERROR",
-            content: res.error,
-          });
-        }
-      });
+    this.loading = false;
   }
 
   onChangeSearchInputHandler(value: string) {
@@ -94,12 +77,38 @@ export class AppsComponent {
     this.isSizeSortAsc = !this.isSizeSortAsc;
   }
 
+  uploadApp() {
+    this.loading = true;
+
+    this.appsService
+      .upload(this.addAppForm._file)
+      .then((res: UploadAppState) => {
+        if (res.success) {
+          // this.apps = [{ ...res.app, name: res.app["appName"] }, ...this.apps];
+
+          const modal = document.querySelector("#add_app");
+          modal?.classList.toggle("hidden");
+
+          this.addAppForm.resetForm();
+        } else {
+          this.alert.show({
+            title: "UPLOAD APP ERROR",
+            content: res.error,
+          });
+        }
+      });
+
+    this.loading = false;
+  }
+
   selectAppToEdit(app: App) {
     this.currApp = app;
     this.editAppForm.form.patchValue(app);
   }
 
   editApp() {
+    this.loading = true;
+
     this.appsService
       .edit({
         ID: this.currApp.ID,
@@ -125,6 +134,8 @@ export class AppsComponent {
           });
         }
       });
+
+    this.loading = false;
   }
 
   selectAppToDelete(app: App) {
@@ -132,6 +143,8 @@ export class AppsComponent {
   }
 
   deleteApp() {
+    this.loading = true;
+
     this.appsService
       .delete(this.currApp)
       .then((res: { success: boolean; error: string }) => {
@@ -147,5 +160,7 @@ export class AppsComponent {
           });
         }
       });
+
+    this.loading = false;
   }
 }

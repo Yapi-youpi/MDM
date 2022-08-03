@@ -5,6 +5,7 @@ export interface App {
   localPath: string;
   pkg: string;
   name: string;
+  url: string;
   version: string;
   arch: string;
   latestVersion: string;

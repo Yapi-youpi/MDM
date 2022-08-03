@@ -10,15 +10,15 @@
   />
   <label [for]="name">загрузить</label>
   <p
-    *ngIf="file"
+    *ngIf="control?.value && !isError && _name"
     class="text-menu-title"
   >
-    {{ file.name }}
+    {{ _name }}
   </p>
   <p
-    *ngIf="_size"
+    *ngIf="control?.value && !isError && _size"
     class="text-menu-title"
   >
-    {{ _size }}
+    {{ _size | fileSize }}
   </p>
 </div>

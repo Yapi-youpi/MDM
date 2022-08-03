@@ -191,6 +191,8 @@ export class GroupsComponent implements OnInit {
 
           const modal = document.querySelector("#add_group");
           modal?.classList.toggle("hidden");
+
+          this.addForm.reset();
         } else {
           this.alert.show({
             title: "ADD GROUP ERROR",

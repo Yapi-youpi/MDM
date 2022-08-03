@@ -45,10 +45,5 @@ export class AddGroupService {
   reset() {
     this.form.reset();
     this.resetSubmitted();
-
-    Object.keys(this.form.controls).forEach((key) => {
-      const control = this.form.controls[key];
-      control.setErrors(null);
-    });
   }
 }

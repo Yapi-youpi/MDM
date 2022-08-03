@@ -9,7 +9,7 @@
     <p *ngIf="app.system" class="text-note">Системное приложение</p>
   </div>
   <p class="app-item__version">{{ app.version }}</p>
-<!--  <p class="app-item__url">123</p>-->
+<!--  <p class="app-item__url">{{ app.url }}</p>-->
   <p class="app-item__pkg">{{ app.pkg }}</p>
   <p class="app-item__file-size">{{ app.fileByteSize | fileSize }}</p>
   <div class="app-item__icon">

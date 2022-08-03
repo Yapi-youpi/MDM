@@ -15,7 +15,7 @@
 
       border-radius: 14px;
 
-      border: 1px solid var(--dark-blue);
+      outline: 1px solid var(--dark-blue);
 
       background-color: var(--white);
       color: var(--dark-blue);
@@ -26,6 +26,13 @@
     &:focus + label,
     & + label:hover {
       background-color: var(--light-grey);
+    }
+
+    &.error + label {
+      outline-width: 2px;
+      outline-color: var(--error);
+
+      color: var(--error);
     }
   }
 

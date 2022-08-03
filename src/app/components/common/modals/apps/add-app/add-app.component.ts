@@ -20,6 +20,22 @@ export class AddAppComponent {
     return this._form.get("file");
   }
 
+  get _name() {
+    return this._form.get("name");
+  }
+
+  get _runAfterInstall() {
+    return this._form.get("runAfterInstall");
+  }
+
+  get _runAtBoot() {
+    return this._form.get("runAtBoot");
+  }
+
+  get _showIcon() {
+    return this._form.get("showIcon");
+  }
+
   get _isSubmitted() {
     return this.form.isSubmitted;
   }
@@ -38,7 +54,6 @@ export class AddAppComponent {
       return;
     } else {
       this.onSubmit.emit();
-      this.form.resetForm();
     }
   }
 
