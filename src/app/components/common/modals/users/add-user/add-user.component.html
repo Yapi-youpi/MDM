@@ -58,17 +58,41 @@
 
       <div class="form__item">
         <label for="password">Пароль</label>
-        <input
-          formControlName="password"
-          type="text"
-          id="password"
-          class="w-296"
-          maxlength="64"
-          pattern="^(?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\/\\.,:;\[\]{} \x22-]).{8,64}$"
-          required
-        />
+        <button
+          *ngIf="!passwordField"
+          class="btn btn--big btn--outline w-296"
+          (click)="showPasswordField()"
+        >
+          Сменить пароль
+        </button>
+        <div class="validation" *ngIf="passwordField">
+          <app-input-password
+            [name]="'password'"
+            [control]="$any(_pass)"
+            [width]="'w-296'"
+            [id]="'password'"
+            [pattern]="pattern"
+            (onFocus)="showValidation()"
+            (onBlur)="hideValidation()"
+            (onInput)="validate()"
+          ></app-input-password>
+
+          <ul class="validation-list w-296">
+            <li class="validation-item" data-pattern="uppercase">
+              заглавные буквы
+            </li>
+            <li class="validation-item" data-pattern="lowercase">
+              строчные буквы
+            </li>
+            <li class="validation-item" data-pattern="length">
+              не менее 8 символов
+            </li>
+            <li class="validation-item" data-pattern="numbers">цифры</li>
+            <li class="validation-item" data-pattern="symbols">символы</li>
+          </ul>
+        </div>
       </div>
-      <div class="form__item">
+      <div class="form__item" *ngIf="!currentUser">
         <label>Роль</label>
         <div class="tags-container w-296">
           <label class="custom-radio">
@@ -127,10 +151,7 @@
       <ng-template #editBtn>
         <button class="btn btn--big" (click)="editUser()">Сохранить</button>
       </ng-template>
-      <button
-        class="btn btn--big btn--outline modal-close"
-        (click)="clearModal()"
-      >
+      <button class="btn btn--big btn--outline" (click)="clearModal()">
         Отменить
       </button>
     </div>

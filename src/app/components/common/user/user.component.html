@@ -1,7 +1,6 @@
-<!--<app-card>-->
 <div class="user-popup-container">
-  <div class="user-popup">
-    <div class="popup-btn-wrapper" [class.no-img]="imgURL === ''">
+  <div class="user-popup" *ngIf="currentUser">
+    <div class="popup-btn-wrapper" [class.no-img]="currentUser.avatar === ''">
       <app-button
         [height]="'30px'"
         [width]="'30px'"
@@ -10,13 +9,13 @@
         [color]="'blue'"
         (onCLick)="togglePopup()"
       >
-        <span *ngIf="imgURL === ''" class="icon icon-user"></span>
+        <span *ngIf="currentUser.avatar === ''" class="icon icon-user"></span>
         <span
           class="avatar--small"
-          *ngIf="imgURL !== ''"
+          *ngIf="currentUser.avatar !== ''"
           [style.background-image]="
-            imgURL !== ''
-              ? 'url(data:image/jpeg;base64,' + imgURL + ')'
+            currentUser.avatar !== ''
+              ? 'url(data:image/jpeg;base64,' + currentUser.avatar + ')'
               : 'none'
           "
         ></span>
@@ -28,28 +27,22 @@
           <div
             class="avatar"
             [style.background-image]="
-              imgURL !== ''
-                ? 'url(data:image/jpeg;base64,' + imgURL + ')'
+              currentUser.avatar !== ''
+                ? 'url(data:image/jpeg;base64,' + currentUser.avatar + ')'
                 : 'none'
             "
           >
-            <span *ngIf="imgURL === ''" class="icon"></span>
+            <span *ngIf="currentUser.avatar === ''" class="icon"></span>
           </div>
           <div class="info">
-            <p class="name text-menu-title">{{ userName }}</p>
-            <p class="company">{{ userGroup }}</p>
+            <p class="name text-menu-title">{{ currentUser.name }}</p>
+            <p class="company">{{ currentUser.userTags }}</p>
           </div>
         </div>
         <div class="top-right">
-          <app-button
-            [height]="'24px'"
-            [width]="'24px'"
-            [padding]="'0'"
-            [radius]="'12px'"
-            [color]="'blue'"
-          >
+          <app-card-menu-btn [target]="'modal-new-user'" [bg]="'blue'">
             <span class="icon icon-edit"></span>
-          </app-button>
+          </app-card-menu-btn>
         </div>
       </div>
       <hr class="divider" />
@@ -70,4 +63,5 @@
     </div>
   </div>
 </div>
-<!--</app-card>-->
+
+<!--<app-add-user [currentUser]="currentUser"> </app-add-user>-->

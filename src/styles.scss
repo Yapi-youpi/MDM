@@ -1387,3 +1387,45 @@ input {
   color: #fff;
   border-radius: 14px;
 }
+
+/* Список валидации пароля */
+.validation {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.validation-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 64px;
+  gap: 13px;
+  font-size: 12px;
+  line-height: 12px;
+  &.hidden {
+    display: none;
+  }
+  & .validation-item {
+    display: flex;
+    gap: 6px;
+    color: var(--grey);
+
+    &:before {
+      display: block;
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
+      background: var(--grey);
+    }
+
+    &--ok {
+      color: var(--dark-blue-grey);
+
+      &:before {
+        content: "";
+        background: var(--dark-blue);
+      }
+    }
+  }
+}

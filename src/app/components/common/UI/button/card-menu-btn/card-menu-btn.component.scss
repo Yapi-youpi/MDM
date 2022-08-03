@@ -6,11 +6,24 @@
   color: inherit;
   border-radius: 50%;
   border: none;
+
+  & span {
+    background-color: var(--dark-blue);
+  }
+  &:focus span,
+  &:hover span {
+    background-color: var(--blue) !important;
+  }
 }
-.card-menu-btn span {
+.blue {
   background-color: var(--dark-blue);
-}
-.card-menu-btn:focus span,
-.card-menu-btn:hover span {
-  background-color: var(--blue) !important;
+  color: white;
+  &:focus,
+  &:hover {
+    background-color: var(--blue);
+  }
+  &:focus span,
+  &:hover span {
+    background-color: white !important;
+  }
 }

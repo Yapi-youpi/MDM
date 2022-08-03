@@ -45,6 +45,17 @@ export class FilterUserComponent implements OnInit {
       });
   }
 
+  deleteUserTag(tag: string) {
+    this.user
+      .deleteUserTag(tag)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   onCheckboxChange(event: any, arr: string) {
     const checkArr = this.filterForm.controls[arr] as FormArray;
     if (event.target.checked) {
