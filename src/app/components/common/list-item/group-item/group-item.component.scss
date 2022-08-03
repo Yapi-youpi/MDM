@@ -1,6 +1,8 @@
 .item {
   margin-bottom: 10px;
 
+  color: var(--dark-grey);
+
   .checkbox-wrapper {
     margin-right: 10px;
   }
@@ -21,6 +23,8 @@
       width: 119px;
 
       margin-right: 10px;
+
+      color: var(--dark-blue-grey);
 
       overflow-wrap: break-word;
       overflow-y: auto;
