@@ -19,6 +19,7 @@ export class ConfigurationComponent implements OnInit {
   public configForm: FormGroup;
   public apps: App[] = [];
   private editedApps: App[] = [];
+  private initialAppList: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -100,13 +101,13 @@ export class ConfigurationComponent implements OnInit {
       .getConfig(id)
       .then((res) => {
         this.config = Object.assign(res[0]);
+        this.initialAppList = res[0].applications || [];
         console.log(this.config);
       })
       .then(() => {
         let i = interval(200).subscribe(() => {
           i.unsubscribe();
           this.setConfig();
-          this.getApps();
         });
       })
       .catch((err) => console.log(err));
@@ -154,6 +155,8 @@ export class ConfigurationComponent implements OnInit {
     if (!this.configForm.value.wifiSecurityType) {
       this.configForm.patchValue({ wifiSecurityType: 'NONE' });
     }
+    this.getApps();
+    this.config.applications = this.initialAppList;
   }
 
   setActive(event) {
