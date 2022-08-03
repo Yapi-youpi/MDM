@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import { environment } from '../../../environments/environment';
+import { environment } from "../../../environments/environment";
 
-import { appsPaths as api } from '../enums/api';
-import { App } from '../types/apps';
+import { appsPaths as api } from "../enums/api";
+import { App } from "../types/apps";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AppsService {
   constructor(private http: HttpClient) {}

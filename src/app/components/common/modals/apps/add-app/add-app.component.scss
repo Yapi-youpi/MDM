@@ -1,0 +1,19 @@
+.inner-wrapper {
+  > label {
+    margin-right: 33px;
+  }
+}
+
+.boot {
+  > label {
+    margin-right: 0;
+  }
+}
+
+.icon {
+  justify-content: flex-start;
+
+  label {
+    margin-right: 95px;
+  }
+}

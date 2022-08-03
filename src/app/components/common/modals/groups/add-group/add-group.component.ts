@@ -69,7 +69,6 @@ export class AddGroupComponent {
     } else {
       this.onSubmit.emit();
       this.currOption = { value: "", html: "" };
-      this.form.reset();
     }
   }
   onCancelHandler() {
