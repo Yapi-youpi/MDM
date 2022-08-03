@@ -1,116 +1,152 @@
 .app-item {
-  height: 60px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
   margin-bottom: 10px;
-  font-size: 12px;
-  line-height: 12px;
+
   background-color: var(--white);
+  color: var(--dark-grey);
+
   border-radius: 14px;
+
   box-shadow: var(--box-shadow);
 
-  img {
-    height: 30px;
-    width: 30px;
-    border-radius: 8px;
-  }
+  overflow: clip;
 
-  p {
-    display: block;
+  &-content {
+    width: 100%;
 
-    &.text-note {
-      margin-top: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-      color: var(--dark-grey);
-    }
-  }
+    padding: 15px 16px;
 
-  > *:nth-child(1) {
-    width: 30px;
+    font-size: 12px;
+    line-height: 12px;
 
-    margin-right: 10px;
-  }
-
-  > *:nth-child(2) {
-    width: 165px;
-
-    margin-right: 5px;
-
-    overflow-wrap: break-word;
-    overflow-y: auto;
-  }
-
-  > *:nth-child(3) {
-    width: 50px;
-
-    margin-right: 5px;
-  }
-
-  > *:nth-child(4) {
-    width: 505px;
-
-    margin-right: 10px;
-  }
-
-  > *:nth-child(5) {
-    width: 230px;
-
-    margin-right: 10px;
-  }
-
-  > *:nth-child(6) {
-    width: 56px;
-
-    margin-right: 21px;
-    padding-left: 12px;
-    //margin-right: 46px;
-  }
-
-  > *:nth-child(7) {
-    //width: 40px;
-    //margin-right: 46px;
-    width: 60px;
-  }
-
-  //> *:nth-child(8) {
-  //  width: 60px;
-  //}
-
-  .icon-container {
-    height: 16px;
-    width: 16px;
-
-    border-radius: 8px;
-
-    .icon {
-      height: 16px;
-      width: 16px;
-
-      background-color: var(--white);
+    &.main {
+      cursor: pointer;
     }
 
-    &.on {
-      background-color: var(--dark-blue);
+    &.child {
+      padding: 10px 16px;
+    }
 
-      .icon {
-        mask-size: 10px 10px;
-        mask-image: url("/assets/UI/check.svg");
-        -webkit-mask-size: 10px 10px;
-        -webkit-mask-image: url("/assets/UI/check.svg");
+    img {
+      height: 30px;
+      width: 30px;
+
+      border-radius: 8px;
+    }
+
+    p {
+      display: block;
+
+      &.text-note {
+        margin-top: 7px;
       }
     }
 
-    &.off {
-      background-color: var(--grey);
+    > *:nth-child(1) {
+      width: 30px;
+
+      margin-right: 10px;
+    }
+
+    > *:nth-child(2) {
+      width: 165px;
+
+      margin-right: 5px;
+
+      color: var(--dark-blue-grey);
+
+      overflow-wrap: break-word;
+      overflow-y: auto;
+    }
+
+    > *:nth-child(3) {
+      width: 50px;
+
+      margin-right: 5px;
+    }
+
+    &.child {
+      > *:nth-child(3) {
+        color: var(--dark-blue-grey);
+      }
+    }
+
+    > *:nth-child(4) {
+      width: 505px;
+
+      margin-right: 10px;
+    }
+
+    > *:nth-child(5) {
+      width: 230px;
+
+      margin-right: 10px;
+    }
+
+    > *:nth-child(6) {
+      width: 56px;
+
+      margin-right: 21px;
+      padding-left: 12px;
+    }
+
+    > *:nth-child(7) {
+      width: 60px;
+    }
+
+    .icon-container {
+      height: 16px;
+      width: 16px;
+
+      border-radius: 8px;
 
       .icon {
-        mask-size: 14px 14px;
-        mask-image: url("/assets/UI/minus.svg");
-        -webkit-mask-size: 14px 14px;
-        -webkit-mask-image: url("/assets/UI/minus.svg");
+        height: 16px;
+        width: 16px;
+
+        background-color: var(--white);
+      }
+
+      &.on {
+        background-color: var(--dark-blue);
+
+        .icon {
+          mask-size: 10px 10px;
+          mask-image: url("/assets/UI/check.svg");
+          -webkit-mask-size: 10px 10px;
+          -webkit-mask-image: url("/assets/UI/check.svg");
+        }
+      }
+
+      &.off {
+        background-color: var(--grey);
+
+        .icon {
+          mask-size: 14px 14px;
+          mask-image: url("/assets/UI/minus.svg");
+          -webkit-mask-size: 14px 14px;
+          -webkit-mask-image: url("/assets/UI/minus.svg");
+        }
+      }
+    }
+  }
+
+  .children-container {
+    &.hidden {
+      display: none;
+    }
+
+    hr {
+      margin: 0 16px 0 226px;
+
+      &:first-child {
+        margin: 0 16px;
+      }
+      &:last-child {
+        display: none;
       }
     }
   }

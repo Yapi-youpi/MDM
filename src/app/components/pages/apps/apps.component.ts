@@ -1,12 +1,14 @@
 import { Component } from "@angular/core";
+import { interval } from "rxjs";
+
 import {
   alertService,
   appsService,
   userService,
 } from "../../../shared/services";
-import { interval } from "rxjs";
-import { AppState, UploadAppState } from "../../../shared/types/states";
 import { add, edit } from "../../../shared/services/forms/app";
+
+import { AppState, UploadAppState } from "../../../shared/types/states";
 import { App } from "../../../shared/types/apps";
 
 @Component({
@@ -17,6 +19,7 @@ import { App } from "../../../shared/types/apps";
 export class AppsComponent {
   public loading: boolean = true;
   public apps: App[] = [];
+  public appGroups: App[] = [];
   public currApp!: App;
 
   public searchParam: string = "";
@@ -48,8 +51,40 @@ export class AppsComponent {
 
     this.appsService.get("all").then((res: AppState) => {
       if (res.success) {
-        // res.app.forEach((a) => console.log(a.ID, " >>> ", a.parentAppID));
         this.apps = res.app;
+
+        res.app.forEach((a) => {
+          if (a.parentAppID === "") this.appGroups.push({ ...a, children: [] });
+          else
+            this.appGroups = this.appGroups.map((ag) => {
+              if (a.parentAppID === ag.ID) {
+                // if (ag.children && ag.children.includes(a)) return ag;
+                // else {
+                //   ag.children = [a, ...ag.children];
+                //   return {
+                //     ...ag,
+                //     children: ag.children.sort(
+                //       (a, b) => parseInt(b.version) - parseInt(a.version)
+                //     ),
+                //   };
+                // }
+                if (ag.children) {
+                  if (ag.children.includes(a)) return ag;
+                  else {
+                    ag.children = [a, ...ag.children];
+                    return {
+                      ...ag,
+                      children: ag.children.sort(
+                        (a, b) => parseInt(b.version) - parseInt(a.version)
+                      ),
+                    };
+                  }
+                } else return ag;
+              } else return ag;
+            });
+        });
+
+        console.log(this.appGroups);
       } else {
         this.alert.show({
           title: "GET APPS ERROR",
@@ -113,31 +148,33 @@ export class AppsComponent {
   editApp() {
     this.loading = true;
 
-    this.appsService
-      .edit({
-        ID: this.currApp.ID,
-        ...this.editAppForm.form.getRawValue(),
-      })
-      .then((res: { success: boolean; error: string }) => {
-        if (res.success) {
-          this.apps = this.apps.map((a) => {
-            if (a.ID === this.currApp.ID) {
-              return {
-                ...a,
-                ...this.editAppForm.form.getRawValue(),
-              };
-            } else return a;
-          });
+    console.log("App to edit: ", this.currApp.ID);
 
-          const modal = document.querySelector("#edit_app");
-          modal?.classList.toggle("hidden");
-        } else {
-          this.alert.show({
-            title: "EDIT APP ERROR",
-            content: res.error,
-          });
-        }
-      });
+    // this.appsService
+    //   .edit({
+    //     ID: this.currApp.ID,
+    //     ...this.editAppForm.form.getRawValue(),
+    //   })
+    //   .then((res: { success: boolean; error: string }) => {
+    //     if (res.success) {
+    //       this.apps = this.apps.map((a) => {
+    //         if (a.ID === this.currApp.ID) {
+    //           return {
+    //             ...a,
+    //             ...this.editAppForm.form.getRawValue(),
+    //           };
+    //         } else return a;
+    //       });
+    //
+    //       const modal = document.querySelector("#edit_app");
+    //       modal?.classList.toggle("hidden");
+    //     } else {
+    //       this.alert.show({
+    //         title: "EDIT APP ERROR",
+    //         content: res.error,
+    //       });
+    //     }
+    //   });
 
     this.loading = false;
   }
@@ -149,21 +186,23 @@ export class AppsComponent {
   deleteApp() {
     this.loading = true;
 
-    this.appsService
-      .delete(this.currApp)
-      .then((res: { success: boolean; error: string }) => {
-        if (res.success) {
-          this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
+    console.log("App to delete: ", this.currApp.ID);
 
-          const modal = document.querySelector("#delete_app");
-          modal?.classList.toggle("hidden");
-        } else {
-          this.alert.show({
-            title: "DELETE APP ERROR",
-            content: res.error,
-          });
-        }
-      });
+    // this.appsService
+    //   .delete(this.currApp)
+    //   .then((res: { success: boolean; error: string }) => {
+    //     if (res.success) {
+    //       this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
+    //
+    //       const modal = document.querySelector("#delete_app");
+    //       modal?.classList.toggle("hidden");
+    //     } else {
+    //       this.alert.show({
+    //         title: "DELETE APP ERROR",
+    //         content: res.error,
+    //       });
+    //     }
+    //   });
 
     this.loading = false;
   }
