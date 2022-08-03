@@ -80,11 +80,28 @@
         {{ app.fileByteSize | fileSize }}
       </td>
       <td>
-        <select name="action" id="action" class="select-app-action">
-          <option [value]="0">Блокировать</option>
+        <select
+          name="action"
+          id="action-{{ app.ID }}"
+          class="select-app-action"
+          (change)="setAction(app.ID, $event)"
+        >
+          <option [value]="0">Удалить</option>
           <option [value]="1" selected>Разрешить</option>
-          <option [value]="2">Удалить</option>
         </select>
+        <!-- component app-mini-select has a lot of bugs, need to fix and to refactor -->
+        <!--        <app-mini-select
+          style="position: absolute"
+          [arrowClass]="'arrow-blue'"
+          [headerClass]="'select-app-action'"
+          [header]="'Действия'"
+          [options]="[
+            { value: 'allow', html: 'Разрешить' },
+            { value: 'disallow', html: 'Удалить' }
+          ]"
+          (onSelect)="setAction()"
+        >
+        </app-mini-select>-->
       </td>
       <td class="row center app-item__icon">
         <label class="checkbox-wrapper" for="icon-{{ app.ID }}">
@@ -112,7 +129,7 @@
           *ngIf="app.showIcon"
           type="number"
           name="order"
-          id="order"
+          id="order-{{ app.ID }}"
           class="input-number"
           min="0"
           max="12"

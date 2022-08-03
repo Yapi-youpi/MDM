@@ -9,6 +9,7 @@ import {
 import { environment } from '../../../../../environments/environment';
 import { appsPaths as api } from '../../../../shared/enums/api';
 import { App } from '../../../../shared/types/apps';
+import { AppsService } from '../../../../shared/services/apps.service';
 
 @Component({
   selector: 'app-apps-config',
@@ -19,6 +20,7 @@ import { App } from '../../../../shared/types/apps';
 export class AppsConfigComponent implements OnInit {
   @Input() apps: App[] = [];
   @Input() appsInConfig: string[] = [];
+  @Input() configId: string = '';
 
   public url: string = environment.url + api.GET_ICON;
   public searchParam: string = '';
@@ -29,7 +31,7 @@ export class AppsConfigComponent implements OnInit {
 
   @Output() onSave = new EventEmitter<string>();
 
-  constructor() {}
+  constructor(private appsService: AppsService) {}
 
   ngOnInit() {}
 
@@ -74,6 +76,17 @@ export class AppsConfigComponent implements OnInit {
     if (currentApp) {
       currentApp!.bottom = !currentApp!.bottom;
       this.onSave.emit(id);
+    }
+  }
+  setAction(id, event) {
+    if (event.target.value == 0) {
+      this.appsService
+        .removeAppFromInstall(this.configId, id)
+        .then((res) => console.log(res));
+    } else if (event.target.value == 1) {
+      this.appsService
+        .addAppToInstall(this.configId, id)
+        .then((res) => console.log(res));
     }
   }
 }

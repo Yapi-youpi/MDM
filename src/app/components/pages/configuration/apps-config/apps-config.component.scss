@@ -112,11 +112,16 @@ input[type="checkbox"] {
 
 .select-app-action {
   padding: 9px 8px;
-  background: #f7f7f7;
-  color: var(--dark-blue);
-  border: none;
+  background: #f7f7f7 !important;
+  color: var(--dark-blue) !important;
+  border: none !important;
   border-radius: 8px;
+  &.open {
+    background-color: var(--grey) !important;
+    color: var(--dark-blue) !important;
+  }
 }
+
 .input-number {
   width: 40px;
   padding: 7px;
