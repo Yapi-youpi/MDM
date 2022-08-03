@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AddAppService {
   public form: FormGroup;
@@ -11,11 +11,11 @@ export class AddAppService {
   constructor() {
     this.form = new FormGroup({
       file: new FormControl(null, Validators.required),
-    })
+    });
   }
 
   get _file() {
-    return this.form.getRawValue()['file']
+    return this.form.getRawValue()["file"];
   }
 
   setFormSubmitted() {
@@ -27,6 +27,7 @@ export class AddAppService {
   }
 
   resetForm() {
+    this.resetFormSubmitted();
     this.form.reset();
 
     Object.keys(this.form.controls).forEach((key) => {

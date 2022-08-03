@@ -49,17 +49,19 @@
         width: 56px;
 
         margin-right: 21px;
+        //margin-right: 46px;
       }
 
       > *:nth-child(7) {
-        width: 40px;
-
-        margin-right: 46px;
-      }
-
-      > *:nth-child(8) {
+        //width: 40px;
+        //
+        //margin-right: 46px;
         width: 60px;
       }
+
+      //> *:nth-child(8) {
+      //  width: 60px;
+      //}
     }
 
     &-body {

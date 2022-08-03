@@ -56,43 +56,6 @@ export class GroupsService {
     });
   }
 
-  // TODO: DELETE ARRAY OF GROUPS
-  delete(id: string) {
-    return new Promise<any>((resolve, reject) => {
-      this.http
-        .post(environment.url + api.DELETE, {
-          id,
-        })
-        .subscribe({
-          next: (res) => {
-            resolve(res);
-          },
-          error: (err) => {
-            reject(err);
-          },
-        });
-    });
-  }
-
-  rename(id: string, name: string) {
-    return new Promise<any>((resolve, reject) => {
-      this.http
-        .post(environment.url + api.RENAME, {
-          id,
-          name,
-        })
-        .subscribe({
-          next: (res) => {
-            resolve(res);
-          },
-          error: (err) => {
-            reject(err);
-          },
-        });
-    });
-  }
-
-  // TODO: EDIT ARRAY OF GROUPS
   edit(group: DevicesGroup) {
     return new Promise<any>((resolve, reject) => {
       this.http.post(environment.url + api.EDIT, group).subscribe({
@@ -102,19 +65,45 @@ export class GroupsService {
     });
   }
 
-  deleteWithDevices(id: string) {
+  editSeveral(groups: DevicesGroup[]) {
     return new Promise<any>((resolve, reject) => {
       this.http
-        .post(environment.url + api.DELETE_WITH_DEVICES, {
-          id,
-        })
+        .post(environment.url + api.EDIT_SEVERAL, { groups: groups })
         .subscribe({
-          next: (res) => {
-            resolve(res);
-          },
-          error: (err) => {
-            reject(err);
-          },
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
+    });
+  }
+
+  delete(group: DevicesGroup) {
+    if (group.capacity === 0)
+      return new Promise<any>((resolve, reject) => {
+        this.http
+          .post(environment.url + api.DELETE, { id: group.id })
+          .subscribe({
+            next: (res) => resolve(res),
+            error: (err) => reject(err),
+          });
+      });
+    else
+      return new Promise<any>((resolve, reject) => {
+        this.http
+          .post(environment.url + api.DELETE_WITH_DEVICES, { id: group.id })
+          .subscribe({
+            next: (res) => resolve(res),
+            error: (err) => reject(err),
+          });
+      });
+  }
+
+  deleteSeveral(groups: DevicesGroup[]) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.DELETE_SEVERAL, { groups: groups })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
         });
     });
   }

@@ -88,24 +88,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
   getConfigs() {
     this.loading = true;
 
-    this.config
-      .get("all")
-      .then((res: states.DevicesConfigsState) => {
-        if (res.success) {
-          this.configs = res.devicesConfigs;
-        } else {
-          this.alert.show({
-            title: "GET CONFIGS ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
+    this.config.get("all").then((res: states.DevicesConfigsState) => {
+      if (res.success) {
+        this.configs = res.devicesConfigs;
+      } else {
         this.alert.show({
-          title: err.name,
-          content: err.message,
+          title: "GET CONFIGS ERROR",
+          content: res.error,
         });
-      });
+      }
+    });
 
     this.loading = false;
   }
@@ -113,24 +105,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
   getGroups() {
     this.loading = true;
 
-    this.group
-      .get("all")
-      .then((res: states.DevicesGroupsState) => {
-        if (res.success) {
-          this.groups = res.devicesGroups;
-        } else {
-          this.alert.show({
-            title: "GET GROUPS ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
+    this.group.get("all").then((res: states.DevicesGroupsState) => {
+      if (res.success) {
+        this.groups = res.devicesGroups;
+      } else {
         this.alert.show({
-          title: err.name,
-          content: err.message,
+          title: "GET GROUPS ERROR",
+          content: res.error,
         });
-      });
+      }
+    });
 
     this.loading = false;
   }
@@ -138,24 +122,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
   getDevices() {
     this.loading = true;
 
-    this.device
-      .get("all")
-      .then((res: states.DevicesState) => {
-        if (res.success) {
-          this.devices = res.devices;
-        } else {
-          this.alert.show({
-            title: "GET DEVICES ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
+    this.device.get("all").then((res: states.DevicesState) => {
+      if (res.success) {
+        this.devices = res.devices;
+      } else {
         this.alert.show({
-          title: err.name,
-          content: err.message,
+          title: "GET DEVICES ERROR",
+          content: res.error,
         });
-      });
+      }
+    });
 
     this.loading = false;
   }
@@ -163,16 +139,15 @@ export class DevicesComponent implements OnInit, OnDestroy {
   async subscribeOnServer() {
     this.sub = await this.query.subscribe();
 
-    this.sub.on("open", () => {
-      console.log("Соединение открыто");
-    });
-    this.sub.on("close", () => {
-      console.log("Соединение Закрыто");
-    });
+    // this.sub.on("open", () => {
+    //   console.log("Соединение открыто");
+    // });
+    // this.sub.on("close", () => {
+    //   console.log("Соединение Закрыто");
+    // });
 
     this.sub.on("update", (item) => {
       const device: Device = item.attributes as Device;
-      console.log(`Обновление списка устройств. Обновление "${device.name}"`);
 
       this.devices = [
         ...this.devices.map((d) => {
@@ -184,7 +159,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
     this.sub.on("delete", (item) => {
       const device: Device = item.attributes as Device;
-      console.log(`Обновление списка устройств. Удалено "${device.name}"`);
 
       this.devices = this.devices.filter(
         (d) => d.device_id !== device.device_id
@@ -193,7 +167,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
     this.sub.on("create", (item) => {
       const device: Device = item.attributes as Device;
-      console.log(`Обновление списка устройств. Добавлено "${device.name}"`);
 
       this.devices = [device, ...this.devices];
     });
@@ -271,12 +244,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
 
     this.loading = false;
@@ -331,12 +298,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
             title: "CHANGE DEVICE STATE ERROR",
             content: res.error,
           });
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
 
     this.loading = false;
@@ -373,12 +334,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
 
     this.loading = false;
@@ -397,27 +352,19 @@ export class DevicesComponent implements OnInit, OnDestroy {
         };
       });
 
-    this.device
-      .edit(data)
-      .then((res: states.DevicesState) => {
-        if (res.success) {
-          this.selectedDevicesIDs = [];
+    this.device.edit(data).then((res: states.DevicesState) => {
+      if (res.success) {
+        this.selectedDevicesIDs = [];
 
-          const modal = document.querySelector("#edit_several_devices");
-          modal?.classList.toggle("hidden");
-        } else {
-          this.alert.show({
-            title: "EDIT SEVERAL DEVICES ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
+        const modal = document.querySelector("#edit_several_devices");
+        modal?.classList.toggle("hidden");
+      } else {
         this.alert.show({
-          title: err.name,
-          content: err.message,
+          title: "EDIT SEVERAL DEVICES ERROR",
+          content: res.error,
         });
-      });
+      }
+    });
 
     this.loading = false;
   }
@@ -441,12 +388,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
             title: "DELETE DEVICE ERROR",
             content: res.error,
           });
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
 
     this.loading = false;
@@ -469,12 +410,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
 
     this.loading = false;

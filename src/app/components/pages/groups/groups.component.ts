@@ -69,24 +69,16 @@ export class GroupsComponent implements OnInit {
   getGroups(param: string) {
     this.loading = true;
 
-    this.groupService
-      .get(param)
-      .then((res: states.DevicesGroupsState) => {
-        if (res.success) {
-          this.groups = res.devicesGroups;
-        } else {
-          this.alert.show({
-            title: "GET GROUPS ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
+    this.groupService.get(param).then((res: states.DevicesGroupsState) => {
+      if (res.success) {
+        this.groups = res.devicesGroups;
+      } else {
         this.alert.show({
-          title: err.name,
-          content: err.message,
+          title: "GET GROUPS ERROR",
+          content: res.error,
         });
-      });
+      }
+    });
 
     this.loading = false;
   }
@@ -94,29 +86,20 @@ export class GroupsComponent implements OnInit {
   getConfigs(param: string) {
     this.loading = true;
 
-    this.configService
-      .get(param)
-      .then((res: states.DevicesConfigsState) => {
-        if (res.success) {
-          console.log(res);
-          this.configs = res.devicesConfigs;
+    this.configService.get(param).then((res: states.DevicesConfigsState) => {
+      if (res.success) {
+        this.configs = res.devicesConfigs;
 
-          this.configs.forEach((c) => {
-            this.configsNV.push({ name: c.name, value: c.ID });
-          });
-        } else {
-          this.alert.show({
-            title: "GET CONFIGS ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
+        this.configs.forEach((c) => {
+          this.configsNV.push({ name: c.name, value: c.ID });
         });
-      });
+      } else {
+        this.alert.show({
+          title: "GET CONFIGS ERROR",
+          content: res.error,
+        });
+      }
+    });
 
     this.loading = false;
   }
@@ -202,11 +185,9 @@ export class GroupsComponent implements OnInit {
 
     this.groupService
       .add(this.addForm.form.getRawValue())
-      .then((res: states.State) => {
+      .then((res: states.GroupsState) => {
         if (res.success) {
-          console.log(
-            `Устройство ${this.addForm.form.getRawValue()["name"]} добавлено`
-          );
+          this.groups = [res.group[0], ...this.groups];
 
           const modal = document.querySelector("#add_group");
           modal?.classList.toggle("hidden");
@@ -216,13 +197,7 @@ export class GroupsComponent implements OnInit {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) =>
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        })
-      );
+      });
 
     this.loading = false;
   }
@@ -234,8 +209,6 @@ export class GroupsComponent implements OnInit {
       .changeState(group.id, !group.activeState)
       .then((res: states.State) => {
         if (res.success) {
-          console.log(`Группа ${group.name} изменена`);
-
           this.groups = this.groups.map((g) => {
             return g.id === group.id
               ? { ...g, activeState: !g.activeState }
@@ -247,12 +220,6 @@ export class GroupsComponent implements OnInit {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
 
     this.loading = false;
@@ -270,8 +237,6 @@ export class GroupsComponent implements OnInit {
       .edit({ ...this.currGroup, ...this.editForm.form.getRawValue() })
       .then((res: { success: boolean; error: string }) => {
         if (res.success) {
-          console.log(`Группа ${this.currGroup.name} изменена`);
-
           this.groups = this.groups.map((g) => {
             return g.id === this.currGroup.id
               ? { ...g, ...this.editForm.form.getRawValue() }
@@ -286,12 +251,6 @@ export class GroupsComponent implements OnInit {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
 
     this.loading = false;
@@ -310,9 +269,26 @@ export class GroupsComponent implements OnInit {
         };
       });
 
-    // CODE
+    this.groupService.editSeveral(data).then((res: states.State) => {
+      if (res.success) {
+        data.forEach((d) => {
+          this.groups = this.groups.map((g) => {
+            if (g.id === d.id) return d;
+            else return g;
+          });
+        });
 
-    console.log(data);
+        this.selectedGroupsIDs = [];
+
+        const modal = document.querySelector("#edit_several_groups");
+        modal?.classList.toggle("hidden");
+      } else {
+        this.alert.show({
+          title: "EDIT SEVERAL ERROR",
+          content: res.error,
+        });
+      }
+    });
 
     this.loading = false;
   }
@@ -324,31 +300,21 @@ export class GroupsComponent implements OnInit {
   deleteGroup() {
     this.loading = true;
 
-    this.groupService
-      .delete(this.currGroup.id)
-      .then((res: states.State) => {
-        if (res.success) {
-          console.log(`Группа ${this.currGroup.name} удалена`);
-
-          this.groups = this.groups.filter((g) => {
-            return g.id !== this.currGroup.id;
-          });
-
-          const modal = document.querySelector("#delete_group");
-          modal?.classList.toggle("hidden");
-        } else {
-          this.alert.show({
-            title: "DELETE GROUP ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
+    this.groupService.delete(this.currGroup).then((res: states.State) => {
+      if (res.success) {
+        this.groups = this.groups.filter((g) => {
+          return g.id !== this.currGroup.id;
         });
-      });
+
+        const modal = document.querySelector("#delete_group");
+        modal?.classList.toggle("hidden");
+      } else {
+        this.alert.show({
+          title: "DELETE GROUP ERROR",
+          content: res.error,
+        });
+      }
+    });
 
     this.loading = false;
   }
@@ -356,7 +322,33 @@ export class GroupsComponent implements OnInit {
   deleteSeveralGroups() {
     this.loading = true;
 
-    // CODE
+    const data: DevicesGroup[] = this.groups
+      .filter((g) => this.selectedGroupsIDs.includes(g.id))
+      .map((g) => {
+        return {
+          ...g,
+          deviceConfigID: this.editSeveralForm._config,
+          activeState: this.editSeveralForm._state,
+        };
+      });
+
+    this.groupService.deleteSeveral(data).then((res: states.State) => {
+      if (res.success) {
+        data.forEach((d) => {
+          this.groups = this.groups.filter((g) => g.id !== d.id);
+        });
+
+        this.selectedGroupsIDs = [];
+
+        const modal = document.querySelector("#delete_several_elements");
+        modal?.classList.toggle("hidden");
+      } else {
+        this.alert.show({
+          title: "EDIT SEVERAL ERROR",
+          content: res.error,
+        });
+      }
+    });
 
     this.loading = false;
   }

@@ -46,26 +46,18 @@ export class AppsComponent {
   getApps() {
     this.loading = true;
 
-    this.appsService
-      .get("all")
-      .then((res: AppState) => {
-        console.log(res);
-        if (res.success) {
-          this.loading = false;
-          this.apps = res.app;
-        } else {
-          this.alert.show({
-            title: "GET APPS ERROR",
-            content: res.error,
-          });
-        }
-      })
-      .catch((err: Error) => {
+    this.appsService.get("all").then((res: AppState) => {
+      console.log(res);
+      if (res.success) {
+        this.loading = false;
+        this.apps = res.app;
+      } else {
         this.alert.show({
-          title: err.name,
-          content: err.message,
+          title: "GET APPS ERROR",
+          content: res.error,
         });
-      });
+      }
+    });
   }
 
   uploadApp() {
@@ -81,12 +73,6 @@ export class AppsComponent {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) => {
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        });
       });
   }
 
@@ -119,8 +105,6 @@ export class AppsComponent {
       })
       .then((res: { success: boolean; error: string }) => {
         if (res.success) {
-          console.log(`Приложение ${this.currApp.name} изменено`);
-
           this.apps = this.apps.map((a) => {
             if (a.ID === this.currApp.ID) {
               return {
@@ -138,13 +122,7 @@ export class AppsComponent {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) =>
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        })
-      );
+      });
   }
 
   selectAppToDelete(app: App) {
@@ -156,8 +134,6 @@ export class AppsComponent {
       .delete(this.currApp)
       .then((res: { success: boolean; error: string }) => {
         if (res.success) {
-          console.log(`Приложение ${this.currApp.name} удалено`);
-
           this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
 
           const modal = document.querySelector("#delete_app");
@@ -168,12 +144,6 @@ export class AppsComponent {
             content: res.error,
           });
         }
-      })
-      .catch((err: Error) =>
-        this.alert.show({
-          title: err.name,
-          content: err.message,
-        })
-      );
+      });
   }
 }

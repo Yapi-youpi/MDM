@@ -36,3 +36,7 @@ export interface AppState extends State {
 export interface UploadAppState extends State {
   app: App;
 }
+
+export interface GroupsState extends State {
+  group: DevicesGroup[];
+}

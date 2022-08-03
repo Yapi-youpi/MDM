@@ -69,10 +69,11 @@ export class AddDeviceComponent {
       return;
     } else {
       this.onSubmit.emit();
+      this.currOption = { value: "", html: "" };
+      this.form.resetForm();
     }
   }
   onCancelHandler() {
-    this.form.resetFormSubmitted();
     this.form.resetForm();
 
     this._form.patchValue({

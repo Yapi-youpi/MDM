@@ -68,11 +68,12 @@ export class AddGroupComponent {
       return;
     } else {
       this.onSubmit.emit();
+      this.currOption = { value: "", html: "" };
+      this.form.reset();
     }
   }
   onCancelHandler() {
-    this.form.resetSubmitted();
-    this._form.reset();
+    this.form.reset();
 
     this._form.patchValue({
       deviceConfigID: "",
