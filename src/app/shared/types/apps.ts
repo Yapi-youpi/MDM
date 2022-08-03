@@ -1,5 +1,6 @@
 export interface App {
   ID: string;
+  parentAppID: string;
   configID: string;
   fileName: string;
   localPath: string;

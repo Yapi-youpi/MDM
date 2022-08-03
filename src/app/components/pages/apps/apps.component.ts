@@ -47,8 +47,8 @@ export class AppsComponent {
     this.loading = true;
 
     this.appsService.get("all").then((res: AppState) => {
-      console.log(res);
       if (res.success) {
+        // res.app.forEach((a) => console.log(a.ID, " >>> ", a.parentAppID));
         this.apps = res.app;
       } else {
         this.alert.show({
@@ -84,7 +84,11 @@ export class AppsComponent {
       .upload(this.addAppForm._file)
       .then((res: UploadAppState) => {
         if (res.success) {
-          // this.apps = [{ ...res.app, name: res.app["appName"] }, ...this.apps];
+          // console.log(res);
+          this.apps = [
+            { ...res.app, ID: res.app["appID"], name: res.app["appName"] },
+            ...this.apps,
+          ];
 
           const modal = document.querySelector("#add_app");
           modal?.classList.toggle("hidden");
