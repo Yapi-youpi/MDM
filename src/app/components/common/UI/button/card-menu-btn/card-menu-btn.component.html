@@ -1,3 +1,8 @@
-<button class="card-menu-btn" (click)="onClickHandler()" [disabled]="disabled">
+<button
+  class="card-menu-btn"
+  [ngClass]="bg"
+  (click)="onClickHandler()"
+  [disabled]="disabled"
+>
   <ng-content></ng-content>
 </button>

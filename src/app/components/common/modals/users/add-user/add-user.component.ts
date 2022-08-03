@@ -25,6 +25,9 @@ export class AddUserComponent implements OnInit {
   public file_placeholder!: Element;
   public avatar!: Element;
   public userPhoto!: string;
+  public passwordField: boolean = true;
+  public pattern =
+    "^(?=.*\\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\\/\\\\.,:;\\[\\]{} \x22-]).{8,64}$";
   @Output() onClose = new EventEmitter<boolean>();
   constructor(private elementRef: ElementRef, public userService: UserService) {
     this.form = new FormGroup({
@@ -38,9 +41,13 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.currentUser
-      ? this.form.patchValue(this.currentUser)
-      : this.form.reset();
+    if (this.currentUser) {
+      this.form.patchValue(this.currentUser);
+      this.passwordField = false;
+    } else {
+      this.form.reset();
+      this.passwordField = true;
+    }
   }
 
   ngOnInit() {
@@ -82,6 +89,10 @@ export class AddUserComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  showPasswordField() {
+    this.passwordField = true;
   }
 
   editUser() {
@@ -187,6 +198,56 @@ export class AddUserComponent implements OnInit {
             this.avatar
           );
         });
+    }
+  }
+
+  get _pass() {
+    return this.form.get('password');
+  }
+
+  showValidation() {
+    document.querySelector('.validation-list')?.classList.remove('hidden');
+  }
+
+  hideValidation() {
+    document.querySelector('.validation-list')?.classList.add('hidden');
+  }
+
+  validate() {
+    this._pass?.value.length >= 8
+      ? document
+          .querySelector('.validation-item[data-pattern="length"]')
+          ?.classList.add('validation-item--ok')
+      : document
+          .querySelector('.validation-item[data-pattern="length"]')
+          ?.classList.remove('validation-item--ok');
+
+    if (this._pass?.value.length > 0) {
+      const checkPattern = (key, pattern) => {
+        if (this._pass?.value.match(pattern)) {
+          document
+            .querySelector(`.validation-item[data-pattern=${key}]`)
+            ?.classList.add('validation-item--ok');
+        } else {
+          document
+            .querySelector(`.validation-item[data-pattern=${key}]`)
+            ?.classList.remove('validation-item--ok');
+        }
+      };
+      const patterns: object = {
+        numbers: new RegExp(/\d/g),
+        lowercase: new RegExp(/[a-zа-я]/g),
+        uppercase: new RegExp(/[A-ZА-Я]/g),
+        symbols: new RegExp(/[~'`!@#№?$%^&*()=+<>|\\\/_.,:;\[\]{} \x22-]/g),
+      };
+
+      for (let key in patterns) {
+        checkPattern(key, patterns[key]);
+      }
+    } else {
+      document
+        .querySelectorAll('.validation-item')
+        .forEach((i) => i.classList.remove('validation-item--ok'));
     }
   }
 

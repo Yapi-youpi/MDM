@@ -1,12 +1,12 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import {
   assetService,
   authService,
   userService,
 } from '../../../shared/services';
 import { interval } from 'rxjs';
+import { Users } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-user',
@@ -14,10 +14,8 @@ import { interval } from 'rxjs';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  public imgURL: string = '';
-  public userName: string = '';
-  public userGroup: string = '';
   private id: string = '';
+  public currentUser!: Users;
   public isPopupOpen: boolean = false;
 
   constructor(
@@ -44,9 +42,7 @@ export class UserComponent implements OnInit {
         if (this.user.token) {
           i.unsubscribe();
           this.user.getUserInfo(this.id, 'uid').then((res) => {
-            this.userName = res[0].name;
-            this.userGroup = res[0].userTags[0];
-            this.imgURL = res[0].avatar;
+            this.currentUser = res[0];
             this.asset.setToStorage('user-role', res[0].role).then();
           });
         }

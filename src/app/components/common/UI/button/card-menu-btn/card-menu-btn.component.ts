@@ -15,6 +15,7 @@ import {
 export class CardMenuBtnComponent {
   @Input() public target: string = '';
   @Input() public disabled?: boolean = false;
+  @Input() public bg: string = '';
   @Output() public onClick = new EventEmitter();
   constructor() {}
 
