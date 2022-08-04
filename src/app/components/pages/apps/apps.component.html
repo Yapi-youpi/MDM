@@ -56,11 +56,11 @@
         </div>
         <div class="list-body">
           <ng-container
-            *ngIf="!loading && appGroups && appGroups.length !== 0; else nodata"
+            *ngIf="!loading && apps.length !== 0; else nodata"
           >
             <app-app-item
               *ngFor=
-                "let app of appGroups
+                "let app of apps
                   | search: searchParam: 'app'
                   | apps_system: isOnlySystemApps
                   | apps_name: isNameSortAsc

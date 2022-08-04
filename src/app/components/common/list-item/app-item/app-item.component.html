@@ -2,16 +2,32 @@
   <div
     class="app-item-content"
     [class.main]="app.children && app.children.length !== 0"
-    (click)="toggleChildren()"
   >
-    <img
-      class="app-img app-item__img"
-      [src]="app.iconUID !== '' ? url + app.ID : ''"
-      alt="{{ app.iconText }}"
-    />
-    <div class="title app-item__name">
-      <p class="text-choose">{{ app.name }}</p>
-      <p *ngIf="app.system" class="text-note">Системное приложение</p>
+    <ng-container *ngIf="app.iconUID === ''; else img">
+      <div class="dummy">
+        <span class="icon"></span>
+      </div>
+    </ng-container>
+    <ng-template #img>
+      <img
+        class="app-img app-item__img"
+        [src]="url + app.ID"
+        alt="{{ app.iconText }}"
+      />
+    </ng-template>
+    <div
+      class="title-wrapper row"
+      (click)="toggleChildren()"
+    >
+      <div class="text">
+        <p class="text-choose">{{ app.name }}</p>
+        <p *ngIf="app.system" class="text-note">Системное приложение</p>
+      </div>
+      <span
+        class="icon"
+        [class.down]="!isChildrenHidden"
+        [class.shifted]="app.system"
+      ></span>
     </div>
     <p class="app-item__version">{{ app.version }}</p>
   <!--  <p class="app-item__url">{{ app.url }}</p>-->
