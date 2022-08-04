@@ -23,18 +23,69 @@
     line-height: 12px;
 
     &.main {
-      cursor: pointer;
+      .dummy, img {
+        height: 30px;
+        width: 30px;
+
+        border-radius: 8px;
+      }
+
+      .dummy {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: var(--red);
+
+        span {
+          height: 30px;
+          width: 30px;
+
+          mask-size: 18px 18px;
+          mask-image: url("/assets/UI/question.svg");
+          -webkit-mask-size: 18px 18px;
+          -webkit-mask-image: url("/assets/UI/question.svg");
+
+          background-color: var(--white);
+        }
+      }
+
+      .title-wrapper {
+        position: relative;
+
+        cursor: pointer;
+
+        .icon {
+          height: 9px;
+          width: 11.29px;
+
+          position: absolute;
+
+          top: 0;
+          right: 5px;
+
+          mask-size: 11px 9px;
+          -wekit-mask-size: 11px 9px;
+          mask-image: url("/assets/UI/arrow_down.svg");
+          -webkit-mask-image: url("/assets/UI/arrow_down.svg");
+
+          background-color: var(--dark-blue-grey);
+
+          transition: transform var(--transition-time) ease;
+
+          &.down {
+            transform: rotate(180deg);
+          }
+
+          &.shifted {
+            margin-top: 10px;
+          }
+        }
+      }
     }
 
     &.child {
       padding: 10px 16px;
-    }
-
-    img {
-      height: 30px;
-      width: 30px;
-
-      border-radius: 8px;
     }
 
     p {

@@ -8,6 +8,7 @@ export interface App {
   name: string;
   url: string;
   version: string;
+  versionCode: number;
   arch: string;
   latestVersion: string;
   iconText: string;
@@ -27,3 +28,17 @@ export interface App {
 
   children?: App[];
 }
+
+// export interface UploadedApp {
+//   appID: string
+//   appName: string
+//   arch: string
+//   fileByteSize: number
+//   fileName: string
+//   fileSize: string
+//   iconUID: string
+//   parentAppID: string
+//   pkg: string
+//   version: string
+//   versionCode: number
+// }
