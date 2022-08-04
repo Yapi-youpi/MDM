@@ -8,7 +8,9 @@
 
   box-shadow: var(--box-shadow);
 
-  overflow: clip;
+  overflow: hidden;
+
+  transition: height var(--transition-time) ease;
 
   &-content {
     width: 100%;
@@ -89,7 +91,7 @@
     }
 
     &.child {
-      padding: 10px 16px;
+      padding: 8px 16px;
     }
 
     p {
@@ -190,12 +192,16 @@
   }
 
   .children-container {
+    transition: opacity var(--transition-time) ease;
+
     &.hidden {
-      display: none;
+      opacity: 0;
     }
 
     hr {
       margin: 0 16px 0 226px;
+
+      height: 1px;
 
       &:first-child {
         margin: 0 16px;

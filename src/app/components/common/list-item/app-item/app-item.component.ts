@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
 
 import { App } from "../../../../shared/types/apps";
 import { appsPaths as api } from "../../../../shared/enums/api";
@@ -20,7 +26,16 @@ export class AppItemComponent {
 
   public url: string = environment.url + api.GET_ICON;
 
-  constructor() {}
+  constructor(private elRef: ElementRef) {}
+
+  get _height() {
+    return this.isChildrenHidden
+      ? 60
+      : 60 +
+          40 * (this.app.children?.length || 0) +
+          1 +
+          ((this.app.children?.length || 0) - 1);
+  }
 
   toggleChildren() {
     this.isChildrenHidden = !this.isChildrenHidden;
