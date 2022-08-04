@@ -78,23 +78,7 @@ export class UserService {
       });
     });
   }
-  changeUserState(id: string, state: boolean) {
-    const url = environment.url + '/change_user_state';
-    const body = {
-      id: id,
-      activeState: state,
-    };
-    return new Promise<boolean>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res: { success: boolean; error: string } | any) => {
-          resolve(res.success);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
+
   deleteUser(id: string) {
     const url = environment.url + '/delete_user';
     const body = {
@@ -215,7 +199,7 @@ export class UserService {
   deleteUserTag(userTags: string) {
     const url = environment.url + '/delete_tag';
     const body = {
-      userTags: userTags,
+      userTags,
     };
     return new Promise<any>((resolve, reject) => {
       this.http.post(url, body).subscribe({

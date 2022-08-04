@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DevicesConfigService } from '../../../services/devices-config.service';
+import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { interval } from 'rxjs';
 import { DevicesConfig } from '../../../interfaces/interfaces';
-import { AssetService } from '../../../services/asset.service';
+import { AssetService } from '../../../shared/services/asset.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user.service';
 
@@ -28,10 +28,9 @@ export class ConfigsComponent implements OnInit {
       description: new FormControl('', Validators.required),
       prototype: new FormControl(''),
     });
-    this.newConfigForm.controls['prototype'].setValue(
-      'Стандартная конфигурация',
-      { onlySelf: true }
-    );
+    this.newConfigForm.controls['prototype'].setValue('Стандартная конфигурация', {
+      onlySelf: true,
+    });
   }
 
   ngOnInit(): void {

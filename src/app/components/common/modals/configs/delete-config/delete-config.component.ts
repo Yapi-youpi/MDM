@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DevicesConfig } from '../../../../../interfaces/interfaces';
-import { DevicesConfigService } from '../../../../../services/devices-config.service';
+import { DevicesConfigService } from '../../../../../shared/services/devices-config.service';
 
 @Component({
   selector: 'app-delete-config',

@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../../../shared/services/user.service';
-import { AssetService } from '../../../../../services/asset.service';
+import { AssetService } from '../../../../../shared/services/asset.service';
 
 @Component({
   selector: 'app-filter-user',
@@ -13,11 +13,7 @@ export class FilterUserComponent implements OnInit {
   public filterForm: FormGroup;
   public userTags = [];
   @Output() onSubmit = new EventEmitter();
-  constructor(
-    public asset: AssetService,
-    private fb: FormBuilder,
-    private user: UserService
-  ) {
+  constructor(public asset: AssetService, private fb: FormBuilder, private user: UserService) {
     this.filterForm = fb.group({
       roles: new FormArray([]),
       groups: new FormArray([]),
@@ -61,9 +57,7 @@ export class FilterUserComponent implements OnInit {
     if (event.target.checked) {
       checkArr.push(new FormControl(event.target.value));
     } else {
-      const index = checkArr.controls.findIndex(
-        (x) => x.value === event.target.value
-      );
+      const index = checkArr.controls.findIndex((x) => x.value === event.target.value);
       checkArr.removeAt(index);
     }
   }
@@ -77,9 +71,7 @@ export class FilterUserComponent implements OnInit {
     clearCheck('group', this.filterForm);
 
     function clearCheck(arr: string, form: any) {
-      const checkboxes = document.querySelectorAll(
-        `input[type="checkbox"][name=${arr}]`
-      );
+      const checkboxes = document.querySelectorAll(`input[type="checkbox"][name=${arr}]`);
       // @ts-ignore
       checkboxes.forEach((checkbox) => (checkbox.checked = false));
       const checkArr = form.controls[arr + 's'] as FormArray;

@@ -13,12 +13,13 @@ export class MapService {
       center: [lat, lon],
       zoom: zoom,
     });
-    const tiles = L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        maxZoom: 19,
-      }
-    );
+    const tiles = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+    });
     tiles.addTo(this.map);
+    let elem = document.querySelector('.leaflet-control-attribution');
+    if (elem) {
+      elem.remove();
+    }
   }
 }
