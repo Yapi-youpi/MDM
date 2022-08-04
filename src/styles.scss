@@ -1,35 +1,35 @@
-@import "~leaflet/dist/leaflet.css";
+@import '~leaflet/dist/leaflet.css';
 
 @font-face {
-  font-family: "HelveticaNeue";
-  src: url("assets/UI/HelveticaNeueCyr-Medium.otf") format("truetype");
+  font-family: 'HelveticaNeue';
+  src: url('assets/UI/HelveticaNeueCyr-Medium.otf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
-  font-family: "HelveticaNeueBold";
-  src: url("assets/UI/HelveticaNeueCyr-Bold.otf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "HelveticaNeueHeavy";
-  src: url("assets/UI/HelveticaNeueCyr-Heavy.otf") format("truetype");
+  font-family: 'HelveticaNeueBold';
+  src: url('assets/UI/HelveticaNeueCyr-Bold.otf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "HelveticaNeueRoman";
-  src: url("assets/UI/HelveticaNeueCyr-Roman.otf") format("truetype");
+  font-family: 'HelveticaNeueHeavy';
+  src: url('assets/UI/HelveticaNeueCyr-Heavy.otf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "HelveticaNeueLight";
-  src: url("assets/UI/HelveticaNeueCyr-Light.otf") format("truetype");
+  font-family: 'HelveticaNeueRoman';
+  src: url('assets/UI/HelveticaNeueCyr-Roman.otf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaNeueLight';
+  src: url('assets/UI/HelveticaNeueCyr-Light.otf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
@@ -225,7 +225,7 @@ legend {
   background-color: var(--blue);
 }
 .progress .indeterminate:before {
-  content: "";
+  content: '';
   position: absolute;
   background-color: inherit;
   top: 0;
@@ -235,15 +235,14 @@ legend {
   animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 }
 .progress .indeterminate:after {
-  content: "";
+  content: '';
   position: absolute;
   background-color: inherit;
   top: 0;
   left: 0;
   bottom: 0;
   will-change: left, right;
-  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)
-    infinite;
+  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
   animation-delay: 1.15s;
 }
 @keyframes indeterminate {
@@ -352,11 +351,11 @@ legend {
   mask-size: 14px 14px;
   mask-repeat: no-repeat;
   mask-position: center;
-  mask-image: url("/assets/UI/search.svg");
+  mask-image: url('/assets/UI/search.svg');
   -webkit-mask-size: 14px 14px;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  -webkit-mask-image: url("/assets/UI/search.svg");
+  -webkit-mask-image: url('/assets/UI/search.svg');
   background-color: var(--light-blue);
   transition: background-color 0.4s ease;
 }
@@ -473,8 +472,8 @@ button {
   display: grid;
   //flex-direction: column;
   grid-template-areas:
-    "sidebar header"
-    "sidebar main";
+    'sidebar header'
+    'sidebar main';
   grid-template-rows: var(--header-height) 1fr;
   grid-template-columns: auto 1fr;
   grid-gap: 8px 12px;
@@ -574,19 +573,19 @@ button {
 .btn--edit {
   width: 12px;
   height: 12px;
-  mask: url("/assets/UI/pencil.svg") no-repeat center;
+  mask: url('/assets/UI/pencil.svg') no-repeat center;
   mask-size: contain;
 }
 .btn--delete {
   width: 14px;
   height: 14px;
-  mask: url("/assets/UI/trash.svg") no-repeat center;
+  mask: url('/assets/UI/trash.svg') no-repeat center;
   mask-size: contain;
 }
 .btn--filter {
   width: 30px;
   height: 30px;
-  mask: url("/assets/UI/filter.svg") no-repeat center;
+  mask: url('/assets/UI/filter.svg') no-repeat center;
   mask-size: contain;
   background-color: white;
 }
@@ -641,25 +640,25 @@ button {
   stroke-dashoffset: 16px;
   transition: all 0.3s ease;
 }
-input[type="checkbox"]:hover + .checkbox-custom,
-input[type="checkbox"]:focus-visible + .checkbox-custom {
+input[type='checkbox']:hover + .checkbox-custom,
+input[type='checkbox']:focus-visible + .checkbox-custom {
   border-color: var(--light-blue);
   background-color: var(--light-blue);
 }
-input[type="checkbox"]:checked + .checkbox-custom {
+input[type='checkbox']:checked + .checkbox-custom {
   border-color: var(--dark-blue);
   background-color: var(--dark-blue);
 }
-input[type="checkbox"]:checked + .checkbox-custom svg polyline {
+input[type='checkbox']:checked + .checkbox-custom svg polyline {
   stroke: #fff;
   stroke-dashoffset: 0;
 }
-input[type="checkbox"]:checked:hover + .checkbox-custom,
-input[type="checkbox"]:checked:focus-visible + .checkbox-custom {
+input[type='checkbox']:checked:hover + .checkbox-custom,
+input[type='checkbox']:checked:focus-visible + .checkbox-custom {
   border-color: var(--blue);
   background-color: var(--blue);
 }
-input[type="checkbox"]:disabled + .checkbox-custom {
+input[type='checkbox']:disabled + .checkbox-custom {
   border-color: var(--grey);
 }
 
@@ -667,6 +666,7 @@ input[type="checkbox"]:disabled + .checkbox-custom {
 .tags-container {
   display: flex;
   gap: 14px;
+  flex-wrap: wrap;
 }
 .custom-radio {
   &__span {
@@ -976,7 +976,7 @@ a {
 
 body {
   // основной текст
-  font-family: "HelveticaNeueRoman", sans-serif;
+  font-family: 'HelveticaNeueRoman', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -998,13 +998,13 @@ body {
 }
 // примечание
 .text-note {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 10px;
 }
 // выбор
 .text-choose {
-  font-family: "HelveticaNeueBold", sans-serif;
+  font-family: 'HelveticaNeueBold', sans-serif;
   font-weight: 700;
   font-size: 12px;
   line-height: 12px;
@@ -1017,7 +1017,7 @@ body {
 }
 // заголовок вкладки
 .text-title {
-  font-family: "HelveticaNeueBold", sans-serif;
+  font-family: 'HelveticaNeueBold', sans-serif;
   font-weight: 550;
   font-size: 24px;
   line-height: 24px;
@@ -1108,28 +1108,28 @@ input {
   outline: 1px solid transparent;
   transition: outline-color var(--transition-time) ease;
 
-  &[type="text"],
-  &[type="email"],
-  &[type="password"],
-  &[type="datetime-local"],
-  &[type="search"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='password'],
+  &[type='datetime-local'],
+  &[type='search'] {
     outline: 1px solid var(--grey);
   }
 
-  &[type="text"],
-  &[type="email"],
-  &[type="password"],
-  &[type="datetime-local"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='password'],
+  &[type='datetime-local'] {
     border-radius: 16px;
   }
 
-  &[type="text"],
-  &[type="email"],
-  &[type="datetime-local"] {
+  &[type='text'],
+  &[type='email'],
+  &[type='datetime-local'] {
     padding: 11px;
   }
 
-  &[type="search"] {
+  &[type='search'] {
     width: 300px;
 
     padding: 6px 8px;
@@ -1144,7 +1144,7 @@ input {
     }
   }
 
-  &[type="password"] {
+  &[type='password'] {
     padding: 11px 31px 11px 11px;
   }
 
@@ -1412,7 +1412,7 @@ input {
 
     &:before {
       display: block;
-      content: "";
+      content: '';
       width: 12px;
       height: 12px;
       border-radius: 6px;
@@ -1423,7 +1423,7 @@ input {
       color: var(--dark-blue-grey);
 
       &:before {
-        content: "";
+        content: '';
         background: var(--dark-blue);
       }
     }

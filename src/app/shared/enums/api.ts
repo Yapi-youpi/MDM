@@ -32,4 +32,5 @@ export enum configsPaths {
   EDIT = '/edit_config',
   RENAME = '/rename_config',
   DELETE = '/remove_config',
+  GET_RESTRICTIONS = '/get_default_restrictions',
 }

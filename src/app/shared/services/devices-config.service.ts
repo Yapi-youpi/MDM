@@ -84,4 +84,23 @@ export class DevicesConfigService {
         });
     });
   }
+
+  getRestrictions() {
+    return new Promise<string>((resolve, reject) => {
+      this.http.get(environment.url + api.GET_RESTRICTIONS).subscribe({
+        next: (
+          res:
+            | {
+                error: string;
+                success: boolean;
+                defaultRestrictions: string;
+              }
+            | any
+        ) => {
+          resolve(res.defaultRestrictions);
+        },
+        error: (err) => reject(err),
+      });
+    });
+  }
 }

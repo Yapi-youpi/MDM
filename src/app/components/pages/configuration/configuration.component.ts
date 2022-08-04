@@ -18,6 +18,7 @@ export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
   public configForm: FormGroup;
   public apps: App[] = [];
+  public restrictions: string[] = [];
   private editedApps: App[] = [];
   private initialAppList: string[] = [];
 
@@ -113,6 +114,15 @@ export class ConfigurationComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
+  getRestrictions() {
+    this.configService
+      .getRestrictions()
+      .then((res) => {
+        this.restrictions = res.split(', ');
+      })
+      .catch((err) => console.log(err));
+  }
+
   editConfig() {
     const config = Object.assign(this.config, this.configForm.value);
     console.log(config);
@@ -156,6 +166,7 @@ export class ConfigurationComponent implements OnInit {
       this.configForm.patchValue({ wifiSecurityType: 'NONE' });
     }
     this.getApps();
+    this.getRestrictions();
     this.config.applications = this.initialAppList;
   }
 
