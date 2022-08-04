@@ -23,15 +23,11 @@ export class InputSelectAccordionComponent {
 
   constructor() {}
 
-  // ngOnInit() {
-  //   this.control.valueChanges.subscribe((x) => {
-  //     if (!x || x.length === 0) {
-  //       this.options = this.options.map((o) => {
-  //         return { ...o, isSelected: false };
-  //       });
-  //     }
-  //   });
-  // }
+  get _height() {
+    return this.isDropdownHidden
+      ? 30
+      : 30 + 16 + (20 + 10) * this.options.length - 10;
+  }
 
   toggleDropdown() {
     this.isDropdownHidden = !this.isDropdownHidden;

@@ -1,4 +1,8 @@
 .input-select-accordion {
+  transition: height var(--transition-time) ease;
+
+  overflow: hidden;
+
   .header {
     height: 30px;
     width: 100%;
@@ -37,8 +41,10 @@
   .select-content {
     margin-top: 16px;
 
+    transition: opacity var(--transition-time) ease;
+
     &.hidden {
-      display: none;
+      opacity: 0;
     }
 
     .item {
