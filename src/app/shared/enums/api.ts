@@ -29,6 +29,7 @@ export enum groupsPaths {
 export enum configsPaths {
   GET = '/get_config/',
   ADD = '/add_config',
+  EDIT = '/edit_config',
   RENAME = '/rename_config',
   DELETE = '/remove_config',
 }

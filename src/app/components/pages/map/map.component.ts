@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { MapService } from '../../../services/map.service';
+import { MapService } from '../../../shared/services/map.service';
 import { Option } from '../../../shared/types/input';
 import { GroupsService } from '../../../shared/services/groups.service';
 import { DatabaseService } from '../../../shared/services/database.service';
@@ -8,7 +8,7 @@ import { LiveQuerySubscription } from 'parse';
 import { DivIcon, Marker } from 'leaflet';
 import * as L from 'leaflet';
 import { Device } from '../../../shared/types/devices';
-import { DevicesConfigService } from '../../../services/devices-config.service';
+import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { UserService } from '../../../shared/services/user.service';
 
 interface DeviceGeo {
@@ -123,11 +123,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       res.map((item) => {
         device = item.attributes;
         if (device.gps_location._latitude && device.gps_location._longitude) {
-          this.addMarkers(
-            device.gps_location.latitude,
-            device.gps_location.longitude,
-            device
-          );
+          this.addMarkers(device.gps_location.latitude, device.gps_location.longitude, device);
         }
         this.devices.push(device);
         this.devices_res.push(device);

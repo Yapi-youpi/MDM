@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DevicesConfigService } from '../../../services/devices-config.service';
+import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';

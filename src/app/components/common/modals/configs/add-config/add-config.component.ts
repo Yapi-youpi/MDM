@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DevicesConfig } from '../../../../../interfaces/interfaces';
-import { DevicesConfigService } from '../../../../../services/devices-config.service';
+import { DevicesConfigService } from '../../../../../shared/services/devices-config.service';
 
 @Component({
   selector: 'app-add-config',
@@ -19,10 +19,9 @@ export class AddConfigComponent implements OnInit {
       description: new FormControl('', Validators.required),
       prototype: new FormControl(''),
     });
-    this.newConfigForm.controls['prototype'].setValue(
-      'Стандартная конфигурация',
-      { onlySelf: true }
-    );
+    this.newConfigForm.controls['prototype'].setValue('Стандартная конфигурация', {
+      onlySelf: true,
+    });
   }
 
   ngOnInit(): void {}

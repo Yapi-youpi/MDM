@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Users } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
-import { AssetService } from '../../../services/asset.service';
+import { AssetService } from '../../../shared/services/asset.service';
 import { UserService } from '../../../shared/services/user.service';
 
 @Component({
@@ -39,10 +39,7 @@ export class UsersComponent implements OnInit {
         console.log(res);
         this.users = res;
         this.users.forEach((user) => {
-          if (
-            user.avatar.length > 0 &&
-            !user.avatar.includes('data:image/jpeg;base64,')
-          )
+          if (user.avatar.length > 0 && !user.avatar.includes('data:image/jpeg;base64,'))
             user.avatar = 'data:image/jpeg;base64,' + user.avatar;
         });
         this.sortUsers();
