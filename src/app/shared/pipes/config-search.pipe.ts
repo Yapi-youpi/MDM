@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DevicesConfig } from '../interfaces/interfaces';
+import { DevicesConfig } from '../../interfaces/interfaces';
 
 @Pipe({
   name: 'configSearch',
