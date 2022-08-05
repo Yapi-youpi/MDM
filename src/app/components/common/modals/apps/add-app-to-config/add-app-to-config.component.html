@@ -13,17 +13,18 @@
       <ng-container *ngIf="apps.length > 0; else loader">
         <div class="checkbox-group">
           <label
-            for="{{ app.ID }}"
+            *ngFor="let group of appsGroup | keyvalue"
             class="checkbox-wrapper"
-            *ngFor="let app of apps | appsConfig: appsInConfig:true"
+            for="{{ group.value[0].name }}"
           >
+            <!-- | appsConfig: appsInConfig:true -->
             <input
-              type="checkbox"
-              name="apps"
-              class="visually-hidden"
-              id="{{ app.ID }}"
-              value="{{ app.ID }}"
               (change)="onCheckboxChange($event)"
+              class="visually-hidden"
+              id="{{ group.value[0].name }}"
+              name="apps"
+              type="checkbox"
+              value="{{ group.value[0].ID }}"
             />
             <div class="input checkbox-custom">
               <svg width="18" height="18" viewBox="0 0 20 20">
@@ -33,11 +34,23 @@
             <div class="app">
               <img
                 class="app__img"
-                src="{{ app.iconUID !== '' ? url + app.ID : '' }}"
-                alt="{{ app.iconText }}"
+                src="{{
+                  group.value[0].iconUID !== '' ? url + group.value[0].ID : ''
+                }}"
+                alt="{{ group.value[0].iconText }}"
               />
-              <span class="app__name">{{ app.name }}</span>
-              <div class="app__version">{{ app.version }}</div>
+              <span class="app__name">{{ group.key }}</span>
+
+              <select
+                (change)="setValue($event)"
+                class="select-app-action app__version"
+                id="version-{{ group.value[0].name }}"
+                name="version"
+              >
+                <option *ngFor="let app of group.value" [value]="app.ID">
+                  {{ app.version }}
+                </option>
+              </select>
             </div>
           </label>
         </div>

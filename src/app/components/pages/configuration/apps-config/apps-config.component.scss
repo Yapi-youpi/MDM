@@ -90,7 +90,7 @@ th {
   }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   &:hover + .checkbox-round,
   &:focus-visible + .checkbox-round {
     background-color: var(--light-blue);

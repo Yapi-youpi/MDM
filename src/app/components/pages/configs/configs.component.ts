@@ -28,9 +28,12 @@ export class ConfigsComponent implements OnInit {
       description: new FormControl('', Validators.required),
       prototype: new FormControl(''),
     });
-    this.newConfigForm.controls['prototype'].setValue('Стандартная конфигурация', {
-      onlySelf: true,
-    });
+    this.newConfigForm.controls['prototype'].setValue(
+      'Стандартная конфигурация',
+      {
+        onlySelf: true,
+      }
+    );
   }
 
   ngOnInit(): void {

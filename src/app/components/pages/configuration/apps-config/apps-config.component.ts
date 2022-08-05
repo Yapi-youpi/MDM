@@ -21,7 +21,7 @@ export class AppsConfigComponent implements OnInit {
   @Input() apps: App[] = [];
   @Input() appsInConfig: string[] = [];
   @Input() configId: string = '';
-
+  @Input() isModalAddAppOpen!: boolean;
   public url: string = environment.url + api.GET_ICON;
   public searchParam: string = '';
   public isOnlySystemApps: boolean = false;
@@ -30,6 +30,7 @@ export class AppsConfigComponent implements OnInit {
   public isPositionSortAsc: boolean = true;
 
   @Output() onSave = new EventEmitter<string>();
+  @Output() onOpenModal = new EventEmitter<boolean>();
 
   constructor(private appsService: AppsService) {}
 
@@ -77,6 +78,9 @@ export class AppsConfigComponent implements OnInit {
       currentApp!.bottom = !currentApp!.bottom;
       this.onSave.emit(id);
     }
+  }
+  setModalAddAppOpen() {
+    this.onOpenModal.emit(true);
   }
   setAction(id, event) {
     if (event.target.value == 0) {

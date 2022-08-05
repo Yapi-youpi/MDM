@@ -19,6 +19,8 @@ export class ConfigurationComponent implements OnInit {
   public configForm: FormGroup;
   public apps: App[] = [];
   public restrictions: string[] = [];
+  public isModalAddAppOpen = false;
+
   private editedApps: App[] = [];
   private initialAppList: string[] = [];
 
@@ -202,5 +204,6 @@ export class ConfigurationComponent implements OnInit {
 
   addApp(addedApps: string[]) {
     this.config.applications = this.config.applications?.concat(addedApps);
+    this.isModalAddAppOpen = false;
   }
 }

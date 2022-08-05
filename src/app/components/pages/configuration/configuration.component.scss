@@ -72,16 +72,16 @@
   background-repeat: no-repeat;
 }
 .settings-card__img--location {
-  background-image: url("/assets/config-images/location.svg");
+  background-image: url('/assets/config-images/location.svg');
 }
 .settings-card__img--bluetooth {
-  background-image: url("/assets/config-images/bluetooth.svg");
+  background-image: url('/assets/config-images/bluetooth.svg');
 }
 .settings-card__img--wifi {
-  background-image: url("/assets/config-images/wifi.svg");
+  background-image: url('/assets/config-images/wifi.svg');
 }
 .settings-card__img--network {
-  background-image: url("/assets/config-images/global.svg");
+  background-image: url('/assets/config-images/global.svg');
 }
 .settings-card__text {
   display: flex;
@@ -116,7 +116,7 @@
 
 /* RANGE */
 
-[type="range"] {
+[type='range'] {
   --track-color: #dae3f4;
   --thumb-color: #557ebe;
   --thumb-behind-color: #557ebe;
@@ -127,11 +127,11 @@
   width: 100%;
   background: transparent;
 }
-[type="range"],
-[type="range"]::-webkit-slider-thumb {
+[type='range'],
+[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-[type="range"]::-webkit-slider-runnable-track {
+[type='range']::-webkit-slider-runnable-track {
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
@@ -139,7 +139,7 @@
   height: 0.5em;
   background: var(--track-color);
 }
-[type="range"]::-moz-range-track {
+[type='range']::-moz-range-track {
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
@@ -147,7 +147,7 @@
   height: 0.5em;
   background: var(--track-color);
 }
-[type="range"]::-ms-track {
+[type='range']::-ms-track {
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
@@ -155,15 +155,15 @@
   height: 0.5em;
   background: var(--track-color);
 }
-[type="range"]::-moz-range-progress {
+[type='range']::-moz-range-progress {
   height: 0.5em;
   background: var(--thumb-behind-color);
 }
-[type="range"]::-ms-fill-lower {
+[type='range']::-ms-fill-lower {
   height: 0.5em;
   background: var(--thumb-behind-color);
 }
-[type="range"]::-webkit-slider-thumb {
+[type='range']::-webkit-slider-thumb {
   box-sizing: border-box;
   border: none;
   width: 1.5em;
@@ -186,7 +186,7 @@
   cursor: pointer;
 }
 
-[type="range"]::-moz-range-thumb {
+[type='range']::-moz-range-thumb {
   box-sizing: border-box;
   border: none;
   width: 1.5em;
@@ -194,7 +194,7 @@
   border-radius: 50%;
   background: var(--thumb-color);
 }
-[type="range"]::-ms-thumb {
+[type='range']::-ms-thumb {
   margin-top: 0;
   box-sizing: border-box;
   border: none;
@@ -203,7 +203,7 @@
   border-radius: 50%;
   background: var(--thumb-color);
 }
-[type="range"]::-ms-tooltip {
+[type='range']::-ms-tooltip {
   display: none;
 }
 
@@ -256,7 +256,7 @@
   user-select: none;
 
   &::before {
-    content: " ";
+    content: ' ';
     position: absolute;
     height: 10px;
     width: calc(100% * (5 / 6));
@@ -289,7 +289,7 @@
   }
 
   &::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     left: 50%;
     top: 50%;
@@ -332,7 +332,7 @@
 }
 
 .range-slider__progress {
-  content: " ";
+  content: ' ';
   position: absolute;
   height: 10px;
   width: 100%;
@@ -351,14 +351,14 @@
 
 .timeout-slider {
   &::before {
-    content: " ";
+    content: ' ';
     position: absolute;
     height: 8px;
     width: calc(100% * (6 / 7));
   }
 
   & .range-slider__label::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     width: 8px;
     height: 8px;
@@ -386,7 +386,7 @@
     }
   }
   & .range-slider__progress {
-    content: " ";
+    content: ' ';
     position: absolute;
     height: 8px;
     width: 100%;
@@ -418,7 +418,7 @@
 
 .switch span:before,
 .switch span:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -464,16 +464,16 @@
 }
 
 /* INPUT COLOR */
-input[type="color"] {
+input[type='color'] {
   width: 24px;
   height: 24px;
   border: 1px solid var(--light-blue);
   -webkit-appearance: none;
 }
-input[type="color"]::-webkit-color-swatch-wrapper {
+input[type='color']::-webkit-color-swatch-wrapper {
   padding: 0;
 }
-input[type="color"]::-webkit-color-swatch {
+input[type='color']::-webkit-color-swatch {
   border: none;
 }
 .input-color {
