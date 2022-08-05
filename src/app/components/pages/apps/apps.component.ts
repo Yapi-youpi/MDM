@@ -1,27 +1,27 @@
-import { Component } from "@angular/core";
-import { interval } from "rxjs";
+import { Component } from '@angular/core';
+import { interval } from 'rxjs';
 
 import {
   alertService,
   appsService,
   userService,
-} from "../../../shared/services";
-import { add, edit } from "../../../shared/services/forms/app";
+} from '../../../shared/services';
+import { add, edit } from '../../../shared/services/forms/app';
 
-import { AppState, UploadAppState } from "../../../shared/types/states";
-import { App } from "../../../shared/types/apps";
+import { AppState, State, UploadAppState } from '../../../shared/types/states';
+import { App } from '../../../shared/types/apps';
 
 @Component({
-  selector: "app-apps",
-  templateUrl: "./apps.component.html",
-  styleUrls: ["./apps.component.scss"],
+  selector: 'app-apps',
+  templateUrl: './apps.component.html',
+  styleUrls: ['./apps.component.scss'],
 })
 export class AppsComponent {
   public loading: boolean = true;
   public apps: App[] = [];
   public currApp!: App;
 
-  public searchParam: string = "";
+  public searchParam: string = '';
 
   public isOnlySystemApps: boolean = false;
 
@@ -48,38 +48,42 @@ export class AppsComponent {
   getApps() {
     this.loading = true;
 
-    this.appsService.get("all").then((res: AppState) => {
+    this.appsService.get('all').then((res: AppState) => {
       if (res.success) {
-        console.log(res.app);
+        console.log('GET APPS REQ: ', res.app);
 
-        res.app.forEach((a) => {
-          if (a.parentAppID === "") this.apps.push({ ...a, children: [] });
-        });
-
-        res.app.forEach((a) => {
-          this.apps.map((ag) => {
-            if (a.parentAppID === ag.ID) {
-              if (ag.children?.length === 0)
-                return {
-                  ...ag,
-                  children: ag.children.push(a),
-                };
-              else {
-                if (ag.children?.includes(a)) return ag;
-                else
-                  return {
-                    ...ag,
-                    children: ag.children?.push(a),
-                  };
-              }
-            } else return ag;
+        if (res.app) {
+          res.app.forEach((a) => {
+            if (a.ID === a.parentAppID) this.apps.push({ ...a, children: [] });
           });
-        });
 
-        this.sortChildrenByVCode();
+          res.app.forEach((a) => {
+            if (a.parentAppID !== a.ID) {
+              this.apps.map((ag) => {
+                if (a.parentAppID === ag.ID) {
+                  if (ag.children?.length === 0)
+                    return {
+                      ...ag,
+                      children: ag.children.push(a),
+                    };
+                  else {
+                    if (ag.children?.includes(a)) return ag;
+                    else
+                      return {
+                        ...ag,
+                        children: ag.children?.push(a),
+                      };
+                  }
+                } else return ag;
+              });
+            }
+          });
+
+          this.sortChildrenByVCode();
+        }
       } else {
         this.alert.show({
-          title: "GET APPS ERROR",
+          title: 'GET APPS ERROR',
           content: res.error,
         });
       }
@@ -112,54 +116,65 @@ export class AppsComponent {
       .then((res: UploadAppState) => {
         if (res.success) {
           console.log(res);
-          if (res.app.parentAppID === "")
-            this.apps = [
-              {
-                ...res.app,
-                ID: res.app["appID"],
-                name: res.app["appName"],
-              },
-              ...this.apps,
-            ];
+
+          if (res.app.parentAppID === res.app.ID)
+            this.apps = [res.app, ...this.apps];
           else {
             this.apps.map((ag) => {
-              if (ag.ID === res.app.parentAppID) {
+              if (res.app.parentAppID === ag.ID) {
                 if (ag.children?.length === 0)
                   return {
                     ...ag,
-                    children: ag.children.push({
-                      ...res.app,
-                      ID: res.app["appID"],
-                      name: res.app["appName"],
-                      children: [],
-                    }),
+                    children: ag.children.push(ag),
                   };
                 else {
-                  if (ag.children?.includes(res.app)) return ag;
+                  if (ag.children?.includes(ag)) return ag;
                   else
                     return {
                       ...ag,
-                      children: ag.children?.push({
-                        ...res.app,
-                        ID: res.app["appID"],
-                        name: res.app["appName"],
-                        children: [],
-                      }),
+                      children: ag.children?.push(ag),
                     };
                 }
               } else return ag;
             });
           }
+          // if (res.app.parentAppID === res.app.ID || res.app.parentAppID === '')
+          //   this.apps = [res.app, ...this.apps];
+          // else {
+          //   this.apps.map((ag) => {
+          //     if (ag.ID === res.app.parentAppID) {
+          //       if (ag.children?.length === 0)
+          //         return {
+          //           ...ag,
+          //           children: ag.children.push({
+          //             ...res.app,
+          //             children: [],
+          //           }),
+          //         };
+          //       else {
+          //         if (ag.children?.includes(res.app)) return ag;
+          //         else
+          //           return {
+          //             ...ag,
+          //             children: ag.children?.push({
+          //               ...res.app,
+          //               children: [],
+          //             }),
+          //           };
+          //       }
+          //     } else return ag;
+          //   });
+          // }
 
           this.sortChildrenByVCode();
 
-          const modal = document.querySelector("#add_app");
-          modal?.classList.toggle("hidden");
+          const modal = document.querySelector('#add_app');
+          modal?.classList.toggle('hidden');
 
           this.addAppForm.resetForm();
         } else {
           this.alert.show({
-            title: "UPLOAD APP ERROR",
+            title: 'UPLOAD APP ERROR',
             content: res.error,
           });
         }
@@ -181,7 +196,7 @@ export class AppsComponent {
         ID: this.currApp.ID,
         ...this.editAppForm.form.getRawValue(),
       })
-      .then((res: { success: boolean; error: string }) => {
+      .then((res: State) => {
         if (res.success) {
           this.apps = this.apps.map((ag) => {
             if (ag.ID === this.currApp.ID) {
@@ -192,7 +207,7 @@ export class AppsComponent {
             } else {
               return {
                 ...ag,
-                children: ag.children?.map((child) => {
+                children: ag.children.map((child) => {
                   if (child.ID === this.currApp.ID) {
                     return {
                       ...child,
@@ -204,11 +219,11 @@ export class AppsComponent {
             }
           });
 
-          const modal = document.querySelector("#edit_app");
-          modal?.classList.toggle("hidden");
+          const modal = document.querySelector('#edit_app');
+          modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
-            title: "EDIT APP ERROR",
+            title: 'EDIT APP ERROR',
             content: res.error,
           });
         }
@@ -224,62 +239,99 @@ export class AppsComponent {
   deleteApp() {
     this.loading = true;
 
-    this.appsService
-      .delete(this.currApp)
-      .then((res: { success: boolean; error: string }) => {
-        if (res.success) {
-          if (this.currApp.parentAppID === "") {
-            if (this.currApp.children) {
-              if (this.currApp.children.length === 0) {
-                this.apps = this.apps.filter((ag) => ag.ID !== this.currApp.ID);
-              } else {
-                const firstChild: App = {
-                  ...this.currApp.children[0],
-                  parentAppID: "",
-                  // children: [],
-                };
-                const restChildren: App[] = this.currApp.children
-                  .filter((child) => child.ID !== firstChild?.ID)
-                  .map((child) => {
-                    return {
-                      ...child,
-                      parentAppID: firstChild.ID,
-                    };
-                  });
-
-                this.apps = this.apps.map((ag) => {
-                  if (ag.ID === this.currApp.ID) {
-                    return {
-                      ...firstChild,
-                      children: restChildren,
-                    };
-                  } else return ag;
-                });
-              }
-            }
-          } else
-            this.apps = this.apps.map((ag) => {
-              if (ag.ID === this.currApp.parentAppID) {
-                return {
-                  ...ag,
-                  children: ag.children?.filter(
-                    (child) => child.ID !== this.currApp.ID
-                  ),
-                };
-              } else return ag;
-            });
-
-          this.sortChildrenByVCode();
-
-          const modal = document.querySelector("#delete_app");
-          modal?.classList.toggle("hidden");
-        } else {
-          this.alert.show({
-            title: "DELETE APP ERROR",
-            content: res.error,
+    // Элемент оказался одиночкой или родителем
+    if (this.currApp.ID === this.currApp.parentAppID) {
+      // Если одиночка
+      if (this.currApp.children.length === 0)
+        this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
+      // Если родитель
+      else {
+        const firstChild: App = this.currApp.children[0];
+        const restChildren: App[] = this.currApp.children
+          ?.filter((child) => child.ID !== firstChild.ID)
+          .map((child) => {
+            return {
+              ...child,
+              parentAppID: firstChild.ID,
+            };
           });
-        }
+
+        this.apps = this.apps.map((a) => {
+          if (a.ID === this.currApp.ID)
+            return { ...firstChild, children: [...restChildren] };
+          else return a;
+        });
+      }
+    } else {
+      // Элемент оказался потомком
+      this.apps = this.apps.map((a) => {
+        if (a.ID === this.currApp.parentAppID)
+          return {
+            ...a,
+            children: a.children.filter(
+              (child) => child.ID !== this.currApp.ID
+            ),
+          };
+        else return a;
       });
+    }
+
+    // this.appsService
+    //   .delete(this.currApp)
+    //   .then((res: { success: boolean; error: string }) => {
+    //     if (res.success) {
+    //       if (this.currApp.parentAppID === '') {
+    //         if (this.currApp.children) {
+    //           if (this.currApp.children.length === 0) {
+    //             this.apps = this.apps.filter((ag) => ag.ID !== this.currApp.ID);
+    //           } else {
+    //             const firstChild: App = {
+    //               ...this.currApp.children[0],
+    //               parentAppID: this.currApp.children[0].ID,
+    //               // children: [],
+    //             };
+    //             const restChildren: App[] = this.currApp.children
+    //               .filter((child) => child.ID !== firstChild?.ID)
+    //               .map((child) => {
+    //                 return {
+    //                   ...child,
+    //                   parentAppID: firstChild.ID,
+    //                 };
+    //               });
+    //
+    //             this.apps = this.apps.map((ag) => {
+    //               if (ag.ID === this.currApp.ID) {
+    //                 return {
+    //                   ...firstChild,
+    //                   children: restChildren,
+    //                 };
+    //               } else return ag;
+    //             });
+    //           }
+    //         }
+    //       } else
+    //         this.apps = this.apps.map((ag) => {
+    //           if (ag.ID === this.currApp.parentAppID) {
+    //             return {
+    //               ...ag,
+    //               children: ag.children?.filter(
+    //                 (child) => child.ID !== this.currApp.ID
+    //               ),
+    //             };
+    //           } else return ag;
+    //         });
+    //
+    //       this.sortChildrenByVCode();
+    //
+    //       const modal = document.querySelector('#delete_app');
+    //       modal?.classList.toggle('hidden');
+    //     } else {
+    //       this.alert.show({
+    //         title: 'DELETE APP ERROR',
+    //         content: res.error,
+    //       });
+    //     }
+    //   });
 
     this.loading = false;
   }
@@ -288,7 +340,7 @@ export class AppsComponent {
     this.apps.map((a) => {
       return {
         ...a,
-        children: a.children?.sort(
+        children: a.children.sort(
           (aChild, bChild) => bChild.versionCode - aChild.versionCode
         ),
       };

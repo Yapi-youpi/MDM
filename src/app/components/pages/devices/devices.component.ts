@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
-import { LiveQuerySubscription } from 'parse';
+import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
+import { interval } from "rxjs";
+import { LiveQuerySubscription } from "parse";
 
 import {
   alertService,
@@ -8,20 +8,20 @@ import {
   deviceService,
   groupService,
   userService,
-} from '../../../shared/services';
-import { device } from 'src/app/shared/services/forms';
-import { DatabaseService } from '../../../shared/services/database.service';
+} from "../../../shared/services";
+import { device } from "src/app/shared/services/forms";
+import { DatabaseService } from "../../../shared/services/database.service";
 
-import { Device } from '../../../shared/types/devices';
-import { DevicesGroup } from '../../../shared/types/groups';
-import { DevicesConfig } from '../../../shared/types/config';
-import { DevicesFilter } from '../../../shared/types/filters';
-import * as states from '../../../shared/types/states';
+import { Device } from "../../../shared/types/devices";
+import { DevicesGroup } from "../../../shared/types/groups";
+import { DevicesConfig } from "../../../shared/types/config";
+import { DevicesFilter } from "../../../shared/types/filters";
+import * as states from "../../../shared/types/states";
 
 @Component({
-  selector: 'app-devices',
-  templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.scss'],
+  selector: "app-devices",
+  templateUrl: "./devices.component.html",
+  styleUrls: ["./devices.component.scss"],
 })
 export class DevicesComponent implements OnInit, OnDestroy {
   private query!: Parse.Query;
@@ -43,7 +43,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public sortGroupAsc: boolean = true;
   public sortBatteryAsc: boolean = true;
 
-  public searchParam: string = '';
+  public searchParam: string = "";
 
   public filter: DevicesFilter = {
     status: null,
@@ -78,7 +78,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.query = this.db.query('Device');
+    this.query = this.db.query("Device");
   }
 
   ngOnDestroy() {
@@ -89,11 +89,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     this.config
-      .getConfig('all')
+      .getConfig("all")
       .then((res) => (this.configs = res))
       .catch((err) => {
         this.alert.show({
-          title: 'GET CONFIGS ERROR',
+          title: "GET CONFIGS ERROR",
           content: err.error,
         });
       });
@@ -104,12 +104,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
   getGroups() {
     this.loading = true;
 
-    this.group.get('all').then((res: states.DevicesGroupsState) => {
+    this.group.get("all").then((res: states.DevicesGroupsState) => {
       if (res.success) {
         this.groups = res.devicesGroups;
       } else {
         this.alert.show({
-          title: 'GET GROUPS ERROR',
+          title: "GET GROUPS ERROR",
           content: res.error,
         });
       }
@@ -121,12 +121,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
   getDevices() {
     this.loading = true;
 
-    this.device.get('all').then((res: states.DevicesState) => {
+    this.device.get("all").then((res: states.DevicesState) => {
       if (res.success) {
         this.devices = res.devices;
       } else {
         this.alert.show({
-          title: 'GET DEVICES ERROR',
+          title: "GET DEVICES ERROR",
           content: res.error,
         });
       }
@@ -145,7 +145,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     //   console.log("Соединение Закрыто");
     // });
 
-    this.sub.on('update', (item) => {
+    this.sub.on("update", (item) => {
       const device: Device = item.attributes as Device;
 
       this.devices = [
@@ -156,13 +156,15 @@ export class DevicesComponent implements OnInit, OnDestroy {
       ];
     });
 
-    this.sub.on('delete', (item) => {
+    this.sub.on("delete", (item) => {
       const device: Device = item.attributes as Device;
 
-      this.devices = this.devices.filter((d) => d.device_id !== device.device_id);
+      this.devices = this.devices.filter(
+        (d) => d.device_id !== device.device_id
+      );
     });
 
-    this.sub.on('create', (item) => {
+    this.sub.on("create", (item) => {
       const device: Device = item.attributes as Device;
 
       this.devices = [device, ...this.devices];
@@ -230,16 +232,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
         if (res.success) {
           this.currDevice = res.device;
 
-          const modalAdd = document.querySelector('#add_device');
-          modalAdd?.classList.toggle('hidden');
+          const modalAdd = document.querySelector("#add_device");
+          modalAdd?.classList.toggle("hidden");
 
-          const modalQR = document.querySelector('#qr_code');
-          modalQR?.classList.toggle('hidden');
+          const modalQR = document.querySelector("#qr_code");
+          modalQR?.classList.toggle("hidden");
 
           this.addDeviceForm.resetForm();
         } else {
           this.alert.show({
-            title: 'ADD DEVICE ERROR',
+            title: "ADD DEVICE ERROR",
             content: res.error,
           });
         }
@@ -255,7 +257,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
       d.isSelected = this.isAllSelected;
     });
 
-    if (this.isAllSelected) this.selectedDevicesIDs = this.devices.map((d) => d.device_id);
+    if (this.isAllSelected)
+      this.selectedDevicesIDs = this.devices.map((d) => d.device_id);
     else this.selectedDevicesIDs = [];
   }
 
@@ -268,13 +271,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
           this.selectedDevicesIDs.push(d.device_id);
 
         if (!d.isSelected && this.selectedDevicesIDs.includes(d.device_id))
-          this.selectedDevicesIDs = this.selectedDevicesIDs.filter((sd) => sd !== d.device_id);
+          this.selectedDevicesIDs = this.selectedDevicesIDs.filter(
+            (sd) => sd !== d.device_id
+          );
       }
     });
     if (!device.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
-    if (this.selectedDevicesIDs.length === this.devices.length) this.isAllSelected = true;
+    if (this.selectedDevicesIDs.length === this.devices.length)
+      this.isAllSelected = true;
   }
 
   changeDeviceState(device: Device) {
@@ -290,7 +296,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       .then((res: states.SingleDeviceState) => {
         if (res.error)
           this.alert.show({
-            title: 'CHANGE DEVICE STATE ERROR',
+            title: "CHANGE DEVICE STATE ERROR",
             content: res.error,
           });
       });
@@ -321,11 +327,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
       ])
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          const modal = document.querySelector('#edit_device');
-          modal?.classList.toggle('hidden');
+          const modal = document.querySelector("#edit_device");
+          modal?.classList.toggle("hidden");
         } else {
           this.alert.show({
-            title: 'EDIT DEVICE ERROR',
+            title: "EDIT DEVICE ERROR",
             content: res.error,
           });
         }
@@ -351,11 +357,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
       if (res.success) {
         this.selectedDevicesIDs = [];
 
-        const modal = document.querySelector('#edit_several_devices');
-        modal?.classList.toggle('hidden');
+        const modal = document.querySelector("#edit_several_devices");
+        modal?.classList.toggle("hidden");
       } else {
         this.alert.show({
-          title: 'EDIT SEVERAL DEVICES ERROR',
+          title: "EDIT SEVERAL DEVICES ERROR",
           content: res.error,
         });
       }
@@ -371,17 +377,19 @@ export class DevicesComponent implements OnInit, OnDestroy {
   deleteDevice(device: Device) {
     this.loading = true;
 
-    this.device.delete([device.device_id]).then((res: states.SingleDeviceState) => {
-      if (res.success) {
-        const modal = document.querySelector('#delete_device');
-        modal?.classList.toggle('hidden');
-      }
-      if (res.error)
-        this.alert.show({
-          title: 'DELETE DEVICE ERROR',
-          content: res.error,
-        });
-    });
+    this.device
+      .delete([device.device_id])
+      .then((res: states.SingleDeviceState) => {
+        if (res.success) {
+          const modal = document.querySelector("#delete_device");
+          modal?.classList.toggle("hidden");
+        }
+        if (res.error)
+          this.alert.show({
+            title: "DELETE DEVICE ERROR",
+            content: res.error,
+          });
+      });
 
     this.loading = false;
   }
@@ -389,19 +397,21 @@ export class DevicesComponent implements OnInit, OnDestroy {
   deleteSeveralDevices() {
     this.loading = true;
 
-    this.device.delete(this.selectedDevicesIDs).then((res: states.SingleDeviceState) => {
-      if (res.success) {
-        this.selectedDevicesIDs = [];
+    this.device
+      .delete(this.selectedDevicesIDs)
+      .then((res: states.SingleDeviceState) => {
+        if (res.success) {
+          this.selectedDevicesIDs = [];
 
-        const modal = document.querySelector('#delete_several_elements');
-        modal?.classList.toggle('hidden');
-      } else {
-        this.alert.show({
-          title: 'DELETE SEVERAL DEVICES ERROR',
-          content: res.error,
-        });
-      }
-    });
+          const modal = document.querySelector("#delete_several_elements");
+          modal?.classList.toggle("hidden");
+        } else {
+          this.alert.show({
+            title: "DELETE SEVERAL DEVICES ERROR",
+            content: res.error,
+          });
+        }
+      });
 
     this.loading = false;
   }

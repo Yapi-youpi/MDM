@@ -26,7 +26,7 @@ export interface App {
   screenOrder: number;
   bottom: boolean;
 
-  children?: App[];
+  children: App[];
 }
 
 // export interface UploadedApp {
