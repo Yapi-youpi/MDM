@@ -24,6 +24,10 @@
     font-size: 12px;
     line-height: 12px;
 
+    img {
+      border-radius: 8px;
+    }
+
     &.main {
       .dummy, img {
         height: 30px;
