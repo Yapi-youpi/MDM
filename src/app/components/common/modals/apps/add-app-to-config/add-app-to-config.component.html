@@ -35,7 +35,9 @@
               <img
                 class="app__img"
                 src="{{
-                  group.value[0].iconUID !== '' ? url + group.value[0].ID : ''
+                  group.value[0].iconUID !== ''
+                    ? url + group.value[0].ID
+                    : '/assets/config-images/app.png'
                 }}"
                 alt="{{ group.value[0].iconText }}"
               />

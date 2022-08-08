@@ -67,9 +67,12 @@
       <td class="app-item__title">
         <img
           class="app-item__img"
-          [src]="app.iconUID !== '' ? url + app.ID : ''"
+          [src]="
+            app.iconUID !== '' ? url + app.ID : '/assets/config-images/app.png'
+          "
           alt="{{ app.iconText }}"
         />
+
         <div class="title app-item__name">
           <p class="text-choose">{{ app.name }}</p>
           <p *ngIf="app.system" class="text-note">Системное приложение</p>
