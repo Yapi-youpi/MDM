@@ -27,7 +27,7 @@ export class AddUserComponent implements OnInit {
   public userPhoto!: string;
   public passwordField: boolean = true;
   public pattern =
-    "^(?=.*\\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\\/\\\\.,:;\\[\\]{} \x22-]).{8,64}$";
+    "^(?=.*\\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\\\\\\/_.,:;\\[\\]{} \x22-]).{8,64}$";
   @Output() onClose = new EventEmitter<boolean>();
   constructor(private elementRef: ElementRef, public userService: UserService) {
     this.form = new FormGroup({
