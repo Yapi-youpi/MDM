@@ -32,129 +32,131 @@
         <!--        ОБЩИЕ           -->
         <div class="form__tab">
           <div class="card__header">Общие</div>
-          <div class="config-settings form__elems w-740">
-            <div class="form__item">
-              <label for="name">Название</label>
-              <input
-                formControlName="name"
-                type="text"
-                id="name"
-                class="w-500"
-                required
-              />
-            </div>
-            <div class="form__item">
-              <label for="description">Описание</label>
-              <input
-                formControlName="description"
-                type="text"
-                id="description"
-                class="w-500"
-                required
-              />
-            </div>
-            <div class="form__item">
-              <label>Время Keep-Alive</label>
-              <div class="w-500">
-                <div class="range-slider">
-                  <input
-                    type="radio"
-                    formControlName="keepaliveTime"
-                    [value]="60"
-                    class="visually-hidden"
-                    id="60"
-                    checked
-                  />
-                  <label
-                    class="range-slider__label"
-                    data-label="1 мин"
-                    for="60"
-                  ></label>
-                  <input
-                    type="radio"
-                    formControlName="keepaliveTime"
-                    [value]="120"
-                    class="visually-hidden"
-                    id="120"
-                  />
-                  <label
-                    class="range-slider__label"
-                    data-label="2 мин"
-                    for="120"
-                  ></label>
-                  <input
-                    type="radio"
-                    formControlName="keepaliveTime"
-                    [value]="180"
-                    class="visually-hidden"
-                    id="180"
-                  />
-                  <label
-                    class="range-slider__label"
-                    data-label="3 мин"
-                    for="180"
-                  ></label>
-                  <input
-                    type="radio"
-                    formControlName="keepaliveTime"
-                    [value]="300"
-                    class="visually-hidden"
-                    id="300"
-                  />
-                  <label
-                    class="range-slider__label"
-                    data-label="5 мин"
-                    for="300"
-                  ></label>
-                  <input
-                    type="radio"
-                    formControlName="keepaliveTime"
-                    [value]="600"
-                    class="visually-hidden"
-                    id="600"
-                  />
-                  <label
-                    class="range-slider__label"
-                    data-label="10 мин"
-                    for="600"
-                  ></label>
-                  <input
-                    type="radio"
-                    formControlName="keepaliveTime"
-                    [value]="900"
-                    class="visually-hidden"
-                    id="900"
-                  />
-                  <label
-                    class="range-slider__label"
-                    data-label="15 мин"
-                    for="900"
-                  ></label>
-                  <div class="range-slider__progress"></div>
+          <div class="config-settings">
+            <div class="form__elems w-740">
+              <div class="form__item">
+                <label for="name">Название</label>
+                <input
+                  formControlName="name"
+                  type="text"
+                  id="name"
+                  class="w-500"
+                  required
+                />
+              </div>
+              <div class="form__item">
+                <label for="description">Описание</label>
+                <input
+                  formControlName="description"
+                  type="text"
+                  id="description"
+                  class="w-500"
+                  required
+                />
+              </div>
+              <div class="form__item">
+                <label>Время Keep-Alive</label>
+                <div class="w-500">
+                  <div class="range-slider">
+                    <input
+                      type="radio"
+                      formControlName="keepaliveTime"
+                      [value]="60"
+                      class="visually-hidden"
+                      id="60"
+                      checked
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="1 мин"
+                      for="60"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="keepaliveTime"
+                      [value]="120"
+                      class="visually-hidden"
+                      id="120"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="2 мин"
+                      for="120"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="keepaliveTime"
+                      [value]="180"
+                      class="visually-hidden"
+                      id="180"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="3 мин"
+                      for="180"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="keepaliveTime"
+                      [value]="300"
+                      class="visually-hidden"
+                      id="300"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="5 мин"
+                      for="300"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="keepaliveTime"
+                      [value]="600"
+                      class="visually-hidden"
+                      id="600"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="10 мин"
+                      for="600"
+                    ></label>
+                    <input
+                      type="radio"
+                      formControlName="keepaliveTime"
+                      [value]="900"
+                      class="visually-hidden"
+                      id="900"
+                    />
+                    <label
+                      class="range-slider__label"
+                      data-label="15 мин"
+                      for="900"
+                    ></label>
+                    <div class="range-slider__progress"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="form__item">
-              <label>Обновление системы</label>
-              <div class="tags-container w-500">
-                <label class="custom-radio">
-                  <input
-                    class="visually-hidden"
-                    formControlName="systemUpdateType"
-                    type="radio"
-                    [value]="2"
-                  />
-                  <span class="custom-radio__span">по расписанию</span>
-                </label>
-                <label class="custom-radio">
-                  <input
-                    class="visually-hidden"
-                    formControlName="systemUpdateType"
-                    type="radio"
-                    [value]="3"
-                  />
-                  <span class="custom-radio__span">по запросу</span>
-                </label>
+              <div class="form__item">
+                <label>Обновление системы</label>
+                <div class="tags-container w-500">
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="systemUpdateType"
+                      type="radio"
+                      [value]="2"
+                    />
+                    <span class="custom-radio__span">по расписанию</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="systemUpdateType"
+                      type="radio"
+                      [value]="3"
+                    />
+                    <span class="custom-radio__span">по запросу</span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -781,119 +783,125 @@
         <!--        Управление           -->
         <div class="form__tab" style="display: none">
           <div class="card__header">Управление</div>
-          <div class="config-settings form__elems w-740">
-            <div class="form__item w-267">
-              <label class="switch">
-                Безопасные настройки
-                <input
-                  formControlName="lockSafeSettings"
-                  id="lockSafeSettings"
-                  type="checkbox"
-                />
-                <span aria-hidden="true"></span>
-              </label>
-            </div>
-            <div class="form__item w-267">
-              <label
-                class="switch"
-                title="Функция выбора одного приложения на устройстве, без доступа к остальному интерфейсу"
-              >
-                <div>
-                  Режим киоска
-                  <p class="hint">?</p>
-                </div>
-                <input
-                  formControlName="kioskMode"
-                  id="kioskMode"
-                  type="checkbox"
-                />
-                <span aria-hidden="true"></span>
-              </label>
-            </div>
-            <div
-              class="form__item"
-              *ngIf="configForm.get('kioskMode')?.value == true"
-            >
-              <label for="mainApp">Приложение-киоск</label>
-              <input
-                type="text"
-                formControlName="mainApp"
-                id="mainApp"
-                class="w-500"
-                placeholder="Приложение-киоск"
-              />
-            </div>
-            <div class="divider"></div>
-            <div class="font-bold">Настройки WIFI:</div>
-            <div class="form__item">
-              <label for="wifiSSID">Имя сети (SSID)</label>
-              <input
-                type="text"
-                formControlName="wifiSSID"
-                id="wifiSSID"
-                class="w-500"
-                placeholder="WiFi SSID - оставьте пустым для ручного ввода"
-              />
-            </div>
-            <div class="form__item">
-              <label for="wifiPassword">Пароль</label>
-              <input
-                type="password"
-                formControlName="wifiPassword"
-                id="wifiPassword"
-                class="w-500"
-                placeholder="WiFi пароль - оставьте пустым для ручного ввода"
-              />
-            </div>
-            <div class="form__item">
-              <label>Тип защиты</label>
-              <div class="tags-container w-500">
-                <label class="custom-radio">
+          <div class="config-settings">
+            <div class="form__elems w-740">
+              <div class="form__item w-267">
+                <label class="switch">
+                  Безопасные настройки
                   <input
-                    class="visually-hidden"
-                    formControlName="wifiSecurityType"
-                    type="radio"
-                    [value]="'WPA'"
+                    formControlName="lockSafeSettings"
+                    id="lockSafeSettings"
+                    type="checkbox"
                   />
-                  <span class="custom-radio__span">WPA</span>
-                </label>
-                <label class="custom-radio">
-                  <input
-                    class="visually-hidden"
-                    formControlName="wifiSecurityType"
-                    type="radio"
-                    [value]="'WEP'"
-                  />
-                  <span class="custom-radio__span">WEP</span>
-                </label>
-                <label class="custom-radio">
-                  <input
-                    class="visually-hidden"
-                    formControlName="wifiSecurityType"
-                    type="radio"
-                    [value]="'EAP'"
-                  />
-                  <span class="custom-radio__span">EAP</span>
-                </label>
-                <label class="custom-radio">
-                  <input
-                    class="visually-hidden"
-                    formControlName="wifiSecurityType"
-                    type="radio"
-                    [value]="'NONE'"
-                  />
-                  <span class="custom-radio__span">NONE</span>
+                  <span aria-hidden="true"></span>
                 </label>
               </div>
-            </div>
-            <div class="divider"></div>
-            <div class="font-bold">Дополнительные ограничения:</div>
-            <div class="form__item">
-              <div class="tags-container">
-                <label class="custom-radio" *ngFor="let item of restrictions">
-                  <input class="visually-hidden" type="radio" [value]="item" />
-                  <span class="custom-radio__span">{{ item }}</span>
+              <div class="form__item w-267">
+                <label
+                  class="switch"
+                  title="Функция выбора одного приложения на устройстве, без доступа к остальному интерфейсу"
+                >
+                  <div>
+                    Режим киоска
+                    <p class="hint">?</p>
+                  </div>
+                  <input
+                    formControlName="kioskMode"
+                    id="kioskMode"
+                    type="checkbox"
+                  />
+                  <span aria-hidden="true"></span>
                 </label>
+              </div>
+              <div
+                class="form__item"
+                *ngIf="configForm.get('kioskMode')?.value == true"
+              >
+                <label for="mainApp">Приложение-киоск</label>
+                <input
+                  type="text"
+                  formControlName="mainApp"
+                  id="mainApp"
+                  class="w-500"
+                  placeholder="Приложение-киоск"
+                />
+              </div>
+              <div class="divider"></div>
+              <div class="font-bold">Настройки WIFI:</div>
+              <div class="form__item">
+                <label for="wifiSSID">Имя сети (SSID)</label>
+                <input
+                  type="text"
+                  formControlName="wifiSSID"
+                  id="wifiSSID"
+                  class="w-500"
+                  placeholder="WiFi SSID - оставьте пустым для ручного ввода"
+                />
+              </div>
+              <div class="form__item">
+                <label for="wifiPassword">Пароль</label>
+                <input
+                  type="password"
+                  formControlName="wifiPassword"
+                  id="wifiPassword"
+                  class="w-500"
+                  placeholder="WiFi пароль - оставьте пустым для ручного ввода"
+                />
+              </div>
+              <div class="form__item">
+                <label>Тип защиты</label>
+                <div class="tags-container w-500">
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="wifiSecurityType"
+                      type="radio"
+                      [value]="'WPA'"
+                    />
+                    <span class="custom-radio__span">WPA</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="wifiSecurityType"
+                      type="radio"
+                      [value]="'WEP'"
+                    />
+                    <span class="custom-radio__span">WEP</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="wifiSecurityType"
+                      type="radio"
+                      [value]="'EAP'"
+                    />
+                    <span class="custom-radio__span">EAP</span>
+                  </label>
+                  <label class="custom-radio">
+                    <input
+                      class="visually-hidden"
+                      formControlName="wifiSecurityType"
+                      type="radio"
+                      [value]="'NONE'"
+                    />
+                    <span class="custom-radio__span">NONE</span>
+                  </label>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <div class="font-bold">Дополнительные ограничения:</div>
+              <div class="form__item">
+                <div class="tags-container">
+                  <label class="custom-radio" *ngFor="let item of restrictions">
+                    <input
+                      class="visually-hidden"
+                      type="radio"
+                      [value]="item"
+                    />
+                    <span class="custom-radio__span">{{ item }}</span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
