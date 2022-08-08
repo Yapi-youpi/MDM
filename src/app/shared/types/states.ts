@@ -1,7 +1,7 @@
-import { Device } from "./devices";
-import { DevicesConfig } from "./config";
-import { DevicesGroup } from "./groups";
-import { App } from "./apps";
+import { Device } from './devices';
+import { DevicesConfig } from './config';
+import { DevicesGroup } from './groups';
+import { App } from './apps';
 
 export interface State {
   success: boolean;

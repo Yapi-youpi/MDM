@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { EditDeviceService } from "../../../../../../shared/services/forms/device/edit-device.service";
-import { DevicesGroup } from "../../../../../../shared/types/groups";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { EditDeviceService } from '../../../../../../shared/services/forms/device/edit-device.service';
+import { DevicesGroup } from '../../../../../../shared/types/groups';
 
 @Component({
-  selector: "app-group-action-btn",
-  templateUrl: "./group-action-btn.component.html",
-  styleUrls: ["./group-action-btn.component.scss"],
+  selector: 'app-group-action-btn',
+  templateUrl: './group-action-btn.component.html',
+  styleUrls: ['./group-action-btn.component.scss'],
 })
 export class GroupActionBtnComponent {
-  @Input() target: string = "";
+  @Input() target: string = '';
   @Input() group!: DevicesGroup;
 
   @Output() onClick = new EventEmitter<DevicesGroup>();
@@ -25,6 +25,6 @@ export class GroupActionBtnComponent {
     // });
 
     const modal = document.querySelector(`#${this.target}`);
-    modal?.classList.toggle("hidden");
+    modal?.classList.toggle('hidden');
   }
 }

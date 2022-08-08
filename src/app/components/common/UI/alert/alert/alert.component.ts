@@ -1,39 +1,38 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
-import { alertTypes } from "../../../../../shared/types/alert";
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   animate,
   state,
   style,
   transition,
   trigger,
-} from "@angular/animations";
-import { alertService } from "../../../../../shared/services";
+} from '@angular/animations';
+import { alertService } from '../../../../../shared/services';
 
 @Component({
-  selector: "app-alert",
-  templateUrl: "./alert.component.html",
-  styleUrls: ["./alert.component.scss"],
+  selector: 'app-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.scss'],
   animations: [
-    trigger("openClose", [
+    trigger('openClose', [
       state(
-        "closed",
+        'closed',
         style({
-          visibility: "hidden",
-          right: "-400px",
+          visibility: 'hidden',
+          right: '-400px',
         })
       ),
       state(
-        "open",
+        'open',
         style({
-          right: "40px",
+          right: '40px',
         })
       ),
-      transition("open <=> closed", [animate("0.5s ease-in-out")]),
+      transition('open <=> closed', [animate('0.5s ease-in-out')]),
     ]),
   ],
 })
 export class AlertComponent {
-  @ViewChild("progress") progressBar!: ElementRef;
+  @ViewChild('progress') progressBar!: ElementRef;
   public progressInterval!: NodeJS.Timeout;
 
   constructor(public alert: alertService) {
@@ -58,7 +57,7 @@ export class AlertComponent {
 
       this.alert.data.progressWidth = String(width - 1);
       this.progressBar.nativeElement.style.width =
-        this.alert.data.progressWidth + "%";
+        this.alert.data.progressWidth + '%';
     }, 30);
   }
 

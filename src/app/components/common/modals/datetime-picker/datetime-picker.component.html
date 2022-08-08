@@ -5,23 +5,21 @@
 >
   <div class="content">
     <div class="top text-menu-title">
-      <div
-        class="prev"
-        (click)="go(-1, dateService.date.value)"
-      >
-        <p class="text-menu-title">{{ _prev | moment: "MMMM" }}</p>
-        <p class="text-note text-center">{{ _prev | moment: "YYYY" }}</p>
+      <div class="prev" (click)="go(-1, dateService.date.value)">
+        <p class="text-menu-title">{{ _prev | moment: 'MMMM' }}</p>
+        <p class="text-note text-center">{{ _prev | moment: 'YYYY' }}</p>
       </div>
       <div class="curr">
-        <p class="text-menu-title">{{ dateService.date | async | moment: "MMMM" }}</p>
-        <p class="text-note text-center">{{ dateService.date | async | moment: "YYYY" }}</p>
+        <p class="text-menu-title">
+          {{ dateService.date | async | moment: 'MMMM' }}
+        </p>
+        <p class="text-note text-center">
+          {{ dateService.date | async | moment: 'YYYY' }}
+        </p>
       </div>
-      <div
-        class="next"
-        (click)="go(1, dateService.date.value)"
-      >
-        <p class="text-menu-title">{{ _next | moment: "MMMM" }}</p>
-        <p class="text-note text-center">{{ _next | moment: "YYYY" }}</p>
+      <div class="next" (click)="go(1, dateService.date.value)">
+        <p class="text-menu-title">{{ _next | moment: 'MMMM' }}</p>
+        <p class="text-note text-center">{{ _next | moment: 'YYYY' }}</p>
       </div>
     </div>
     <hr class="divider" />
@@ -46,7 +44,7 @@
             [class.active]="day.active"
             (click)="select(day.value)"
           >
-            {{ day.value | moment: "D" }}
+            {{ day.value | moment: 'D' }}
           </td>
         </tr>
       </tbody>
@@ -60,9 +58,8 @@
           type="text"
           [(ngModel)]="hour"
           (ngModelChange)="setHour(hour)"
-
           maxlength="2"
-        >
+        />
         <span class="text-title">:</span>
         <input
           class="time-picker"
@@ -70,7 +67,7 @@
           [(ngModel)]="minute"
           (ngModelChange)="setMinute(minute)"
           maxlength="2"
-        >
+        />
       </div>
       <app-button
         [text]="'Выбрать'"

@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesGroup } from "../../../../../shared/types/groups";
+import { DevicesGroup } from '../../../../../shared/types/groups';
 
 @Component({
-  selector: "app-delete-group",
-  templateUrl: "./delete-group.component.html",
-  styleUrls: ["./delete-group.component.scss"],
+  selector: 'app-delete-group',
+  templateUrl: './delete-group.component.html',
+  styleUrls: ['./delete-group.component.scss'],
 })
 export class DeleteGroupComponent {
   @Input() group!: DevicesGroup;
@@ -19,7 +19,7 @@ export class DeleteGroupComponent {
   }
 
   onCancelHandler() {
-    const modal = document.querySelector("#delete_group");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#delete_group');
+    modal?.classList.toggle('hidden');
   }
 }

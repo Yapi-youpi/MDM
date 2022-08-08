@@ -1,9 +1,9 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { Device } from "../../types/devices";
+import { Device } from '../../types/devices';
 
 @Pipe({
-  name: "devicesFilter",
+  name: 'devicesFilter',
 })
 export class DevicesFilterPipe implements PipeTransform {
   transform(

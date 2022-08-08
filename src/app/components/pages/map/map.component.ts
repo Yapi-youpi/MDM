@@ -123,7 +123,11 @@ export class MapComponent implements OnInit, AfterViewInit {
       res.map((item) => {
         device = item.attributes;
         if (device.gps_location._latitude && device.gps_location._longitude) {
-          this.addMarkers(device.gps_location.latitude, device.gps_location.longitude, device);
+          this.addMarkers(
+            device.gps_location.latitude,
+            device.gps_location.longitude,
+            device
+          );
         }
         this.devices.push(device);
         this.devices_res.push(device);

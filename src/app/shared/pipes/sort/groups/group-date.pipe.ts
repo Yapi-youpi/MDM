@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import * as moment from "moment/moment";
+import { Pipe, PipeTransform } from '@angular/core';
+import * as moment from 'moment/moment';
 
-import { DevicesGroup } from "../../../types/groups";
+import { DevicesGroup } from '../../../types/groups';
 
 @Pipe({
-  name: "group_date",
+  name: 'group_date',
 })
 export class GroupDatePipe implements PipeTransform {
   transform(groups: DevicesGroup[], isDateAsc: boolean) {

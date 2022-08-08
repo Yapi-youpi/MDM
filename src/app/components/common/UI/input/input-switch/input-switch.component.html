@@ -1,22 +1,15 @@
 <label class="switch">
-  <ng-container
-    *ngIf="control"
-  >
-    <input
-      type="checkbox"
-      [formControl]="control"
-    >
+  <ng-container *ngIf="control">
+    <input type="checkbox" [formControl]="control" />
     <span class="slider"></span>
   </ng-container>
-  <ng-container
-    *ngIf="!control"
-  >
+  <ng-container *ngIf="!control">
     <input
       type="checkbox"
       [name]="name"
       [checked]="value"
       (change)="onChangeHandler()"
-    >
+    />
     <span class="slider"></span>
   </ng-container>
 </label>

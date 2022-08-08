@@ -1,9 +1,9 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { DevicesGroup } from "../../../types/groups";
+import { DevicesGroup } from '../../../types/groups';
 
 @Pipe({
-  name: "group_devices_count",
+  name: 'group_devices_count',
 })
 export class GroupDevicesCountPipe implements PipeTransform {
   transform(

@@ -1,20 +1,13 @@
-<app-modal
-  [modalID]="'edit_several_groups'"
-  [isClosable]="true"
->
+<app-modal [modalID]="'edit_several_groups'" [isClosable]="true">
   <div class="modal-form w-700">
     <div class="modal-form-header">
       <h4 class="text-title text-center">Настройки выбранных групп</h4>
     </div>
-    <hr class="divider">
+    <hr class="divider" />
     <div class="modal-form-body">
-      <form
-        [formGroup]="_form"
-      >
+      <form [formGroup]="_form">
         <div class="form-group-wrapper">
-          <label class="text-menu-title">
-            Конфигурация
-          </label>
+          <label class="text-menu-title"> Конфигурация </label>
           <app-input-select
             [width]="'w-440'"
             [options]="_options"
@@ -29,9 +22,7 @@
           ></app-input-alert>
         </div>
         <div class="form-group-wrapper switch">
-          <label for="active_state" class="text-menu-title">
-            Состояние
-          </label>
+          <label for="active_state" class="text-menu-title"> Состояние </label>
           <app-input-switch
             [control]="$any(_state)"
             [name]="'active_state'"

@@ -1,7 +1,4 @@
-<div
-  class="action-btns"
-  [class.reverse]="isReverse"
->
+<div class="action-btns" [class.reverse]="isReverse">
   <div>
     <app-button
       [text]="submitText"
@@ -12,7 +9,10 @@
     ></app-button>
   </div>
   <div
-    [ngStyle]="{'margin-left': !isReverse ? margin : 0, 'margin-right': isReverse ? margin : 0}"
+    [ngStyle]="{
+      'margin-left': !isReverse ? margin : 0,
+      'margin-right': isReverse ? margin : 0
+    }"
   >
     <app-button
       [text]="cancelText"

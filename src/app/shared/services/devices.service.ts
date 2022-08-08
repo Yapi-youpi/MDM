@@ -1,21 +1,21 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { environment } from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 
-import { AddDevice, Device } from "../types/devices";
+import { AddDevice, Device } from '../types/devices';
 
-import { devicesPaths as api } from "../enums/api";
+import { devicesPaths as api } from '../enums/api';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class DevicesService {
   constructor(private http: HttpClient) {}
 
   get(param: string, group_id?: string) {
     let url = environment.url + api.GET + param;
-    if (param === "group") {
+    if (param === 'group') {
       url = url + `/${group_id}`;
     }
     return new Promise<any>((resolve, reject) => {

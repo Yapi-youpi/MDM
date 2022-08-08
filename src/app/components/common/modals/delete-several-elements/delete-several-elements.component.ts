@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: "app-delete-several-elements",
-  templateUrl: "./delete-several-elements.component.html",
-  styleUrls: ["./delete-several-elements.component.scss"],
+  selector: 'app-delete-several-elements',
+  templateUrl: './delete-several-elements.component.html',
+  styleUrls: ['./delete-several-elements.component.scss'],
 })
 export class DeleteSeveralElementsComponent {
   @Output() onSubmit = new EventEmitter();
@@ -15,7 +15,7 @@ export class DeleteSeveralElementsComponent {
   }
 
   onCancelHandler() {
-    const modal = document.querySelector("#delete_several_elements");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#delete_several_elements');
+    modal?.classList.toggle('hidden');
   }
 }

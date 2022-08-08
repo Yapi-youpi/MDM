@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { inputWidth, Option } from "../../../../../shared/types/input";
-import { FormControl } from "@angular/forms";
+import { inputWidth, Option } from '../../../../../shared/types/input';
+import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: "app-input-select-accordion",
-  templateUrl: "./input-select-accordion.component.html",
-  styleUrls: ["./input-select-accordion.component.scss"],
+  selector: 'app-input-select-accordion',
+  templateUrl: './input-select-accordion.component.html',
+  styleUrls: ['./input-select-accordion.component.scss'],
 })
 export class InputSelectAccordionComponent {
-  @Input() title: string = "";
-  @Input() width: inputWidth = "w-170";
+  @Input() title: string = '';
+  @Input() width: inputWidth = 'w-170';
   @Input() control: FormControl = new FormControl(null);
   @Input() options: Option[] = [];
   @Input() currOptions: Option[] = [];

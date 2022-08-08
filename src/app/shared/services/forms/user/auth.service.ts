@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
   public form: FormGroup;
@@ -10,17 +10,17 @@ export class AuthService {
 
   constructor() {
     this.form = new FormGroup({
-      login: new FormControl("", Validators.required),
-      password: new FormControl("", Validators.required),
+      login: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
   }
 
   get _login() {
-    return this.form.getRawValue()["login"];
+    return this.form.getRawValue()['login'];
   }
 
   get _pass() {
-    return this.form.getRawValue()["password"];
+    return this.form.getRawValue()['password'];
   }
 
   setSubmitted() {

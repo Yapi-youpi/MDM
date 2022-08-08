@@ -4,10 +4,7 @@
   (mouseleave)="countDown()"
   [@openClose]="alert.data && alert.data.show ? 'open' : 'closed'"
 >
-  <div
-    *ngIf="alert.data"
-    class="content"
-  >
+  <div *ngIf="alert.data" class="content">
     <div class="header row">
       <div
         class="icon-wrapper"
@@ -17,15 +14,12 @@
       </div>
       <h6 class="text-title-choose">{{ alert.data.title }}</h6>
     </div>
-    <hr class="divider"/>
+    <hr class="divider" />
     <div class="body">
       <p class="text-menu-title">{{ alert.data.content }}</p>
     </div>
   </div>
   <div class="progress-bar-wrapper">
-    <div
-      class="progress-bar"
-      #progress
-    ></div>
+    <div class="progress-bar" #progress></div>
   </div>
 </div>

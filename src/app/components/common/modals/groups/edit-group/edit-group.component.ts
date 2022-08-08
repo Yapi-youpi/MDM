@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { edit } from "../../../../../shared/services/forms/group";
-import { DevicesConfig } from "../../../../../shared/types/config";
-import { Option } from "../../../../../shared/types/input";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { edit } from '../../../../../shared/services/forms/group';
+import { DevicesConfig } from '../../../../../shared/types/config';
+import { Option } from '../../../../../shared/types/input';
 
 @Component({
-  selector: "app-edit-group",
-  templateUrl: "./edit-group.component.html",
-  styleUrls: ["./edit-group.component.scss"],
+  selector: 'app-edit-group',
+  templateUrl: './edit-group.component.html',
+  styleUrls: ['./edit-group.component.scss'],
 })
 export class EditGroupComponent {
   @Input() configs: DevicesConfig[] = [];
@@ -26,15 +26,15 @@ export class EditGroupComponent {
   }
 
   get _name() {
-    return this._form.get("name");
+    return this._form.get('name');
   }
 
   get _description() {
-    return this._form.get("description");
+    return this._form.get('description');
   }
 
   get _deviceConfigID() {
-    return this._form.get("deviceConfigID");
+    return this._form.get('deviceConfigID');
   }
 
   get _options() {
@@ -76,7 +76,7 @@ export class EditGroupComponent {
     this.form.resetSubmitted();
     this.form.form.reset();
 
-    const modal = document.querySelector("#edit_group");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#edit_group');
+    modal?.classList.toggle('hidden');
   }
 }

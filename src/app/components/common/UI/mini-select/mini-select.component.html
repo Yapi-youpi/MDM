@@ -1,5 +1,10 @@
-<div [id]="'select_' + header" class="select">
-  <div [id]="header" class="select__head" (click)="openSelect()">
+<div [id]="'select_' + header" class="select" [ngClass]="arrowClass">
+  <div
+    [id]="header"
+    class="select__head"
+    [ngClass]="headerClass"
+    (click)="openSelect()"
+  >
     {{ currentValue }}
   </div>
   <ul class="select__list" *ngIf="open">

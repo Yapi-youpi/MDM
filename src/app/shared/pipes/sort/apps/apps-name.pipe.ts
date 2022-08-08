@@ -1,9 +1,9 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { App } from "../../../types/apps";
+import { App } from '../../../types/apps';
 
 @Pipe({
-  name: "apps_name",
+  name: 'apps_name',
 })
 export class AppsNamePipe implements PipeTransform {
   transform(apps: App[], isNameAsc: boolean): App[] {

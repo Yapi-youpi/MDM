@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { App } from "../../../../../shared/types/apps";
+import { App } from '../../../../../shared/types/apps';
 
-import { EditAppService } from "../../../../../shared/services/forms/app/edit-app.service";
+import { EditAppService } from '../../../../../shared/services/forms/app/edit-app.service';
 
 @Component({
-  selector: "app-edit-app",
-  templateUrl: "./edit-app.component.html",
-  styleUrls: ["./edit-app.component.scss"],
+  selector: 'app-edit-app',
+  templateUrl: './edit-app.component.html',
+  styleUrls: ['./edit-app.component.scss'],
 })
 export class EditAppComponent {
   @Input() app!: App;
@@ -25,27 +25,27 @@ export class EditAppComponent {
   }
 
   get _system() {
-    return this._form.get("system");
+    return this._form.get('system');
   }
 
   get _name() {
-    return this._form.get("name");
+    return this._form.get('name');
   }
 
   get _runAfterInstall() {
-    return this._form.get("runAfterInstall");
+    return this._form.get('runAfterInstall');
   }
 
   get _runAtBoot() {
-    return this._form.get("runAtBoot");
+    return this._form.get('runAtBoot');
   }
 
   get _showIcon() {
-    return this._form.get("showIcon");
+    return this._form.get('showIcon');
   }
 
   toggleSystemView() {
-    this._form.controls["system"].setValue(!this._system?.value);
+    this._form.controls['system'].setValue(!this._system?.value);
   }
 
   onSubmitHandler() {
@@ -62,7 +62,7 @@ export class EditAppComponent {
     this.form.resetSubmitted();
     this.form.resetForm();
 
-    const modal = document.querySelector("#edit_app");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#edit_app');
+    modal?.classList.toggle('hidden');
   }
 }

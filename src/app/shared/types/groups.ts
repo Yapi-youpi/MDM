@@ -1,4 +1,4 @@
-import { Device } from "./devices";
+import { Device } from './devices';
 
 export interface DevicesGroup {
   id: string;

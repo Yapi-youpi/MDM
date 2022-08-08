@@ -1,12 +1,9 @@
-<app-modal
-  [modalID]="'qr_code'"
-  [isClosable]="true"
->
+<app-modal [modalID]="'qr_code'" [isClosable]="true">
   <div class="modal-form">
     <div class="modal-form-header">
       <h4 class="text-title text-center">Устройство "{{ device?.name }}"</h4>
     </div>
-    <hr class="divider">
+    <hr class="divider" />
     <div class="modal-form-body row">
       <ngx-qrcode
         class="qr-code"

@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesGroup } from "../../../../shared/types/groups";
-import { DevicesConfig } from "../../../../shared/types/config";
+import { DevicesGroup } from '../../../../shared/types/groups';
+import { DevicesConfig } from '../../../../shared/types/config';
 
 @Component({
-  selector: "app-group-item",
-  templateUrl: "./group-item.component.html",
-  styleUrls: ["./group-item.component.scss"],
+  selector: 'app-group-item',
+  templateUrl: './group-item.component.html',
+  styleUrls: ['./group-item.component.scss'],
 })
 export class GroupItemComponent {
   @Input() group!: DevicesGroup;

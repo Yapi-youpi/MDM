@@ -15,24 +15,26 @@
 h4 {
   margin-bottom: 1rem;
 }
+
 .icon.icon-d-item {
   height: 14px;
   width: 14px;
-
   mask-size: 14px 14px;
   -webkit-mask-size: 14px 14px;
-
   background-color: var(--white);
+
   &.edit_device {
-    mask-image: url("/assets/UI/pencil.svg");
-    -webkit-mask-image: url("/assets/UI/pencil.svg");
+    mask-image: url('/assets/UI/pencil.svg');
+    -webkit-mask-image: url('/assets/UI/pencil.svg');
   }
 }
+
 .marker-event {
   & .hidden {
     display: none !important;
   }
 }
+
 .search-list {
   padding-top: 20px;
   overscroll-behavior: contain;
@@ -47,11 +49,13 @@ h4 {
   background-color: var(--white);
   width: 300px;
 }
+
 .search-item {
   padding: 8px;
   font-size: 16px;
-  font-family: "HelveticaNeueRoman", sans-serif;
+  font-family: 'HelveticaNeueRoman', sans-serif;
 }
-input[type="search"] {
+
+input[type='search'] {
   background-color: var(--white) !important;
 }

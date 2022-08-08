@@ -1,12 +1,10 @@
-<div
-  class="search-container"
->
+<div class="search-container">
   <input
     class="text-field"
     type="search"
     [(ngModel)]="value"
     (ngModelChange)="onChangeHandler(value)"
-  >
+  />
   <span
     *ngIf="!isSearchFocused && value === ''"
     class="icon icon-search"

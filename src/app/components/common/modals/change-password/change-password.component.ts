@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import { formService, userService } from "src/app/shared/services";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { formService, userService } from 'src/app/shared/services';
 
 @Component({
-  selector: "app-change-password",
-  templateUrl: "./change-password.component.html",
-  styleUrls: ["./change-password.component.scss"],
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.scss'],
 })
 export class ChangePasswordComponent {
   @Output() onSubmit = new EventEmitter();
@@ -19,11 +19,11 @@ export class ChangePasswordComponent {
   }
 
   get _pass() {
-    return this.changeForm.form.get("password");
+    return this.changeForm.form.get('password');
   }
 
   get _confPass() {
-    return this.changeForm.form.get("confirmPassword");
+    return this.changeForm.form.get('confirmPassword');
   }
 
   onSubmitHandler() {

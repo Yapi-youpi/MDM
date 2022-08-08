@@ -1,7 +1,6 @@
 .content {
   min-width: 328px;
   width: 100%;
-
   padding: 20px 30px 40px 30px;
 
   .divider {
@@ -18,16 +17,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     text-transform: capitalize;
 
     p {
       transition: color var(--transition-time) ease;
     }
 
-    .prev, .next {
+    .prev,
+    .next {
       color: var(--grey);
-
       cursor: pointer;
 
       &:hover {
@@ -38,7 +36,6 @@
 
   .body {
     width: 100%;
-
     border-collapse: separate;
     border-spacing: 7px 15px;
 
@@ -49,17 +46,11 @@
     tbody td {
       height: 30px;
       width: 35px;
-
       text-align: center;
-
       border-radius: 8px;
-
       border: 1px solid transparent;
-
       cursor: pointer;
-
-      transition:
-        background-color var(--transition-time) ease,
+      transition: background-color var(--transition-time) ease,
         color var(--transition-time) ease;
 
       &.disabled {
@@ -101,20 +92,15 @@
       .time-picker {
         height: 24px;
         width: 30px;
-
         padding: 0;
-
-        font-family: "HelveticaNeueBold", sans-serif;
+        font-family: 'HelveticaNeueBold', sans-serif;
         font-weight: 550 !important;
         font-size: 24px !important;
         line-height: 24px !important;
-
         border: none;
         border-radius: 0;
         outline: none;
-
         color: var(--dark-blue);
-
         -moz-appearance: textfield;
 
         &::-webkit-outer-spin-button,

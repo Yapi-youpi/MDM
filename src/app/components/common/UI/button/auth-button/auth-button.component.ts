@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-auth-button',
   templateUrl: './auth-button.component.html',
-  styleUrls: ['./auth-button.component.scss']
+  styleUrls: ['./auth-button.component.scss'],
 })
 export class AuthButtonComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,8 +1,8 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { App } from "../../../types/apps";
+import { Pipe, PipeTransform } from '@angular/core';
+import { App } from '../../../types/apps';
 
 @Pipe({
-  name: "apps_size",
+  name: 'apps_size',
 })
 export class AppsSizePipe implements PipeTransform {
   transform(apps: App[], isSizeAsc: boolean = false): App[] {

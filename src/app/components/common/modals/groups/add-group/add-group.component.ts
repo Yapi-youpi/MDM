@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { DevicesConfig } from "../../../../../shared/types/config";
-import { Option } from "../../../../../shared/types/input";
-import { add } from "../../../../../shared/services/forms/group";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DevicesConfig } from '../../../../../shared/types/config';
+import { Option } from '../../../../../shared/types/input';
+import { add } from '../../../../../shared/services/forms/group';
 
 @Component({
-  selector: "app-add-group",
-  templateUrl: "./add-group.component.html",
-  styleUrls: ["./add-group.component.scss"],
+  selector: 'app-add-group',
+  templateUrl: './add-group.component.html',
+  styleUrls: ['./add-group.component.scss'],
 })
 export class AddGroupComponent {
   @Input() configs: DevicesConfig[] = [];
 
   @Output() public onSubmit = new EventEmitter();
 
-  public currOption: Option = { value: "", html: "" };
+  public currOption: Option = { value: '', html: '' };
 
   constructor(private form: add) {}
 
@@ -26,15 +26,15 @@ export class AddGroupComponent {
   }
 
   get _name() {
-    return this._form.get("name");
+    return this._form.get('name');
   }
 
   get _description() {
-    return this._form.get("description");
+    return this._form.get('description');
   }
 
   get _config_id() {
-    return this._form.get("deviceConfigID");
+    return this._form.get('deviceConfigID');
   }
 
   get _options() {
@@ -68,18 +68,18 @@ export class AddGroupComponent {
       return;
     } else {
       this.onSubmit.emit();
-      this.currOption = { value: "", html: "" };
+      this.currOption = { value: '', html: '' };
     }
   }
   onCancelHandler() {
     this.form.reset();
 
     this._form.patchValue({
-      deviceConfigID: "",
+      deviceConfigID: '',
     });
-    this.currOption = { value: "", html: "" };
+    this.currOption = { value: '', html: '' };
 
-    const modal = document.querySelector("#add_group");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#add_group');
+    modal?.classList.toggle('hidden');
   }
 }

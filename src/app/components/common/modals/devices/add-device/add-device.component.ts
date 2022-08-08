@@ -1,20 +1,20 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesGroup } from "../../../../../shared/types/groups";
-import { AddDeviceService } from "../../../../../shared/services/forms/device/add-device.service";
-import { Option } from "../../../../../shared/types/input";
+import { DevicesGroup } from '../../../../../shared/types/groups';
+import { AddDeviceService } from '../../../../../shared/services/forms/device/add-device.service';
+import { Option } from '../../../../../shared/types/input';
 
 @Component({
-  selector: "app-add-device",
-  templateUrl: "./add-device.component.html",
-  styleUrls: ["./add-device.component.scss"],
+  selector: 'app-add-device',
+  templateUrl: './add-device.component.html',
+  styleUrls: ['./add-device.component.scss'],
 })
 export class AddDeviceComponent {
   @Input() public groups!: DevicesGroup[];
 
   @Output() public onSubmit = new EventEmitter();
 
-  public currOption: Option = { value: "", html: "" };
+  public currOption: Option = { value: '', html: '' };
 
   constructor(public form: AddDeviceService) {}
 
@@ -27,15 +27,15 @@ export class AddDeviceComponent {
   }
 
   get _name() {
-    return this._form.get("name");
+    return this._form.get('name');
   }
 
   get _description() {
-    return this._form.get("description");
+    return this._form.get('description');
   }
 
   get _group_id() {
-    return this._form.get("device_group_id");
+    return this._form.get('device_group_id');
   }
 
   get _options() {
@@ -69,7 +69,7 @@ export class AddDeviceComponent {
       return;
     } else {
       this.onSubmit.emit();
-      this.currOption = { value: "", html: "" };
+      this.currOption = { value: '', html: '' };
     }
   }
 
@@ -77,11 +77,11 @@ export class AddDeviceComponent {
     this.form.resetForm();
 
     this._form.patchValue({
-      device_group_id: "",
+      device_group_id: '',
     });
-    this.currOption = { value: "", html: "" };
+    this.currOption = { value: '', html: '' };
 
-    const modal = document.querySelector("#add_device");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#add_device');
+    modal?.classList.toggle('hidden');
   }
 }

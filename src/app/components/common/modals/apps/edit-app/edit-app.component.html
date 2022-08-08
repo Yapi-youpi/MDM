@@ -1,7 +1,4 @@
-<app-modal
-  [modalID]="'edit_app'"
-  [isClosable]="true"
->
+<app-modal [modalID]="'edit_app'" [isClosable]="true">
   <div class="modal-form w-700">
     <div class="modal-form-header">
       <h4 class="text-title text-center">Приложение</h4>
@@ -17,15 +14,11 @@
         ></app-button>
       </div>
     </div>
-    <hr class="divider">
+    <hr class="divider" />
     <div class="modal-form-body">
-      <form
-        [formGroup]="_form"
-      >
+      <form [formGroup]="_form">
         <div class="form-group-wrapper">
-          <label for="name" class="text-menu-title">
-            Название
-          </label>
+          <label for="name" class="text-menu-title"> Название </label>
           <app-input-text
             [control]="$any(_name)"
             [name]="'name'"
@@ -41,7 +34,9 @@
         <div class="form-group-wrapper boot">
           <label class="text-menu-title">Запуск:</label>
           <div class="inner-wrapper row space-between">
-            <label for="runAfterInstall" class="text-menu-title">после установки</label>
+            <label for="runAfterInstall" class="text-menu-title"
+              >после установки</label
+            >
             <app-input-switch
               [control]="$any(_runAfterInstall)"
               [name]="'runAfterInstall'"
@@ -49,7 +44,9 @@
           </div>
           <div class="inner-wrapper">
             <div class="inner-wrapper row space-between">
-              <label for="runAtBoot" class="text-menu-title">после загрузки</label>
+              <label for="runAtBoot" class="text-menu-title"
+                >после загрузки</label
+              >
               <app-input-switch
                 [control]="$any(_runAtBoot)"
                 [name]="'runAtBoot'"
@@ -58,9 +55,7 @@
           </div>
         </div>
         <div class="form-group-wrapper icon">
-          <label for="showIcon" class="text-menu-title">
-            Ярлык
-          </label>
+          <label for="showIcon" class="text-menu-title"> Ярлык </label>
           <app-input-switch
             [control]="$any(_showIcon)"
             [name]="'showIcon'"

@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Device } from "../../../../../shared/types/devices";
+import { Device } from '../../../../../shared/types/devices';
 
 @Component({
-  selector: "app-delete-device",
-  templateUrl: "./delete-device.component.html",
-  styleUrls: ["./delete-device.component.scss"],
+  selector: 'app-delete-device',
+  templateUrl: './delete-device.component.html',
+  styleUrls: ['./delete-device.component.scss'],
 })
 export class DeleteDeviceComponent {
   @Input() public device!: Device;
@@ -19,7 +19,7 @@ export class DeleteDeviceComponent {
   }
 
   onCancelHandler() {
-    const modal = document.querySelector("#delete_device");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#delete_device');
+    modal?.classList.toggle('hidden');
   }
 }

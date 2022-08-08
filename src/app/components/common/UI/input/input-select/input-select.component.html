@@ -4,16 +4,10 @@
   [class.opened]="!isDropdownHidden"
   [class.error]="isError"
 >
-  <div
-    [class.filled]="!isDropdownHidden"
-    (click)="toggleDropdown()"
-  >
+  <div [class.filled]="!isDropdownHidden" (click)="toggleDropdown()">
     {{ currOption?.html }}
   </div>
-  <ul
-    class="select-content"
-    [class.hidden]="isDropdownHidden"
-  >
+  <ul class="select-content" [class.hidden]="isDropdownHidden">
     <li
       *ngFor="let option of options; trackBy: identify"
       class="item"

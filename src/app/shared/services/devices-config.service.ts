@@ -29,7 +29,11 @@ export class DevicesConfigService {
     });
   }
 
-  addConfig(config: DevicesConfig | undefined, name: string, description: string) {
+  addConfig(
+    config: DevicesConfig | undefined,
+    name: string,
+    description: string
+  ) {
     if (config) {
       config.name = name;
       config.description = description;

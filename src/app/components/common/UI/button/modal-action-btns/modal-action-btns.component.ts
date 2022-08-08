@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: "app-modal-action-btns",
-  templateUrl: "./modal-action-btns.component.html",
-  styleUrls: ["./modal-action-btns.component.scss"],
+  selector: 'app-modal-action-btns',
+  templateUrl: './modal-action-btns.component.html',
+  styleUrls: ['./modal-action-btns.component.scss'],
 })
 export class ModalActionBtnsComponent {
-  @Input() submitText: string = "Подтвердить";
-  @Input() cancelText: string = "Отменить";
-  @Input() margin: string = "";
+  @Input() submitText: string = 'Подтвердить';
+  @Input() cancelText: string = 'Отменить';
+  @Input() margin: string = '';
   @Input() isReverse: boolean = false;
 
   @Output() onSubmit = new EventEmitter();

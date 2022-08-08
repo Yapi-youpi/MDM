@@ -1,8 +1,6 @@
 .input-select {
   height: 44.44px;
-
   position: relative;
-
   border: 1px solid var(--grey);
   border-radius: 16px;
 
@@ -17,26 +15,18 @@
   div {
     height: 44.44px;
     width: calc(100% + 1px);
-
     padding: 13px 30px 11px 11px;
-
     position: relative;
-
     top: -1px;
     left: -1px;
-
     font-weight: 300;
     font-size: 16px;
     line-height: 18.77px;
     text-align: left;
-
     background-color: transparent;
     color: var(--dark-blue-grey);
-
     border-radius: 16px;
-
     cursor: pointer;
-
     z-index: 2;
 
     &.filled {
@@ -47,24 +37,15 @@
 
   .select-content {
     width: calc(100% + 2px);
-
     display: block;
-
     padding-top: 43.44px;
-
     position: absolute;
-
     top: -1px;
     left: -1px;
-
     background-color: var(--white);
-
     border: 1px solid var(--dark-blue);
-
     border-radius: 16px;
-
     box-shadow: var(--box-shadow);
-
     z-index: 1;
 
     &.hidden {
@@ -73,9 +54,7 @@
 
     .item {
       cursor: pointer;
-
-      transition:
-        background-color var(--transition-time) ease,
+      transition: background-color var(--transition-time) ease,
         color var(--transition-time) ease;
 
       p {
@@ -106,40 +85,30 @@
   &::after {
     height: 7.71px;
     width: 12.86px;
-
     display: block;
-
     position: absolute;
-    content: "";
-
+    content: '';
     top: 18.73px;
     right: 8.14px;
-
     mask-size: 12.86px 7.71px;
     mask-repeat: no-repeat;
     mask-position: center center;
-    mask-image: url("/assets/UI/arrow_down.svg");
+    mask-image: url('/assets/UI/arrow_down.svg');
     -webkit-mask-size: 12.86px 7.71px;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center center;
-    -webkit-mask-image: url("/assets/UI/arrow_down.svg");
-
+    -webkit-mask-image: url('/assets/UI/arrow_down.svg');
     background-color: var(--dark-blue-grey);
-
-    transition:
-      transform var(--transition-time) ease,
+    transition: transform var(--transition-time) ease,
       top var(--transition-time) ease,
       background-color var(--transition-time) ease;
-
     z-index: 2;
   }
 
   &.opened {
     &::after {
       top: 15.86px;
-
       background-color: var(--white);
-
       transform: rotate(180deg);
     }
   }

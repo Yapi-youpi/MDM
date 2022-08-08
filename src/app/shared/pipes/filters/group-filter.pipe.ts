@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import * as moment from "moment/moment";
+import { Pipe, PipeTransform } from '@angular/core';
+import * as moment from 'moment/moment';
 
-import { DevicesGroup } from "../../types/groups";
+import { DevicesGroup } from '../../types/groups';
 
 @Pipe({
-  name: "groupFilter",
+  name: 'groupFilter',
 })
 export class GroupFilterPipe implements PipeTransform {
   transform(
@@ -17,7 +17,7 @@ export class GroupFilterPipe implements PipeTransform {
     return groups.filter((g) => {
       return (
         (status !== null ? g.activeState === status : g) &&
-        (dateFrom ? g.updateTime > dateFrom : g.updateTime > "") &&
+        (dateFrom ? g.updateTime > dateFrom : g.updateTime > '') &&
         (dateTo
           ? g.updateTime < dateTo
           : g.updateTime < moment.utc(Infinity).format()) &&

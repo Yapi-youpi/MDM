@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-import { inputWidth } from "../../../../../shared/types/input";
+import { inputWidth } from '../../../../../shared/types/input';
 
 @Component({
-  selector: "app-input-file",
-  templateUrl: "./input-file.component.html",
-  styleUrls: ["./input-file.component.scss"],
+  selector: 'app-input-file',
+  templateUrl: './input-file.component.html',
+  styleUrls: ['./input-file.component.scss'],
 })
 export class InputFileComponent {
   @Input() control: FormControl = new FormControl(null);
 
-  @Input() name: string = "";
-  @Input() width: inputWidth = "w-170";
+  @Input() name: string = '';
+  @Input() width: inputWidth = 'w-170';
   @Input() isError: boolean = false;
 
   @Output() onChange = new EventEmitter<File>();

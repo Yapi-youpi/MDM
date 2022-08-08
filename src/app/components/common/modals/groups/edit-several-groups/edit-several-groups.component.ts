@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { DevicesConfig } from "../../../../../shared/types/config";
-import { editSeveral } from "../../../../../shared/services/forms/group";
-import { Option } from "../../../../../shared/types/input";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DevicesConfig } from '../../../../../shared/types/config';
+import { editSeveral } from '../../../../../shared/services/forms/group';
+import { Option } from '../../../../../shared/types/input';
 
 @Component({
-  selector: "app-edit-several-groups",
-  templateUrl: "./edit-several-groups.component.html",
-  styleUrls: ["./edit-several-groups.component.scss"],
+  selector: 'app-edit-several-groups',
+  templateUrl: './edit-several-groups.component.html',
+  styleUrls: ['./edit-several-groups.component.scss'],
 })
 export class EditSeveralGroupsComponent {
   @Input() configs!: DevicesConfig[];
 
   @Output() onSubmit = new EventEmitter();
 
-  public currOption: Option = { value: "", html: "" };
+  public currOption: Option = { value: '', html: '' };
 
   constructor(private form: editSeveral) {}
 
@@ -26,11 +26,11 @@ export class EditSeveralGroupsComponent {
   }
 
   get _config() {
-    return this._form.get("deviceConfigID");
+    return this._form.get('deviceConfigID');
   }
 
   get _state() {
-    return this._form.get("activeState");
+    return this._form.get('activeState');
   }
 
   get _options() {
@@ -72,11 +72,11 @@ export class EditSeveralGroupsComponent {
     this.form.resetForm();
 
     this._form.patchValue({
-      deviceConfigID: "",
+      deviceConfigID: '',
     });
-    this.currOption = { value: "", html: "" };
+    this.currOption = { value: '', html: '' };
 
-    const modal = document.querySelector("#edit_several_groups");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#edit_several_groups');
+    modal?.classList.toggle('hidden');
   }
 }

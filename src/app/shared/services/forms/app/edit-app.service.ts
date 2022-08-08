@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class EditAppService {
   public form: FormGroup;
@@ -10,7 +10,7 @@ export class EditAppService {
 
   constructor() {
     this.form = new FormGroup({
-      name: new FormControl("", [
+      name: new FormControl('', [
         Validators.required,
         Validators.maxLength(20),
       ]),

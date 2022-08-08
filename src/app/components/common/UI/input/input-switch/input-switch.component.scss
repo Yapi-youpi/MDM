@@ -1,9 +1,7 @@
 .switch {
   height: 15.8px;
   width: 27.1px;
-
   display: inline-block;
-
   position: relative;
 
   input {
@@ -26,35 +24,24 @@
 
   .slider {
     position: absolute;
-
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-
     background-color: var(--grey);
-
     border-radius: 8px;
-
     transition: all var(--transition-time) ease;
-
     cursor: pointer;
 
     &:before {
       position: absolute;
-
-      content: "";
-
+      content: '';
       height: 12px;
       width: 12px;
-
       top: 2px;
       left: 2px;
-
       background-color: var(--dark-grey);
-
       transition: all var(--transition-time) ease;
-
       border-radius: 6px;
     }
   }

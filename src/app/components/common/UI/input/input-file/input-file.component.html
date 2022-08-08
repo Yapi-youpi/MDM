@@ -9,16 +9,10 @@
     (change)="onChangeHandler($event)"
   />
   <label [for]="name">загрузить</label>
-  <p
-    *ngIf="control?.value && !isError && _name"
-    class="text-menu-title"
-  >
+  <p *ngIf="control?.value && !isError && _name" class="text-menu-title">
     {{ _name }}
   </p>
-  <p
-    *ngIf="control?.value && !isError && _size"
-    class="text-menu-title"
-  >
+  <p *ngIf="control?.value && !isError && _size" class="text-menu-title">
     {{ _size | fileSize }}
   </p>
 </div>

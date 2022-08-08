@@ -1,7 +1,4 @@
-<span
-  class="alert"
-  [ngClass]="type"
->
+<span class="alert" [ngClass]="type">
   <ng-container *ngIf="control.hasError('required')">
     Данное поле должно быть заполнено
   </ng-container>

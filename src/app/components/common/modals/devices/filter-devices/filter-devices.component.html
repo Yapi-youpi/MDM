@@ -7,11 +7,9 @@
     <div class="modal-form-filter-header">
       <h4 class="text-title text-center">Фильтры</h4>
     </div>
-    <hr class="divider">
+    <hr class="divider" />
     <div class="modal-form-filter-body">
-      <form
-        [formGroup]="_form"
-      >
+      <form [formGroup]="_form">
         <div class="form-group-wrapper status">
           <p class="text-menu-title">Статус</p>
           <div class="filter-btn-wrapper">
@@ -39,9 +37,7 @@
           <p class="text-menu-title last-date">Последнее обновление</p>
         </div>
         <div class="form-group-wrapper date">
-          <label class="text-menu-title">
-            с
-          </label>
+          <label class="text-menu-title"> с </label>
           <app-input-datetime
             [name]="'date-from'"
             [width]="'w-180'"
@@ -49,9 +45,7 @@
           ></app-input-datetime>
         </div>
         <div class="form-group-wrapper date">
-          <label class="text-menu-title">
-            по
-          </label>
+          <label class="text-menu-title"> по </label>
           <app-input-datetime
             [name]="'date-to'"
             [width]="'w-180'"

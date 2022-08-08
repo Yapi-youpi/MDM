@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AddAppService {
   public form: FormGroup;
@@ -22,7 +22,7 @@ export class AddAppService {
   }
 
   get _file() {
-    return this.form.getRawValue()["file"];
+    return this.form.getRawValue()['file'];
   }
 
   // get _name() {

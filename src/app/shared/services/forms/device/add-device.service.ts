@@ -1,8 +1,8 @@
-import { ElementRef, Injectable } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AddDeviceService {
   public form: FormGroup;
@@ -11,28 +11,28 @@ export class AddDeviceService {
 
   constructor() {
     this.form = new FormGroup({
-      name: new FormControl("", [
+      name: new FormControl('', [
         Validators.required,
         Validators.maxLength(20),
       ]),
-      description: new FormControl("", [
+      description: new FormControl('', [
         Validators.required,
         Validators.maxLength(60),
       ]),
-      device_group_id: new FormControl("", Validators.required),
+      device_group_id: new FormControl('', Validators.required),
     });
   }
 
   get _name() {
-    return this.form.getRawValue()["name"];
+    return this.form.getRawValue()['name'];
   }
 
   get _desc() {
-    return this.form.getRawValue()["description"];
+    return this.form.getRawValue()['description'];
   }
 
   get _group() {
-    return this.form.getRawValue()["device_group_id"];
+    return this.form.getRawValue()['device_group_id'];
   }
 
   setFormSubmitted() {

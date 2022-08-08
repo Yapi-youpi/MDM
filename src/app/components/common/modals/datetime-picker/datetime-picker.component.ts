@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import * as moment from "moment";
-import "moment/locale/ru";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import * as moment from 'moment';
+import 'moment/locale/ru';
 
-import { DateService } from "../../../../shared/services/date.service";
+import { DateService } from '../../../../shared/services/date.service';
 
 interface Day {
   value: moment.Moment;
@@ -16,9 +16,9 @@ interface Week {
 }
 
 @Component({
-  selector: "app-datetime-picker",
-  templateUrl: "./datetime-picker.component.html",
-  styleUrls: ["./datetime-picker.component.scss"],
+  selector: 'app-datetime-picker',
+  templateUrl: './datetime-picker.component.html',
+  styleUrls: ['./datetime-picker.component.scss'],
 })
 export class DatetimePickerComponent implements OnInit {
   public calendar: Week[] = [];
@@ -26,11 +26,11 @@ export class DatetimePickerComponent implements OnInit {
   public isHourFocused: boolean = false;
   public isMinuteFocused: boolean = false;
 
-  public hour: string = "00";
-  public minute: string = "00";
+  public hour: string = '00';
+  public minute: string = '00';
   public currDate!: moment.Moment;
 
-  @Input() name: string = "";
+  @Input() name: string = '';
 
   @Output() onSubmit = new EventEmitter<moment.Moment>();
 
@@ -42,30 +42,30 @@ export class DatetimePickerComponent implements OnInit {
   }
 
   get _prev() {
-    return moment(this.dateService.date.value).add(-1, "month");
+    return moment(this.dateService.date.value).add(-1, 'month');
   }
 
   get _next() {
-    return moment(this.dateService.date.value).add(1, "month");
+    return moment(this.dateService.date.value).add(1, 'month');
   }
 
   generate(now: moment.Moment) {
-    const startDay = now.clone().startOf("month").startOf("week");
-    const endDay = now.clone().endOf("month").endOf("week");
+    const startDay = now.clone().startOf('month').startOf('week');
+    const endDay = now.clone().endOf('month').endOf('week');
 
-    const date = startDay.clone().subtract(1, "day");
+    const date = startDay.clone().subtract(1, 'day');
 
     const calendar: Week[] = [];
 
-    while (date.isBefore(endDay, "day")) {
+    while (date.isBefore(endDay, 'day')) {
       calendar.push({
         days: Array(7)
           .fill(0)
           .map(() => {
-            const value = date.add(1, "day").clone();
-            const active = moment().isSame(value, "date");
-            const disabled = !now.isSame(value, "month");
-            const selected = now.isSame(value, "date");
+            const value = date.add(1, 'day').clone();
+            const active = moment().isSame(value, 'date');
+            const disabled = !now.isSame(value, 'month');
+            const selected = now.isSame(value, 'date');
 
             return {
               value,
@@ -91,18 +91,18 @@ export class DatetimePickerComponent implements OnInit {
   }
 
   setHour(hour: string) {
-    if (Number(hour) > 23) this.hour = "23";
-    if (Number(hour) < 0 || hour === "") this.hour = "00";
+    if (Number(hour) > 23) this.hour = '23';
+    if (Number(hour) < 0 || hour === '') this.hour = '00';
   }
 
   setMinute(minute: string) {
-    if (Number(minute) > 59) this.minute = "59";
-    if (Number(minute) < 0 || minute === "") this.minute = "00";
+    if (Number(minute) > 59) this.minute = '59';
+    if (Number(minute) < 0 || minute === '') this.minute = '00';
   }
 
   onSubmitHandler() {
-    if (this.hour.length === 1) this.hour = "0" + this.hour;
-    if (this.minute.length === 1) this.minute = "0" + this.minute;
+    if (this.hour.length === 1) this.hour = '0' + this.hour;
+    if (this.minute.length === 1) this.minute = '0' + this.minute;
 
     const date = this.currDate.set({
       date: this.currDate.date(),

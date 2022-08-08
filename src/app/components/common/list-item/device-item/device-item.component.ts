@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesConfig } from "../../../../shared/types/config";
-import { DevicesGroup } from "../../../../shared/types/groups";
-import { Device } from "../../../../shared/types/devices";
+import { DevicesConfig } from '../../../../shared/types/config';
+import { DevicesGroup } from '../../../../shared/types/groups';
+import { Device } from '../../../../shared/types/devices';
 
 @Component({
-  selector: "app-device-item",
-  templateUrl: "./device-item.component.html",
-  styleUrls: ["./device-item.component.scss"],
+  selector: 'app-device-item',
+  templateUrl: './device-item.component.html',
+  styleUrls: ['./device-item.component.scss'],
 })
 export class DeviceItemComponent {
   @Input() public device!: Device;

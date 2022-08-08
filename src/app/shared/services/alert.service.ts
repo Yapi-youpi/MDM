@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
-import { Alert } from "../types/alert";
+import { Alert } from '../types/alert';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AlertService {
   public data!: Alert;
@@ -13,7 +13,7 @@ export class AlertService {
   constructor() {}
 
   show(data: Alert) {
-    this.data = { ...data, show: true, progressWidth: "100%" };
+    this.data = { ...data, show: true, progressWidth: '100%' };
     this.open.next(this.data);
   }
 

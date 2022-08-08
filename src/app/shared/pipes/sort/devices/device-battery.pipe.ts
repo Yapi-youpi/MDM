@@ -1,9 +1,9 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { Device } from "../../../types/devices";
+import { Device } from '../../../types/devices';
 
 @Pipe({
-  name: "devices_battery",
+  name: 'devices_battery',
 })
 export class DeviceBatteryPipe implements PipeTransform {
   transform(devices: Device[], isBatteryAsc: boolean): Device[] {

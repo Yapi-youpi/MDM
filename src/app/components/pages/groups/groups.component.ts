@@ -144,7 +144,8 @@ export class GroupsComponent implements OnInit {
       g.isSelected = this.isAllSelected;
     });
 
-    if (this.isAllSelected) this.selectedGroupsIDs = this.groups.map((g) => g.id);
+    if (this.isAllSelected)
+      this.selectedGroupsIDs = this.groups.map((g) => g.id);
     else this.selectedGroupsIDs = [];
   }
 
@@ -157,13 +158,16 @@ export class GroupsComponent implements OnInit {
           this.selectedGroupsIDs.push(g.id);
 
         if (!g.isSelected && this.selectedGroupsIDs.includes(g.id))
-          this.selectedGroupsIDs = this.selectedGroupsIDs.filter((sg) => sg !== g.id);
+          this.selectedGroupsIDs = this.selectedGroupsIDs.filter(
+            (sg) => sg !== g.id
+          );
       }
     });
     if (!group.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
-    if (this.selectedGroupsIDs.length === this.groups.length) this.isAllSelected = true;
+    if (this.selectedGroupsIDs.length === this.groups.length)
+      this.isAllSelected = true;
   }
 
   cancelSelection() {
@@ -179,21 +183,23 @@ export class GroupsComponent implements OnInit {
   addGroup() {
     this.loading = true;
 
-    this.groupService.add(this.addForm.form.getRawValue()).then((res: states.GroupsState) => {
-      if (res.success) {
-        this.groups = [res.group[0], ...this.groups];
+    this.groupService
+      .add(this.addForm.form.getRawValue())
+      .then((res: states.GroupsState) => {
+        if (res.success) {
+          this.groups = [res.group[0], ...this.groups];
 
-        const modal = document.querySelector('#add_group');
-        modal?.classList.toggle('hidden');
+          const modal = document.querySelector('#add_group');
+          modal?.classList.toggle('hidden');
 
-        this.addForm.reset();
-      } else {
-        this.alert.show({
-          title: 'ADD GROUP ERROR',
-          content: res.error,
-        });
-      }
-    });
+          this.addForm.reset();
+        } else {
+          this.alert.show({
+            title: 'ADD GROUP ERROR',
+            content: res.error,
+          });
+        }
+      });
 
     this.loading = false;
   }
@@ -201,18 +207,22 @@ export class GroupsComponent implements OnInit {
   changeGroupState(group: DevicesGroup) {
     this.loading = true;
 
-    this.groupService.changeState(group.id, !group.activeState).then((res: states.State) => {
-      if (res.success) {
-        this.groups = this.groups.map((g) => {
-          return g.id === group.id ? { ...g, activeState: !g.activeState } : g;
-        });
-      } else {
-        this.alert.show({
-          title: 'CHANGE GROUP STATE ERROR',
-          content: res.error,
-        });
-      }
-    });
+    this.groupService
+      .changeState(group.id, !group.activeState)
+      .then((res: states.State) => {
+        if (res.success) {
+          this.groups = this.groups.map((g) => {
+            return g.id === group.id
+              ? { ...g, activeState: !g.activeState }
+              : g;
+          });
+        } else {
+          this.alert.show({
+            title: 'CHANGE GROUP STATE ERROR',
+            content: res.error,
+          });
+        }
+      });
 
     this.loading = false;
   }
@@ -230,7 +240,9 @@ export class GroupsComponent implements OnInit {
       .then((res: { success: boolean; error: string }) => {
         if (res.success) {
           this.groups = this.groups.map((g) => {
-            return g.id === this.currGroup.id ? { ...g, ...this.editForm.form.getRawValue() } : g;
+            return g.id === this.currGroup.id
+              ? { ...g, ...this.editForm.form.getRawValue() }
+              : g;
           });
 
           const modal = document.querySelector('#edit_group');

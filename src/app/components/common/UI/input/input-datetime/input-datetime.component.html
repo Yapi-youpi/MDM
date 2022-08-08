@@ -8,10 +8,7 @@
     [formControl]="control"
     [value]="currDay ? (currDay | moment: 'HH:mm, D MMM YYYY') : ''"
   />
-  <span
-    class="icon icon-datetime"
-    (click)="showDatetimePicker()"
-  ></span>
+  <span class="icon icon-datetime" (click)="showDatetimePicker()"></span>
 </div>
 
 <app-datetime-picker

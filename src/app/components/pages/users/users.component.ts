@@ -39,7 +39,10 @@ export class UsersComponent implements OnInit {
         console.log(res);
         this.users = res;
         this.users.forEach((user) => {
-          if (user.avatar.length > 0 && !user.avatar.includes('data:image/jpeg;base64,'))
+          if (
+            user.avatar.length > 0 &&
+            !user.avatar.includes('data:image/jpeg;base64,')
+          )
             user.avatar = 'data:image/jpeg;base64,' + user.avatar;
         });
         this.sortUsers();

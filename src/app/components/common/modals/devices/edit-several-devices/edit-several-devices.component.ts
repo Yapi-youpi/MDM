@@ -1,22 +1,22 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesGroup } from "../../../../../shared/types/groups";
+import { DevicesGroup } from '../../../../../shared/types/groups';
 
-import { EditSeveralDevicesService } from "../../../../../shared/services/forms/device/edit-several-devices.service";
+import { EditSeveralDevicesService } from '../../../../../shared/services/forms/device/edit-several-devices.service';
 
-import { Option } from "../../../../../shared/types/input";
+import { Option } from '../../../../../shared/types/input';
 
 @Component({
-  selector: "app-edit-several-devices",
-  templateUrl: "./edit-several-devices.component.html",
-  styleUrls: ["./edit-several-devices.component.scss"],
+  selector: 'app-edit-several-devices',
+  templateUrl: './edit-several-devices.component.html',
+  styleUrls: ['./edit-several-devices.component.scss'],
 })
 export class EditSeveralDevicesComponent {
   @Input() groups!: DevicesGroup[];
 
   @Output() onSubmit = new EventEmitter();
 
-  public currOption: Option = { value: "", html: "" };
+  public currOption: Option = { value: '', html: '' };
 
   constructor(public form: EditSeveralDevicesService) {}
 
@@ -29,11 +29,11 @@ export class EditSeveralDevicesComponent {
   }
 
   get _group_id() {
-    return this._form.get("device_group_id");
+    return this._form.get('device_group_id');
   }
 
   get _state() {
-    return this._form.get("active_state");
+    return this._form.get('active_state');
   }
 
   get _options() {
@@ -75,11 +75,11 @@ export class EditSeveralDevicesComponent {
     this.form.resetForm();
 
     this._form.patchValue({
-      device_group_id: "",
+      device_group_id: '',
     });
-    this.currOption = { value: "", html: "" };
+    this.currOption = { value: '', html: '' };
 
-    const modal = document.querySelector("#edit_several_devices");
-    modal?.classList.toggle("hidden");
+    const modal = document.querySelector('#edit_several_devices');
+    modal?.classList.toggle('hidden');
   }
 }

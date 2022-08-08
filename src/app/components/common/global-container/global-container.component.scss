@@ -2,10 +2,8 @@
   min-height: calc(100vh - 24px);
   height: 100%;
   min-width: fit-content;
-
   margin: 12px 18px 12px 310px;
-
-  transition: margin-left .4s ease;
+  transition: margin-left 0.4s ease;
 
   &.full-width {
     margin-left: 106px;

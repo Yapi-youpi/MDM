@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ChangePasswordService {
   public form: FormGroup;
@@ -11,17 +11,17 @@ export class ChangePasswordService {
 
   constructor() {
     this.form = new FormGroup({
-      password: new FormControl("", Validators.required),
-      confirmPassword: new FormControl("", Validators.required),
+      password: new FormControl('', Validators.required),
+      confirmPassword: new FormControl('', Validators.required),
     });
   }
 
   get _pass() {
-    return this.form.getRawValue()["password"];
+    return this.form.getRawValue()['password'];
   }
 
   get _passConf() {
-    return this.form.getRawValue()["confirmPassword"];
+    return this.form.getRawValue()['confirmPassword'];
   }
 
   setSubmitted() {

@@ -1,18 +1,16 @@
 .icon-g-item {
   height: 14px;
   width: 14px;
-
   mask-size: 14px 14px;
   -webkit-mask-size: 14px 14px;
-
   background-color: var(--white);
 
   &.edit_group {
-    mask-image: url("/assets/UI/pencil.svg");
-    -webkit-mask-image: url("/assets/UI/pencil.svg");
+    mask-image: url('/assets/UI/pencil.svg');
+    -webkit-mask-image: url('/assets/UI/pencil.svg');
   }
   &.delete_group {
-    mask-image: url("/assets/UI/trash.svg");
-    -webkit-mask-image: url("/assets/UI/trash.svg");
+    mask-image: url('/assets/UI/trash.svg');
+    -webkit-mask-image: url('/assets/UI/trash.svg');
   }
 }

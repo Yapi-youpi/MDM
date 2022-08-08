@@ -1,10 +1,9 @@
-<app-modal
-  [modalID]="'delete_device'"
-  [isClosable]="true"
->
+<app-modal [modalID]="'delete_device'" [isClosable]="true">
   <div class="modal-form w-500">
     <div class="modal-form-header">
-      <h4 class="text-title text-center">Удалить устройство "{{ device?.name }}"?</h4>
+      <h4 class="text-title text-center">
+        Удалить устройство "{{ device?.name }}"?
+      </h4>
     </div>
     <div class="modal-form-footer">
       <app-modal-action-btns

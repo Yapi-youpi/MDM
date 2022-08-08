@@ -1,6 +1,5 @@
 .user-popup-container {
   background-color: var(--white);
-
   border-radius: 14px;
 
   .user-popup {
@@ -17,9 +16,9 @@
           height: 24px;
           width: 24px;
           mask-size: 20px 20px;
-          mask-image: url("/assets/UI/users_group.svg");
+          mask-image: url('/assets/UI/users_group.svg');
           -webkit-mask-size: 20px 20px;
-          -webkit-mask-image: url("/assets/UI/users_group.svg");
+          -webkit-mask-image: url('/assets/UI/users_group.svg');
           background-color: var(--white);
         }
       }
@@ -72,9 +71,9 @@
               height: 30px;
               width: 30px;
               mask-size: 30px 30px;
-              mask-image: url("/assets/UI/users_group.svg");
+              mask-image: url('/assets/UI/users_group.svg');
               -webkit-mask-size: 30px 30px;
-              -webkit-mask-image: url("/assets/UI/users_group.svg");
+              -webkit-mask-image: url('/assets/UI/users_group.svg');
               background-color: var(--white);
             }
           }
@@ -90,12 +89,10 @@
           .icon-edit {
             height: 24px;
             width: 24px;
-
             mask-size: 12.8px 12.8px;
-            mask-image: url("/assets/UI/pencil.svg");
+            mask-image: url('/assets/UI/pencil.svg');
             -webkit-mask-size: 12.8px 12.8px;
-            -webkit-mask-image: url("/assets/UI/pencil.svg");
-
+            -webkit-mask-image: url('/assets/UI/pencil.svg');
             background-color: var(--white);
           }
         }
@@ -104,20 +101,16 @@
       .bottom {
         .logout-wrapper {
           width: 100%;
-
           color: var(--dark-blue);
 
           .icon-logout {
             height: 18.46px;
             width: 24px;
-
             margin-right: 13px;
-
             mask-size: 18.46px 24px;
-            mask-image: url("/assets/UI/leave.svg");
+            mask-image: url('/assets/UI/leave.svg');
             -webkit-mask-size: 18.46px 24px;
-            -webkit-mask-image: url("/assets/UI/leave.svg");
-
+            -webkit-mask-image: url('/assets/UI/leave.svg');
             background-color: var(--dark-blue);
           }
 
@@ -129,5 +122,3 @@
     }
   }
 }
-
-

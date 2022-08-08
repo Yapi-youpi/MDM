@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input-checkbox',
   templateUrl: './input-checkbox.component.html',
-  styleUrls: ['./input-checkbox.component.scss']
+  styleUrls: ['./input-checkbox.component.scss'],
 })
 export class InputCheckboxComponent {
   @Input() control!: FormControl;

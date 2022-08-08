@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { EditDeviceService } from "../../../../../../shared/services/forms/device/edit-device.service";
+import { EditDeviceService } from '../../../../../../shared/services/forms/device/edit-device.service';
 
-import { Device } from "../../../../../../shared/types/devices";
+import { Device } from '../../../../../../shared/types/devices';
 
 @Component({
-  selector: "app-device-action-btn",
-  templateUrl: "./device-action-btn.component.html",
-  styleUrls: ["./device-action-btn.component.scss"],
+  selector: 'app-device-action-btn',
+  templateUrl: './device-action-btn.component.html',
+  styleUrls: ['./device-action-btn.component.scss'],
 })
 export class DeviceActionBtnComponent {
-  @Input() target: string = "";
+  @Input() target: string = '';
   @Input() device!: Device;
 
   @Output() onClick = new EventEmitter<Device>();
@@ -27,6 +27,6 @@ export class DeviceActionBtnComponent {
     });
 
     const modal = document.querySelector(`#${this.target}`);
-    modal?.classList.toggle("hidden");
+    modal?.classList.toggle('hidden');
   }
 }

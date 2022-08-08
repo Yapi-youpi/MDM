@@ -11,9 +11,7 @@
           (onChange)="onChangeSearchInputHandler($event)"
         ></app-input-search>
         <div class="filter-wrapper">
-          <app-filter-btn
-            [target]="'filter_groups'"
-          ></app-filter-btn>
+          <app-filter-btn [target]="'filter_groups'"></app-filter-btn>
         </div>
         <app-add-button
           [title]="'добавить группу'"
@@ -77,19 +75,19 @@
         <div class="list-box">
           <ng-container *ngIf="groups; else nodata">
             <app-group-item
-              *ngFor=
-                "let group of groups
-                  | search: searchParam : 'group'
+              *ngFor="
+                let group of groups
+                  | search: searchParam:'group'
                   | groupFilter
-                        : filter.status
-                        : filter.dateFrom
-                        : filter.dateTo
-                        : filter.configsIDs
+                    : filter.status
+                    : filter.dateFrom
+                    : filter.dateTo
+                    : filter.configsIDs
                   | group_name: isNamesSortAsc
                   | group_devices_count: isDevicesCountSortAsc
-                  | group_config: configsNV : isConfigSortAsc
+                  | group_config: configsNV:isConfigSortAsc
                   | group_date: isDateSortAsc
-                "
+              "
               [group]="group"
               [configs]="configs"
               (onSelectUnselectGroup)="selectUnselectGroup($event)"
@@ -112,14 +110,8 @@
   (onSubmit)="searchGroupsWithParams()"
   (onCancel)="resetSearchParams()"
 ></app-filter-group>
-<app-add-group
-  [configs]="configs"
-  (onSubmit)="addGroup()"
-></app-add-group>
-<app-edit-group
-  [configs]="configs"
-  (onSubmit)="editGroup()"
-></app-edit-group>
+<app-add-group [configs]="configs" (onSubmit)="addGroup()"></app-add-group>
+<app-edit-group [configs]="configs" (onSubmit)="editGroup()"></app-edit-group>
 <app-edit-several-groups
   [configs]="configs"
   (onSubmit)="editSeveralGroups()"

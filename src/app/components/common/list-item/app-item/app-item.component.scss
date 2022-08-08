@@ -1,26 +1,18 @@
 .app-item {
   margin-bottom: 10px;
-
   background-color: var(--white);
   color: var(--dark-grey);
-
   border-radius: 14px;
-
   box-shadow: var(--box-shadow);
-
   overflow: hidden;
-
   transition: height var(--transition-time) ease;
 
   &-content {
     width: 100%;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 15px 16px;
-
     font-size: 12px;
     line-height: 12px;
 
@@ -29,10 +21,10 @@
     }
 
     &.main {
-      .dummy, img {
+      .dummy,
+      img {
         height: 30px;
         width: 30px;
-
         border-radius: 8px;
       }
 
@@ -44,43 +36,34 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
         background-color: var(--red);
 
         span {
           height: 30px;
           width: 30px;
-
           mask-size: 18px 18px;
-          mask-image: url("/assets/UI/question.svg");
+          mask-image: url('/assets/UI/question.svg');
           -webkit-mask-size: 18px 18px;
-          -webkit-mask-image: url("/assets/UI/question.svg");
-
+          -webkit-mask-image: url('/assets/UI/question.svg');
           background-color: var(--white);
         }
       }
 
       .title-wrapper {
         position: relative;
-
         cursor: pointer;
 
         .icon {
           height: 9px;
           width: 11.29px;
-
           position: absolute;
-
           top: 0;
           right: 5px;
-
           mask-size: 11px 9px;
           -wekit-mask-size: 11px 9px;
-          mask-image: url("/assets/UI/arrow_down.svg");
-          -webkit-mask-image: url("/assets/UI/arrow_down.svg");
-
+          mask-image: url('/assets/UI/arrow_down.svg');
+          -webkit-mask-image: url('/assets/UI/arrow_down.svg');
           background-color: var(--dark-blue-grey);
-
           transition: transform var(--transition-time) ease;
 
           &.down {
@@ -108,24 +91,19 @@
 
     > *:nth-child(1) {
       width: 30px;
-
       margin-right: 10px;
     }
 
     > *:nth-child(2) {
       width: 165px;
-
       margin-right: 5px;
-
       color: var(--dark-blue-grey);
-
       overflow-wrap: break-word;
       overflow-y: auto;
     }
 
     > *:nth-child(3) {
       width: 50px;
-
       margin-right: 5px;
     }
 
@@ -137,19 +115,16 @@
 
     > *:nth-child(4) {
       width: 505px;
-
       margin-right: 10px;
     }
 
     > *:nth-child(5) {
       width: 230px;
-
       margin-right: 10px;
     }
 
     > *:nth-child(6) {
       width: 56px;
-
       margin-right: 21px;
       padding-left: 12px;
     }
@@ -161,13 +136,11 @@
     .icon-container {
       height: 16px;
       width: 16px;
-
       border-radius: 8px;
 
       .icon {
         height: 16px;
         width: 16px;
-
         background-color: var(--white);
       }
 
@@ -176,9 +149,9 @@
 
         .icon {
           mask-size: 10px 10px;
-          mask-image: url("/assets/UI/check.svg");
+          mask-image: url('/assets/UI/check.svg');
           -webkit-mask-size: 10px 10px;
-          -webkit-mask-image: url("/assets/UI/check.svg");
+          -webkit-mask-image: url('/assets/UI/check.svg');
         }
       }
 
@@ -187,9 +160,9 @@
 
         .icon {
           mask-size: 14px 14px;
-          mask-image: url("/assets/UI/minus.svg");
+          mask-image: url('/assets/UI/minus.svg');
           -webkit-mask-size: 14px 14px;
-          -webkit-mask-image: url("/assets/UI/minus.svg");
+          -webkit-mask-image: url('/assets/UI/minus.svg');
         }
       }
     }
@@ -204,7 +177,6 @@
 
     hr {
       margin: 0 16px 0 226px;
-
       height: 1px;
 
       &:first-child {
