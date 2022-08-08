@@ -53,25 +53,28 @@ export class AppsComponent {
         console.log('GET APPS REQ: ', res.app);
 
         if (res.app) {
+          if (this.apps.length !== 0) this.apps = [];
+
           res.app.forEach((a) => {
-            if (a.ID === a.parentAppID) this.apps.push({ ...a, children: [] });
+            if (a.ID === a.parentAppID)
+              this.apps = [{ ...a, children: [] }, ...this.apps];
           });
 
           res.app.forEach((a) => {
             if (a.parentAppID !== a.ID) {
-              this.apps.map((ag) => {
+              this.apps = this.apps.map((ag) => {
                 if (a.parentAppID === ag.ID) {
                   if (ag.children?.length === 0)
                     return {
                       ...ag,
-                      children: ag.children.push(a),
+                      children: [a, ...ag.children],
                     };
                   else {
                     if (ag.children?.includes(a)) return ag;
                     else
                       return {
                         ...ag,
-                        children: ag.children?.push(a),
+                        children: [a, ...ag.children],
                       };
                   }
                 } else return ag;
@@ -117,12 +120,7 @@ export class AppsComponent {
         if (res.success) {
           // Приложение - родитель
           if (res.app.parentAppID === res.app.ID) {
-            this.alert.show({
-              title: 'Добавление приложения',
-              content:
-                'Приложение успешно добавлено.<br/>Для обновления списка приложений перезагрузите страницу.',
-              type: 'success',
-            });
+            this.getApps();
             // Приложение - потомок
           } else {
             this.apps = this.apps.map((ag) => {
