@@ -115,66 +115,22 @@ export class AppsComponent {
       .upload(this.addAppForm._file)
       .then((res: UploadAppState) => {
         if (res.success) {
-          console.log(res);
-
-          // 1. Если у добавляемого приложения есть уже существующий родственник:
-          //   1.1. Если у родственника нет потомков, тогда сравнить версии.
-          //     1.1.2. Сделать добавляемое приложение родителем, а родственника потомком, если версия добавляемого выше, чем у родственника.
-          //     1.1.3. Иначе наоборот - сделать добавляемое приложение потомком, а родственника родителем.
-          //   1.2. Если у родственника (родителя) есть потомки:
-          //     1.2.1. Если у добавляемого приложения версия выше, чем у родителя, то добавляемое приложение сделать новым родителем, а текущего сделать старшим потомком.
-          //     1.2.2. Иначе сделать добавляемое приложение потомком и отсортировать новый список потомков.
-          // 2. Иначе добавить в список как одиночку.
-
-          // if (res.app.parentAppID === res.app.ID)
-          //   this.apps = [res.app, ...this.apps];
-          // else {
-          //   this.apps.map((ag) => {
-          //     if (res.app.parentAppID === ag.ID) {
-          //       if (ag.children?.length === 0)
-          //         return {
-          //           ...ag,
-          //           children: ag.children.push(ag),
-          //         };
-          //       else {
-          //         if (ag.children?.includes(ag)) return ag;
-          //         else
-          //           return {
-          //             ...ag,
-          //             children: ag.children?.push(ag),
-          //           };
-          //       }
-          //     } else return ag;
-          //   });
-          // }
-
-          // if (res.app.parentAppID === res.app.ID || res.app.parentAppID === '')
-          //   this.apps = [res.app, ...this.apps];
-          // else {
-          //   this.apps.map((ag) => {
-          //     if (ag.ID === res.app.parentAppID) {
-          //       if (ag.children?.length === 0)
-          //         return {
-          //           ...ag,
-          //           children: ag.children.push({
-          //             ...res.app,
-          //             children: [],
-          //           }),
-          //         };
-          //       else {
-          //         if (ag.children?.includes(res.app)) return ag;
-          //         else
-          //           return {
-          //             ...ag,
-          //             children: ag.children?.push({
-          //               ...res.app,
-          //               children: [],
-          //             }),
-          //           };
-          //       }
-          //     } else return ag;
-          //   });
-          // }
+          // Приложение - родитель
+          if (res.app.parentAppID === res.app.ID) {
+            this.alert.show({
+              title: 'Добавление приложения',
+              content:
+                'Приложение успешно добавлено.<br/>Пожалуйста, перезагрузите страницу.',
+              type: 'success',
+            });
+            // Приложение - потомок
+          } else {
+            this.apps = this.apps.map((ag) => {
+              if (ag.ID === res.app.parentAppID) {
+                return { ...ag, children: [res.app, ...ag.children] };
+              } else return ag;
+            });
+          }
 
           this.sortChildrenByVCode();
 
@@ -249,58 +205,55 @@ export class AppsComponent {
   deleteApp() {
     this.loading = true;
 
-    this.appsService
-      .delete(this.currApp)
-      .then((res: { success: boolean; error: string }) => {
-        if (res.success) {
-          // Элемент оказался одиночкой или родителем
-          if (this.currApp.ID === this.currApp.parentAppID) {
-            // Если одиночка
-            if (this.currApp.children.length === 0)
-              this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
-            // Если родитель
-            else {
-              const firstChild: App = this.currApp.children[0];
-              const restChildren: App[] = this.currApp.children
-                ?.filter((child) => child.ID !== firstChild.ID)
-                .map((child) => {
-                  return {
-                    ...child,
-                    parentAppID: firstChild.ID,
-                  };
-                });
-
-              this.apps = this.apps.map((a) => {
-                if (a.ID === this.currApp.ID)
-                  return { ...firstChild, children: [...restChildren] };
-                else return a;
-              });
-            }
-          } else {
-            // Элемент оказался потомком
-            this.apps = this.apps.map((a) => {
-              if (a.ID === this.currApp.parentAppID)
+    this.appsService.delete(this.currApp).then((res: State) => {
+      if (res.success) {
+        // Элемент оказался одиночкой или родителем
+        if (this.currApp.ID === this.currApp.parentAppID) {
+          // Если одиночка
+          if (this.currApp.children.length === 0)
+            this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
+          // Если родитель
+          else {
+            const firstChild: App =
+              this.currApp.children[this.currApp.children.length - 1];
+            const restChildren: App[] = this.currApp.children
+              ?.filter((child) => child.ID !== firstChild.ID)
+              .map((child) => {
                 return {
-                  ...a,
-                  children: a.children.filter(
-                    (child) => child.ID !== this.currApp.ID
-                  ),
+                  ...child,
+                  parentAppID: firstChild.ID,
                 };
+              });
+
+            this.apps = this.apps.map((a) => {
+              if (a.ID === this.currApp.ID)
+                return { ...firstChild, children: [...restChildren] };
               else return a;
             });
           }
-
-          // this.sortChildrenByVCode();
-
-          const modal = document.querySelector('#delete_app');
-          modal?.classList.toggle('hidden');
         } else {
-          this.alert.show({
-            title: 'DELETE APP ERROR',
-            content: res.error,
+          // Элемент оказался потомком
+          this.apps = this.apps.map((a) => {
+            if (a.ID === this.currApp.parentAppID)
+              return {
+                ...a,
+                children: a.children.filter(
+                  (child) => child.ID !== this.currApp.ID
+                ),
+              };
+            else return a;
           });
         }
-      });
+
+        const modal = document.querySelector('#delete_app');
+        modal?.classList.toggle('hidden');
+      } else {
+        this.alert.show({
+          title: 'DELETE APP ERROR',
+          content: res.error,
+        });
+      }
+    });
 
     this.loading = false;
   }
