@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { DevicesConfig } from '../../../interfaces/interfaces';
@@ -13,6 +13,7 @@ import { AppsService } from '../../../shared/services/apps.service';
   selector: 'app-configuration',
   templateUrl: './configuration.component.html',
   styleUrls: ['./configuration.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
@@ -132,6 +133,13 @@ export class ConfigurationComponent implements OnInit {
       .editConfig(config)
       .then((res) => {
         console.log(res);
+        const saveBtn = document.querySelector('.save-btn');
+        saveBtn?.classList.add('save-btn--success');
+        let i = interval(2000).subscribe(() => {
+          saveBtn?.classList.remove('save-btn--success');
+          i.unsubscribe();
+        });
+
         // this.configForm.reset();
       })
       .catch((err) => console.log(err));

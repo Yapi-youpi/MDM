@@ -487,6 +487,34 @@ input[type='color']::-webkit-color-swatch {
   color: var(--dark-blue);
 }
 
+.save-btn {
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    padding: 8px 12px;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+  &--success:after {
+    content: 'Изменения успешно применены';
+    display: block;
+    position: absolute;
+    padding: 8px 12px;
+    top: -40px;
+    background: white;
+    border: 1px solid var(--light-blue-grey);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--dark-blue);
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+  }
+}
+
 .colors-wrapper {
   margin-right: 0 !important;
   display: flex;
