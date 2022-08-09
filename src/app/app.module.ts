@@ -116,6 +116,7 @@ import { GroupDevicesCountPipe } from './shared/pipes/sort/groups/group-devices-
 import { GroupNamePipe } from './shared/pipes/sort/groups/group-name.pipe';
 import { MessagesComponent } from './components/pages/messages/messages.component';
 import { MsgPipe } from './shared/pipes/msg.pipe';
+import { FilterMessagesComponent } from './components/common/modals/messages/filter-messages/filter-messages.component';
 
 const routes: Routes = [
   {
@@ -226,6 +227,7 @@ const routes: Routes = [
     GroupNamePipe,
     MessagesComponent,
     MsgPipe,
+    FilterMessagesComponent,
   ],
   imports: [
     BrowserModule,
