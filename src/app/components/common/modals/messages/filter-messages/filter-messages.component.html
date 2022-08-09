@@ -1,0 +1,69 @@
+<app-modal
+  [modalID]="'filter-messages'"
+  [direction]="'horizontal'"
+  [isClosable]="true"
+>
+  <div class="modal-form-filter w-400">
+    <form class="filter" [formGroup]="filterForm" (submit)="asd()">
+      <div class="filter__header">Фильтр</div>
+      <div class="filter__content">
+        <div class="form-group-wrapper">
+          <p class="text-menu-title">Статус</p>
+        </div>
+        <div class="form-group-wrapper">
+          <div class="tags-container">
+            <label class="custom-radio">
+              <input
+                class="visually-hidden"
+                formControlName="status"
+                type="radio"
+                [value]="'отправлено'"
+              />
+              <span class="custom-radio__span">отправлено</span>
+            </label>
+            <label class="custom-radio">
+              <input
+                class="visually-hidden"
+                formControlName="status"
+                type="radio"
+                [value]="'не отправлено'"
+              />
+              <span class="custom-radio__span">не отправлено</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group-wrapper">
+          <p class="text-menu-title last-date">Последнее обновление</p>
+        </div>
+        <div class="form-group-wrapper date">
+          <label class="text-menu-title"> с </label>
+          <app-input-datetime
+            [name]="'date-from'"
+            [width]="'w-180'"
+            [control]="$any(filterForm.get('date-from'))"
+          ></app-input-datetime>
+        </div>
+        <div class="form-group-wrapper date">
+          <label class="text-menu-title"> по </label>
+          <app-input-datetime
+            [name]="'date-to'"
+            [width]="'w-180'"
+            [control]="$any(filterForm.get('date-to'))"
+          ></app-input-datetime>
+        </div>
+      </div>
+      <div class="filter__footer">
+        <div class="btn-wrapper">
+          <button type="submit" class="btn btn--big">Применить</button>
+          <button
+            (click)="asd()"
+            type="button"
+            class="btn btn--big btn--outline"
+          >
+            Отменить
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-modal>
