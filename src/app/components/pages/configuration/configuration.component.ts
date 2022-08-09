@@ -59,7 +59,6 @@ export class ConfigurationComponent implements OnInit {
       name: new FormControl('', Validators.required),
       orientation: new FormControl(0, Validators.required),
       pushOptions: new FormControl('all', Validators.required),
-      restrictions: new FormControl('', Validators.required),
       scheduleAppUpdate: new FormControl(false, Validators.required),
       textColor: new FormControl('', Validators.required),
       timeout: new FormControl(30000000000, Validators.required),
@@ -217,6 +216,20 @@ export class ConfigurationComponent implements OnInit {
       // @ts-ignore
       tabsContent[i].style.display = 'flex';
       tabs[i].classList.add('tab--active');
+    }
+  }
+
+  changeRestrictions(event) {
+    if (event.target.checked) {
+      this.config.restrictions =
+        this.config.restrictions.length !== 0
+          ? `${this.config.restrictions}, ${event.target.value}`
+          : event.target.value;
+    } else {
+      let arr = this.config.restrictions.split(', ');
+      const index = arr.findIndex((i) => i === event.target.value);
+      arr.splice(index, 1);
+      this.config.restrictions = arr.join(', ');
     }
   }
 

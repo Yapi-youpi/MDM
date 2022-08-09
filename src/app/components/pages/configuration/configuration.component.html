@@ -903,8 +903,9 @@
                   <label class="custom-radio" *ngFor="let item of restrictions">
                     <input
                       class="visually-hidden"
-                      type="radio"
+                      type="checkbox"
                       [value]="item"
+                      (click)="changeRestrictions($event)"
                     />
                     <span class="custom-radio__span">{{ item }}</span>
                   </label>
