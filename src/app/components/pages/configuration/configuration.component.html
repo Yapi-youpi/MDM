@@ -906,6 +906,7 @@
                       type="checkbox"
                       [value]="item"
                       (click)="changeRestrictions($event)"
+                      [checked]="config.restrictions.includes(item)"
                     />
                     <span class="custom-radio__span">{{ item }}</span>
                   </label>
