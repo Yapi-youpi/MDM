@@ -9,10 +9,10 @@
     (change)="onChangeHandler($event)"
   />
   <label [for]="name">загрузить</label>
-  <p *ngIf="control?.value && !isError && _name" class="text-menu-title">
-    {{ _name }}
+  <p *ngIf="!isError" class="file-name text-menu-title">
+    {{ _name ? _name : 'Файл не выбран' }}
   </p>
-  <p *ngIf="control?.value && !isError && _size" class="text-menu-title">
-    {{ _size | fileSize }}
+  <p *ngIf="!isError && !!_name" class="file-size text-menu-title">
+    {{ _size ? (_size | fileSize) : '0 Мб' }}
   </p>
 </div>

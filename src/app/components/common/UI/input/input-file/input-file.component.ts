@@ -22,13 +22,17 @@ export class InputFileComponent {
   constructor() {}
 
   get _name() {
-    if (!this.file) return null;
-    else return this.file.name;
+    if (this.control.value) {
+      if (!this.file) return null;
+      else return this.file.name;
+    } else return null;
   }
 
   get _size() {
-    if (!this.file) return null;
-    else return this.file.size;
+    if (this.control.value) {
+      if (!this.file) return null;
+      else return this.file.size;
+    } else return null;
   }
 
   onChangeHandler(event) {

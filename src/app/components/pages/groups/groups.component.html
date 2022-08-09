@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="list-box">
-          <ng-container *ngIf="groups; else nodata">
+          <ng-container *ngIf="groups.length !== 0; else nodata">
             <app-group-item
               *ngFor="
                 let group of groups
