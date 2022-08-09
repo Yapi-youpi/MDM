@@ -18,11 +18,14 @@
           [target]="'add_group'"
         ></app-add-button>
       </div>
-      <ng-container *ngIf="loading">
+      <ng-container *ngIf="loading; else dummy">
         <div class="progress">
           <div class="indeterminate"></div>
         </div>
       </ng-container>
+      <ng-template #dummy>
+        <div class="dummy"></div>
+      </ng-template>
       <app-selected-elements
         [selectedIDs]="selectedGroupsIDs"
         [editTarget]="'edit_several_groups'"
@@ -73,7 +76,7 @@
           </div>
         </div>
         <div class="list-box">
-          <ng-container *ngIf="groups; else nodata">
+          <ng-container *ngIf="groups.length !== 0; else nodata">
             <app-group-item
               *ngFor="
                 let group of groups

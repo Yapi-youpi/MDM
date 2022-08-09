@@ -18,11 +18,14 @@
           [target]="'add_device'"
         ></app-add-button>
       </div>
-      <ng-container *ngIf="loading">
+      <ng-container *ngIf="loading; else dummy">
         <div class="progress">
           <div class="indeterminate"></div>
         </div>
       </ng-container>
+      <ng-template #dummy>
+        <div class="dummy"></div>
+      </ng-template>
       <app-selected-elements
         [selectedIDs]="selectedDevicesIDs"
         [editTarget]="'edit_several_devices'"
@@ -84,7 +87,7 @@
           </div>
         </div>
         <div class="list-body">
-          <ng-container *ngIf="!loading && devices; else nodata">
+          <ng-container *ngIf="devices.length !== 0; else nodata">
             <app-device-item
               *ngFor="
                 let device of devices

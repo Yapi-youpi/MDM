@@ -103,8 +103,11 @@
     }
 
     > *:nth-child(3) {
+      max-height: 30px;
       width: 50px;
       margin-right: 5px;
+      overflow-wrap: break-word;
+      overflow-y: auto;
     }
 
     &.child {
