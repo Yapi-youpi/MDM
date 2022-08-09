@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, timer } from 'rxjs';
 
 import {
   alertService,
@@ -69,18 +69,23 @@ export class GroupsComponent implements OnInit {
   getGroups(param: string) {
     this.loading = true;
 
-    this.groupService.get(param).then((res: states.DevicesGroupsState) => {
-      if (res.success) {
-        this.groups = res.devicesGroups;
-      } else {
-        this.alert.show({
-          title: 'GET GROUPS ERROR',
-          content: res.error,
+    this.groupService
+      .get(param)
+      .then((res: states.DevicesGroupsState) => {
+        if (res.success) {
+          this.groups = res.devicesGroups;
+        } else {
+          this.alert.show({
+            title: 'GET GROUPS ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
         });
-      }
-    });
-
-    this.loading = false;
+      });
   }
 
   getConfigs(param: string) {
@@ -99,9 +104,12 @@ export class GroupsComponent implements OnInit {
           title: 'GET CONFIGS ERROR',
           content: err.error,
         });
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   onChangeSearchInputHandler(value: string) {
@@ -199,9 +207,12 @@ export class GroupsComponent implements OnInit {
             content: res.error,
           });
         }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   changeGroupState(group: DevicesGroup) {
@@ -222,9 +233,12 @@ export class GroupsComponent implements OnInit {
             content: res.error,
           });
         }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   changeGroupConfig(group: DevicesGroup, deviceConfigID: string) {
@@ -245,9 +259,12 @@ export class GroupsComponent implements OnInit {
             content: res.error,
           });
         }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   selectGroupToEdit(group: DevicesGroup) {
@@ -276,9 +293,12 @@ export class GroupsComponent implements OnInit {
             content: res.error,
           });
         }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   editSeveralGroups() {
@@ -294,28 +314,33 @@ export class GroupsComponent implements OnInit {
         };
       });
 
-    this.groupService.editSeveral(data).then((res: states.State) => {
-      if (res.success) {
-        data.forEach((d) => {
-          this.groups = this.groups.map((g) => {
-            if (g.id === d.id) return d;
-            else return g;
+    this.groupService
+      .editSeveral(data)
+      .then((res: states.State) => {
+        if (res.success) {
+          data.forEach((d) => {
+            this.groups = this.groups.map((g) => {
+              if (g.id === d.id) return d;
+              else return g;
+            });
           });
+
+          this.selectedGroupsIDs = [];
+
+          const modal = document.querySelector('#edit_several_groups');
+          modal?.classList.toggle('hidden');
+        } else {
+          this.alert.show({
+            title: 'EDIT SEVERAL ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
         });
-
-        this.selectedGroupsIDs = [];
-
-        const modal = document.querySelector('#edit_several_groups');
-        modal?.classList.toggle('hidden');
-      } else {
-        this.alert.show({
-          title: 'EDIT SEVERAL ERROR',
-          content: res.error,
-        });
-      }
-    });
-
-    this.loading = false;
+      });
   }
 
   selectGroupToDelete(group: DevicesGroup) {
@@ -325,23 +350,28 @@ export class GroupsComponent implements OnInit {
   deleteGroup() {
     this.loading = true;
 
-    this.groupService.delete(this.currGroup).then((res: states.State) => {
-      if (res.success) {
-        this.groups = this.groups.filter((g) => {
-          return g.id !== this.currGroup.id;
-        });
+    this.groupService
+      .delete(this.currGroup)
+      .then((res: states.State) => {
+        if (res.success) {
+          this.groups = this.groups.filter((g) => {
+            return g.id !== this.currGroup.id;
+          });
 
-        const modal = document.querySelector('#delete_group');
-        modal?.classList.toggle('hidden');
-      } else {
-        this.alert.show({
-          title: 'DELETE GROUP ERROR',
-          content: res.error,
+          const modal = document.querySelector('#delete_group');
+          modal?.classList.toggle('hidden');
+        } else {
+          this.alert.show({
+            title: 'DELETE GROUP ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
         });
-      }
-    });
-
-    this.loading = false;
+      });
   }
 
   deleteSeveralGroups() {
@@ -357,24 +387,29 @@ export class GroupsComponent implements OnInit {
         };
       });
 
-    this.groupService.deleteSeveral(data).then((res: states.State) => {
-      if (res.success) {
-        data.forEach((d) => {
-          this.groups = this.groups.filter((g) => g.id !== d.id);
+    this.groupService
+      .deleteSeveral(data)
+      .then((res: states.State) => {
+        if (res.success) {
+          data.forEach((d) => {
+            this.groups = this.groups.filter((g) => g.id !== d.id);
+          });
+
+          this.selectedGroupsIDs = [];
+
+          const modal = document.querySelector('#delete_several_elements');
+          modal?.classList.toggle('hidden');
+        } else {
+          this.alert.show({
+            title: 'EDIT SEVERAL ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
         });
-
-        this.selectedGroupsIDs = [];
-
-        const modal = document.querySelector('#delete_several_elements');
-        modal?.classList.toggle('hidden');
-      } else {
-        this.alert.show({
-          title: 'EDIT SEVERAL ERROR',
-          content: res.error,
-        });
-      }
-    });
-
-    this.loading = false;
+      });
   }
 }

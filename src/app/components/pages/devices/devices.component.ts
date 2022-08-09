@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, timer } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
 
 import {
@@ -96,43 +96,56 @@ export class DevicesComponent implements OnInit, OnDestroy {
           title: 'GET CONFIGS ERROR',
           content: err.error,
         });
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   getGroups() {
     this.loading = true;
 
-    this.group.get('all').then((res: states.DevicesGroupsState) => {
-      if (res.success) {
-        this.groups = res.devicesGroups;
-      } else {
-        this.alert.show({
-          title: 'GET GROUPS ERROR',
-          content: res.error,
+    this.group
+      .get('all')
+      .then((res: states.DevicesGroupsState) => {
+        if (res.success) {
+          this.groups = res.devicesGroups;
+        } else {
+          this.alert.show({
+            title: 'GET GROUPS ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
         });
-      }
-    });
-
-    this.loading = false;
+      });
   }
 
   getDevices() {
     this.loading = true;
 
-    this.device.get('all').then((res: states.DevicesState) => {
-      if (res.success) {
-        this.devices = res.devices;
-      } else {
-        this.alert.show({
-          title: 'GET DEVICES ERROR',
-          content: res.error,
+    this.device
+      .get('all')
+      .then((res: states.DevicesState) => {
+        if (res.success) {
+          this.devices = res.devices;
+        } else {
+          this.alert.show({
+            title: 'GET DEVICES ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
         });
-      }
-    });
-
-    this.loading = false;
+      });
   }
 
   async subscribeOnServer() {
@@ -245,9 +258,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
             content: res.error,
           });
         }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   selectUnselectDevices() {
@@ -299,9 +315,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
             title: 'CHANGE DEVICE STATE ERROR',
             content: res.error,
           });
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   getDeviceQRCode(device: Device) {
@@ -335,9 +354,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
             content: res.error,
           });
         }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   editSeveralDevices() {
@@ -353,21 +375,26 @@ export class DevicesComponent implements OnInit, OnDestroy {
         };
       });
 
-    this.device.edit(data).then((res: states.DevicesState) => {
-      if (res.success) {
-        this.selectedDevicesIDs = [];
+    this.device
+      .edit(data)
+      .then((res: states.DevicesState) => {
+        if (res.success) {
+          this.selectedDevicesIDs = [];
 
-        const modal = document.querySelector('#edit_several_devices');
-        modal?.classList.toggle('hidden');
-      } else {
-        this.alert.show({
-          title: 'EDIT SEVERAL DEVICES ERROR',
-          content: res.error,
+          const modal = document.querySelector('#edit_several_devices');
+          modal?.classList.toggle('hidden');
+        } else {
+          this.alert.show({
+            title: 'EDIT SEVERAL DEVICES ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
         });
-      }
-    });
-
-    this.loading = false;
+      });
   }
 
   selectDeviceToDelete(device: Device) {
@@ -389,9 +416,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
             title: 'DELETE DEVICE ERROR',
             content: res.error,
           });
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 
   deleteSeveralDevices() {
@@ -411,8 +441,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
             content: res.error,
           });
         }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
       });
-
-    this.loading = false;
   }
 }

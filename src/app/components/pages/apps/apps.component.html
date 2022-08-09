@@ -26,11 +26,14 @@
           [target]="'add_app'"
         ></app-add-button>
       </div>
-      <ng-container *ngIf="loading">
+      <ng-container *ngIf="loading; else dummy">
         <div class="progress">
           <div class="indeterminate"></div>
         </div>
       </ng-container>
+      <ng-template #dummy>
+        <div class="dummy"></div>
+      </ng-template>
       <div class="list">
         <div class="list-header row space-between">
           <div class="empty"></div>
@@ -55,15 +58,15 @@
           <p>Действия</p>
         </div>
         <div class="list-body">
-          <ng-container *ngIf="!loading && apps.length > 0; else nodata">
+          <ng-container *ngIf="apps.length !== 0; else nodata">
             <app-app-item
               *ngFor="
-                let app of apps
-                  | search: searchParam:'app'
-                  | apps_system: isOnlySystemApps
-                  | apps_name: isNameSortAsc
-                  | apps_size: isSizeSortAsc
-              "
+               let app of apps
+                 | search: searchParam:'app'
+                 | apps_system: isOnlySystemApps
+                 | apps_name: isNameSortAsc
+                 | apps_size: isSizeSortAsc
+               "
               [app]="app"
               (onEditClick)="selectAppToEdit($event)"
               (onDeleteClick)="selectAppToDelete($event)"
