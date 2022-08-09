@@ -1,0 +1,56 @@
+<app-global-container class="global-container">
+  <app-global-header
+    class="global-header"
+    [title]="'Сообщения'"
+  ></app-global-header>
+  <main class="global-main">
+    <div class="card">
+      <div class="card__header">
+        <span class="search-wrapper">
+          <input
+            [(ngModel)]="search"
+            type="search"
+            name="search"
+            id="search"
+            class="search-input" /><i class="search-icon"></i
+        ></span>
+        <app-filter-btn [target]="'filter-messages'"></app-filter-btn>
+        <app-add-button
+          class="btn--right"
+          [title]="'написать сообщение'"
+          [target]="'туц'"
+        ></app-add-button>
+      </div>
+      <table *ngIf="messages && messages!.length > 0; else nodata">
+        <thead>
+          <tr class="table-row">
+            <th class="sort-btn-wrapper">
+              <app-sort-btn
+                [title]="'Дата'"
+                [isSortAsc]="isNameSortAsc"
+                (click)="asd()"
+              ></app-sort-btn>
+            </th>
+            <th class="sort-btn-wrapper">
+              <app-sort-btn [title]="'Устройства или группа'"></app-sort-btn>
+            </th>
+            <th>Статус</th>
+            <th>Текст</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="msg-item table-row" *ngFor="let msg of messages">
+            <td class="msg-item__col">{{ msg.date | dateConverter }}</td>
+            <td class="msg-item__col">{{ msg.group }}</td>
+            <td class="msg-item__col">{{ msg.status }}</td>
+            <td class="msg-item__col">{{ msg.text }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #nodata>
+        <div style="margin-top: 32px; text-align: center">Нет сообщений</div>
+      </ng-template>
+    </div>
+  </main>
+</app-global-container>

@@ -12,6 +12,7 @@
 table {
   width: 100%;
 }
+
 th,
 td {
   display: flex;
@@ -22,9 +23,11 @@ td {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 th {
   padding: 18px 0;
 }
+
 .table-row {
   display: grid;
   border-collapse: collapse;
@@ -41,27 +44,32 @@ th {
   font-size: 12px;
   line-height: 12px;
 }
+
 .app-item {
   height: 60px;
   margin-bottom: 10px;
   background: white;
   border-radius: 14px;
   box-shadow: var(--box-shadow);
+
   &__img {
     margin: 0 10px;
     height: 30px;
     width: 30px;
     border-radius: 8px;
   }
+
   &__title {
     margin-right: 8px;
   }
+
   &__pkg {
     margin-right: 12px;
   }
   &__order {
     padding-left: 12px;
   }
+
   & .text-note {
     margin-top: 7px;
     color: var(--dark-grey);
@@ -75,11 +83,13 @@ th {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
   & .icon {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   & svg polyline {
     fill: none;
     stroke: #fff;
@@ -98,6 +108,7 @@ input[type='checkbox'] {
 
   &:checked + .checkbox-round {
     background-color: var(--dark-blue);
+
     & svg polyline {
       stroke-dasharray: 19.7;
       stroke-dashoffset: 6.8;
@@ -116,6 +127,7 @@ input[type='checkbox'] {
   color: var(--dark-blue) !important;
   border: none !important;
   border-radius: 8px;
+
   &.open {
     background-color: var(--grey) !important;
     color: var(--dark-blue) !important;

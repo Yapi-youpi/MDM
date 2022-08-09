@@ -114,6 +114,7 @@ import { GroupConfigPipe } from './shared/pipes/sort/groups/group-config.pipe';
 import { GroupDatePipe } from './shared/pipes/sort/groups/group-date.pipe';
 import { GroupDevicesCountPipe } from './shared/pipes/sort/groups/group-devices-count.pipe';
 import { GroupNamePipe } from './shared/pipes/sort/groups/group-name.pipe';
+import { MessagesComponent } from './components/pages/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -222,6 +223,7 @@ const routes: Routes = [
     GroupDatePipe,
     GroupDevicesCountPipe,
     GroupNamePipe,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
