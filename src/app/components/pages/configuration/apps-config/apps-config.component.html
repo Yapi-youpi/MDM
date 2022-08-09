@@ -90,22 +90,22 @@
           class="select-app-action"
           (change)="setAction(app.ID, $event)"
         >
-          <option [value]="0">Удалить</option>
-          <option [value]="1" selected>Разрешить</option>
+          <option
+            [value]="'0'"
+            [selected]="removedAppsInConfig.includes(app.ID)"
+          >
+            Удалить
+          </option>
+          <option
+            [value]="'1'"
+            [selected]="
+              installedAppsInConfig.includes(app.ID) ||
+              !removedAppsInConfig.includes(app.ID)
+            "
+          >
+            Разрешить
+          </option>
         </select>
-        <!-- component app-mini-select has a lot of bugs, need to fix and to refactor -->
-        <!--        <app-mini-select
-          style="position: absolute"
-          [arrowClass]="'arrow-blue'"
-          [headerClass]="'select-app-action'"
-          [header]="'Действия'"
-          [options]="[
-            { value: 'allow', html: 'Разрешить' },
-            { value: 'disallow', html: 'Удалить' }
-          ]"
-          (onSelect)="setAction()"
-        >
-        </app-mini-select>-->
       </td>
       <td class="row center app-item__icon">
         <label class="checkbox-wrapper" for="icon-{{ app.ID }}">

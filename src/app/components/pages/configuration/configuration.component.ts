@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { DevicesConfig } from '../../../interfaces/interfaces';
@@ -13,7 +13,6 @@ import { AppsService } from '../../../shared/services/apps.service';
   selector: 'app-configuration',
   templateUrl: './configuration.component.html',
   styleUrls: ['./configuration.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
@@ -26,10 +25,10 @@ export class ConfigurationComponent implements OnInit {
   private initialAppList: string[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private configService: DevicesConfigService,
     public userService: UserService,
     public appsService: AppsService,
+    private route: ActivatedRoute,
+    private configService: DevicesConfigService,
     private router: Router
   ) {
     this.configForm = new FormGroup({
@@ -143,6 +142,7 @@ export class ConfigurationComponent implements OnInit {
         // this.configForm.reset();
       })
       .catch((err) => console.log(err));
+
     if (this.editedApps.length > 0) {
       this.editedApps.map((app) => {
         this.appsService
@@ -157,6 +157,16 @@ export class ConfigurationComponent implements OnInit {
     const currentApp = this.apps.find((app) => app.ID === id);
     if (currentApp) {
       this.editedApps.push(currentApp);
+    }
+  }
+
+  toggleApp(app) {
+    const { id, value } = app;
+    if (value === '0') {
+      this.config.removedApps.push(id);
+    }
+    if (value === '1') {
+      this.config.installedApps.push(id);
     }
   }
 

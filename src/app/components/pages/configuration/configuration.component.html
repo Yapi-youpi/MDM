@@ -775,7 +775,14 @@
               [configId]="config.ID"
               [isModalAddAppOpen]="isModalAddAppOpen"
               [appsInConfig]="config.applications ? config.applications : []"
+              [installedAppsInConfig]="
+                config.installedApps ? config.installedApps : []
+              "
+              [removedAppsInConfig]="
+                config.removedApps ? config.removedApps : []
+              "
               (onSave)="editApp($event)"
+              (onChangeAction)="toggleApp($event)"
               (onOpenModal)="isModalAddAppOpen = $event"
             ></app-apps-config>
           </div>

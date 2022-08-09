@@ -89,6 +89,30 @@ export interface DevicesConfig {
   wifiSSID: string | '';
   wifiSecurityType: string | '';
   allowedClasses: AllowedClasses;
+  //новые поля
+  appName: string | '';
+  appUpdateFrom: string | '';
+  appUpdateTo: string | '';
+  configVersion: number;
+  custom1: string | '';
+  custom2: string | '';
+  custom3: string | '';
+  imei: string | '';
+  installedApps: string[];
+  lockStatusBar: false;
+  mainApp: string | '';
+  newNumber: string | '';
+  newServerUrl: '';
+  password: '';
+  passwordMode: '';
+  phone: '';
+  removedApps: string[];
+  requestUpdates: '';
+  runDefaultLauncher: false;
+  systemUpdateFrom: '';
+  systemUpdateTo: '';
+  title: '';
+  vendor: '';
 }
 
 export interface AllowedClasses {}

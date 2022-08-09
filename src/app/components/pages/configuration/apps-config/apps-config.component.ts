@@ -20,6 +20,8 @@ import { AppsService } from '../../../../shared/services/apps.service';
 export class AppsConfigComponent implements OnInit {
   @Input() apps: App[] = [];
   @Input() appsInConfig: string[] = [];
+  @Input() installedAppsInConfig: string[] = [];
+  @Input() removedAppsInConfig: string[] = [];
   @Input() configId: string = '';
   @Input() isModalAddAppOpen!: boolean;
   public url: string = environment.url + api.GET_ICON;
@@ -30,6 +32,7 @@ export class AppsConfigComponent implements OnInit {
   public isPositionSortAsc: boolean = true;
 
   @Output() onSave = new EventEmitter<string>();
+  @Output() onChangeAction = new EventEmitter<Array<any>>();
   @Output() onOpenModal = new EventEmitter<boolean>();
 
   constructor(private appsService: AppsService) {}
@@ -79,18 +82,24 @@ export class AppsConfigComponent implements OnInit {
       this.onSave.emit(id);
     }
   }
+
   setModalAddAppOpen() {
     this.onOpenModal.emit(true);
   }
+
   setAction(id, event) {
-    if (event.target.value == 0) {
-      this.appsService
-        .removeAppFromInstall(this.configId, id)
-        .then((res) => console.log(res));
-    } else if (event.target.value == 1) {
-      this.appsService
-        .addAppToInstall(this.configId, id)
-        .then((res) => console.log(res));
+    const currentApp = this.apps.find((app) => app.ID === id);
+    if (currentApp) {
+      if (event.target.value === '0') {
+        this.appsService
+          .removeAppFromInstall(this.configId, id)
+          .then((res) => console.log(res));
+      } else if (event.target.value === '1') {
+        this.appsService
+          .addAppToInstall(this.configId, id)
+          .then((res) => console.log(res));
+      }
+      this.onChangeAction.emit([id, event.target.value]);
     }
   }
 }
