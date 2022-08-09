@@ -58,13 +58,14 @@
       color: var(--dark-blue-grey);
 
       overflow-wrap: break-word;
-      overflow-y: auto;
     }
     // описание
     > *:nth-child(4) {
       width: 195px;
 
       margin-right: 5px;
+
+      overflow-wrap: break-word;
     }
     // телефон
     > *:nth-child(5) {

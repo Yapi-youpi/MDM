@@ -27,13 +27,14 @@
       color: var(--dark-blue-grey);
 
       overflow-wrap: break-word;
-      overflow-y: auto;
     }
 
     > *:nth-child(2) {
       width: 275px;
 
       margin-right: 5px;
+
+      overflow-wrap: break-word;
     }
 
     > *:nth-child(3) {
