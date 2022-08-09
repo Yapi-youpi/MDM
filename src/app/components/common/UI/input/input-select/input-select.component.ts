@@ -13,6 +13,7 @@ import { inputWidth, Option } from '../../../../../shared/types/input';
   styleUrls: ['./input-select.component.scss'],
 })
 export class InputSelectComponent {
+  @Input() color: 'common' | 'light' = 'common';
   @Input() width: inputWidth = 'w-170';
   @Input() options: Option[] = [];
   @Input() currOption!: Option;
@@ -27,7 +28,10 @@ export class InputSelectComponent {
 
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event): void {
-    if (!event.target.classList.contains('dropdown-item')) {
+    if (
+      !event.target.classList.contains('dropdown-item') &&
+      !event.target.classList.contains('select-field')
+    ) {
       this.isDropdownHidden = true;
     }
   }
@@ -36,7 +40,7 @@ export class InputSelectComponent {
     this.isDropdownHidden = !this.isDropdownHidden;
   }
 
-  setCurrentHTML(option: Option) {
+  onSelectHandler(option: Option) {
     this.currOption = option;
 
     this.onSelect.emit(option);

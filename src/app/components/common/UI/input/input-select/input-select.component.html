@@ -1,19 +1,31 @@
 <div
   class="input-select"
-  [ngClass]="width"
+  [ngClass]="[width, color]"
   [class.opened]="!isDropdownHidden"
   [class.error]="isError"
 >
-  <div [class.filled]="!isDropdownHidden" (click)="toggleDropdown()">
+  <div
+    class="select-field"
+    [class.filled]="!isDropdownHidden"
+    [class.text-menu-title]="color === 'common'"
+    (click)="toggleDropdown()">
     {{ currOption?.html }}
   </div>
-  <ul class="select-content" [class.hidden]="isDropdownHidden">
+  <ul
+    class="select-content"
+    [class.hidden]="isDropdownHidden"
+  >
     <li
       *ngFor="let option of options; trackBy: identify"
       class="item"
-      (click)="setCurrentHTML(option)"
+      (click)="onSelectHandler(option)"
     >
-      <p class="text-menu-title dropdown-item">{{ option.html }}</p>
+      <p
+        class="dropdown-item"
+        [class.text-menu-title]="color === 'common'"
+      >
+        {{ option.html }}
+      </p>
     </li>
   </ul>
 </div>

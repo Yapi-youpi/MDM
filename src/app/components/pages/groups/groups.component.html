@@ -91,6 +91,7 @@
               [group]="group"
               [configs]="configs"
               (onSelectUnselectGroup)="selectUnselectGroup($event)"
+              (onConfigChange)="changeGroupConfig($event.group, $event.deviceConfigID)"
               (onSwitchChange)="changeGroupState($event)"
               (onEditClick)="selectGroupToEdit($event)"
               (onDeleteClick)="selectGroupToDelete($event)"

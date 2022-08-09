@@ -227,6 +227,29 @@ export class GroupsComponent implements OnInit {
     this.loading = false;
   }
 
+  changeGroupConfig(group: DevicesGroup, deviceConfigID: string) {
+    this.loading = true;
+
+    this.groupService
+      .edit({ ...group, deviceConfigID: deviceConfigID })
+      .then((res: states.State) => {
+        if (res.success) {
+          this.groups = this.groups.map((g) => {
+            return g.id === group.id
+              ? { ...g, deviceConfigID: deviceConfigID }
+              : g;
+          });
+        } else {
+          this.alert.show({
+            title: 'CHANGE GROUP CONFIG ERROR',
+            content: res.error,
+          });
+        }
+      });
+
+    this.loading = false;
+  }
+
   selectGroupToEdit(group: DevicesGroup) {
     this.currGroup = group;
     this.editForm.form.patchValue(group);
