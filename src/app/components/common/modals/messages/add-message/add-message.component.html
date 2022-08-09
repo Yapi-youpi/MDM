@@ -1,0 +1,41 @@
+<app-modal [modalID]="'modal-add-message'" [isClosable]="true">
+  <div class="modal-form w-700">
+    <h4 class="modal-title">Новое сообщение</h4>
+    <form [formGroup]="newMsgForm" class="form">
+      <div class="form__item">
+        <label>Отправить на</label>
+        <select class="select-native w-440" formControlName="device">
+          <option value="{{ device.name }}" *ngFor="let device of devices">
+            {{ device.name }}
+          </option>
+        </select>
+      </div>
+      <div class="form__item">
+        <label for="target">Устройство/группа</label>
+        <input
+          formControlName="target"
+          type="text"
+          id="target"
+          class="w-440"
+          required
+        />
+      </div>
+      <div class="form__item">
+        <label for="text">Текст</label>
+        <input
+          formControlName="text"
+          type="text"
+          id="text"
+          class="w-440"
+          required
+        />
+      </div>
+    </form>
+    <div class="modal-form-footer btn-wrapper">
+      <button (click)="sendMessage()" class="btn btn--big">Добавить</button>
+      <button class="btn btn--big btn--outline" (click)="closeModal()">
+        Отменить
+      </button>
+    </div>
+  </div>
+</app-modal>

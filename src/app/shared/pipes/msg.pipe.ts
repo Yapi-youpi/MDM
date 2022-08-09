@@ -22,7 +22,13 @@ export class MsgPipe implements PipeTransform {
     }
 
     if (sortParam === 'status') {
+      // sort for boolean status format
       if (isSort) {
+        return msgs.sort((a, b) => (a.status < b.status ? -1 : 1));
+      } else return msgs.sort((a, b) => (a.status > b.status ? -1 : 1));
+    }
+    // sort for string status format
+    /*      if (isSort) {
         return msgs.sort((a, b) =>
           a.status.toLowerCase().localeCompare(b.status.toLowerCase())
         );
@@ -30,7 +36,7 @@ export class MsgPipe implements PipeTransform {
         return msgs.sort((a, b) =>
           b.status.toLowerCase().localeCompare(a.status.toLowerCase())
         );
-    }
+    }*/
 
     return msgs;
   }

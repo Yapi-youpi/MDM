@@ -18,7 +18,7 @@
         <app-add-button
           class="btn--right"
           [title]="'написать сообщение'"
-          [target]="'туц'"
+          [target]="'modal-add-message'"
         ></app-add-button>
       </div>
       <table *ngIf="messages && messages!.length > 0; else nodata">
@@ -54,6 +54,7 @@
             *ngFor="
               let msg of messages
                 | search: search:'message'
+                | msgFilter: filter.status:filter.dateFrom:filter.dateTo
                 | msg: isDateSortAsc:'date'
                 | msg: isTargetSortAsc:'target'
                 | msg: isStatusSortAsc:'status'
@@ -61,7 +62,9 @@
           >
             <td class="msg-item__col">{{ msg.date | dateConverter }}</td>
             <td class="msg-item__col">{{ msg.group }}</td>
-            <td class="msg-item__col">{{ msg.status }}</td>
+            <td class="msg-item__col">
+              {{ msg.status ? 'отправлено' : 'не отправлено' }}
+            </td>
             <td class="msg-item__col">{{ msg.text }}</td>
           </tr>
         </tbody>
@@ -73,4 +76,9 @@
     </div>
   </main>
 </app-global-container>
-<app-filter-messages></app-filter-messages>
+
+<app-add-message></app-add-message>
+<app-filter-messages
+  (onSubmit)="applyFilterParams($event)"
+  (onCancel)="resetFilterParams()"
+></app-filter-messages>

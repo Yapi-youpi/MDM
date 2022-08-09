@@ -117,6 +117,8 @@ import { GroupNamePipe } from './shared/pipes/sort/groups/group-name.pipe';
 import { MessagesComponent } from './components/pages/messages/messages.component';
 import { MsgPipe } from './shared/pipes/msg.pipe';
 import { FilterMessagesComponent } from './components/common/modals/messages/filter-messages/filter-messages.component';
+import { MsgFilterPipe } from './shared/pipes/filters/msg-filter.pipe';
+import { AddMessageComponent } from './components/common/modals/messages/add-message/add-message.component';
 
 const routes: Routes = [
   {
@@ -228,6 +230,8 @@ const routes: Routes = [
     MessagesComponent,
     MsgPipe,
     FilterMessagesComponent,
+    MsgFilterPipe,
+    AddMessageComponent,
   ],
   imports: [
     BrowserModule,
