@@ -24,22 +24,41 @@
       <table *ngIf="messages && messages!.length > 0; else nodata">
         <thead>
           <tr class="table-row">
-            <th class="sort-btn-wrapper">
+            <th>
               <app-sort-btn
                 [title]="'Дата'"
-                [isSortAsc]="isNameSortAsc"
-                (click)="asd()"
+                [isSortAsc]="isDateSortAsc"
+                (click)="toggleDateSortDir()"
               ></app-sort-btn>
             </th>
-            <th class="sort-btn-wrapper">
-              <app-sort-btn [title]="'Устройства или группа'"></app-sort-btn>
+            <th>
+              <app-sort-btn
+                [title]="'Устройства или группа'"
+                [isSortAsc]="isTargetSortAsc"
+                (click)="toggleTargetSortDir()"
+              ></app-sort-btn>
             </th>
-            <th>Статус</th>
+            <th>
+              <app-sort-btn
+                [title]="'Статус'"
+                [isSortAsc]="isStatusSortAsc"
+                (click)="toggleStatusSortDir()"
+              ></app-sort-btn>
+            </th>
             <th>Текст</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="msg-item table-row" *ngFor="let msg of messages">
+          <tr
+            class="msg-item table-row"
+            *ngFor="
+              let msg of messages
+                | search: search:'message'
+                | msg: isDateSortAsc:'date'
+                | msg: isTargetSortAsc:'target'
+                | msg: isStatusSortAsc:'status'
+            "
+          >
             <td class="msg-item__col">{{ msg.date | dateConverter }}</td>
             <td class="msg-item__col">{{ msg.group }}</td>
             <td class="msg-item__col">{{ msg.status }}</td>

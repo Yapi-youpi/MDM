@@ -12,7 +12,9 @@ interface Message {
 })
 export class MessagesComponent implements OnInit {
   public search!: string;
-  public isNameSortAsc: boolean = true;
+  public isDateSortAsc: boolean = false;
+  public isTargetSortAsc: boolean = false;
+  public isStatusSortAsc: boolean = false;
   public messages!: Message[];
   constructor() {
     this.messages = [
@@ -25,14 +27,14 @@ export class MessagesComponent implements OnInit {
       {
         date: '2022-04-12T15:53:59Z',
         status: 'Отправлено',
-        group: '123456',
-        text: 'Предлагаем отметить Международный день кошек',
+        group: 'phone 123',
+        text: 'Предлагаем отметить Международный день собак',
       },
       {
         date: '2022-06-03T09:21:31Z',
         status: 'Не отправлено',
-        group: '123456',
-        text: 'Предлагаем отметить Международный день кошек',
+        group: '789',
+        text: 'Предлагаем отметить Международный день попугайчиков',
       },
     ];
   }
@@ -41,7 +43,15 @@ export class MessagesComponent implements OnInit {
 
   asd() {}
 
-  toggleNameSortDir() {
-    this.isNameSortAsc = !this.isNameSortAsc;
+  toggleDateSortDir() {
+    this.isDateSortAsc = !this.isDateSortAsc;
+  }
+
+  toggleTargetSortDir() {
+    this.isTargetSortAsc = !this.isTargetSortAsc;
+  }
+
+  toggleStatusSortDir() {
+    this.isStatusSortAsc = !this.isStatusSortAsc;
   }
 }
