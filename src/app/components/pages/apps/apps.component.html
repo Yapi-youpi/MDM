@@ -81,6 +81,17 @@
   </main>
 </app-global-container>
 
-<app-add-app (onSubmit)="uploadApp()"></app-add-app>
-<app-edit-app [app]="currApp" (onSubmit)="editApp()"></app-edit-app>
-<app-delete-app [app]="currApp" (onSubmit)="deleteApp()"></app-delete-app>
+<app-add-app
+  [isDataFetching]="loading"
+  (onSubmit)="uploadApp()"
+></app-add-app>
+<app-edit-app
+  [app]="currApp"
+  [isDataFetching]="loading"
+  (onSubmit)="editApp()"
+></app-edit-app>
+<app-delete-app
+  [app]="currApp"
+  [isDataFetching]="loading"
+  (onSubmit)="deleteApp()"
+></app-delete-app>

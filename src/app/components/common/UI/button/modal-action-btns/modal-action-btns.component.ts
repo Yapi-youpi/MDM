@@ -10,6 +10,7 @@ export class ModalActionBtnsComponent {
   @Input() cancelText: string = 'Отменить';
   @Input() margin: string = '';
   @Input() isReverse: boolean = false;
+  @Input() isSubmitBtnDisabled: boolean = false;
 
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();

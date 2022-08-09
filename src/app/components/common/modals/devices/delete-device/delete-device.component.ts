@@ -9,6 +9,7 @@ import { Device } from '../../../../../shared/types/devices';
 })
 export class DeleteDeviceComponent {
   @Input() public device!: Device;
+  @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter<Device>();
 

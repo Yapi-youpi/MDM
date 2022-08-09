@@ -11,6 +11,7 @@
         [submitText]="'Да'"
         [cancelText]="'Нет'"
         [margin]="'50px'"
+        [isSubmitBtnDisabled]="isDataFetching"
         (onCancel)="onCancelHandler()"
         (onSubmit)="onSubmitHandler()"
       ></app-modal-action-btns>

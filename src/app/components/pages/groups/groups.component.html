@@ -114,14 +114,24 @@
   (onSubmit)="searchGroupsWithParams()"
   (onCancel)="resetSearchParams()"
 ></app-filter-group>
-<app-add-group [configs]="configs" (onSubmit)="addGroup()"></app-add-group>
-<app-edit-group [configs]="configs" (onSubmit)="editGroup()"></app-edit-group>
+<app-add-group
+  [configs]="configs"
+  [isDataFetching]="loading"
+  (onSubmit)="addGroup()"
+></app-add-group>
+<app-edit-group
+  [configs]="configs"
+  [isDataFetching]="loading"
+  (onSubmit)="editGroup()"
+></app-edit-group>
 <app-edit-several-groups
   [configs]="configs"
+  [isDataFetching]="loading"
   (onSubmit)="editSeveralGroups()"
 ></app-edit-several-groups>
 <app-delete-group
   [group]="currGroup"
+  [isDataFetching]="loading"
   (onSubmit)="deleteGroup()"
 ></app-delete-group>
 <app-delete-several-elements

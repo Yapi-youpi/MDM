@@ -57,8 +57,9 @@
   }
 
   &:disabled {
-    background-color: var(--grey);
+    background-color: var(--grey) !important;
     color: var(--white);
+    border-color: transparent;
     cursor: initial;
   }
 }

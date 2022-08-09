@@ -129,17 +129,30 @@
   (onCancel)="resetSearchParams()"
   (onSubmit)="searchDevicesWithParams()"
 ></app-filter-devices>
-<app-add-device [groups]="groups" (onSubmit)="addDevice()"></app-add-device>
-<app-qr-code [device]="currDevice"></app-qr-code>
-<app-edit-device [groups]="groups" (onSubmit)="editDevice()"></app-edit-device>
+<app-add-device
+  [groups]="groups"
+  [isDataFetching]="loading"
+  (onSubmit)="addDevice()"
+></app-add-device>
+<app-qr-code
+  [device]="currDevice"
+></app-qr-code>
+<app-edit-device
+  [groups]="groups"
+  [isDataFetching]="loading"
+  (onSubmit)="editDevice()"
+></app-edit-device>
 <app-edit-several-devices
   [groups]="groups"
+  [isDataFetching]="loading"
   (onSubmit)="editSeveralDevices()"
 ></app-edit-several-devices>
 <app-delete-device
   [device]="currDevice"
+  [isDataFetching]="loading"
   (onSubmit)="deleteDevice($event)"
 ></app-delete-device>
 <app-delete-several-elements
+  [isDataFetching]="loading"
   (onSubmit)="deleteSeveralDevices()"
 ></app-delete-several-elements>

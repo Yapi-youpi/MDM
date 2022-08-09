@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-delete-several-elements',
@@ -6,6 +6,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./delete-several-elements.component.scss'],
 })
 export class DeleteSeveralElementsComponent {
+  @Input() isDataFetching: boolean = false;
+
   @Output() onSubmit = new EventEmitter();
 
   constructor() {}

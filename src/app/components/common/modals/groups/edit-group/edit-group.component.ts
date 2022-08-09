@@ -10,6 +10,7 @@ import { Option } from '../../../../../shared/types/input';
 })
 export class EditGroupComponent {
   @Input() configs: DevicesConfig[] = [];
+  @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();
 

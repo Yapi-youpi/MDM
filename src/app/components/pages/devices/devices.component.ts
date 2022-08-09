@@ -246,10 +246,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
           this.currDevice = res.device;
 
           const modalAdd = document.querySelector('#add_device');
-          modalAdd?.classList.toggle('hidden');
+          if (!modalAdd?.classList.contains('hidden'))
+            modalAdd?.classList.toggle('hidden');
 
           const modalQR = document.querySelector('#qr_code');
-          modalQR?.classList.toggle('hidden');
+          if (!modalQR?.classList.contains('hidden'))
+            modalQR?.classList.toggle('hidden');
 
           this.addDeviceForm.resetForm();
         } else {
@@ -347,7 +349,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           const modal = document.querySelector('#edit_device');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'EDIT DEVICE ERROR',
@@ -382,7 +385,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
           this.selectedDevicesIDs = [];
 
           const modal = document.querySelector('#edit_several_devices');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'EDIT SEVERAL DEVICES ERROR',
@@ -409,7 +413,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
           const modal = document.querySelector('#delete_device');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         }
         if (res.error)
           this.alert.show({
@@ -434,7 +439,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
           this.selectedDevicesIDs = [];
 
           const modal = document.querySelector('#delete_several_elements');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'DELETE SEVERAL DEVICES ERROR',

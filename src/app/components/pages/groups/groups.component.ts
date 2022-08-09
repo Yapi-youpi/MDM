@@ -198,7 +198,8 @@ export class GroupsComponent implements OnInit {
           this.groups = [res.group[0], ...this.groups];
 
           const modal = document.querySelector('#add_group');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
 
           this.addForm.reset();
         } else {
@@ -286,7 +287,8 @@ export class GroupsComponent implements OnInit {
           });
 
           const modal = document.querySelector('#edit_group');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'EDIT GROUP ERROR',
@@ -328,7 +330,8 @@ export class GroupsComponent implements OnInit {
           this.selectedGroupsIDs = [];
 
           const modal = document.querySelector('#edit_several_groups');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'EDIT SEVERAL ERROR',
@@ -359,7 +362,8 @@ export class GroupsComponent implements OnInit {
           });
 
           const modal = document.querySelector('#delete_group');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'DELETE GROUP ERROR',
@@ -398,7 +402,8 @@ export class GroupsComponent implements OnInit {
           this.selectedGroupsIDs = [];
 
           const modal = document.querySelector('#delete_several_elements');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'EDIT SEVERAL ERROR',

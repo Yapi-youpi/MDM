@@ -8,14 +8,15 @@ import { btnColor, btnText, btnType } from '../../../../../shared/types/button';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-  @Input() public text: string = '';
-  @Input() public textLike: btnText = 'like-button';
-  @Input() public type: btnType = 'button';
-  @Input() public height: string = '44.44px';
-  @Input() public width: string = 'auto';
-  @Input() public padding: string = '12px 16px';
-  @Input() public color: btnColor = 'common';
-  @Input() public radius: string = '14px';
+  @Input() text: string = '';
+  @Input() textLike: btnText = 'like-button';
+  @Input() type: btnType = 'button';
+  @Input() height: string = '44.44px';
+  @Input() width: string = 'auto';
+  @Input() padding: string = '12px 16px';
+  @Input() color: btnColor = 'common';
+  @Input() radius: string = '14px';
+  @Input() disabled: boolean = false;
 
   @Output() public onCLick = new EventEmitter();
 

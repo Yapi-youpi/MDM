@@ -9,6 +9,7 @@ import { App } from '../../../../../shared/types/apps';
 })
 export class DeleteAppComponent {
   @Input() public app!: App;
+  @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();
 

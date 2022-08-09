@@ -9,6 +9,7 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
 })
 export class DeleteGroupComponent {
   @Input() group!: DevicesGroup;
+  @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter<DevicesGroup>();
 

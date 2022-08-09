@@ -11,6 +11,7 @@ import { EditAppService } from '../../../../../shared/services/forms/app/edit-ap
 })
 export class EditAppComponent {
   @Input() app!: App;
+  @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();
 

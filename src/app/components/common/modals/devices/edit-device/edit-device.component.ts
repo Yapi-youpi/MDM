@@ -12,6 +12,7 @@ import { Option } from '../../../../../shared/types/input';
 })
 export class EditDeviceComponent {
   @Input() public groups!: DevicesGroup[];
+  @Input() isDataFetching: boolean = false;
 
   @Output() public onSubmit = new EventEmitter();
 

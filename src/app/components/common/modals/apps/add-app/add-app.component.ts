@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { AddAppService } from '../../../../../shared/services/forms/app/add-app.service';
 
@@ -8,6 +8,8 @@ import { AddAppService } from '../../../../../shared/services/forms/app/add-app.
   styleUrls: ['./add-app.component.scss'],
 })
 export class AddAppComponent {
+  @Input() isDataFetching: boolean = false;
+
   @Output() onSubmit = new EventEmitter();
 
   constructor(private form: AddAppService) {}

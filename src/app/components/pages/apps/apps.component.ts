@@ -130,7 +130,8 @@ export class AppsComponent {
           this.sortChildrenByVCode();
 
           const modal = document.querySelector('#add_app');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
 
           this.addAppForm.resetForm();
         } else {
@@ -184,7 +185,8 @@ export class AppsComponent {
           });
 
           const modal = document.querySelector('#edit_app');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'EDIT APP ERROR',
@@ -249,7 +251,8 @@ export class AppsComponent {
           }
 
           const modal = document.querySelector('#delete_app');
-          modal?.classList.toggle('hidden');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
         } else {
           this.alert.show({
             title: 'DELETE APP ERROR',

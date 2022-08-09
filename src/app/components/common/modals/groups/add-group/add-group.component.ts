@@ -10,6 +10,7 @@ import { add } from '../../../../../shared/services/forms/group';
 })
 export class AddGroupComponent {
   @Input() configs: DevicesConfig[] = [];
+  @Input() isDataFetching: boolean = false;
 
   @Output() public onSubmit = new EventEmitter();
 
