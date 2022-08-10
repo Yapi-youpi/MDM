@@ -111,7 +111,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       .get('all')
       .then((res: states.DevicesGroupsState) => {
         if (res.success) {
-          this.groups = res.devicesGroups;
+          this.groups = res.devicesGroups ? res.devicesGroups : [];
         } else {
           this.alert.show({
             title: 'GET GROUPS ERROR',
@@ -133,7 +133,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       .get('all')
       .then((res: states.DevicesState) => {
         if (res.success) {
-          this.devices = res.devices;
+          this.devices = res.devices ? res.devices : [];
         } else {
           this.alert.show({
             title: 'GET DEVICES ERROR',
@@ -243,7 +243,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       })
       .then((res: states.SingleDeviceState) => {
         if (res.success) {
-          this.currDevice = res.device;
+          if (res.device) this.currDevice = res.device;
 
           const modalAdd = document.querySelector('#add_device');
           if (!modalAdd?.classList.contains('hidden'))

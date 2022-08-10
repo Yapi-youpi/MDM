@@ -73,7 +73,7 @@ export class GroupsComponent implements OnInit {
       .get(param)
       .then((res: states.DevicesGroupsState) => {
         if (res.success) {
-          this.groups = res.devicesGroups;
+          this.groups = res.devicesGroups ? res.devicesGroups : [];
         } else {
           this.alert.show({
             title: 'GET GROUPS ERROR',
@@ -195,7 +195,7 @@ export class GroupsComponent implements OnInit {
       .add(this.addForm.form.getRawValue())
       .then((res: states.GroupsState) => {
         if (res.success) {
-          this.groups = [res.group[0], ...this.groups];
+          if (res.group?.[0]) this.groups = [res.group[0], ...this.groups];
 
           const modal = document.querySelector('#add_group');
           if (!modal?.classList.contains('hidden'))

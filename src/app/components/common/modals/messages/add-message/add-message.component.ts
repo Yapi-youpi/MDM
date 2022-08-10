@@ -36,7 +36,7 @@ export class AddMessageComponent implements OnInit {
       .get('all')
       .then((res: states.DevicesState) => {
         if (res.success) {
-          this.devices = res.devices;
+          this.devices = res.devices ? res.devices : [];
         }
       })
       .catch((err) => console.log(err));

@@ -87,7 +87,7 @@ export class ConfigurationComponent implements OnInit {
       .then((res: AppState) => {
         console.log(res);
         if (res.success) {
-          this.apps = res.app;
+          this.apps = res.app ? res.app : [];
         } else {
           console.log(res.error);
         }

@@ -14,29 +14,29 @@ export interface UserState extends State {
 }
 
 export interface DevicesConfigsState extends State {
-  devicesConfigs: DevicesConfig[];
+  devicesConfigs: DevicesConfig[] | null;
 }
 
 export interface DevicesGroupsState extends State {
-  devicesGroups: DevicesGroup[];
+  devicesGroups: DevicesGroup[] | null;
 }
 
 export interface DevicesState extends State {
-  devices: Device[];
+  devices: Device[] | null;
 }
 
 export interface SingleDeviceState extends State {
-  device: Device;
+  device: Device | null;
 }
 
 export interface AppState extends State {
-  app: App[];
+  app: App[] | null;
 }
 
 export interface UploadAppState extends State {
-  app: App;
+  app: App | null;
 }
 
 export interface GroupsState extends State {
-  group: DevicesGroup[];
+  group: DevicesGroup[] | null;
 }

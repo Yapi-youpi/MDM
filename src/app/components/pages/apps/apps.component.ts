@@ -115,19 +115,21 @@ export class AppsComponent {
       .upload(this.addAppForm._file)
       .then((res: UploadAppState) => {
         if (res.success) {
-          // Приложение - родитель
-          if (res.app.parentAppID === res.app.ID) {
-            this.getApps();
-            // Приложение - потомок
-          } else {
-            this.apps = this.apps.map((ag) => {
-              if (ag.ID === res.app.parentAppID) {
-                return { ...ag, children: [res.app, ...ag.children] };
-              } else return ag;
-            });
-          }
+          if (res.app) {
+            // Приложение - родитель
+            if (res.app.parentAppID === res.app.ID) {
+              this.getApps();
+              // Приложение - потомок
+            } else {
+              this.apps = this.apps.map((ag) => {
+                if (ag.ID === res.app?.parentAppID) {
+                  return { ...ag, children: [res.app, ...ag.children] };
+                } else return ag;
+              });
+            }
 
-          this.sortChildrenByVCode();
+            this.sortChildrenByVCode();
+          }
 
           const modal = document.querySelector('#add_app');
           if (!modal?.classList.contains('hidden'))
