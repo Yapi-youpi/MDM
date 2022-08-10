@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import 'moment/locale/ru';
 
 import { DateService } from '../../../../shared/services/date.service';

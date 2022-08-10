@@ -21,7 +21,11 @@
         [class.shifted]="app.system"
       ></span>
     </div>
-    <p class="app-item__version">{{ app.version }}</p>
+    <div class="version-wrapper">
+      <p class="app-item__version">{{ app.version }}</p>
+      <p *ngIf="app.version.length > 9" class="tip">{{ app.version }}</p>
+    </div>
+<!--    <p class="app-item__version">{{ app.version }}</p>-->
     <!--  <p class="app-item__url">{{ app.url }}</p>-->
     <p class="app-item__pkg">{{ app.pkg }}</p>
     <p class="app-item__file-size">{{ app.fileByteSize | fileSize }}</p>

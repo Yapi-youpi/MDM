@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import moment from 'moment';
+import * as moment from 'moment';
 
 import { inputWidth } from '../../../../../shared/types/input';
 
