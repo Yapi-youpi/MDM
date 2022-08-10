@@ -202,6 +202,7 @@ export class ConfigurationComponent implements OnInit {
         }
       });
     }
+
     function hideTabContent() {
       tabsContent.forEach((item) => {
         // @ts-ignore

@@ -120,6 +120,7 @@ import { FilterMessagesComponent } from './components/common/modals/messages/fil
 import { MsgFilterPipe } from './shared/pipes/filters/msg-filter.pipe';
 import { AddMessageComponent } from './components/common/modals/messages/add-message/add-message.component';
 import { HelpComponent } from './components/pages/help/help.component';
+import { TicketModalComponent } from './components/pages/help/ticket-modal/ticket-modal.component';
 
 const routes: Routes = [
   {
@@ -234,6 +235,7 @@ const routes: Routes = [
     MsgFilterPipe,
     AddMessageComponent,
     HelpComponent,
+    TicketModalComponent,
   ],
   imports: [
     BrowserModule,

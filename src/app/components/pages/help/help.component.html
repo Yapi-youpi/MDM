@@ -21,8 +21,16 @@
     </ng-template>
 
     <div class="card">
+      <div class="card__header">
+        <span class="card-title">Что такое MDM?</span>
+        <app-add-button
+          class="btn--right"
+          [target]="'modal-add-ticket'"
+          [title]="'Сообщить о проблеме'"
+        >
+        </app-add-button>
+      </div>
       <div class="help-tab">
-        <div class="card__header">Что такое MDM?</div>
         <div class="help-p">
           <h4>Mobile Device Management</h4>
           <p>
@@ -48,36 +56,36 @@
           </p>
         </div>
       </div>
-      <div style="display: none" class="help-tab">
-        <div class="card__header">Как добавить устройство</div>
+      <!-- Как добавить устройство-->
+      <div class="help-tab" style="display: none">
         <div class="help-p">
           <h4>Шаг первый</h4>
           <p>Купите себе самое вкусное мороженое</p>
         </div>
       </div>
-      <div style="display: none" class="help-tab">
-        <div class="card__header">Настройка конфигурации</div>
+      <!--   Настройка конфигурации  -->
+      <div class="help-tab" style="display: none">
         <div class="help-p">
           <h4>Шаг первый</h4>
           <p>Купите себе самое вкусное мороженое</p>
         </div>
       </div>
-      <div style="display: none" class="help-tab">
-        <div class="card__header">Не работают группы</div>
+      <!--   Не работают группы  -->
+      <div class="help-tab" style="display: none">
         <div class="help-p">
           <h4>Шаг первый</h4>
           <p>Купите себе самое вкусное мороженое</p>
         </div>
       </div>
-      <div style="display: none" class="help-tab">
-        <div class="card__header">Потеря связи</div>
+      <!--   Потеря связи  -->
+      <div class="help-tab" style="display: none">
         <div class="help-p">
           <h4>Шаг первый</h4>
           <p>Купите себе самое вкусное мороженое</p>
         </div>
       </div>
-      <div style="display: none" class="help-tab">
-        <div class="card__header">Как работать с QR-кодом</div>
+      <!--   Как работать с QR-кодом  -->
+      <div class="help-tab" style="display: none">
         <div class="help-p">
           <h4>Шаг первый</h4>
           <p>Купите себе самое вкусное мороженое</p>
@@ -86,3 +94,5 @@
     </div>
   </main>
 </app-global-container>
+
+<app-ticket-modal></app-ticket-modal>

@@ -192,6 +192,13 @@ legend {
   margin: 15px 0;
 }
 
+.card-title {
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 20px;
+  color: var(--dark-blue);
+}
+
 //.divider {
 //  height: 2px !important;
 //  background-color: var(--light-blue) !important;
@@ -1116,6 +1123,20 @@ input {
     outline-width: 2px;
     outline-color: var(--error);
   }
+}
+
+// TEXTAREA
+
+textarea {
+  width: 100%;
+  padding: 16px;
+  background: #fff;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--dark-blue-grey);
+  border: 1px solid var(--dark-blue);
+  border-radius: 16px;
 }
 
 // ФОРМЫ В МОДАЛЬНЫХ ОКНАХ (САША)

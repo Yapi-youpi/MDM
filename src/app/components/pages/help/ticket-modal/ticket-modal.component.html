@@ -1,0 +1,18 @@
+<app-modal [modalID]="'modal-add-ticket'" [isClosable]="true">
+  <div class="modal-form w-700">
+    <h4 class="modal-title">Сообщение о проблеме</h4>
+    <div class="form__item">
+      <textarea
+        [(ngModel)]="ticket"
+        placeholder="Опишите вашу проблему"
+        required
+      ></textarea>
+    </div>
+    <div class="modal-form-footer btn-wrapper">
+      <button (click)="sendTicket()" class="btn btn--big">Отправить</button>
+      <button class="btn btn--big btn--outline" (click)="closeModal()">
+        Отменить
+      </button>
+    </div>
+  </div>
+</app-modal>
