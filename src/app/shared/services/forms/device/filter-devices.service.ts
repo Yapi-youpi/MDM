@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root',

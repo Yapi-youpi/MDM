@@ -50,7 +50,6 @@ export class MessagesComponent implements OnInit {
   }
 
   applyFilterParams(form) {
-    console.log(form);
     this.filter.status = form.status;
     this.filter.dateFrom = form.dateFrom;
     this.filter.dateTo = form.dateTo;

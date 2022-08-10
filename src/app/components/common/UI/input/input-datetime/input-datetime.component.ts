@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import * as moment from 'moment';
+import { FormControl, FormGroup } from '@angular/forms';
+import moment from 'moment';
 
 import { inputWidth } from '../../../../../shared/types/input';
 
@@ -13,6 +13,8 @@ export class InputDatetimeComponent {
   @Input() name: string = '';
   @Input() width: inputWidth = 'w-170';
   @Input() control: FormControl = new FormControl(null);
+  @Input() controlName?;
+  @Input() groupName?: FormGroup;
   @Input() isError: boolean = false;
 
   public currDay!: moment.Moment;
@@ -26,7 +28,13 @@ export class InputDatetimeComponent {
 
   selectDay(day: moment.Moment) {
     this.currDay = day;
+    this.control?.setValue(moment(day).format());
 
-    this.control.setValue(moment(day).format());
+    if (this.groupName) {
+      this.groupName.setValue({
+        ...this.groupName.value,
+        [this.controlName]: moment(day).format(),
+      });
+    }
   }
 }

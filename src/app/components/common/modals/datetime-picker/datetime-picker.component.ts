@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/ru';
 
 import { DateService } from '../../../../shared/services/date.service';
@@ -21,16 +21,14 @@ interface Week {
   styleUrls: ['./datetime-picker.component.scss'],
 })
 export class DatetimePickerComponent implements OnInit {
-  public calendar: Week[] = [];
+  @Input() name: string = '';
 
+  public calendar: Week[] = [];
   public isHourFocused: boolean = false;
   public isMinuteFocused: boolean = false;
-
   public hour: string = '00';
   public minute: string = '00';
   public currDate!: moment.Moment;
-
-  @Input() name: string = '';
 
   @Output() onSubmit = new EventEmitter<moment.Moment>();
 
@@ -113,5 +111,8 @@ export class DatetimePickerComponent implements OnInit {
 
     this.dateService.changeDate(date);
     this.onSubmit.emit(date);
+    document
+      .querySelector(`#datetime_picker_${this.name}`)
+      ?.classList.add('hidden');
   }
 }

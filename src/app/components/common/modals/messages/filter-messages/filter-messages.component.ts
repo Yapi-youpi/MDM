@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import moment from 'moment/moment';
 
 @Component({
   selector: 'app-filter-messages',
@@ -14,37 +13,14 @@ export class FilterMessagesComponent implements OnInit {
   constructor() {
     this.filterForm = new FormGroup({
       status: new FormControl(true),
-      dateFrom: new FormControl({
-        value: null,
-        disabled: true,
-      }),
-      dateTo: new FormControl({
-        value: null,
-        disabled: true,
-      }),
+      dateFrom: new FormControl(''),
+      dateTo: new FormControl(''),
     });
   }
 
   ngOnInit(): void {}
 
-  get _dateFrom() {
-    console.log(
-      this.filterForm.getRawValue()['dateFrom'],
-      moment.utc(this.filterForm.getRawValue()['dateFrom']).format()
-    );
-    return this.filterForm.getRawValue()['dateFrom']
-      ? moment.utc(this.filterForm.getRawValue()['dateFrom']).format()
-      : null;
-  }
-
-  get _dateTo() {
-    return this.filterForm.getRawValue()['dateTo']
-      ? moment.utc(this.filterForm.getRawValue()['dateTo']).format()
-      : null;
-  }
-
   applyFilter() {
-    console.log(this.filterForm.value);
     this.onSubmit.emit(this.filterForm.value);
   }
 

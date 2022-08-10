@@ -40,7 +40,8 @@
           <app-input-datetime
             [name]="'dateFrom'"
             [width]="'w-180'"
-            [control]="$any(filterForm.get('dateFrom'))"
+            [controlName]="'dateFrom'"
+            [groupName]="filterForm"
           ></app-input-datetime>
         </div>
         <div class="form-group-wrapper date">
@@ -48,7 +49,8 @@
           <app-input-datetime
             [name]="'dateTo'"
             [width]="'w-180'"
-            [control]="$any(filterForm.get('dateTo'))"
+            [controlName]="'dateTo'"
+            [groupName]="filterForm"
           ></app-input-datetime>
         </div>
       </div>

@@ -1,4 +1,22 @@
-<div class="datetime-wrapper">
+<form [formGroup]="groupName" *ngIf="groupName; else datetime">
+  <ng-container *ngTemplateOutlet="datetime"></ng-container>
+</form>
+<ng-template #datetime>
+  <div class="datetime-wrapper">
+    <input
+      *ngIf="groupName; else input"
+      [id]="name"
+      [name]="name"
+      type="text"
+      class="input-datetime text-field"
+      [ngClass]="width"
+      [formControlName]="controlName"
+      [value]="currDay ? (currDay | moment: 'HH:mm, D MMM YYYY') : ''"
+    />
+    <span class="icon icon-datetime" (click)="showDatetimePicker()"></span>
+  </div>
+</ng-template>
+<ng-template #input>
   <input
     [id]="name"
     [name]="name"
@@ -8,9 +26,7 @@
     [formControl]="control"
     [value]="currDay ? (currDay | moment: 'HH:mm, D MMM YYYY') : ''"
   />
-  <span class="icon icon-datetime" (click)="showDatetimePicker()"></span>
-</div>
-
+</ng-template>
 <app-datetime-picker
   [name]="name"
   (onSubmit)="selectDay($event)"
