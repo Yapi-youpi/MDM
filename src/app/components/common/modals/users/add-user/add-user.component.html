@@ -101,7 +101,7 @@
               formControlName="role"
               type="radio"
               [value]="'admin'"
-              [attr.disabled]="currentUser ? '' : null"
+              [attr.disabled]="currentUser || userRole === 'admin' ? '' : null"
             />
             <span class="custom-radio__span"> администратор </span>
           </label>

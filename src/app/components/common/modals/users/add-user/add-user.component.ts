@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../../shared/services/user.service';
 import Compressor from 'compressorjs';
 import { interval } from 'rxjs';
+import { AssetService } from '../../../../../shared/services/asset.service';
 
 @Component({
   selector: 'app-add-user',
@@ -19,6 +20,7 @@ import { interval } from 'rxjs';
 })
 export class AddUserComponent implements OnInit {
   @Input() currentUser: Users | undefined;
+  public userRole = '';
   public form: FormGroup;
   public userTags = [];
   public file_input!: any;
@@ -29,7 +31,11 @@ export class AddUserComponent implements OnInit {
   public pattern =
     "^(?=.*\\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\\\\\\/_.,:;\\[\\]{} \x22-]).{8,64}$";
   @Output() onClose = new EventEmitter<boolean>();
-  constructor(private elementRef: ElementRef, public userService: UserService) {
+  constructor(
+    private asset: AssetService,
+    private elementRef: ElementRef,
+    public userService: UserService
+  ) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
@@ -55,6 +61,9 @@ export class AddUserComponent implements OnInit {
       if (this.userService.token) {
         i.unsubscribe();
         this.getUserTags();
+        this.asset.getFromStorage('user-role').then((role: string) => {
+          this.userRole = role;
+        });
       }
     });
   }
