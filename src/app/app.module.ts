@@ -119,6 +119,7 @@ import { MsgPipe } from './shared/pipes/msg.pipe';
 import { FilterMessagesComponent } from './components/common/modals/messages/filter-messages/filter-messages.component';
 import { MsgFilterPipe } from './shared/pipes/filters/msg-filter.pipe';
 import { AddMessageComponent } from './components/common/modals/messages/add-message/add-message.component';
+import { HelpComponent } from './components/pages/help/help.component';
 
 const routes: Routes = [
   {
@@ -232,6 +233,7 @@ const routes: Routes = [
     FilterMessagesComponent,
     MsgFilterPipe,
     AddMessageComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

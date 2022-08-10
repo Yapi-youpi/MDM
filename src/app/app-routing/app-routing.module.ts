@@ -10,6 +10,7 @@ import { ConfigsComponent } from '../components/pages/configs/configs.component'
 import { ConfigurationComponent } from '../components/pages/configuration/configuration.component';
 import { AppsComponent } from '../components/pages/apps/apps.component';
 import { MessagesComponent } from '../components/pages/messages/messages.component';
+import { HelpComponent } from '../components/pages/help/help.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'configuration/:id',
     component: ConfigurationComponent,
+  },
+  {
+    path: 'help',
+    component: HelpComponent,
   },
 ];
 
