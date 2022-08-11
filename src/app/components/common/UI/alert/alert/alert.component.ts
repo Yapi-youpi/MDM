@@ -44,6 +44,11 @@ export class AlertComponent {
   }
 
   countDown() {
+    const ms =
+      this.alert.data.content.length < 60
+        ? 30
+        : this.alert.data.content.length / 2;
+
     this.progressBar.nativeElement.style.width = this.alert.data.progressWidth;
 
     this.progressInterval = setInterval(() => {
@@ -58,7 +63,7 @@ export class AlertComponent {
       this.alert.data.progressWidth = String(width - 1);
       this.progressBar.nativeElement.style.width =
         this.alert.data.progressWidth + '%';
-    }, 30);
+    }, ms);
   }
 
   stopCountDown() {

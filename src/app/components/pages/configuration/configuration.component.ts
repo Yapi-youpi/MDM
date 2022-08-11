@@ -8,6 +8,7 @@ import { UserService } from '../../../shared/services/user.service';
 import { App } from '../../../shared/types/apps';
 import { AppState } from '../../../shared/types/states';
 import { AppsService } from '../../../shared/services/apps.service';
+import { alertService } from '../../../shared/services';
 
 @Component({
   selector: 'app-configuration',
@@ -27,6 +28,7 @@ export class ConfigurationComponent implements OnInit {
   constructor(
     public userService: UserService,
     public appsService: AppsService,
+    private alert: alertService,
     private route: ActivatedRoute,
     private configService: DevicesConfigService,
     private router: Router
@@ -237,5 +239,14 @@ export class ConfigurationComponent implements OnInit {
   addApp(addedApps: string[]) {
     this.config.applications = this.config.applications?.concat(addedApps);
     this.isModalAddAppOpen = false;
+  }
+
+  showAlert() {
+    this.alert.show({
+      title: 'Предупреждение!',
+      content:
+        'Отключение GPS исключает возможность отображения на карте устройств данной конфигурации',
+      type: 'warning',
+    });
   }
 }
