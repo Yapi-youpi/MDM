@@ -48,7 +48,8 @@
               <div
                 *ngIf="
                   userRole === 'super' ||
-                  (userRole === 'admin' && user.role === 'operator')
+                  (userRole === 'admin' && user.role === 'operator') ||
+                  userLogin === user.login
                 "
                 class="user-card__menu"
               >

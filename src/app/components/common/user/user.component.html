@@ -39,7 +39,7 @@
             <p class="company">{{ currentUser.userTags }}</p>
           </div>
         </div>
-        <div class="top-right">
+        <div class="top-right" *ngIf="router.url !== '/users'">
           <app-card-menu-btn [target]="'modal-new-user'" [bg]="'blue'">
             <span class="icon icon-edit"></span>
           </app-card-menu-btn>
@@ -64,4 +64,5 @@
   </div>
 </div>
 
-<!--<app-add-user [currentUser]="currentUser"> </app-add-user>-->
+<app-add-user *ngIf="router.url !== '/users'" [currentUser]="currentUser">
+</app-add-user>

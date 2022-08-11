@@ -13,6 +13,7 @@ import { UserService } from '../../../shared/services/user.service';
 export class UsersComponent implements OnInit {
   public users: Users[] = [];
   public userRole = '';
+  public userLogin = '';
   public currentUser: Users | undefined; // undefined is need for reset currentUser
   public search!: string;
   public loaded: boolean = false;
@@ -27,6 +28,9 @@ export class UsersComponent implements OnInit {
         this.getAllUsers();
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;
+        });
+        this.asset.getFromStorage('login').then((login: string) => {
+          this.userLogin = login;
         });
       }
     });
