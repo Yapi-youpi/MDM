@@ -33,6 +33,7 @@ export class AddAppToConfigComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes) {
+    console.log(changes);
     for (let key in changes) {
       if (
         key === 'isModalAddAppOpen' &&
@@ -54,35 +55,44 @@ export class AddAppToConfigComponent implements OnChanges {
         // sort apps by value
         for (let key in this.appsGroup) {
           this.appsGroup[key].sort((a, b) => b.versionCode - a.versionCode);
-          console.log(this.appsGroup[key]);
         }
-        // console.log(this.appGroups);
       }
     }
   }
-  onCheckboxChange(event: any) {
+
+  onCheckboxChange(event, appName) {
     if (event.target.checked) {
       if (!this.addedApps.includes(event.target.value)) {
-        //TODO check if array already has this app, replace older version
-
-        /*
-        this.apps.map((app) => {
-          if (app.ID === event.target.value) {
-            const newID = event.target.value;
-            this.appsInConfig.map((id) => {
-              if (app.ID === id) {
-                const oldID = id;
-              }
-            });
-          }
-        });
-*/
-
+        this.checkSelectedValue(appName);
         this.addedApps.push(event.target.value);
+        this.checkAppsInConfig(appName, event.target.value);
       }
     } else {
-      this.addedApps = this.addedApps.filter((i) => i !== event.target.value);
+      this.checkSelectedValue(appName);
     }
+
+    // console.log(this.addedApps);
+  }
+
+  checkSelectedValue(appName) {
+    this.addedApps.map((id) => {
+      this.apps.map((app) => {
+        if (app.ID === id && app.name === appName) {
+          this.addedApps = this.addedApps.filter((i) => i !== id);
+        }
+      });
+    });
+  }
+
+  checkAppsInConfig(appName, newID) {
+    // TODO replace app to newest version
+    this.appsInConfig.map((id) => {
+      this.apps.map((app) => {
+        if (app.ID === id && app.name === appName) {
+          this.addedApps = this.addedApps.filter((i) => i !== newID);
+        }
+      });
+    });
   }
 
   onSubmitHandler() {
@@ -94,8 +104,12 @@ export class AddAppToConfigComponent implements OnChanges {
     const checkbox = event.target.parentNode.parentNode.querySelector(
       'input[type="Checkbox"]'
     );
+
     if (checkbox) {
       checkbox.value = event.target.value;
+      this.checkSelectedValue(checkbox.id);
+      this.addedApps.push(event.target.value);
+      this.checkAppsInConfig(checkbox.id, event.target.value);
     }
   }
 
