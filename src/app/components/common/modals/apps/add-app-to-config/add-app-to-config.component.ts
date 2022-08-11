@@ -70,8 +70,6 @@ export class AddAppToConfigComponent implements OnChanges {
     } else {
       this.checkSelectedValue(appName);
     }
-
-    console.log(this.addedApps);
   }
 
   checkSelectedValue(appName) {
@@ -122,8 +120,6 @@ export class AddAppToConfigComponent implements OnChanges {
       if (checkbox.checked) this.addedApps.push(event.target.value);
       this.checkAppsInConfig(checkbox.id, event.target.value);
     }
-
-    console.log(this.addedApps);
   }
 
   resetForm() {

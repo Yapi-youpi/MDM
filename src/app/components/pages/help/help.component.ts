@@ -28,12 +28,8 @@ export class HelpComponent implements OnInit {
     }
 
     function hideTabContent() {
-      tabsContent.forEach((item) => {
-        item.style.display = 'none';
-      });
-      tabs.forEach((item) => {
-        item.classList.remove('tab--active');
-      });
+      tabsContent.forEach((item) => (item.style.display = 'none'));
+      tabs.forEach((item) => item.classList.remove('tab--active'));
     }
 
     function showTabContent(i = 0) {
