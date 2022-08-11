@@ -9,8 +9,8 @@ export class AppsConfigPipe implements PipeTransform {
     if (inConfig) {
       const filterSet = new Set(inConfig);
       return param
-        ? apps.filter((app) => !filterSet.has(app.ID))
-        : apps.filter((app) => filterSet.has(app.ID));
+        ? apps.filter((app) => filterSet.has(app.ID))
+        : apps.filter((app) => !filterSet.has(app.ID));
     } else return apps;
   }
 }

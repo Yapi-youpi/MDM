@@ -823,13 +823,29 @@
                 *ngIf="configForm.get('kioskMode')?.value == true"
               >
                 <label for="mainApp">Приложение-киоск</label>
-                <input
-                  type="text"
+                <select
+                  class="select-native w-500"
                   formControlName="mainApp"
                   id="mainApp"
-                  class="w-500"
-                  placeholder="Приложение-киоск"
-                />
+                >
+                  <ng-container
+                    *ngFor="
+                      let app of apps
+                        | appsConfig: config.applications:true
+                        | appsConfig: config.removedApps:false
+                    "
+                  >
+                    <option
+                      [ngValue]="app.name"
+                      *ngIf="app.useKiosk; else noOptions"
+                    >
+                      {{ app.name }}
+                    </option>
+                  </ng-container>
+                  <ng-template #noOptions>
+                    <option selected disabled>Нет доступных приложений</option>
+                  </ng-template>
+                </select>
               </div>
               <div class="divider"></div>
               <div class="font-bold">Настройки WIFI:</div>

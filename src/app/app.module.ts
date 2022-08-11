@@ -115,7 +115,7 @@ import { GroupDatePipe } from './shared/pipes/sort/groups/group-date.pipe';
 import { GroupDevicesCountPipe } from './shared/pipes/sort/groups/group-devices-count.pipe';
 import { GroupNamePipe } from './shared/pipes/sort/groups/group-name.pipe';
 import { MessagesComponent } from './components/pages/messages/messages.component';
-import { MsgPipe } from './shared/pipes/msg.pipe';
+import { MsgPipe } from './shared/pipes/sort/msg.pipe';
 import { FilterMessagesComponent } from './components/common/modals/messages/filter-messages/filter-messages.component';
 import { MsgFilterPipe } from './shared/pipes/filters/msg-filter.pipe';
 import { AddMessageComponent } from './components/common/modals/messages/add-message/add-message.component';

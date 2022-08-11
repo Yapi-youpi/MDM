@@ -57,7 +57,7 @@
       class="app-item table-row"
       *ngFor="
         let app of apps
-          | appsConfig: appsInConfig
+          | appsConfig: appsInConfig:true
           | search: searchParam:'app'
           | apps_system: isOnlySystemApps
           | apps_name: isNameSortAsc
