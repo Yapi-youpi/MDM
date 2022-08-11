@@ -33,7 +33,7 @@ export class AddAppToConfigComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes) {
-    console.log(changes);
+    // console.log(changes);
     for (let key in changes) {
       if (
         key === 'isModalAddAppOpen' &&
@@ -71,7 +71,7 @@ export class AddAppToConfigComponent implements OnChanges {
       this.checkSelectedValue(appName);
     }
 
-    // console.log(this.addedApps);
+    console.log(this.addedApps);
   }
 
   checkSelectedValue(appName) {
@@ -85,10 +85,21 @@ export class AddAppToConfigComponent implements OnChanges {
   }
 
   checkAppsInConfig(appName, newID) {
-    // TODO replace app to newest version
+    let version = 0;
+
+    this.apps.map((app) => {
+      if (app.ID === newID) {
+        version = app.versionCode;
+      }
+    });
+
     this.appsInConfig.map((id) => {
       this.apps.map((app) => {
-        if (app.ID === id && app.name === appName) {
+        if (
+          app.ID === id &&
+          app.name === appName &&
+          app.versionCode >= version
+        ) {
           this.addedApps = this.addedApps.filter((i) => i !== newID);
         }
       });
@@ -108,9 +119,11 @@ export class AddAppToConfigComponent implements OnChanges {
     if (checkbox) {
       checkbox.value = event.target.value;
       this.checkSelectedValue(checkbox.id);
-      this.addedApps.push(event.target.value);
+      if (checkbox.checked) this.addedApps.push(event.target.value);
       this.checkAppsInConfig(checkbox.id, event.target.value);
     }
+
+    console.log(this.addedApps);
   }
 
   resetForm() {
