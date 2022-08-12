@@ -12,6 +12,7 @@ import { UserService } from '../../../../../shared/services/user.service';
 import Compressor from 'compressorjs';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../../../shared/services/asset.service';
+import { alertService } from '../../../../../shared/services';
 
 @Component({
   selector: 'app-add-user',
@@ -33,8 +34,9 @@ export class AddUserComponent implements OnInit {
   @Output() onClose = new EventEmitter<boolean>();
   constructor(
     private asset: AssetService,
+    private alert: alertService,
     private elementRef: ElementRef,
-    public userService: UserService
+    private userService: UserService
   ) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -62,10 +64,10 @@ export class AddUserComponent implements OnInit {
         i.unsubscribe();
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;
+          if (role === 'super' || role === 'admin') {
+            this.getUserTags();
+          }
         });
-        if (this.userRole === 'super' || this.userRole === 'admin') {
-          this.getUserTags();
-        }
       }
     });
   }
@@ -96,6 +98,7 @@ export class AddUserComponent implements OnInit {
       .addUser(avatar, login, password, name, role, group)
       .then(() => {
         this.clearModal(true);
+        this.showAlert('Пользователь добавлен');
       })
       .catch((err) => {
         console.log(err);
@@ -123,6 +126,7 @@ export class AddUserComponent implements OnInit {
           console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
+          this.showAlert('Пароль изменен');
         })
         .catch((err) => {
           console.log(err);
@@ -135,6 +139,7 @@ export class AddUserComponent implements OnInit {
           console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
+          this.showAlert('Аватар обновлен');
         })
         .catch((err) => {
           console.log(err);
@@ -147,6 +152,7 @@ export class AddUserComponent implements OnInit {
           console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
+          this.showAlert('Подразделение обновлено');
         })
         .catch((err) => {
           console.log(err);
@@ -159,6 +165,7 @@ export class AddUserComponent implements OnInit {
           console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
+          this.showAlert('Имя изменено');
         })
         .catch((err) => {
           console.log(err);
@@ -265,6 +272,14 @@ export class AddUserComponent implements OnInit {
         .querySelectorAll('.validation-item')
         .forEach((i) => i.classList.remove('validation-item--ok'));
     }
+  }
+
+  showAlert(message) {
+    this.alert.show({
+      title: 'Данные успешно сохранены',
+      content: message,
+      type: 'success',
+    });
   }
 
   clearInputFile(

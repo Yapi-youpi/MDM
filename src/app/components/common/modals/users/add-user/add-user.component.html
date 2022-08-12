@@ -121,9 +121,11 @@
       <div class="form__item">
         <label>Подразделение</label>
         <select class="select-native w-296" formControlName="userTags">
-          <option value="{{ tag }}" *ngFor="let tag of userTags">
-            {{ tag }}
-          </option>
+          <ng-container *ngFor="let tag of userTags">
+            <option value="{{ tag }}" *ngIf="tag">
+              {{ tag }}
+            </option></ng-container
+          >
           <option value="Другое">Другое</option>
         </select>
       </div>
