@@ -30,7 +30,7 @@
           <p>Группы устройств</p>
         </a>
       </li>
-      <li>
+      <li *ngIf="userRole === 'admin' || userRole === 'super'">
         <a
           id="apps"
           class="router-link text-menu-title apps"
@@ -61,7 +61,7 @@
         </a>
       </li>
       <hr class="divider" />
-      <li>
+      <li *ngIf="userRole === 'admin' || userRole === 'super'">
         <a
           id="config"
           class="router-link text-menu-title config"
@@ -71,7 +71,7 @@
           <p>Конфигурации</p>
         </a>
       </li>
-      <li>
+      <li *ngIf="userRole === 'admin' || userRole === 'super'">
         <a
           id="users"
           class="router-link text-menu-title users"
@@ -81,7 +81,7 @@
           <p>Пользователи</p>
         </a>
       </li>
-      <!--      <hr class="divider" />
+      <!--      <hr class="divider" *ngIf="userRole === 'admin' || userRole === 'super'" />
       <li>
         <a
           id="help"

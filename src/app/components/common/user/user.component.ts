@@ -38,7 +38,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.asset.getFromStorage('id').then((id: string) => {
       this.id = id;
-      let i = interval(500).subscribe(() => {
+      let i = interval(10).subscribe(() => {
         if (this.user.token) {
           i.unsubscribe();
           this.user
@@ -47,7 +47,10 @@ export class UserComponent implements OnInit {
               this.currentUser = res[0];
               this.asset.setToStorage('user-role', res[0].role).then();
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+              console.log(err);
+              this.asset.setToStorage('user-role', '').then();
+            });
         }
       });
     });
