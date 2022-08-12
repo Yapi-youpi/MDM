@@ -42,21 +42,23 @@
                 class="checkbox-wrapper"
                 *ngFor="let tag of userTags"
               >
-                <input
-                  type="checkbox"
-                  name="group"
-                  id="{{ tag }}"
-                  value="{{ tag }}"
-                  class="visually-hidden"
-                  formArrayName="groups"
-                  (change)="onCheckboxChange($event, 'groups')"
-                />
-                <div class="input checkbox-custom">
-                  <svg width="18" height="18" viewBox="0 0 20 20">
-                    <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-                  </svg>
-                </div>
-                <span>{{ tag }}</span>
+                <ng-container *ngIf="tag">
+                  <input
+                    type="checkbox"
+                    name="group"
+                    id="{{ tag }}"
+                    value="{{ tag }}"
+                    class="visually-hidden"
+                    formArrayName="groups"
+                    (change)="onCheckboxChange($event, 'groups')"
+                  />
+                  <div class="input checkbox-custom">
+                    <svg width="18" height="18" viewBox="0 0 20 20">
+                      <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
+                    </svg>
+                  </div>
+                  <span>{{ tag }}</span>
+                </ng-container>
               </label>
             </div>
           </fieldset>

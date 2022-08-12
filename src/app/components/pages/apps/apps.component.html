@@ -61,12 +61,12 @@
           <ng-container *ngIf="apps.length !== 0; else nodata">
             <app-app-item
               *ngFor="
-               let app of apps
-                 | search: searchParam:'app'
-                 | apps_system: isOnlySystemApps
-                 | apps_name: isNameSortAsc
-                 | apps_size: isSizeSortAsc
-               "
+                let app of apps
+                  | search: searchParam:'app'
+                  | apps_system: isOnlySystemApps
+                  | apps_name: isNameSortAsc
+                  | apps_size: isSizeSortAsc
+              "
               [app]="app"
               (onEditClick)="selectAppToEdit($event)"
               (onDeleteClick)="selectAppToDelete($event)"
@@ -81,10 +81,7 @@
   </main>
 </app-global-container>
 
-<app-add-app
-  [isDataFetching]="loading"
-  (onSubmit)="uploadApp()"
-></app-add-app>
+<app-add-app [isDataFetching]="loading" (onSubmit)="uploadApp()"></app-add-app>
 <app-edit-app
   [app]="currApp"
   [isDataFetching]="loading"

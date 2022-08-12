@@ -11,11 +11,11 @@
 .config-card {
   background: white;
   border-radius: 14px;
-  border: 2px solid transparent;
+  outline: 2px solid transparent;
   box-shadow: var(--box-shadow);
 }
 .config-card:hover {
-  border: 2px solid #557ebe;
+  outline: 2px solid #557ebe;
 }
 .config-card__header {
   position: relative;

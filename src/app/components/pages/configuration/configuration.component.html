@@ -8,11 +8,11 @@
     <div class="card card--sidebar">
       <div class="card__header card-title">Настройки</div>
       <div class="tabs-wrapper" (click)="setActive($event)">
-        <div class="tab tab--active">Общие</div>
-        <div class="tab">Использование функций</div>
-        <div class="tab">Дизайн</div>
-        <div class="tab">Приложения</div>
-        <div class="tab">Управление</div>
+        <div class="tab tab--active" tabindex="0">Общие</div>
+        <div class="tab" tabindex="0">Использование функций</div>
+        <div class="tab" tabindex="0">Дизайн</div>
+        <div class="tab" tabindex="0">Приложения</div>
+        <div class="tab" tabindex="0">Управление</div>
       </div>
       <div class="btn-wrapper">
         <button class="btn btn--big" (click)="goBack()">
@@ -35,11 +35,11 @@
           <div class="config-settings">
             <div class="form__elems w-740">
               <div class="form__item">
-                <label for="name">Название</label>
+                <label for="configName">Название</label>
                 <input
                   formControlName="name"
                   type="text"
-                  id="name"
+                  id="configName"
                   class="w-500"
                   required
                 />
@@ -620,10 +620,11 @@
                 *ngIf="!configForm.get('useDefaultDesignSettings')?.value"
               >
                 <div class="form__item w-500">
-                  <label>Заголовок рабочего стола</label>
+                  <label for="desktopHeader">Заголовок рабочего стола</label>
                   <select
                     class="select-native w-267"
                     formControlName="desktopHeader"
+                    id="desktopHeader"
                   >
                     <option [ngValue]="'NO_HEADER'">Нет</option>
                     <option [ngValue]="'DEVICE_ID'">ID устройства</option>

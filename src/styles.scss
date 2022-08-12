@@ -864,6 +864,8 @@ input[type='checkbox']:disabled + .checkbox-custom {
 }
 
 .filter__content {
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding: 30px 0;
@@ -1432,7 +1434,8 @@ textarea {
   line-height: 16px;
 }
 
-.tab:hover {
+.tab:hover,
+.tab:focus {
   background: #eceef1;
   color: #667389;
   cursor: pointer;

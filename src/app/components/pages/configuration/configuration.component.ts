@@ -172,7 +172,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('config');
+    this.router.navigateByUrl('config').then();
   }
 
   setConfig() {
