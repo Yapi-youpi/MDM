@@ -41,10 +41,13 @@ export class UserComponent implements OnInit {
       let i = interval(500).subscribe(() => {
         if (this.user.token) {
           i.unsubscribe();
-          this.user.getUserInfo(this.id, 'uid').then((res) => {
-            this.currentUser = res[0];
-            this.asset.setToStorage('user-role', res[0].role).then();
-          });
+          this.user
+            .getUserInfo(this.id, 'uid')
+            .then((res) => {
+              this.currentUser = res[0];
+              this.asset.setToStorage('user-role', res[0].role).then();
+            })
+            .catch((err) => console.log(err));
         }
       });
     });
@@ -68,9 +71,13 @@ export class UserComponent implements OnInit {
         if (res) {
           this.user.token = '';
           this.router.navigateByUrl('auth').then();
+          this.asset.removeFromStorage('id').then();
           this.asset.removeFromStorage('token').then();
           this.asset.removeFromStorage('name').then();
           this.asset.removeFromStorage('login').then();
+          this.asset.removeFromStorage('last_password').then();
+          this.asset.removeFromStorage('user-role').then();
+          localStorage.clear();
         } else {
           console.log('Ошибка выхода из системы');
         }

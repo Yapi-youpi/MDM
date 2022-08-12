@@ -60,10 +60,12 @@ export class AddUserComponent implements OnInit {
     let i = interval(500).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
-        this.getUserTags();
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;
         });
+        if (this.userRole === 'super' || this.userRole === 'admin') {
+          this.getUserTags();
+        }
       }
     });
   }
@@ -113,7 +115,8 @@ export class AddUserComponent implements OnInit {
       this.form.get('userTags')?.value === 'Другое'
         ? [this.form.get('other')?.value]
         : [this.form.get('userTags')?.value];
-    if (password)
+    if (password) {
+      // TODO add change password for not super users
       this.userService
         .changeUserPassword(login, password)
         .then((res) => {
@@ -124,7 +127,8 @@ export class AddUserComponent implements OnInit {
         .catch((err) => {
           console.log(err);
         });
-    if (avatar && avatar?.length > 0)
+    }
+    if (avatar && avatar?.length > 0) {
       this.userService
         .loadAvatar(this.currentUser!.id, avatar)
         .then((res) => {
@@ -135,7 +139,8 @@ export class AddUserComponent implements OnInit {
         .catch((err) => {
           console.log(err);
         });
-    if (group[0][0] !== this.currentUser?.userTags[0])
+    }
+    if (group[0][0] !== this.currentUser?.userTags[0]) {
       this.userService
         .changeUserTag(this.currentUser!.id, group)
         .then((res) => {
@@ -146,7 +151,8 @@ export class AddUserComponent implements OnInit {
         .catch((err) => {
           console.log(err);
         });
-    if (name !== this.currentUser!.name)
+    }
+    if (name !== this.currentUser!.name) {
       this.userService
         .renameUSer(login, name)
         .then((res) => {
@@ -157,6 +163,7 @@ export class AddUserComponent implements OnInit {
         .catch((err) => {
           console.log(err);
         });
+    }
   }
 
   addFile(event: Event) {

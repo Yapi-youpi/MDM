@@ -38,7 +38,7 @@
               <div class="config-card__menu">
                 <a
                   class="config-card__menu-btn"
-                  routerLink="/configuration/{{ config.ID }}"
+                  [routerLink]="['/configuration', config.ID]"
                 >
                   <span class="btn--edit"></span>
                 </a>

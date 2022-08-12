@@ -102,6 +102,17 @@ export class AuthComponent {
         .catch((err) => {
           console.log(err);
         });
+
+      // forbidden for not super users :((
+      // I wanted to get permissions and set them automatically on components and interactive elements
+      /*      this.user
+        .getPermissions()
+        .then((res) => {
+          for (let key in res) {
+            this.asset.setToStorage(key, String(res[key])).then();
+          }
+        })
+        .catch((err) => console.log(err));*/
     }
   }
 }

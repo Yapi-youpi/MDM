@@ -1,6 +1,6 @@
 <div class="user-popup-container">
-  <div class="user-popup" *ngIf="currentUser">
-    <div class="popup-btn-wrapper" [class.no-img]="currentUser.avatar === ''">
+  <div class="user-popup">
+    <div class="popup-btn-wrapper" [class.no-img]="currentUser?.avatar === ''">
       <app-button
         [height]="'30px'"
         [width]="'30px'"
@@ -9,13 +9,13 @@
         [color]="'blue'"
         (onCLick)="togglePopup()"
       >
-        <span *ngIf="currentUser.avatar === ''" class="icon icon-user"></span>
+        <span *ngIf="currentUser?.avatar === ''" class="icon icon-user"></span>
         <span
           class="avatar--small"
-          *ngIf="currentUser.avatar !== ''"
+          *ngIf="currentUser?.avatar !== ''"
           [style.background-image]="
-            currentUser.avatar !== ''
-              ? 'url(data:image/jpeg;base64,' + currentUser.avatar + ')'
+            currentUser?.avatar !== ''
+              ? 'url(data:image/jpeg;base64,' + currentUser?.avatar + ')'
               : 'none'
           "
         ></span>
@@ -27,16 +27,16 @@
           <div
             class="avatar"
             [style.background-image]="
-              currentUser.avatar !== ''
-                ? 'url(data:image/jpeg;base64,' + currentUser.avatar + ')'
+              currentUser?.avatar !== ''
+                ? 'url(data:image/jpeg;base64,' + currentUser?.avatar + ')'
                 : 'none'
             "
           >
-            <span *ngIf="currentUser.avatar === ''" class="icon"></span>
+            <span *ngIf="currentUser?.avatar === ''" class="icon"></span>
           </div>
           <div class="info">
-            <p class="name text-menu-title">{{ currentUser.name }}</p>
-            <p class="company">{{ currentUser.userTags }}</p>
+            <p class="name text-menu-title">{{ currentUser?.name }}</p>
+            <p class="company">{{ currentUser?.userTags }}</p>
           </div>
         </div>
         <div class="top-right" *ngIf="router.url !== '/users'">
@@ -54,6 +54,7 @@
             [padding]="'0'"
             [radius]="'0'"
             [color]="'transparent'"
+            [disabled]="currentUser.id?.length === 0"
             (onCLick)="logout()"
           >
             <p>выйти</p>

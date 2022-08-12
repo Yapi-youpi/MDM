@@ -11,11 +11,16 @@ import { ConfigurationComponent } from '../components/pages/configuration/config
 import { AppsComponent } from '../components/pages/apps/apps.component';
 import { MessagesComponent } from '../components/pages/messages/messages.component';
 import { HelpComponent } from '../components/pages/help/help.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AuthGuard],
+    data: {
+      requiredRoles: ['super', 'admin'],
+    },
   },
   {
     path: 'auth',
@@ -28,10 +33,19 @@ const routes: Routes = [
   {
     path: 'groups',
     component: GroupsComponent,
+    // ???
+    canActivate: [AuthGuard],
+    data: {
+      requiredRoles: ['super', 'admin'],
+    },
   },
   {
     path: 'apps',
     component: AppsComponent,
+    canActivate: [AuthGuard],
+    data: {
+      requiredRoles: ['super', 'admin'],
+    },
   },
   {
     path: 'messages',
@@ -44,10 +58,18 @@ const routes: Routes = [
   {
     path: 'config',
     component: ConfigsComponent,
+    canActivate: [AuthGuard],
+    data: {
+      requiredRoles: ['super', 'admin'],
+    },
   },
   {
     path: 'configuration/:id',
     component: ConfigurationComponent,
+    canActivate: [AuthGuard],
+    data: {
+      requiredRoles: ['super', 'admin'],
+    },
   },
   {
     path: 'help',
