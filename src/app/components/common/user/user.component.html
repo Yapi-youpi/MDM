@@ -40,7 +40,11 @@
           </div>
         </div>
         <div class="top-right" *ngIf="router.url !== '/users'">
-          <app-card-menu-btn [target]="'modal-new-user'" [bg]="'blue'">
+          <app-card-menu-btn
+            [target]="'modal-new-user'"
+            [bg]="'blue'"
+            *ngIf="currentUser"
+          >
             <span class="icon icon-edit"></span>
           </app-card-menu-btn>
         </div>
@@ -54,7 +58,6 @@
             [padding]="'0'"
             [radius]="'0'"
             [color]="'transparent'"
-            [disabled]="currentUser.id?.length === 0"
             (onCLick)="logout()"
           >
             <p>выйти</p>

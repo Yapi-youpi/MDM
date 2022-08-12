@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { interval, timer } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
-
 import {
   alertService,
   deviceConfigService,
@@ -11,12 +10,12 @@ import {
 } from '../../../shared/services';
 import { device } from 'src/app/shared/services/forms';
 import { DatabaseService } from '../../../shared/services/database.service';
-
 import { Device } from '../../../shared/types/devices';
 import { DevicesGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
 import { DevicesFilter } from '../../../shared/types/filters';
 import * as states from '../../../shared/types/states';
+import { AssetService } from '../../../shared/services/asset.service';
 
 @Component({
   selector: 'app-devices',
@@ -31,20 +30,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
-
   public currDevice!: Device;
-
   public selectedDevicesIDs: string[] = [];
   public isAllSelected: boolean = false;
-
   public sortStatusAsc: boolean = true;
   public sortDateAsc: boolean = true;
   public sortNameAsc: boolean = true;
   public sortGroupAsc: boolean = true;
   public sortBatteryAsc: boolean = true;
-
   public searchParam: string = '';
-
+  public userRole: string = '';
   public filter: DevicesFilter = {
     status: null,
     dateFrom: null,
@@ -63,7 +58,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private editDeviceForm: device.edit,
     private editSeveralDevicesForm: device.editSeveral,
     private filterForm: device.filter,
-    private alert: alertService
+    private alert: alertService,
+    private asset: AssetService
   ) {}
 
   ngOnInit() {
@@ -73,7 +69,9 @@ export class DevicesComponent implements OnInit, OnDestroy {
         this.getGroups();
         this.getConfigs();
         this.getDevices();
-
+        this.asset.getFromStorage('user-role').then((role: string) => {
+          this.userRole = role;
+        });
         this.subscribeOnServer().then();
       }
     });

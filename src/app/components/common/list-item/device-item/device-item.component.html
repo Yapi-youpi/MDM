@@ -1,5 +1,8 @@
 <div class="row item">
-  <div class="checkbox-container">
+  <div
+    class="checkbox-container"
+    *ngIf="userRole === 'admin' || userRole === 'super'"
+  >
     <app-input-checkbox
       [value]="!!device.isSelected"
       (onChange)="onSelectUnselectDeviceHandler(device)"
@@ -46,11 +49,13 @@
         (onClick)="onClickDeviceQRCodeHandler($event)"
       ></app-device-action-btn>
       <app-device-action-btn
+        *ngIf="userRole === 'admin' || userRole === 'super'"
         [device]="device"
         [target]="'edit_device'"
         (onClick)="onClickDeviceEditHandler($event)"
       ></app-device-action-btn>
       <app-device-action-btn
+        *ngIf="userRole === 'admin' || userRole === 'super'"
         [device]="device"
         [target]="'delete_device'"
         (onClick)="onClickDeviceDeleteHandler($event)"

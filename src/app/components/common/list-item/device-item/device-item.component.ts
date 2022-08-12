@@ -13,6 +13,7 @@ export class DeviceItemComponent {
   @Input() public device!: Device;
   @Input() public configs!: DevicesConfig[];
   @Input() public groups!: DevicesGroup[];
+  @Input() userRole!: string;
 
   @Output() onSelectUnselectDevice = new EventEmitter<Device>();
   @Output() onChangeDeviceState = new EventEmitter<Device>();

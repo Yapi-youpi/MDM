@@ -14,6 +14,7 @@
           <app-filter-btn [target]="'filter_devices'"></app-filter-btn>
         </div>
         <app-add-button
+          *ngIf="userRole === 'admin' || userRole === 'super'"
           [title]="'добавить устройство'"
           [target]="'add_device'"
         ></app-add-button>
@@ -27,6 +28,7 @@
         <div class="dummy"></div>
       </ng-template>
       <app-selected-elements
+        *ngIf="userRole === 'admin' || userRole === 'super'"
         [selectedIDs]="selectedDevicesIDs"
         [editTarget]="'edit_several_devices'"
         [deleteTarget]="'delete_several_elements'"
@@ -34,7 +36,10 @@
       ></app-selected-elements>
       <div class="list">
         <div class="list-header">
-          <div class="checkbox-wrapper">
+          <div
+            class="checkbox-wrapper"
+            *ngIf="userRole === 'admin' || userRole === 'super'"
+          >
             <app-input-checkbox
               [value]="isAllSelected"
               (onChange)="selectUnselectDevices()"
@@ -107,6 +112,7 @@
               [device]="device"
               [groups]="groups"
               [configs]="configs"
+              [userRole]="userRole"
               (onSelectUnselectDevice)="selectUnselectDevice($event)"
               (onChangeDeviceState)="changeDeviceState($event)"
               (onClickDeviceQRCode)="getDeviceQRCode($event)"
@@ -130,29 +136,32 @@
   (onSubmit)="searchDevicesWithParams()"
 ></app-filter-devices>
 <app-add-device
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [groups]="groups"
   [isDataFetching]="loading"
   (onSubmit)="addDevice()"
 ></app-add-device>
-<app-qr-code
-  [device]="currDevice"
-></app-qr-code>
+<app-qr-code [device]="currDevice"></app-qr-code>
 <app-edit-device
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [groups]="groups"
   [isDataFetching]="loading"
   (onSubmit)="editDevice()"
 ></app-edit-device>
 <app-edit-several-devices
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [groups]="groups"
   [isDataFetching]="loading"
   (onSubmit)="editSeveralDevices()"
 ></app-edit-several-devices>
 <app-delete-device
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [device]="currDevice"
   [isDataFetching]="loading"
   (onSubmit)="deleteDevice($event)"
 ></app-delete-device>
 <app-delete-several-elements
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [isDataFetching]="loading"
   (onSubmit)="deleteSeveralDevices()"
 ></app-delete-several-elements>
