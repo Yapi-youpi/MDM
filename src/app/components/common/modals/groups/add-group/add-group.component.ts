@@ -14,8 +14,6 @@ export class AddGroupComponent {
 
   @Output() public onSubmit = new EventEmitter();
 
-  public currOption: Option = { value: '', html: '' };
-
   constructor(private form: add) {}
 
   get _form() {
@@ -48,18 +46,21 @@ export class AddGroupComponent {
   }
 
   get _currOption() {
+    const value = this._config_id?.value;
+    const html = this.configs.find(
+      (c) => c.ID === this._config_id?.value
+    )?.name;
+
     return {
-      value: this._config_id?.value,
-      html: this.configs.find((c) => c.ID === this._config_id?.value)?.name,
-    } as Option;
+      value: value ? value : '',
+      html: html ? html : '',
+    };
   }
 
   onSelectHandler(item: Option) {
     this._form.patchValue({
       deviceConfigID: item.value,
     });
-
-    this.currOption = item;
   }
 
   onSubmitHandler() {
@@ -69,7 +70,6 @@ export class AddGroupComponent {
       return;
     } else {
       this.onSubmit.emit();
-      this.currOption = { value: '', html: '' };
     }
   }
   onCancelHandler() {
@@ -78,7 +78,6 @@ export class AddGroupComponent {
     this._form.patchValue({
       deviceConfigID: '',
     });
-    this.currOption = { value: '', html: '' };
 
     const modal = document.querySelector('#add_group');
     modal?.classList.toggle('hidden');

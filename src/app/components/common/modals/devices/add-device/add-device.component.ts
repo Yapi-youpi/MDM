@@ -15,8 +15,6 @@ export class AddDeviceComponent {
 
   @Output() public onSubmit = new EventEmitter();
 
-  public currOption: Option = { value: '', html: '' };
-
   constructor(public form: AddDeviceService) {}
 
   get _form() {
@@ -49,9 +47,12 @@ export class AddDeviceComponent {
   }
 
   get _currOption() {
+    const value = this._group_id?.value;
+    const html = this.groups.find((g) => g.id === this._group_id?.value)?.name;
+
     return {
-      value: this._group_id?.value,
-      html: this.groups.find((g) => g.id === this._group_id?.value)?.name,
+      value: value ? value : '',
+      html: html ? html : '',
     } as Option;
   }
 
@@ -59,8 +60,6 @@ export class AddDeviceComponent {
     this._form.patchValue({
       device_group_id: item.value,
     });
-
-    this.currOption = item;
   }
 
   onSubmitHandler() {
@@ -70,7 +69,6 @@ export class AddDeviceComponent {
       return;
     } else {
       this.onSubmit.emit();
-      this.currOption = { value: '', html: '' };
     }
   }
 
@@ -80,7 +78,6 @@ export class AddDeviceComponent {
     this._form.patchValue({
       device_group_id: '',
     });
-    this.currOption = { value: '', html: '' };
 
     const modal = document.querySelector('#add_device');
     modal?.classList.toggle('hidden');
