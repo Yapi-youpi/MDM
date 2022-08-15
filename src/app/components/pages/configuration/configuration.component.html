@@ -836,12 +836,16 @@
                         | appsConfig: config.removedApps:false
                     "
                   >
-                    <option
+                    <option [ngValue]="app.name">
+                      {{ app.name }}
+                    </option>
+                    <!-- Если заданы приложения, которые могут использоваться как киоск -->
+                    <!--    <option
                       [ngValue]="app.name"
                       *ngIf="app.useKiosk; else noOptions"
                     >
                       {{ app.name }}
-                    </option>
+                    </option> -->
                   </ng-container>
                   <ng-template #noOptions>
                     <option selected disabled>Нет доступных приложений</option>
