@@ -18,4 +18,14 @@ export class ModalComponent {
       event.target.classList.add('hidden');
     }
   }
+
+  @HostListener('document:keydown.esc', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    const modalEl = document.querySelectorAll('.modal-bg');
+    modalEl.forEach((modal) => {
+      if (this.isClosable && !modal.classList.contains('hidden')) {
+        modal.classList.add('hidden');
+      }
+    });
+  }
 }

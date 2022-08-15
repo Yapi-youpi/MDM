@@ -31,6 +31,12 @@
 
     &.vertical {
       animation: appearance-vertical var(--transition-time) ease;
+
+      & .modal-container {
+        max-height: calc(100vh - 10%);
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
     }
 
     &.horizontal {
