@@ -142,7 +142,7 @@ export class AddUserComponent implements OnInit {
         const lastPassword = this.form.get('oldPassword')?.value;
         this.userService
           .changePassword(lastPassword, password)
-          .then((res) => {
+          .then(() => {
             document.getElementById('old-pass')?.removeAttribute('style');
             this.clearModal(true);
             this.showAlert('Пароль изменен');
@@ -158,7 +158,7 @@ export class AddUserComponent implements OnInit {
       } else {
         this.userService
           .changeUserPassword(login, password)
-          .then((res) => {
+          .then(() => {
             this.currentUser = undefined;
             this.clearModal(true);
             this.showAlert('Пароль изменен');
@@ -263,10 +263,6 @@ export class AddUserComponent implements OnInit {
     }
   }
 
-  get _pass() {
-    return this.form.get('password');
-  }
-
   showValidation() {
     document.querySelector('.validation-list')?.classList.remove('hidden');
   }
@@ -276,7 +272,7 @@ export class AddUserComponent implements OnInit {
   }
 
   validate() {
-    this._pass?.value.length >= 8
+    this.form.get('password')?.value.length >= 8
       ? document
           .querySelector('.validation-item[data-pattern="length"]')
           ?.classList.add('validation-item--ok')
@@ -284,9 +280,9 @@ export class AddUserComponent implements OnInit {
           .querySelector('.validation-item[data-pattern="length"]')
           ?.classList.remove('validation-item--ok');
 
-    if (this._pass?.value.length > 0) {
+    if (this.form.get('password')?.value.length > 0) {
       const checkPattern = (key, pattern) => {
-        if (this._pass?.value.match(pattern)) {
+        if (this.form.get('password')?.value.match(pattern)) {
           document
             .querySelector(`.validation-item[data-pattern=${key}]`)
             ?.classList.add('validation-item--ok');

@@ -55,13 +55,11 @@
     </div>
     <div class="form__item" *ngIf="isEditSelf && passwordField">
       <label for="old-pass">Старый пароль</label>
-      <input
-        formControlName="oldPassword"
-        type="password"
-        name="old-pass"
-        id="old-pass"
-        class="w-296"
-      />
+      <app-input-password
+        [control]="$any(this.form.get('oldPassword'))"
+        [name]="'old-pass'"
+        [width]="'w-296'"
+      ></app-input-password>
     </div>
     <div class="form__item">
       <label for="password">{{ isEditSelf ? 'Новый пароль' : 'Пароль' }}</label>
@@ -75,7 +73,7 @@
       <div class="validation" *ngIf="passwordField">
         <app-input-password
           [name]="'password'"
-          [control]="$any(_pass)"
+          [control]="$any(this.form.get('password'))"
           [width]="'w-296'"
           [pattern]="pattern"
           (onFocus)="showValidation()"
