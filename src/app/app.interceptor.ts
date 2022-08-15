@@ -22,12 +22,12 @@ export class AppInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    // console.log(req);
     if (
       req.url.includes('login') ||
       req.url.includes('registration') ||
       req.url.includes('address')
     ) {
-      console.log(req);
       return next.handle(req).pipe(
         tap({
           next: (req) => {

@@ -22,6 +22,7 @@ import { alertService } from '../../../../../shared/services';
 export class AddUserComponent implements OnInit {
   @Input() currentUser: Users | undefined;
   public userRole = '';
+  public userLogin = '';
   public form: FormGroup;
   public userTags = [];
   public file_input!: any;
@@ -29,6 +30,7 @@ export class AddUserComponent implements OnInit {
   public avatar!: Element;
   public userPhoto!: string;
   public passwordField: boolean = true;
+  public isEditSelf: boolean = false;
   public pattern =
     "^(?=.*\\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\\\\\\/_.,:;\\[\\]{} \x22-]).{8,64}$";
   @Output() onClose = new EventEmitter<boolean>();
@@ -40,6 +42,7 @@ export class AddUserComponent implements OnInit {
   ) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
+      oldPassword: new FormControl(''),
       password: new FormControl('', Validators.required),
       login: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
@@ -51,9 +54,13 @@ export class AddUserComponent implements OnInit {
   ngOnChanges() {
     if (this.currentUser) {
       this.form.patchValue(this.currentUser);
+      this.currentUser.login === this.userLogin
+        ? (this.isEditSelf = true)
+        : (this.isEditSelf = false);
       this.passwordField = false;
     } else {
       this.form.reset();
+      this.isEditSelf = false;
       this.passwordField = true;
     }
   }
@@ -62,6 +69,11 @@ export class AddUserComponent implements OnInit {
     let i = interval(500).subscribe(() => {
       if (this.userService.token) {
         i.unsubscribe();
+        this.asset.getFromStorage('login').then((login) => {
+          this.userLogin = login;
+          if (this.currentUser?.login === this.userLogin)
+            this.isEditSelf = true;
+        });
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;
           if (role === 'super' || role === 'admin') {
@@ -107,6 +119,12 @@ export class AddUserComponent implements OnInit {
 
   showPasswordField() {
     this.passwordField = true;
+    let t = interval(20).subscribe(() => {
+      this.isEditSelf
+        ? document.getElementById('old-pass')?.focus()
+        : document.getElementById('password')?.focus();
+      t.unsubscribe();
+    });
   }
 
   editUser() {
@@ -118,20 +136,39 @@ export class AddUserComponent implements OnInit {
       this.form.get('userTags')?.value === 'Другое'
         ? [this.form.get('other')?.value]
         : [this.form.get('userTags')?.value];
+
     if (password) {
-      // TODO add change password for not super users
-      this.userService
-        .changeUserPassword(login, password)
-        .then((res) => {
-          console.log(res);
-          this.currentUser = undefined;
-          this.clearModal(true);
-          this.showAlert('Пароль изменен');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (this.isEditSelf) {
+        const lastPassword = this.form.get('oldPassword')?.value;
+        this.userService
+          .changePassword(lastPassword, password)
+          .then((res) => {
+            document.getElementById('old-pass')?.removeAttribute('style');
+            this.clearModal(true);
+            this.showAlert('Пароль изменен');
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.error.error === 'wrong password or login') {
+              document
+                .getElementById('old-pass')
+                ?.setAttribute('style', 'outline: 2px solid #eb4f4f;');
+            }
+          });
+      } else {
+        this.userService
+          .changeUserPassword(login, password)
+          .then((res) => {
+            this.currentUser = undefined;
+            this.clearModal(true);
+            this.showAlert('Пароль изменен');
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     }
+
     if (avatar && avatar?.length > 0) {
       this.userService
         .loadAvatar(this.currentUser!.id, avatar)
@@ -145,6 +182,7 @@ export class AddUserComponent implements OnInit {
           console.log(err);
         });
     }
+
     if (group[0][0] !== this.currentUser?.userTags[0]) {
       this.userService
         .changeUserTag(this.currentUser!.id, group)
@@ -158,6 +196,7 @@ export class AddUserComponent implements OnInit {
           console.log(err);
         });
     }
+
     if (name !== this.currentUser!.name) {
       this.userService
         .renameUSer(login, name)

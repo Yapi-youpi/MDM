@@ -53,9 +53,18 @@
         required
       />
     </div>
-
+    <div class="form__item" *ngIf="isEditSelf && passwordField">
+      <label for="old-pass">Старый пароль</label>
+      <input
+        formControlName="oldPassword"
+        type="password"
+        name="old-pass"
+        id="old-pass"
+        class="w-296"
+      />
+    </div>
     <div class="form__item">
-      <label for="password">Пароль</label>
+      <label for="password">{{ isEditSelf ? 'Новый пароль' : 'Пароль' }}</label>
       <button
         *ngIf="!passwordField"
         class="btn btn--big btn--outline w-296"
@@ -68,7 +77,6 @@
           [name]="'password'"
           [control]="$any(_pass)"
           [width]="'w-296'"
-          [id]="'password'"
           [pattern]="pattern"
           (onFocus)="showValidation()"
           (onBlur)="hideValidation()"

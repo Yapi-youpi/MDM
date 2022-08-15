@@ -35,27 +35,6 @@ export class UserComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.asset.getFromStorage('id').then((id: string) => {
-      this.id = id;
-      let i = interval(10).subscribe(() => {
-        if (this.user.token) {
-          i.unsubscribe();
-          this.user
-            .getUserInfo(this.id, 'uid')
-            .then((res) => {
-              this.currentUser = res[0];
-              this.asset.setToStorage('user-role', res[0].role).then();
-            })
-            .catch((err) => {
-              console.log(err);
-              this.asset.setToStorage('user-role', '').then();
-            });
-        }
-      });
-    });
-  }
-
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event: Event): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
@@ -63,8 +42,40 @@ export class UserComponent implements OnInit {
     }
   }
 
+  ngOnInit() {
+    this.asset.getFromStorage('id').then((id: string) => {
+      this.id = id;
+      let i = interval(10).subscribe(() => {
+        if (this.user.token) {
+          i.unsubscribe();
+          this.getUser();
+        }
+      });
+    });
+  }
+
   togglePopup() {
     this.isPopupOpen = !this.isPopupOpen;
+  }
+
+  getUser() {
+    this.user
+      .getUserInfo(this.id, 'uid')
+      .then((res) => {
+        this.currentUser = res[0];
+        this.asset.setToStorage('user-role', res[0].role).then();
+      })
+      .catch((err) => {
+        console.log(err);
+        this.asset.setToStorage('user-role', '').then();
+      });
+  }
+
+  setUser(change) {
+    if (change) {
+      this.getUser();
+    } else this.currentUser = { ...this.currentUser };
+    this.isPopupOpen = false;
   }
 
   logout() {

@@ -68,5 +68,9 @@
   </div>
 </div>
 
-<app-add-user *ngIf="router.url !== '/users'" [currentUser]="currentUser">
+<app-add-user
+  *ngIf="router.url !== '/users'"
+  [currentUser]="currentUser"
+  (onClose)="setUser($event)"
+>
 </app-add-user>

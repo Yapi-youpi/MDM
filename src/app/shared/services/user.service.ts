@@ -17,12 +17,12 @@ export class UserService {
   public passLength = 0;
   constructor(private http: HttpClient) {}
 
-  changePassword(password: string) {
+  changePassword(last_password: string, password: string) {
     const url = environment.url + '/change_password';
     const body = {
       login: this.login,
       password: password,
-      lastPassword: this.last_password,
+      lastPassword: last_password,
     };
     return new Promise((resolve, reject) => {
       this.http.post(url, body).subscribe({
