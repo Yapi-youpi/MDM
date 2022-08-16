@@ -81,7 +81,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.sub != null) this.sub.unsubscribe();
   }
 
   getConfigs() {
