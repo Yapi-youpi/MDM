@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   login(login: string, password: string) {
     const url = environment.url + '/login';

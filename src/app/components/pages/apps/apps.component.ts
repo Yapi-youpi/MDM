@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, timer } from 'rxjs';
+import { timer } from 'rxjs';
 
 import {
   alertService,
@@ -35,15 +35,9 @@ export class AppsComponent {
   ) {}
 
   ngOnInit(): void {
-    const i = interval(1000).subscribe(() => {
-      if (this.user.token) {
-        i.unsubscribe();
-
-        this.loading = true;
-        this.getApps();
-        this.loading = false;
-      }
-    });
+    this.loading = true;
+    this.getApps();
+    this.loading = false;
   }
 
   getApps() {

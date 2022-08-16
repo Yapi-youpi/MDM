@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
-import { interval } from 'rxjs';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { AssetService } from '../../../shared/services/asset.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-configs',
@@ -21,8 +19,7 @@ export class ConfigsComponent implements OnInit {
   public currentConfig!: DevicesConfig;
   constructor(
     public asset: AssetService,
-    private configService: DevicesConfigService,
-    private userService: UserService
+    private configService: DevicesConfigService
   ) {
     this.newConfigForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -38,13 +35,8 @@ export class ConfigsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let i = interval(1000).subscribe(() => {
-      if (this.userService.token) {
-        i.unsubscribe();
-        this.getDefaultConfig();
-        this.getAllConfigs();
-      }
-    });
+    this.getDefaultConfig();
+    this.getAllConfigs();
   }
 
   getDefaultConfig() {

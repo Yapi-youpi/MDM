@@ -5,7 +5,6 @@ import {
   authService,
   userService,
 } from '../../../shared/services';
-import { interval } from 'rxjs';
 import { Users } from 'src/app/interfaces/interfaces';
 
 @Component({
@@ -24,16 +23,7 @@ export class UserComponent implements OnInit {
     public user: userService,
     public router: Router,
     public asset: assetService
-  ) {
-    if (!this.user.token) {
-      this.asset.getFromStorage('token').then((token: string) => {
-        this.user.token = token;
-      });
-      this.asset.getFromStorage('login').then((login: string) => {
-        this.user.login = login;
-      });
-    }
-  }
+  ) {}
 
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event: Event): void {
@@ -45,12 +35,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.asset.getFromStorage('id').then((id: string) => {
       this.id = id;
-      let i = interval(10).subscribe(() => {
-        if (this.user.token) {
-          i.unsubscribe();
-          this.getUser();
-        }
-      });
+
+      this.getUser();
     });
   }
 

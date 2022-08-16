@@ -4,7 +4,6 @@ import {
   GroupPermissions,
   Permissions,
 } from '../../../../interfaces/interfaces';
-import { interval } from 'rxjs';
 import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
@@ -36,12 +35,7 @@ export class UserPermissionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let i = interval(1000).subscribe(() => {
-      if (this.userService.token) {
-        i.unsubscribe();
-        this.getPermissions();
-      }
-    });
+    this.getPermissions();
   }
 
   getPermissions() {

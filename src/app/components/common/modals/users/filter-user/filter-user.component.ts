@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { interval } from 'rxjs';
 import { UserService } from '../../../../../shared/services/user.service';
 import { AssetService } from '../../../../../shared/services/asset.service';
 
@@ -25,12 +24,7 @@ export class FilterUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    let i = interval(500).subscribe(() => {
-      if (this.user.token) {
-        i.unsubscribe();
-        this.getUserTags();
-      }
-    });
+    this.getUserTags();
   }
 
   getUserTags() {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { timer } from 'rxjs';
 import { deviceService, userService } from '../../../../../shared/services';
 import * as states from '../../../../../shared/types/states';
 import { Device } from '../../../../../shared/types/devices';
@@ -23,12 +22,7 @@ export class AddMessageComponent implements OnInit {
   }
 
   ngOnInit() {
-    const i = timer(200).subscribe(() => {
-      if (this.user.token) {
-        i.unsubscribe();
-        this.getDevices();
-      }
-    });
+    this.getDevices();
   }
 
   getDevices() {

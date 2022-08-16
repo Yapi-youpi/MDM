@@ -58,30 +58,16 @@ export class AuthComponent {
 
           this.user.token = res.token;
           this.user.login = this.logForm._login;
-          this.user.last_password = this.logForm._pass;
 
           this.router.navigateByUrl('devices').then(() => {
             if (res.error === 'change super admin password') {
               // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
-              // let i = interval(1000).subscribe(() => {
-              //   let elem = document.querySelector(".modal");
-              //   const options = {
-              //     dismissible: false,
-              //   };
-              //   if (elem) {
-              //     i.unsubscribe();
-              //     // M.Modal.init(elem, options);
-              //     // let instance = M.Modal.getInstance(elem);
-              //     // instance.open();
-              //   }
-              // });
             }
           });
 
           this.db
-            .signup(this.user.login, this.user.last_password)
+            .signup(this.user.login, this.logForm._pass)
             .then((res) => {
-              console.log(res);
               console.log(res, 'Log In res');
               this.logForm.resetForm();
               this.logForm.resetSubmitted();

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { GroupPermissions, Users } from '../../interfaces/interfaces';
+import { assetService } from './index';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +10,19 @@ import { GroupPermissions, Users } from '../../interfaces/interfaces';
 export class UserService {
   public token = '';
   public login = '';
-  public last_password = '';
   public upperCase = false;
   public lowerCase = false;
   public number = false;
   public specialChar = false;
   public passLength = 0;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private asset: assetService) {
+    this.asset.getFromStorage('token').then((token: string) => {
+      this.token = token;
+    });
+    this.asset.getFromStorage('login').then((login: string) => {
+      this.login = login;
+    });
+  }
 
   changePassword(last_password: string, password: string) {
     const url = environment.url + '/change_password';

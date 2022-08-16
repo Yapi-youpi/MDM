@@ -89,12 +89,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   ngOnInit() {
-    let i = interval(1000).subscribe(() => {
-      if (this.userService.token) {
-        i.unsubscribe();
-        this.getConfig();
-      }
-    });
+    this.getConfig();
   }
 
   getApps() {

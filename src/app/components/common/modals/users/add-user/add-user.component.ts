@@ -66,21 +66,18 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    let i = interval(500).subscribe(() => {
-      if (this.userService.token) {
-        i.unsubscribe();
-        this.asset.getFromStorage('login').then((login) => {
-          this.userLogin = login;
-          if (this.currentUser?.login === this.userLogin)
-            this.isEditSelf = true;
-        });
-        this.asset.getFromStorage('user-role').then((role: string) => {
-          this.userRole = role;
-          if (role === 'super' || role === 'admin') {
-            this.getUserTags();
-          }
-        });
-      }
+    let i = interval(200).subscribe(() => {
+      this.asset.getFromStorage('login').then((login) => {
+        this.userLogin = login;
+        if (this.currentUser?.login === this.userLogin) this.isEditSelf = true;
+      });
+      this.asset.getFromStorage('user-role').then((role: string) => {
+        this.userRole = role;
+        if (role === 'super' || role === 'admin') {
+          this.getUserTags();
+        }
+      });
+      i.unsubscribe();
     });
   }
 

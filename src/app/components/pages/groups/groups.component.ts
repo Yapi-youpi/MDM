@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, timer } from 'rxjs';
+import { timer } from 'rxjs';
 
 import {
   alertService,
@@ -58,13 +58,8 @@ export class GroupsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let i = interval(1000).subscribe(() => {
-      if (this.userService.token) {
-        i.unsubscribe();
-        this.getGroups('all');
-        this.getConfigs('all');
-      }
-    });
+    this.getGroups('all');
+    this.getConfigs('all');
   }
 
   getGroups(param: string) {

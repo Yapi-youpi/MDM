@@ -22,6 +22,8 @@ export class AppInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const token = this.userService.token;
+    const login = this.userService.login;
     // console.log(req);
     if (
       req.url.includes('login') ||
@@ -44,10 +46,9 @@ export class AppInterceptor implements HttpInterceptor {
         })
       );
     } else {
+      // console.log(token, login);
       const clonedReq = req.clone({
-        headers: req.headers
-          .set('MDMToken', this.userService.token)
-          .set('MDMLogin', this.userService.login),
+        headers: req.headers.set('MDMToken', token).set('MDMLogin', login),
       });
       return next.handle(clonedReq).pipe(
         tap({

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Users } from '../../../interfaces/interfaces';
-import { interval } from 'rxjs';
 import { AssetService } from '../../../shared/services/asset.service';
 import { UserService } from '../../../shared/services/user.service';
 
@@ -23,17 +22,12 @@ export class UsersComponent implements OnInit {
   constructor(public asset: AssetService, public userService: UserService) {}
 
   ngOnInit() {
-    let i = interval(1000).subscribe(() => {
-      if (this.userService.token) {
-        i.unsubscribe();
-        this.getAllUsers();
-        this.asset.getFromStorage('user-role').then((role: string) => {
-          this.userRole = role;
-        });
-        this.asset.getFromStorage('login').then((login: string) => {
-          this.userLogin = login;
-        });
-      }
+    this.getAllUsers();
+    this.asset.getFromStorage('user-role').then((role: string) => {
+      this.userRole = role;
+    });
+    this.asset.getFromStorage('login').then((login: string) => {
+      this.userLogin = login;
     });
   }
 
