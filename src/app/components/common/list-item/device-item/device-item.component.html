@@ -13,8 +13,8 @@
       <app-status-icon
         [size]="'s18x18'"
         [controlState]="!device.registration_state"
-        [isOn]="device.active_state"
-        [isOff]="!device.active_state"
+        [isOn]="device.online_state"
+        [isOff]="!device.online_state"
       ></app-status-icon>
     </div>
     <p>{{ device.updatedAt | dateConverter }}</p>
