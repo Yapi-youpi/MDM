@@ -16,6 +16,7 @@ import { alertService } from '../../../shared/services';
   styleUrls: ['./configuration.component.scss'],
 })
 export class ConfigurationComponent implements OnInit {
+  public title = 'Конфигурации / ';
   public config!: DevicesConfig;
   public configForm: FormGroup;
   public apps: App[] = [];
@@ -105,6 +106,7 @@ export class ConfigurationComponent implements OnInit {
       .getConfig(id)
       .then((res) => {
         this.config = Object.assign(res[0]);
+        this.title = this.title + res[0].name;
         this.initialAppList = res[0].applications || [];
         console.log(this.config);
       })
@@ -162,12 +164,18 @@ export class ConfigurationComponent implements OnInit {
   }
 
   toggleApp(app) {
-    const { id, value } = app;
+    const [id, value] = app;
     if (value === '0') {
       this.config.removedApps.push(id);
+      this.config.installedApps = this.config.installedApps.filter(
+        (app) => app != id
+      );
     }
     if (value === '1') {
       this.config.installedApps.push(id);
+      this.config.removedApps = this.config.removedApps.filter(
+        (app) => app != id
+      );
     }
   }
 
