@@ -113,6 +113,7 @@
             (onClickDeviceQRCode)="getDeviceQRCode($event)"
             (onClickDeviceEdit)="selectDeviceToEdit($event)"
             (onClickDeviceDelete)="selectDeviceToDelete($event)"
+            (onClickDeviceReboot)="rebootDevice($event)"
           ></app-device-item>
         </ng-container>
         <ng-template #nodata>

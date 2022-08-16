@@ -453,4 +453,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
         });
       });
   }
+
+  rebootDevice(device: Device) {
+    this.device
+      .reload(device.device_id)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
 }

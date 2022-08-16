@@ -3,6 +3,7 @@ export enum devicesPaths {
   GET = '/get_device/',
   REMOVE = '/remove_device',
   EDIT = '/edit_device',
+  REBOOT = '/reboot_device',
 }
 
 export enum appsPaths {

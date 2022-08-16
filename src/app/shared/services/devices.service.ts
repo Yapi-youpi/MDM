@@ -80,4 +80,21 @@ export class DevicesService {
       });
     });
   }
+
+  reload(device_id: string) {
+    const url = environment.url + api.REBOOT;
+    const body = {
+      id: device_id,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).subscribe({
+        next: (res) => {
+          resolve(res);
+        },
+        error: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
 }

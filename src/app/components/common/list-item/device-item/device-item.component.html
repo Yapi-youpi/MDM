@@ -47,18 +47,28 @@
         [device]="device"
         [target]="'qr_code'"
         (onClick)="onClickDeviceQRCodeHandler($event)"
+        title="Показать QR-код устройства"
       ></app-device-action-btn>
       <app-device-action-btn
         *ngIf="userRole === 'admin' || userRole === 'super'"
         [device]="device"
         [target]="'edit_device'"
         (onClick)="onClickDeviceEditHandler($event)"
+        title="Редактировать устройство"
       ></app-device-action-btn>
       <app-device-action-btn
         *ngIf="userRole === 'admin' || userRole === 'super'"
         [device]="device"
         [target]="'delete_device'"
         (onClick)="onClickDeviceDeleteHandler($event)"
+        title="Удалить устройство"
+      ></app-device-action-btn>
+      <app-device-action-btn
+        *ngIf="userRole === 'admin' || userRole === 'super'"
+        [device]="device"
+        [target]="'reload_device'"
+        (onClick)="onClickDeviceReloadHandler($event)"
+        title="Перезагрузить устройство"
       ></app-device-action-btn>
     </div>
   </div>
