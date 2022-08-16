@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
-import { DevicesConfig } from '../../../interfaces/interfaces';
+import { DevicesConfig, Permissions } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
@@ -21,7 +21,8 @@ export class ConfigurationComponent implements OnInit {
   public config!: DevicesConfig;
   public configForm: FormGroup;
   public apps: App[] = [];
-  public restrictions: string[] = [];
+  // public restrictions: string[] = [];
+  public restrictionList: Permissions;
   public isModalAddAppOpen = false;
 
   private editedApps: App[] = [];
@@ -37,6 +38,15 @@ export class ConfigurationComponent implements OnInit {
     private asset: AssetService
   ) {
     this.title = this.title + this.asset.configName;
+    this.restrictionList = {
+      no_install_apps: 'установка приложений',
+      no_uninstall_apps: 'удаление приложений',
+      no_config_credentials: 'настройка пользователя',
+      no_config_location: 'настройка местоположения',
+      no_config_tethering: 'настройка точки доступа',
+      no_factory_reset: 'сброс настроек',
+      no_fun: 'развлекательные приложения',
+    };
     this.configForm = new FormGroup({
       GPS: new FormControl(true, Validators.required),
       autoUpdate: new FormControl(false, Validators.required),
@@ -121,14 +131,14 @@ export class ConfigurationComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
-  getRestrictions() {
-    this.configService
-      .getRestrictions()
-      .then((res) => {
-        this.restrictions = res.split(', ');
-      })
-      .catch((err) => console.log(err));
-  }
+  // getRestrictions() {
+  //   this.configService
+  //     .getRestrictions()
+  //     .then((res) => {
+  //       this.restrictions = res.split(', ');
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   editConfig() {
     const config = Object.assign(this.config, this.configForm.value);
@@ -197,7 +207,7 @@ export class ConfigurationComponent implements OnInit {
       this.configForm.patchValue({ wifiSecurityType: 'NONE' });
     }
     this.getApps();
-    this.getRestrictions();
+    // this.getRestrictions();
     this.config.applications = this.initialAppList;
   }
 
@@ -244,6 +254,7 @@ export class ConfigurationComponent implements OnInit {
       arr.splice(index, 1);
       this.config.restrictions = arr.join(', ');
     }
+    console.log(this.config.restrictions);
   }
 
   addApp(addedApps: string[]) {

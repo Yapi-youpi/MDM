@@ -787,13 +787,15 @@
               </label>
             </div>
             <div class="form__item w-267">
-              <label
-                class="switch"
-                title="Функция выбора одного приложения на устройстве, без доступа к остальному интерфейсу"
-              >
+              <label class="switch">
                 <div>
                   Режим киоска
-                  <p class="hint">?</p>
+                  <p
+                    class="hint"
+                    title="Функция выбора одного приложения на устройстве, без доступа к остальному интерфейсу"
+                  >
+                    ?
+                  </p>
                 </div>
                 <input
                   formControlName="kioskMode"
@@ -900,18 +902,29 @@
               </div>
             </div>
             <div class="divider"></div>
-            <div class="font-bold">Дополнительные ограничения:</div>
+            <div>
+              <span class="font-bold"> Дополнительные ограничения:</span>
+              <span
+                class="hint"
+                title="Запрещает использовать на устройствах выбранные функции"
+              >
+                ?
+              </span>
+            </div>
             <div class="form__item">
               <div class="tags-container">
-                <label class="custom-radio" *ngFor="let item of restrictions">
+                <label
+                  class="custom-radio"
+                  *ngFor="let item of restrictionList | keyvalue"
+                >
                   <input
                     class="visually-hidden"
                     type="checkbox"
-                    [value]="item"
+                    [value]="item.key"
                     (click)="changeRestrictions($event)"
-                    [checked]="config.restrictions.includes(item)"
+                    [checked]="config.restrictions.includes(item.key)"
                   />
-                  <span class="custom-radio__span">{{ item }}</span>
+                  <span class="custom-radio__span">{{ item.value }}</span>
                 </label>
               </div>
             </div>
