@@ -8,22 +8,17 @@
     class="select-field"
     [class.filled]="!isDropdownHidden"
     [class.text-menu-title]="color === 'common'"
-    (click)="toggleDropdown()">
+    (click)="toggleDropdown()"
+  >
     {{ currOption?.html }}
   </div>
-  <ul
-    class="select-content"
-    [class.hidden]="isDropdownHidden"
-  >
+  <ul class="select-content" [class.hidden]="isDropdownHidden">
     <li
       *ngFor="let option of options; trackBy: identify"
       class="item"
       (click)="onSelectHandler(option)"
     >
-      <p
-        class="dropdown-item"
-        [class.text-menu-title]="color === 'common'"
-      >
+      <p class="dropdown-item" [class.text-menu-title]="color === 'common'">
         {{ option.html }}
       </p>
     </li>

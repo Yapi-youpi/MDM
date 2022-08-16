@@ -17,14 +17,12 @@ import { App } from '../../../shared/types/apps';
   styleUrls: ['./apps.component.scss'],
 })
 export class AppsComponent {
+  public title = 'Приложения';
   public loading: boolean = true;
   public apps: App[] = [];
   public currApp!: App;
-
   public searchParam: string = '';
-
   public isOnlySystemApps: boolean = false;
-
   public isNameSortAsc: boolean = true;
   public isSizeSortAsc: boolean = true;
 

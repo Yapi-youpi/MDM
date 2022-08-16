@@ -22,6 +22,7 @@ interface DeviceGeo {
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit, AfterViewInit {
+  public title = 'Карта';
   public group_option: Option[] = [];
   public config_option: Option[] = [];
   public status_option: Option[] = [
@@ -49,6 +50,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   public devices_geo: DeviceGeo[] = [];
   public open = false;
   public search = '';
+
   constructor(
     private mapService: MapService,
     private groupService: GroupsService,

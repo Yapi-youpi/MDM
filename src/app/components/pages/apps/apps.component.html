@@ -1,85 +1,79 @@
-<app-global-container class="global-container">
-  <app-global-header
-    class="global-header"
-    [title]="'Приложения'"
-  ></app-global-header>
-  <main class="global-main card-wrapper">
-    <div class="card page-content">
-      <div class="top row space-between">
-        <app-input-search
-          [value]="searchParam"
-          (onChange)="onChangeSearchInputHandler($event)"
-        ></app-input-search>
-        <div class="filter-btn-wrapper">
-          <app-button
-            [text]="'системное приложение'"
-            [textLike]="'like-body'"
-            [height]="'30px'"
-            [padding]="'9px 14px'"
-            [radius]="'15px'"
-            [color]="isOnlySystemApps ? 'blue' : 'common'"
-            (onCLick)="toggleSystemApps()"
-          ></app-button>
-        </div>
-        <app-add-button
-          [title]="'добавить приложение'"
-          [target]="'add_app'"
-        ></app-add-button>
+<main class="global-main card-wrapper">
+  <div class="card page-content">
+    <div class="top row space-between">
+      <app-input-search
+        [value]="searchParam"
+        (onChange)="onChangeSearchInputHandler($event)"
+      ></app-input-search>
+      <div class="filter-btn-wrapper">
+        <app-button
+          [text]="'системное приложение'"
+          [textLike]="'like-body'"
+          [height]="'30px'"
+          [padding]="'9px 14px'"
+          [radius]="'15px'"
+          [color]="isOnlySystemApps ? 'blue' : 'common'"
+          (onCLick)="toggleSystemApps()"
+        ></app-button>
       </div>
-      <ng-container *ngIf="loading; else dummy">
-        <div class="progress">
-          <div class="indeterminate"></div>
+      <app-add-button
+        [title]="'добавить приложение'"
+        [target]="'add_app'"
+      ></app-add-button>
+    </div>
+    <ng-container *ngIf="loading; else dummy">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </ng-container>
+    <ng-template #dummy>
+      <div class="dummy"></div>
+    </ng-template>
+    <div class="list">
+      <div class="list-header row space-between">
+        <div class="empty"></div>
+        <div class="sort-btn-wrapper name">
+          <app-sort-btn
+            [title]="'Название'"
+            [isSortAsc]="isNameSortAsc"
+            (onCLick)="toggleNameSortDir()"
+          ></app-sort-btn>
         </div>
-      </ng-container>
-      <ng-template #dummy>
-        <div class="dummy"></div>
-      </ng-template>
-      <div class="list">
-        <div class="list-header row space-between">
-          <div class="empty"></div>
-          <div class="sort-btn-wrapper name">
-            <app-sort-btn
-              [title]="'Название'"
-              [isSortAsc]="isNameSortAsc"
-              (onCLick)="toggleNameSortDir()"
-            ></app-sort-btn>
-          </div>
-          <p>Версия</p>
-          <!--          <p>URL</p>-->
-          <p>ID пакета</p>
-          <div class="sort-btn-wrapper size">
-            <app-sort-btn
-              [title]="'Размер'"
-              [isSortAsc]="isSizeSortAsc"
-              (onCLick)="toggleSizeSortDir()"
-            ></app-sort-btn>
-          </div>
-          <p>Ярлык</p>
-          <p>Действия</p>
+        <p>Версия</p>
+        <!--          <p>URL</p>-->
+        <p>ID пакета</p>
+        <div class="sort-btn-wrapper size">
+          <app-sort-btn
+            [title]="'Размер'"
+            [isSortAsc]="isSizeSortAsc"
+            (onCLick)="toggleSizeSortDir()"
+          ></app-sort-btn>
         </div>
-        <div class="list-body">
-          <ng-container *ngIf="apps.length !== 0; else nodata">
-            <app-app-item
-              *ngFor="
-                let app of apps
-                  | search: searchParam:'app'
-                  | apps_system: isOnlySystemApps
-                  | apps_name: isNameSortAsc
-                  | apps_size: isSizeSortAsc
-              "
-              [app]="app"
-              (onEditClick)="selectAppToEdit($event)"
-              (onDeleteClick)="selectAppToDelete($event)"
-            ></app-app-item>
-          </ng-container>
-          <ng-template #nodata>
-            <app-no-list-data></app-no-list-data>
-          </ng-template>
-        </div>
+        <p>Ярлык</p>
+        <p>Действия</p>
+      </div>
+      <div class="list-body">
+        <ng-container *ngIf="apps.length !== 0; else nodata">
+          <app-app-item
+            *ngFor="
+              let app of apps
+                | search: searchParam:'app'
+                | apps_system: isOnlySystemApps
+                | apps_name: isNameSortAsc
+                | apps_size: isSizeSortAsc
+            "
+            [app]="app"
+            (onEditClick)="selectAppToEdit($event)"
+            (onDeleteClick)="selectAppToDelete($event)"
+          ></app-app-item>
+        </ng-container>
+        <ng-template #nodata>
+          <app-no-list-data></app-no-list-data>
+        </ng-template>
       </div>
     </div>
-  </main>
-</app-global-container>
+  </div>
+</main>
 
 <app-add-app [isDataFetching]="loading" (onSubmit)="uploadApp()"></app-add-app>
 <app-edit-app

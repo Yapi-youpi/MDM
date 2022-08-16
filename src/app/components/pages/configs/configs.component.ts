@@ -12,6 +12,7 @@ import { UserService } from '../../../shared/services/user.service';
   styleUrls: ['./configs.component.css'],
 })
 export class ConfigsComponent implements OnInit {
+  public title = 'Конфигурации';
   public newConfigForm: FormGroup;
   public search = '';
   public default_config!: DevicesConfig;
@@ -74,6 +75,10 @@ export class ConfigsComponent implements OnInit {
 
   setCurrentConfig(config) {
     this.currentConfig = config;
+  }
+
+  setConfigName(configName) {
+    this.asset.configName = configName;
   }
 
   sortConfigs() {

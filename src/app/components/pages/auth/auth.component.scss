@@ -1,23 +1,18 @@
 .form-wrapper {
   height: 100vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
   .auth {
     width: 754px;
-
     margin: 0 auto;
     padding: 40px 174px 48px 100px;
-
     background-color: var(--light-grey);
-
     border-radius: 14px;
 
     .divider {
       width: 350px;
-
       margin-left: auto;
     }
 
@@ -35,7 +30,6 @@
 
     .footer {
       width: 350px;
-
       margin-left: auto;
 
       .row {

@@ -28,7 +28,7 @@ import { UserComponent } from './components/common/user/user.component';
 import { MenuComponent } from './components/common/menu/menu.component';
 import { DeviceItemComponent } from './components/common/list-item/device-item/device-item.component';
 import { GlobalContainerComponent } from './components/common/global-container/global-container.component';
-import { UserPermissionsComponent } from './components/pages/user-permissions/user-permissions.component';
+import { UserPermissionsComponent } from './components/pages/users/user-permissions/user-permissions.component';
 import { ConfigurationComponent } from './components/pages/configuration/configuration.component';
 import { QrTipComponent } from './components/common/qr-tip/qr-tip.component';
 import { ChangePasswordComponent } from './components/common/modals/change-password/change-password.component';

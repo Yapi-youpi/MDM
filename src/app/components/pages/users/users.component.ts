@@ -11,6 +11,7 @@ import { UserService } from '../../../shared/services/user.service';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
+  public title = 'Пользователи';
   public users: Users[] = [];
   public userRole = '';
   public userLogin = '';

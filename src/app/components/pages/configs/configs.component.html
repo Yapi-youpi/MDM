@@ -1,62 +1,59 @@
-<app-global-container class="global-container">
-  <app-global-header class="global-header" [title]="'Конфигурации'">
-  </app-global-header>
-  <main class="global-main card-wrapper">
-    <div class="card">
-      <div class="card__header">
-        <span class="search-wrapper">
-          <input
-            [(ngModel)]="search"
-            type="search"
-            name="search"
-            id="search"
-            class="search-input" /><i class="search-icon"></i
-        ></span>
+<main class="global-main card-wrapper">
+  <div class="card">
+    <div class="card__header">
+      <span class="search-wrapper">
+        <input
+          [(ngModel)]="search"
+          type="search"
+          name="search"
+          id="search"
+          class="search-input" /><i class="search-icon"></i
+      ></span>
 
-        <app-add-button
-          class="btn--right"
-          [target]="'modal-add-config'"
-          [title]="'Добавить конфигурацию'"
-        >
-        </app-add-button>
-      </div>
-      <ng-template #loader>
-        <div class="progress">
-          <div class="indeterminate"></div>
-        </div>
-      </ng-template>
-      <div class="config-wrapper">
-        <ng-container *ngIf="configs.length > 0; else loader">
-          <div
-            class="config-card"
-            *ngFor="let config of configs | configSearch: search"
-          >
-            <div class="config-card__header">
-              <div class="config-card__title">
-                {{ config.name }}
-              </div>
-              <div class="config-card__menu">
-                <a
-                  class="config-card__menu-btn"
-                  [routerLink]="['/configuration', config.ID]"
-                >
-                  <span class="btn--edit"></span>
-                </a>
-                <app-card-menu-btn
-                  [target]="'modal-delete-config'"
-                  (click)="setCurrentConfig(config)"
-                >
-                  <span class="btn--delete"></span>
-                </app-card-menu-btn>
-              </div>
-            </div>
-            <div class="config-card__content">{{ config.description }}</div>
-          </div>
-        </ng-container>
-      </div>
+      <app-add-button
+        class="btn--right"
+        [target]="'modal-add-config'"
+        [title]="'Добавить конфигурацию'"
+      >
+      </app-add-button>
     </div>
-  </main>
-</app-global-container>
+    <ng-template #loader>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </ng-template>
+    <div class="config-wrapper">
+      <ng-container *ngIf="configs.length > 0; else loader">
+        <div
+          class="config-card"
+          *ngFor="let config of configs | configSearch: search"
+        >
+          <div class="config-card__header">
+            <div class="config-card__title">
+              {{ config.name }}
+            </div>
+            <div class="config-card__menu">
+              <a
+                class="config-card__menu-btn"
+                [routerLink]="['/configuration', config.ID]"
+                (click)="setConfigName(config.name)"
+              >
+                <span class="btn--edit"></span>
+              </a>
+              <app-card-menu-btn
+                [target]="'modal-delete-config'"
+                (click)="setCurrentConfig(config)"
+              >
+                <span class="btn--delete"></span>
+              </app-card-menu-btn>
+            </div>
+          </div>
+          <div class="config-card__content">{{ config.description }}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</main>
 
 <!--  MODALS -->
 <app-add-config

@@ -6,6 +6,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./help.component.scss'],
 })
 export class HelpComponent implements OnInit {
+  public title = 'Помощь';
   constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {}

@@ -1,98 +1,94 @@
-<app-global-container class="global-container">
-  <app-global-header class="global-header" [title]="'Помощь'">
-  </app-global-header>
-  <main class="global-main card-wrapper">
-    <div class="card card--sidebar">
-      <app-input-search></app-input-search>
-      <div class="tabs-wrapper" (click)="setActive($event)">
-        <div class="tab tab--active" tabindex="0">Что такое MDM?</div>
-        <div class="tab" tabindex="0">Как добавить устройство</div>
-        <div class="tab" tabindex="0">Настройка конфигурации</div>
-        <div class="tab" tabindex="0">Не работают группы</div>
-        <div class="tab" tabindex="0">Потеря связи</div>
-        <div class="tab" tabindex="0">Как работать с QR-кодом</div>
+<main class="global-main card-wrapper">
+  <div class="card card--sidebar">
+    <app-input-search></app-input-search>
+    <div class="tabs-wrapper" (click)="setActive($event)">
+      <div class="tab tab--active" tabindex="0">Что такое MDM?</div>
+      <div class="tab" tabindex="0">Как добавить устройство</div>
+      <div class="tab" tabindex="0">Настройка конфигурации</div>
+      <div class="tab" tabindex="0">Не работают группы</div>
+      <div class="tab" tabindex="0">Потеря связи</div>
+      <div class="tab" tabindex="0">Как работать с QR-кодом</div>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+  </ng-template>
+
+  <div class="card">
+    <div class="card__header">
+      <span class="card-title">Что такое MDM?</span>
+      <app-add-button
+        class="btn--right"
+        [target]="'modal-add-ticket'"
+        [title]="'Сообщить о проблеме'"
+      >
+      </app-add-button>
+    </div>
+    <div class="help-tab">
+      <div class="help-p">
+        <h4>Mobile Device Management</h4>
+        <p>
+          MDM (Mobile Device Management, управление мобильными устройствами) —
+          это набор решений и технологий для централизованного управления
+          смартфонами, планшетами, ноутбуками и другими мобильными устройствами,
+          которые используются в рабочих целях.
+        </p>
+      </div>
+      <div class="help-p">
+        <h4>Mobile Device Management</h4>
+        <p>
+          MDM (Mobile Device Management, управление мобильными устройствами) —
+          это набор решений и технологий для централизованного управления
+          смартфонами, планшетами, ноутбуками и другими мобильными устройствами,
+          которые используются в рабочих целях.
+        </p>
+        <p>
+          MDM (Mobile Device Management, управление мобильными устройствами) —
+          это набор решений и технологий для централизованного управления
+          смартфонами, планшетами, ноутбуками и другими мобильными устройствами,
+          которые используются в рабочих целях.
+        </p>
       </div>
     </div>
-
-    <ng-template #loader>
-      <div class="progress">
-        <div class="indeterminate"></div>
-      </div>
-    </ng-template>
-
-    <div class="card">
-      <div class="card__header">
-        <span class="card-title">Что такое MDM?</span>
-        <app-add-button
-          class="btn--right"
-          [target]="'modal-add-ticket'"
-          [title]="'Сообщить о проблеме'"
-        >
-        </app-add-button>
-      </div>
-      <div class="help-tab">
-        <div class="help-p">
-          <h4>Mobile Device Management</h4>
-          <p>
-            MDM (Mobile Device Management, управление мобильными устройствами) —
-            это набор решений и технологий для централизованного управления
-            смартфонами, планшетами, ноутбуками и другими мобильными
-            устройствами, которые используются в рабочих целях.
-          </p>
-        </div>
-        <div class="help-p">
-          <h4>Mobile Device Management</h4>
-          <p>
-            MDM (Mobile Device Management, управление мобильными устройствами) —
-            это набор решений и технологий для централизованного управления
-            смартфонами, планшетами, ноутбуками и другими мобильными
-            устройствами, которые используются в рабочих целях.
-          </p>
-          <p>
-            MDM (Mobile Device Management, управление мобильными устройствами) —
-            это набор решений и технологий для централизованного управления
-            смартфонами, планшетами, ноутбуками и другими мобильными
-            устройствами, которые используются в рабочих целях.
-          </p>
-        </div>
-      </div>
-      <!-- Как добавить устройство-->
-      <div class="help-tab" style="display: none">
-        <div class="help-p">
-          <h4>Шаг первый</h4>
-          <p>Купите себе самое вкусное мороженое</p>
-        </div>
-      </div>
-      <!--   Настройка конфигурации  -->
-      <div class="help-tab" style="display: none">
-        <div class="help-p">
-          <h4>Шаг первый</h4>
-          <p>Купите себе самое вкусное мороженое</p>
-        </div>
-      </div>
-      <!--   Не работают группы  -->
-      <div class="help-tab" style="display: none">
-        <div class="help-p">
-          <h4>Шаг первый</h4>
-          <p>Купите себе самое вкусное мороженое</p>
-        </div>
-      </div>
-      <!--   Потеря связи  -->
-      <div class="help-tab" style="display: none">
-        <div class="help-p">
-          <h4>Шаг первый</h4>
-          <p>Купите себе самое вкусное мороженое</p>
-        </div>
-      </div>
-      <!--   Как работать с QR-кодом  -->
-      <div class="help-tab" style="display: none">
-        <div class="help-p">
-          <h4>Шаг первый</h4>
-          <p>Купите себе самое вкусное мороженое</p>
-        </div>
+    <!-- Как добавить устройство-->
+    <div class="help-tab" style="display: none">
+      <div class="help-p">
+        <h4>Шаг первый</h4>
+        <p>Купите себе самое вкусное мороженое</p>
       </div>
     </div>
-  </main>
-</app-global-container>
+    <!--   Настройка конфигурации  -->
+    <div class="help-tab" style="display: none">
+      <div class="help-p">
+        <h4>Шаг первый</h4>
+        <p>Купите себе самое вкусное мороженое</p>
+      </div>
+    </div>
+    <!--   Не работают группы  -->
+    <div class="help-tab" style="display: none">
+      <div class="help-p">
+        <h4>Шаг первый</h4>
+        <p>Купите себе самое вкусное мороженое</p>
+      </div>
+    </div>
+    <!--   Потеря связи  -->
+    <div class="help-tab" style="display: none">
+      <div class="help-p">
+        <h4>Шаг первый</h4>
+        <p>Купите себе самое вкусное мороженое</p>
+      </div>
+    </div>
+    <!--   Как работать с QR-кодом  -->
+    <div class="help-tab" style="display: none">
+      <div class="help-p">
+        <h4>Шаг первый</h4>
+        <p>Купите себе самое вкусное мороженое</p>
+      </div>
+    </div>
+  </div>
+</main>
 
 <app-ticket-modal></app-ticket-modal>

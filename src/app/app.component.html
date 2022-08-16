@@ -1,4 +1,14 @@
-<router-outlet></router-outlet>
-
+<ng-container *ngIf="isAuth; else global">
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
+</ng-container>
+<ng-template #global>
+  <div class="global-container">
+    <app-menu></app-menu>
+    <app-global-header
+      class="global-header"
+      [title]="title"
+    ></app-global-header>
+    <router-outlet (activate)="onActivate($event)"></router-outlet></div
+></ng-template>
 <!-- АЛЕРТЕР -->
 <app-alert></app-alert>

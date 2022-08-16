@@ -1,3 +1,7 @@
+:host(app-users) {
+  grid-area: main;
+}
+
 .users-wrapper {
   height: calc(100% - 30px);
   padding: 15px 4px;

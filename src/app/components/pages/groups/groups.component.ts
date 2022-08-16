@@ -21,6 +21,7 @@ import { GroupFilter } from '../../../shared/types/filters';
   styleUrls: ['./groups.component.scss'],
 })
 export class GroupsComponent implements OnInit {
+  public title = 'Группы устройств';
   public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;

@@ -11,6 +11,7 @@ export class AssetService {
     admin: { text: 'Администратор', color: '#557EBE' },
     super: { text: 'Суперадмин', color: '#2F4459' },
   };
+  public configName = '';
   constructor(private storage: Storage) {
     this.storage.create().then();
   }

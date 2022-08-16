@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AssetService } from '../../../shared/services/asset.service';
-import { GroupPermissions, Permissions } from '../../../interfaces/interfaces';
+import { AssetService } from '../../../../shared/services/asset.service';
+import {
+  GroupPermissions,
+  Permissions,
+} from '../../../../interfaces/interfaces';
 import { interval } from 'rxjs';
-import { UserService } from '../../../shared/services/user.service';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-user-permissions',

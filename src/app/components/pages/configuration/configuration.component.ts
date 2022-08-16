@@ -9,6 +9,7 @@ import { App } from '../../../shared/types/apps';
 import { AppState } from '../../../shared/types/states';
 import { AppsService } from '../../../shared/services/apps.service';
 import { alertService } from '../../../shared/services';
+import { AssetService } from '../../../shared/services/asset.service';
 
 @Component({
   selector: 'app-configuration',
@@ -32,8 +33,10 @@ export class ConfigurationComponent implements OnInit {
     private alert: alertService,
     private route: ActivatedRoute,
     private configService: DevicesConfigService,
-    private router: Router
+    private router: Router,
+    private asset: AssetService
   ) {
+    this.title = this.title + this.asset.configName;
     this.configForm = new FormGroup({
       GPS: new FormControl(true, Validators.required),
       autoUpdate: new FormControl(false, Validators.required),
@@ -106,7 +109,6 @@ export class ConfigurationComponent implements OnInit {
       .getConfig(id)
       .then((res) => {
         this.config = Object.assign(res[0]);
-        this.title = this.title + res[0].name;
         this.initialAppList = res[0].applications || [];
         console.log(this.config);
       })

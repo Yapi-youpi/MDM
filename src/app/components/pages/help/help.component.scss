@@ -1,3 +1,7 @@
+:host(app-help) {
+  grid-area: main;
+}
+
 .help-tab {
   display: flex;
   flex-direction: column;

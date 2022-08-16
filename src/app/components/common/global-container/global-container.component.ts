@@ -5,12 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './global-container.component.html',
   styleUrls: ['./global-container.component.scss'],
 })
-export class GlobalContainerComponent {
-  public isSidebarHidden: boolean = false;
-
-  constructor() {}
-
-  toggleSidebarView() {
-    this.isSidebarHidden = !this.isSidebarHidden;
-  }
-}
+export class GlobalContainerComponent {}

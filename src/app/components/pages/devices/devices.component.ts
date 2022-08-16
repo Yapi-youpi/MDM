@@ -26,6 +26,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   private query!: Parse.Query;
   private sub!: LiveQuerySubscription;
 
+  public title = 'Устройства';
   public devices: Device[] = [];
   public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];

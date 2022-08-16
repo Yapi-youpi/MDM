@@ -8,6 +8,7 @@ import { Message } from '../../../shared/types/message';
   styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent implements OnInit {
+  public title = 'Сообщения';
   public search!: string;
   public isDateSortAsc: boolean = false;
   public isTargetSortAsc: boolean = false;
