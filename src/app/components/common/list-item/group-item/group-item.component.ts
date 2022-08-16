@@ -12,6 +12,7 @@ import { Option } from '../../../../shared/types/input';
 export class GroupItemComponent {
   @Input() group!: DevicesGroup;
   @Input() configs!: DevicesConfig[];
+  @Input() userRole!: string;
 
   @Output() onSelectUnselectGroup = new EventEmitter<DevicesGroup>();
   @Output() onConfigChange = new EventEmitter<{

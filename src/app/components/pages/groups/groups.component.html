@@ -9,6 +9,7 @@
         <app-filter-btn [target]="'filter_groups'"></app-filter-btn>
       </div>
       <app-add-button
+        *ngIf="userRole === 'admin' || userRole === 'super'"
         [title]="'добавить группу'"
         [target]="'add_group'"
       ></app-add-button>
@@ -22,6 +23,7 @@
       <div class="dummy"></div>
     </ng-template>
     <app-selected-elements
+      *ngIf="userRole === 'admin' || userRole === 'super'"
       [selectedIDs]="selectedGroupsIDs"
       [editTarget]="'edit_several_groups'"
       [deleteTarget]="'delete_several_elements'"
@@ -29,7 +31,10 @@
     ></app-selected-elements>
     <div class="list">
       <div class="list-header row">
-        <div class="checkbox-wrapper">
+        <div
+          class="checkbox-wrapper"
+          *ngIf="userRole === 'admin' || userRole === 'super'"
+        >
           <app-input-checkbox
             [value]="isAllSelected"
             (onChange)="selectUnselectGroups()"
@@ -67,7 +72,7 @@
             ></app-sort-btn>
           </div>
           <p>Состояние</p>
-          <p>Действия</p>
+          <p *ngIf="userRole === 'admin' || userRole === 'super'">Действия</p>
         </div>
       </div>
       <div class="list-box">
@@ -88,6 +93,7 @@
             "
             [group]="group"
             [configs]="configs"
+            [userRole]="userRole"
             (onSelectUnselectGroup)="selectUnselectGroup($event)"
             (onConfigChange)="
               changeGroupConfig($event.group, $event.deviceConfigID)
@@ -111,25 +117,30 @@
   (onCancel)="resetSearchParams()"
 ></app-filter-group>
 <app-add-group
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [configs]="configs"
   [isDataFetching]="loading"
   (onSubmit)="addGroup()"
 ></app-add-group>
 <app-edit-group
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [configs]="configs"
   [isDataFetching]="loading"
   (onSubmit)="editGroup()"
 ></app-edit-group>
 <app-edit-several-groups
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [configs]="configs"
   [isDataFetching]="loading"
   (onSubmit)="editSeveralGroups()"
 ></app-edit-several-groups>
 <app-delete-group
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   [group]="currGroup"
   [isDataFetching]="loading"
   (onSubmit)="deleteGroup()"
 ></app-delete-group>
 <app-delete-several-elements
+  *ngIf="userRole === 'admin' || userRole === 'super'"
   (onSubmit)="deleteSeveralGroups()"
 ></app-delete-several-elements>

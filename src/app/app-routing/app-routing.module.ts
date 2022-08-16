@@ -33,11 +33,6 @@ const routes: Routes = [
   {
     path: 'groups',
     component: GroupsComponent,
-    // ???
-    canActivate: [AuthGuard],
-    data: {
-      requiredRoles: ['super', 'admin'],
-    },
   },
   {
     path: 'apps',

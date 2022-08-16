@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
+import { interval, timer } from 'rxjs';
 
 import {
   alertService,
@@ -14,6 +14,7 @@ import { DevicesGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
 import * as states from '../../../shared/types/states';
 import { GroupFilter } from '../../../shared/types/filters';
+import { AssetService } from '../../../shared/services/asset.service';
 
 @Component({
   selector: 'app-group',
@@ -25,14 +26,11 @@ export class GroupsComponent implements OnInit {
   public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
-
+  public userRole: string = '';
   public currGroup!: DevicesGroup;
-
   public isAllSelected: boolean = false;
   public selectedGroupsIDs: string[] = [];
-
   public searchParam: string = '';
-
   public isNamesSortAsc: boolean = true;
   public isDevicesCountSortAsc: boolean = true;
   public isConfigSortAsc: boolean = true;
@@ -54,12 +52,19 @@ export class GroupsComponent implements OnInit {
     private editForm: edit,
     private editSeveralForm: editSeveral,
     private addForm: add,
-    private alert: alertService
+    private alert: alertService,
+    private asset: AssetService
   ) {}
 
   ngOnInit() {
-    this.getGroups('all');
-    this.getConfigs('all');
+    const i = interval(200).subscribe(() => {
+      this.getGroups('all');
+      this.getConfigs('all');
+      this.asset.getFromStorage('user-role').then((role: string) => {
+        this.userRole = role;
+      });
+      i.unsubscribe();
+    });
   }
 
   getGroups(param: string) {
