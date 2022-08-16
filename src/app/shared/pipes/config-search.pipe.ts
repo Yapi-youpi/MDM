@@ -6,9 +6,7 @@ import { DevicesConfig } from '../../interfaces/interfaces';
 })
 export class ConfigSearchPipe implements PipeTransform {
   transform(configs: DevicesConfig[], search: string): DevicesConfig[] {
-    return !configs
-      ? []
-      : !search
+    return !search
       ? configs
       : configs.filter((item) => {
           if (item.name.toLowerCase().includes(search.toLowerCase())) {
