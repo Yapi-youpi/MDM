@@ -585,11 +585,13 @@ button {
 .btn--flat {
   color: var(--dark-blue);
   background: var(--light-grey);
+  border: none;
 }
 
 .btn--flat:hover,
 .btn--flat:focus {
   background: var(--light-blue-grey);
+  border: none;
 }
 
 .btn--flat:disabled {

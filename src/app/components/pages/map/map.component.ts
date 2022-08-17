@@ -42,6 +42,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     device_group_id: '',
     device_config_id: '',
   };
+  public isFilterActive = false;
   public sub!: LiveQuerySubscription;
   public icon!: DivIcon;
   public device_marker!: L.Marker;
@@ -278,20 +279,34 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
   }
 
-  devicesFilter(event: Option, filter: string) {
+  devicesFilter(value: string, filter: string) {
     switch (filter) {
-      case 'status':
-        this.filter.active_state = event.value;
+      case 'status': {
+        this.filter.active_state = value;
         this.filterDevices();
+        this.isFilterActive = true;
         break;
-      case 'group':
-        this.filter.device_group_id = event.value;
+      }
+      case 'group': {
+        this.filter.device_group_id = value;
         this.filterDevices();
+        this.isFilterActive = true;
         break;
-      case 'config':
-        this.filter.device_config_id = event.value;
+      }
+      case 'config': {
+        this.filter.device_config_id = value;
         this.filterDevices();
+        this.isFilterActive = true;
         break;
+      }
+      case 'default': {
+        this.filter.active_state = '';
+        this.filter.device_group_id = '';
+        this.filter.device_config_id = '';
+        this.filterDevices();
+        this.isFilterActive = false;
+        break;
+      }
     }
   }
 

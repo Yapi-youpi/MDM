@@ -1,4 +1,3 @@
-<!--  <app-card class="global-main" [color]="'light-grey'">-->
 <main class="global-main card page-content">
   <div style="display: flex; justify-content: flex-start">
     <app-input-search
@@ -38,7 +37,14 @@
       [options]="config_option"
       (onSelect)="devicesFilter($event, 'config')"
     ></app-mini-select>
+    <button
+      *ngIf="isFilterActive"
+      type="button"
+      class="btn btn--flat"
+      (click)="devicesFilter('', 'default')"
+    >
+      сбросить фильтры
+    </button>
   </div>
   <div id="map-container"></div>
 </main>
-<!--  </app-card>-->
