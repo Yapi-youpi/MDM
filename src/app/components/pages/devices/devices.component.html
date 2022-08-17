@@ -14,6 +14,16 @@
         [target]="'add_device'"
       ></app-add-button>
     </div>
+    <app-devices-filters
+      [filter]="filter"
+      [configs]="configs"
+      [groups]="groups"
+      (onStatusRemove)="resetOneSearchParam('status')"
+      (onDateFromRemove)="resetOneSearchParam('dateFrom')"
+      (onDateToRemove)="resetOneSearchParam('dateTo')"
+      (onConfigsIDsRemove)="resetOneSearchParam('configsIDs', $event)"
+      (onGroupsIDsRemove)="resetOneSearchParam('groupsIDs', $event)"
+    ></app-devices-filters>
     <ng-container *ngIf="loading; else dummy">
       <div class="progress">
         <div class="indeterminate"></div>

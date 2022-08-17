@@ -81,7 +81,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub != null) this.sub.unsubscribe();
+    if (this.sub) this.sub.unsubscribe();
   }
 
   getConfigs() {
@@ -219,6 +219,54 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.filter.dateTo = null;
     this.filter.configsIDs = null;
     this.filter.groupsIDs = null;
+  }
+
+  resetOneSearchParam(
+    type: 'status' | 'dateFrom' | 'dateTo' | 'configsIDs' | 'groupsIDs',
+    value?: string
+  ) {
+    switch (type) {
+      case 'status': {
+        this.filter.status = null;
+        if (this.filterForm.form.controls['status-on'].value === true)
+          this.filterForm.form.controls['status-on'].setValue(false);
+        if (this.filterForm.form.controls['status-off'].value === true)
+          this.filterForm.form.controls['status-off'].setValue(false);
+        break;
+      }
+      case 'dateFrom': {
+        this.filter.dateFrom = null;
+        this.filterForm.form.controls['date-from'].setValue(null);
+        break;
+      }
+      case 'dateTo': {
+        this.filter.dateTo = null;
+        this.filterForm.form.controls['date-to'].setValue(null);
+        break;
+      }
+      case 'configsIDs': {
+        if (value) {
+          const prevValues: string[] =
+            this.filterForm.form.controls['config_ids'].value;
+          const newValues = prevValues.filter((c) => c !== value);
+          this.filterForm.form.controls['config_ids'].setValue(newValues);
+          this.filter.configsIDs = newValues;
+        }
+        break;
+      }
+      case 'groupsIDs': {
+        if (value) {
+          const prevValues: string[] =
+            this.filterForm.form.controls['group_ids'].value;
+          const newValues = prevValues.filter((c) => c !== value);
+          this.filterForm.form.controls['group_ids'].setValue(newValues);
+          this.filter.groupsIDs = newValues;
+        }
+        break;
+      }
+      default:
+        return;
+    }
   }
 
   searchDevicesWithParams() {

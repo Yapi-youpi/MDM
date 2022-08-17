@@ -121,6 +121,7 @@ import { MsgFilterPipe } from './shared/pipes/filters/msg-filter.pipe';
 import { AddMessageComponent } from './components/common/modals/messages/add-message/add-message.component';
 import { HelpComponent } from './components/pages/help/help.component';
 import { TicketModalComponent } from './components/pages/help/ticket-modal/ticket-modal.component';
+import { DevicesFiltersComponent } from './components/common/filters/devices-filters/devices-filters.component';
 
 const routes: Routes = [
   {
@@ -236,6 +237,7 @@ const routes: Routes = [
     AddMessageComponent,
     HelpComponent,
     TicketModalComponent,
+    DevicesFiltersComponent,
   ],
   imports: [
     BrowserModule,
