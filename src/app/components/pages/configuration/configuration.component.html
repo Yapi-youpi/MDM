@@ -173,7 +173,7 @@
                 </div>
               </div>
               <div class="settings-card__btns">
-                <label class="custom-radio">
+                <!--                <label class="custom-radio">
                   <input
                     class="visually-hidden"
                     formControlName="GPS"
@@ -181,7 +181,7 @@
                     [value]="null"
                   />
                   <span class="custom-radio__span">разрешено</span>
-                </label>
+                </label>-->
                 <label class="custom-radio">
                   <input
                     class="visually-hidden"
@@ -214,7 +214,7 @@
                 </div>
               </div>
               <div class="settings-card__btns">
-                <label class="custom-radio">
+                <!--                <label class="custom-radio">
                   <input
                     class="visually-hidden"
                     formControlName="bluetooth"
@@ -222,7 +222,7 @@
                     [value]="null"
                   />
                   <span class="custom-radio__span">разрешено</span>
-                </label>
+                </label>-->
                 <label class="custom-radio">
                   <input
                     class="visually-hidden"
@@ -254,7 +254,7 @@
                 </div>
               </div>
               <div class="settings-card__btns">
-                <label class="custom-radio">
+                <!--                <label class="custom-radio">
                   <input
                     class="visually-hidden"
                     formControlName="wifi"
@@ -262,7 +262,7 @@
                     [value]="null"
                   />
                   <span class="custom-radio__span">разрешено</span>
-                </label>
+                </label>-->
                 <label class="custom-radio">
                   <input
                     class="visually-hidden"
@@ -294,7 +294,7 @@
                 </div>
               </div>
               <div class="settings-card__btns">
-                <label class="custom-radio">
+                <!--                <label class="custom-radio">
                   <input
                     class="visually-hidden"
                     formControlName="mobileData"
@@ -302,7 +302,7 @@
                     [value]="null"
                   />
                   <span class="custom-radio__span">разрешено</span>
-                </label>
+                </label>-->
                 <label class="custom-radio">
                   <input
                     class="visually-hidden"
@@ -591,7 +591,7 @@
         <div class="card__header card-title">Дизайн</div>
         <div class="config-settings two-columns">
           <div class="form__elems">
-            <div class="form__item w-500">
+            <!--            <div class="form__item w-500">
               <label class="switch">
                 Использовать дизайн по умолчанию
                 <input
@@ -601,7 +601,7 @@
                 />
                 <span aria-hidden="true"></span>
               </label>
-            </div>
+            </div>-->
             <ng-container
               *ngIf="!configForm.get('useDefaultDesignSettings')?.value"
             >
@@ -775,7 +775,7 @@
         <div class="card__header card-title">Управление</div>
         <div class="config-settings">
           <div class="form__elems w-740">
-            <div class="form__item w-267">
+            <!--            <div class="form__item w-267">
               <label class="switch">
                 Безопасные настройки
                 <input
@@ -825,20 +825,20 @@
                   <option [ngValue]="app.name">
                     {{ app.name }}
                   </option>
-                  <!-- Если заданы приложения, которые могут использоваться как киоск -->
-                  <!--    <option
+                  &lt;!&ndash; Если заданы приложения, которые могут использоваться как киоск &ndash;&gt;
+                  &lt;!&ndash;    <option
                       [ngValue]="app.name"
                       *ngIf="app.useKiosk; else noOptions"
                     >
                       {{ app.name }}
-                    </option> -->
+                    </option> &ndash;&gt;
                 </ng-container>
                 <ng-template #noOptions>
                   <option selected disabled>Нет доступных приложений</option>
                 </ng-template>
               </select>
             </div>
-            <div class="divider"></div>
+            <div class="divider"></div>-->
             <div class="font-bold">Настройки WIFI:</div>
             <div class="form__item">
               <label for="wifiSSID">Имя сети (SSID)</label>

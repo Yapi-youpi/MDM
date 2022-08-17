@@ -95,8 +95,9 @@
 .settings-card__btns {
   padding: 0 8px;
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
   gap: 4px;
+  justify-content: space-around;
 }
 
 .two-columns {
