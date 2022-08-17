@@ -94,8 +94,7 @@ body {
   color: var(--dark-blue-grey);
 }
 
-ul,
-ol {
+ul {
   list-style: none;
   padding-inline-start: 0;
 }
@@ -586,11 +585,13 @@ button {
 .btn--flat {
   color: var(--dark-blue);
   background: var(--light-grey);
+  border: none;
 }
 
 .btn--flat:hover,
 .btn--flat:focus {
   background: var(--light-blue-grey);
+  border: none;
 }
 
 .btn--flat:disabled {
@@ -1268,6 +1269,8 @@ textarea {
   }
 }
 
+// Настройки для карты
+
 .info-panel {
   padding: 15px !important;
   display: flex !important;
@@ -1307,6 +1310,10 @@ textarea {
   box-shadow: 0 0 10px rgba(133, 133, 133, 0.95);
   //filter: drop-shadow(0px 0px 10px rgba(133, 133, 133, 0.15);
   -webkit-box-shadow: 0 0 100px rgba(133, 133, 133, 0.95);
+}
+
+.leaflet-tile-pane {
+  filter: saturate(40%) brightness(110%) opacity(80%);
 }
 
 .leaflet-control {

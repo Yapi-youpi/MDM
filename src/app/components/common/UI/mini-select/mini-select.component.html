@@ -1,29 +1,28 @@
-<div [id]="'select_' + header" class="select">
-  <div [id]="header" class="select__head" (click)="openSelect()">
+<div
+  [id]="'select_' + header"
+  class="select"
+  [class.opened]="open"
+  [ngClass]="arrowClass"
+>
+  <div
+    (click)="openSelect()"
+    [id]="header"
+    class="select__head"
+    [class.open]="open"
+    [ngClass]="headerClass"
+  >
     {{ currentValue }}
   </div>
-  <ul class="select__list" *ngIf="open">
+  <ul class="select__list" *ngIf="open" role="listbox">
     <ng-container *ngFor="let option of options">
-      <li class="select__item" (click)="selectOption(option)">
+      <li
+        class="select__item"
+        tabindex="0"
+        role="option"
+        (click)="selectOption(option)"
+      >
         {{ option.html }}
       </li>
     </ng-container>
   </ul>
 </div>
-<!--<div [id]="'select_' + header" class="select" [ngClass]="arrowClass">
-  <div
-    [id]="header"
-    class="select__head"
-    [ngClass]="headerClass"
-    (click)="openSelect()"
-  >
-    {{ currentValue }}
-  </div>
-  <ul class="select__list" *ngIf="open">
-    <ng-container *ngFor="let option of options">
-      <li class="select__item" (click)="selectOption(option)">
-        {{ option.html }}
-      </li>
-    </ng-container>
-  </ul>
-</div>-->

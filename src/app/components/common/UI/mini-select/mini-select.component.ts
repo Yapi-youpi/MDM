@@ -17,36 +17,34 @@ export class MiniSelectComponent implements OnInit {
   @Input() open = false;
   @Input() header = '';
   @Input() options: Option[] = [];
-  @Output() onSelect = new EventEmitter<Option>();
+  @Input() headerClass: string = '';
+  @Input() arrowClass: string = '';
   public currentValue = '';
+  @Output() onSelect = new EventEmitter<string>();
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.currentValue = this.header;
   }
-  // @HostListener('document:mousedown', ['$event'])
-  // onGlobalClick(event): void {
-  //   if (!event.target.classList.contains('select__list')) {
-  //     this.open = false;
-  //   }
-  // }
+
+  @HostListener('document:mousedown', ['$event'])
+  onGlobalClick(event) {
+    // console.log(event.target);
+    if (
+      event.target.classList.contains('select__head') ||
+      !event.target.classList.contains('select__item')
+    ) {
+      this.open = false;
+    }
+  }
 
   openSelect() {
-    let elem = document.getElementById(this.header);
-    let el = document.getElementById('select_' + this.header);
-    console.log(el);
-    el?.classList.toggle('opened');
-    elem?.classList.toggle('open');
-    this.open = !this.open;
+    this.open = true;
   }
 
   selectOption(option: Option) {
     this.currentValue = option.html;
     this.open = !this.open;
-    let elem = document.getElementById(this.header);
-    if (elem) {
-      elem.classList.toggle('open');
-    }
-    this.onSelect.emit(option);
+    this.onSelect.emit(option.value);
   }
 }
