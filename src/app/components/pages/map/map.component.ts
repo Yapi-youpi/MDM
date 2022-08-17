@@ -315,7 +315,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       device.marker.remove();
       return (
         (this.filter.active_state !== ''
-          ? device.device.active_state.toString() === this.filter.active_state
+          ? device.device.online_state.toString() === this.filter.active_state
           : device) &&
         (this.filter.device_config_id !== ''
           ? device.device.device_config_id === this.filter.device_config_id
