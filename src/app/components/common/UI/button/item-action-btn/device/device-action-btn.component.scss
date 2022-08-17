@@ -17,4 +17,7 @@
     mask-image: url('/assets/UI/trash.svg');
     -webkit-mask-image: url('/assets/UI/trash.svg');
   }
+  &.reload_device {
+    mask-image: url('/assets/UI/reload.svg');
+  }
 }
