@@ -3,7 +3,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnInit,
+  OnChanges,
   Output,
 } from '@angular/core';
 import { Option } from '../../../../shared/types/input';
@@ -13,8 +13,9 @@ import { Option } from '../../../../shared/types/input';
   templateUrl: './mini-select.component.html',
   styleUrls: ['./mini-select.component.scss'],
 })
-export class MiniSelectComponent implements OnInit {
+export class MiniSelectComponent implements OnChanges {
   @Input() open = false;
+  @Input() state;
   @Input() header = '';
   @Input() options: Option[] = [];
   @Input() headerClass: string = '';
@@ -23,8 +24,12 @@ export class MiniSelectComponent implements OnInit {
   @Output() onSelect = new EventEmitter<string>();
   constructor() {}
 
-  ngOnInit() {
-    this.currentValue = this.header;
+  ngOnChanges(changes) {
+    for (let change in changes) {
+      if (change === 'state' && changes[change].currentValue != true) {
+        this.currentValue = this.header;
+      }
+    }
   }
 
   @HostListener('document:mousedown', ['$event'])
