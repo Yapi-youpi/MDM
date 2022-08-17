@@ -1,9 +1,6 @@
 .filters-wrapper {
   flex-wrap: wrap;
-
-  > * {
-    margin-right: 5px;
-  }
+  gap: 5px;
 }
 
 .icon {
