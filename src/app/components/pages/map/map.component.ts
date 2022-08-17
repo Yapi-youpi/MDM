@@ -138,7 +138,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
   addMarkers(lat: number, lng: number, device: Device) {
     let color: string;
-    if (device.active_state) {
+    if (device.online_state) {
       color = '#AFD9A1';
     } else {
       color = '#FCA3A3';
