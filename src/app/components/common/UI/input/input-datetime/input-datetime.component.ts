@@ -28,7 +28,7 @@ export class InputDatetimeComponent {
 
   selectDay(day: moment.Moment) {
     this.currDay = day;
-    this.control?.setValue(moment(day).format());
+    this.control?.setValue(moment(day).format('YYYY-MM-DDTHH:mm:ss') + 'Z');
 
     if (this.groupName) {
       this.groupName.setValue({

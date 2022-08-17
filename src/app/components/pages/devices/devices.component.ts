@@ -82,6 +82,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.sub) this.sub.unsubscribe();
+    this.resetSearchParams();
+    this.filterForm.reset();
   }
 
   getConfigs() {
