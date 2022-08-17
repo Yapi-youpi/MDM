@@ -4,7 +4,7 @@
 
 .config-wrapper {
   height: calc(100% - 30px);
-  padding: 15px 0;
+  padding: 15px 2px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   justify-content: stretch;
