@@ -522,66 +522,81 @@
               </div>
               <div class="form__item">
                 <label class="switch">
-                  Автоматическая яркость экрана
+                  Управление яркостью экрана
                   <input
-                    formControlName="autoBrightness"
-                    id="autoBrightness"
+                    [value]="manageBrightness"
                     type="checkbox"
+                    (click)="toggleBrightness()"
                   />
                   <span aria-hidden="true"></span>
                 </label>
               </div>
-              <div
-                *ngIf="configForm.get('autoBrightness')?.value === false"
-                class="form__item"
-              >
-                <div class="range-wrapper">
-                  <div class="range">
+              <ng-container *ngIf="manageBrightness">
+                <div class="form__item">
+                  <label class="switch">
+                    Автоматическая яркость экрана
                     <input
-                      type="range"
-                      min="0"
-                      max="255"
-                      step="25.5"
-                      formControlName="brightness"
-                      id="brightness"
-                      list="bright"
+                      formControlName="autoBrightness"
+                      id="autoBrightness"
+                      type="checkbox"
                     />
-                    <datalist class="range__list" id="bright">
-                      <option value="0" class="range__opt" label="0">0</option>
-                      <option value="25.5" class="range__opt" label="10">
-                        10
-                      </option>
-                      <option value="51" class="range__opt" label="20">
-                        20
-                      </option>
-                      <option value="76.5" class="range__opt" label="30">
-                        30
-                      </option>
-                      <option value="102" class="range__opt" label="40">
-                        40
-                      </option>
-                      <option value="127.5" class="range__opt" label="50">
-                        50
-                      </option>
-                      <option value="153" class="range__opt" label="60">
-                        60
-                      </option>
-                      <option value="178.5" class="range__opt" label="70">
-                        70
-                      </option>
-                      <option value="204" class="range__opt" label="80">
-                        80
-                      </option>
-                      <option value="229.5" class="range__opt" label="90">
-                        90
-                      </option>
-                      <option value="255" class="range__opt" label="100">
-                        100
-                      </option>
-                    </datalist>
+                    <span aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div
+                  *ngIf="configForm.get('autoBrightness')?.value === false"
+                  class="form__item"
+                >
+                  <div class="range-wrapper">
+                    <div class="range">
+                      <input
+                        type="range"
+                        min="0"
+                        max="255"
+                        step="25.5"
+                        formControlName="brightness"
+                        id="brightness"
+                        list="bright"
+                      />
+                      <datalist class="range__list" id="bright">
+                        <option value="0" class="range__opt" label="0">
+                          0
+                        </option>
+                        <option value="25.5" class="range__opt" label="10">
+                          10
+                        </option>
+                        <option value="51" class="range__opt" label="20">
+                          20
+                        </option>
+                        <option value="76.5" class="range__opt" label="30">
+                          30
+                        </option>
+                        <option value="102" class="range__opt" label="40">
+                          40
+                        </option>
+                        <option value="127.5" class="range__opt" label="50">
+                          50
+                        </option>
+                        <option value="153" class="range__opt" label="60">
+                          60
+                        </option>
+                        <option value="178.5" class="range__opt" label="70">
+                          70
+                        </option>
+                        <option value="204" class="range__opt" label="80">
+                          80
+                        </option>
+                        <option value="229.5" class="range__opt" label="90">
+                          90
+                        </option>
+                        <option value="255" class="range__opt" label="100">
+                          100
+                        </option>
+                      </datalist>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ng-container>
             </div>
           </div>
         </div>

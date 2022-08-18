@@ -24,6 +24,7 @@ export class ConfigurationComponent implements OnInit {
   // public restrictions: string[] = [];
   public restrictionList: Permissions;
   public isModalAddAppOpen = false;
+  public manageBrightness = false;
 
   private editedApps: App[] = [];
   private initialAppList: string[] = [];
@@ -188,6 +189,10 @@ export class ConfigurationComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('config').then();
+  }
+
+  toggleBrightness() {
+    this.manageBrightness = !this.manageBrightness;
   }
 
   setConfig() {
