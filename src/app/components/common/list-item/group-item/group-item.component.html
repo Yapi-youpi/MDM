@@ -25,17 +25,18 @@
       ></app-input-select>
     </div>
     <p>{{ group.updateTime | dateConverter }}</p>
+    <!--    <div-->
+    <!--      class="switch-wrapper"-->
+    <!--      *ngIf="userRole === 'admin' || userRole === 'super'"-->
+    <!--    >-->
+    <!--      <app-input-switch-->
+    <!--        [value]="group.activeState"-->
+    <!--        (onChange)="onSwitchChangeHandler(group)"-->
+    <!--      ></app-input-switch>-->
+    <!--    </div>-->
     <div
-      class="switch-wrapper"
-      *ngIf="userRole === 'admin' || userRole === 'super'"
-    >
-      <app-input-switch
-        [value]="group.activeState"
-        (onChange)="onSwitchChangeHandler(group)"
-      ></app-input-switch>
-    </div>
-    <div
-      class="row space-between device-actions-wrapper"
+      class="row device-actions-wrapper"
+      style="gap: 8px"
       *ngIf="userRole === 'admin' || userRole === 'super'"
     >
       <app-group-action-btn
