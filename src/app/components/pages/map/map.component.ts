@@ -154,17 +154,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     let color = device.online_state ? '#AFD9A1' : '#FCA3A3';
     let signalLevel = !device.signalLevel
       ? ''
-      : +device.signalLevel > -33
+      : Number(device.signalLevel) < -92
       ? 'low'
-      : +device.signalLevel > -66
+      : Number(device.signalLevel) < -83
       ? 'medium'
       : 'high';
 
     this.icon = L.divIcon({
       html: `
-        <div id="m_${
-          device.device_id
-        }" class="marker" (click)="showInfo($event)">
+        <div id="m_${device.device_id}" class="marker" (click)="showInfo($event)">
           <div class="marker__header">
             <div class="marker__label">
               ${device.name}
@@ -182,9 +180,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             </div>
             <div class="marker__info-row">
               <div class="marker__info-title">Сигнал:</div>
-              <div class="signal-level ${signalLevel}" title="${
-        +device.signalLevel * -1
-      }%">
+              <div class="signal-level ${signalLevel}" title="${device.signalLevel}Дб">
                 <div></div>
                 <div></div>
                 <div></div>
