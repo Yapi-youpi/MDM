@@ -195,6 +195,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.device_marker = L.marker([lat, lng], { icon: this.icon });
     this.device_marker.on('click', (e) => {
       const marker = e.target._icon.firstElementChild;
+      let elems = document.querySelectorAll('.marker');
+      elems.forEach((elem) => {
+        if (elem != marker) elem.classList.remove('open');
+      });
       marker?.classList.toggle('open');
     });
     let device_geo = {
