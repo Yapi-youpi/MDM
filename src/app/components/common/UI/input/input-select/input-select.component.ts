@@ -18,6 +18,7 @@ export class InputSelectComponent {
   @Input() options: Option[] = [];
   @Input() currOption!: Option;
   @Input() isError: boolean = false;
+  @Input() disabled: boolean = false;
 
   @Output() onSelect = new EventEmitter<Option>();
 

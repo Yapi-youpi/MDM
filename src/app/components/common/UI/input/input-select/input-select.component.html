@@ -1,26 +1,31 @@
-<div
-  class="input-select"
-  [ngClass]="[width, color]"
-  [class.opened]="!isDropdownHidden"
-  [class.error]="isError"
->
-  <div
-    class="select-field"
-    [class.filled]="!isDropdownHidden"
-    [class.text-menu-title]="color === 'common'"
-    (click)="toggleDropdown()"
+<ng-container *ngIf="!disabled; else currentOpt"
+  ><div
+    class="input-select"
+    [ngClass]="[width, color]"
+    [class.opened]="!isDropdownHidden"
+    [class.error]="isError"
   >
-    {{ currOption?.html }}
-  </div>
-  <ul class="select-content" [class.hidden]="isDropdownHidden">
-    <li
-      *ngFor="let option of options; trackBy: identify"
-      class="item"
-      (click)="onSelectHandler(option)"
+    <div
+      class="select-field"
+      [class.filled]="!isDropdownHidden"
+      [class.text-menu-title]="color === 'common'"
+      (click)="toggleDropdown()"
     >
-      <p class="dropdown-item" [class.text-menu-title]="color === 'common'">
-        {{ option.html }}
-      </p>
-    </li>
-  </ul>
-</div>
+      {{ currOption?.html }}
+    </div>
+    <ul class="select-content" [class.hidden]="isDropdownHidden">
+      <li
+        *ngFor="let option of options; trackBy: identify"
+        class="item"
+        (click)="onSelectHandler(option)"
+      >
+        <p class="dropdown-item" [class.text-menu-title]="color === 'common'">
+          {{ option.html }}
+        </p>
+      </li>
+    </ul>
+  </div>
+</ng-container>
+<ng-template #currentOpt>
+  <div>{{ currOption?.html }}</div>
+</ng-template>
