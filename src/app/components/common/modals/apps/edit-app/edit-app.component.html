@@ -2,17 +2,17 @@
   <div class="modal-form w-700">
     <div class="modal-form-header">
       <h4 class="text-title text-center">Приложение</h4>
-      <div class="btn-wrapper">
-        <app-button
-          [text]="'системное приложение'"
-          [textLike]="'like-body'"
-          [height]="'20px'"
-          [padding]="'4px 14px'"
-          [radius]="'8px'"
-          [color]="_system?.value ? 'blue' : 'common'"
-          (onCLick)="toggleSystemView()"
-        ></app-button>
-      </div>
+      <!--      <div class="btn-wrapper">-->
+      <!--        <app-button-->
+      <!--          [text]="'системное приложение'"-->
+      <!--          [textLike]="'like-body'"-->
+      <!--          [height]="'20px'"-->
+      <!--          [padding]="'4px 14px'"-->
+      <!--          [radius]="'8px'"-->
+      <!--          [color]="_system?.value ? 'blue' : 'common'"-->
+      <!--          (onCLick)="toggleSystemView()"-->
+      <!--        ></app-button>-->
+      <!--      </div>-->
     </div>
     <hr class="divider" />
     <div class="modal-form-body">
@@ -54,13 +54,13 @@
             </div>
           </div>
         </div>
-        <div class="form-group-wrapper icon">
+        <!--        <div class="form-group-wrapper icon">
           <label for="showIcon" class="text-menu-title"> Ярлык </label>
           <app-input-switch
             [control]="$any(_showIcon)"
             [name]="'showIcon'"
           ></app-input-switch>
-        </div>
+        </div>-->
       </form>
     </div>
     <div class="modal-form-footer">
