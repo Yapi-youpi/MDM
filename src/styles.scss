@@ -1271,45 +1271,121 @@ textarea {
 
 // Настройки для карты
 
-.info-panel {
-  padding: 15px !important;
-  display: flex !important;
+.marker {
+  margin-left: 12px;
+  margin-top: 8px;
+  position: inherit;
+  display: flex;
+  flex-direction: column;
+  transition: margin-top 0.3s ease;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+  &__icon {
+    width: 30px;
+    height: 30px;
+    margin-right: -4px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+  &__label {
+    padding: 4px 4px 4px 8px;
+    font-size: 12px;
+    line-height: 12px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 50px;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 0 0 14px 14px;
+    box-shadow: var(--box-shadow);
+    transition: height 0.3s 0.3s ease-out, width 0.3s ease, padding 0.3s ease,
+      opacity 0.3s ease;
+  }
+  &__info-row {
+    display: flex;
+    height: 18px;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  &__info-title {
+    width: 50px;
+    font-weight: 700;
+  }
+  &__info-data {
+    white-space: nowrap;
+  }
 }
 
-.marker-event {
-  display: none;
-  height: 140px;
-  width: 175px;
-  background-color: #ffffff;
-  border-radius: 14px;
-  z-index: 9999;
+.open {
+  &.marker {
+    margin-top: 0;
+  }
+  & .marker__icon {
+    margin-right: -40px;
+  }
+  & .marker__label {
+    width: 100%;
+    padding: 14px 48px;
+    background-color: var(--light-blue);
+    border-radius: 14px 14px 0 0;
+  }
+  & .marker__info {
+    width: 175px;
+    height: 100%;
+    padding: 8px 18px 21px;
+    opacity: 1;
+  }
 }
 
-.marker-header {
-  height: 40px;
-  width: 175px;
-  background-color: #dae3f4;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
-}
-
-.marker-text {
-  font-weight: normal;
-  margin-bottom: 0.5rem;
-}
-
-.marker-attributes {
-  width: 45%;
-}
-
-.marker-attributes-values {
-  width: 50%;
-}
-
-.marker-icon {
-  box-shadow: 0 0 10px rgba(133, 133, 133, 0.95);
-  //filter: drop-shadow(0px 0px 10px rgba(133, 133, 133, 0.15);
-  -webkit-box-shadow: 0 0 100px rgba(133, 133, 133, 0.95);
+.signal-level {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  & div {
+    width: 4px;
+    background-color: var(--light-blue);
+    border-radius: 3px;
+    &:nth-child(1) {
+      height: 8px;
+    }
+    &:nth-child(2) {
+      height: 13px;
+    }
+    &:nth-child(3) {
+      height: 18px;
+    }
+  }
+  &.low {
+    & div:first-child {
+      background-color: var(--dark-blue);
+    }
+  }
+  &.medium {
+    & div:nth-child(-n + 2) {
+      background-color: var(--dark-blue);
+    }
+  }
+  &.high {
+    & div {
+      background-color: var(--dark-blue);
+    }
+  }
 }
 
 .leaflet-tile-pane {

@@ -1,9 +1,9 @@
 <main class="global-main card page-content">
-  <div style="display: flex; justify-content: flex-start">
+  <div class="card__header">
     <app-input-search
       (onChange)="getValue($event)"
       [value]="search"
-      style="margin-right: 7px; z-index: 999999999999999"
+      class="input-search"
     >
     </app-input-search>
     <div class="search-list" *ngIf="search !== ''">
@@ -49,5 +49,5 @@
       сбросить фильтры
     </button>
   </div>
-  <div id="map-container"></div>
+  <div id="map-container" class="map-container"></div>
 </main>

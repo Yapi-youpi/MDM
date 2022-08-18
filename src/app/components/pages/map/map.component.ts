@@ -1,9 +1,15 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { MapService } from '../../../shared/services/map.service';
 import { Option } from '../../../shared/types/input';
 import { GroupsService } from '../../../shared/services/groups.service';
 import { DatabaseService } from '../../../shared/services/database.service';
-import { interval, timer } from 'rxjs';
+import { interval } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
 import { DivIcon, Marker } from 'leaflet';
 import * as L from 'leaflet';
@@ -21,7 +27,7 @@ interface DeviceGeo {
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public title = 'Карта';
   public group_option: Option[] = [];
   public config_option: Option[] = [];
@@ -60,38 +66,44 @@ export class MapComponent implements OnInit, AfterViewInit {
     protected user: UserService
   ) {}
 
+  @HostListener('document:mouseup', ['$event'])
+  onGlobalClick(event) {
+    if (event.target.classList.contains('map-container')) {
+      let elems = document.querySelectorAll('.marker');
+      elems.forEach((elem) => {
+        elem.classList.remove('open');
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.mapService.initMap(61.4029, 55.1561, 13);
     this.deviceSub().then();
   }
 
   ngAfterViewInit() {
-    let t = interval(1000).subscribe(() => {
-      if (this.user.token) {
-        t.unsubscribe();
-        this.eventListener();
-        this.groupService.get('all').then((res) => {
-          res.devicesGroups.map((item) => {
-            let option = {
-              value: item.id,
-              html: item.name,
-              isSelected: false,
-            };
-            this.group_option.push(option);
-          });
+    let t = interval(200).subscribe(() => {
+      this.groupService.get('all').then((res) => {
+        res.devicesGroups.map((item) => {
+          let option = {
+            value: item.id,
+            html: item.name,
+            isSelected: false,
+          };
+          this.group_option.push(option);
         });
-        this.configService.getConfig('all').then((res) => {
-          res.map((item) => {
-            let option = {
-              value: item.ID,
-              html: item.name,
-              isSelected: false,
-            };
-            this.config_option.push(option);
-          });
+      });
+      this.configService.getConfig('all').then((res) => {
+        res.map((item) => {
+          let option = {
+            value: item.ID,
+            html: item.name,
+            isSelected: false,
+          };
+          this.config_option.push(option);
         });
-        t.unsubscribe();
-      }
+      });
+      t.unsubscribe();
     });
   }
 
@@ -137,113 +149,57 @@ export class MapComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
   addMarkers(lat: number, lng: number, device: Device) {
-    let color: string;
-    if (device.online_state) {
-      color = '#AFD9A1';
-    } else {
-      color = '#FCA3A3';
-    }
+    let color = device.online_state ? '#AFD9A1' : '#FCA3A3';
+    let signalLevel = !device.signalLevel
+      ? ''
+      : +device.signalLevel > -33
+      ? 'low'
+      : +device.signalLevel > -66
+      ? 'medium'
+      : 'high';
+
     this.icon = L.divIcon({
-      html: `<div
-              class="marker-event"
-              id="${device.device_id}"
-            >
-              <div
-                class="marker-header"
-              >
-                <svg viewBox="0 0 200 60">
-                <circle
-                  class="marker-icon"
-                  cx="28"
-                  cy="25"
-                  r="14.5"
-                  fill="${color}"
-                  stroke="white"
-                  stroke-opacity="0.5"
-                  stroke-width="1"
-                  stroke-opacity="0.5"
-                />
-                <text
-                  y="30"
-                  x="50"
-                  font-family="HelveticaNeueRoman"
-                  font-size="12px"
-                  text-anchor="start"
-                  fill="#343841"
-                >
-                  ${device.name}
-                  </text>
-                </svg>
-                <span class="icon icon-d-item edit_device"></span>
-              </div>
-              <div class="info-panel">
-                <div class="marker-attributes">
-                  <h4 class="marker-text"><b>Группа:</b></h4>
-                  <h4 class="marker-text"><b>Заряд:</b></h4>
-                  <h4 class="marker-text"><b>Сигнал:</b></h4>
-                </div>
-                <div style="width: 50%">
-                  <h4 class="marker-text">
-                    ${device.group_name ? device.group_name : 'Без группы'}
-                  </h4>
-                  <h4 class="marker-text">
-                  ${device.battery_percent}%
-                  </h4>
-                  <h4 class="marker-text">
-                  ${device.signalLevel ? device.signalLevel : 'Нет сигнала'}
-                  </h4>
-                </div>
+      html: `
+        <div id="m_${
+          device.device_id
+        }" class="marker" (click)="showInfo($event)">
+          <div class="marker__header">
+            <div class="marker__label">
+              ${device.name}
+            </div>
+            <div class="marker__icon" style="background-color: ${color}"></div>
+          </div>
+          <div class="marker__info">
+            <div class="marker__info-row">
+              <div class="marker__info-title">Группа:</div>
+              <div class="marker__info-data">${device.group_name}</div>
+            </div>
+            <div class="marker__info-row">
+              <div class="marker__info-title">Заряд:</div>
+              <div>${device.battery_percent}%</div>
+            </div>
+            <div class="marker__info-row">
+              <div class="marker__info-title">Сигнал:</div>
+              <div class="signal-level ${signalLevel}" title="${
+        +device.signalLevel * -1
+      }%">
+                <div></div>
+                <div></div>
+                <div></div>
               </div>
             </div>
-            <svg id="icon_${device.device_id}" viewBox="0 0 200 60" width="200">
-              <rect
-                class="marker-icon"
-                x="35"
-                y="22"
-                width="48"
-                height="17"
-                rx="3.5332"
-                fill="white"
-                stroke="rgba(133, 133, 133, 0.15)"
-                stroke-opacity="0.1"
-                stroke-width="1"
-                stroke-opacity="0.5"
-              />
-              <circle
-                class="marker-icon"
-                cx="31"
-                cy="31"
-                r="14.5"
-                fill="${color}"
-                stroke="white"
-                stroke-opacity="0.5"
-                stroke-width="1"
-               />
-              <text
-                y="35"
-                x="50"
-                font-family="HelveticaNeueRoman"
-                font-size="12px"
-                text-anchor="start"
-                fill="#343841"
-              >
-              ${device.name}
-              </text>
-            </svg>
-            `,
+          </div>
+        </div>
+      `,
       className: '',
       iconSize: [60, 30],
     });
     this.device_marker = L.marker([lat, lng], { icon: this.icon });
     this.device_marker.on('click', (e) => {
-      let id = e.target._icon.firstElementChild.id;
-      let elem = document.getElementById(id);
-      let icon = document.getElementById('icon_' + id);
-      if (elem && icon) {
-        elem.style.display = 'block';
-        icon.style.display = 'none';
-      }
+      const marker = e.target._icon.firstElementChild;
+      marker?.classList.toggle('open');
     });
     let device_geo = {
       device: device,
@@ -251,32 +207,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     };
     this.devices_geo.push(device_geo);
     this.device_marker.addTo(this.mapService.map);
-  }
-
-  closePanel(id: string) {
-    let elem = document.getElementById(id);
-    if (elem) {
-      elem.style.display = 'none';
-    }
-  }
-
-  eventListener() {
-    let elems = document.querySelectorAll('.marker-event');
-    elems.forEach((elem) => {
-      elem.addEventListener('click', () => {
-        let el = document.getElementById(elem.id);
-        let icon = document.getElementById('icon_' + elem.id);
-        let t = timer(100).subscribe(() => {
-          if (el) {
-            el.style.display = 'none';
-          }
-          if (icon) {
-            icon.style.display = 'block';
-          }
-          t.unsubscribe();
-        });
-      });
-    });
   }
 
   devicesFilter(value: string, filter: string) {
@@ -325,6 +255,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           : device)
       );
     });
+
     arr.map((d) => {
       d.marker.addTo(this.mapService.map);
       d.marker.setLatLng({
@@ -333,6 +264,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
   getValue(event) {
     this.devices = Array.from(this.devices_res);
     this.search = event;
@@ -353,19 +285,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       lng: device.gps_location.longitude,
     });
   }
+
+  ngOnDestroy() {
+    if (this.sub) this.sub.unsubscribe();
+  }
 }
-// if (device.device.)
-// if (
-//   device.device.device_config_id === this.filter.config &&
-//   this.filter.config !== ''
-// ) {
-//   device.marker.addTo(this.mapService.map);
-//   device.marker.setLatLng(
-// {
-//   lat: device.device.gps_location.latitude,
-//     lng: device.device.gps_location.longitude,
-// }
-//   );
-// } else {
-//   device.marker.remove();
-// }
