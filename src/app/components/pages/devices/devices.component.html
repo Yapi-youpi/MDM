@@ -92,7 +92,7 @@
               (onCLick)="changeSortBatteryDir()"
             ></app-sort-btn>
           </div>
-          <p>Блокировка</p>
+          <p *ngIf="userRole === 'admin' || userRole === 'super'">Блокировка</p>
           <p>Действия</p>
         </div>
       </div>

@@ -36,7 +36,10 @@
       ></app-status-icon>
     </div>
     <p>{{ device.battery_percent }}%</p>
-    <div class="switch-wrapper">
+    <div
+      class="switch-wrapper"
+      *ngIf="userRole === 'admin' || userRole === 'super'"
+    >
       <app-input-switch
         [value]="device.active_state"
         (onChange)="onChangeDeviceStateHandler(device)"
