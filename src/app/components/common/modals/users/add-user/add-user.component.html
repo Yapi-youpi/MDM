@@ -53,97 +53,100 @@
         required
       />
     </div>
-    <div class="form__item" *ngIf="isEditSelf && passwordField">
-      <label for="old-pass">Старый пароль</label>
-      <app-input-password
-        [control]="$any(this.form.get('oldPassword'))"
-        [name]="'old-pass'"
-        [width]="'w-296'"
-      ></app-input-password>
-    </div>
-    <div class="form__item">
-      <label for="password">{{ isEditSelf ? 'Новый пароль' : 'Пароль' }}</label>
-      <button
-        *ngIf="!passwordField"
-        class="btn btn--big btn--outline w-296"
-        (click)="showPasswordField()"
-      >
-        Сменить пароль
-      </button>
-      <div class="validation" *ngIf="passwordField">
+    <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
+      <div class="form__item" *ngIf="isEditSelf && passwordField">
+        <label for="old-pass">Старый пароль</label>
         <app-input-password
-          [name]="'password'"
-          [control]="$any(this.form.get('password'))"
+          [control]="$any(this.form.get('oldPassword'))"
+          [name]="'old-pass'"
           [width]="'w-296'"
-          [pattern]="pattern"
-          (onFocus)="showValidation()"
-          (onBlur)="hideValidation()"
-          (onInput)="validate()"
         ></app-input-password>
-
-        <ul class="validation-list w-296">
-          <li class="validation-item" data-pattern="uppercase">
-            заглавные буквы
-          </li>
-          <li class="validation-item" data-pattern="lowercase">
-            строчные буквы
-          </li>
-          <li class="validation-item" data-pattern="length">
-            не менее 8 символов
-          </li>
-          <li class="validation-item" data-pattern="numbers">цифры</li>
-          <li class="validation-item" data-pattern="symbols">символы</li>
-        </ul>
       </div>
-    </div>
-    <div class="form__item" *ngIf="!currentUser">
-      <label>Роль</label>
-      <div class="tags-container w-296">
-        <label class="custom-radio">
-          <input
-            class="visually-hidden"
-            formControlName="role"
-            type="radio"
-            [value]="'admin'"
-            [attr.disabled]="currentUser || userRole === 'admin' ? '' : null"
-          />
-          <span class="custom-radio__span"> администратор </span>
-        </label>
-
-        <label class="custom-radio">
-          <input
-            class="visually-hidden"
-            formControlName="role"
-            type="radio"
-            [value]="'operator'"
-            [attr.disabled]="currentUser ? '' : null"
-          />
-          <span class="custom-radio__span"> оператор </span>
-        </label>
-      </div>
-    </div>
-    <div class="form__item">
-      <label>Подразделение</label>
-      <select class="select-native w-296" formControlName="userTags">
-        <ng-container *ngFor="let tag of userTags">
-          <option value="{{ tag }}" *ngIf="tag">
-            {{ tag }}
-          </option></ng-container
+      <div class="form__item">
+        <label for="password">{{
+          isEditSelf ? 'Новый пароль' : 'Пароль'
+        }}</label>
+        <button
+          *ngIf="!passwordField"
+          class="btn btn--big btn--outline w-296"
+          (click)="showPasswordField()"
         >
-        <option value="Другое">Другое</option>
-      </select>
-    </div>
-    <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
-      <label></label>
-      <input
-        formControlName="other"
-        type="text"
-        id="other"
-        class="w-296"
-        placeholder="Введите название подразделения"
-      />
-    </div>
+          Сменить пароль
+        </button>
+        <div class="validation" *ngIf="passwordField">
+          <app-input-password
+            [name]="'password'"
+            [control]="$any(this.form.get('password'))"
+            [width]="'w-296'"
+            [pattern]="pattern"
+            (onFocus)="showValidation()"
+            (onBlur)="hideValidation()"
+            (onInput)="validate()"
+          ></app-input-password>
 
+          <ul class="validation-list w-296">
+            <li class="validation-item" data-pattern="uppercase">
+              заглавные буквы
+            </li>
+            <li class="validation-item" data-pattern="lowercase">
+              строчные буквы
+            </li>
+            <li class="validation-item" data-pattern="length">
+              не менее 8 символов
+            </li>
+            <li class="validation-item" data-pattern="numbers">цифры</li>
+            <li class="validation-item" data-pattern="symbols">символы</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form__item" *ngIf="!currentUser">
+        <label>Роль</label>
+        <div class="tags-container w-296">
+          <label class="custom-radio">
+            <input
+              class="visually-hidden"
+              formControlName="role"
+              type="radio"
+              [value]="'admin'"
+              [attr.disabled]="currentUser || userRole === 'admin' ? '' : null"
+            />
+            <span class="custom-radio__span"> администратор </span>
+          </label>
+
+          <label class="custom-radio">
+            <input
+              class="visually-hidden"
+              formControlName="role"
+              type="radio"
+              [value]="'operator'"
+              [attr.disabled]="currentUser ? '' : null"
+            />
+            <span class="custom-radio__span"> оператор </span>
+          </label>
+        </div>
+      </div>
+      <div class="form__item">
+        <label>Подразделение</label>
+        <select class="select-native w-296" formControlName="userTags">
+          <ng-container *ngFor="let tag of userTags">
+            <option value="{{ tag }}" *ngIf="tag">
+              {{ tag }}
+            </option></ng-container
+          >
+          <option value="Другое">Другое</option>
+        </select>
+      </div>
+      <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
+        <label></label>
+        <input
+          formControlName="other"
+          type="text"
+          id="other"
+          class="w-296"
+          placeholder="Введите название подразделения"
+        />
+      </div>
+    </ng-container>
     <div class="modal-form-footer btn-wrapper">
       <button
         *ngIf="!currentUser; else editBtn"
