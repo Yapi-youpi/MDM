@@ -122,6 +122,7 @@ import { AddMessageComponent } from './components/common/modals/messages/add-mes
 import { HelpComponent } from './components/pages/help/help.component';
 import { TicketModalComponent } from './components/pages/help/ticket-modal/ticket-modal.component';
 import { DevicesFiltersComponent } from './components/common/filters/devices-filters/devices-filters.component';
+import { GroupsFiltersComponent } from './components/common/filters/groups-filters/groups-filters.component';
 
 const routes: Routes = [
   {
@@ -238,6 +239,7 @@ const routes: Routes = [
     HelpComponent,
     TicketModalComponent,
     DevicesFiltersComponent,
+    GroupsFiltersComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,62 @@
+<ng-container
+  *ngIf="
+    filter.status !== null ||
+    (filter.dateFrom && filter.dateFrom !== '') ||
+    (filter.dateTo && filter.dateTo !== '') ||
+    (filter.configsIDs && filter.configsIDs.length !== 0)
+  "
+>
+  <div class="row filters-wrapper">
+    <app-button
+      *ngIf="filter.status !== null"
+      [height]="'auto'"
+      [padding]="'7px 9px 7px 10px'"
+      [text]="filter.status ? 'статус: вкл' : 'статус: выкл'"
+      [textLike]="'like-body'"
+      [color]="'blue'"
+      [radius]="'14px'"
+      (click)="onStatusRemoveHandler()"
+    >
+      <span class="icon"></span>
+    </app-button>
+    <app-button
+      *ngIf="filter.dateFrom !== null"
+      [height]="'auto'"
+      [padding]="'7px 9px 7px 10px'"
+      [text]="'с ' + (filter.dateFrom | dateConverter: 'HH:mm, D MMM YYYY')"
+      [textLike]="'like-body'"
+      [color]="'blue'"
+      [radius]="'14px'"
+      (click)="onDateFromRemoveHandler()"
+    >
+      <span class="icon"></span>
+    </app-button>
+    <app-button
+      *ngIf="filter.dateTo !== null"
+      [height]="'auto'"
+      [padding]="'7px 9px 7px 10px'"
+      [text]="'по ' + (filter.dateTo | dateConverter: 'HH:mm, D MMM YYYY')"
+      [textLike]="'like-body'"
+      [color]="'blue'"
+      [radius]="'14px'"
+      (click)="onDateToRemoveHandler()"
+    >
+      <span class="icon"></span>
+    </app-button>
+    <ng-container *ngIf="_configIDs && _configIDs.length !== 0">
+      <ng-container *ngFor="let config of _configIDs">
+        <app-button
+          [height]="'auto'"
+          [padding]="'7px 9px 7px 10px'"
+          [text]="'конф.: ' + config"
+          [textLike]="'like-body'"
+          [color]="'blue'"
+          [radius]="'14px'"
+          (click)="onConfigsIDsRemoveHandler(config)"
+        >
+          <span class="icon"></span>
+        </app-button>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>

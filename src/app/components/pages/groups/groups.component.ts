@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, timer } from 'rxjs';
 
 import {
@@ -21,7 +21,7 @@ import { AssetService } from '../../../shared/services/asset.service';
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss'],
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent implements OnInit, OnDestroy {
   public title = 'Группы устройств';
   public groups: DevicesGroup[] = [];
   public configs: DevicesConfig[] = [];
@@ -65,6 +65,10 @@ export class GroupsComponent implements OnInit {
       });
       i.unsubscribe();
     });
+  }
+
+  ngOnDestroy() {
+    this.filterForm.reset();
   }
 
   getGroups(param: string) {
@@ -122,6 +126,44 @@ export class GroupsComponent implements OnInit {
     this.filter.dateFrom = null;
     this.filter.dateTo = null;
     this.filter.configsIDs = null;
+  }
+
+  resetOneSearchParam(
+    type: 'status' | 'dateFrom' | 'dateTo' | 'configsIDs',
+    value?: string
+  ) {
+    switch (type) {
+      case 'status': {
+        this.filter.status = null;
+        if (this.filterForm.form.controls['status-on'].value === true)
+          this.filterForm.form.controls['status-on'].setValue(false);
+        if (this.filterForm.form.controls['status-off'].value === true)
+          this.filterForm.form.controls['status-off'].setValue(false);
+        break;
+      }
+      case 'dateFrom': {
+        this.filter.dateFrom = null;
+        this.filterForm.form.controls['date-from'].setValue(null);
+        break;
+      }
+      case 'dateTo': {
+        this.filter.dateTo = null;
+        this.filterForm.form.controls['date-to'].setValue(null);
+        break;
+      }
+      case 'configsIDs': {
+        if (value) {
+          const prevValues: string[] =
+            this.filterForm.form.controls['config_ids'].value;
+          const newValues = prevValues.filter((c) => c !== value);
+          this.filterForm.form.controls['config_ids'].setValue(newValues);
+          this.filter.configsIDs = newValues;
+        }
+        break;
+      }
+      default:
+        return;
+    }
   }
 
   searchGroupsWithParams() {

@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesFilter } from '../../../../shared/types/filters';
+import { GroupFilter } from '../../../../shared/types/filters';
 import { DevicesConfig } from '../../../../shared/types/config';
 import { DevicesGroup } from '../../../../shared/types/groups';
 
 @Component({
-  selector: 'app-devices-filters',
-  templateUrl: './devices-filters.component.html',
-  styleUrls: ['./devices-filters.component.scss'],
+  selector: 'app-groups-filters',
+  templateUrl: './groups-filters.component.html',
+  styleUrls: ['./groups-filters.component.scss'],
 })
-export class DevicesFiltersComponent {
-  @Input() filter!: DevicesFilter;
+export class GroupsFiltersComponent {
+  @Input() filter!: GroupFilter;
   @Input() configs!: DevicesConfig[];
   @Input() groups!: DevicesGroup[];
 
@@ -29,17 +29,6 @@ export class DevicesFiltersComponent {
       return this.filter.configsIDs.map((c) => {
         const idx = this.configs.map((e) => e.ID).indexOf(c);
         return this.configs[idx].name;
-      });
-    }
-  }
-
-  get _groupsIDs() {
-    if (!this.filter.groupsIDs || this.filter.groupsIDs.length === 0)
-      return null;
-    else {
-      return this.filter.groupsIDs.map((c) => {
-        const idx = this.groups.map((e) => e.id).indexOf(c);
-        return this.groups[idx].name;
       });
     }
   }

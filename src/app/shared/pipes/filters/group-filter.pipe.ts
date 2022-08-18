@@ -17,10 +17,8 @@ export class GroupFilterPipe implements PipeTransform {
     return groups.filter((g) => {
       return (
         (status !== null ? g.activeState === status : g) &&
-        (dateFrom ? g.updateTime > dateFrom : g.updateTime > '') &&
-        (dateTo
-          ? g.updateTime < dateTo
-          : g.updateTime < moment.utc(Infinity).format()) &&
+        (dateFrom ? moment(g.updateTime).isAfter(moment(dateFrom)) : g) &&
+        (dateTo ? moment(g.updateTime).isBefore(dateTo) : g) &&
         (configIDs && configIDs.length !== 0
           ? configIDs.some((el) => g.deviceConfigID === el)
           : g)
