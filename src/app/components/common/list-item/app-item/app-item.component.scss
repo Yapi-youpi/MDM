@@ -4,7 +4,7 @@
   color: var(--dark-grey);
   border-radius: 14px;
   box-shadow: var(--box-shadow);
-  overflow: hidden;
+  //overflow: hidden;
   transition: height var(--transition-time) ease;
 
   &-content {
@@ -21,6 +21,11 @@
     }
 
     &.main {
+      &.has-children {
+        position: relative;
+        cursor: pointer;
+      }
+
       .dummy,
       img {
         height: 30px;
@@ -46,33 +51,6 @@
           -webkit-mask-size: 18px 18px;
           -webkit-mask-image: url('/assets/UI/question.svg');
           background-color: var(--white);
-        }
-      }
-
-      .title-wrapper {
-        position: relative;
-        cursor: pointer;
-
-        .icon {
-          height: 9px;
-          width: 11.29px;
-          position: absolute;
-          top: 0;
-          right: 5px;
-          mask-size: 11px 9px;
-          -wekit-mask-size: 11px 9px;
-          mask-image: url('/assets/UI/arrow_down.svg');
-          -webkit-mask-image: url('/assets/UI/arrow_down.svg');
-          background-color: var(--dark-blue-grey);
-          transition: transform var(--transition-time) ease;
-
-          &.down {
-            transform: rotate(180deg);
-          }
-
-          &.shifted {
-            margin-top: 10px;
-          }
         }
       }
     }
@@ -106,15 +84,10 @@
       max-height: 30px;
       width: 50px;
       position: relative;
-      margin-right: 5px;
-      //overflow-wrap: break-word;
-      //overflow: hidden;
-      //text-overflow: ellipsis;
+      margin-right: 15px;
 
       p:first-child {
-        width: 50px;
-
-        //display: block;
+        width: calc(100% - 9px);
 
         overflow: hidden;
         text-overflow: ellipsis;
@@ -143,6 +116,28 @@
 
         transition: all var(--transition-time) ease;
       }
+
+      .icon {
+        height: 6px;
+        width: 8px;
+        position: absolute;
+        top: 2.5px;
+        right: 0;
+        mask-size: 8px 6px;
+        -wekit-mask-size: 8px 6px;
+        mask-image: url('/assets/UI/arrow_down.svg');
+        -webkit-mask-image: url('/assets/UI/arrow_down.svg');
+        background-color: var(--dark-blue-grey);
+        transition: transform var(--transition-time) ease;
+
+        &.down {
+          transform: rotate(180deg);
+        }
+
+        &.shifted {
+          margin-top: 10px;
+        }
+      }
     }
 
     &.child {
@@ -152,7 +147,7 @@
     }
 
     > *:nth-child(4) {
-      width: 505px;
+      width: 495px;
       margin-right: 10px;
     }
 
@@ -208,9 +203,11 @@
 
   .children-container {
     transition: opacity var(--transition-time) ease;
+    //animation: show var(--transition-time) ease;
 
     &.hidden {
       opacity: 0;
+      //display: none;
     }
 
     hr {

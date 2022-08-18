@@ -2,6 +2,8 @@
   <div
     class="app-item-content"
     [class.main]="app.children && app.children.length !== 0"
+    [class.has-children]="app.children && app.children.length !== 0"
+    (click)="toggleChildren()"
   >
     <img
       class="app-img app-item__img"
@@ -10,22 +12,17 @@
       "
       alt="{{ app.iconText }}"
     />
-    <div class="title-wrapper row" (click)="toggleChildren()">
-      <div class="text">
-        <p class="text-choose">{{ app.name }}</p>
-        <p *ngIf="app.system" class="text-note">Системное приложение</p>
-      </div>
+    <p class="text-choose">{{ app.name }}</p>
+    <div class="version-wrapper">
+      <p class="app-item__version">{{ app.version }}</p>
+      <p class="tip">{{ app.version }}</p>
       <span
+        *ngIf="app.children && app.children.length !== 0"
         class="icon"
         [class.down]="!isChildrenHidden"
         [class.shifted]="app.system"
       ></span>
     </div>
-    <div class="version-wrapper">
-      <p class="app-item__version">{{ app.version }}</p>
-      <p *ngIf="app.version.length > 9" class="tip">{{ app.version }}</p>
-    </div>
-    <!--    <p class="app-item__version">{{ app.version }}</p>-->
     <!--  <p class="app-item__url">{{ app.url }}</p>-->
     <p class="app-item__pkg">{{ app.pkg }}</p>
     <p class="app-item__file-size">{{ app.fileByteSize | fileSize }}</p>
