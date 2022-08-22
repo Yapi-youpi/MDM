@@ -39,15 +39,13 @@
 
     // статус
     > *:nth-child(1) {
-      width: 34px;
+      width: 18px;
 
-      margin-right: 5px;
+      margin-right: 16px;
     }
     // дата вкл
     > *:nth-child(2) {
-      width: 90px;
-
-      margin-right: 10px;
+      width: 80px;
     }
     // название
     > *:nth-child(3) {
@@ -61,7 +59,7 @@
     }
     // описание
     > *:nth-child(4) {
-      width: 195px;
+      width: 190px;
 
       margin-right: 5px;
 
@@ -71,51 +69,61 @@
     > *:nth-child(5) {
       width: 90px;
 
-      margin-right: 10px;
+      margin-right: 7px;
     }
-    // imei
+    // модель / imei
     > *:nth-child(6) {
       width: 105px;
 
-      margin-right: 5px;
-    }
-    // модель
-    > *:nth-child(7) {
-      width: 70px;
+      margin-right: 10px;
 
-      margin-right: 5px;
+      > *:first-child {
+        margin-bottom: 5px;
+      }
+
+      > *:last-child {
+        color: #9ea7b6;
+      }
     }
     // группа
-    > *:nth-child(8) {
+    > *:nth-child(7) {
       width: 105px;
 
       margin-right: 5px;
     }
     // конфигурация
-    > *:nth-child(9) {
-      width: 110px;
+    > *:nth-child(8) {
+      width: 108px;
     }
     // обновление
-    > *:nth-child(10) {
-      width: 70px;
+    > *:nth-child(9) {
+      width: 60px;
 
-      margin-right: 5px;
+      > * {
+        margin-right: 12px;
+      }
+    }
+    // версия лаунчера
+    > *:nth-child(10) {
+      width: 60px;
+
+      margin-right: 6px;
     }
     // заряд
     > *:nth-child(11) {
-      width: 51px;
+      width: 50px;
 
-      margin-right: 5px;
+      margin-right: 9px;
     }
     // блокировка
     > *:nth-child(12) {
       width: 70px;
 
-      margin-right: 6px;
+      margin-right: 9px;
     }
     // действия
     > *:nth-child(13) {
-      width: 96px;
+      width: 120px;
     }
 
     .device-actions-wrapper {

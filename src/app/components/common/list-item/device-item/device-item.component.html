@@ -24,17 +24,26 @@
     <!--    <p>123456789012345</p>-->
     <!--    <p>Ololo Pro</p>-->
     <p>{{ device.phone_number }}</p>
-    <p>{{ device.imei }}</p>
-    <p>{{ device.model }}</p>
-    <p>{{ device.device_group_id | groupConverter: groups }}</p>
-    <p>{{ device.device_config_id | configConverter: configs }}</p>
-    <div class="icon-wrapper">
+    <div class="phone_imei">
+      <p>{{ device.model }}</p>
+      <p>{{ device.imei }}</p>
+    </div>
+    <!--    <p>{{ device.imei }}</p>-->
+    <!--    <p>{{ device.model }}</p>-->
+    <p class="font-bold-color">
+      {{ device.device_group_id | groupConverter: groups }}
+    </p>
+    <p class="font-bold-color">
+      {{ device.device_config_id | configConverter: configs }}
+    </p>
+    <div class="icon-wrapper row center">
       <app-status-icon
         [size]="'s14x14'"
         [isOn]="device.online_state"
         [isOff]="!device.online_state"
       ></app-status-icon>
     </div>
+    <p>{{ device.launcher_version }}</p>
     <p>{{ device.battery_percent }}%</p>
     <div
       class="switch-wrapper"
@@ -46,6 +55,13 @@
       ></app-input-switch>
     </div>
     <div class="device-actions-wrapper">
+      <app-device-action-btn
+        *ngIf="userRole === 'admin' || userRole === 'super'"
+        [device]="device"
+        [target]="'reload_device'"
+        (onClick)="onClickDeviceReloadHandler($event)"
+        title="Перезагрузить устройство"
+      ></app-device-action-btn>
       <app-device-action-btn
         [device]="device"
         [target]="'qr_code'"
@@ -65,13 +81,6 @@
         [target]="'delete_device'"
         (onClick)="onClickDeviceDeleteHandler($event)"
         title="Удалить устройство"
-      ></app-device-action-btn>
-      <app-device-action-btn
-        *ngIf="userRole === 'admin' || userRole === 'super'"
-        [device]="device"
-        [target]="'reload_device'"
-        (onClick)="onClickDeviceReloadHandler($event)"
-        title="Перезагрузить устройство"
       ></app-device-action-btn>
     </div>
   </div>

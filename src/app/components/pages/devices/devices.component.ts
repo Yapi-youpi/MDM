@@ -133,6 +133,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.device
       .get('all')
       .then((res: states.DevicesState) => {
+        console.log(res);
         if (res.success) {
           this.devices = res.devices ? res.devices : [];
         } else {

@@ -22,12 +22,14 @@
       align-items: center;
 
       margin-bottom: 24px;
-      padding-right: 16px;
+
+      .checkbox-wrapper {
+        margin-right: 10px;
+      }
 
       .sort-headers {
         width: 100%;
-
-        margin-left: 10px;
+        padding: 0 16px 0 0;
 
         p {
           display: inline-block;
@@ -35,87 +37,79 @@
 
         // статус
         > *:nth-child(1) {
-          width: 50px;
+          width: 18px;
 
-          margin-right: 5px;
+          margin-right: 32px;
         }
         // дата вкл
         > *:nth-child(2) {
           width: 80px;
-
-          margin-right: 10px;
         }
         // название
         > *:nth-child(3) {
           width: 70px;
 
           margin-right: 10px;
-          padding-left: 5px;
+
+          color: var(--dark-blue-grey);
+
+          overflow-wrap: break-word;
         }
         // описание
         > *:nth-child(4) {
-          width: 195px;
+          width: 190px;
 
           margin-right: 5px;
-          padding-left: 5px;
+
+          overflow-wrap: break-word;
         }
         // телефон
         > *:nth-child(5) {
           width: 90px;
 
-          margin-right: 10px;
-          padding-left: 7px;
+          margin-right: 7px;
         }
-        // imei
+        // модель / imei
         > *:nth-child(6) {
           width: 105px;
 
-          margin-right: 5px;
-          padding-left: 6px;
-        }
-        // модель
-        > *:nth-child(7) {
-          width: 70px;
-
-          margin-right: 5px;
-          padding-left: 5px;
+          margin-right: 10px;
         }
         // группа
-        > *:nth-child(8) {
+        > *:nth-child(7) {
           width: 105px;
 
           margin-right: 5px;
-          padding-left: 2px;
         }
         // конфигурация
-        > *:nth-child(9) {
-          width: 110px;
-
-          padding-left: 2px;
+        > *:nth-child(8) {
+          width: 108px;
         }
         // обновление
+        > *:nth-child(9) {
+          width: 60px;
+        }
+        // версия лаунчера
         > *:nth-child(10) {
-          width: 70px;
+          width: 60px;
 
-          margin-right: 5px;
-          padding-left: 5px;
+          margin-right: 6px;
         }
         // заряд
         > *:nth-child(11) {
-          width: 51px;
+          width: 50px;
 
-          margin-right: 5px;
+          margin-right: 9px;
         }
         // блокировка
         > *:nth-child(12) {
           width: 70px;
 
-          margin-right: 6px;
-          padding-left: 5px;
+          margin-right: 9px;
         }
         // действия
         > *:nth-child(13) {
-          width: 96px;
+          width: 120px;
         }
       }
     }
