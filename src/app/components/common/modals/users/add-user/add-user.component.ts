@@ -85,7 +85,6 @@ export class AddUserComponent implements OnInit {
     this.userService
       .getUserTags()
       .then((res) => {
-        console.log(res);
         this.userTags = res.userTags;
       })
       .catch((err) => {
@@ -170,7 +169,6 @@ export class AddUserComponent implements OnInit {
       this.userService
         .loadAvatar(this.currentUser!.id, avatar)
         .then((res) => {
-          console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
           this.showAlert('Аватар обновлен');
@@ -198,7 +196,6 @@ export class AddUserComponent implements OnInit {
       this.userService
         .renameUSer(login, name)
         .then((res) => {
-          console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
           this.showAlert('Имя изменено');

@@ -651,14 +651,56 @@
                 <div class="colors-wrapper">
                   <div class="colors">
                     <label for="backgroundColor">Фон</label>
-                    <div class="input-color">
+                    <div
+                      class="input-color"
+                      [class.fit]="bgImg"
+                      [class.set]="!bgImg"
+                    >
                       <input
                         type="color"
                         formControlName="backgroundColor"
                         id="backgroundColor"
                         [value]="'#557ebe'"
                       />
-                      <span>{{ configForm.value.backgroundColor }}</span>
+                      <span *ngIf="!bgImg">{{
+                        configForm.value.backgroundColor
+                      }}</span>
+                    </div>
+                    <div class="input-color fit" [class.set]="bgImg">
+                      <label for="input-bg">
+                        <input
+                          (change)="addBgFile($event)"
+                          type="file"
+                          class="visually-hidden"
+                          style="position: absolute"
+                          id="input-bg"
+                          accept="image/*"
+                        />
+                        <div class="btn btn--flat btn--rounded add-bg-btn">
+                          <span></span>
+                        </div>
+                      </label>
+                      <span
+                        class="bg-placeholder"
+                        [class.bg-placeholder--active]="bgImg"
+                      >
+                        <span class="filename" *ngIf="bgImg">
+                          {{
+                            bgImg.slice(15, 36) ===
+                            config.backgroundImageUrl.slice(15, 36)
+                              ? 'image'
+                              : ''
+                          }}</span
+                        >
+                        <button
+                          (click)="clearInputFile()"
+                          type="button"
+                          class="btn btn--flat btn--action"
+                          [class.btn--hidden]="!bgImg"
+                        >
+                          <i class="tiny material-icons">clear</i>
+                        </button>
+                      </span>
                     </div>
                   </div>
                   <div class="colors">
@@ -760,6 +802,7 @@
                 : configForm.get('desktopHeader')?.value || ''
             "
             [bgColor]="configForm.get('backgroundColor')?.value || ''"
+            [bgImg]="bgImg"
             [textColor]="configForm.get('textColor')?.value || ''"
             [iconSize]="configForm.get('iconSize')?.value || ''"
             [orientation]="configForm.get('orientation')?.value || 0"

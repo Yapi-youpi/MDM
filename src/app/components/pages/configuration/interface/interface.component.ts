@@ -8,13 +8,17 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 export class InterfaceComponent implements OnChanges {
   @Input() title = '';
   @Input() bgColor = '';
+  @Input() bgImg = '';
   @Input() textColor = '';
   @Input() iconSize = '';
   @Input() orientation = 0;
 
+  public bgImage = '';
+
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
     for (let prop in changes) {
       if (prop === 'iconSize') {
         const appIcon = document.querySelectorAll(
@@ -44,6 +48,21 @@ export class InterfaceComponent implements OnChanges {
         this.orientation === 2
           ? gadget?.classList.add('orientation--landscape')
           : gadget?.classList.remove('orientation--landscape');
+      }
+      if (prop === 'bgImg') {
+        const gadget = document.querySelector('.interface-sample');
+        if (gadget) {
+          if (this.bgImg != null && this.bgImg !== '') {
+            gadget.setAttribute(
+              'style',
+              `background-image: url(
+                ${this.bgImg}
+              ); background-size: cover; background-position: center;`
+            );
+          } else {
+            gadget.setAttribute('style', 'background-color:' + this.bgColor);
+          }
+        }
       }
     }
   }

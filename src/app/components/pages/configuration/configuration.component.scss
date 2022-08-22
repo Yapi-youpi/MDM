@@ -488,6 +488,12 @@ input[type='color']::-webkit-color-swatch {
   background: #ffffff;
   border-radius: 8px;
   color: var(--dark-blue);
+  &.fit {
+    width: fit-content;
+  }
+  &.set {
+    border: 2px solid var(--dark-blue);
+  }
 }
 
 .save-btn {
@@ -523,12 +529,47 @@ input[type='color']::-webkit-color-swatch {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
   flex: 1;
 }
 .colors {
   display: flex;
   gap: 16px;
   align-items: center;
+}
+
+.add-bg-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    mask-image: url('/assets/UI/upload.svg');
+    mask-repeat: no-repeat;
+    mask-position: center center;
+    mask-size: 24px 24px;
+    background-color: var(--dark-blue);
+  }
+}
+.bg-placeholder {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+
+  &--active {
+    margin-left: 18px;
+  }
+
+  & .btn--hidden {
+    display: none;
+  }
 }
 
 /* ОРИЕНТАЦИЯ */

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { DevicesConfig, Permissions } from '../../../interfaces/interfaces';
@@ -10,6 +10,7 @@ import { AppState } from '../../../shared/types/states';
 import { AppsService } from '../../../shared/services/apps.service';
 import { alertService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
+import Compressor from 'compressorjs';
 
 @Component({
   selector: 'app-configuration',
@@ -25,6 +26,9 @@ export class ConfigurationComponent implements OnInit {
   public restrictionList: Permissions;
   public isModalAddAppOpen = false;
   public manageBrightness = false;
+  public file_input!: any;
+  public file_placeholder!: Element;
+  public bgImg!: string;
 
   private editedApps: App[] = [];
   private initialAppList: string[] = [];
@@ -36,6 +40,7 @@ export class ConfigurationComponent implements OnInit {
     private route: ActivatedRoute,
     private configService: DevicesConfigService,
     private router: Router,
+    private elementRef: ElementRef,
     private asset: AssetService
   ) {
     this.title = this.title + this.asset.configName;
@@ -53,7 +58,6 @@ export class ConfigurationComponent implements OnInit {
       autoUpdate: new FormControl(false, Validators.required),
       autoBrightness: new FormControl(false, Validators.required),
       backgroundColor: new FormControl('', Validators.required),
-      backgroundImageUrl: new FormControl('', Validators.required),
       blockStatusBar: new FormControl(false, Validators.required),
       bluetooth: new FormControl(true, Validators.required),
       brightness: new FormControl(255, Validators.required),
@@ -121,6 +125,10 @@ export class ConfigurationComponent implements OnInit {
       .then(() => {
         let i = interval(200).subscribe(() => {
           i.unsubscribe();
+          this.file_placeholder =
+            this.elementRef.nativeElement.querySelector('.bg-placeholder');
+          this.file_input =
+            this.elementRef.nativeElement.querySelector('#input-bg');
           this.setConfig();
         });
       })
@@ -136,7 +144,31 @@ export class ConfigurationComponent implements OnInit {
   //     .catch((err) => console.log(err));
   // }
 
+  setConfig() {
+    this.configForm.patchValue(this.config);
+
+    if (!this.configForm.value.textColor) {
+      this.configForm.patchValue({ textColor: '#ffffff' });
+    }
+    if (!this.configForm.value.backgroundColor) {
+      this.configForm.patchValue({ backgroundColor: '#557ebe' });
+    }
+    if (!this.configForm.value.wifiSecurityType) {
+      this.configForm.patchValue({ wifiSecurityType: 'NONE' });
+    }
+
+    this.getApps();
+    // this.getRestrictions();
+    this.config.applications = this.initialAppList;
+
+    // две строки ниже должны быть именно в таком порядке!
+    this.clearInputFile();
+    this.bgImg = this.config.backgroundImageUrl;
+  }
+
   editConfig() {
+    this.config.backgroundImageUrl = this.bgImg;
+
     const config = Object.assign(this.config, this.configForm.value);
     console.log(config);
     this.configService
@@ -195,22 +227,6 @@ export class ConfigurationComponent implements OnInit {
     this.manageBrightness = !this.manageBrightness;
   }
 
-  setConfig() {
-    this.configForm.patchValue(this.config);
-    if (!this.configForm.value.textColor) {
-      this.configForm.patchValue({ textColor: '#ffffff' });
-    }
-    if (!this.configForm.value.backgroundColor) {
-      this.configForm.patchValue({ backgroundColor: '#557ebe' });
-    }
-    if (!this.configForm.value.wifiSecurityType) {
-      this.configForm.patchValue({ wifiSecurityType: 'NONE' });
-    }
-    this.getApps();
-    // this.getRestrictions();
-    this.config.applications = this.initialAppList;
-  }
-
   setActive(event) {
     const target = event.target;
     const tabs = document.querySelectorAll('.tab');
@@ -260,6 +276,52 @@ export class ConfigurationComponent implements OnInit {
   addApp(addedApps: string[]) {
     this.config.applications = this.config.applications?.concat(addedApps);
     this.isModalAddAppOpen = false;
+  }
+
+  addBgFile(event: Event) {
+    // @ts-ignore
+    const file = event.target.files[0];
+
+    if (file) {
+      new Compressor(file, {
+        maxWidth: 1280,
+        maxHeight: 1280,
+
+        success(res) {
+          convertTo64(res);
+        },
+        error(err) {
+          console.log(err.message);
+        },
+      });
+
+      this.bgImg = window.URL.createObjectURL(file);
+
+      const convertTo64 = (img) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = () => {
+          if (reader.result) {
+            this.bgImg = reader.result.toString();
+          }
+        };
+      };
+
+      const span = this.file_placeholder.querySelector('.filename');
+      if (span) span.innerHTML = file.name;
+    }
+  }
+
+  clearInputFile() {
+    const input = this.file_input;
+    const placeholder = this.file_placeholder;
+
+    if (input && placeholder) {
+      this.bgImg = '';
+      input.value = '';
+      // const span = placeholder.querySelector('.filename');
+      // if (span) span.innerHTML = '';
+    }
   }
 
   showAlert() {
