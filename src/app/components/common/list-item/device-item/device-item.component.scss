@@ -4,6 +4,12 @@
 
   margin-bottom: 10px;
 
+  &.locked {
+    .content {
+      background-color: transparent;
+    }
+  }
+
   .checkbox-container {
     margin-right: 10px;
   }
@@ -23,32 +29,20 @@
 
     border-radius: 14px;
 
-    .icon-wrapper {
-      &:nth-of-type(2) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-
-    .switch-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    box-shadow: var(--box-shadow);
 
     // статус
-    > *:nth-child(1) {
+    .status {
       width: 18px;
 
       margin-right: 16px;
     }
     // дата вкл
-    > *:nth-child(2) {
+    .date {
       width: 80px;
     }
     // название
-    > *:nth-child(3) {
+    .name {
       width: 70px;
 
       margin-right: 10px;
@@ -58,7 +52,7 @@
       overflow-wrap: break-word;
     }
     // описание
-    > *:nth-child(4) {
+    .descr {
       width: 190px;
 
       margin-right: 5px;
@@ -66,13 +60,13 @@
       overflow-wrap: break-word;
     }
     // телефон
-    > *:nth-child(5) {
+    .phone {
       width: 90px;
 
       margin-right: 7px;
     }
     // модель / imei
-    > *:nth-child(6) {
+    .phone_imei {
       width: 105px;
 
       margin-right: 10px;
@@ -86,17 +80,17 @@
       }
     }
     // группа
-    > *:nth-child(7) {
+    .group {
       width: 105px;
 
       margin-right: 5px;
     }
     // конфигурация
-    > *:nth-child(8) {
+    .conf {
       width: 108px;
     }
     // обновление
-    > *:nth-child(9) {
+    .update {
       width: 60px;
 
       > * {
@@ -104,32 +98,26 @@
       }
     }
     // версия лаунчера
-    > *:nth-child(10) {
+    .version {
       width: 60px;
 
       margin-right: 6px;
     }
     // заряд
-    > *:nth-child(11) {
+    .battery {
       width: 50px;
 
       margin-right: 9px;
     }
     // блокировка
-    > *:nth-child(12) {
+    .lock {
       width: 70px;
 
       margin-right: 9px;
     }
     // действия
-    > *:nth-child(13) {
+    .actions {
       width: 120px;
-    }
-
-    .device-actions-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
   }
 }

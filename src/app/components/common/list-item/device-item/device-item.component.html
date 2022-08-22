@@ -1,4 +1,5 @@
 <div class="row item">
+  <!--  [class.locked]="!device.registration_state"-->
   <div
     class="checkbox-container"
     *ngIf="userRole === 'admin' || userRole === 'super'"
@@ -9,44 +10,39 @@
     ></app-input-checkbox>
   </div>
   <div class="content">
-    <div class="icon-wrapper">
+    <div class="icon-wrapper status">
       <app-status-icon
         [size]="'s18x18'"
         [controlState]="!device.registration_state"
-        [isOn]="device.online_state"
-        [isOff]="!device.online_state"
+        [isOn]="device.active_state"
+        [isOff]="!device.active_state"
       ></app-status-icon>
     </div>
-    <p>{{ device.updatedAt | dateConverter }}</p>
-    <p class="text-choose">{{ device.name }}</p>
-    <p>{{ device.description }}</p>
-    <!--    <p>88005553535</p>-->
-    <!--    <p>123456789012345</p>-->
-    <!--    <p>Ololo Pro</p>-->
-    <p>{{ device.phone_number }}</p>
+    <p class="date">{{ device.updatedAt | dateConverter }}</p>
+    <p class="text-choose name">{{ device.name }}</p>
+    <p class="descr">{{ device.description }}</p>
+    <p class="phone">{{ device.phone_number }}</p>
     <div class="phone_imei">
       <p>{{ device.model }}</p>
       <p>{{ device.imei }}</p>
     </div>
-    <!--    <p>{{ device.imei }}</p>-->
-    <!--    <p>{{ device.model }}</p>-->
-    <p class="font-bold-color">
+    <p class="font-bold-color group">
       {{ device.device_group_id | groupConverter: groups }}
     </p>
-    <p class="font-bold-color">
+    <p class="font-bold-color conf">
       {{ device.device_config_id | configConverter: configs }}
     </p>
-    <div class="icon-wrapper row center">
+    <div class="icon-wrapper row center update">
       <app-status-icon
         [size]="'s14x14'"
         [isOn]="device.online_state"
         [isOff]="!device.online_state"
       ></app-status-icon>
     </div>
-    <p>{{ device.launcher_version }}</p>
-    <p>{{ device.battery_percent }}%</p>
+    <p class="version">{{ device.launcher_version }}</p>
+    <p class="battery">{{ device.battery_percent }}%</p>
     <div
-      class="switch-wrapper"
+      class="row center lock"
       *ngIf="userRole === 'admin' || userRole === 'super'"
     >
       <app-input-switch
@@ -54,7 +50,7 @@
         (onChange)="onChangeDeviceStateHandler(device)"
       ></app-input-switch>
     </div>
-    <div class="device-actions-wrapper">
+    <div class="row space-between actions">
       <app-device-action-btn
         *ngIf="userRole === 'admin' || userRole === 'super'"
         [device]="device"

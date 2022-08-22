@@ -72,11 +72,11 @@
               (onCLick)="changeSortNameDir()"
             ></app-sort-btn>
           </div>
-          <p>Описание</p>
-          <p>Телефон</p>
+          <p class="descr">Описание</p>
+          <p class="phone">Телефон</p>
           <!--          <p>IMEI</p>-->
           <!--          <p>Модель</p>-->
-          <p>Модель / IMEI</p>
+          <p class="phone_imei">Модель / IMEI</p>
           <div class="sort-btn-wrapper group">
             <app-sort-btn
               [title]="'Группа'"
@@ -84,9 +84,9 @@
               (onCLick)="changeSortGroupDir()"
             ></app-sort-btn>
           </div>
-          <p>Конфигурация</p>
-          <p>Обнов-е</p>
-          <p>Версия<br />лаунчера</p>
+          <p class="conf">Конфигурация</p>
+          <p class="update">Обнов-е</p>
+          <p class="version">Версия<br />лаунчера</p>
           <div class="sort-btn-wrapper battery">
             <app-sort-btn
               [title]="'Заряд'"
@@ -94,8 +94,10 @@
               (onCLick)="changeSortBatteryDir()"
             ></app-sort-btn>
           </div>
-          <p *ngIf="userRole === 'admin' || userRole === 'super'">Блокировка</p>
-          <p>Действия</p>
+          <p class="lock" *ngIf="userRole === 'admin' || userRole === 'super'">
+            Блокировка
+          </p>
+          <p class="actions">Действия</p>
         </div>
       </div>
       <div class="list-body">

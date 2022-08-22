@@ -5,6 +5,13 @@
   -webkit-mask-size: 14px 14px;
   background-color: var(--white);
 
+  &.reload_device {
+    height: 18.22px;
+    width: 15.404px;
+    mask-size: 18.22px 15.404px;
+    -webkit-mask-size: 18.22px 15.404px;
+    mask-image: url('/assets/UI/reload.svg');
+  }
   &.qr_code {
     mask-image: url('/assets/UI/qr_code.svg');
     -webkit-mask-image: url('/assets/UI/qr_code.svg');
@@ -16,8 +23,5 @@
   &.delete_device {
     mask-image: url('/assets/UI/trash.svg');
     -webkit-mask-image: url('/assets/UI/trash.svg');
-  }
-  &.reload_device {
-    mask-image: url('/assets/UI/reload.svg');
   }
 }
