@@ -1,4 +1,4 @@
-<div class="row item">
+<div class="row item" [class.locked]="device.active_state">
   <!--  [class.locked]="!device.registration_state"-->
   <div
     class="checkbox-container"
@@ -13,9 +13,8 @@
     <div class="icon-wrapper status">
       <app-status-icon
         [size]="'s18x18'"
-        [controlState]="!device.registration_state"
-        [isOn]="device.active_state"
-        [isOff]="!device.active_state"
+        [isOn]="device.online_state"
+        [isOff]="!device.online_state"
       ></app-status-icon>
     </div>
     <p class="date">{{ device.updatedAt | dateConverter }}</p>
@@ -35,8 +34,8 @@
     <div class="icon-wrapper row center update">
       <app-status-icon
         [size]="'s14x14'"
-        [isOn]="device.online_state"
-        [isOff]="!device.online_state"
+        [isOn]="device.registration_state"
+        [isOff]="!device.registration_state"
       ></app-status-icon>
     </div>
     <p class="version">{{ device.launcher_version }}</p>
