@@ -102,7 +102,6 @@ export class ConfigurationComponent implements OnInit {
     this.appsService
       .get('all')
       .then((res: AppState) => {
-        console.log(res);
         if (res.success) {
           this.apps = res.app ? res.app : [];
         } else {
@@ -167,7 +166,6 @@ export class ConfigurationComponent implements OnInit {
     this.bgImg = this.config.backgroundImageUrl;
     if (this.bgImg) {
       const span = this.file_placeholder.querySelector('.filename');
-      console.log(span);
       if (span)
         span.innerHTML =
           this.bgImg
@@ -178,10 +176,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   editConfig() {
-    // this.config.backgroundImageUrl = this.bgImg;
-
     const config = Object.assign(this.config, this.configForm.value);
-    console.log(config);
     this.configService
       .editConfig(config)
       .then((res) => {
@@ -290,7 +285,6 @@ export class ConfigurationComponent implements OnInit {
       arr.splice(index, 1);
       this.config.restrictions = arr.join(', ');
     }
-    console.log(this.config.restrictions);
   }
 
   addApp(addedApps: string[]) {
@@ -304,9 +298,7 @@ export class ConfigurationComponent implements OnInit {
 
     if (file) {
       new Compressor(file, {
-        maxWidth: 1280,
-        maxHeight: 1280,
-
+        mimeType: 'image/jpeg',
         success(res) {
           convertTo64(res);
         },
@@ -316,7 +308,6 @@ export class ConfigurationComponent implements OnInit {
       });
 
       this.bgImg = window.URL.createObjectURL(file);
-      console.log(this.bgImg);
 
       const convertTo64 = (img) => {
         const reader = new FileReader();
@@ -326,7 +317,6 @@ export class ConfigurationComponent implements OnInit {
             this.bgImage = reader.result
               .toString()
               .replace(/^data:image\/[a-z]+;base64,/, '');
-            console.log(this.bgImage);
           }
         };
       };
@@ -345,7 +335,6 @@ export class ConfigurationComponent implements OnInit {
         this.config.backgroundImageUrl &&
         this.config.backgroundImageUrl === this.bgImg
       ) {
-        console.log('remove wallpaper');
         this.configService
           .removeWallpaper(this.config.ID)
           .then((res) => console.log(res))
@@ -354,7 +343,6 @@ export class ConfigurationComponent implements OnInit {
       this.bgImg = '';
       this.bgImage = '';
       input.value = '';
-      // TODO remove wallpaper from server if this.config.backgroundImageUrl
     }
   }
 
