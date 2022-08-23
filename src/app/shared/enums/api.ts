@@ -34,4 +34,6 @@ export enum configsPaths {
   RENAME = '/rename_config',
   DELETE = '/remove_config',
   GET_RESTRICTIONS = '/get_default_restrictions',
+  UPLOAD_WP = '/upload_wallpaper',
+  REMOVE_WP = '/remove_wallpaper',
 }

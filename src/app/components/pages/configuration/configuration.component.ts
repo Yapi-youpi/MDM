@@ -29,6 +29,7 @@ export class ConfigurationComponent implements OnInit {
   public file_input!: any;
   public file_placeholder!: Element;
   public bgImg!: string;
+  public bgImage = '';
 
   private editedApps: App[] = [];
   private initialAppList: string[] = [];
@@ -164,10 +165,20 @@ export class ConfigurationComponent implements OnInit {
     // две строки ниже должны быть именно в таком порядке!
     this.clearInputFile();
     this.bgImg = this.config.backgroundImageUrl;
+    if (this.bgImg) {
+      const span = this.file_placeholder.querySelector('.filename');
+      console.log(span);
+      if (span)
+        span.innerHTML =
+          this.bgImg
+            .match(/([^\/]+\.jpg)$/)
+            ?.toString()
+            .slice(-21) || '';
+    }
   }
 
   editConfig() {
-    this.config.backgroundImageUrl = this.bgImg;
+    // this.config.backgroundImageUrl = this.bgImg;
 
     const config = Object.assign(this.config, this.configForm.value);
     console.log(config);
@@ -193,6 +204,13 @@ export class ConfigurationComponent implements OnInit {
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
       });
+    }
+
+    if (this.bgImage) {
+      this.configService
+        .uploadWallpaper(this.config.ID, this.bgImage)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   }
 
@@ -226,6 +244,8 @@ export class ConfigurationComponent implements OnInit {
   toggleBrightness() {
     this.manageBrightness = !this.manageBrightness;
   }
+
+  /* toggle tabs */
 
   setActive(event) {
     const target = event.target;
@@ -296,13 +316,17 @@ export class ConfigurationComponent implements OnInit {
       });
 
       this.bgImg = window.URL.createObjectURL(file);
+      console.log(this.bgImg);
 
       const convertTo64 = (img) => {
         const reader = new FileReader();
         reader.readAsDataURL(img);
         reader.onload = () => {
           if (reader.result) {
-            this.bgImg = reader.result.toString();
+            this.bgImage = reader.result
+              .toString()
+              .replace(/^data:image\/[a-z]+;base64,/, '');
+            console.log(this.bgImage);
           }
         };
       };
@@ -317,10 +341,20 @@ export class ConfigurationComponent implements OnInit {
     const placeholder = this.file_placeholder;
 
     if (input && placeholder) {
+      if (
+        this.config.backgroundImageUrl &&
+        this.config.backgroundImageUrl === this.bgImg
+      ) {
+        console.log('remove wallpaper');
+        this.configService
+          .removeWallpaper(this.config.ID)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      }
       this.bgImg = '';
+      this.bgImage = '';
       input.value = '';
-      // const span = placeholder.querySelector('.filename');
-      // if (span) span.innerHTML = '';
+      // TODO remove wallpaper from server if this.config.backgroundImageUrl
     }
   }
 

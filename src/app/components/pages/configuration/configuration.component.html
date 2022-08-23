@@ -684,19 +684,12 @@
                         class="bg-placeholder"
                         [class.bg-placeholder--active]="bgImg"
                       >
-                        <span class="filename" *ngIf="bgImg">
-                          {{
-                            bgImg.slice(15, 36) ===
-                            config.backgroundImageUrl.slice(15, 36)
-                              ? 'image'
-                              : ''
-                          }}</span
-                        >
+                        <span class="filename" [class.hidden]="!bgImg"></span>
                         <button
                           (click)="clearInputFile()"
                           type="button"
                           class="btn btn--flat btn--action"
-                          [class.btn--hidden]="!bgImg"
+                          [class.hidden]="!bgImg"
                         >
                           <i class="tiny material-icons">clear</i>
                         </button>
