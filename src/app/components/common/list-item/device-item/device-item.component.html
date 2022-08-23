@@ -18,7 +18,17 @@
       ></app-status-icon>
     </div>
     <p class="date">{{ device.updatedAt | dateConverter }}</p>
-    <p class="text-choose name">{{ device.name }}</p>
+    <div class="name-wrapper">
+      <p
+        class="text-choose name"
+        (mouseenter)="displayTip()"
+        (mouseleave)="hideTip()"
+        #name
+      >
+        {{ device.name }}
+      </p>
+      <p class="list-tip" #tip>{{ device.name }}</p>
+    </div>
     <p class="descr">{{ device.description }}</p>
     <p class="phone">{{ device.phone_number }}</p>
     <div class="phone_imei">

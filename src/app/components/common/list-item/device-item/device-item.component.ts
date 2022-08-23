@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 import { DevicesConfig } from '../../../../shared/types/config';
 import { DevicesGroup } from '../../../../shared/types/groups';
@@ -22,7 +29,22 @@ export class DeviceItemComponent {
   @Output() onClickDeviceDelete = new EventEmitter<Device>();
   @Output() onClickDeviceReboot = new EventEmitter<Device>();
 
-  constructor() {}
+  @ViewChild('name') nameRef!: ElementRef;
+  @ViewChild('tip') tipRef!: ElementRef;
+
+  displayTip() {
+    if (
+      this.nameRef.nativeElement.offsetWidth <
+      this.nameRef.nativeElement.scrollWidth
+    ) {
+      this.tipRef.nativeElement.style.visibility = 'visible';
+      this.tipRef.nativeElement.style.opacity = 1;
+    }
+  }
+  hideTip() {
+    this.tipRef.nativeElement.style.visibility = 'hidden';
+    this.tipRef.nativeElement.style.opacity = 0;
+  }
 
   onSelectUnselectDeviceHandler(device: Device) {
     this.onSelectUnselectDevice.emit(device);

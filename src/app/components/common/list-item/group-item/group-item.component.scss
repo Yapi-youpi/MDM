@@ -24,9 +24,14 @@
 
       margin-right: 10px;
 
+      position: relative;
+
       color: var(--dark-blue-grey);
 
-      overflow-wrap: break-word;
+      .name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     > *:nth-child(2) {

@@ -12,10 +12,27 @@
       "
       alt="{{ app.iconText }}"
     />
-    <p class="text-choose">{{ app.name }}</p>
+    <div class="name-wrapper">
+      <p
+        class="text-choose name"
+        (mouseenter)="displayNameTip()"
+        (mouseleave)="hideNameTip()"
+        #name
+      >
+        {{ app.name }}
+      </p>
+      <p class="list-tip" #nametip>{{ app.name }}</p>
+    </div>
     <div class="version-wrapper">
-      <p class="app-item__version">{{ app.version }}</p>
-      <p class="tip">{{ app.version }}</p>
+      <p
+        class="app-item__version"
+        (mouseenter)="displayVTip()"
+        (mouseleave)="hideVTip()"
+        #version
+      >
+        {{ app.version }}
+      </p>
+      <p class="list-tip" #vtip>{{ app.version }}</p>
       <span
         *ngIf="app.children && app.children.length !== 0"
         class="icon"
