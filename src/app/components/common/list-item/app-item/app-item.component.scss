@@ -74,10 +74,17 @@
 
     > *:nth-child(2) {
       width: 165px;
+
       margin-right: 5px;
+
+      position: relative;
+
       color: var(--dark-blue-grey);
-      overflow-wrap: break-word;
-      overflow-y: auto;
+
+      .name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     > *:nth-child(3) {
@@ -91,30 +98,6 @@
 
         overflow: hidden;
         text-overflow: ellipsis;
-
-        &:hover + .tip {
-          visibility: visible;
-          opacity: 1;
-        }
-      }
-
-      .tip {
-        position: absolute;
-
-        top: -20px;
-        left: -3px;
-
-        padding: 3px;
-
-        background-color: var(--dark-blue-grey);
-        color: var(--white);
-
-        border-radius: 3px;
-
-        visibility: hidden;
-        opacity: 0;
-
-        transition: all var(--transition-time) ease;
       }
 
       .icon {

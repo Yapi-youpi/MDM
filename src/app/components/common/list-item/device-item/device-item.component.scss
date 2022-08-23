@@ -42,14 +42,19 @@
       width: 80px;
     }
     // название
-    .name {
+    .name-wrapper {
       width: 70px;
 
       margin-right: 10px;
 
+      position: relative;
+
       color: var(--dark-blue-grey);
 
-      overflow-wrap: break-word;
+      .name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
     // описание
     .descr {

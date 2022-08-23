@@ -11,10 +11,7 @@ export class AddDeviceService {
 
   constructor() {
     this.form = new FormGroup({
-      name: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(20),
-      ]),
+      name: new FormControl('', [Validators.required]),
       description: new FormControl('', [
         Validators.required,
         Validators.maxLength(60),

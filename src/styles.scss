@@ -1537,3 +1537,23 @@ textarea {
   background: #dae3f4;
   color: #557ebe;
 }
+
+// ПОДСКАЗКИ ДЛИННЫХ НАИМЕНОВАНИЙ (САША)
+.list-tip {
+  position: absolute;
+
+  top: -20px;
+  left: -3px;
+
+  padding: 3px;
+
+  background-color: var(--dark-blue-grey);
+  color: var(--white);
+
+  border-radius: 3px;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: all var(--transition-time) ease;
+}

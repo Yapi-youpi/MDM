@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 import { App } from '../../../../shared/types/apps';
 import { appsPaths as api } from '../../../../shared/enums/api';
@@ -16,11 +23,44 @@ export class AppItemComponent {
   @Output() onEditClick = new EventEmitter<App>();
   @Output() onDeleteClick = new EventEmitter<App>();
 
+  @ViewChild('name') nameRef!: ElementRef;
+  @ViewChild('nametip') nametipRef!: ElementRef;
+  @ViewChild('version') versionRef!: ElementRef;
+  @ViewChild('vtip') vtipRef!: ElementRef;
+
   public isChildrenHidden: boolean = true;
 
   public url: string = environment.url + api.GET_ICON;
 
   constructor() {}
+
+  displayNameTip() {
+    if (
+      this.nameRef.nativeElement.offsetWidth <
+      this.nameRef.nativeElement.scrollWidth
+    ) {
+      this.nametipRef.nativeElement.style.visibility = 'visible';
+      this.nametipRef.nativeElement.style.opacity = 1;
+    }
+  }
+  hideNameTip() {
+    this.nametipRef.nativeElement.style.visibility = 'hidden';
+    this.nametipRef.nativeElement.style.opacity = 0;
+  }
+
+  displayVTip() {
+    if (
+      this.versionRef.nativeElement.offsetWidth <
+      this.versionRef.nativeElement.scrollWidth
+    ) {
+      this.vtipRef.nativeElement.style.visibility = 'visible';
+      this.vtipRef.nativeElement.style.opacity = 1;
+    }
+  }
+  hideVTip() {
+    this.vtipRef.nativeElement.style.visibility = 'hidden';
+    this.vtipRef.nativeElement.style.opacity = 0;
+  }
 
   get _height() {
     return this.isChildrenHidden

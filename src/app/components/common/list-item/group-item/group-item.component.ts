@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 import { DevicesGroup } from '../../../../shared/types/groups';
 import { DevicesConfig } from '../../../../shared/types/config';
@@ -23,9 +30,24 @@ export class GroupItemComponent {
   @Output() onEditClick = new EventEmitter<DevicesGroup>();
   @Output() onDeleteClick = new EventEmitter<DevicesGroup>();
 
+  @ViewChild('name') nameRef!: ElementRef;
+  @ViewChild('tip') tipRef!: ElementRef;
+
   public currOption: Option = { value: '', html: '' };
 
-  constructor() {}
+  displayTip() {
+    if (
+      this.nameRef.nativeElement.offsetWidth <
+      this.nameRef.nativeElement.scrollWidth
+    ) {
+      this.tipRef.nativeElement.style.visibility = 'visible';
+      this.tipRef.nativeElement.style.opacity = 1;
+    }
+  }
+  hideTip() {
+    this.tipRef.nativeElement.style.visibility = 'hidden';
+    this.tipRef.nativeElement.style.opacity = 0;
+  }
 
   get _options() {
     return this.configs.map((c) => {
