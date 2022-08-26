@@ -29,7 +29,7 @@
         [color]="'light'"
         [width]="'w-186'"
         [options]="_options"
-        [disabled]="userRole !== 'admin' && userRole !== 'super'"
+        [disabled]="true"
         [currOption]="currOption.value === '' ? _currOption : currOption"
         (onSelect)="onSelectHandler($event)"
       ></app-input-select>

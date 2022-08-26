@@ -7,20 +7,6 @@
     <div class="modal-form-body">
       <form [formGroup]="_form">
         <div class="form-group-wrapper">
-          <label for="name" class="text-menu-title"> Название </label>
-          <app-input-text
-            [control]="$any(_name)"
-            [name]="'name'"
-            [width]="'w-440'"
-            [isError]="_isSubmitted && !!_name?.errors"
-          ></app-input-text>
-          <app-input-alert
-            *ngIf="_isSubmitted && _name?.errors"
-            [control]="$any(_name)"
-            [type]="'error'"
-          ></app-input-alert>
-        </div>
-        <div class="form-group-wrapper">
           <label for="description" class="text-menu-title"> Описание </label>
           <app-input-text
             [control]="$any(_description)"
