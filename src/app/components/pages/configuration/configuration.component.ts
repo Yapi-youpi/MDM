@@ -61,6 +61,7 @@ export class ConfigurationComponent implements OnInit {
       backgroundColor: new FormControl('', Validators.required),
       blockStatusBar: new FormControl(false, Validators.required),
       bluetooth: new FormControl(true, Validators.required),
+      nfcState: new FormControl(true, Validators.required),
       brightness: new FormControl(255, Validators.required),
       description: new FormControl('', Validators.required),
       desktopHeader: new FormControl('', Validators.required),
@@ -355,3 +356,7 @@ export class ConfigurationComponent implements OnInit {
     });
   }
 }
+
+/*  Enter in the address field
+ chrome://flags/#block -Secure private network requests ,
+ change the option to disable  */

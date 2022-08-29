@@ -285,6 +285,46 @@
             </div>
             <div class="settings-card">
               <div class="settings-card__content">
+                <div class="settings-card__img settings-card__img--nfc"></div>
+                <div class="settings-card__text">
+                  <div class="settings-card__title">NFC</div>
+                  <div class="settings-card__description">
+                    Бесконтактная передача данных
+                  </div>
+                </div>
+              </div>
+              <div class="settings-card__btns">
+                <!--                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="bluetooth"
+                    type="radio"
+                    [value]="null"
+                  />
+                  <span class="custom-radio__span">разрешено</span>
+                </label>-->
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="nfcState"
+                    type="radio"
+                    [value]="true"
+                  />
+                  <span class="custom-radio__span">вкл</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="nfcState"
+                    type="radio"
+                    [value]="false"
+                  />
+                  <span class="custom-radio__span">выкл</span>
+                </label>
+              </div>
+            </div>
+            <div class="settings-card">
+              <div class="settings-card__content">
                 <div
                   class="settings-card__img settings-card__img--network"
                 ></div>

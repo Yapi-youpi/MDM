@@ -74,6 +74,11 @@
   background-image: url('/assets/config-images/global.svg');
 }
 
+.settings-card__img--nfc {
+  background-image: url('/assets/config-images/nfc.svg');
+  flex-shrink: 0;
+}
+
 .settings-card__text {
   display: flex;
   flex-direction: column;
