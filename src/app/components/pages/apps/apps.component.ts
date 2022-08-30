@@ -74,6 +74,24 @@ export class AppsComponent {
           });
 
           this.sortChildrenByVCode();
+
+          // console.log(this.apps);
+
+          this.apps = this.apps.map((ag) => {
+            if (ag.children.length !== 0) {
+              const head = { ...ag, children: [] };
+              // const tail = ag.children[ag.children.length - 1];
+              const tail = ag.children[0];
+
+              return {
+                ...tail,
+                children: [
+                  ...ag.children.filter((c) => c.ID !== tail.ID),
+                  head,
+                ],
+              };
+            } else return ag;
+          });
         }
       } else {
         this.alert.show({
@@ -115,7 +133,8 @@ export class AppsComponent {
             } else {
               this.apps = this.apps.map((ag) => {
                 if (ag.ID === res.app?.parentAppID) {
-                  return { ...ag, children: [res.app, ...ag.children] };
+                  // return { ...ag, children: [res.app, ...ag.children] };
+                  return { ...ag, children: [...ag.children, res.app] };
                 } else return ag;
               });
             }
@@ -206,42 +225,28 @@ export class AppsComponent {
       .delete(this.currApp)
       .then((res: State) => {
         if (res.success) {
-          // Элемент оказался одиночкой или родителем
-          if (this.currApp.ID === this.currApp.parentAppID) {
-            // Если одиночка
-            if (this.currApp.children.length === 0)
-              this.apps = this.apps.filter((a) => a.ID !== this.currApp.ID);
-            // Если родитель
-            else {
-              const firstChild: App =
-                this.currApp.children[this.currApp.children.length - 1];
-              const restChildren: App[] = this.currApp.children
-                ?.filter((child) => child.ID !== firstChild.ID)
-                .map((child) => {
-                  return {
-                    ...child,
-                    parentAppID: firstChild.ID,
-                  };
-                });
+          if (this.currApp.children.length !== 0) {
+            const appGroup = this.apps.filter(
+              (ag) => ag.ID === this.currApp.ID
+            )[0];
+            const head = appGroup.children[0];
+            const body = appGroup.children.filter((c) => c.ID !== head.ID);
 
-              this.apps = this.apps.map((a) => {
-                if (a.ID === this.currApp.ID)
-                  return { ...firstChild, children: [...restChildren] };
-                else return a;
-              });
-            }
-          } else {
-            // Элемент оказался потомком
-            this.apps = this.apps.map((a) => {
-              if (a.ID === this.currApp.parentAppID)
-                return {
-                  ...a,
-                  children: a.children.filter(
-                    (child) => child.ID !== this.currApp.ID
-                  ),
-                };
-              else return a;
+            this.apps = this.apps.map((ag) => {
+              if (ag.ID === this.currApp.ID) {
+                return { ...head, children: body };
+              } else return ag;
             });
+          } else {
+            if (this.apps.find((ag) => ag.ID === this.currApp.ID))
+              this.apps = this.apps.filter((ag) => ag.ID !== this.currApp.ID);
+            else
+              this.apps = this.apps.map((ag) => {
+                return {
+                  ...ag,
+                  children: ag.children.filter((c) => c.ID !== this.currApp.ID),
+                };
+              });
           }
 
           const modal = document.querySelector('#delete_app');
