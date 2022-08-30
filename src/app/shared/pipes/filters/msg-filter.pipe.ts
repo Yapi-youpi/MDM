@@ -15,8 +15,8 @@ export class MsgFilterPipe implements PipeTransform {
     return messages.filter((m) => {
       return (
         (status !== null ? m.status === status : m) &&
-        (dateFrom ? m.date > dateFrom : m) &&
-        (dateTo ? m.date < dateTo : m)
+        (dateFrom ? m.send_time > dateFrom : m) &&
+        (dateTo ? m.send_time < dateTo : m)
       );
     });
   }

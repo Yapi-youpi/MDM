@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Filter } from '../../../shared/types/filters';
 import { Message } from '../../../shared/types/message';
+import { pagerService } from '../../../shared/services';
 
 @Component({
   selector: 'app-messages',
@@ -19,30 +20,17 @@ export class MessagesComponent implements OnInit {
     dateFrom: null,
     dateTo: null,
   };
-  constructor() {
-    this.messages = [
-      {
-        date: '2022-02-28T12:02:39Z',
-        status: true,
-        group: '123456',
-        text: 'Предлагаем отметить Международный день кошек',
-      },
-      {
-        date: '2022-04-12T15:53:59Z',
-        status: true,
-        group: 'phone 123',
-        text: 'Предлагаем отметить Международный день собак',
-      },
-      {
-        date: '2022-06-03T09:21:31Z',
-        status: false,
-        group: '789',
-        text: 'Предлагаем отметить Международный день попугайчиков',
-      },
-    ];
+  constructor(private pager: pagerService) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.pager.getMessages().then(res => {
+      this.messages = res;
+      console.log(res);
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   resetFilterParams() {
     this.filter.status = null;

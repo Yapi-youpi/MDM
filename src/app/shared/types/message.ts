@@ -1,6 +1,8 @@
 export interface Message {
-  date: string;
+  id: number;
   status: boolean;
-  group: string;
   text: string;
+  destination: string;
+  dst_id: string;
+  send_time: string;
 }

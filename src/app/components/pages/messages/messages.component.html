@@ -16,7 +16,7 @@
         [target]="'modal-add-message'"
       ></app-add-button>
     </div>
-    <table *ngIf="messages && messages!.length > 0; else nodata">
+    <table *ngIf="messages; else nodata">
       <thead>
         <tr class="table-row">
           <th>
@@ -55,8 +55,8 @@
               | msg: isStatusSortAsc:'status'
           "
         >
-          <td class="msg-item__col">{{ msg.date | dateConverter }}</td>
-          <td class="msg-item__col">{{ msg.group }}</td>
+          <td class="msg-item__col">{{ msg.send_time | dateConverter }}</td>
+          <td class="msg-item__col">{{ msg.destination }}</td>
           <td class="msg-item__col">
             {{ msg.status ? 'отправлено' : 'не отправлено' }}
           </td>
@@ -72,7 +72,7 @@
 </main>
 
 <app-add-message></app-add-message>
-<app-filter-messages
-  (onSubmit)="applyFilterParams($event)"
-  (onCancel)="resetFilterParams()"
-></app-filter-messages>
+<!--<app-filter-messages-->
+<!--  (onSubmit)="applyFilterParams($event)"-->
+<!--  (onCancel)="resetFilterParams()"-->
+<!--&gt;</app-filter-messages>-->
