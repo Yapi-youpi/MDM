@@ -178,6 +178,11 @@ export class ConfigurationComponent implements OnInit {
 
   editConfig() {
     const config = Object.assign(this.config, this.configForm.value);
+    // дополнительная проверка на одновременное отключение интернета и wifi
+    if (!config.wifi && !config.mobileData) {
+      // включаем интернет, если пользователю удалось отключить и интернет, и wifi
+      config.mobileData = !config.mobileData;
+    }
     this.configService
       .editConfig(config)
       .then((res) => {

@@ -278,6 +278,9 @@
                     formControlName="wifi"
                     type="radio"
                     [value]="false"
+                    [attr.disabled]="
+                      configForm.get('mobileData')?.value ? null : true
+                    "
                   />
                   <span class="custom-radio__span">выкл</span>
                 </label>
@@ -358,6 +361,9 @@
                     formControlName="mobileData"
                     type="radio"
                     [value]="false"
+                    [attr.disabled]="
+                      configForm.get('wifi')?.value ? null : true
+                    "
                   />
                   <span class="custom-radio__span">выкл</span>
                 </label>
