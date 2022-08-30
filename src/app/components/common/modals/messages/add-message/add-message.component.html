@@ -3,23 +3,42 @@
     <h4 class="modal-title">Новое сообщение</h4>
     <form [formGroup]="newMsgForm" class="form">
       <div class="form__item">
-        <label>Отправить на</label>
-        <select class="select-native w-440" formControlName="device">
-          <option value="{{ device.name }}" *ngFor="let device of devices">
-            {{ device.name }}
-          </option>
+        <label for="dst">Отправить на</label>
+        <select class="select-native w-440" formControlName="dst" id="dst">
+          <option value="all">все устройства</option>
+          <option value="group">все устройства группы</option>
+          <option value="device">устройство</option>
         </select>
       </div>
-      <div class="form__item">
-        <label for="target">Устройство/группа</label>
-        <input
-          formControlName="target"
-          type="text"
-          id="target"
-          class="w-440"
-          required
-        />
-      </div>
+
+      <ng-container *ngIf="newMsgForm.get('dst')?.value === 'group'">
+        <div class="form__item">
+          <label for="target">Группа</label>
+          <select
+            class="select-native w-440"
+            formControlName="target"
+            id="target"
+          >
+            <option value="{{ group.id }}" *ngFor="let group of groups">
+              {{ group.name }}
+            </option>
+          </select>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="newMsgForm.get('dst')?.value === 'device'">
+        <div class="form__item">
+          <label>Устройство</label>
+          <select class="select-native w-440" formControlName="target">
+            <option
+              value="{{ device.device_id }}"
+              *ngFor="let device of devices"
+            >
+              {{ device.name }}
+            </option>
+          </select>
+        </div>
+      </ng-container>
+
       <div class="form__item">
         <label for="text">Текст</label>
         <input
