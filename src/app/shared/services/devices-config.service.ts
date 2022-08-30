@@ -107,4 +107,31 @@ export class DevicesConfigService {
       });
     });
   }
+
+  uploadWallpaper(id: string, wallpaper: string) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.UPLOAD_WP, {
+          id,
+          wallpaper,
+        })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
+    });
+  }
+
+  removeWallpaper(id: string) {
+    return new Promise<any>((resolve, reject) => {
+      this.http
+        .post(environment.url + api.REMOVE_WP, {
+          id,
+        })
+        .subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
+    });
+  }
 }

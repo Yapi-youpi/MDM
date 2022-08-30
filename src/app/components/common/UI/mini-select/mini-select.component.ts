@@ -34,11 +34,7 @@ export class MiniSelectComponent implements OnChanges {
 
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event) {
-    // console.log(event.target);
-    if (
-      event.target.classList.contains('select__head') ||
-      !event.target.classList.contains('select__item')
-    ) {
+    if (!event.target.classList.contains('select__item')) {
       this.open = false;
     }
   }

@@ -71,6 +71,7 @@ export interface DevicesConfig {
   mobileData: boolean | true;
   mobileEnrollment: boolean | false;
   name: string;
+  nfcState: boolean;
   orientation: number | 0;
   pushOptions: string | 'all';
   restrictions: string | '';

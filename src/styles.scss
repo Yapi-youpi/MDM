@@ -916,6 +916,13 @@ input[type='checkbox']:disabled + .checkbox-custom {
   font-size: 16px;
 }
 
+.filename {
+  max-width: 274px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* СПАН-ИКОНКА */
 
 .icon,
@@ -1300,6 +1307,7 @@ textarea {
     background-color: white;
     border-radius: 3px;
     box-shadow: var(--box-shadow);
+    white-space: nowrap;
     transition: all 0.3s ease;
   }
   &__info {

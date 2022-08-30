@@ -278,6 +278,49 @@
                     formControlName="wifi"
                     type="radio"
                     [value]="false"
+                    [attr.disabled]="
+                      configForm.get('mobileData')?.value ? null : true
+                    "
+                  />
+                  <span class="custom-radio__span">выкл</span>
+                </label>
+              </div>
+            </div>
+            <div class="settings-card">
+              <div class="settings-card__content">
+                <div class="settings-card__img settings-card__img--nfc"></div>
+                <div class="settings-card__text">
+                  <div class="settings-card__title">NFC</div>
+                  <div class="settings-card__description">
+                    Бесконтактная передача данных
+                  </div>
+                </div>
+              </div>
+              <div class="settings-card__btns">
+                <!--                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="bluetooth"
+                    type="radio"
+                    [value]="null"
+                  />
+                  <span class="custom-radio__span">разрешено</span>
+                </label>-->
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="nfcState"
+                    type="radio"
+                    [value]="true"
+                  />
+                  <span class="custom-radio__span">вкл</span>
+                </label>
+                <label class="custom-radio">
+                  <input
+                    class="visually-hidden"
+                    formControlName="nfcState"
+                    type="radio"
+                    [value]="false"
                   />
                   <span class="custom-radio__span">выкл</span>
                 </label>
@@ -318,6 +361,9 @@
                     formControlName="mobileData"
                     type="radio"
                     [value]="false"
+                    [attr.disabled]="
+                      configForm.get('wifi')?.value ? null : true
+                    "
                   />
                   <span class="custom-radio__span">выкл</span>
                 </label>
@@ -651,14 +697,49 @@
                 <div class="colors-wrapper">
                   <div class="colors">
                     <label for="backgroundColor">Фон</label>
-                    <div class="input-color">
+                    <div
+                      class="input-color"
+                      [class.fit]="bgImg"
+                      [class.set]="!bgImg"
+                    >
                       <input
                         type="color"
                         formControlName="backgroundColor"
                         id="backgroundColor"
                         [value]="'#557ebe'"
                       />
-                      <span>{{ configForm.value.backgroundColor }}</span>
+                      <span *ngIf="!bgImg">{{
+                        configForm.value.backgroundColor
+                      }}</span>
+                    </div>
+                    <div class="input-color fit" [class.set]="bgImg">
+                      <label for="input-bg">
+                        <input
+                          (change)="addBgFile($event)"
+                          type="file"
+                          class="visually-hidden"
+                          style="position: absolute"
+                          id="input-bg"
+                          accept="image/*"
+                        />
+                        <div class="btn btn--flat btn--rounded add-bg-btn">
+                          <span></span>
+                        </div>
+                      </label>
+                      <span
+                        class="bg-placeholder"
+                        [class.bg-placeholder--active]="bgImg"
+                      >
+                        <span class="filename" [class.hidden]="!bgImg"></span>
+                        <button
+                          (click)="clearInputFile()"
+                          type="button"
+                          class="btn btn--flat btn--action"
+                          [class.hidden]="!bgImg"
+                        >
+                          <i class="tiny material-icons">clear</i>
+                        </button>
+                      </span>
                     </div>
                   </div>
                   <div class="colors">
@@ -760,6 +841,7 @@
                 : configForm.get('desktopHeader')?.value || ''
             "
             [bgColor]="configForm.get('backgroundColor')?.value || ''"
+            [bgImg]="bgImg"
             [textColor]="configForm.get('textColor')?.value || ''"
             [iconSize]="configForm.get('iconSize')?.value || ''"
             [orientation]="configForm.get('orientation')?.value || 0"

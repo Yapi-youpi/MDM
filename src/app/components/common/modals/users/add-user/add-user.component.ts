@@ -67,17 +67,19 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     let i = interval(200).subscribe(() => {
-      this.asset.getFromStorage('login').then((login) => {
-        this.userLogin = login;
-        if (this.currentUser?.login === this.userLogin) this.isEditSelf = true;
-      });
-      this.asset.getFromStorage('user-role').then((role: string) => {
-        this.userRole = role;
-        if (role === 'super' || role === 'admin') {
-          this.getUserTags();
-        }
-      });
-      i.unsubscribe();
+      if (this.userService.token) {
+        this.asset.getFromStorage('login').then((login) => {
+          this.userLogin = login;
+          if (this.currentUser?.login === this.userLogin) this.isEditSelf = true;
+        });
+        this.asset.getFromStorage('user-role').then((role: string) => {
+          this.userRole = role;
+          if (role === 'super' || role === 'admin') {
+            this.getUserTags();
+          }
+        });
+        i.unsubscribe();
+      }
     });
   }
 
@@ -85,7 +87,6 @@ export class AddUserComponent implements OnInit {
     this.userService
       .getUserTags()
       .then((res) => {
-        console.log(res);
         this.userTags = res.userTags;
       })
       .catch((err) => {
@@ -170,7 +171,6 @@ export class AddUserComponent implements OnInit {
       this.userService
         .loadAvatar(this.currentUser!.id, avatar)
         .then((res) => {
-          console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
           this.showAlert('Аватар обновлен');
@@ -198,7 +198,6 @@ export class AddUserComponent implements OnInit {
       this.userService
         .renameUSer(login, name)
         .then((res) => {
-          console.log(res);
           this.currentUser = undefined;
           this.clearModal(true);
           this.showAlert('Имя изменено');

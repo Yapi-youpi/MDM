@@ -116,6 +116,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.sub.on('update', (item) => {
       device = item.attributes;
+      console.log({
+        device_id: device.name,
+        lat: device.gps_location._latitude,
+        lng: device.gps_location._longitude,
+      })
       let index = this.devices_geo.findIndex((item) => {
         if (item.device.device_id === device.device_id) {
           return item;
@@ -123,7 +128,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           return -1;
         }
       });
-      if (index !== -1) {
+      if (index !== -1 && device.gps_location._latitude !==0 &&device.gps_location._longitude !==0) {
         this.devices_geo[index].marker.setLatLng({
           lat: device.gps_location._latitude,
           lng: device.gps_location._longitude,
