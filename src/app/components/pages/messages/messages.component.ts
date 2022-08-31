@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Filter } from '../../../shared/types/filters';
 import { Message } from '../../../shared/types/message';
 import { pagerService } from '../../../shared/services';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu, 'ru');
 
 @Component({
   selector: 'app-messages',
@@ -20,16 +24,18 @@ export class MessagesComponent implements OnInit {
     dateFrom: null,
     dateTo: null,
   };
-  constructor(private pager: pagerService) {
-  }
+  constructor(private pager: pagerService) {}
 
   ngOnInit() {
-    this.pager.getMessages().then(res => {
-      this.messages = res;
-      console.log(res);
-    }).catch(err => {
-      console.log(err)
-    })
+    this.pager
+      .getMessages()
+      .then((res) => {
+        this.messages = res;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   resetFilterParams() {
