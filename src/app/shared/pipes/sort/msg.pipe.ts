@@ -11,8 +11,8 @@ export class MsgPipe implements PipeTransform {
   ): any[] {
     if (sortParam === 'date') {
       if (isSort) {
-        return msgs.sort((a, b) => (a.date < b.date ? -1 : 1));
-      } else return msgs.sort((a, b) => (a.date > b.date ? -1 : 1));
+        return msgs.sort((a, b) => (a.send_time < b.send_time ? -1 : 1));
+      } else return msgs.sort((a, b) => (a.send_time > b.send_time ? -1 : 1));
     }
 
     if (sortParam === 'target') {
