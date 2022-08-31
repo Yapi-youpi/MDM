@@ -30,17 +30,18 @@
             </th>
             <th>
               <app-sort-btn
-                [title]="'Устройства или группа'"
+                [title]="'Получатель'"
                 [isSortAsc]="isTargetSortAsc"
                 (click)="toggleTargetSortDir()"
               ></app-sort-btn>
             </th>
             <th>
-              <app-sort-btn
+              <!--              <app-sort-btn
                 [title]="'Статус'"
                 [isSortAsc]="isStatusSortAsc"
                 (click)="toggleStatusSortDir()"
-              ></app-sort-btn>
+              ></app-sort-btn>-->
+              Устройства или группа
             </th>
             <th>Текст</th>
           </tr>
@@ -60,9 +61,18 @@
             <td class="msg-item__col">
               {{ msg.send_time | date: 'd MMM, HH:mm':'+0500':'ru' }}
             </td>
-            <td class="msg-item__col">{{ msg.destination }}</td>
             <td class="msg-item__col">
-              {{ msg.status ? 'отправлено' : 'не отправлено' }}
+              {{
+                msg.destination === 'all'
+                  ? 'Все'
+                  : msg.destination === 'device'
+                  ? 'Устройство'
+                  : 'Группа'
+              }}
+            </td>
+            <td class="msg-item__col">
+              <!--              {{ msg.status ? 'отправлено' : 'не отправлено' }}-->
+              {{ msg.name }}
             </td>
             <td class="msg-item__col">{{ msg.text }}</td>
           </tr>
@@ -75,7 +85,7 @@
   </div>
 </main>
 
-<app-add-message></app-add-message>
+<app-add-message [devices]="devices" [groups]="groups"></app-add-message>
 <app-filter-messages
   (onSubmit)="applyFilterParams($event)"
   (onCancel)="resetFilterParams()"

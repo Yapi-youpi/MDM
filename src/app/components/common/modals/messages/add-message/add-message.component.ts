@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   deviceService,
@@ -18,14 +18,12 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
 })
 export class AddMessageComponent implements OnInit {
   public newMsgForm: FormGroup;
-  public devices: Device[] = [];
-  public groups: DevicesGroup[] = [];
+  @Input() public devices: Device[] = [];
+  @Input() public groups: DevicesGroup[] = [];
 
   constructor(
     private user: userService,
-    private device: deviceService,
     private pager: pagerService,
-    private group: groupService,
     private alert: alertService
   ) {
     this.newMsgForm = new FormGroup({
@@ -35,42 +33,7 @@ export class AddMessageComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getDevices();
-    this.getGroups('all');
-  }
-
-  getDevices() {
-    this.device
-      .get('all')
-      .then((res: states.DevicesState) => {
-        if (res.success) {
-          this.devices = res.devices ? res.devices : [];
-        } else {
-          this.alert.show({
-            title: 'GET DEVICES ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  }
-
-  getGroups(param: string) {
-    this.group
-      .get(param)
-      .then((res: states.DevicesGroupsState) => {
-        if (res.success) {
-          this.groups = res.devicesGroups ? res.devicesGroups : [];
-        } else {
-          this.alert.show({
-            title: 'GET GROUPS ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  }
+  ngOnInit() {}
 
   sendMessage() {
     this.pager

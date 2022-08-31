@@ -17,8 +17,9 @@ export class MsgPipe implements PipeTransform {
 
     if (sortParam === 'target') {
       if (isSort) {
-        return msgs.sort((a, b) => (a.target > b.target ? 1 : -1));
-      } else return msgs.sort((a, b) => (a.target < b.target ? 1 : -1));
+        return msgs.sort((a, b) => (a.destination > b.destination ? 1 : -1));
+      } else
+        return msgs.sort((a, b) => (a.destination < b.destination ? 1 : -1));
     }
 
     if (sortParam === 'status') {
