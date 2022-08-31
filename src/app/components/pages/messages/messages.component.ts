@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Filter } from '../../../shared/types/filters';
 import { Message } from '../../../shared/types/message';
 import {
@@ -25,7 +25,7 @@ registerLocaleData(localeRu, 'ru');
 export class MessagesComponent implements OnInit {
   public title = 'Сообщения';
   public search!: string;
-  public isDateSortAsc: boolean = false;
+  public isDateSortAsc: boolean = true;
   public isTargetSortAsc: boolean = false;
   public isStatusSortAsc: boolean = false;
   public messages!: Message[];
@@ -59,8 +59,11 @@ export class MessagesComponent implements OnInit {
     this.pager
       .getMessages()
       .then((res) => {
-        this.messages = res;
-        console.log(res);
+        this.messages = res.sort((a, b) => {
+          return b.id - a.id;
+        });
+
+        console.log(this.messages);
       })
       .catch((err) => {
         console.log(err);
