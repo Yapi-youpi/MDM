@@ -50,17 +50,21 @@ export class MessagesComponent implements OnInit {
         i.unsubscribe();
         this.getDevices();
         this.getGroups('all');
-        this.pager
-          .getMessages()
-          .then((res) => {
-            this.messages = res;
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        this.getMessages();
       }
     });
+  }
+
+  getMessages() {
+    this.pager
+      .getMessages()
+      .then((res) => {
+        this.messages = res;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   getDevices() {

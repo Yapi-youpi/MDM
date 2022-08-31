@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   deviceService,
@@ -20,6 +20,8 @@ export class AddMessageComponent implements OnInit {
   public newMsgForm: FormGroup;
   @Input() public devices: Device[] = [];
   @Input() public groups: DevicesGroup[] = [];
+
+  @Output() onSend = new EventEmitter<boolean>();
 
   constructor(
     private user: userService,
@@ -49,6 +51,7 @@ export class AddMessageComponent implements OnInit {
           title: 'УСПЕШНО',
           content: 'Сообщение отправлено',
         });
+        this.onSend.emit(true);
         this.closeModal();
       })
       .catch((err) => {

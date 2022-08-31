@@ -85,7 +85,11 @@
   </div>
 </main>
 
-<app-add-message [devices]="devices" [groups]="groups"></app-add-message>
+<app-add-message
+  (onSend)="getMessages()"
+  [devices]="devices"
+  [groups]="groups"
+></app-add-message>
 <app-filter-messages
   (onSubmit)="applyFilterParams($event)"
   (onCancel)="resetFilterParams()"
