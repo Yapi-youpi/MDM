@@ -79,8 +79,22 @@ export class AddMessageComponent implements OnInit {
         this.newMsgForm.value.text,
         this.newMsgForm.value.dst
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+        this.alert.show({
+          type: 'success',
+          title: 'УСПЕШНО',
+          content: 'Сообщение отправлено',
+        });
+        this.closeModal();
+      })
+      .catch((err) => {
+        console.log(err);
+        this.alert.show({
+          title: 'ОШИБКА',
+          content: err,
+        });
+      });
     console.log(this.newMsgForm.value);
   }
 
