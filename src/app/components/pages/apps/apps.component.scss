@@ -5,7 +5,7 @@
 .page-content {
   padding: 22px;
 
-  overflow-y: auto;
+  //overflow-y: auto;
 
   .top {
     margin-bottom: 16px;
@@ -75,9 +75,15 @@
     }
 
     &-body {
+      height: calc(
+        100vh - 24px - 70px - 8px - 44px - 31px - 16px - 4px - 24px - 20px -
+          24px + 8px
+      );
+
       margin-top: 24px;
 
       //overflow-y: auto;
+      overflow: scroll;
     }
   }
 }
