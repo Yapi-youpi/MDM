@@ -22,18 +22,20 @@
         <thead>
           <tr class="table-row">
             <th>
-              <app-sort-btn
+              <!--              <app-sort-btn
                 [title]="'Дата'"
                 [isSortAsc]="isDateSortAsc"
                 (click)="toggleDateSortDir()"
-              ></app-sort-btn>
+              ></app-sort-btn>-->
+              Дата
             </th>
             <th>
-              <app-sort-btn
+              <!--              <app-sort-btn
                 [title]="'Получатель'"
                 [isSortAsc]="isTargetSortAsc"
                 (click)="toggleTargetSortDir()"
-              ></app-sort-btn>
+              ></app-sort-btn>-->
+              Получатель
             </th>
             <th>
               <!--              <app-sort-btn
@@ -53,11 +55,11 @@
               let msg of messages
                 | search: search:'message'
                 | msgFilter: filter.status:filter.dateFrom:filter.dateTo
-                | msg: isDateSortAsc:'date'
-                | msg: isTargetSortAsc:'target'
-                | msg: isStatusSortAsc:'status'
             "
           >
+            <!--| msg: isDateSortAsc:'date'
+                | msg: isTargetSortAsc:'target'
+                | msg: isStatusSortAsc:'status' -->
             <td class="msg-item__col">
               {{ msg.send_time | date: 'd MMM, HH:mm':'+0500':'ru' }}
             </td>
