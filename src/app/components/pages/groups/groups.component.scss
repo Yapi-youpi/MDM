@@ -77,5 +77,13 @@
         }
       }
     }
+
+    &-body {
+      height: calc(
+        100vh - 24px - 70px - 44px - 31px - 16px - 4px - 20px - 24px - 24px
+      );
+
+      overflow: scroll;
+    }
   }
 }

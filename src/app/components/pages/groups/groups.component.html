@@ -84,7 +84,7 @@
           <p *ngIf="userRole === 'admin' || userRole === 'super'">Действия</p>
         </div>
       </div>
-      <div class="list-box">
+      <div class="list-body">
         <ng-container *ngIf="groups.length !== 0; else nodata">
           <app-group-item
             *ngFor="
