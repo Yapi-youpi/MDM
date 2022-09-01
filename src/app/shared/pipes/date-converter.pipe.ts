@@ -7,6 +7,6 @@ import * as moment from 'moment';
 })
 export class DateConverterPipe implements PipeTransform {
   transform(date: string, format: string = 'DD MMM, HH:mm'): string {
-    return moment.utc(date).format(format);
+    return moment.utc(date).local().format(format);
   }
 }
