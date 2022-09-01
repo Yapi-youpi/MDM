@@ -133,9 +133,10 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.device
       .get('all')
       .then((res: states.DevicesState) => {
-        console.log(res);
         if (res.success) {
-          this.devices = res.devices ? res.devices : [];
+          this.devices = res.devices
+            ? res.devices.map((d) => ({ ...d, isSelected: false }))
+            : [];
         } else {
           this.alert.show({
             title: 'GET DEVICES ERROR',
@@ -165,7 +166,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
       this.devices = [
         ...this.devices.map((d) => {
-          if (d.device_id === device.device_id) return device;
+          if (d.device_id === device.device_id)
+            return { ...device, isSelected: d.isSelected };
           else return d;
         }),
       ];

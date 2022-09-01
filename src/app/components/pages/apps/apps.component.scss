@@ -5,7 +5,7 @@
 .page-content {
   padding: 22px;
 
-  overflow-y: auto;
+  //overflow-y: auto;
 
   .top {
     margin-bottom: 16px;
@@ -22,8 +22,8 @@
 
   .list {
     &-header {
-      margin-top: 24px;
-      padding: 0 16px;
+      //margin-top: 24px;
+      margin: 0 32px 0 24px;
 
       > *:nth-child(1) {
         width: 30px;
@@ -75,9 +75,10 @@
     }
 
     &-body {
-      margin-top: 24px;
+      height: calc(100vh - 24px - 70px - 8px - 44px - 31px - 16px - 4px - 20px);
 
       //overflow-y: auto;
+      overflow-y: scroll;
     }
   }
 }
