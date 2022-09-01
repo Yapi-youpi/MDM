@@ -345,6 +345,7 @@ export class ConfigurationComponent implements OnInit {
           .removeWallpaper(this.config.ID)
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
+        this.config.backgroundImageUrl = '';
       }
       this.bgImg = '';
       this.bgImage = '';
