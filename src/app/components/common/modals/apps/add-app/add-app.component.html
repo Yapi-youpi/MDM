@@ -1,7 +1,7 @@
 <app-modal [modalID]="'add_app'" [isClosable]="true">
   <div class="modal-form w-700">
     <div class="modal-form-header">
-      <h4 class="text-title text-center">Добавить приложение</h4>
+      <h4 i18n class="text-title text-center">Добавить приложение</h4>
     </div>
     <hr class="divider" />
     <div class="modal-form-body">
@@ -22,7 +22,7 @@
         <!--          ></app-input-alert>-->
         <!--        </div>-->
         <div class="form-group-wrapper file">
-          <label for="file" class="text-menu-title"> Файл </label>
+          <label i18n for="file" class="text-menu-title"> Файл </label>
           <app-input-file
             [control]="$any(_file)"
             [name]="'file'"

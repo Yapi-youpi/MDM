@@ -34,7 +34,7 @@
       <div class="avatar__attachment"></div>
     </div>
     <div class="form__item">
-      <label for="name">Имя</label>
+      <label i18n for="name">Имя</label>
       <input
         formControlName="name"
         type="text"
@@ -44,7 +44,7 @@
       />
     </div>
     <div class="form__item" *ngIf="!currentUser">
-      <label for="login">Логин</label>
+      <label i18n for="login">Логин</label>
       <input
         formControlName="login"
         type="text"
@@ -55,7 +55,7 @@
     </div>
     <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
       <div class="form__item" *ngIf="isEditSelf && passwordField">
-        <label for="old-pass">Старый пароль</label>
+        <label i18n for="old-pass">Старый пароль</label>
         <app-input-password
           [control]="$any(this.form.get('oldPassword'))"
           [name]="'old-pass'"
@@ -70,6 +70,7 @@
           *ngIf="!passwordField"
           class="btn btn--big btn--outline w-296"
           (click)="showPasswordField()"
+          i18n
         >
           Сменить пароль
         </button>
@@ -85,22 +86,22 @@
           ></app-input-password>
 
           <ul class="validation-list w-296">
-            <li class="validation-item" data-pattern="uppercase">
+            <li i18n class="validation-item" data-pattern="uppercase">
               заглавные буквы
             </li>
-            <li class="validation-item" data-pattern="lowercase">
+            <li i18n class="validation-item" data-pattern="lowercase">
               строчные буквы
             </li>
-            <li class="validation-item" data-pattern="length">
+            <li i18n class="validation-item" data-pattern="length">
               не менее 8 символов
             </li>
-            <li class="validation-item" data-pattern="numbers">цифры</li>
-            <li class="validation-item" data-pattern="symbols">символы</li>
+            <li i18n class="validation-item" data-pattern="numbers">цифры</li>
+            <li i18n class="validation-item" data-pattern="symbols">символы</li>
           </ul>
         </div>
       </div>
       <div class="form__item" *ngIf="!currentUser">
-        <label>Роль</label>
+        <label i18n>Роль</label>
         <div class="tags-container w-296">
           <label class="custom-radio">
             <input
@@ -110,7 +111,7 @@
               [value]="'admin'"
               [attr.disabled]="currentUser || userRole === 'admin' ? '' : null"
             />
-            <span class="custom-radio__span"> администратор </span>
+            <span i18n class="custom-radio__span"> администратор </span>
           </label>
 
           <label class="custom-radio">
@@ -121,19 +122,19 @@
               [value]="'operator'"
               [attr.disabled]="currentUser ? '' : null"
             />
-            <span class="custom-radio__span"> оператор </span>
+            <span i18n class="custom-radio__span"> оператор </span>
           </label>
         </div>
       </div>
       <div class="form__item">
-        <label>Подразделение</label>
+        <label i18n>Подразделение</label>
         <select class="select-native w-296" formControlName="userTags">
           <ng-container *ngFor="let tag of userTags">
             <option value="{{ tag }}" *ngIf="tag">
               {{ tag }}
             </option></ng-container
           >
-          <option value="Другое">Другое</option>
+          <option i18n value="Другое">Другое</option>
         </select>
       </div>
       <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
@@ -153,13 +154,14 @@
         class="btn btn--big"
         (click)="addUser()"
         [disabled]="form.invalid || form.untouched || form.pristine"
+        i18n
       >
         Добавить
       </button>
       <ng-template #editBtn>
-        <button class="btn btn--big" (click)="editUser()">Сохранить</button>
+        <button i18n class="btn btn--big" (click)="editUser()">Сохранить</button>
       </ng-template>
-      <button class="btn btn--big btn--outline" (click)="clearModal()">
+      <button i18n class="btn btn--big btn--outline" (click)="clearModal()">
         Отменить
       </button>
     </div>

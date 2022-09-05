@@ -1,13 +1,13 @@
 <app-modal [modalID]="'add_device'" [isClosable]="true">
   <div class="modal-form w-700">
     <div class="modal-form-header">
-      <h4 class="text-title text-center">Добавить устройство</h4>
+      <h4 i18n class="text-title text-center">Добавить устройство</h4>
     </div>
     <hr class="divider" />
     <div class="modal-form-body">
       <form [formGroup]="_form">
         <div class="form-group-wrapper">
-          <label for="name" class="text-menu-title"> Название </label>
+          <label i18n for="name" class="text-menu-title"> Название </label>
           <app-input-text
             [control]="$any(_name)"
             [name]="'name'"
@@ -21,7 +21,7 @@
           ></app-input-alert>
         </div>
         <div class="form-group-wrapper">
-          <label for="description" class="text-menu-title"> Описание </label>
+          <label i18n for="description" class="text-menu-title"> Описание </label>
           <app-input-text
             [control]="$any(_description)"
             [name]="'description'"
@@ -35,7 +35,7 @@
           ></app-input-alert>
         </div>
         <div class="form-group-wrapper">
-          <label class="text-menu-title"> Группа </label>
+          <label i18n class="text-menu-title"> Группа </label>
           <app-input-select
             [width]="'w-440'"
             [options]="_options"

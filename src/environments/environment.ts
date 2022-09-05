@@ -5,8 +5,11 @@
 export const environment = {
   production: false,
   // url: 'https://lk3.variag.ru/central_mdm',
-  url: 'http://62.113.111.186:2525',
+  // url: 'http://62.113.111.186:2525',
   // url: 'http://172.24.18.25:2525',
+  url: 'http://45.147.176.126:2525',
+  serverURL: 'http://45.147.176.126:1337/parse',
+  liveQueryServerURL: 'ws://45.147.176.126:8189/live'
 };
 
 /*

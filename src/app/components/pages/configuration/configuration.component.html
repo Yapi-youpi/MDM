@@ -1,15 +1,15 @@
 <main class="global-main card-wrapper">
   <div class="card card--sidebar">
-    <div class="card__header card-title">Настройки</div>
+    <div i18n class="card__header card-title">Настройки</div>
     <div class="tabs-wrapper" (click)="setActive($event)">
-      <div class="tab tab--active" tabindex="0">Общие</div>
-      <div class="tab" tabindex="0">Использование функций</div>
-      <div class="tab" tabindex="0">Дизайн</div>
-      <div class="tab" tabindex="0">Приложения</div>
-      <div class="tab" tabindex="0">Управление</div>
+      <div i18n class="tab tab--active" tabindex="0">Общие</div>
+      <div i18n class="tab" tabindex="0">Использование функций</div>
+      <div i18n class="tab" tabindex="0">Дизайн</div>
+      <div i18n class="tab" tabindex="0">Приложения</div>
+      <div i18n class="tab" tabindex="0">Управление</div>
     </div>
     <div class="btn-wrapper">
-      <button class="btn btn--big" (click)="goBack()">
+      <button i18n class="btn btn--big" (click)="goBack()">
         Назад в конфигурации
       </button>
     </div>
@@ -25,11 +25,11 @@
     <form [formGroup]="configForm" *ngIf="config; else loader">
       <!--        ОБЩИЕ           -->
       <div class="form__tab">
-        <div class="card__header card-title">Общие</div>
+        <div i18n class="card__header card-title">Общие</div>
         <div class="config-settings">
           <div class="form__elems w-740">
             <div class="form__item">
-              <label for="configName">Название</label>
+              <label i18n for="configName">Название</label>
               <input
                 formControlName="name"
                 type="text"
@@ -39,7 +39,7 @@
               />
             </div>
             <div class="form__item">
-              <label for="description">Описание</label>
+              <label i18n for="description">Описание</label>
               <input
                 formControlName="description"
                 type="text"
@@ -49,7 +49,7 @@
               />
             </div>
             <div class="form__item">
-              <label>Время Keep-Alive</label>
+              <label i18n>Время Keep-Alive</label>
               <div class="w-500">
                 <div class="range-slider">
                   <input
@@ -130,7 +130,7 @@
               </div>
             </div>
             <div class="form__item">
-              <label>Обновление системы</label>
+              <label i18n>Обновление системы</label>
               <div class="tags-container w-500">
                 <label class="custom-radio">
                   <input
@@ -139,7 +139,7 @@
                     type="radio"
                     [value]="2"
                   />
-                  <span class="custom-radio__span">по расписанию</span>
+                  <span i18n class="custom-radio__span">по расписанию</span>
                 </label>
                 <label class="custom-radio">
                   <input
@@ -148,7 +148,7 @@
                     type="radio"
                     [value]="3"
                   />
-                  <span class="custom-radio__span">по запросу</span>
+                  <span i18n class="custom-radio__span">по запросу</span>
                 </label>
               </div>
             </div>
@@ -157,7 +157,7 @@
       </div>
       <!--        Использование функций           -->
       <div class="form__tab" style="display: none">
-        <div class="card__header card-title">Использование функций</div>
+        <div i18n class="card__header card-title">Использование функций</div>
         <div class="config-settings form__elems">
           <div class="form__item settings-card-wrapper">
             <div class="settings-card">
@@ -167,7 +167,7 @@
                 ></div>
                 <div class="settings-card__text">
                   <div class="settings-card__title">GPS</div>
-                  <div class="settings-card__description">
+                  <div i18n class="settings-card__description">
                     Определение местоположения
                   </div>
                 </div>
@@ -189,7 +189,7 @@
                     type="radio"
                     [value]="true"
                   />
-                  <span class="custom-radio__span">вкл</span>
+                  <span i18n class="custom-radio__span">вкл</span>
                 </label>
                 <label class="custom-radio">
                   <input
@@ -199,7 +199,7 @@
                     [value]="false"
                     (click)="showAlert()"
                   />
-                  <span class="custom-radio__span">выкл</span>
+                  <span i18n class="custom-radio__span">выкл</span>
                 </label>
               </div>
             </div>
@@ -210,7 +210,7 @@
                 ></div>
                 <div class="settings-card__text">
                   <div class="settings-card__title">Bluetooth</div>
-                  <div class="settings-card__description">Передача файлов</div>
+                  <div i18n class="settings-card__description">Передача файлов</div>
                 </div>
               </div>
               <div class="settings-card__btns">
@@ -248,7 +248,7 @@
                 <div class="settings-card__img settings-card__img--wifi"></div>
                 <div class="settings-card__text">
                   <div class="settings-card__title">WI-FI</div>
-                  <div class="settings-card__description">
+                  <div i18n class="settings-card__description">
                     Подключение к сети
                   </div>
                 </div>
@@ -332,8 +332,8 @@
                   class="settings-card__img settings-card__img--network"
                 ></div>
                 <div class="settings-card__text">
-                  <div class="settings-card__title">Интернет</div>
-                  <div class="settings-card__description">Мобильная сеть</div>
+                  <div i18n class="settings-card__title">Интернет</div>
+                  <div i18n class="settings-card__description">Мобильная сеть</div>
                 </div>
               </div>
               <div class="settings-card__btns">
@@ -372,9 +372,9 @@
           </div>
           <div class="two-columns">
             <div class="form__elems">
-              <div class="font-bold">Громкость:</div>
+              <div i18n class="font-bold">Громкость:</div>
               <div class="form__item">
-                <label class="switch">
+                <label i18n class="switch">
                   Блокировка громкости
                   <input
                     formControlName="lockVolume"
@@ -385,7 +385,7 @@
                 </label>
               </div>
               <div class="form__item">
-                <label class="switch">
+                <label i18n class="switch">
                   Управление громкостью
                   <input
                     formControlName="manageVolume"
@@ -448,9 +448,9 @@
               </div>
             </div>
             <div class="form__elems">
-              <div class="font-bold">Экран:</div>
+              <div i18n class="font-bold">Экран:</div>
               <div class="form__item">
-                <label class="switch">
+                <label i18n class="switch">
                   Разрешить скриншоты
                   <input
                     formControlName="disableScreenshots"
@@ -461,7 +461,7 @@
                 </label>
               </div>
               <div class="form__item">
-                <label class="switch">
+                <label i18n class="switch">
                   Управление таймаутом экрана
                   <input
                     formControlName="manageTimeout"
@@ -567,7 +567,7 @@
                 </div>
               </div>
               <div class="form__item">
-                <label class="switch">
+                <label i18n class="switch">
                   Управление яркостью экрана
                   <input
                     [value]="manageBrightness"
@@ -579,7 +579,7 @@
               </div>
               <ng-container *ngIf="manageBrightness">
                 <div class="form__item">
-                  <label class="switch">
+                  <label i18n class="switch">
                     Автоматическая яркость экрана
                     <input
                       formControlName="autoBrightness"
@@ -649,7 +649,7 @@
       </div>
       <!--        Дизайн           -->
       <div class="form__tab" style="display: none">
-        <div class="card__header card-title">Дизайн</div>
+        <div i18n class="card__header card-title">Дизайн</div>
         <div class="config-settings two-columns">
           <div class="form__elems">
             <!--            <div class="form__item w-500">
@@ -667,23 +667,23 @@
               *ngIf="!configForm.get('useDefaultDesignSettings')?.value"
             >
               <div class="form__item w-500">
-                <label for="desktopHeader">Заголовок рабочего стола</label>
+                <label i18n for="desktopHeader">Заголовок рабочего стола</label>
                 <select
                   class="select-native w-267"
                   formControlName="desktopHeader"
                   id="desktopHeader"
                 >
-                  <option [ngValue]="'NO_HEADER'">Нет</option>
-                  <option [ngValue]="'DEVICE_ID'">ID устройства</option>
-                  <option [ngValue]="'DESCRIPTION'">Описание</option>
-                  <option [ngValue]="'TEMPLATE'">Шаблон</option>
+                  <option i18n [ngValue]="'NO_HEADER'">Нет</option>
+                  <option i18n [ngValue]="'DEVICE_ID'">ID устройства</option>
+                  <option i18n [ngValue]="'DESCRIPTION'">Описание</option>
+                  <option i18n [ngValue]="'TEMPLATE'">Шаблон</option>
                 </select>
               </div>
               <div
                 class="form__item w-500"
                 *ngIf="configForm.get('desktopHeader')?.value == 'TEMPLATE'"
               >
-                <label for="desktopHeaderTemplate">Шаблон заголовка</label>
+                <label i18n for="desktopHeaderTemplate">Шаблон заголовка</label>
                 <input
                   formControlName="desktopHeaderTemplate"
                   type="text"
@@ -692,11 +692,11 @@
                   placeholder="Используйте deviceId, description, custom1..."
                 />
               </div>
-              <div class="font-bold">Цвет</div>
+              <div i18n class="font-bold">Цвет</div>
               <div class="form__item w-500">
                 <div class="colors-wrapper">
                   <div class="colors">
-                    <label for="backgroundColor">Фон</label>
+                    <label i18n for="backgroundColor">Фон</label>
                     <div
                       class="input-color"
                       [class.fit]="bgImg"
@@ -743,7 +743,7 @@
                     </div>
                   </div>
                   <div class="colors">
-                    <label for="textColor">Надписи</label>
+                    <label i18n for="textColor">Надписи</label>
                     <div class="input-color">
                       <input
                         type="color"
@@ -756,7 +756,7 @@
                   </div>
                 </div>
               </div>
-              <div class="font-bold">Размер значков</div>
+              <div i18n class="font-bold">Размер значков</div>
               <div class="form__item">
                 <div class="tags-container">
                   <label class="custom-radio">
@@ -766,7 +766,7 @@
                       type="radio"
                       [value]="'100'"
                     />
-                    <span class="custom-radio__span">Маленькие</span>
+                    <span i18n class="custom-radio__span">Маленькие</span>
                   </label>
                   <label class="custom-radio">
                     <input
@@ -775,7 +775,7 @@
                       type="radio"
                       [value]="'120'"
                     />
-                    <span class="custom-radio__span">Средние + 20%</span>
+                    <span i18n class="custom-radio__span">Средние + 20%</span>
                   </label>
                   <label class="custom-radio">
                     <input
@@ -784,12 +784,12 @@
                       type="radio"
                       [value]="'140'"
                     />
-                    <span class="custom-radio__span">Большие + 40%</span>
+                    <span i18n class="custom-radio__span">Большие + 40%</span>
                   </label>
                 </div>
               </div>
             </ng-container>
-            <div class="font-bold">Ориентация</div>
+            <div i18n class="font-bold">Ориентация</div>
             <div class="form__item">
               <div class="tags-container">
                 <label class="orientation">
@@ -802,7 +802,7 @@
                   <div class="orientation__card">
                     <img src="/assets/config-images/rotate.svg" alt="" />
                   </div>
-                  <span class="orientation__span">Поворот</span>
+                  <span i18n class="orientation__span">Поворот</span>
                 </label>
                 <label class="orientation">
                   <input
@@ -814,7 +814,7 @@
                   <div class="orientation__card">
                     <img src="/assets/config-images/portrait.svg" alt="" />
                   </div>
-                  <span class="orientation__span">Вертикально</span>
+                  <span i18n class="orientation__span">Вертикально</span>
                 </label>
                 <label class="orientation">
                   <input
@@ -826,7 +826,7 @@
                   <div class="orientation__card">
                     <img src="/assets/config-images/landscape.svg" alt="" />
                   </div>
-                  <span class="orientation__span">Горизонтально</span>
+                  <span i18n class="orientation__span">Горизонтально</span>
                 </label>
               </div>
             </div>
@@ -850,7 +850,7 @@
       </div>
       <!--        Приложения           -->
       <div class="form__tab" style="display: none">
-        <div class="card__header card-title">Приложения</div>
+        <div i18n class="card__header card-title">Приложения</div>
         <div class="config-settings">
           <app-apps-config
             [apps]="apps"
@@ -869,7 +869,7 @@
       </div>
       <!--        Управление           -->
       <div class="form__tab" style="display: none">
-        <div class="card__header card-title">Управление</div>
+        <div i18n class="card__header card-title">Управление</div>
         <div class="config-settings">
           <div class="form__elems w-740">
             <!--   Киоск и безопасные настройки  -->
@@ -1002,7 +1002,7 @@
             </div>
             <div class="divider"></div>-->
             <div>
-              <span class="font-bold"> Дополнительные ограничения:</span>
+              <span i18n class="font-bold"> Дополнительные ограничения:</span>
               <span
                 class="hint"
                 title="Запрещает использовать на устройствах выбранные функции"
@@ -1035,6 +1035,7 @@
           type="button"
           class="btn btn--big save-btn"
           (click)="editConfig()"
+          i18n
         >
           Сохранить
         </button>
@@ -1042,6 +1043,7 @@
           type="button"
           class="btn btn--big btn--outline"
           (click)="setConfig()"
+          i18n
         >
           Сбросить
         </button>

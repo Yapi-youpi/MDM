@@ -65,12 +65,14 @@
         [device]="device"
         [target]="'reload_device'"
         (onClick)="onClickDeviceReloadHandler($event)"
+        i18n-title
         title="Перезагрузить устройство"
       ></app-device-action-btn>
       <app-device-action-btn
         [device]="device"
         [target]="'qr_code'"
         (onClick)="onClickDeviceQRCodeHandler($event)"
+        i18n-title
         title="Показать QR-код устройства"
       ></app-device-action-btn>
       <app-device-action-btn
@@ -84,6 +86,7 @@
         *ngIf="userRole === 'admin' || userRole === 'super'"
         [device]="device"
         [target]="'delete_device'"
+        i18n-title
         (onClick)="onClickDeviceDeleteHandler($event)"
         title="Удалить устройство"
       ></app-device-action-btn>

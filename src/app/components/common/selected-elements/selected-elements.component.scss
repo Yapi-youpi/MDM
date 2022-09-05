@@ -4,7 +4,7 @@
   margin-bottom: 20px;
   padding: 9px 16px 7px 28px;
   background-color: var(--light-blue);
-  color: var(--dark-blue-grey);
+  color: var(--white);
   border-radius: 14px;
   overflow: hidden;
   transition: all var(--transition-time) ease;
@@ -51,9 +51,9 @@
       height: 13.6px;
       width: 11.2px;
       mask-size: 11.2px 13.6px;
-      mask-image: url('/assets/UI/trash.svg');
+      mask-image: url('/assets/UI/cross.svg');
       -webkit-mask-size: 11.2px 13.6px;
-      -webkit-mask-image: url('/assets/UI/trash.svg');
+      -webkit-mask-image: url('/assets/UI/cross.svg');
     }
   }
 }

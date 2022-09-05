@@ -5,11 +5,11 @@
 >
   <div class="modal-form-filter w-400">
     <form class="filter" [formGroup]="filterForm" (submit)="applyFilter()">
-      <div class="filter__header">Фильтр</div>
+      <div i18n class="filter__header">Фильтр</div>
       <div class="filter__content">
         <div>
           <fieldset>
-            <legend>Роль</legend>
+            <legend i18n>Роль</legend>
             <div class="checkbox-group">
               <label
                 for="{{ role.key }}"
@@ -35,7 +35,7 @@
             </div>
           </fieldset>
           <fieldset>
-            <legend>Структурное подразделение</legend>
+            <legend i18n>Структурное подразделение</legend>
             <div class="checkbox-group">
               <label
                 for="{{ tag }}"
@@ -84,11 +84,12 @@
       </div>
       <div class="filter__footer">
         <div class="btn-wrapper">
-          <button type="submit" class="btn btn--big">Применить</button>
+          <button i18n type="submit" class="btn btn--big">Применить</button>
           <button
             (click)="clearFilter()"
             type="button"
             class="btn btn--big btn--outline"
+            i18n
           >
             Отменить
           </button>

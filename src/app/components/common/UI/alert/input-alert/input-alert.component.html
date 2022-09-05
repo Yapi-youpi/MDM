@@ -1,23 +1,23 @@
 <span class="alert" [ngClass]="type">
-  <ng-container *ngIf="control.hasError('required')">
+  <ng-container i18n *ngIf="control.hasError('required')">
     Данное поле должно быть заполнено
   </ng-container>
-  <ng-container *ngIf="control.hasError('pattern')">
+  <ng-container i18n *ngIf="control.hasError('pattern')">
     Недопустимый формат поля
   </ng-container>
-  <ng-container *ngIf="control.hasError('min')">
+  <ng-container i18n *ngIf="control.hasError('min')">
     Недопустимый минимальный размер поля
   </ng-container>
-  <ng-container *ngIf="control.hasError('minlength')">
+  <ng-container i18n *ngIf="control.hasError('minlength')">
     Недопустимый минимальный размер поля
   </ng-container>
-  <ng-container *ngIf="control.hasError('max')">
+  <ng-container i18n *ngIf="control.hasError('max')">
     Недопустимый максимальный размер поля
   </ng-container>
-  <ng-container *ngIf="control.hasError('maxlength')">
+  <ng-container i18n *ngIf="control.hasError('maxlength')">
     Недопустимый максимальный размер поля
   </ng-container>
-  <ng-container *ngIf="control.hasError('pass-mismatch')">
+  <ng-container i18n *ngIf="control.hasError('pass-mismatch')">
     Пароли не совпадают
   </ng-container>
   <ng-container *ngIf="control.invalid" class="alert error">

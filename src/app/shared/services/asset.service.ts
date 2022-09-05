@@ -7,9 +7,9 @@ import { Roles } from '../../interfaces/interfaces';
 })
 export class AssetService {
   public roles: Roles = {
-    operator: { text: 'Оператор', color: '#AFD9A1' },
-    admin: { text: 'Администратор', color: '#557EBE' },
-    super: { text: 'Суперадмин', color: '#2F4459' },
+    operator: { text: 'Оператор', color: '#AFBBC4' },
+    admin: { text: 'Администратор', color: '#67687C' },
+    super: { text: 'Суперадмин', color: '#3E405F' },
   };
   public configName = '';
   constructor(private storage: Storage) {

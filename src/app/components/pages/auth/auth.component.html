@@ -1,12 +1,12 @@
 <div class="form-wrapper">
   <form class="auth" [formGroup]="_form" (ngSubmit)="login()">
     <div class="header">
-      <h1 class="text-title text-center">Вход</h1>
+      <h1 i18n class="text-title text-center">Вход</h1>
     </div>
     <hr class="divider" />
     <div class="body">
       <div class="form-group-wrapper">
-        <label for="login" class="text-menu-title"> Логин </label>
+        <label i18n for="login" class="text-menu-title"> Логин </label>
         <app-input-text
           [name]="'login'"
           [width]="'w-350'"
@@ -20,7 +20,7 @@
         ></app-input-alert>
       </div>
       <div class="form-group-wrapper">
-        <label for="password" class="text-menu-title"> Пароль </label>
+        <label i18n for="password" class="text-menu-title"> Пароль </label>
         <app-input-password
           [name]="'password'"
           [width]="'w-350'"
@@ -38,9 +38,9 @@
         <div class="row space-between">
           <div class="remember">
             <app-input-checkbox></app-input-checkbox>
-            <p class="text-menu-title">Запомнить меня</p>
+            <p i18n class="text-menu-title">Запомнить меня</p>
           </div>
-          <a href="" class="text-menu-title"> Забыли пароль? </a>
+<!--          <a href="" class="text-menu-title"> Забыли пароль? </a>-->
         </div>
       </div>
     </div>

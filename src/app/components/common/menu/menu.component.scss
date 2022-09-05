@@ -64,10 +64,11 @@
             height: 24px;
             width: 24px;
             flex-shrink: 0;
-            background-color: var(--dark-blue-grey);
+            background-color: var(--white);
           }
 
           p {
+            color: var(--white);
             margin-left: 13px;
             white-space: nowrap;
           }
@@ -84,21 +85,21 @@
 
           &.devices span {
             mask-size: 11px 16px;
-            mask-image: url('/assets/UI/mobile.svg');
+            mask-image: url('/assets/UI/devices.svg');
             -webkit-mask-size: 11px 16px;
-            -webkit-mask-image: url('/assets/UI/mobile.svg');
+            -webkit-mask-image: url('/assets/UI/devices.svg');
           }
           &.groups span {
-            mask-size: 19.2px 12.8px;
-            mask-image: url('/assets/UI/devices_group.svg');
-            -webkit-mask-size: 19.2px 12.8px;
-            -webkit-mask-image: url('/assets/UI/devices_group.svg');
+            mask-size: 19.2px 19.2px;
+            mask-image: url('/assets/UI/new_app.svg');
+            -webkit-mask-size: 14.4px 14.4px;
+            -webkit-mask-image: url('/assets/UI/new_app.svg');
           }
           &.apps span {
             mask-size: 19.2px 19.2px;
-            mask-image: url('/assets/UI/apps.svg');
-            -webkit-mask-size: 19.2px 19.2px;
-            -webkit-mask-image: url('/assets/UI/apps.svg');
+            mask-image: url('/assets/UI/new_apps.svg');
+            -webkit-mask-size: 16.8px 16.8px;
+            -webkit-mask-image: url('/assets/UI/new_apps.svg');
           }
           &.messages span {
             mask-size: 16px 11.2px;
@@ -108,21 +109,21 @@
           }
           &.map span {
             mask-size: 14.4px 14.4px;
-            mask-image: url('/assets/UI/map.svg');
-            -webkit-mask-size: 14.4px 14.4px;
-            -webkit-mask-image: url('/assets/UI/map.svg');
+            mask-image: url('/assets/UI/new_map.svg');
+            -webkit-mask-size: 19.2px 19.2px;
+            -webkit-mask-image: url('/assets/UI/new_map.svg');
           }
           &.config span {
             mask-size: 23px 23px;
-            mask-image: url('/assets/UI/settings.svg');
-            -webkit-mask-size: 23px 23px;
-            -webkit-mask-image: url('/assets/UI/settings.svg');
+            mask-image: url('/assets/UI/new_conf.svg');
+            -webkit-mask-size: 16px 15px;
+            -webkit-mask-image: url('/assets/UI/new_conf.svg');
           }
           &.users span {
             mask-size: 18px 18px;
-            mask-image: url('/assets/UI/users_group.svg');
-            -webkit-mask-size: 18px 18px;
-            -webkit-mask-image: url('/assets/UI/users_group.svg');
+            mask-image: url('/assets/UI/users.svg');
+            -webkit-mask-size: 16.8px 12px;
+            -webkit-mask-image: url('/assets/UI/users.svg');
           }
           &.help span {
             mask-size: 19.2px 19.2px;

@@ -58,6 +58,9 @@ export class AuthComponent {
 
           this.user.token = res.token;
           this.user.login = this.logForm._login;
+          this.user.getUserInfo(res.id, 'uid').then((res)=>{
+            this.asset.setToStorage('user-role', res[0].role).then();
+          })
 
           this.router.navigateByUrl('devices').then(() => {
             if (res.error === 'change super admin password') {

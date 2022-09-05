@@ -77,7 +77,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mapService.initMap(61.4029, 55.1561, 13);
+    this.mapService.initMap(63.6495,53.2099, 13);
     this.deviceSub().then();
   }
 
@@ -108,7 +108,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async deviceSub() {
-    let query = this.db.query('Device');
+    let query = this.db.query('K_Device');
     this.sub = await query.subscribe();
     let device: Device | any;
     this.sub.on('open', () => {
@@ -116,24 +116,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.sub.on('update', (item) => {
       device = item.attributes;
-      console.log({
-        device_id: device.name,
-        lat: device.gps_location._latitude,
-        lng: device.gps_location._longitude,
-      })
-      let index = this.devices_geo.findIndex((item) => {
-        if (item.device.device_id === device.device_id) {
-          return item;
-        } else {
-          return -1;
+      this.devices_geo.map((dev)=>{
+        if (dev.device.device_id === device.device_id) {
+          dev.marker.setLatLng({
+            lat: device.gps_location._latitude,
+            lng: device.gps_location._longitude,
+          });
         }
-      });
-      if (index !== -1 && device.gps_location._latitude !==0 &&device.gps_location._longitude !==0) {
-        this.devices_geo[index].marker.setLatLng({
-          lat: device.gps_location._latitude,
-          lng: device.gps_location._longitude,
-        });
-      }
+      })
     });
     this.sub.on('create', (item) => {
       console.log(item.attributes);

@@ -123,6 +123,7 @@ import { HelpComponent } from './components/pages/help/help.component';
 import { TicketModalComponent } from './components/pages/help/ticket-modal/ticket-modal.component';
 import { DevicesFiltersComponent } from './components/common/filters/devices-filters/devices-filters.component';
 import { GroupsFiltersComponent } from './components/common/filters/groups-filters/groups-filters.component';
+import { DeviceReloadComponent } from './components/common/modals/apps/device-reload/device-reload.component';
 
 const routes: Routes = [
   {
@@ -240,6 +241,7 @@ const routes: Routes = [
     TicketModalComponent,
     DevicesFiltersComponent,
     GroupsFiltersComponent,
+    DeviceReloadComponent,
   ],
   imports: [
     BrowserModule,

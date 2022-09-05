@@ -4,12 +4,11 @@
     [name]="name"
     type="file"
     class="input-file"
-    accept='.apk'
     [class.error]="isError"
     [ngClass]="width"
     (change)="onChangeHandler($event)"
   />
-  <label [for]="name">загрузить</label>
+  <label i18n [for]="name">загрузить</label>
   <p *ngIf="!isError" class="file-name text-menu-title">
     {{ _name ? _name : 'Файл не выбран' }}
   </p>

@@ -3,7 +3,7 @@
     <div class="header row flex-start" [class.hidden]="isSidebarHidden">
       <app-menu-button (onClick)="toggleSidebarView()"></app-menu-button>
       <img
-        src="/assets/UI/logo.svg"
+        src="/assets/UI/logo_hor.svg"
         alt="Logo"
         class="logo"
         [class.hidden]="isSidebarHidden"
@@ -18,7 +18,7 @@
           [routerLinkActive]="'active'"
         >
           <span class="icon"></span>
-          <p>Устройства</p>
+          <p i18n>Устройства</p>
         </a>
       </li>
       <li>
@@ -29,7 +29,7 @@
           [routerLinkActive]="'active'"
         >
           <span class="icon"></span>
-          <p>Группы устройств</p>
+          <p i18n>Группы устройств</p>
         </a>
       </li>
       <li *ngIf="userRole === 'admin' || userRole === 'super'">
@@ -40,7 +40,7 @@
           [routerLinkActive]="'active'"
         >
           <span class="icon"></span>
-          <p>Приложения</p>
+          <p i18n>Приложения</p>
         </a>
       </li>
       <li>
@@ -62,7 +62,7 @@
           [routerLinkActive]="'active'"
         >
           <span class="icon"></span>
-          <p>Карта</p>
+          <p i18n>Карта</p>
         </a>
       </li>
       <hr class="divider" />
@@ -74,7 +74,7 @@
           [routerLinkActive]="'active'"
         >
           <span class="icon"></span>
-          <p>Конфигурации</p>
+          <p i18n>Конфигурации</p>
         </a>
       </li>
       <li *ngIf="userRole === 'admin' || userRole === 'super'">
@@ -85,7 +85,7 @@
           [routerLinkActive]="'active'"
         >
           <span class="icon"></span>
-          <p>Пользователи</p>
+          <p i18n>Пользователи</p>
         </a>
       </li>
       <!--      <hr class="divider" *ngIf="userRole === 'admin' || userRole === 'super'" />

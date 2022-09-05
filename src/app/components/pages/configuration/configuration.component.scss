@@ -118,8 +118,8 @@
 
 [type='range'] {
   --track-color: #dae3f4;
-  --thumb-color: #557ebe;
-  --thumb-behind-color: #557ebe;
+  --thumb-color: var(--blue);
+  --thumb-behind-color: var(--dark-blue-grey);
   margin: 0;
   padding: 0;
   /*width: 450px;*/
@@ -452,16 +452,16 @@
 }
 
 .switch:hover span:before {
-  background: var(--light-blue);
+  //background: var(--light-blue);
 }
 
 .switch:hover span:after {
-  background: var(--dark-blue);
+  //background: var(--dark-blue);
 }
 
 .switch input:checked + span:after {
   right: 2px;
-  background: var(--light-blue);
+  background: var(--yellow);
 }
 
 .switch input:checked + span:before {

@@ -2,7 +2,7 @@
   class="selected-devices row space-between"
   [class.hidden]="selectedIDs.length === 0"
 >
-  <p>{{ selectedIDs.length }} выбран(-о)</p>
+  <p i18n>{{ selectedIDs.length }} выбран(-о)</p>
   <span class="icon close" (click)="onCloseClickHandler()"></span>
   <app-button
     [height]="'24px'"

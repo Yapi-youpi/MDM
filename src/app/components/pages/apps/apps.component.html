@@ -39,9 +39,9 @@
             (onCLick)="toggleNameSortDir()"
           ></app-sort-btn>
         </div>
-        <p>Версия</p>
+        <p i18n>Версия</p>
         <!--          <p>URL</p>-->
-        <p>ID пакета</p>
+        <p i18n>ID пакета</p>
         <div class="sort-btn-wrapper size">
           <app-sort-btn
             [title]="'Размер'"
@@ -49,8 +49,8 @@
             (onCLick)="toggleSizeSortDir()"
           ></app-sort-btn>
         </div>
-        <p>Ярлык</p>
-        <p>Действия</p>
+        <p i18n>Ярлык</p>
+        <p i18n>Действия</p>
       </div>
       <div class="list-body">
         <ng-container *ngIf="apps.length !== 0; else nodata">

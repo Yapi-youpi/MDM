@@ -1,7 +1,7 @@
 <app-modal [modalID]="'edit_app'" [isClosable]="true">
   <div class="modal-form w-700">
     <div class="modal-form-header">
-      <h4 class="text-title text-center">Приложение</h4>
+      <h4 i18n class="text-title text-center">Приложение</h4>
       <!--      <div class="btn-wrapper">-->
       <!--        <app-button-->
       <!--          [text]="'системное приложение'"-->
@@ -18,7 +18,7 @@
     <div class="modal-form-body">
       <form [formGroup]="_form">
         <div class="form-group-wrapper">
-          <label for="name" class="text-menu-title"> Название </label>
+          <label i18n for="name" class="text-menu-title"> Название </label>
           <app-input-text
             [control]="$any(_name)"
             [name]="'name'"
@@ -32,9 +32,9 @@
           ></app-input-alert>
         </div>
         <div class="form-group-wrapper boot">
-          <label class="text-menu-title">Запуск:</label>
+          <label i18n class="text-menu-title">Запуск:</label>
           <div class="inner-wrapper row space-between">
-            <label for="runAfterInstall" class="text-menu-title"
+            <label i18n for="runAfterInstall" class="text-menu-title"
               >после установки</label
             >
             <app-input-switch
@@ -44,7 +44,7 @@
           </div>
           <div class="inner-wrapper">
             <div class="inner-wrapper row space-between">
-              <label for="runAtBoot" class="text-menu-title"
+              <label i18n for="runAtBoot" class="text-menu-title"
                 >после загрузки</label
               >
               <app-input-switch

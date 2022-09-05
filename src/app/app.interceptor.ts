@@ -61,9 +61,9 @@ export class AppInterceptor implements HttpInterceptor {
             if (err.status === 401) {
               this.router.navigateByUrl('auth').then();
             }
-            if (err.status === 403) {
-              this.router.navigateByUrl('auth').then();
-            }
+            // if (err.status === 403) {
+            //   this.router.navigateByUrl('auth').then();
+            // }
             if (err.status === 0) {
               // M.toast({ html: 'Сервер недоступен' });
             }

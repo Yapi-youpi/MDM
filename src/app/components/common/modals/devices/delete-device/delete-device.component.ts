@@ -12,7 +12,6 @@ export class DeleteDeviceComponent {
   @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter<Device>();
-
   constructor() {}
 
   onSubmitHandler(device: Device) {

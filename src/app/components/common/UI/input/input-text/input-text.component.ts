@@ -14,6 +14,7 @@ export class InputTextComponent {
   @Input() name: string = '';
   @Input() width: inputWidth = 'w-170';
   @Input() isError: boolean = false;
+  @Input() readonly: boolean = false
 
   @Output() onChange = new EventEmitter<string>();
 

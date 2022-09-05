@@ -1,0 +1,1350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="4333614627481032385" datatype="html">
+        <source> Данное поле должно быть заполнено </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/alert/input-alert/input-alert.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6992715287573939059" datatype="html">
+        <source> Недопустимый формат поля </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/alert/input-alert/input-alert.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2350170626524504587" datatype="html">
+        <source> Недопустимый минимальный размер поля </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/alert/input-alert/input-alert.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/alert/input-alert/input-alert.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1520287612600444138" datatype="html">
+        <source> Недопустимый максимальный размер поля </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/alert/input-alert/input-alert.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/alert/input-alert/input-alert.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7477414974587852269" datatype="html">
+        <source> Пароли не совпадают </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/alert/input-alert/input-alert.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3930133058410847635" datatype="html">
+        <source>загрузить</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/input/input-file/input-file.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1025059329441644685" datatype="html">
+        <source>Нет данных по данному запросу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/UI/no-list-data/no-list-data.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ title }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/global-header/global-header.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9108975134503011332" datatype="html">
+        <source>Перезагрузить устройство</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/list-item/device-item/device-item.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2484848951496887047" datatype="html">
+        <source>Показать QR-код устройства</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/list-item/device-item/device-item.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8333397584133469225" datatype="html">
+        <source>Удалить устройство</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/list-item/device-item/device-item.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1210409756534410753" datatype="html">
+        <source>Устройства</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/menu/menu.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8308765294729786291" datatype="html">
+        <source>Группы устройств</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/menu/menu.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7242779532244250654" datatype="html">
+        <source>Приложения</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/menu/menu.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">807</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2525351333886162735" datatype="html">
+        <source>Карта</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/menu/menu.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1193762892259993484" datatype="html">
+        <source>Конфигурации</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/menu/menu.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3713441941414701471" datatype="html">
+        <source>Пользователи</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/menu/menu.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4131379362376911870" datatype="html">
+        <source>Добавить приложения в конфигурацию</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/add-app-to-config/add-app-to-config.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4758856432485000640" datatype="html">
+        <source>Добавить приложение</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/add-app/add-app.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7457056185353600282" datatype="html">
+        <source> Файл </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/add-app/add-app.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7003655630585021089" datatype="html">
+        <source> Удалить приложение<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>&quot;<x id="INTERPOLATION" equiv-text="{{ app?.name }}"/>&quot;? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/delete-app/delete-app.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7165355773875822274" datatype="html">
+        <source> Перезагрузить устройство &quot;<x id="INTERPOLATION" equiv-text="{{ device?.name }}"/>&quot;? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/device-reload/device-reload.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7569178351050526850" datatype="html">
+        <source>Приложение</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/edit-app/edit-app.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3937022165790056208" datatype="html">
+        <source> Название </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/edit-app/edit-app.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/add-device/add-device.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/edit-device/edit-device.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7239867006156656318" datatype="html">
+        <source>Запуск:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/edit-app/edit-app.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6513406896333018946" datatype="html">
+        <source>после установки</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/edit-app/edit-app.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1888999361493773195" datatype="html">
+        <source>после загрузки</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/apps/edit-app/edit-app.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7834491905984806295" datatype="html">
+        <source>Пароль должен стостоять минимум иметь минимум по 1:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5784656858224964839" datatype="html">
+        <source> Заглавный символ <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span *ngIf=&quot;user.upperCase&quot; class=&quot;red-text&quot;&gt;"/>отсутствует<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">6,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8616967624859730480" datatype="html">
+        <source> Прописной символ <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span *ngIf=&quot;user.lowerCase&quot; class=&quot;red-text&quot;&gt;"/>отсутствует<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5910212640369642153" datatype="html">
+        <source> Цифра <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span  *ngIf=&quot;user.number&quot; class=&quot;red-text&quot;&gt;"/>отсутствует<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6545367087477577138" datatype="html">
+        <source> Спец. символ <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span *ngIf=&quot;user.specialChar&quot; class=&quot;red-text&quot;&gt;"/>отсутствует<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9006852318079373268" datatype="html">
+        <source> Состоять минимум из 8 символов <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span *ngIf=&quot;user.passLength &gt; 0&quot; class=&quot;red-text&quot;
+            &gt;"/><x id="INTERPOLATION" equiv-text="{{ user.passLength }}"/> осталось<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span
+          &gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">22,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="911735901411746581" datatype="html">
+        <source>Введите новый пароль</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2215301977319985865" datatype="html">
+        <source>Повторите новый пароль</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9017982100781753221" datatype="html">
+        <source> Сменить <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;material-icons right&quot;&gt;"/>send<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/change-password/change-password.component.html</context>
+          <context context-type="linenumber">60,62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7265539981083263425" datatype="html">
+        <source>Добавить конфигурацию</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/add-config/add-config.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1999819659160476251" datatype="html">
+        <source>Название</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/add-config/add-config.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5085375219320218745" datatype="html">
+        <source>Описание</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/add-config/add-config.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">632</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">75,76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7680170230769125592" datatype="html">
+        <source>Создать на основе</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/add-config/add-config.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3034698374745209711" datatype="html">
+        <source> Конфигурация по умолчанию </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/add-config/add-config.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8455034752684014134" datatype="html">
+        <source> Добавить </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/add-config/add-config.component.html</context>
+          <context context-type="linenumber">38,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">157,159</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="446761882786696425" datatype="html">
+        <source> Отменить </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/add-config/add-config.component.html</context>
+          <context context-type="linenumber">41,43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/delete-config/delete-config.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">163,165</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/filter-user/filter-user.component.html</context>
+          <context context-type="linenumber">93,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4813759370688881854" datatype="html">
+        <source>Удалить конфигурацию <x id="INTERPOLATION" equiv-text="{{ currentConfig.name }}"/>?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/delete-config/delete-config.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2388377744176930447" datatype="html">
+        <source> Удалить </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/configs/delete-config/delete-config.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">97,99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1658562045143950116" datatype="html">
+        <source>Время:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/datetime-picker/datetime-picker.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6918499277966430817" datatype="html">
+        <source>Удалить выбранные элементы?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/delete-several-elements/delete-several-elements.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1828669322126664774" datatype="html">
+        <source>Добавить устройство</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/add-device/add-device.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8891511919121954342" datatype="html">
+        <source> Описание </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/add-device/add-device.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/edit-device/edit-device.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/add-group/add-group.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8870703583773663135" datatype="html">
+        <source> Группа </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/add-device/add-device.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/edit-several-devices/edit-several-devices.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8559375556634113249" datatype="html">
+        <source> Удалить устройство &quot;<x id="INTERPOLATION" equiv-text="{{ device?.name }}"/>&quot;? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/delete-device/delete-device.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="413699528699590681" datatype="html">
+        <source>Редактировать устройство</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/edit-device/edit-device.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4114595291907697431" datatype="html">
+        <source>Настройки выбранных устройств</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/edit-several-devices/edit-several-devices.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2565081729156998492" datatype="html">
+        <source> Блокировка </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/edit-several-devices/edit-several-devices.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4263485993966020120" datatype="html">
+        <source>Фильтры</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/filter-devices/filter-devices.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/filter-groups/filter-groups.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3198937660400400559" datatype="html">
+        <source>Статус</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/filter-devices/filter-devices.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2319195470827953389" datatype="html">
+        <source>Последнее обновление</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/filter-devices/filter-devices.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/filter-groups/filter-groups.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6879291876609354762" datatype="html">
+        <source> по </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/filter-devices/filter-devices.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/filter-groups/filter-groups.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7819705363749872492" datatype="html">
+        <source>Устройство &quot;<x id="INTERPOLATION" equiv-text="{{ device?.name }}"/>&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/devices/qr-code/qr-code.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1372341041310605062" datatype="html">
+        <source>Добавить группу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/add-group/add-group.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2068965523157336769" datatype="html">
+        <source> Конфигурация </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/add-group/add-group.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/edit-several-groups/edit-several-groups.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1842949350551610227" datatype="html">
+        <source> Удалить группу &quot;<x id="INTERPOLATION" equiv-text="{{ group?.name }}"/>&quot;? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/delete-group/delete-group.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6268466028645347546" datatype="html">
+        <source>Редактировать группу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/edit-group/edit-group.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1900426427897350866" datatype="html">
+        <source>Настройки выбранных групп</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/groups/edit-several-groups/edit-several-groups.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9160934205853432244" datatype="html">
+        <source>Имя</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4008850725912515888" datatype="html">
+        <source>Логин</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5034392624165134371" datatype="html">
+        <source>Старый пароль</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8445907096030951113" datatype="html">
+        <source> Сменить пароль </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">74,76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4080437297278033197" datatype="html">
+        <source> заглавные буквы </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">89,91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="587843888344214057" datatype="html">
+        <source> строчные буквы </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">92,94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1102717733418119273" datatype="html">
+        <source> не менее 8 символов </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">95,97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3414752081551448039" datatype="html">
+        <source>цифры</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3630169613328788439" datatype="html">
+        <source>символы</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6820897821402150629" datatype="html">
+        <source>Роль</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/filter-user/filter-user.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6879217829251409838" datatype="html">
+        <source> администратор </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5345954267798591214" datatype="html">
+        <source> оператор </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9160656531166269974" datatype="html">
+        <source>Подразделение</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2627121997739028947" datatype="html">
+        <source>Другое</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3723747900508174057" datatype="html">
+        <source>Сохранить</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/add-user/add-user.component.html</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1628688785261169739" datatype="html">
+        <source>Удалить пользователя <x id="INTERPOLATION" equiv-text="{{ currentUser?.name }}"/>?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/delete-user/delete-user.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7640337589910218803" datatype="html">
+        <source> Да </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/delete-user/delete-user.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3177251180695257096" datatype="html">
+        <source> Нет </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/delete-user/delete-user.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7233393464081379881" datatype="html">
+        <source>Фильтр</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/filter-user/filter-user.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1563099536427134247" datatype="html">
+        <source>Структурное подразделение</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/filter-user/filter-user.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2873040288569390167" datatype="html">
+        <source>Применить</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/modals/users/filter-user/filter-user.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5351850587823541822" datatype="html">
+        <source> Чтобы перевести устройство на платформе Android версии 7 и выше в режим предприятия и подключится к системе SDM, необходимо: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/qr-tip/qr-tip.component.html</context>
+          <context context-type="linenumber">2,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7456004552833644869" datatype="html">
+        <source> Выполнить полный сброс настроек устройства к заводским, если оно настраивалось ранее; </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/qr-tip/qr-tip.component.html</context>
+          <context context-type="linenumber">7,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7973740332152135729" datatype="html">
+        <source> Начать настройку подключения к Wi-Fi при отсутствии мобильной связи, с последующим выходом к стартовому экрану, после подключения; </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/qr-tip/qr-tip.component.html</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4904064635851347696" datatype="html">
+        <source> На любом свободном месте стартового экрана, необходимо быстро произвести 7 нажатий для перехода в режим сканирования QR-кода; </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/qr-tip/qr-tip.component.html</context>
+          <context context-type="linenumber">15,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7923098695653861834" datatype="html">
+        <source> Выполните сканирование QR-кода и подтвердите все последующие условия пользования, предлагаемые устройством. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/qr-tip/qr-tip.component.html</context>
+          <context context-type="linenumber">19,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2623075132739891709" datatype="html">
+        <source> Для привязки имеющегося устройства к системе SDM, необходимо произвести сканирование созданного QR-кода. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/qr-tip/qr-tip.component.html</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8788140752840186985" datatype="html">
+        <source> Привязку устройства к системе можно произвести позже, нажав на иконку QR-кода созданного устройства в общем списке устройств. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/qr-tip/qr-tip.component.html</context>
+          <context context-type="linenumber">29,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8473454100850047043" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ selectedIDs.length }}"/> выбран(-о)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/selected-elements/selected-elements.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="466524434780112666" datatype="html">
+        <source>выйти</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/user/user.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6492546337829262964" datatype="html">
+        <source>Версия</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/apps/apps.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6984414990611759290" datatype="html">
+        <source>ID пакета</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/apps/apps.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1795464683403207483" datatype="html">
+        <source>Ярлык</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/apps/apps.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7938564888478501532" datatype="html">
+        <source>Действия</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/apps/apps.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">100,101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2665051728128938835" datatype="html">
+        <source>Вход</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8461057026516530623" datatype="html">
+        <source> Логин </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3211140826815973136" datatype="html">
+        <source> Пароль </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="22188075067246284" datatype="html">
+        <source>Запомнить меня</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5167399484848691053" datatype="html">
+        <source>Закреп снизу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3282682054883832734" datatype="html">
+        <source>Системное приложение</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9173878979088641803" datatype="html">
+        <source> Установить </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">107,109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3552006255976981551" datatype="html">
+        <source>Нет приложений</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/apps-config/apps-config.component.html</context>
+          <context context-type="linenumber">175</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6674427438881975865" datatype="html">
+        <source>Настройки</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6705085282950218693" datatype="html">
+        <source>Общие</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7413059248749870379" datatype="html">
+        <source>Использование функций</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="308155865011415942" datatype="html">
+        <source>Дизайн</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">606</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5478617993274733100" datatype="html">
+        <source>Управление</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">826</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6355627802799164443" datatype="html">
+        <source> Назад в конфигурации </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8524285284900209644" datatype="html">
+        <source>Время Keep-Alive</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3236550179665395727" datatype="html">
+        <source>Обновление системы</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1411232945346999696" datatype="html">
+        <source>по расписанию</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7660209129488943763" datatype="html">
+        <source>по запросу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3399663496710196598" datatype="html">
+        <source> Определение местоположения </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">170,172</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5476258234679831758" datatype="html">
+        <source>вкл</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">192</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5206759464064016446" datatype="html">
+        <source>выкл</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">202</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7124775274586150089" datatype="html">
+        <source>Передача файлов</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">213</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2455421949822037686" datatype="html">
+        <source> Подключение к сети </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">251,253</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4132707887864531134" datatype="html">
+        <source>Интернет</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">292</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3318632423381128125" datatype="html">
+        <source>Мобильная сеть</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">293</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6099174586795896513" datatype="html">
+        <source>Громкость:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">329</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1064659303253330819" datatype="html">
+        <source> Блокировка громкости <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+                    formControlName=&quot;lockVolume&quot;
+                    id=&quot;lockVolume&quot;
+                    type=&quot;checkbox&quot;
+                  /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span aria-hidden=&quot;true&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">331,338</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="953278997545142136" datatype="html">
+        <source> Управление громкостью <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+                    formControlName=&quot;manageVolume&quot;
+                    id=&quot;manageVolume&quot;
+                    type=&quot;checkbox&quot;
+                  /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span aria-hidden=&quot;true&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">342,349</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5732218138754435529" datatype="html">
+        <source>Экран:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">405</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9013561039622241397" datatype="html">
+        <source> Разрешить скриншоты <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+                    formControlName=&quot;disableScreenshots&quot;
+                    id=&quot;disableScreenshots&quot;
+                    type=&quot;checkbox&quot;
+                  /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span aria-hidden=&quot;true&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">407,414</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8694864926646449088" datatype="html">
+        <source> Управление таймаутом экрана <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+                    formControlName=&quot;manageTimeout&quot;
+                    id=&quot;manageTimeout&quot;
+                    type=&quot;checkbox&quot;
+                  /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span aria-hidden=&quot;true&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">418,425</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6679520843119751513" datatype="html">
+        <source> Управление яркостью экрана <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+                    [value]=&quot;manageBrightness&quot;
+                    type=&quot;checkbox&quot;
+                    (click)=&quot;toggleBrightness()&quot;
+                  /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span aria-hidden=&quot;true&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">524,531</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6950993865891560964" datatype="html">
+        <source> Автоматическая яркость экрана <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+                      formControlName=&quot;autoBrightness&quot;
+                      id=&quot;autoBrightness&quot;
+                      type=&quot;checkbox&quot;
+                    /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span aria-hidden=&quot;true&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">536,543</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2686755355881667950" datatype="html">
+        <source>Заголовок рабочего стола</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">624</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6691503823975026026" datatype="html">
+        <source>Нет</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">630</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8436190613066188707" datatype="html">
+        <source>ID устройства</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">631</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1519245508944328903" datatype="html">
+        <source>Шаблон</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">633</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7177373089906988366" datatype="html">
+        <source>Шаблон заголовка</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">640</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7944163325616646446" datatype="html">
+        <source>Цвет</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">649</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8067453241987127896" datatype="html">
+        <source>Фон</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">653</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8329078079945454678" datatype="html">
+        <source>Надписи</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">700</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1132898930860098770" datatype="html">
+        <source>Размер значков</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">713</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1528625041293844480" datatype="html">
+        <source>Маленькие</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">723</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5779701473859391786" datatype="html">
+        <source>Средние + 20%</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">732</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8283992244924620847" datatype="html">
+        <source>Большие + 40%</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">741</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3504973281590294197" datatype="html">
+        <source>Ориентация</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">746</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7462040050627937130" datatype="html">
+        <source>Поворот</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">759</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2835987705932156812" datatype="html">
+        <source>Вертикально</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">771</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4261067230741681908" datatype="html">
+        <source>Горизонтально</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">783</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1496226144470231518" datatype="html">
+        <source> Дополнительные ограничения:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">959</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4564953990730820284" datatype="html">
+        <source> Сохранить </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">993,995</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7326763602780246227" datatype="html">
+        <source> Сбросить </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/configuration.component.html</context>
+          <context context-type="linenumber">1001,1003</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6217524680177810810" datatype="html">
+        <source>Интерфейс</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/interface/interface.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7024694048460474709" datatype="html">
+        <source> Камера </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/interface/interface.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/configuration/interface/interface.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4549570742212095687" datatype="html">
+        <source>Телефон</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">76,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1518168373601355041" datatype="html">
+        <source>Модель / IMEI</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1784281658678735327" datatype="html">
+        <source>Конфигурация</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">87,88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3687590539626567294" datatype="html">
+        <source>Обнов-е</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">88,89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3262589053951403293" datatype="html">
+        <source>Версия<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>лаунчера</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/devices/devices.component.html</context>
+          <context context-type="linenumber">89,90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7385536989797615783" datatype="html">
+        <source>Что такое MDM?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2713002919853433534" datatype="html">
+        <source>Как добавить устройство</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1680577111240518091" datatype="html">
+        <source>Настройка конфигурации</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6519401832082876322" datatype="html">
+        <source>Не работают группы</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2007944526153254130" datatype="html">
+        <source>Потеря связи</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="481177654858013398" datatype="html">
+        <source>Как работать с QR-кодом</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3846578432479938867" datatype="html">
+        <source> MDM (Mobile Device Management, управление мобильными устройствами) — это набор решений и технологий для централизованного управления смартфонами, планшетами, ноутбуками и другими мобильными устройствами, которые используются в рабочих целях. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">33,38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">42,47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">48,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7587651662959594229" datatype="html">
+        <source>Mobile Device Management</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/help/help.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7115503906097442586" datatype="html">
+        <source>Ничего не найдено</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/map/map.component.html</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4636119256692737149" datatype="html">
+        <source> сбросить фильтры </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/map/map.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

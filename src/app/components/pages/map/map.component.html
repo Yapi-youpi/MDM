@@ -18,7 +18,7 @@
       </ng-container>
       <ng-template #nothing>
         <ul>
-          <li class="search-item">Ничего не найдено</li>
+          <li i18n class="search-item">Ничего не найдено</li>
         </ul>
       </ng-template>
     </div>
@@ -45,6 +45,7 @@
       type="button"
       class="btn btn--flat"
       (click)="devicesFilter('', 'default')"
+      i18n
     >
       сбросить фильтры
     </button>

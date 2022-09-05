@@ -77,11 +77,13 @@ export class DevicesComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.query = this.db.query('Device');
+    this.query = this.db.query('K_Device');
   }
 
   ngOnDestroy() {
-    if (this.sub) this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe()
+    }
     this.resetSearchParams();
     this.filterForm.reset();
   }
@@ -154,9 +156,9 @@ export class DevicesComponent implements OnInit, OnDestroy {
   async subscribeOnServer() {
     this.sub = await this.query.subscribe();
 
-    // this.sub.on("open", () => {
-    //   console.log("Соединение открыто");
-    // });
+    this.sub.on("open", () => {
+      console.log("Соединение открыто");
+    });
     // this.sub.on("close", () => {
     //   console.log("Соединение Закрыто");
     // });
@@ -459,7 +461,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   deleteDevice(device: Device) {
     this.loading = true;
-
     this.device
       .delete([device.device_id])
       .then((res: states.SingleDeviceState) => {
@@ -508,9 +509,25 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   rebootDevice(device: Device) {
+    this.loading = true
     this.device
-      .reload(device.device_id)
-      .then((res) => console.log(res))
+      .reload(device.device_id)      .then((res: states.SingleDeviceState) => {
+      if (res.success) {
+        const modal = document.querySelector('#reload_device');
+        if (!modal?.classList.contains('hidden'))
+          modal?.classList.toggle('hidden');
+      }
+      if (res.error)
+        this.alert.show({
+          title: 'RELOAD DEVICE ERROR',
+          content: res.error,
+        });
+    })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
+      })
       .catch((err) => console.log(err));
   }
 }

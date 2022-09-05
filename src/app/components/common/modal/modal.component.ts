@@ -15,6 +15,7 @@ export class ModalComponent {
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event): void {
     if (event.target.classList.contains('modal-bg') && this.isClosable) {
+      console.log(event.target)
       event.target.classList.add('hidden');
     }
   }

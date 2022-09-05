@@ -35,14 +35,16 @@
 }
 
 :root {
-  --dark-blue-grey: #2f4459;
+  --yellow: #FCE49C;
+  --dark-blue-grey: #67687C;
   --dark-grey: #667389;
-  --dark-blue: #557ebe;
-  --blue: #739cdd;
-  --light-blue: #dae3f4;
+  --dark-blue: #67687C;
+  --blue: #3E405F;
+  --light-blue: #67687C;
+  --light-grey-blue: #EBEAE7;
   --light-blue-darker: #c7d5ed;
   --light-blue-grey: #eceef1;
-  --light-grey: #f7f7f7;
+  --light-grey: #F1F1F1;
   --grey: #d8d8d8;
   --white: #ffffff;
   --green: #afd9a1;
@@ -85,8 +87,15 @@
   background-color: var(--dark-blue);
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: 1;
+  font-style: normal;
+}
+
 body {
-  font-family: 'HelveticaNeueRoman', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -238,7 +247,7 @@ legend {
 }
 
 .progress {
-  background-color: var(--light-blue);
+  background-color: #AFBBC4;
   position: relative;
   height: 4px;
   display: block;
@@ -249,7 +258,7 @@ legend {
 }
 
 .progress .indeterminate {
-  background-color: var(--blue);
+  background-color: var(--yellow);
 }
 
 .progress .indeterminate:before {
@@ -409,6 +418,16 @@ legend {
 /* СЕЛЕКТ */
 
 .select-native {
+  padding: 11px;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2f4459;
+  border: 1px solid #d8d8d8;
+  border-radius: 16px;
+  background: white;
+}
+option.select-native {
   padding: 11px;
   font-weight: 300;
   font-size: 16px;
@@ -1528,14 +1547,14 @@ textarea {
 
 .tab:hover,
 .tab:focus {
-  background: #eceef1;
-  color: #667389;
+  background: #AFBBC4;
+  color: #67687C;
   cursor: pointer;
 }
 
 .tab--active {
-  background: #dae3f4;
-  color: #557ebe;
+  background: #AFBBC4;
+  color: #67687C;
 }
 
 // ПОДСКАЗКИ ДЛИННЫХ НАИМЕНОВАНИЙ (САША)

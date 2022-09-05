@@ -64,9 +64,11 @@ export class DeviceItemComponent {
 
   onClickDeviceDeleteHandler(device: Device) {
     this.onClickDeviceDelete.emit(device);
+
+    console.log('reload', device);
   }
   onClickDeviceReloadHandler(device: Device) {
     this.onClickDeviceReboot.emit(device);
-    console.log('reload', device.device_id);
+    console.log('reload', device);
   }
 }

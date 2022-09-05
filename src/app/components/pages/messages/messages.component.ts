@@ -28,7 +28,7 @@ export class MessagesComponent implements OnInit {
   public isDateSortAsc: boolean = true;
   public isTargetSortAsc: boolean = false;
   public isStatusSortAsc: boolean = false;
-  public messages!: Message[];
+  public messages: Message[] = [];
   public devices: Device[] = [];
   public groups: DevicesGroup[] = [];
   public filter: Filter = {
@@ -62,8 +62,6 @@ export class MessagesComponent implements OnInit {
         this.messages = res.sort((a, b) => {
           return b.id - a.id;
         });
-
-        console.log(this.messages);
       })
       .catch((err) => {
         console.log(err);

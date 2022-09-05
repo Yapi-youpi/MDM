@@ -1,9 +1,9 @@
 <app-modal [modalID]="'modal-add-config'" [isClosable]="true">
   <div class="modal-form w-700">
-    <h4 class="modal-title">Добавить конфигурацию</h4>
+    <h4 i18n class="modal-title">Добавить конфигурацию</h4>
     <form [formGroup]="newConfigForm" class="form">
       <div class="form__item">
-        <label for="name">Название</label>
+        <label i18n for="name">Название</label>
         <input
           formControlName="name"
           type="text"
@@ -13,7 +13,7 @@
         />
       </div>
       <div class="form__item">
-        <label for="description">Описание</label>
+        <label i18n for="description">Описание</label>
         <input
           formControlName="description"
           type="text"
@@ -23,9 +23,9 @@
         />
       </div>
       <div class="form__item">
-        <label>Создать на основе</label>
+        <label i18n>Создать на основе</label>
         <select class="select-native w-440" formControlName="prototype">
-          <option [ngValue]="'Стандартная конфигурация'" selected>
+          <option i18n [ngValue]="'Стандартная конфигурация'" selected>
             Конфигурация по умолчанию
           </option>
           <option value="{{ config.name }}" *ngFor="let config of configs">
@@ -35,10 +35,10 @@
       </div>
     </form>
     <div class="modal-form-footer btn-wrapper">
-      <button (click)="addConfig(newConfigForm.value)" class="btn btn--big">
+      <button i18n (click)="addConfig(newConfigForm.value)" class="btn btn--big">
         Добавить
       </button>
-      <button class="btn btn--big btn--outline" (click)="closeModal()">
+      <button i18n class="btn btn--big btn--outline" (click)="closeModal()">
         Отменить
       </button>
     </div>

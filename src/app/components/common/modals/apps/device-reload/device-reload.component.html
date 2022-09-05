@@ -1,0 +1,20 @@
+<app-modal [modalID]="'reload_device'" [isClosable]="true">
+  <div class="modal-form w-500">
+    <div class="modal-form-header">
+      <h4 i18n class="text-title text-center">
+        Перезагрузить устройство "{{ device?.name }}"?
+      </h4>
+    </div>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [isReverse]="true"
+        [submitText]="'Да'"
+        [cancelText]="'Нет'"
+        [margin]="'50px'"
+        [isSubmitBtnDisabled]="isDataFetching"
+        (onCancel)="onCancelHandler()"
+        (onSubmit)="onSubmitHandler(device)"
+      ></app-modal-action-btns>
+    </div>
+  </div>
+</app-modal>

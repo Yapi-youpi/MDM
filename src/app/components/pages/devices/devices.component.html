@@ -72,11 +72,11 @@
               (onCLick)="changeSortNameDir()"
             ></app-sort-btn>
           </div>
-          <p class="descr">Описание</p>
-          <p class="phone">Телефон</p>
+          <p i18n class="descr">Описание</p>
+          <p i18n class="phone">Телефон</p>
           <!--          <p>IMEI</p>-->
           <!--          <p>Модель</p>-->
-          <p class="phone_imei">Модель / IMEI</p>
+          <p i18n class="phone_imei">Модель / IMEI</p>
           <div class="sort-btn-wrapper group">
             <app-sort-btn
               [title]="'Группа'"
@@ -84,9 +84,9 @@
               (onCLick)="changeSortGroupDir()"
             ></app-sort-btn>
           </div>
-          <p class="conf">Конфигурация</p>
-          <p class="update">Обнов-е</p>
-          <p class="version">Версия<br />лаунчера</p>
+          <p i18n class="conf">Конфигурация</p>
+          <p i18n class="update">Обнов-е</p>
+          <p i18n class="version">Версия<br />лаунчера</p>
           <div class="sort-btn-wrapper battery">
             <app-sort-btn
               [title]="'Заряд'"
@@ -94,10 +94,10 @@
               (onCLick)="changeSortBatteryDir()"
             ></app-sort-btn>
           </div>
-          <p class="lock" *ngIf="userRole === 'admin' || userRole === 'super'">
+          <p  i18n class="lock" *ngIf="userRole === 'admin' || userRole === 'super'">
             Блокировка
           </p>
-          <p class="actions">Действия</p>
+          <p i18n class="actions">Действия</p>
         </div>
       </div>
       <div class="list-body">
@@ -127,7 +127,7 @@
             (onClickDeviceQRCode)="getDeviceQRCode($event)"
             (onClickDeviceEdit)="selectDeviceToEdit($event)"
             (onClickDeviceDelete)="selectDeviceToDelete($event)"
-            (onClickDeviceReboot)="rebootDevice($event)"
+            (onClickDeviceReboot)="selectDeviceToDelete($event)"
           ></app-device-item>
         </ng-container>
         <ng-template #nodata>
@@ -150,6 +150,12 @@
   [isDataFetching]="loading"
   (onSubmit)="addDevice()"
 ></app-add-device>
+<app-device-reload
+  *ngIf="userRole === 'admin' || userRole === 'super'"
+  [device]="currDevice"
+  [isDataFetching]="loading"
+  (onSubmit)='rebootDevice($event)'
+></app-device-reload>
 <app-qr-code [device]="currDevice"></app-qr-code>
 <app-edit-device
   *ngIf="userRole === 'admin' || userRole === 'super'"

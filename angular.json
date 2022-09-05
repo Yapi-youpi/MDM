@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "untitled": {
+    "mdm": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -32,7 +32,7 @@
             ],
             "scripts": []
           },
-          "configurations": {
+          "configurations":  {
             "production": {
               "budgets": [
                 {
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "untitled:build:production"
+              "browserTarget": "mdm:build:production"
             },
             "development": {
-              "browserTarget": "untitled:build:development"
+              "browserTarget": "mdm:build:development"
             }
           },
           "defaultConfiguration": "development"
