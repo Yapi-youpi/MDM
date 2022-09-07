@@ -49,6 +49,48 @@
             [message]="'Данное поле должно быть заполнено'"
           ></app-input-alert>
         </div>
+        <div class="group-icon">
+          <div class="row">
+            <label class="text-menu-title">Обозначение</label>
+            <div class="right">
+              <div class="img-wrapper">
+                <img
+                  class="img"
+                  [src]="
+                    _iconID?.value !== ''
+                      ? _iconID?.value
+                      : '/assets/group-icons/rhombus.png'
+                  "
+                />
+              </div>
+              <div
+                *ngIf="!isIconContainerShown"
+                class="icon pencil"
+                (click)="toggleIconsContainer()"
+              ></div>
+            </div>
+          </div>
+          <div class="choose-icon" [class.hidden]="!isIconContainerShown">
+            <p class="text-menu-title">Выбор значка:</p>
+            <div class="icons-container">
+              <ng-container *ngFor="let icon of groupIcons; index as i">
+                <div
+                  class="img-wrapper"
+                  [style.margin-top]="i + 1 <= 10 ? '0' : '12px'"
+                  [style.margin-right]="(i + 1) % 10 !== 0 ? '15px' : '0'"
+                  (click)="onIconSelectHandler($event)"
+                >
+                  <!--                  [class.chosen]="_iconID?.value.includes(icon)"-->
+                  <img
+                    class="img"
+                    [src]="'/assets/group-icons/' + icon + '.png'"
+                    [alt]="icon"
+                  />
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
     <div class="modal-form-footer">
