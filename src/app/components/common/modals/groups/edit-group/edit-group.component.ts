@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { edit } from '../../../../../shared/services/forms/group';
 import { DevicesConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
+import { groupIcons } from '../../../../../shared/types/groups';
 
 @Component({
   selector: 'app-edit-group',
@@ -15,6 +16,8 @@ export class EditGroupComponent {
   @Output() onSubmit = new EventEmitter();
 
   public currOption!: Option;
+  public groupIcons: string[] = groupIcons;
+  public isIconContainerShown: boolean = false;
 
   constructor(private form: edit) {}
 
@@ -38,6 +41,10 @@ export class EditGroupComponent {
     return this._form.get('deviceConfigID');
   }
 
+  get _iconID() {
+    return this._form.get('iconID');
+  }
+
   get _options() {
     return this.configs.map((c) => {
       return {
@@ -55,12 +62,28 @@ export class EditGroupComponent {
     } as Option;
   }
 
+  toggleIconsContainer() {
+    this.isIconContainerShown = !this.isIconContainerShown;
+  }
+
   onSelectHandler(item: Option) {
     this._form.patchValue({
       deviceConfigID: item.value,
     });
 
     this.currOption = item;
+  }
+
+  onIconSelectHandler(event) {
+    let img;
+    if (event.target.src) {
+      img = event.target.src;
+    } else {
+      img = event.target.querySelector('.img').src;
+    }
+
+    this.form.setIconBase64FromURL(img).then();
+    this.toggleIconsContainer();
   }
 
   onSubmitHandler() {

@@ -24,7 +24,7 @@
     <div class="icon-wrapper group-icon">
       <ng-container *ngIf="group.iconID !== ''; else noicon">
         <div class="img-wrapper">
-          <img class="img" [src]="group.iconID" />
+          <img class="img" [src]="group.iconID" alt="Иконка группы" />
         </div>
       </ng-container>
       <ng-template #noicon>

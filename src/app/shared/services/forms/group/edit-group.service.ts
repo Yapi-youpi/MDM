@@ -19,6 +19,10 @@ export class EditGroupService {
         Validators.maxLength(60),
       ]),
       deviceConfigID: new FormControl('', Validators.required),
+      iconID: new FormControl(
+        '/assets/group-icons/rhombus.png',
+        Validators.required
+      ),
     });
   }
 
@@ -40,5 +44,17 @@ export class EditGroupService {
 
   resetSubmitted() {
     this.isSubmitted = false;
+  }
+
+  async setIconBase64FromURL(url) {
+    const data = await fetch(url);
+    const blob = await data.blob();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      this.form.get('iconID')?.setValue(base64data);
+    };
   }
 }

@@ -88,11 +88,11 @@ export class AddGroupComponent {
   }
 
   onSubmitHandler() {
+    this.form.setSubmitted();
+
     if (this._iconID?.value === '') {
       this.form.setIconBase64FromURL('/assets/group-icons/rhombus.png').then();
     }
-    // console.log(this.form.form.getRawValue());
-    this.form.setSubmitted();
 
     if (this.form.form.invalid) {
       return;
