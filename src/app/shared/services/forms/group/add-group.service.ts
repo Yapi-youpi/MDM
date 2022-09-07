@@ -16,7 +16,7 @@ export class AddGroupService {
         Validators.maxLength(60),
       ]),
       deviceConfigID: new FormControl('', Validators.required),
-      iconID: new FormControl('', Validators.required),
+      iconID: new FormControl(null, Validators.required),
     });
   }
 

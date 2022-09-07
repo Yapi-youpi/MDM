@@ -57,7 +57,7 @@
                 <img
                   class="img"
                   [src]="
-                    _iconID?.value !== ''
+                    _iconID?.value && _iconID?.value !== ''
                       ? _iconID?.value
                       : '/assets/group-icons/rhombus.png'
                   "
