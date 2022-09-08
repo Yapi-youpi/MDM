@@ -5,7 +5,7 @@
         [value]="searchParam"
         (onChange)="onChangeSearchInputHandler($event)"
       ></app-input-search>
-      <!--      <div class="filter-btn-wrapper">
+      <div class="filter-btn-wrapper">
         <app-button
           [text]="'системное приложение'"
           [textLike]="'like-body'"
@@ -15,7 +15,7 @@
           [color]="isOnlySystemApps ? 'blue' : 'common'"
           (onCLick)="toggleSystemApps()"
         ></app-button>
-      </div>-->
+      </div>
       <app-add-button
         [title]="'добавить приложение'"
         [target]="'add_app'"

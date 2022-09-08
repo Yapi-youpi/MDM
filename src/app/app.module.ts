@@ -124,6 +124,7 @@ import { TicketModalComponent } from './components/pages/help/ticket-modal/ticke
 import { DevicesFiltersComponent } from './components/common/filters/devices-filters/devices-filters.component';
 import { GroupsFiltersComponent } from './components/common/filters/groups-filters/groups-filters.component';
 import { DeviceReloadComponent } from './components/common/modals/apps/device-reload/device-reload.component';
+import { AppGroupPipe } from './shared/pipes/filters/app-group.pipe';
 
 const routes: Routes = [
   {
@@ -241,6 +242,7 @@ const routes: Routes = [
     TicketModalComponent,
     DevicesFiltersComponent,
     GroupsFiltersComponent,
+    AppGroupPipe,
     DeviceReloadComponent,
   ],
   imports: [

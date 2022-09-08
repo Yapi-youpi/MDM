@@ -21,7 +21,16 @@
       <p class="list-tip" #tip>{{ group.name }}</p>
     </div>
     <p>{{ group.description }}</p>
-    <!--    <div class="icon-wrapper">123</div>-->
+    <div class="icon-wrapper group-icon">
+      <ng-container *ngIf="group.iconID !== ''; else noicon">
+        <div class="img-wrapper">
+          <img class="img" [src]="group.iconID" alt="Иконка группы" />
+        </div>
+      </ng-container>
+      <ng-template #noicon>
+        <p>Без иконки</p>
+      </ng-template>
+    </div>
     <p>{{ group.capacity }} шт.</p>
     <!--    <p>{{ group.deviceConfigID | configConverter: configs }}</p>-->
     <div class="select-wrapper">

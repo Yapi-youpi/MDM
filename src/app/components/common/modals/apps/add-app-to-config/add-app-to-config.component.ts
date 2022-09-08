@@ -5,13 +5,10 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { App } from '../../../../../shared/types/apps';
+import { App, AppsGroup } from '../../../../../shared/types/apps';
 import { environment } from '../../../../../../environments/environment';
 import { appsPaths as api } from '../../../../../shared/enums/api';
-
-interface AppsGroup {
-  [name: string]: App[];
-}
+// import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-add-app-to-config',
@@ -26,11 +23,17 @@ export class AddAppToConfigComponent implements OnChanges {
   public appsGroup: AppsGroup = {};
   public addedApps: string[] = [];
   public isSubmitted: boolean = false;
+  public filter: string = 'all';
+  // public filterForm: FormGroup;
   public url: string = environment.url + api.GET_ICON;
 
   @Output() onSubmit = new EventEmitter();
 
-  constructor() {}
+  constructor() {
+    // this.filterForm = new FormGroup({
+    //   dateTo: new FormControl(''),
+    // });
+  }
 
   ngOnChanges(changes) {
     // console.log(changes);
@@ -58,6 +61,13 @@ export class AddAppToConfigComponent implements OnChanges {
         }
       }
     }
+  }
+
+  setFilter(event: Event) {
+    // @ts-ignore
+    this.filter = event.target!.value;
+    // @ts-ignore
+    console.log(event.target!.value);
   }
 
   onCheckboxChange(event, appName) {

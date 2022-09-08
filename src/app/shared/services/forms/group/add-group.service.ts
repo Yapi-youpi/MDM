@@ -16,6 +16,7 @@ export class AddGroupService {
         Validators.maxLength(60),
       ]),
       deviceConfigID: new FormControl('', Validators.required),
+      iconID: new FormControl(null, Validators.required),
     });
   }
 
@@ -42,5 +43,17 @@ export class AddGroupService {
   reset() {
     this.form.reset();
     this.resetSubmitted();
+  }
+
+  async setIconBase64FromURL(url) {
+    const data = await fetch(url);
+    const blob = await data.blob();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      this.form.get('iconID')?.setValue(base64data);
+    };
   }
 }

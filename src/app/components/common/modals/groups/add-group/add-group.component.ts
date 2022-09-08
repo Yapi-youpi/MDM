@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DevicesConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 import { add } from '../../../../../shared/services/forms/group';
+import { groupIcons } from '../../../../../shared/types/groups';
 
 @Component({
   selector: 'app-add-group',
@@ -13,6 +14,9 @@ export class AddGroupComponent {
   @Input() isDataFetching: boolean = false;
 
   @Output() public onSubmit = new EventEmitter();
+
+  public groupIcons: string[] = groupIcons;
+  public isIconContainerShown: boolean = false;
 
   constructor(private form: add) {}
 
@@ -36,6 +40,10 @@ export class AddGroupComponent {
     return this._form.get('deviceConfigID');
   }
 
+  get _iconID() {
+    return this._form.get('iconID');
+  }
+
   get _options() {
     return this.configs.map((c) => {
       return {
@@ -57,14 +65,34 @@ export class AddGroupComponent {
     };
   }
 
+  toggleIconsContainer() {
+    this.isIconContainerShown = !this.isIconContainerShown;
+  }
+
   onSelectHandler(item: Option) {
     this._form.patchValue({
       deviceConfigID: item.value,
     });
   }
 
+  onIconSelectHandler(event) {
+    let img;
+    if (event.target.src) {
+      img = event.target.src;
+    } else {
+      img = event.target.querySelector('.img').src;
+    }
+
+    this.form.setIconBase64FromURL(img).then();
+    this.toggleIconsContainer();
+  }
+
   onSubmitHandler() {
     this.form.setSubmitted();
+
+    if (this._iconID?.value === '') {
+      this.form.setIconBase64FromURL('/assets/group-icons/rhombus.png').then();
+    }
 
     if (this.form.form.invalid) {
       return;
@@ -72,6 +100,7 @@ export class AddGroupComponent {
       this.onSubmit.emit();
     }
   }
+
   onCancelHandler() {
     this.form.reset();
 

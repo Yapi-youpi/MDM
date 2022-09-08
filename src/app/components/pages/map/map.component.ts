@@ -108,7 +108,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async deviceSub() {
-    let query = this.db.query('K_Device');
+    let query = this.db.query('Device');
     this.sub = await query.subscribe();
     let device: Device | any;
     this.sub.on('open', () => {
@@ -162,7 +162,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             <div class="marker__label">
               ${device.name}
             </div>
-            <div class="marker__icon" style="background-color: ${color}"></div>
+            <div class="marker__icon" style="background-color: ${color}; background-image: url('/assets/group-icons/apple.png')"></div>
           </div>
           <div class="marker__info">
             <div class="marker__info-row">
