@@ -86,6 +86,11 @@
       .name {
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .system {
+        color: var(--dark-grey);
       }
     }
 
