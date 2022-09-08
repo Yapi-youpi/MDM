@@ -1,17 +1,40 @@
 <app-modal [modalID]="'add_app_config'" [isClosable]="true">
   <div class="modal">
     <div class="modal__header">Добавить приложения в конфигурацию</div>
-    <div class="filter-btn-wrapper">
-      <app-button
-        [text]="'системные приложения'"
-        [textLike]="'like-body'"
-        [height]="'30px'"
-        [padding]="'9px 14px'"
-        [radius]="'15px'"
-        [color]="filter === 'system' ? 'blue' : 'common'"
-        (onCLick)="showSystemApps()"
-      ></app-button>
-    </div>
+    <form class="filter-btn-wrapper">
+      <div class="tags-container">
+        <label class="custom-radio">
+          <input
+            class="visually-hidden"
+            type="radio"
+            name="filter"
+            [value]="'all'"
+            (change)="setFilter($event)"
+          />
+          <span class="custom-radio__span">все</span>
+        </label>
+        <label class="custom-radio">
+          <input
+            class="visually-hidden"
+            type="radio"
+            name="filter"
+            [value]="'uploaded'"
+            (change)="setFilter($event)"
+          />
+          <span class="custom-radio__span">загруженные</span>
+        </label>
+        <label class="custom-radio">
+          <input
+            class="visually-hidden"
+            type="radio"
+            name="filter"
+            [value]="'system'"
+            (change)="setFilter($event)"
+          />
+          <span class="custom-radio__span">системные</span>
+        </label>
+      </div>
+    </form>
     <div class="modal__content">
       <ng-template #loader>
         <div class="progress">
@@ -21,7 +44,7 @@
       <ng-container *ngIf="apps.length > 0; else loader">
         <div class="checkbox-group">
           <label
-            *ngFor="let group of appsGroup | keyvalue"
+            *ngFor="let group of appsGroup | appGroup: filter | keyvalue"
             class="checkbox-wrapper"
             for="{{ group.value[0].name }}"
           >
