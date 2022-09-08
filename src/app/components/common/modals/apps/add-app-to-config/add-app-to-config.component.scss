@@ -1,25 +1,36 @@
-.content {
+.modal {
   width: 700px;
+  height: 100%;
   padding: 30px 58px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 
-  .divider {
-    margin: 25px 0;
+  &__header {
+    padding-bottom: 25px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 550;
+    border-bottom: 2px solid var(--light-blue);
   }
 
-  .body {
-    margin-bottom: 50px;
-
+  &__content {
+    height: 100%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+    flex-grow: 1;
   }
 
-  .form-group-wrapper {
-    height: 30px;
-    justify-content: flex-start;
-
-    label {
-      margin-right: 103.06px;
-    }
+  &__footer {
+    margin-top: auto;
+    padding-top: 10px;
   }
+}
+
+.filter-btn-wrapper {
+  padding: 5px;
 }
 
 .app {

@@ -29,6 +29,10 @@ export interface App {
   children: App[];
 }
 
+export interface AppsGroup {
+  [name: string]: App[];
+}
+
 // export interface UploadedApp {
 //   appID: string
 //   appName: string
