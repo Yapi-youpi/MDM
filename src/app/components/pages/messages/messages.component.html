@@ -18,7 +18,7 @@
     </div>
 
     <div class="message-wrapper">
-      <table *ngIf="messages; else nodata">
+      <table *ngIf="messages?.length !== 0; else nodata">
         <thead>
           <tr class="table-row">
             <th>

@@ -93,16 +93,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           this.group_option.push(option);
         });
       });
-      this.configService.getConfig('all').then((res) => {
-        res.map((item) => {
-          let option = {
-            value: item.ID,
-            html: item.name,
-            isSelected: false,
-          };
-          this.config_option.push(option);
+      if (this.user.token)
+        this.configService.getConfig('all').then((res) => {
+          res.map((item) => {
+            let option = {
+              value: item.ID,
+              html: item.name,
+              isSelected: false,
+            };
+            this.config_option.push(option);
+          });
         });
-      });
       t.unsubscribe();
     });
   }
@@ -120,7 +121,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         device_id: device.name,
         lat: device.gps_location._latitude,
         lng: device.gps_location._longitude,
-      })
+      });
       let index = this.devices_geo.findIndex((item) => {
         if (item.device.device_id === device.device_id) {
           return item;
@@ -128,7 +129,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           return -1;
         }
       });
-      if (index !== -1 && device.gps_location._latitude !==0 &&device.gps_location._longitude !==0) {
+      if (
+        index !== -1 &&
+        device.gps_location._latitude !== 0 &&
+        device.gps_location._longitude !== 0
+      ) {
         this.devices_geo[index].marker.setLatLng({
           lat: device.gps_location._latitude,
           lng: device.gps_location._longitude,
@@ -172,7 +177,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             <div class="marker__label">
               ${device.name}
             </div>
-            <div class="marker__icon" style="background-color: ${color}"></div>
+            <div class="marker__icon" style="background-color: ${color}; background-image: url('/assets/group-icons/apple.png')"></div>
           </div>
           <div class="marker__info">
             <div class="marker__info-row">
