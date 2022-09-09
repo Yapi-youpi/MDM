@@ -78,7 +78,7 @@
       height: calc(100vh - 24px - 70px - 8px - 44px - 31px - 16px - 4px - 20px);
 
       //overflow-y: auto;
-      overflow-y: scroll;
+      overflow-y: overlay;
     }
   }
 }

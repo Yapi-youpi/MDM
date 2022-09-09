@@ -5,6 +5,10 @@
   -webkit-mask-size: 14px 14px;
   background-color: var(--white);
 
+  &.device_files {
+    mask-image: url('/assets/UI/paperclip.svg');
+    -webkit-mask-image: url('/assets/UI/paperclip.svg');
+  }
   &.reload_device {
     height: 18.22px;
     width: 15.404px;

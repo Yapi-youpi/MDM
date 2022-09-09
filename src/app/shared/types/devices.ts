@@ -1,3 +1,5 @@
+import { App } from './apps';
+
 export interface Device {
   device_id: string;
   name: string;
@@ -20,6 +22,49 @@ export interface Device {
   gps_location: Parse.GeoPoint;
   group_name: string;
   signalLevel: string;
+  device_info: {
+    androidVersion: string;
+    applications: App[] | null;
+    batteryCharging: string;
+    batteryLevel: number;
+    cpu: string;
+    defaultLauncher: boolean;
+    deviceId: string;
+    factoryReset: boolean;
+    files: DeviceFile[] | null;
+    iccid: string;
+    id: string;
+    imei: string;
+    imei2: string;
+    kioskMode: boolean;
+    launcherPackage: string;
+    location: {
+      lat: number;
+      lon: number;
+      ts: number;
+    };
+    mdmMode: boolean;
+    model: string;
+    permissions: number[];
+    phone: string;
+    phone2: string;
+    serial: string;
+    signalLevel: string;
+  };
+}
+
+export interface DeviceFile {
+  ABSPath: string;
+  size: number;
+  name: string;
+  fileID: string;
+  path: string;
+  description: string;
+  url: string;
+  lastUpdate: number;
+  checksum: string;
+  remove: boolean;
+  varContent: boolean;
 }
 
 export interface AddDevice {
