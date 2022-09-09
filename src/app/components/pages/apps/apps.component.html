@@ -12,7 +12,7 @@
           [height]="'30px'"
           [padding]="'9px 14px'"
           [radius]="'15px'"
-          [color]="isOnlySystemApps ? 'blue' : 'common'"
+          [color]="isSystemApps ? 'blue' : 'common'"
           (onCLick)="toggleSystemApps()"
         ></app-button>
       </div>
@@ -58,7 +58,7 @@
             *ngFor="
               let app of apps
                 | search: searchParam:'app'
-                | apps_system: isOnlySystemApps
+                | apps_system: isSystemApps
                 | apps_name: isNameSortAsc
                 | apps_size: isSizeSortAsc
             "
