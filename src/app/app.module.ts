@@ -124,6 +124,11 @@ import { TicketModalComponent } from './components/pages/help/ticket-modal/ticke
 import { DevicesFiltersComponent } from './components/common/filters/devices-filters/devices-filters.component';
 import { GroupsFiltersComponent } from './components/common/filters/groups-filters/groups-filters.component';
 import { AppGroupPipe } from './shared/pipes/filters/app-group.pipe';
+import { DeviceFilesComponent } from './components/common/modals/devices/device-files/device-files.component';
+import { FileNamePipe } from './shared/pipes/sort/files/file-name.pipe';
+import { FileDatePipe } from './shared/pipes/sort/files/file-date.pipe';
+import { FileActionBtnComponent } from './components/common/UI/button/item-action-btn/file/file-action-btn.component';
+import { DeviceFileSizePipe } from './shared/pipes/sort/files/file-size.pipe';
 
 const routes: Routes = [
   {
@@ -242,6 +247,12 @@ const routes: Routes = [
     DevicesFiltersComponent,
     GroupsFiltersComponent,
     AppGroupPipe,
+    DeviceFilesComponent,
+    FileNamePipe,
+    FileDatePipe,
+    FileSizePipe,
+    DeviceFileSizePipe,
+    FileActionBtnComponent,
   ],
   imports: [
     BrowserModule,

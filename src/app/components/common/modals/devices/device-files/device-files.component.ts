@@ -1,0 +1,59 @@
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Device } from '../../../../../shared/types/devices';
+
+@Component({
+  selector: 'app-device-files',
+  templateUrl: './device-files.component.html',
+  styleUrls: ['./device-files.component.scss'],
+})
+export class DeviceFilesComponent {
+  @Input() device!: Device;
+
+  public displayFiles: 'all' | 'import' | 'export' = 'all';
+
+  public searchTerm: string = '';
+
+  public isNameSortAsc: boolean = true;
+  public isSizeSortAsc: boolean = true;
+  public isDateSortAsc: boolean = true;
+
+  @ViewChild('name') nameRef!: ElementRef;
+  @ViewChild('tip') tipRef!: ElementRef;
+
+  constructor() {}
+
+  toggleFilesDisplay(type: typeof this.displayFiles) {
+    if (type === this.displayFiles) return;
+    else this.displayFiles = type;
+  }
+
+  onChangeSearchInputHandler(str: string) {
+    this.searchTerm = str;
+  }
+
+  changeNameSortDir() {
+    this.isNameSortAsc = !this.isNameSortAsc;
+  }
+
+  changeSizeSOrtDir() {
+    this.isSizeSortAsc = !this.isSizeSortAsc;
+  }
+
+  changeDateSortDir() {
+    this.isDateSortAsc = !this.isDateSortAsc;
+  }
+
+  displayTip() {
+    if (
+      this.nameRef.nativeElement.offsetWidth <
+      this.nameRef.nativeElement.scrollWidth
+    ) {
+      this.tipRef.nativeElement.style.visibility = 'visible';
+      this.tipRef.nativeElement.style.opacity = 1;
+    }
+  }
+  hideTip() {
+    this.tipRef.nativeElement.style.visibility = 'hidden';
+    this.tipRef.nativeElement.style.opacity = 0;
+  }
+}

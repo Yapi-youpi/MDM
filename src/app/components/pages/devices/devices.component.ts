@@ -133,6 +133,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.device
       .get('all')
       .then((res: states.DevicesState) => {
+        console.log(res);
         if (res.success) {
           this.devices = res.devices
             ? res.devices.map((d) => ({ ...d, isSelected: false }))
@@ -375,6 +376,10 @@ export class DevicesComponent implements OnInit, OnDestroy {
           this.loading = false;
         });
       });
+  }
+
+  getDeviceFiles(device: Device) {
+    this.currDevice = device;
   }
 
   getDeviceQRCode(device: Device) {

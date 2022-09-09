@@ -28,6 +28,7 @@ export class DeviceItemComponent {
   @Output() onClickDeviceEdit = new EventEmitter<Device>();
   @Output() onClickDeviceDelete = new EventEmitter<Device>();
   @Output() onClickDeviceReboot = new EventEmitter<Device>();
+  @Output() onClickDeviceFiles = new EventEmitter<Device>();
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
@@ -65,8 +66,12 @@ export class DeviceItemComponent {
   onClickDeviceDeleteHandler(device: Device) {
     this.onClickDeviceDelete.emit(device);
   }
+
   onClickDeviceReloadHandler(device: Device) {
     this.onClickDeviceReboot.emit(device);
-    console.log('reload', device.device_id);
+  }
+
+  onClickDeviceFilesHandler(device: Device) {
+    this.onClickDeviceFiles.emit(device);
   }
 }

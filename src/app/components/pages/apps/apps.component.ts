@@ -166,7 +166,6 @@ export class AppsComponent {
   selectAppToEdit(app: App) {
     this.currApp = app;
     this.editAppForm.form.patchValue(app);
-    console.log(this.currApp);
   }
 
   editApp() {

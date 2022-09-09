@@ -31,7 +31,7 @@ export interface Device {
     defaultLauncher: boolean;
     deviceId: string;
     factoryReset: boolean;
-    files: DeviceFiles[] | null;
+    files: DeviceFile[] | null;
     iccid: string;
     id: string;
     imei: string;
@@ -53,7 +53,7 @@ export interface Device {
   };
 }
 
-export interface DeviceFiles {
+export interface DeviceFile {
   ABSPath: string;
   size: number;
   name: string;
