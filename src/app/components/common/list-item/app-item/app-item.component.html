@@ -21,7 +21,10 @@
       >
         {{ app.name }}
       </p>
-      <p class="list-tip" #nametip>{{ app.name }}</p>
+      <p class="list-tip" #nametip [style.bottom]="app.system && '35px'">
+        {{ app.name }}
+      </p>
+      <p *ngIf="app.system" class="text-note system">Системное приложение</p>
     </div>
     <div class="version-wrapper">
       <p

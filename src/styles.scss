@@ -1554,10 +1554,12 @@ textarea {
   position: absolute;
 
   //top: -20px;
-  bottom: 20px;
+  bottom: 15px;
   left: -3px;
 
   padding: 3px;
+
+  white-space: nowrap;
 
   background-color: var(--dark-blue-grey);
   color: var(--white);
