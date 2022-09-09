@@ -7,8 +7,6 @@ import { App } from '../../../types/apps';
 })
 export class AppsSystemPipe implements PipeTransform {
   transform(apps: App[], isSystem: boolean = false): App[] {
-    if (isSystem) {
-      return apps.filter((a) => a.system);
-    } else return apps;
+    return apps.filter((a) => a.system === isSystem);
   }
 }

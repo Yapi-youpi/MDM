@@ -22,7 +22,7 @@ export class AppsComponent {
   public apps: App[] = [];
   public currApp!: App;
   public searchParam: string = '';
-  public isOnlySystemApps: boolean = false;
+  public isSystemApps: boolean = false;
   public isNameSortAsc: boolean = true;
   public isSizeSortAsc: boolean = true;
 
@@ -44,7 +44,9 @@ export class AppsComponent {
     this.appsService.get('all').then((res: AppState) => {
       if (res.success) {
         if (res.app) {
+          console.log(res.app);
           if (this.apps.length !== 0) this.apps = [];
+          // this.apps = res.app;
 
           res.app.forEach((a) => {
             if (a.ID === a.parentAppID)
@@ -107,7 +109,7 @@ export class AppsComponent {
   }
 
   toggleSystemApps() {
-    this.isOnlySystemApps = !this.isOnlySystemApps;
+    this.isSystemApps = !this.isSystemApps;
   }
 
   toggleNameSortDir() {
@@ -164,6 +166,7 @@ export class AppsComponent {
   selectAppToEdit(app: App) {
     this.currApp = app;
     this.editAppForm.form.patchValue(app);
+    console.log(this.currApp);
   }
 
   editApp() {
