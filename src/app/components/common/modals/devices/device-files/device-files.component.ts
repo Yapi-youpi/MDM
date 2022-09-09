@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Device } from '../../../../../shared/types/devices';
+import { Device, DeviceFile } from '../../../../../shared/types/devices';
 
 @Component({
   selector: 'app-device-files',
@@ -55,5 +55,14 @@ export class DeviceFilesComponent {
   hideTip() {
     this.tipRef.nativeElement.style.visibility = 'hidden';
     this.tipRef.nativeElement.style.opacity = 0;
+  }
+
+  onDownloadClickHandler(file: DeviceFile) {
+    const link = document.createElement('a');
+    link.download = file.name;
+    link.href = file.url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }
