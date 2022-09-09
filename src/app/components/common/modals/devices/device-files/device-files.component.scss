@@ -24,13 +24,12 @@
     .list {
       width: 550px;
 
-      //margin-top: 24px;
-      margin-top: 12px;
+      margin-top: 24px;
 
       align-self: flex-start;
 
       &-header {
-        margin-bottom: 12px;
+        margin-bottom: 16px;
         padding: 0 16px;
 
         > *:nth-child(1) {
@@ -103,7 +102,7 @@
       align-items: center;
       justify-content: center;
 
-      margin-top: 44px;
+      margin-top: 60px;
 
       background-color: var(--light-blue-grey);
 
