@@ -5,12 +5,13 @@ import {
   alertService,
   deviceConfigService,
   deviceService,
+  filesService,
   groupService,
   userService,
 } from '../../../shared/services';
 import { device } from 'src/app/shared/services/forms';
 import { DatabaseService } from '../../../shared/services/database.service';
-import { Device } from '../../../shared/types/devices';
+import { Device, DeviceFile } from '../../../shared/types/devices';
 import { DevicesGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
 import { DevicesFilter } from '../../../shared/types/filters';
@@ -32,6 +33,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
   public currDevice!: Device;
+  public currFile!: DeviceFile;
   public selectedDevicesIDs: string[] = [];
   public isAllSelected: boolean = false;
   public sortStatusAsc: boolean = true;
@@ -60,7 +62,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private editSeveralDevicesForm: device.editSeveral,
     private filterForm: device.filter,
     private alert: alertService,
-    private asset: AssetService
+    private asset: AssetService,
+    private files: filesService
   ) {}
 
   ngOnInit() {
@@ -380,6 +383,39 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   getDeviceFiles(device: Device) {
     this.currDevice = device;
+  }
+
+  selectFileToDelete(file: DeviceFile) {
+    this.currFile = file;
+  }
+
+  deleteFile(file: DeviceFile) {
+    this.loading = true;
+
+    this.files
+      .delete(this.currDevice.device_id, file.fileID)
+      .then((res) => {
+        if (res.success) {
+          console.log('Удалено');
+
+          if (this.currDevice.device_info.files)
+            this.currDevice.device_info.files =
+              this.currDevice.device_info.files?.filter(
+                (f) => f.fileID !== file.fileID
+              );
+
+          const modal = document.querySelector('#file_delete');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
+        } else {
+          console.log(res.error);
+        }
+      })
+      .finally(() => {
+        timer(500).subscribe(() => {
+          this.loading = false;
+        });
+      });
   }
 
   getDeviceQRCode(device: Device) {

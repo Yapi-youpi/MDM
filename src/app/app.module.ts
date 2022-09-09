@@ -129,6 +129,7 @@ import { FileNamePipe } from './shared/pipes/sort/files/file-name.pipe';
 import { FileDatePipe } from './shared/pipes/sort/files/file-date.pipe';
 import { FileActionBtnComponent } from './components/common/UI/button/item-action-btn/file/file-action-btn.component';
 import { DeviceFileSizePipe } from './shared/pipes/sort/files/file-size.pipe';
+import { DeleteFileComponent } from './components/common/modals/devices/delete-file/delete-file.component';
 
 const routes: Routes = [
   {
@@ -253,6 +254,7 @@ const routes: Routes = [
     FileSizePipe,
     DeviceFileSizePipe,
     FileActionBtnComponent,
+    DeleteFileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Device, DeviceFile } from '../../../../../shared/types/devices';
 
 @Component({
@@ -8,6 +15,8 @@ import { Device, DeviceFile } from '../../../../../shared/types/devices';
 })
 export class DeviceFilesComponent {
   @Input() device!: Device;
+
+  @Output() onDeleteClick = new EventEmitter<DeviceFile>();
 
   public displayFiles: 'all' | 'import' | 'export' = 'all';
 
@@ -64,5 +73,9 @@ export class DeviceFilesComponent {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+  onDeleteClickHandler(file: DeviceFile) {
+    this.onDeleteClick.emit(file);
   }
 }
