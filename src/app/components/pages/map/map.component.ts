@@ -125,11 +125,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.sub.on('update', (item) => {
       device = item.attributes;
-      console.log({
-        device_id: device.name,
-        lat: device.gps_location._latitude,
-        lng: device.gps_location._longitude,
-      });
+      // console.log({
+      //   device_id: device.name,
+      //   lat: device.gps_location._latitude,
+      //   lng: device.gps_location._longitude,
+      // });
       let index = this.devices_geo.findIndex((item) => {
         if (item.device.device_id === device.device_id) {
           return item;
@@ -162,6 +162,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             device
           );
         }
+
+        this.filterDevices();
+
         this.devices.push(device);
         this.devices_res.push(device);
       });
@@ -262,8 +265,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   filterDevices() {
+    const bounds = L.latLngBounds([]);
+
     let arr = this.devices_geo.filter((device) => {
       device.marker.remove();
+      const lat_lng = [
+        device.device.gps_location.latitude,
+        device.device.gps_location.longitude,
+      ];
+      // @ts-ignore
+      bounds.extend(lat_lng);
+
       return (
         (this.filter.active_state !== ''
           ? device.device.online_state.toString() === this.filter.active_state
@@ -284,6 +296,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         lng: d.device.gps_location.longitude,
       });
     });
+
+    this.mapService.map.fitBounds(bounds);
   }
 
   getValue(event) {
