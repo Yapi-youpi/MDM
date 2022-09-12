@@ -6,19 +6,32 @@
   }
 
   &-body {
-    .files-filter-btn {
-      &-all {
-        margin-left: 12px;
-      }
+    //.files-filter-btn {
+    //  &-all {
+    //    margin-left: 12px;
+    //  }
+    //
+    //  &-all,
+    //  &-import {
+    //    margin-right: 12px;
+    //  }
+    //
+    //  &-export {
+    //    margin-right: auto;
+    //  }
+    //}
+    .progress,
+    .dummy,
+    .filters {
+      margin-bottom: 10px;
+    }
 
-      &-all,
-      &-import {
-        margin-right: 12px;
-      }
+    .dummy {
+      height: 4px;
+    }
 
-      &-export {
-        margin-right: auto;
-      }
+    .add-btn {
+      margin-left: auto;
     }
 
     .list {
@@ -51,7 +64,8 @@
         }
 
         > *:nth-child(4) {
-          width: 96px;
+          //width: 96px;
+          width: 56px;
         }
       }
 
@@ -89,7 +103,8 @@
         }
 
         > *:nth-child(4) {
-          width: 96px;
+          //width: 96px;
+          width: 56px;
         }
       }
     }

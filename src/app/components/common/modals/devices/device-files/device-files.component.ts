@@ -15,6 +15,7 @@ import { Device, DeviceFile } from '../../../../../shared/types/devices';
 })
 export class DeviceFilesComponent {
   @Input() device!: Device;
+  @Input() loading: boolean = false;
 
   @Output() onDeleteClick = new EventEmitter<DeviceFile>();
 
