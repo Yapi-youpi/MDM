@@ -11,11 +11,12 @@ import { GroupsService } from '../../../shared/services/groups.service';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { interval } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
-import { DivIcon, Marker } from 'leaflet';
 import * as L from 'leaflet';
+import { DivIcon, Marker } from 'leaflet';
 import { Device } from '../../../shared/types/devices';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { UserService } from '../../../shared/services/user.service';
+import { DevicesGroup } from '../../../shared/types/groups';
 
 interface DeviceGeo {
   device: Device;
@@ -53,6 +54,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public icon!: DivIcon;
   public device_marker!: L.Marker;
   public devices: Device[] = [];
+  public groups: DevicesGroup[] = [];
   public devices_res: Device[] = [];
   public devices_geo: DeviceGeo[] = [];
   public open = false;
@@ -76,24 +78,30 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    this.mapService.initMap(61.4029, 55.1561, 13);
-    this.deviceSub().then();
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     let t = interval(200).subscribe(() => {
-      this.groupService.get('all').then((res) => {
-        res.devicesGroups.map((item) => {
-          let option = {
-            value: item.id,
-            html: item.name,
-            isSelected: false,
-          };
-          this.group_option.push(option);
-        });
-      });
-      if (this.user.token)
+      if (this.user.token) {
+        t.unsubscribe();
+        this.groupService
+          .get('all')
+          .then((res) => {
+            this.groups = res.devicesGroups;
+            res.devicesGroups.map((item) => {
+              let option = {
+                value: item.id,
+                html: item.name,
+                isSelected: false,
+              };
+              this.group_option.push(option);
+            });
+          })
+          .then(() => {
+            this.mapService.initMap(61.4029, 55.1561, 13);
+
+            this.deviceSub().then();
+          });
         this.configService.getConfig('all').then((res) => {
           res.map((item) => {
             let option = {
@@ -104,7 +112,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             this.config_option.push(option);
           });
         });
-      t.unsubscribe();
+      }
     });
   }
 
@@ -169,6 +177,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       : Number(device.signalLevel) < -83
       ? 'medium'
       : 'high';
+    const img = this.groups.find(
+      (g) => g.id === device.device_group_id
+    )?.iconID;
 
     this.icon = L.divIcon({
       html: `
@@ -177,7 +188,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             <div class="marker__label">
               ${device.name}
             </div>
-            <div class="marker__icon" style="background-color: ${color}; background-image: url('/assets/group-icons/apple.png')"></div>
+            <div class="marker__icon" style="background-color: ${color}; background-image: url('${img}')"></div>
           </div>
           <div class="marker__info">
             <div class="marker__info-row">
