@@ -131,6 +131,7 @@ import { FileActionBtnComponent } from './components/common/UI/button/item-actio
 import { DeviceFileSizePipe } from './shared/pipes/sort/files/file-size.pipe';
 import { DeleteFileComponent } from './components/common/modals/devices/delete-file/delete-file.component';
 import { AddFileComponent } from './components/common/modals/devices/add-file/add-file.component';
+import { FileItemComponent } from './components/common/list-item/file-item/file-item.component';
 
 const routes: Routes = [
   {
@@ -257,6 +258,7 @@ const routes: Routes = [
     FileActionBtnComponent,
     DeleteFileComponent,
     AddFileComponent,
+    FileItemComponent,
   ],
   imports: [
     BrowserModule,

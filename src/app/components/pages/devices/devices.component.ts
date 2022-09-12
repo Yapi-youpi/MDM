@@ -393,7 +393,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   addFile() {
-    // console.log(this._addFile._file);
     this.loading = true;
 
     this.files
@@ -413,7 +412,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
             this.currDevice.device_info.files = [res.file];
           }
 
-          const modal = document.querySelector('#add_file');
+          const modal = document.querySelector('#file_add');
           if (!modal?.classList.contains('hidden'))
             modal?.classList.toggle('hidden');
         } else {
@@ -442,8 +441,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
       .delete(this.currDevice.device_id, file.fileID)
       .then((res) => {
         if (res.success) {
-          console.log('Удалено');
-
           if (this.currDevice.device_info.files)
             this.currDevice.device_info.files =
               this.currDevice.device_info.files?.filter(

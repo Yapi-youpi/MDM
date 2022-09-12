@@ -1,0 +1,27 @@
+<div
+  class="item row space-between r-14"
+  [class.chosen]="file?.fileID === currFile?.fileID"
+  (click)="onFileClickHandler(file)"
+>
+  <div class="name-wrapper">
+    <p class="name" (mouseenter)="displayTip()" (mouseleave)="hideTip()" #name>
+      {{ file.name }}
+    </p>
+    <p class="list-tip" #tip>{{ file.name }}</p>
+  </div>
+  <p class="size">{{ file.size | fileSize }}</p>
+  <p class="date">{{ file.lastUpdate | dateConverter }}</p>
+  <div class="action-btns row space-between">
+    <app-file-action-btn
+      class="download"
+      target="file_download"
+      (onClick)="onDownloadClickHandler(file)"
+    ></app-file-action-btn>
+    <!--                  <app-file-action-btn target="file_hide"></app-file-action-btn>-->
+    <app-file-action-btn
+      class="delete"
+      target="file_delete"
+      (onClick)="onDeleteClickHandler(file)"
+    ></app-file-action-btn>
+  </div>
+</div>
