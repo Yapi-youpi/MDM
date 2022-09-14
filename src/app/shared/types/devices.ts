@@ -65,6 +65,7 @@ export interface DeviceFile {
   checksum: string;
   remove: boolean;
   varContent: boolean;
+  camData: boolean;
 }
 
 export interface AddDevice {

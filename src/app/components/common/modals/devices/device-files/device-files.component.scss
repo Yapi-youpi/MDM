@@ -6,20 +6,21 @@
   }
 
   &-body {
-    //.files-filter-btn {
-    //  &-all {
-    //    margin-left: 12px;
-    //  }
-    //
-    //  &-all,
-    //  &-import {
-    //    margin-right: 12px;
-    //  }
-    //
-    //  &-export {
-    //    margin-right: auto;
-    //  }
-    //}
+    .files-filter-btn {
+      &-all {
+        margin-left: 12px;
+      }
+
+      &-all,
+      &-import {
+        margin-right: 12px;
+      }
+
+      //&-export {
+      //  margin-right: auto;
+      //}
+    }
+
     .progress,
     .dummy,
     .filters {

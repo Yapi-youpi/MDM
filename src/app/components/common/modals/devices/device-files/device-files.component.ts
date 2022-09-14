@@ -20,7 +20,7 @@ export class DeviceFilesComponent {
 
   @Output() onDeleteClick = new EventEmitter<DeviceFile>();
 
-  // public displayFiles: 'all' | 'import' | 'export' = 'all';
+  public displayFiles: 'all' | 'import' | 'export' = 'all';
   private imagesEXT: string[] = ['ico', 'jpg', 'jpeg', 'png', 'gif', 'svg'];
   private videoEXT: string[] = ['mp4', 'webm', 'ogg'];
 
@@ -37,10 +37,10 @@ export class DeviceFilesComponent {
 
   constructor() {}
 
-  // toggleFilesDisplay(type: typeof this.displayFiles) {
-  //   if (type === this.displayFiles) return;
-  //   else this.displayFiles = type;
-  // }
+  toggleFilesDisplay(type: typeof this.displayFiles) {
+    if (type === this.displayFiles) return;
+    else this.displayFiles = type;
+  }
 
   onChangeSearchInputHandler(str: string) {
     this.searchTerm = str;

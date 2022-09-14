@@ -12,39 +12,39 @@
           [value]="searchTerm"
           (onChange)="onChangeSearchInputHandler($event)"
         ></app-input-search>
-        <!--        <app-button-->
-        <!--          class="files-filter-btn-all"-->
-        <!--          [class.chosen]="displayFiles === 'all'"-->
-        <!--          height="auto"-->
-        <!--          padding="9px 14px"-->
-        <!--          text="все"-->
-        <!--          textLike="like-body"-->
-        <!--          radius="14px"-->
-        <!--          [color]="displayFiles === 'all' ? 'blue' : 'common'"-->
-        <!--          (onCLick)="toggleFilesDisplay('all')"-->
-        <!--        ></app-button>-->
-        <!--        <app-button-->
-        <!--          class="files-filter-btn-import"-->
-        <!--          [class.chosen]="displayFiles === 'import'"-->
-        <!--          height="auto"-->
-        <!--          padding="9px 14px"-->
-        <!--          text="импорт"-->
-        <!--          textLike="like-body"-->
-        <!--          radius="14px"-->
-        <!--          [color]="displayFiles === 'import' ? 'blue' : 'common'"-->
-        <!--          (onCLick)="toggleFilesDisplay('import')"-->
-        <!--        ></app-button>-->
-        <!--        <app-button-->
-        <!--          class="files-filter-btn-export"-->
-        <!--          [class.chosen]="displayFiles === 'export'"-->
-        <!--          height="auto"-->
-        <!--          padding="9px 14px"-->
-        <!--          text="экспорт"-->
-        <!--          textLike="like-body"-->
-        <!--          radius="14px"-->
-        <!--          [color]="displayFiles === 'export' ? 'blue' : 'common'"-->
-        <!--          (onCLick)="toggleFilesDisplay('export')"-->
-        <!--        ></app-button>-->
+        <app-button
+          class="files-filter-btn-all"
+          [class.chosen]="displayFiles === 'all'"
+          height="auto"
+          padding="9px 14px"
+          text="все"
+          textLike="like-body"
+          radius="14px"
+          [color]="displayFiles === 'all' ? 'blue' : 'common'"
+          (onCLick)="toggleFilesDisplay('all')"
+        ></app-button>
+        <app-button
+          class="files-filter-btn-import"
+          [class.chosen]="displayFiles === 'import'"
+          height="auto"
+          padding="9px 14px"
+          text="импорт"
+          textLike="like-body"
+          radius="14px"
+          [color]="displayFiles === 'import' ? 'blue' : 'common'"
+          (onCLick)="toggleFilesDisplay('import')"
+        ></app-button>
+        <app-button
+          class="files-filter-btn-export"
+          [class.chosen]="displayFiles === 'export'"
+          height="auto"
+          padding="9px 14px"
+          text="экспорт"
+          textLike="like-body"
+          radius="14px"
+          [color]="displayFiles === 'export' ? 'blue' : 'common'"
+          (onCLick)="toggleFilesDisplay('export')"
+        ></app-button>
         <app-add-button
           class="add-btn"
           [title]="'добавить новый'"
@@ -100,6 +100,7 @@
                     | fileName: isNameSortAsc
                     | deviceFileSize: isSizeSortAsc
                     | fileDate: isDateSortAsc
+                    | filesSort: displayFiles
                 "
                 [file]="file"
                 [currFile]="currFile"
