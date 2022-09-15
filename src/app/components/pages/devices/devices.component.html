@@ -178,8 +178,10 @@
 <app-device-files
   *ngIf="userRole === 'admin' || userRole === 'super'"
   [device]="currDevice"
+  [loading]="loading"
   (onDeleteClick)="selectFileToDelete($event)"
 ></app-device-files>
+<app-add-file [isDataFetching]="loading" (onSubmit)="addFile()"></app-add-file>
 <app-delete-file
   *ngIf="userRole === 'admin' || userRole === 'super'"
   [file]="currFile"

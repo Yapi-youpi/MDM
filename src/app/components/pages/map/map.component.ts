@@ -53,6 +53,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public icon!: DivIcon;
   public device_marker!: L.Marker;
   public devices: Device[] = [];
+  public groups: DevicesGroup[] = [];
   public devices_res: Device[] = [];
   public devices_geo: DeviceGeo[] = [];
   public open = false;
@@ -83,27 +84,37 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     let t = interval(200).subscribe(() => {
-      this.groupService.get('all').then((res) => {
-        res.devicesGroups.map((item) => {
-          let option = {
-            value: item.id,
-            html: item.name,
-            isSelected: false,
-          };
-          this.group_option.push(option);
+      if (this.user.token) {
+        t.unsubscribe();
+        this.groupService
+          .get('all')
+          .then((res) => {
+            this.groups = res.devicesGroups;
+            res.devicesGroups.map((item) => {
+              let option = {
+                value: item.id,
+                html: item.name,
+                isSelected: false,
+              };
+              this.group_option.push(option);
+            });
+          })
+          .then(() => {
+            this.mapService.initMap(61.4029, 55.1561, 13);
+
+            this.deviceSub().then();
+          });
+        this.configService.getConfig('all').then((res) => {
+          res.map((item) => {
+            let option = {
+              value: item.ID,
+              html: item.name,
+              isSelected: false,
+            };
+            this.config_option.push(option);
+          });
         });
-      });
-      this.configService.getConfig('all').then((res) => {
-        res.map((item) => {
-          let option = {
-            value: item.ID,
-            html: item.name,
-            isSelected: false,
-          };
-          this.config_option.push(option);
-        });
-      });
-      t.unsubscribe();
+      }
     });
   }
 
@@ -116,14 +127,28 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.sub.on('update', (item) => {
       device = item.attributes;
-      this.devices_geo.map((dev)=>{
-        if (dev.device.device_id === device.device_id) {
-          dev.marker.setLatLng({
-            lat: device.gps_location._latitude,
-            lng: device.gps_location._longitude,
-          });
+      console.log({
+        device_id: device.name,
+        lat: device.gps_location._latitude,
+        lng: device.gps_location._longitude,
+      });
+      let index = this.devices_geo.findIndex((item) => {
+        if (item.device.device_id === device.device_id) {
+          return item;
+        } else {
+          return -1;
         }
-      })
+      });
+      if (
+        index !== -1 &&
+        device.gps_location._latitude !== 0 &&
+        device.gps_location._longitude !== 0
+      ) {
+        this.devices_geo[index].marker.setLatLng({
+          lat: device.gps_location._latitude,
+          lng: device.gps_location._longitude,
+        });
+      }
     });
     this.sub.on('create', (item) => {
       console.log(item.attributes);
@@ -139,6 +164,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             device
           );
         }
+
+        this.filterDevices();
+
         this.devices.push(device);
         this.devices_res.push(device);
       });
@@ -154,6 +182,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       : Number(device.signalLevel) < -83
       ? 'medium'
       : 'high';
+    const img = this.groups.find(
+      (g) => g.id === device.device_group_id
+    )?.iconID;
 
     this.icon = L.divIcon({
       html: `
@@ -162,7 +193,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             <div class="marker__label">
               ${device.name}
             </div>
-            <div class="marker__icon" style="background-color: ${color}; background-image: url('/assets/group-icons/apple.png')"></div>
+            <div class="marker__icon" style="background-color: ${color}; background-image: url('${img}')"></div>
           </div>
           <div class="marker__info">
             <div class="marker__info-row">
@@ -236,8 +267,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   filterDevices() {
+    const bounds = L.latLngBounds([]);
+
     let arr = this.devices_geo.filter((device) => {
       device.marker.remove();
+      const lat_lng = [
+        device.device.gps_location.latitude,
+        device.device.gps_location.longitude,
+      ];
+      // @ts-ignore
+      bounds.extend(lat_lng);
+
       return (
         (this.filter.active_state !== ''
           ? device.device.online_state.toString() === this.filter.active_state
@@ -258,6 +298,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         lng: d.device.gps_location.longitude,
       });
     });
+
+    this.mapService.map.fitBounds(bounds);
   }
 
   getValue(event) {

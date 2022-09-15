@@ -17,6 +17,7 @@ import { DevicesConfig } from '../../../shared/types/config';
 import { DevicesFilter } from '../../../shared/types/filters';
 import * as states from '../../../shared/types/states';
 import { AssetService } from '../../../shared/services/asset.service';
+import { addFile } from '../../../shared/services/forms/device';
 
 @Component({
   selector: 'app-devices',
@@ -63,7 +64,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private filterForm: device.filter,
     private alert: alertService,
     private asset: AssetService,
-    private files: filesService
+    private files: filesService,
+    private _addFile: addFile
   ) {}
 
   ngOnInit() {
@@ -104,7 +106,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         });
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -126,7 +129,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -151,7 +155,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -320,7 +325,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -377,7 +383,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
           });
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -385,6 +392,44 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   getDeviceFiles(device: Device) {
     this.currDevice = device;
+  }
+
+  addFile() {
+    this.loading = true;
+
+    this.files
+      .upload(this.currDevice.device_id, this._addFile._file)
+      .then((res) => {
+        if (res.success) {
+          if (this.currDevice.device_info.files) {
+            if (this.currDevice.device_info.files?.length !== 0) {
+              this.currDevice.device_info.files = [
+                res.file,
+                ...this.currDevice.device_info.files,
+              ];
+            } else {
+              this.currDevice.device_info.files.push(res.file);
+            }
+          } else {
+            this.currDevice.device_info.files = [res.file];
+          }
+
+          const modal = document.querySelector('#file_add');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
+        } else {
+          this.alert.show({
+            title: 'ADD FILE ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
+          this.loading = false;
+        });
+      });
   }
 
   selectFileToDelete(file: DeviceFile) {
@@ -398,8 +443,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
       .delete(this.currDevice.device_id, file.fileID)
       .then((res) => {
         if (res.success) {
-          console.log('Удалено');
-
           if (this.currDevice.device_info.files)
             this.currDevice.device_info.files =
               this.currDevice.device_info.files?.filter(
@@ -414,7 +457,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -454,7 +498,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -490,7 +535,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -517,7 +563,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
           });
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });
@@ -543,7 +590,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       })
       .finally(() => {
-        timer(500).subscribe(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
           this.loading = false;
         });
       });

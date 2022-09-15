@@ -130,6 +130,9 @@ import { FileDatePipe } from './shared/pipes/sort/files/file-date.pipe';
 import { FileActionBtnComponent } from './components/common/UI/button/item-action-btn/file/file-action-btn.component';
 import { DeviceFileSizePipe } from './shared/pipes/sort/files/file-size.pipe';
 import { DeleteFileComponent } from './components/common/modals/devices/delete-file/delete-file.component';
+import { AddFileComponent } from './components/common/modals/devices/add-file/add-file.component';
+import { FileItemComponent } from './components/common/list-item/file-item/file-item.component';
+import { FilesSortPipe } from './shared/pipes/sort/files-sort.pipe';
 
 const routes: Routes = [
   {
@@ -255,6 +258,9 @@ const routes: Routes = [
     DeviceFileSizePipe,
     FileActionBtnComponent,
     DeleteFileComponent,
+    AddFileComponent,
+    FileItemComponent,
+    FilesSortPipe,
   ],
   imports: [
     BrowserModule,

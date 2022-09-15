@@ -4,6 +4,7 @@ export enum devicesPaths {
   REMOVE = '/remove_device',
   EDIT = '/edit_device',
   REBOOT = '/reboot_device',
+  UPLOAD_FILE = '/upload_device_file/',
   DELETE_FILE = '/remove_device_file',
 }
 

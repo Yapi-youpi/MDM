@@ -1,5 +1,5 @@
 <app-modal [modalID]="'device_files'" [isClosable]="true">
-  <div class="modal-form w-900">
+  <div class="modal-form">
     <div class="modal-form-header">
       <h4 class="text-title text-center">
         Файлы на устройстве {{ device?.name }}
@@ -46,13 +46,22 @@
           (onCLick)="toggleFilesDisplay('export')"
         ></app-button>
         <app-add-button
+          class="add-btn"
           [title]="'добавить новый'"
-          [target]="'add_file'"
+          [target]="'file_add'"
         ></app-add-button>
       </div>
+      <ng-container *ngIf="loading; else dummy">
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </ng-container>
+      <ng-template #dummy>
+        <div class="dummy"></div>
+      </ng-template>
       <div class="row space-between">
         <div class="list">
-          <div class="list-header row">
+          <div class="list-header row space-between">
             <div class="sort-btn-wrapper">
               <app-sort-btn
                 title="Название"
@@ -84,41 +93,21 @@
                 else nodata
               "
             >
-              <div
+              <app-file-item
                 *ngFor="
                   let file of device.device_info.files
                     | search: searchTerm:'file'
                     | fileName: isNameSortAsc
                     | deviceFileSize: isSizeSortAsc
                     | fileDate: isDateSortAsc
+                    | filesSort: displayFiles
                 "
-                class="list-item row space-between r-14"
-              >
-                <div class="name-wrapper">
-                  <p
-                    class="name"
-                    (mouseenter)="displayTip()"
-                    (mouseleave)="hideTip()"
-                    #name
-                  >
-                    {{ file.name }}
-                  </p>
-                  <p class="list-tip" #tip>{{ file.name }}</p>
-                </div>
-                <p>{{ file.size | fileSize }}</p>
-                <p>{{ file.lastUpdate | dateConverter }}</p>
-                <div class="row space-between">
-                  <app-file-action-btn
-                    target="file_download"
-                    (onClick)="onDownloadClickHandler(file)"
-                  ></app-file-action-btn>
-                  <app-file-action-btn target="file_hide"></app-file-action-btn>
-                  <app-file-action-btn
-                    target="file_delete"
-                    (onClick)="onDeleteClickHandler(file)"
-                  ></app-file-action-btn>
-                </div>
-              </div>
+                [file]="file"
+                [currFile]="currFile"
+                (onFileClick)="setCurrentFile($event)"
+                (onDeleteClick)="onDeleteClickHandler($event)"
+                (onDownloadClick)="onDownloadClickHandler($event)"
+              ></app-file-item>
             </ng-container>
           </div>
           <ng-template #nodata>
@@ -126,8 +115,35 @@
           </ng-template>
         </div>
         <div class="preview-wrapper">
-          <div class="preview r-14">
-            <span class="text-choose">область просмотра</span>
+          <div
+            class="preview r-14"
+            [class.video]="currFile && fileType(currFile.url) === 'video'"
+          >
+            <span *ngIf="!currFile" class="text-choose">область просмотра</span>
+            <ng-container *ngIf="currFile">
+              <span
+                *ngIf="
+                  fileType(currFile.url) === 'none' ||
+                  fileType(currFile.url) === 'other'
+                "
+                class="text-choose"
+                >непросматриваемый файл</span
+              >
+              <img
+                *ngIf="fileType(currFile.url) === 'img'"
+                class="img"
+                [src]="currFile?.url"
+                alt=""
+              />
+              <video
+                *ngIf="fileType(currFile.url) === 'video'"
+                class="video"
+                [src]="currFile.url"
+                controls
+                [disableRemotePlayback]="true"
+                [controlsList]="['nodownload']"
+              ></video>
+            </ng-container>
           </div>
         </div>
       </div>
