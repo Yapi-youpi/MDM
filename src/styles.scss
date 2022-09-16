@@ -1067,14 +1067,16 @@ input {
   &[type='email'],
   &[type='password'],
   &[type='datetime-local'],
-  &[type='search'] {
+  &[type='search'],
+  &[type='time'] {
     outline: 1px solid var(--grey);
   }
 
   &[type='text'],
   &[type='email'],
   &[type='password'],
-  &[type='datetime-local'] {
+  &[type='datetime-local'],
+  &[type='time'] {
     border-radius: 16px;
   }
 
@@ -1098,6 +1100,11 @@ input {
 
   &[type='password'] {
     padding: 11px 31px 11px 11px;
+  }
+
+  &[type='time'] {
+    padding: 8px 11px;
+    line-height: 22px;
   }
 
   &:hover:not(:disabled),
