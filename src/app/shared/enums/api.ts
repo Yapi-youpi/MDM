@@ -27,6 +27,8 @@ export enum groupsPaths {
   DELETE = '/remove_device_group',
   DELETE_WITH_DEVICES = '/remove_device_group_and_all_devices',
   DELETE_SEVERAL = '/remove_device_groups_and_all_devices',
+  UPLOAD_FILE = '/upload_group_file/',
+  DELETE_FILE = '/remove_group_file',
 }
 
 export enum configsPaths {

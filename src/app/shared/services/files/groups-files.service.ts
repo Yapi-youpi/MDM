@@ -1,28 +1,30 @@
 import { Injectable } from '@angular/core';
+import { CFile, IFile } from '../../types/files';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { devicesPaths as api } from '../enums/api';
-import { DeviceFile } from '../types/devices';
+import { environment } from '../../../../environments/environment';
+import { groupsPaths as api } from '../../enums/api';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FilesService {
+export class GroupsFilesService implements CFile {
   constructor(private http: HttpClient) {}
 
-  upload(deviceID: string, file: FormData) {
-    // console.log(deviceID, file);
+  upload(
+    groupID: string,
+    file: FormData
+  ): Promise<{ success: boolean; error: string; file: IFile }> {
     return new Promise<{
       success: boolean;
       error: string;
-      file: DeviceFile;
+      file: IFile;
     }>((resolve, reject) => {
       this.http
         .post<{
           success: boolean;
           error: string;
-          file: DeviceFile;
-        }>(environment.url + api.UPLOAD_FILE + deviceID, file)
+          file: IFile;
+        }>(environment.url + api.UPLOAD_FILE + groupID, file)
         .subscribe({
           next: (res) => resolve(res),
           error: (err) => reject(err),
@@ -30,14 +32,17 @@ export class FilesService {
     });
   }
 
-  delete(deviceID: string, fileID: string) {
+  delete(
+    groupID: string,
+    fileID: string
+  ): Promise<{ success: boolean; error: string }> {
     return new Promise<{ success: boolean; error: string }>(
       (resolve, reject) => {
         this.http
           .post<{ success: boolean; error: string }>(
             environment.url + api.DELETE_FILE,
             {
-              deviceID: deviceID,
+              groupID: groupID,
               fileID: fileID,
             }
           )

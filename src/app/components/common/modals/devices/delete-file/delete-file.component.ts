@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DeviceFile } from '../../../../../shared/types/devices';
+import { IFile } from '../../../../../shared/types/files';
 
 @Component({
   selector: 'app-delete-file',
@@ -7,14 +7,14 @@ import { DeviceFile } from '../../../../../shared/types/devices';
   styleUrls: ['./delete-file.component.scss'],
 })
 export class DeleteFileComponent {
-  @Input() file!: DeviceFile;
+  @Input() file!: IFile;
   @Input() isDataFetching: boolean = false;
 
-  @Output() onSubmit = new EventEmitter<DeviceFile>();
+  @Output() onSubmit = new EventEmitter<IFile>();
 
   constructor() {}
 
-  onSubmitHandler(file: DeviceFile) {
+  onSubmitHandler(file: IFile) {
     this.onSubmit.emit(file);
   }
 

@@ -11,13 +11,14 @@ import {
 } from '../../../shared/services';
 import { device } from 'src/app/shared/services/forms';
 import { DatabaseService } from '../../../shared/services/database.service';
-import { Device, DeviceFile } from '../../../shared/types/devices';
+import { Device } from '../../../shared/types/devices';
 import { DevicesGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
 import { DevicesFilter } from '../../../shared/types/filters';
 import * as states from '../../../shared/types/states';
 import { AssetService } from '../../../shared/services/asset.service';
 import { addFile } from '../../../shared/services/forms/device';
+import { IFile } from '../../../shared/types/files';
 
 @Component({
   selector: 'app-devices',
@@ -34,7 +35,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
   public currDevice!: Device;
-  public currFile!: DeviceFile;
+  public currFile!: IFile;
   public selectedDevicesIDs: string[] = [];
   public isAllSelected: boolean = false;
   public sortStatusAsc: boolean = true;
@@ -64,7 +65,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private filterForm: device.filter,
     private alert: alertService,
     private asset: AssetService,
-    private files: filesService,
+    private files: filesService.devicesFiles,
     private _addFile: addFile
   ) {}
 
@@ -430,11 +431,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectFileToDelete(file: DeviceFile) {
+  selectFileToDelete(file: IFile) {
     this.currFile = file;
   }
 
-  deleteFile(file: DeviceFile) {
+  deleteFile(file: IFile) {
     this.loading = true;
 
     this.files

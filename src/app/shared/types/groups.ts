@@ -1,4 +1,5 @@
 import { Device } from './devices';
+import { IFile } from './files';
 
 export interface DevicesGroup {
   id: string;
@@ -11,6 +12,7 @@ export interface DevicesGroup {
   devices: Device[];
   capacity: number;
   isSelected?: boolean;
+  files: IFile[] | null;
 }
 
 export const groupIcons: string[] = [
