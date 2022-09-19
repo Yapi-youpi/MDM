@@ -1,4 +1,5 @@
 import { App } from './apps';
+import { IFile } from './files';
 
 export interface Device {
   device_id: string;
@@ -31,7 +32,7 @@ export interface Device {
     defaultLauncher: boolean;
     deviceId: string;
     factoryReset: boolean;
-    files: DeviceFile[] | null;
+    files: IFile[] | null;
     iccid: string;
     id: string;
     imei: string;
@@ -51,21 +52,6 @@ export interface Device {
     serial: string;
     signalLevel: string;
   };
-}
-
-export interface DeviceFile {
-  ABSPath: string;
-  size: number;
-  name: string;
-  fileID: string;
-  path: string;
-  description: string;
-  url: string;
-  lastUpdate: number;
-  checksum: string;
-  remove: boolean;
-  varContent: boolean;
-  camData: boolean;
 }
 
 export interface AddDevice {

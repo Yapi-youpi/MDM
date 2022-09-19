@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DeviceFile } from '../../../types/devices';
+import { IFile } from '../../../types/files';
 
 @Pipe({
   name: 'fileName',
 })
 export class FileNamePipe implements PipeTransform {
-  transform(files: DeviceFile[], asc: boolean): DeviceFile[] {
+  transform(files: IFile[], asc: boolean): IFile[] {
     return files.sort((a, b) =>
       asc
         ? b.name.toLowerCase().localeCompare(a.name.toLowerCase())

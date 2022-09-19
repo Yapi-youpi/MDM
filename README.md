@@ -4,6 +4,9 @@
 пароль: VhG2NXs3_
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
+## Deploy
+Для деплоя используется sftp `62.113.111.186` log: `root` pass: `HW1g*zz&`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

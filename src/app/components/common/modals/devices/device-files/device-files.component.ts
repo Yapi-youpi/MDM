@@ -7,7 +7,8 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Device, DeviceFile } from '../../../../../shared/types/devices';
+import { Device } from '../../../../../shared/types/devices';
+import { IFile } from '../../../../../shared/types/files';
 
 @Component({
   selector: 'app-device-files',
@@ -18,7 +19,7 @@ export class DeviceFilesComponent {
   @Input() device!: Device;
   @Input() loading: boolean = false;
 
-  @Output() onDeleteClick = new EventEmitter<DeviceFile>();
+  @Output() onDeleteClick = new EventEmitter<IFile>();
 
   public displayFiles: 'all' | 'import' | 'export' = 'all';
   private imagesEXT: string[] = ['ico', 'jpg', 'jpeg', 'png', 'gif', 'svg'];
@@ -30,7 +31,7 @@ export class DeviceFilesComponent {
   public isSizeSortAsc: boolean = true;
   public isDateSortAsc: boolean = true;
 
-  public currFile: DeviceFile | null = null;
+  public currFile: IFile | null = null;
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
@@ -58,7 +59,7 @@ export class DeviceFilesComponent {
     this.isDateSortAsc = !this.isDateSortAsc;
   }
 
-  onDownloadClickHandler(file: DeviceFile) {
+  onDownloadClickHandler(file: IFile) {
     const link = document.createElement('a');
     link.download = file.name;
     link.href = file.url;
@@ -67,11 +68,11 @@ export class DeviceFilesComponent {
     document.body.removeChild(link);
   }
 
-  onDeleteClickHandler(file: DeviceFile) {
+  onDeleteClickHandler(file: IFile) {
     this.onDeleteClick.emit(file);
   }
 
-  setCurrentFile(file: DeviceFile) {
+  setCurrentFile(file: IFile) {
     this.currFile = file;
   }
 

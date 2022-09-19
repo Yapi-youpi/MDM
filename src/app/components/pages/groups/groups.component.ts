@@ -77,8 +77,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.groupService
       .get(param)
       .then((res: states.DevicesGroupsState) => {
+        console.log(res);
         if (res.success) {
-          console.log(res.devicesGroups);
           this.groups = res.devicesGroups ? res.devicesGroups : [];
         } else {
           this.alert.show({

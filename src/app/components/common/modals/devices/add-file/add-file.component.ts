@@ -35,7 +35,7 @@ export class AddFileComponent {
   onCancelHandler() {
     this.form.resetForm();
 
-    const modal = document.querySelector('#add_file');
+    const modal = document.querySelector('#file_add');
     modal?.classList.toggle('hidden');
   }
 

@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DeviceFile } from '../../../types/devices';
+import { IFile } from '../../../types/files';
 
 @Pipe({
   name: 'fileDate',
 })
 export class FileDatePipe implements PipeTransform {
-  transform(files: DeviceFile[], asc: boolean): DeviceFile[] {
+  transform(files: IFile[], asc: boolean): IFile[] {
     return files.sort((a, b) => {
       const bDate: any = new Date(b.lastUpdate * 1000).toLocaleDateString(
         'ru-RU'

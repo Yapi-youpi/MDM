@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DeviceFile } from '../../../../../../shared/types/devices';
+import { IFile } from '../../../../../../shared/types/files';
 
 @Component({
   selector: 'app-file-action-btn',
@@ -8,13 +8,13 @@ import { DeviceFile } from '../../../../../../shared/types/devices';
 })
 export class FileActionBtnComponent {
   @Input() target: string = '';
-  @Input() file!: DeviceFile;
+  @Input() file!: IFile;
 
-  @Output() onClick = new EventEmitter<DeviceFile>();
+  @Output() onClick = new EventEmitter<IFile>();
 
   constructor() {}
 
-  onClickHandler(file: DeviceFile) {
+  onClickHandler(file: IFile) {
     this.onClick.emit(file);
 
     const modal = document.querySelector(`#${this.target}`);

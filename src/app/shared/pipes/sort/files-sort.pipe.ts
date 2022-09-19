@@ -1,14 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DeviceFile } from '../../types/devices';
+import { IFile } from '../../types/files';
 
 @Pipe({
   name: 'filesSort',
 })
 export class FilesSortPipe implements PipeTransform {
   transform(
-    files: DeviceFile[],
+    files: IFile[],
     sort: 'all' | 'import' | 'export' = 'all'
-  ): DeviceFile[] {
+  ): IFile[] {
     return files.filter((f) =>
       sort === 'import' ? !f.camData : sort === 'export' ? f.camData : f
     );

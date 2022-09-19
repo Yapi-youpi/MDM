@@ -152,6 +152,36 @@
                 </label>
               </div>
             </div>
+            <div
+              class="form__item"
+              *ngIf="configForm.get('systemUpdateType')?.value == 2"
+            >
+              <label for="systemUpdateTime">Время обновления</label>
+              <div class="w-500">
+                <input
+                  formControlName="systemUpdateTime"
+                  type="time"
+                  id="systemUpdateTime"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form__item">
+              <label for="configUpdateTime">Обновление конфигурации</label>
+              <div class="w-500">
+                <input
+                  formControlName="configUpdateTime"
+                  type="time"
+                  id="configUpdateTime"
+                  required
+                />
+                <span
+                  class="hint"
+                  title="Время автоматического обновления конфигурации на устройствах"
+                  >?
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

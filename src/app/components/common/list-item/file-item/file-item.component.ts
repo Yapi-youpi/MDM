@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { DeviceFile } from '../../../../shared/types/devices';
+import { IFile } from '../../../../shared/types/files';
 
 @Component({
   selector: 'app-file-item',
@@ -14,19 +14,19 @@ import { DeviceFile } from '../../../../shared/types/devices';
   styleUrls: ['./file-item.component.scss'],
 })
 export class FileItemComponent {
-  @Input() file!: DeviceFile;
-  @Input() currFile: DeviceFile | null = null;
+  @Input() file!: IFile;
+  @Input() currFile: IFile | null = null;
 
-  @Output() onFileClick = new EventEmitter<DeviceFile>();
-  @Output() onDownloadClick = new EventEmitter<DeviceFile>();
-  @Output() onDeleteClick = new EventEmitter<DeviceFile>();
+  @Output() onFileClick = new EventEmitter<IFile>();
+  @Output() onDownloadClick = new EventEmitter<IFile>();
+  @Output() onDeleteClick = new EventEmitter<IFile>();
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
   constructor() {}
 
-  onFileClickHandler(file: DeviceFile) {
+  onFileClickHandler(file: IFile) {
     this.onFileClick.emit(file);
   }
 
@@ -44,11 +44,11 @@ export class FileItemComponent {
     this.tipRef.nativeElement.style.opacity = 0;
   }
 
-  onDownloadClickHandler(file: DeviceFile) {
+  onDownloadClickHandler(file: IFile) {
     this.onDownloadClick.emit(file);
   }
 
-  onDeleteClickHandler(file: DeviceFile) {
+  onDeleteClickHandler(file: IFile) {
     this.onDeleteClick.emit(file);
   }
 }
