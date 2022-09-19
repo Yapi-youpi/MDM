@@ -9,7 +9,7 @@ import {
   groupService,
   userService,
 } from '../../../shared/services';
-import { device } from 'src/app/shared/services/forms';
+import { device, files } from 'src/app/shared/services/forms';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { Device } from '../../../shared/types/devices';
 import { DevicesGroup } from '../../../shared/types/groups';
@@ -17,7 +17,6 @@ import { DevicesConfig } from '../../../shared/types/config';
 import { DevicesFilter } from '../../../shared/types/filters';
 import * as states from '../../../shared/types/states';
 import { AssetService } from '../../../shared/services/asset.service';
-import { addFile } from '../../../shared/services/forms/device';
 import { IFile } from '../../../shared/types/files';
 
 @Component({
@@ -66,7 +65,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private alert: alertService,
     private asset: AssetService,
     private files: filesService.devicesFiles,
-    private _addFile: addFile
+    private fileForm: files.add
   ) {}
 
   ngOnInit() {
@@ -397,7 +396,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     this.files
-      .upload(this.currDevice.device_id, this._addFile._file)
+      .upload(this.currDevice.device_id, this.fileForm._file)
       .then((res) => {
         if (res.success) {
           if (this.currDevice.device_info.files) {
