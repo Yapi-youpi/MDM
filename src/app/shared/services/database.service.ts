@@ -7,12 +7,9 @@ import { environment } from '../../../environments/environment';
 })
 export class DatabaseService {
   constructor() {
-    Parse.initialize(
-      'MDMSERVER12324990543BSFD93234',
-      'U52RUG55222VAJ5478JDE32T3TE223B77YA'
-    );
-    (Parse as any).serverURL = environment.serverURL;
-    (Parse as any).liveQueryServerURL = environment.liveQueryServerURL;
+    Parse.initialize(environment.parseInit.appId, environment.parseInit.jsKey);
+    (Parse as any).serverURL = environment.parseInit.serverURL;
+    (Parse as any).liveQueryServerURL = environment.parseInit.lqServerURL;
   }
 
   query(cl: any) {

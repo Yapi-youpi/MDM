@@ -18,6 +18,7 @@ import { DevicesFilter } from '../../../shared/types/filters';
 import * as states from '../../../shared/types/states';
 import { AssetService } from '../../../shared/services/asset.service';
 import { IFile } from '../../../shared/types/files';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-devices',
@@ -34,7 +35,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
   public currDevice!: Device;
-  public currFile!: IFile;
+  public currFile: IFile | null = null;
   public selectedDevicesIDs: string[] = [];
   public isAllSelected: boolean = false;
   public sortStatusAsc: boolean = true;
@@ -82,13 +83,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.query = this.db.query('K_Device');
+    this.query = this.db.query('Device');
   }
 
   ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe()
-    }
+    if (this.sub) this.sub.unsubscribe();
     this.resetSearchParams();
     this.filterForm.reset();
   }
@@ -165,9 +164,9 @@ export class DevicesComponent implements OnInit, OnDestroy {
   async subscribeOnServer() {
     this.sub = await this.query.subscribe();
 
-    this.sub.on("open", () => {
-      console.log("Соединение открыто");
-    });
+    // this.sub.on("open", () => {
+    //   console.log("Соединение открыто");
+    // });
     // this.sub.on("close", () => {
     //   console.log("Соединение Закрыто");
     // });
@@ -414,6 +413,10 @@ export class DevicesComponent implements OnInit, OnDestroy {
             this.currDevice.device_info.files = [res.file];
           }
 
+          this.currFile = null;
+
+          this.fileForm.resetForm();
+
           const modal = document.querySelector('#file_add');
           if (!modal?.classList.contains('hidden'))
             modal?.classList.toggle('hidden');
@@ -548,6 +551,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   deleteDevice(device: Device) {
     this.loading = true;
+
     this.device
       .delete([device.device_id])
       .then((res: states.SingleDeviceState) => {
@@ -598,25 +602,9 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   rebootDevice(device: Device) {
-    this.loading = true
     this.device
-      .reload(device.device_id)      .then((res: states.SingleDeviceState) => {
-      if (res.success) {
-        const modal = document.querySelector('#reload_device');
-        if (!modal?.classList.contains('hidden'))
-          modal?.classList.toggle('hidden');
-      }
-      if (res.error)
-        this.alert.show({
-          title: 'RELOAD DEVICE ERROR',
-          content: res.error,
-        });
-    })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
-      })
+      .reload(device.device_id)
+      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }
 }

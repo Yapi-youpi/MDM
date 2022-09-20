@@ -7,15 +7,15 @@ import { IFile } from '../../../../../shared/types/files';
   styleUrls: ['./delete-file.component.scss'],
 })
 export class DeleteFileComponent {
-  @Input() file!: IFile;
+  @Input() file: IFile | null = null;
   @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter<IFile>();
 
   constructor() {}
 
-  onSubmitHandler(file: IFile) {
-    this.onSubmit.emit(file);
+  onSubmitHandler(file: IFile | null) {
+    if (file) this.onSubmit.emit(file);
   }
 
   onCancelHandler() {

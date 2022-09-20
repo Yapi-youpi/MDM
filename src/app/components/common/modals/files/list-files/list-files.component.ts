@@ -9,14 +9,17 @@ import {
 } from '@angular/core';
 import { Device } from '../../../../../shared/types/devices';
 import { IFile } from '../../../../../shared/types/files';
+import { DevicesGroup } from '../../../../../shared/types/groups';
 
 @Component({
-  selector: 'app-device-files',
-  templateUrl: './device-files.component.html',
-  styleUrls: ['./device-files.component.scss'],
+  selector: 'app-list-files',
+  templateUrl: './list-files.component.html',
+  styleUrls: ['./list-files.component.scss'],
 })
-export class DeviceFilesComponent {
+export class ListFilesComponent {
+  @Input() source: 'device' | 'group' = 'device';
   @Input() device!: Device;
+  @Input() group!: DevicesGroup;
   @Input() loading: boolean = false;
 
   @Output() onDeleteClick = new EventEmitter<IFile>();

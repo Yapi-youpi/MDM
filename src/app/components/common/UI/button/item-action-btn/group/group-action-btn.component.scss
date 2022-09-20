@@ -5,6 +5,10 @@
   -webkit-mask-size: 14px 14px;
   background-color: var(--white);
 
+  &.list_files {
+    mask-image: url('/assets/UI/paperclip.svg');
+    -webkit-mask-image: url('/assets/UI/paperclip.svg');
+  }
   &.edit_group {
     mask-image: url('/assets/UI/pencil.svg');
     -webkit-mask-image: url('/assets/UI/pencil.svg');
