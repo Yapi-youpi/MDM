@@ -45,15 +45,18 @@ export class AddGroupService {
     this.resetSubmitted();
   }
 
-  async setIconBase64FromURL(url) {
-    const data = await fetch(url);
-    const blob = await data.blob();
+  setIconBase64FromURL(url) {
+    return new Promise(async (resolve) => {
+      const data = await fetch(url);
+      const blob = await data.blob();
 
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = () => {
-      const base64data = reader.result;
-      this.form.get('iconID')?.setValue(base64data);
-    };
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        this.form.get('iconID')?.setValue(base64data);
+        resolve(true);
+      };
+    });
   }
 }

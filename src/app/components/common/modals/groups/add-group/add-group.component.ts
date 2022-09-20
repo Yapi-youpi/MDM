@@ -87,17 +87,23 @@ export class AddGroupComponent {
     this.toggleIconsContainer();
   }
 
-  onSubmitHandler() {
-    this.form.setSubmitted();
-
-    if (this._iconID?.value === '') {
-      this.form.setIconBase64FromURL('/assets/group-icons/rhombus.png').then();
-    }
-
+  submitForm() {
     if (this.form.form.invalid) {
       return;
     } else {
       this.onSubmit.emit();
+    }
+  }
+
+  onSubmitHandler() {
+    if (!this._iconID?.value) {
+      this.form
+        .setIconBase64FromURL('/assets/group-icons/rhombus.png')
+        .then(() => {
+          this.submitForm();
+        });
+    } else {
+      this.submitForm();
     }
   }
 
