@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import * as Parse from 'parse';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
   constructor() {
-    Parse.initialize(
-      'MDMSERVER12324990543BSFD93234',
-      'U52RUG55222VAJ5478JDE32T3TE223B77YA'
-    );
-    (Parse as any).serverURL = 'http://45.147.176.126:1337/parse';
-    (Parse as any).liveQueryServerURL = 'ws://45.147.176.126:8189';
+    Parse.initialize(environment.parseInit.appId, environment.parseInit.jsKey);
+    (Parse as any).serverURL = environment.parseInit.serverURL;
+    (Parse as any).liveQueryServerURL = environment.parseInit.lqServerURL;
   }
 
   query(cl: any) {

@@ -31,7 +31,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
   public userRole: string = '';
   public currGroup!: DevicesGroup;
-  public currFile!: IFile;
+  public currFile: IFile | null = null;
   public isAllSelected: boolean = false;
   public selectedGroupsIDs: string[] = [];
   public searchParam: string = '';
@@ -378,6 +378,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
             this.currGroup.files = this.currGroup.files?.filter(
               (f) => f.fileID !== file.fileID
             );
+          this.currFile = null;
 
           const modal = document.querySelector('#file_delete');
           if (!modal?.classList.contains('hidden'))

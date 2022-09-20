@@ -18,6 +18,7 @@ import { DevicesFilter } from '../../../shared/types/filters';
 import * as states from '../../../shared/types/states';
 import { AssetService } from '../../../shared/services/asset.service';
 import { IFile } from '../../../shared/types/files';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-devices',
@@ -34,7 +35,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public configs: DevicesConfig[] = [];
   public loading: boolean = true;
   public currDevice!: Device;
-  public currFile!: IFile;
+  public currFile: IFile | null = null;
   public selectedDevicesIDs: string[] = [];
   public isAllSelected: boolean = false;
   public sortStatusAsc: boolean = true;
@@ -82,7 +83,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.query = this.db.query('Device');
+    this.query = this.db.query(environment.parseClasses.devices);
   }
 
   ngOnDestroy() {
@@ -140,7 +141,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.device
       .get('all')
       .then((res: states.DevicesState) => {
-        console.log(res);
         if (res.success) {
           this.devices = res.devices
             ? res.devices.map((d) => ({ ...d, isSelected: false }))
@@ -411,6 +411,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
           } else {
             this.currDevice.device_info.files = [res.file];
           }
+
+          this.currFile = null;
 
           this.fileForm.resetForm();
 
