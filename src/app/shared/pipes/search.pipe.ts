@@ -7,8 +7,10 @@ export class SearchPipe implements PipeTransform {
   transform(
     array: any,
     value: string,
-    arrayType: 'device' | 'group' | 'app' | 'message' | 'file'
+    arrayType: 'device' | 'group' | 'app' | 'appGroup' | 'message' | 'file'
   ): any {
+    value = value.toLowerCase();
+
     if (arrayType === 'device' || arrayType === 'group')
       return !value
         ? array
@@ -28,6 +30,14 @@ export class SearchPipe implements PipeTransform {
       return array.filter((el) =>
         value !== '' ? el.name.toLowerCase().includes(value.toLowerCase()) : el
       );
+    if (arrayType === 'appGroup') {
+      if (value) {
+        return array.filter((res) => res['key'].toLowerCase().includes(value));
+      } else {
+        return array;
+      }
+    }
+
     if (arrayType === 'message')
       return array.filter((el) =>
         value ? el.text.toLowerCase().includes(value.toLowerCase()) : el

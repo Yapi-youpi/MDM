@@ -27,6 +27,7 @@ export class AddAppToConfigComponent implements OnChanges {
   public filter: string = 'all';
   // public filterForm: FormGroup;
   public url: string = environment.url + api.GET_ICON;
+  public searchParam: string = '';
 
   @Output() onSubmit = new EventEmitter();
 
@@ -62,6 +63,20 @@ export class AddAppToConfigComponent implements OnChanges {
         }
       }
     }
+  }
+
+  changeSearchParam(value: string) {
+    this.searchParam = value;
+
+    // const ololo = Object.fromEntries(
+    //   Object.entries(this.appsGroup).filter(([, val]) =>
+    //     // @ts-ignore
+    //     value !== ''
+    //       ? val[0].name.toLowerCase().includes(value)
+    //       : { [val[0].name]: val[0] }
+    //   )
+    // );
+    // console.log(ololo);
   }
 
   setFilter(event: Event) {

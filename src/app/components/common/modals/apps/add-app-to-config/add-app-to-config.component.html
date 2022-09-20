@@ -3,6 +3,10 @@
     <div class="modal__header">Добавить приложения в конфигурацию</div>
     <form class="filter-btn-wrapper">
       <div class="tags-container">
+        <app-input-search
+          [value]="searchParam"
+          (onChange)="changeSearchParam($event)"
+        ></app-input-search>
         <label class="custom-radio">
           <input
             class="visually-hidden"
@@ -44,7 +48,12 @@
       <ng-container *ngIf="apps.length > 0; else loader">
         <div class="checkbox-group">
           <label
-            *ngFor="let group of appsGroup | appGroup: filter | keyvalue"
+            *ngFor="
+              let group of appsGroup
+                | appGroup: filter
+                | keyvalue
+                | search: searchParam:'appGroup'
+            "
             class="checkbox-wrapper"
             for="{{ group.value[0].name }}"
           >
@@ -71,7 +80,7 @@
                 }}"
                 alt="{{ group.value[0].iconText }}"
               />
-              <span class="app__name">{{ group.key }}</span>
+              <span [title]="group.key" class="app__name">{{ group.key }}</span>
 
               <select
                 *ngIf="!group.value[0].system; else systemApp"
