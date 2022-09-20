@@ -11,6 +11,7 @@ import { Device } from '../../../../../../shared/types/devices';
 })
 export class DeviceActionBtnComponent {
   @Input() target: string = '';
+  @Input() title: string = '';
   @Input() device!: Device;
 
   @Output() onClick = new EventEmitter<Device>();

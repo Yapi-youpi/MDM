@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class FilterBtnComponent {
   @Input() public target: string = '';
+  @Input() public text: string = '';
 
   constructor() {}
 

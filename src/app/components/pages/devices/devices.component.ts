@@ -83,7 +83,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.query = this.db.query('Device');
+    this.query = this.db.query(environment.parseClasses.devices);
   }
 
   ngOnDestroy() {

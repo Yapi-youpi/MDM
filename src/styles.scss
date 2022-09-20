@@ -1366,6 +1366,7 @@ textarea {
     margin-right: -40px;
   }
   & .marker__label {
+    color: white;
     width: 100%;
     padding: 14px 48px;
     background-color: var(--light-blue);
@@ -1450,7 +1451,7 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #557ebe;
+  background-color: #67687C;
   border-radius: 50%;
   height: 25px;
   width: 25px;

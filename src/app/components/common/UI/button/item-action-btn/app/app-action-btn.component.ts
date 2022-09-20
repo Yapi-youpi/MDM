@@ -10,10 +10,12 @@ import { App } from '../../../../../../shared/types/apps';
 export class AppActionBtnComponent {
   @Input() target: string = '';
   @Input() app!: App;
+  @Input() text!: string;
 
   @Output() onClick = new EventEmitter<App>();
 
-  constructor(private form: EditDeviceService) {}
+  constructor(private form: EditDeviceService) {
+  }
 
   onClickHandler(app: App) {
     this.onClick.emit(app);

@@ -16,6 +16,8 @@ import * as L from 'leaflet';
 import { Device } from '../../../shared/types/devices';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { UserService } from '../../../shared/services/user.service';
+import { DevicesGroup } from '../../../shared/types/groups';
+import { environment } from '../../../../environments/environment';
 
 interface DeviceGeo {
   device: Device;
@@ -78,8 +80,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mapService.initMap(63.6495,53.2099, 13);
-    this.deviceSub().then();
   }
 
   ngAfterViewInit() {
@@ -100,7 +100,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             });
           })
           .then(() => {
-            this.mapService.initMap(61.4029, 55.1561, 13);
+            this.mapService.initMap(71.43190, 51.12765, 13);
 
             this.deviceSub().then();
           });
@@ -119,7 +119,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async deviceSub() {
-    let query = this.db.query('Device');
+    let query = this.db.query(environment.parseClasses.devices);
     this.sub = await query.subscribe();
     let device: Device | any;
     this.sub.on('open', () => {
@@ -127,32 +127,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.sub.on('update', (item) => {
       device = item.attributes;
-      console.log({
-        device_id: device.name,
+      this.devices_geo.find((dev)=>
+        dev.device.device_id === device.device_id
+      )?.marker.setLatLng({
         lat: device.gps_location._latitude,
         lng: device.gps_location._longitude,
-      });
-      let index = this.devices_geo.findIndex((item) => {
-        if (item.device.device_id === device.device_id) {
-          return item;
-        } else {
-          return -1;
-        }
-      });
-      if (
-        index !== -1 &&
-        device.gps_location._latitude !== 0 &&
-        device.gps_location._longitude !== 0
-      ) {
-        this.devices_geo[index].marker.setLatLng({
-          lat: device.gps_location._latitude,
-          lng: device.gps_location._longitude,
-        });
-      }
+      })
     });
     this.sub.on('create', (item) => {
-      console.log(item.attributes);
-      console.log('NEW OBJECT WAS CREATED');
+      // console.log(item.attributes);
+      // console.log('NEW OBJECT WAS CREATED');
     });
     query.findAll().then((res) => {
       res.map((item) => {
@@ -175,6 +159,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   addMarkers(lat: number, lng: number, device: Device) {
     let color = device.online_state ? '#AFD9A1' : '#FCA3A3';
+    let text = device.online_state ? 'активно' : 'неактивно';
     let signalLevel = !device.signalLevel
       ? ''
       : Number(device.signalLevel) < -92
@@ -188,7 +173,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.icon = L.divIcon({
       html: `
-        <div id="m_${device.device_id}" class="marker" (click)="showInfo($event)">
+        <div title='${device.name + ' ' + text}' id="m_${device.device_id}" class="marker" (click)="showInfo($event)">
           <div class="marker__header">
             <div class="marker__label">
               ${device.name}

@@ -8,6 +8,7 @@ import { btnColor, btnText, btnType } from '../../../../../shared/types/button';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
+  @Input() title!: string
   @Input() text: string = '';
   @Input() textLike: btnText = 'like-button';
   @Input() type: btnType = 'button';

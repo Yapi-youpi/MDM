@@ -129,43 +129,43 @@
                 </div>
               </div>
             </div>
-            <div class="form__item">
-              <label>Обновление системы</label>
-              <div class="tags-container w-500">
-                <label class="custom-radio">
-                  <input
-                    class="visually-hidden"
-                    formControlName="systemUpdateType"
-                    type="radio"
-                    [value]="2"
-                  />
-                  <span class="custom-radio__span">по расписанию</span>
-                </label>
-                <label class="custom-radio">
-                  <input
-                    class="visually-hidden"
-                    formControlName="systemUpdateType"
-                    type="radio"
-                    [value]="3"
-                  />
-                  <span class="custom-radio__span">по запросу</span>
-                </label>
-              </div>
-            </div>
-            <div
-              class="form__item"
-              *ngIf="configForm.get('systemUpdateType')?.value == 2"
-            >
-              <label for="systemUpdateTime">Время обновления</label>
-              <div class="w-500">
-                <input
-                  formControlName="systemUpdateTime"
-                  type="time"
-                  id="systemUpdateTime"
-                  required
-                />
-              </div>
-            </div>
+<!--            <div class="form__item">-->
+<!--              <label>Обновление системы</label>-->
+<!--              <div class="tags-container w-500">-->
+<!--                <label class="custom-radio">-->
+<!--                  <input-->
+<!--                    class="visually-hidden"-->
+<!--                    formControlName="systemUpdateType"-->
+<!--                    type="radio"-->
+<!--                    [value]="2"-->
+<!--                  />-->
+<!--                  <span class="custom-radio__span">по расписанию</span>-->
+<!--                </label>-->
+<!--                <label class="custom-radio">-->
+<!--                  <input-->
+<!--                    class="visually-hidden"-->
+<!--                    formControlName="systemUpdateType"-->
+<!--                    type="radio"-->
+<!--                    [value]="3"-->
+<!--                  />-->
+<!--                  <span class="custom-radio__span">по запросу</span>-->
+<!--                </label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="form__item"-->
+<!--              *ngIf="configForm.get('systemUpdateType')?.value == 2"-->
+<!--            >-->
+<!--              <label for="systemUpdateTime">Время обновления</label>-->
+<!--              <div class="w-500">-->
+<!--                <input-->
+<!--                  formControlName="systemUpdateTime"-->
+<!--                  type="time"-->
+<!--                  id="systemUpdateTime"-->
+<!--                  required-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
             <div class="form__item">
               <label for="configUpdateTime">Обновление конфигурации</label>
               <div class="w-500">
