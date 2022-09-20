@@ -6,7 +6,10 @@
         (onChange)="onChangeSearchInputHandler($event)"
       ></app-input-search>
       <div class="filter-wrapper">
-        <app-filter-btn [target]="'filter_devices'"></app-filter-btn>
+        <app-filter-btn
+          title="Показать фильтры поиска"
+          [target]="'filter_devices'"
+        ></app-filter-btn>
       </div>
       <app-add-button
         *ngIf="userRole === 'admin' || userRole === 'super'"

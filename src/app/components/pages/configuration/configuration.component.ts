@@ -120,9 +120,11 @@ export class ConfigurationComponent implements OnInit {
     this.configService
       .getConfig(id)
       .then((res) => {
-        this.config = Object.assign(res[0]);
-        this.initialAppList = res[0].applications || [];
-        console.log(this.config);
+        if (res.length > 0) {
+          this.config = Object.assign(res[0]);
+          this.initialAppList = res[0].applications || [];
+          console.log(this.config);
+        }
       })
       .then(() => {
         let i = interval(200).subscribe(() => {
@@ -161,11 +163,12 @@ export class ConfigurationComponent implements OnInit {
 
     this.getApps();
     // this.getRestrictions();
-    this.config.applications = this.initialAppList;
-
-    // две строки ниже должны быть именно в таком порядке!
-    this.clearInputFile();
-    this.bgImg = this.config.backgroundImageUrl;
+    if (this.config) {
+      this.config.applications = this.initialAppList;
+      // две строки ниже должны быть именно в таком порядке!
+      this.clearInputFile();
+      this.bgImg = this.config.backgroundImageUrl;
+    }
     if (this.bgImg) {
       const span = this.file_placeholder.querySelector('.filename');
       if (span)

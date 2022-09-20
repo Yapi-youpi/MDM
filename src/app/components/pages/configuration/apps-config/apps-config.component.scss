@@ -9,6 +9,15 @@
   flex: 1;
 }
 
+.progress,
+.dummy {
+  margin: 5px 0;
+}
+
+.dummy {
+  height: 4px;
+}
+
 table {
   width: 100%;
 }

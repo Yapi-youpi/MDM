@@ -13,7 +13,11 @@
       [formControlName]="controlName"
       [value]="currDay ? (currDay | moment: 'HH:mm, D MMM YYYY') : ''"
     />
-    <span class="icon icon-datetime" (click)="showDatetimePicker()"></span>
+    <span
+      title="Выбрать из календаря"
+      class="icon icon-datetime"
+      (click)="showDatetimePicker()"
+    ></span>
   </div>
 </ng-template>
 <ng-template #input>

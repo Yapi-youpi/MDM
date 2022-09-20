@@ -5,6 +5,7 @@
   ></app-input-search>
   <div class="filter-btn-wrapper">
     <app-button
+      title="Показать/скрыть системные приложения"
       [text]="'системное приложение'"
       [textLike]="'like-body'"
       [height]="'30px'"
@@ -20,6 +21,15 @@
     (click)="setModalAddAppOpen()"
   ></app-add-button>
 </div>
+
+<ng-container *ngIf="loading; else dummy">
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
+</ng-container>
+<ng-template #dummy>
+  <div class="dummy"></div>
+</ng-template>
 
 <table *ngIf="appsInConfig && appsInConfig!.length > 0; else nodata">
   <thead>

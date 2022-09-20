@@ -12,6 +12,7 @@
   <div class="content">
     <div class="icon-wrapper status">
       <app-status-icon
+        [title]="device.online_state ? 'Активно' : 'Неактивно'"
         [size]="'s18x18'"
         [isOn]="device.online_state"
         [isOff]="!device.online_state"
@@ -43,6 +44,9 @@
     </p>
     <div class="icon-wrapper row center update">
       <app-status-icon
+        [title]="
+          device.registration_state ? 'Зарегистрировано' : 'Не зарегистрировано'
+        "
         [size]="'s14x14'"
         [isOn]="device.registration_state"
         [isOff]="!device.registration_state"

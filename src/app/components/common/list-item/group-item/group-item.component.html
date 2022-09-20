@@ -59,16 +59,19 @@
       *ngIf="userRole === 'admin' || userRole === 'super'"
     >
       <app-group-action-btn
+        title="Файлы в группе"
         [group]="group"
         [target]="'list_files'"
         (onClick)="onEditCLickHandler(group)"
       ></app-group-action-btn>
       <app-group-action-btn
+        title="Редактировать группу"
         [group]="group"
         [target]="'edit_group'"
         (onClick)="onEditCLickHandler(group)"
       ></app-group-action-btn>
       <app-group-action-btn
+        title="Удалить группу"
         [group]="group"
         [target]="'delete_group'"
         (onClick)="onDeleteClickHandler(group)"

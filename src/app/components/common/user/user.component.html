@@ -2,6 +2,7 @@
   <div class="user-popup">
     <div class="popup-btn-wrapper" [class.no-img]="currentUser?.avatar === ''">
       <app-button
+        title="Окно пользователя"
         [height]="'30px'"
         [width]="'30px'"
         [padding]="'0'"
@@ -41,6 +42,7 @@
         </div>
         <div class="top-right" *ngIf="router.url !== '/users'">
           <app-card-menu-btn
+            title="Редактировать данные"
             [target]="'modal-new-user'"
             [bg]="'blue'"
             *ngIf="currentUser"
