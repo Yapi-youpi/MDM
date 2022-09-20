@@ -15,6 +15,9 @@ import { DevicesConfig } from '../../../shared/types/config';
 import * as states from '../../../shared/types/states';
 import { GroupFilter } from '../../../shared/types/filters';
 import { AssetService } from '../../../shared/services/asset.service';
+import { addFile } from '../../../shared/services/forms/device';
+import { groupsFiles } from '../../../shared/services/files';
+import { IFile } from '../../../shared/types/files';
 
 @Component({
   selector: 'app-group',
@@ -28,6 +31,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
   public userRole: string = '';
   public currGroup!: DevicesGroup;
+  public currFile!: IFile;
   public isAllSelected: boolean = false;
   public selectedGroupsIDs: string[] = [];
   public searchParam: string = '';
@@ -53,7 +57,9 @@ export class GroupsComponent implements OnInit, OnDestroy {
     private editSeveralForm: editSeveral,
     private addForm: add,
     private alert: alertService,
-    private asset: AssetService
+    private asset: AssetService,
+    private files: groupsFiles,
+    private fileForm: addFile
   ) {}
 
   ngOnInit() {
@@ -77,7 +83,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.groupService
       .get(param)
       .then((res: states.DevicesGroupsState) => {
-        console.log(res);
         if (res.success) {
           this.groups = res.devicesGroups ? res.devicesGroups : [];
         } else {
@@ -315,6 +320,76 @@ export class GroupsComponent implements OnInit, OnDestroy {
   selectGroupToEdit(group: DevicesGroup) {
     this.currGroup = group;
     this.editForm.form.patchValue(group);
+  }
+
+  getGroupFiles(group: DevicesGroup) {
+    this.currGroup = group;
+  }
+
+  addFile() {
+    this.loading = true;
+
+    this.files
+      .upload(this.currGroup.id, this.fileForm._file)
+      .then((res) => {
+        if (res.success) {
+          if (this.currGroup.files) {
+            if (this.currGroup.files?.length !== 0) {
+              this.currGroup.files = [res.file, ...this.currGroup.files];
+            } else {
+              this.currGroup.files.push(res.file);
+            }
+          } else {
+            this.currGroup.files = [res.file];
+          }
+
+          const modal = document.querySelector('#file_add');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
+        } else {
+          this.alert.show({
+            title: 'ADD FILE ERROR',
+            content: res.error,
+          });
+        }
+      })
+      .finally(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
+          this.loading = false;
+        });
+      });
+  }
+
+  selectFileToDelete(file: IFile) {
+    this.currFile = file;
+  }
+
+  deleteFile(file: IFile) {
+    this.loading = true;
+
+    this.files
+      .delete(this.currGroup.id, file.fileID)
+      .then((res) => {
+        if (res.success) {
+          if (this.currGroup.files)
+            this.currGroup.files = this.currGroup.files?.filter(
+              (f) => f.fileID !== file.fileID
+            );
+
+          const modal = document.querySelector('#file_delete');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
+        } else {
+          console.log(res.error);
+        }
+      })
+      .finally(() => {
+        const t = timer(500).subscribe(() => {
+          t.unsubscribe();
+          this.loading = false;
+        });
+      });
   }
 
   editGroup() {

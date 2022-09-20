@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { addFile } from '../../../../../shared/services/forms/device';
+import { add } from '../../../../../shared/services/forms/file';
 
 @Component({
   selector: 'app-add-file',
@@ -7,11 +7,13 @@ import { addFile } from '../../../../../shared/services/forms/device';
   styleUrls: ['./add-file.component.scss'],
 })
 export class AddFileComponent {
+  @Input() source: 'device' | 'group' = 'device';
+
   @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();
 
-  constructor(private form: addFile) {}
+  constructor(private form: add) {}
 
   get _form() {
     return this.form.form;

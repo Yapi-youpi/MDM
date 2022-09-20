@@ -27,6 +27,7 @@ export class GroupItemComponent {
     deviceConfigID: string;
   }>();
   @Output() onSwitchChange = new EventEmitter<DevicesGroup>();
+  @Output() onFileClick = new EventEmitter<DevicesGroup>();
   @Output() onEditClick = new EventEmitter<DevicesGroup>();
   @Output() onDeleteClick = new EventEmitter<DevicesGroup>();
 
@@ -76,6 +77,10 @@ export class GroupItemComponent {
 
   onSwitchChangeHandler(group: DevicesGroup) {
     this.onSwitchChange.emit(group);
+  }
+
+  onFileClickHandler(group: DevicesGroup) {
+    this.onFileClick.emit(group);
   }
 
   onEditCLickHandler(group: DevicesGroup) {

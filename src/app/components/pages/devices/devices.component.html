@@ -145,46 +145,44 @@
   (onCancel)="resetSearchParams()"
   (onSubmit)="searchDevicesWithParams()"
 ></app-filter-devices>
-<app-add-device
-  *ngIf="userRole === 'admin' || userRole === 'super'"
-  [groups]="groups"
-  [isDataFetching]="loading"
-  (onSubmit)="addDevice()"
-></app-add-device>
-<app-qr-code [device]="currDevice"></app-qr-code>
-<app-edit-device
-  *ngIf="userRole === 'admin' || userRole === 'super'"
-  [groups]="groups"
-  [isDataFetching]="loading"
-  (onSubmit)="editDevice()"
-></app-edit-device>
-<app-edit-several-devices
-  *ngIf="userRole === 'admin' || userRole === 'super'"
-  [groups]="groups"
-  [isDataFetching]="loading"
-  (onSubmit)="editSeveralDevices()"
-></app-edit-several-devices>
-<app-delete-device
-  *ngIf="userRole === 'admin' || userRole === 'super'"
-  [device]="currDevice"
-  [isDataFetching]="loading"
-  (onSubmit)="deleteDevice($event)"
-></app-delete-device>
-<app-delete-several-elements
-  *ngIf="userRole === 'admin' || userRole === 'super'"
-  [isDataFetching]="loading"
-  (onSubmit)="deleteSeveralDevices()"
-></app-delete-several-elements>
-<app-device-files
-  *ngIf="userRole === 'admin' || userRole === 'super'"
-  [device]="currDevice"
-  [loading]="loading"
-  (onDeleteClick)="selectFileToDelete($event)"
-></app-device-files>
-<app-add-file [isDataFetching]="loading" (onSubmit)="addFile()"></app-add-file>
-<app-delete-file
-  *ngIf="userRole === 'admin' || userRole === 'super'"
-  [file]="currFile"
-  [isDataFetching]="loading"
-  (onSubmit)="deleteFile($event)"
-></app-delete-file>
+<ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
+  <app-add-device
+    [groups]="groups"
+    [isDataFetching]="loading"
+    (onSubmit)="addDevice()"
+  ></app-add-device>
+  <app-qr-code [device]="currDevice"></app-qr-code>
+  <app-edit-device
+    [groups]="groups"
+    [isDataFetching]="loading"
+    (onSubmit)="editDevice()"
+  ></app-edit-device>
+  <app-edit-several-devices
+    [groups]="groups"
+    [isDataFetching]="loading"
+    (onSubmit)="editSeveralDevices()"
+  ></app-edit-several-devices>
+  <app-delete-device
+    [device]="currDevice"
+    [isDataFetching]="loading"
+    (onSubmit)="deleteDevice($event)"
+  ></app-delete-device>
+  <app-delete-several-elements
+    [isDataFetching]="loading"
+    (onSubmit)="deleteSeveralDevices()"
+  ></app-delete-several-elements>
+  <app-list-files
+    [device]="currDevice"
+    [loading]="loading"
+    (onDeleteClick)="selectFileToDelete($event)"
+  ></app-list-files>
+  <app-add-file
+    [isDataFetching]="loading"
+    (onSubmit)="addFile()"
+  ></app-add-file>
+  <app-delete-file
+    [file]="currFile"
+    [isDataFetching]="loading"
+    (onSubmit)="deleteFile($event)"
+  ></app-delete-file>
+</ng-container>

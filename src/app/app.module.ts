@@ -124,13 +124,13 @@ import { TicketModalComponent } from './components/pages/help/ticket-modal/ticke
 import { DevicesFiltersComponent } from './components/common/filters/devices-filters/devices-filters.component';
 import { GroupsFiltersComponent } from './components/common/filters/groups-filters/groups-filters.component';
 import { AppGroupPipe } from './shared/pipes/filters/app-group.pipe';
-import { DeviceFilesComponent } from './components/common/modals/devices/device-files/device-files.component';
+import { ListFilesComponent } from './components/common/modals/files/list-files/list-files.component';
 import { FileNamePipe } from './shared/pipes/sort/files/file-name.pipe';
 import { FileDatePipe } from './shared/pipes/sort/files/file-date.pipe';
 import { FileActionBtnComponent } from './components/common/UI/button/item-action-btn/file/file-action-btn.component';
 import { DeviceFileSizePipe } from './shared/pipes/sort/files/file-size.pipe';
-import { DeleteFileComponent } from './components/common/modals/devices/delete-file/delete-file.component';
-import { AddFileComponent } from './components/common/modals/devices/add-file/add-file.component';
+import { DeleteFileComponent } from './components/common/modals/files/delete-file/delete-file.component';
+import { AddFileComponent } from './components/common/modals/files/add-file/add-file.component';
 import { FileItemComponent } from './components/common/list-item/file-item/file-item.component';
 import { FilesSortPipe } from './shared/pipes/sort/files-sort.pipe';
 
@@ -251,7 +251,7 @@ const routes: Routes = [
     DevicesFiltersComponent,
     GroupsFiltersComponent,
     AppGroupPipe,
-    DeviceFilesComponent,
+    ListFilesComponent,
     FileNamePipe,
     FileDatePipe,
     FileSizePipe,

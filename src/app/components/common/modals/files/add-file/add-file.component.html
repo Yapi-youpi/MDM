@@ -1,7 +1,9 @@
 <app-modal [modalID]="'file_add'" [isClosable]="true">
   <div class="modal-form w-700">
     <div class="modal-form-header">
-      <h4 class="text-title text-center">Добавить файл на устройство</h4>
+      <h4 class="text-title text-center">
+        Добавить файл {{ source === 'device' ? 'на устройство' : 'в группу' }}
+      </h4>
     </div>
     <hr class="divider" />
     <div class="modal-form-body">
