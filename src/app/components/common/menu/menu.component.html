@@ -1,7 +1,10 @@
 <aside class="menu-sidebar" [class.hidden]="isSidebarHidden">
   <div class="content">
     <div class="header row flex-start" [class.hidden]="isSidebarHidden">
-      <app-menu-button (onClick)="toggleSidebarView()"></app-menu-button>
+      <app-menu-button
+        title="Свернуть/развернуть боковое меню"
+        (onClick)="toggleSidebarView()"
+      ></app-menu-button>
       <img
         src="/assets/UI/logo.svg"
         alt="Logo"

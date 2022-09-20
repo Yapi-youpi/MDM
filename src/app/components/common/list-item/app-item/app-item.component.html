@@ -57,11 +57,13 @@
     </div>
     <div class="row space-between app-item__action">
       <app-app-action-btn
+        title="Редактировать приложение"
         [app]="app"
         [target]="'edit_app'"
         (onClick)="onEditClickHandler(app)"
       ></app-app-action-btn>
       <app-app-action-btn
+        title="Удалить приложение"
         [app]="app"
         [target]="'delete_app'"
         (onClick)="onDeleteClickHandler(app)"
@@ -83,11 +85,13 @@
           <div class="empty-container"></div>
           <div class="row space-between app-item__action">
             <app-app-action-btn
+              title="Редактировать приложение"
               [app]="child"
               [target]="'edit_app'"
               (onClick)="onEditClickHandler(child)"
             ></app-app-action-btn>
             <app-app-action-btn
+              title="Удалить приложение"
               [app]="child"
               [target]="'delete_app'"
               (onClick)="onDeleteClickHandler(child)"

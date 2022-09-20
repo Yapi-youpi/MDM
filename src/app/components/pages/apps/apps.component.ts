@@ -109,7 +109,13 @@ export class AppsComponent {
   }
 
   toggleSystemApps() {
-    this.isSystemApps = !this.isSystemApps;
+    this.loading = true;
+
+    const t = timer(500).subscribe(() => {
+      t.unsubscribe();
+      this.isSystemApps = !this.isSystemApps;
+      this.loading = false;
+    });
   }
 
   toggleNameSortDir() {

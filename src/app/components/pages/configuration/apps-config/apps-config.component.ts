@@ -10,6 +10,7 @@ import { environment } from '../../../../../environments/environment';
 import { appsPaths as api } from '../../../../shared/enums/api';
 import { App } from '../../../../shared/types/apps';
 import { AppsService } from '../../../../shared/services/apps.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-apps-config',
@@ -30,6 +31,7 @@ export class AppsConfigComponent implements OnInit {
   public isNameSortAsc: boolean = true;
   public isSizeSortAsc: boolean = true;
   public isPositionSortAsc: boolean = true;
+  public loading: boolean = false;
 
   @Output() onSave = new EventEmitter<string>();
   @Output() onChangeAction = new EventEmitter<Array<any>>();
@@ -44,7 +46,13 @@ export class AppsConfigComponent implements OnInit {
   }
 
   toggleSystemApps() {
-    this.isOnlySystemApps = !this.isOnlySystemApps;
+    this.loading = true;
+
+    const t = timer(500).subscribe(() => {
+      t.unsubscribe();
+      this.isOnlySystemApps = !this.isOnlySystemApps;
+      this.loading = false;
+    });
   }
 
   toggleName() {
