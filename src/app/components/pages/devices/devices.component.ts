@@ -412,6 +412,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
             this.currDevice.device_info.files = [res.file];
           }
 
+          this.fileForm.resetForm();
+
           const modal = document.querySelector('#file_add');
           if (!modal?.classList.contains('hidden'))
             modal?.classList.toggle('hidden');
