@@ -297,7 +297,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
 
-    this.mapService.map.fitBounds(bounds);
+    if (Object.keys(bounds).length > 0) {
+      this.mapService.map.fitBounds(bounds);
+    }
   }
 
   getValue(event) {
