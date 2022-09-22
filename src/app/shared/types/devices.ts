@@ -14,7 +14,21 @@ export interface Device {
   launcher_version: string;
   model: string;
   online_state: boolean;
-  qr_code: any;
+  qr_code: {
+    'android.app.extra.PROVISIONING_ADMIN_EXTRAS_BUNDLE': {
+      'com.sdm.BASE_URL': string;
+      'com.sdm.CONFIG': string;
+      'com.sdm.DEVICE_ID': string;
+      'com.sdm.MQTT_HOST': string;
+      'com.sdm.SERVER_PROJECT': string;
+    };
+    'android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME': string;
+    'android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_CHECKSUM': string;
+    'android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION': string;
+    'android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED': boolean;
+    'android.app.extra.PROVISIONING_SKIP_ENCRYPTION': boolean;
+    'android.app.extra.PROVISIONING_USE_MOBILE_DATA': boolean;
+  };
   raw_qr_code: string;
   objectId: string;
   isSelected?: boolean;
