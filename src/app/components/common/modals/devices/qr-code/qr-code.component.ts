@@ -21,7 +21,7 @@ export class QrCodeComponent {
   constructor() {}
 
   get _qrcode() {
-    return JSON.stringify(this.device?.qr_code);
+    return JSON.stringify(this.device?.raw_qr_code);
   }
 
   onHelpClickHandler() {
