@@ -18,7 +18,7 @@ export class InterfaceComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
+    // console.log(changes);
     for (let prop in changes) {
       if (prop === 'iconSize') {
         const appIcon = document.querySelectorAll(

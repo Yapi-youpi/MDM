@@ -44,7 +44,7 @@ export class ConfigsComponent implements OnInit {
       .getConfig('default')
       .then((res) => {
         this.default_config = Object.assign(res[0]);
-        console.log(this.default_config);
+        // console.log(this.default_config);
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +55,7 @@ export class ConfigsComponent implements OnInit {
     this.configService
       .getConfig('all')
       .then((res) => {
-        console.log(res);
+        // console.log('CONFIGS: ', res);
         this.loading = false;
         this.configs = res;
         this.sortConfigs();

@@ -44,7 +44,7 @@ export class AppsComponent {
     this.appsService.get('all').then((res: AppState) => {
       if (res.success) {
         if (res.app) {
-          console.log(res.app);
+          // console.log(res.app);
           if (this.apps.length !== 0) this.apps = [];
           // this.apps = res.app;
 

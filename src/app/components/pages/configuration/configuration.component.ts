@@ -106,6 +106,7 @@ export class ConfigurationComponent implements OnInit {
       .then((res: AppState) => {
         if (res.success) {
           this.apps = res.app ? res.app : [];
+          // console.log('APPS: ', this.apps);
         } else {
           console.log(res.error);
         }
@@ -123,7 +124,7 @@ export class ConfigurationComponent implements OnInit {
         if (res.length > 0) {
           this.config = Object.assign(res[0]);
           this.initialAppList = res[0].applications || [];
-          console.log(this.config);
+          // console.log(this.config);
         }
       })
       .then(() => {
@@ -190,7 +191,7 @@ export class ConfigurationComponent implements OnInit {
     this.configService
       .editConfig(config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const saveBtn = document.querySelector('.save-btn');
         saveBtn?.classList.add('save-btn--success');
         let i = interval(2000).subscribe(() => {

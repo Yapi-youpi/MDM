@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean | UrlTree> | boolean {
-    console.log('check Auth Guard');
+    // console.log('check Auth Guard');
 
     const roles = route.data['requiredRoles'] as Array<string>;
 
