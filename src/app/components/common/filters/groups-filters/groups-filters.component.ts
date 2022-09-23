@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { GroupFilter } from '../../../../shared/types/filters';
+import { IGroupFilter } from '../../../../shared/types/filters';
 import { DevicesConfig } from '../../../../shared/types/config';
 import { DevicesGroup } from '../../../../shared/types/groups';
 
@@ -10,7 +10,7 @@ import { DevicesGroup } from '../../../../shared/types/groups';
   styleUrls: ['./groups-filters.component.scss'],
 })
 export class GroupsFiltersComponent {
-  @Input() filter!: GroupFilter;
+  @Input() filter!: IGroupFilter;
   @Input() configs!: DevicesConfig[];
   @Input() groups!: DevicesGroup[];
 

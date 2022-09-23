@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 
-import { AddDevice, Device } from '../types/devices';
+import { IAddDevice, IDevice } from '../types/devices';
+import { DevicesState, SingleDeviceState, State } from '../types/states';
 
 import { devicesPaths as api } from '../enums/api';
 
@@ -18,8 +19,8 @@ export class DevicesService {
     if (param === 'group') {
       url = url + `/${group_id}`;
     }
-    return new Promise<any>((resolve, reject) => {
-      this.http.get(url).subscribe({
+    return new Promise<DevicesState>((resolve, reject) => {
+      this.http.get<DevicesState>(url).subscribe({
         next: (res) => {
           resolve(res);
         },
@@ -30,71 +31,69 @@ export class DevicesService {
     });
   }
 
-  add(device: AddDevice) {
-    const url = environment.url + api.ADD;
-    const body = {
-      ...device,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  add(device: IAddDevice) {
+    return new Promise<SingleDeviceState>((resolve, reject) => {
+      this.http
+        .post<SingleDeviceState>(environment.url + api.ADD, device)
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
     });
   }
 
-  edit(devices: Device[]) {
-    const url = environment.url + api.EDIT;
-    const body = {
-      edit: devices,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  edit(devices: IDevice[]) {
+    return new Promise<SingleDeviceState>((resolve, reject) => {
+      this.http
+        .post<SingleDeviceState>(environment.url + api.EDIT, {
+          edit: devices,
+        })
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
     });
   }
 
-  delete(device_ids: string[]) {
-    const url = environment.url + api.REMOVE;
-    const body = {
-      remove: device_ids,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  delete(devIDs: string[]) {
+    return new Promise<SingleDeviceState>((resolve, reject) => {
+      this.http
+        .post<SingleDeviceState>(environment.url + api.REMOVE, {
+          remove: devIDs,
+        })
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
     });
   }
 
-  reload(device_id: string) {
-    const url = environment.url + api.REBOOT;
-    const body = {
-      id: device_id,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  reload(devIDs: string) {
+    return new Promise<State>((resolve, reject) => {
+      this.http
+        .post<State>(environment.url + api.REBOOT, {
+          id: devIDs,
+        })
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
     });
   }
 }

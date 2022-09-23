@@ -1,4 +1,4 @@
-import { Device } from './devices';
+import { IDevice } from './devices';
 import { IFile } from './files';
 
 export interface DevicesGroup {
@@ -9,7 +9,7 @@ export interface DevicesGroup {
   deviceConfigID: string;
   iconID: string;
   updateTime: string;
-  devices: Device[];
+  devices: IDevice[];
   capacity: number;
   isSelected?: boolean;
   files: IFile[] | null;

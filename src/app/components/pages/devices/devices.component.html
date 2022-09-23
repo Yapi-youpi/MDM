@@ -18,7 +18,6 @@
       ></app-add-button>
     </div>
     <app-devices-filters
-      [filter]="filter"
       [configs]="configs"
       [groups]="groups"
       (onStatusRemove)="resetOneSearchParam('status')"
@@ -37,7 +36,7 @@
     </ng-template>
     <app-selected-elements
       *ngIf="userRole === 'admin' || userRole === 'super'"
-      [selectedIDs]="selectedDevicesIDs"
+      [selectedIDs]="_selectedDevices"
       [editTarget]="'edit_several_devices'"
       [deleteTarget]="'delete_several_elements'"
       (onCloseClick)="cancelSelection()"
@@ -104,17 +103,17 @@
         </div>
       </div>
       <div class="list-body">
-        <ng-container *ngIf="devices.length !== 0; else nodata">
+        <ng-container *ngIf="_devices.length !== 0; else nodata">
           <app-device-item
             *ngFor="
-              let device of devices
+              let device of _devices
                 | search: searchParam:'device'
                 | devicesFilter
-                  : filter.status
-                  : filter.dateFrom
-                  : filter.dateTo
-                  : filter.configsIDs
-                  : filter.groupsIDs
+                  : filters.status
+                  : filters.dateFrom
+                  : filters.dateTo
+                  : filters.configsIDs
+                  : filters.groupsIDs
                 | devices_status: sortStatusAsc
                 | devices_date: sortDateAsc
                 | devices_group: groups:sortGroupAsc
@@ -127,11 +126,11 @@
             [userRole]="userRole"
             (onSelectUnselectDevice)="selectUnselectDevice($event)"
             (onChangeDeviceState)="changeDeviceState($event)"
-            (onClickDeviceQRCode)="getDeviceQRCode($event)"
-            (onClickDeviceEdit)="selectDeviceToEdit($event)"
-            (onClickDeviceDelete)="selectDeviceToDelete($event)"
+            (onClickDeviceQRCode)="setCurrentDevice($event)"
+            (onClickDeviceEdit)="setCurrentDevice($event, true)"
+            (onClickDeviceDelete)="setCurrentDevice($event)"
             (onClickDeviceReboot)="rebootDevice($event)"
-            (onClickDeviceFiles)="getDeviceFiles($event)"
+            (onClickDeviceFiles)="setCurrentDevice($event)"
           ></app-device-item>
         </ng-container>
         <ng-template #nodata>
@@ -154,7 +153,7 @@
     [isDataFetching]="loading"
     (onSubmit)="addDevice()"
   ></app-add-device>
-  <app-qr-code [device]="currDevice"></app-qr-code>
+  <app-qr-code></app-qr-code>
   <app-edit-device
     [groups]="groups"
     [isDataFetching]="loading"
@@ -166,16 +165,14 @@
     (onSubmit)="editSeveralDevices()"
   ></app-edit-several-devices>
   <app-delete-device
-    [device]="currDevice"
     [isDataFetching]="loading"
-    (onSubmit)="deleteDevice($event)"
+    (onSubmit)="deleteDevice()"
   ></app-delete-device>
   <app-delete-several-elements
     [isDataFetching]="loading"
     (onSubmit)="deleteSeveralDevices()"
   ></app-delete-several-elements>
   <app-list-files
-    [device]="currDevice"
     [loading]="loading"
     (onDeleteClick)="selectFileToDelete($event)"
   ></app-list-files>

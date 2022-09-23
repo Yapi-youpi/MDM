@@ -3,7 +3,7 @@
     <div class="modal-form-header">
       <h4 class="text-title text-center">
         Файлы {{ source === 'device' ? 'на устройстве' : 'в группе' }}
-        {{ source === 'device' ? device?.name : group?.name }}
+        {{ source === 'device' ? _device?.name : group?.name }}
       </h4>
       <hr class="divider" />
     </div>
@@ -92,15 +92,15 @@
             <ng-container *ngIf="source === 'device'">
               <ng-container
                 *ngIf="
-                  device &&
-                    device.device_info?.files &&
-                    device.device_info?.files?.length !== 0;
+                  _device &&
+                    _device.device_info?.files &&
+                    _device.device_info?.files?.length !== 0;
                   else nodata
                 "
               >
                 <app-file-item
                   *ngFor="
-                    let file of device.device_info.files
+                    let file of _device.device_info.files
                       | search: searchTerm:'file'
                       | fileName: isNameSortAsc
                       | deviceFileSize: isSizeSortAsc

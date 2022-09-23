@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { Device } from '../../../../../shared/types/devices';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 
 @Component({
   selector: 'app-delete-device',
@@ -8,15 +7,18 @@ import { Device } from '../../../../../shared/types/devices';
   styleUrls: ['./delete-device.component.scss'],
 })
 export class DeleteDeviceComponent {
-  @Input() public device!: Device;
   @Input() isDataFetching: boolean = false;
 
-  @Output() onSubmit = new EventEmitter<Device>();
+  @Output() onSubmit = new EventEmitter();
 
-  constructor() {}
+  constructor(private device: DeviceClass) {}
 
-  onSubmitHandler(device: Device) {
-    this.onSubmit.emit(device);
+  get _device() {
+    return this.device.current.value;
+  }
+
+  onSubmitHandler() {
+    this.onSubmit.emit();
   }
 
   onCancelHandler() {

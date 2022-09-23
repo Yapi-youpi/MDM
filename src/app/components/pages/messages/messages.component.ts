@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Filter } from '../../../shared/types/filters';
+import { IFilter } from '../../../shared/types/filters';
 import { Message } from '../../../shared/types/message';
 import {
   alertService,
@@ -11,7 +11,7 @@ import {
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import * as states from '../../../shared/types/states';
-import { Device } from '../../../shared/types/devices';
+import { IDevice } from '../../../shared/types/devices';
 import { DevicesGroup } from '../../../shared/types/groups';
 import { interval } from 'rxjs';
 
@@ -29,9 +29,9 @@ export class MessagesComponent implements OnInit {
   public isTargetSortAsc: boolean = false;
   public isStatusSortAsc: boolean = false;
   public messages!: Message[];
-  public devices: Device[] = [];
+  public devices: IDevice[] = [];
   public groups: DevicesGroup[] = [];
-  public filter: Filter = {
+  public filter: IFilter = {
     status: null,
     dateFrom: null,
     dateTo: null,

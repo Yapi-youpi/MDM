@@ -2,7 +2,7 @@
   <div class="modal-form w-500">
     <div class="modal-form-header">
       <h4 class="text-title text-center">
-        Удалить устройство "{{ device?.name }}"?
+        Удалить устройство "{{ _device?.name }}"?
       </h4>
     </div>
     <div class="modal-form-footer">
@@ -13,7 +13,7 @@
         [margin]="'50px'"
         [isSubmitBtnDisabled]="isDataFetching"
         (onCancel)="onCancelHandler()"
-        (onSubmit)="onSubmitHandler(device)"
+        (onSubmit)="onSubmitHandler()"
       ></app-modal-action-btns>
     </div>
   </div>

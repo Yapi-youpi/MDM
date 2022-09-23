@@ -8,7 +8,7 @@ import {
   alertService,
 } from '../../../../../shared/services';
 import * as states from '../../../../../shared/types/states';
-import { Device } from '../../../../../shared/types/devices';
+import { IDevice } from '../../../../../shared/types/devices';
 import { DevicesGroup } from '../../../../../shared/types/groups';
 
 @Component({
@@ -18,7 +18,7 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
 })
 export class AddMessageComponent implements OnInit {
   public newMsgForm: FormGroup;
-  @Input() public devices: Device[] = [];
+  @Input() public devices: IDevice[] = [];
   @Input() public groups: DevicesGroup[] = [];
 
   @Output() onSend = new EventEmitter<boolean>();

@@ -7,9 +7,9 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Device } from '../../../../../shared/types/devices';
 import { IFile } from '../../../../../shared/types/files';
 import { DevicesGroup } from '../../../../../shared/types/groups';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 
 @Component({
   selector: 'app-list-files',
@@ -18,7 +18,6 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
 })
 export class ListFilesComponent {
   @Input() source: 'device' | 'group' = 'device';
-  @Input() device!: Device;
   @Input() group!: DevicesGroup;
   @Input() loading: boolean = false;
 
@@ -39,7 +38,11 @@ export class ListFilesComponent {
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
-  constructor() {}
+  constructor(private device: DeviceClass) {}
+
+  get _device() {
+    return this.device.current.value;
+  }
 
   toggleFilesDisplay(type: typeof this.displayFiles) {
     if (type === this.displayFiles) return;

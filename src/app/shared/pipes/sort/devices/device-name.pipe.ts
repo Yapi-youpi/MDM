@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Device } from '../../../types/devices';
+import { IDevice } from '../../../types/devices';
 
 @Pipe({
   name: 'devices_name',
 })
 export class DeviceNamePipe implements PipeTransform {
-  transform(devices: Device[], isNameAsc: boolean): Device[] {
+  transform(devices: IDevice[], isNameAsc: boolean): IDevice[] {
     // FROM A ENG TO A RU
     if (isNameAsc)
       return devices.sort((a, b) =>

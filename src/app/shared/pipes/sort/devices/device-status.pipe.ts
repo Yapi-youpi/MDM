@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Device } from '../../../types/devices';
+import { IDevice } from '../../../types/devices';
 
 @Pipe({
   name: 'devices_status',
 })
 export class DeviceStatusPipe implements PipeTransform {
-  transform(devices: Device[], isStatusAsc: boolean): Device[] {
+  transform(devices: IDevice[], isStatusAsc: boolean): IDevice[] {
     // FROM REGISTERED AND ACTIVE TO INACTIVE AND UNREGISTERED
     if (isStatusAsc)
       return devices.sort((a, b) =>

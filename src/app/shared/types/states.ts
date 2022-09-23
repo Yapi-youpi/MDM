@@ -1,4 +1,4 @@
-import { Device } from './devices';
+import { IDevice } from './devices';
 import { DevicesConfig } from './config';
 import { DevicesGroup } from './groups';
 import { App } from './apps';
@@ -22,11 +22,11 @@ export interface DevicesGroupsState extends State {
 }
 
 export interface DevicesState extends State {
-  devices: Device[] | null;
+  devices: IDevice[] | null;
 }
 
 export interface SingleDeviceState extends State {
-  device: Device | null;
+  device: IDevice | null;
 }
 
 export interface AppState extends State {

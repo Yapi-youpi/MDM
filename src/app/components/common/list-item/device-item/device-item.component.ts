@@ -9,7 +9,7 @@ import {
 
 import { DevicesConfig } from '../../../../shared/types/config';
 import { DevicesGroup } from '../../../../shared/types/groups';
-import { Device } from '../../../../shared/types/devices';
+import { IDevice } from '../../../../shared/types/devices';
 
 @Component({
   selector: 'app-device-item',
@@ -17,18 +17,18 @@ import { Device } from '../../../../shared/types/devices';
   styleUrls: ['./device-item.component.scss'],
 })
 export class DeviceItemComponent {
-  @Input() public device!: Device;
+  @Input() public device!: IDevice;
   @Input() public configs!: DevicesConfig[];
   @Input() public groups!: DevicesGroup[];
   @Input() userRole!: string;
 
-  @Output() onSelectUnselectDevice = new EventEmitter<Device>();
-  @Output() onChangeDeviceState = new EventEmitter<Device>();
-  @Output() onClickDeviceQRCode = new EventEmitter<Device>();
-  @Output() onClickDeviceEdit = new EventEmitter<Device>();
-  @Output() onClickDeviceDelete = new EventEmitter<Device>();
-  @Output() onClickDeviceReboot = new EventEmitter<Device>();
-  @Output() onClickDeviceFiles = new EventEmitter<Device>();
+  @Output() onSelectUnselectDevice = new EventEmitter<IDevice>();
+  @Output() onChangeDeviceState = new EventEmitter<IDevice>();
+  @Output() onClickDeviceQRCode = new EventEmitter<IDevice>();
+  @Output() onClickDeviceEdit = new EventEmitter<IDevice>();
+  @Output() onClickDeviceDelete = new EventEmitter<IDevice>();
+  @Output() onClickDeviceReboot = new EventEmitter<IDevice>();
+  @Output() onClickDeviceFiles = new EventEmitter<IDevice>();
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
@@ -47,31 +47,31 @@ export class DeviceItemComponent {
     this.tipRef.nativeElement.style.opacity = 0;
   }
 
-  onSelectUnselectDeviceHandler(device: Device) {
+  onSelectUnselectDeviceHandler(device: IDevice) {
     this.onSelectUnselectDevice.emit(device);
   }
 
-  onChangeDeviceStateHandler(device: Device) {
+  onChangeDeviceStateHandler(device: IDevice) {
     this.onChangeDeviceState.emit(device);
   }
 
-  onClickDeviceQRCodeHandler(device: Device) {
+  onClickDeviceQRCodeHandler(device: IDevice) {
     this.onClickDeviceQRCode.emit(device);
   }
 
-  onClickDeviceEditHandler(device: Device) {
+  onClickDeviceEditHandler(device: IDevice) {
     this.onClickDeviceEdit.emit(device);
   }
 
-  onClickDeviceDeleteHandler(device: Device) {
+  onClickDeviceDeleteHandler(device: IDevice) {
     this.onClickDeviceDelete.emit(device);
   }
 
-  onClickDeviceReloadHandler(device: Device) {
+  onClickDeviceReloadHandler(device: IDevice) {
     this.onClickDeviceReboot.emit(device);
   }
 
-  onClickDeviceFilesHandler(device: Device) {
+  onClickDeviceFilesHandler(device: IDevice) {
     this.onClickDeviceFiles.emit(device);
   }
 }

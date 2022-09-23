@@ -13,7 +13,7 @@ import { add, edit, editSeveral } from '../../../shared/services/forms/group';
 import { DevicesGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
 import * as states from '../../../shared/types/states';
-import { GroupFilter } from '../../../shared/types/filters';
+import { IGroupFilter } from '../../../shared/types/filters';
 import { AssetService } from '../../../shared/services/asset.service';
 import { addFile } from '../../../shared/services/forms/device';
 import { groupsFiles } from '../../../shared/services/files';
@@ -41,7 +41,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   public configsNV: { name: string; value: string }[] = [];
   public isDateSortAsc: boolean = true;
 
-  public filter: GroupFilter = {
+  public filter: IGroupFilter = {
     status: null,
     dateFrom: null,
     dateTo: null,

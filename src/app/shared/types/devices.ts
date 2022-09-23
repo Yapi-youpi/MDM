@@ -1,7 +1,7 @@
 import { App } from './apps';
 import { IFile } from './files';
 
-export interface Device {
+export interface IDevice {
   device_id: string;
   name: string;
   device_config_id: string;
@@ -68,7 +68,7 @@ export interface Device {
   };
 }
 
-export interface AddDevice {
+export interface IAddDevice {
   name: string;
   description: string;
   device_group_id: string;

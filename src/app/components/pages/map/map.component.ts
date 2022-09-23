@@ -13,13 +13,13 @@ import { interval } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
 import * as L from 'leaflet';
 import { DivIcon, Marker } from 'leaflet';
-import { Device } from '../../../shared/types/devices';
+import { IDevice } from '../../../shared/types/devices';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DevicesGroup } from '../../../shared/types/groups';
 
 interface DeviceGeo {
-  device: Device;
+  device: IDevice;
   marker: Marker;
 }
 
@@ -53,9 +53,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public sub!: LiveQuerySubscription;
   public icon!: DivIcon;
   public device_marker!: L.Marker;
-  public devices: Device[] = [];
+  public devices: IDevice[] = [];
   public groups: DevicesGroup[] = [];
-  public devices_res: Device[] = [];
+  public devices_res: IDevice[] = [];
   public devices_geo: DeviceGeo[] = [];
   public open = false;
   public search = '';
@@ -119,7 +119,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   async deviceSub() {
     let query = this.db.query('Device');
     this.sub = await query.subscribe();
-    let device: Device | any;
+    let device: IDevice | any;
     this.sub.on('open', () => {
       console.log('OPEN PARSE CONN');
     });
@@ -171,7 +171,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  addMarkers(lat: number, lng: number, device: Device) {
+  addMarkers(lat: number, lng: number, device: IDevice) {
     let color = device.online_state ? '#AFD9A1' : '#FCA3A3';
     let signalLevel = !device.signalLevel
       ? ''
@@ -314,7 +314,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  setView(device: Device) {
+  setView(device: IDevice) {
     this.devices = Array.from(this.devices_res);
     this.search = '';
     this.mapService.map.setView({
