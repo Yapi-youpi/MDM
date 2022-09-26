@@ -2,7 +2,7 @@
   <div class="modal-form w-500">
     <div class="modal-form-header">
       <h4 class="text-title text-center" style="overflow-wrap: break-word">
-        Удалить файл "{{ file?.name }}"?
+        Удалить файл "{{ _file?.name }}"?
       </h4>
     </div>
     <div class="modal-form-footer">
@@ -13,7 +13,7 @@
         [margin]="'50px'"
         [isSubmitBtnDisabled]="isDataFetching"
         (onCancel)="onCancelHandler()"
-        (onSubmit)="onSubmitHandler(file)"
+        (onSubmit)="onSubmitHandler()"
       ></app-modal-action-btns>
     </div>
   </div>

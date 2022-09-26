@@ -13,10 +13,10 @@ import { IGroup } from '../../../shared/types/groups';
 import { IConfig } from '../../../shared/types/config';
 import { AssetService } from '../../../shared/services/asset.service';
 import { addFile } from '../../../shared/services/forms/device';
-import { groupsFiles } from '../../../shared/services/files';
 import { IFile } from '../../../shared/types/files';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
 import { GroupFiltersClass } from '../../../shared/classes/groups/group-filters.class';
+import { FileClass } from '../../../shared/classes/files/file.class';
 
 @Component({
   selector: 'app-group',
@@ -52,7 +52,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
     private addForm: add,
     private alert: alertService,
     private asset: AssetService,
-    private files: groupsFiles,
+    private files: FileClass,
     private fileForm: addFile,
     public filters: GroupFiltersClass
   ) {}
@@ -189,76 +189,34 @@ export class GroupsComponent implements OnInit, OnDestroy {
     const group = this.groups.current.value;
 
     if (group) {
-      this.loading = true;
+      this.files.upload('group', group.id, this.fileForm._file).then((res) => {
+        if (res) {
+          this.fileForm.resetForm();
 
-      this.files
-        .upload(group.id, this.fileForm._file)
-        .then((res) => {
-          if (res.success) {
-            if (group.files) {
-              if (group.files?.length !== 0) {
-                group.files = [res.file, ...group.files];
-              } else {
-                group.files.push(res.file);
-              }
-            } else {
-              group.files = [res.file];
-            }
-
-            this.fileForm.resetForm();
-
-            const modal = document.querySelector('#file_add');
-            if (!modal?.classList.contains('hidden'))
-              modal?.classList.toggle('hidden');
-          } else {
-            this.alert.show({
-              title: 'ADD FILE ERROR',
-              content: res.error,
-            });
-          }
-        })
-        .finally(() => {
-          const t = timer(500).subscribe(() => {
-            t.unsubscribe();
-            this.loading = false;
-          });
-        });
+          const modal = document.querySelector('#file_add');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
+        }
+      });
     }
   }
 
-  selectFileToDelete(file: IFile) {
-    this.currFile = file;
+  setCurrentFile(file: IFile) {
+    this.files.setCurrent(file);
   }
 
-  deleteFile(file: IFile) {
+  deleteFile() {
     const group = this.groups.current.value;
+    const file = this.files.current.value;
 
-    if (group) {
-      this.loading = true;
-
-      this.files
-        .delete(group.id, file.fileID)
-        .then((res) => {
-          if (res.success) {
-            if (group.files)
-              group.files = group.files?.filter(
-                (f) => f.fileID !== file.fileID
-              );
-            this.currFile = null;
-
-            const modal = document.querySelector('#file_delete');
-            if (!modal?.classList.contains('hidden'))
-              modal?.classList.toggle('hidden');
-          } else {
-            console.log(res.error);
-          }
-        })
-        .finally(() => {
-          const t = timer(500).subscribe(() => {
-            t.unsubscribe();
-            this.loading = false;
-          });
-        });
+    if (group && file) {
+      this.files.delete('group', group.id, file.fileID).then((res) => {
+        if (res) {
+          const modal = document.querySelector('#file_delete');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
+        }
+      });
     }
   }
 

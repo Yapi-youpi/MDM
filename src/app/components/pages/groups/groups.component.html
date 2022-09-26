@@ -131,16 +131,15 @@
   <app-list-files
     source="group"
     [loading]="loading"
-    (onDeleteClick)="selectFileToDelete($event)"
+    (onDeleteClick)="setCurrentFile($event)"
   ></app-list-files>
   <app-add-file
     [isDataFetching]="loading"
     (onSubmit)="addFile()"
   ></app-add-file>
   <app-delete-file
-    [file]="currFile"
     [isDataFetching]="loading"
-    (onSubmit)="deleteFile($event)"
+    (onSubmit)="deleteFile()"
   ></app-delete-file>
   <app-edit-group
     [configs]="configs"

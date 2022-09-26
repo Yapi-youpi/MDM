@@ -10,6 +10,7 @@ import {
 import { IFile } from '../../../../../shared/types/files';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { FileClass } from '../../../../../shared/classes/files/file.class';
 
 @Component({
   selector: 'app-list-files',
@@ -32,12 +33,14 @@ export class ListFilesComponent {
   public isSizeSortAsc: boolean = true;
   public isDateSortAsc: boolean = true;
 
-  public currFile: IFile | null = null;
-
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
-  constructor(private groups: GroupClass, private device: DeviceClass) {}
+  constructor(
+    private groups: GroupClass,
+    private device: DeviceClass,
+    private files: FileClass
+  ) {}
 
   get _group() {
     return this.groups.current.value;
@@ -45,6 +48,10 @@ export class ListFilesComponent {
 
   get _device() {
     return this.device.current.value;
+  }
+
+  get _file() {
+    return this.files.current.value;
   }
 
   toggleFilesDisplay(type: typeof this.displayFiles) {
@@ -82,7 +89,7 @@ export class ListFilesComponent {
   }
 
   setCurrentFile(file: IFile) {
-    this.currFile = file;
+    this.files.setCurrent(file);
   }
 
   fileType(fileURL: string): 'img' | 'video' | 'other' | 'none' {
@@ -90,7 +97,7 @@ export class ListFilesComponent {
     else {
       const fType = fileURL.split('.');
       const ext = fType[fType.length - 1];
-      // return this.imagesEXT.includes(ext);
+
       if (this.imagesEXT.includes(ext)) return 'img';
       if (this.videoEXT.includes(ext)) return 'video';
       return 'other';
@@ -117,7 +124,7 @@ export class ListFilesComponent {
       !event.target.classList.contains('video') &&
       !event.target.classList.contains('img')
     ) {
-      if (this.currFile) this.currFile = null;
+      if (this.files.current.value) this.files.setCurrent(null);
     }
   }
 }

@@ -1,6 +1,6 @@
 <div
   class="item row space-between r-14"
-  [class.chosen]="file?.fileID === currFile?.fileID"
+  [class.chosen]="file?.fileID === _curFile?.fileID"
   (click)="onFileClickHandler(file)"
 >
   <div class="name-wrapper">
@@ -17,7 +17,6 @@
       target="file_download"
       (onClick)="onDownloadClickHandler(file)"
     ></app-file-action-btn>
-    <!--                  <app-file-action-btn target="file_hide"></app-file-action-btn>-->
     <app-file-action-btn
       class="delete"
       target="file_delete"

@@ -3,7 +3,6 @@ import { interval, timer } from 'rxjs';
 import {
   alertService,
   deviceConfigService,
-  filesService,
   userService,
 } from '../../../shared/services';
 import { device, files } from 'src/app/shared/services/forms';
@@ -16,6 +15,7 @@ import { DeviceClass } from '../../../shared/classes/devices/device.class';
 import { DeviceSubscriptionClass } from '../../../shared/classes/devices/device-subscription.class';
 import { DeviceFiltersClass } from '../../../shared/classes/devices/device-filters.class';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
+import { FileClass } from '../../../shared/classes/files/file.class';
 
 @Component({
   selector: 'app-devices',
@@ -28,7 +28,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   public loading: boolean = true;
 
-  // public groups: IGroup[] = [];
   public configs: IConfig[] = [];
 
   public currFile: IFile | null = null;
@@ -59,7 +58,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     public filters: DeviceFiltersClass,
     private alert: alertService,
     private asset: AssetService,
-    private files: filesService.devicesFiles,
+    private files: FileClass,
     private fileForm: files.add
   ) {}
 
@@ -232,80 +231,36 @@ export class DevicesComponent implements OnInit, OnDestroy {
     const device = this.device.current.value;
 
     if (device) {
-      this.loading = true;
-
       this.files
-        .upload(device.device_id, this.fileForm._file)
+        .upload('device', device.device_id, this.fileForm._file)
         .then((res) => {
-          if (res.success) {
-            if (device.device_info.files) {
-              if (device.device_info.files?.length !== 0) {
-                device.device_info.files = [
-                  res.file,
-                  ...device.device_info.files,
-                ];
-              } else {
-                device.device_info.files.push(res.file);
-              }
-            } else {
-              device.device_info.files = [res.file];
-            }
-
-            this.currFile = null;
-
+          if (res) {
             this.fileForm.resetForm();
 
             const modal = document.querySelector('#file_add');
             if (!modal?.classList.contains('hidden'))
               modal?.classList.toggle('hidden');
-          } else {
-            this.alert.show({
-              title: 'ADD FILE ERROR',
-              content: res.error,
-            });
           }
-        })
-        .finally(() => {
-          const t = timer(500).subscribe(() => {
-            t.unsubscribe();
-            this.loading = false;
-          });
         });
     }
   }
 
-  selectFileToDelete(file: IFile) {
-    this.currFile = file;
+  setCurrentFile(file: IFile) {
+    this.files.setCurrent(file);
   }
 
-  deleteFile(file: IFile) {
+  deleteFile() {
     const device = this.device.current.value;
+    const file = this.files.current.value;
 
-    if (device) {
-      this.loading = true;
-
-      this.files
-        .delete(device.device_id, file.fileID)
-        .then((res) => {
-          if (res.success) {
-            if (device.device_info.files)
-              device.device_info.files = device.device_info.files?.filter(
-                (f) => f.fileID !== file.fileID
-              );
-
-            const modal = document.querySelector('#file_delete');
-            if (!modal?.classList.contains('hidden'))
-              modal?.classList.toggle('hidden');
-          } else {
-            console.log(res.error);
-          }
-        })
-        .finally(() => {
-          const t = timer(500).subscribe(() => {
-            t.unsubscribe();
-            this.loading = false;
-          });
-        });
+    if (device && file) {
+      this.files.delete('device', device.device_id, file.fileID).then((res) => {
+        if (res) {
+          const modal = document.querySelector('#file_delete');
+          if (!modal?.classList.contains('hidden'))
+            modal?.classList.toggle('hidden');
+        }
+      });
     }
   }
 

@@ -108,7 +108,6 @@
                       | filesSort: displayFiles
                   "
                   [file]="file"
-                  [currFile]="currFile"
                   (onFileClick)="setCurrentFile($event)"
                   (onDeleteClick)="onDeleteClickHandler($event)"
                   (onDownloadClick)="onDownloadClickHandler($event)"
@@ -132,7 +131,6 @@
                       | filesSort: displayFiles
                   "
                   [file]="file"
-                  [currFile]="currFile"
                   (onFileClick)="setCurrentFile($event)"
                   (onDeleteClick)="onDeleteClickHandler($event)"
                   (onDownloadClick)="onDownloadClickHandler($event)"
@@ -147,28 +145,28 @@
         <div class="preview-wrapper">
           <div
             class="preview r-14"
-            [class.video]="currFile && fileType(currFile.url) === 'video'"
+            [class.video]="_file && fileType(_file.url) === 'video'"
           >
-            <span *ngIf="!currFile" class="text-choose">область просмотра</span>
-            <ng-container *ngIf="currFile">
+            <span *ngIf="!_file" class="text-choose">область просмотра</span>
+            <ng-container *ngIf="_file">
               <span
                 *ngIf="
-                  fileType(currFile.url) === 'none' ||
-                  fileType(currFile.url) === 'other'
+                  fileType(_file.url) === 'none' ||
+                  fileType(_file.url) === 'other'
                 "
                 class="text-choose"
                 >непросматриваемый файл</span
               >
               <img
-                *ngIf="fileType(currFile.url) === 'img'"
+                *ngIf="fileType(_file.url) === 'img'"
                 class="img"
-                [src]="currFile?.url"
+                [src]="_file?.url"
                 alt=""
               />
               <video
-                *ngIf="fileType(currFile.url) === 'video'"
+                *ngIf="fileType(_file.url) === 'video'"
                 class="video"
-                [src]="currFile.url"
+                [src]="_file.url"
                 controls
                 [disableRemotePlayback]="true"
                 [controlsList]="['nodownload']"
