@@ -8,8 +8,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IFile } from '../../../../../shared/types/files';
-import { DevicesGroup } from '../../../../../shared/types/groups';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-list-files',
@@ -18,7 +18,6 @@ import { DeviceClass } from '../../../../../shared/classes/devices/device.class'
 })
 export class ListFilesComponent {
   @Input() source: 'device' | 'group' = 'device';
-  @Input() group!: DevicesGroup;
   @Input() loading: boolean = false;
 
   @Output() onDeleteClick = new EventEmitter<IFile>();
@@ -38,7 +37,11 @@ export class ListFilesComponent {
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
-  constructor(private device: DeviceClass) {}
+  constructor(private groups: GroupClass, private device: DeviceClass) {}
+
+  get _group() {
+    return this.groups.current.value;
+  }
 
   get _device() {
     return this.device.current.value;

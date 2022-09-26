@@ -9,7 +9,7 @@ import {
 } from '../../../../../shared/services';
 import * as states from '../../../../../shared/types/states';
 import { IDevice } from '../../../../../shared/types/devices';
-import { DevicesGroup } from '../../../../../shared/types/groups';
+import { IGroup } from '../../../../../shared/types/groups';
 
 @Component({
   selector: 'app-add-message',
@@ -19,7 +19,7 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
 export class AddMessageComponent implements OnInit {
   public newMsgForm: FormGroup;
   @Input() public devices: IDevice[] = [];
-  @Input() public groups: DevicesGroup[] = [];
+  @Input() public groups: IGroup[] = [];
 
   @Output() onSend = new EventEmitter<boolean>();
 

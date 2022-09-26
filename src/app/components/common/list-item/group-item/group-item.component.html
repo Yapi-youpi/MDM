@@ -32,7 +32,6 @@
       </ng-template>
     </div>
     <p>{{ group.capacity }} шт.</p>
-    <!--    <p>{{ group.deviceConfigID | configConverter: configs }}</p>-->
     <div class="select-wrapper">
       <app-input-select
         [color]="'light'"
@@ -44,15 +43,6 @@
       ></app-input-select>
     </div>
     <p>{{ group.updateTime | dateConverter }}</p>
-    <!--    <div-->
-    <!--      class="switch-wrapper"-->
-    <!--      *ngIf="userRole === 'admin' || userRole === 'super'"-->
-    <!--    >-->
-    <!--      <app-input-switch-->
-    <!--        [value]="group.activeState"-->
-    <!--        (onChange)="onSwitchChangeHandler(group)"-->
-    <!--      ></app-input-switch>-->
-    <!--    </div>-->
     <div
       class="row device-actions-wrapper"
       style="gap: 8px"
@@ -62,7 +52,7 @@
         title="Файлы в группе"
         [group]="group"
         [target]="'list_files'"
-        (onClick)="onEditCLickHandler(group)"
+        (onClick)="onFileClickHandler(group)"
       ></app-group-action-btn>
       <app-group-action-btn
         title="Редактировать группу"

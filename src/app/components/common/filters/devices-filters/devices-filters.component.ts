@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DevicesConfig } from '../../../../shared/types/config';
-import { DevicesGroup } from '../../../../shared/types/groups';
+import { IGroup } from '../../../../shared/types/groups';
 import { DeviceFiltersClass } from '../../../../shared/classes/devices/device-filters.class';
 
 @Component({
@@ -10,7 +10,7 @@ import { DeviceFiltersClass } from '../../../../shared/classes/devices/device-fi
 })
 export class DevicesFiltersComponent {
   @Input() configs!: DevicesConfig[];
-  @Input() groups!: DevicesGroup[];
+  @Input() groups!: IGroup[];
 
   @Output() onStatusRemove = new EventEmitter();
   @Output() onDateFromRemove = new EventEmitter();

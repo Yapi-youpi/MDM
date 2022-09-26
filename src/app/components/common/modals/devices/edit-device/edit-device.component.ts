@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { EditDeviceService } from '../../../../../shared/services/forms/device/edit-device.service';
 
-import { DevicesGroup } from '../../../../../shared/types/groups';
+import { IGroup } from '../../../../../shared/types/groups';
 import { Option } from '../../../../../shared/types/input';
 
 @Component({
@@ -11,7 +11,7 @@ import { Option } from '../../../../../shared/types/input';
   styleUrls: ['./edit-device.component.scss'],
 })
 export class EditDeviceComponent {
-  @Input() public groups!: DevicesGroup[];
+  @Input() public groups!: IGroup[];
   @Input() isDataFetching: boolean = false;
 
   @Output() public onSubmit = new EventEmitter();

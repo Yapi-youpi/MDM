@@ -1,19 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment/moment';
 
-import { DevicesGroup } from '../../types/groups';
+import { IGroup } from '../../types/groups';
 
 @Pipe({
   name: 'groupFilter',
 })
 export class GroupFilterPipe implements PipeTransform {
   transform(
-    groups: DevicesGroup[],
+    groups: IGroup[],
     status: boolean | null,
     dateFrom: string | null,
     dateTo: string | null,
     configIDs: string[] | null
-  ): DevicesGroup[] {
+  ): IGroup[] {
     return groups.filter((g) => {
       return (
         (status !== null ? g.activeState === status : g) &&

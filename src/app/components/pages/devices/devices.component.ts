@@ -10,7 +10,7 @@ import {
 import { device, files } from 'src/app/shared/services/forms';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { IDevice } from '../../../shared/types/devices';
-import { DevicesGroup } from '../../../shared/types/groups';
+import { IGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
 import * as states from '../../../shared/types/states';
 import { AssetService } from '../../../shared/services/asset.service';
@@ -30,7 +30,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   public loading: boolean = true;
 
-  public groups: DevicesGroup[] = [];
+  public groups: IGroup[] = [];
   public configs: DevicesConfig[] = [];
 
   public currFile: IFile | null = null;
@@ -225,7 +225,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     if (!device.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
-    if (this.device.listOfSelectedLength === this.device.arrayLength)
+    if (this.device.selectedIDs.length === this.device.array.length)
       this.isAllSelected = true;
   }
 

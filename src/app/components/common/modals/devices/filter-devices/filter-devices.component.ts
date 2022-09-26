@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { filter } from 'src/app/shared/services/forms/device';
 
 import { DevicesConfig } from '../../../../../shared/types/config';
-import { DevicesGroup } from '../../../../../shared/types/groups';
+import { IGroup } from '../../../../../shared/types/groups';
 import { Option } from '../../../../../shared/types/input';
 
 @Component({
@@ -13,7 +13,7 @@ import { Option } from '../../../../../shared/types/input';
 })
 export class FilterDevicesComponent {
   @Input() configs!: DevicesConfig[];
-  @Input() groups!: DevicesGroup[];
+  @Input() groups!: IGroup[];
 
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();

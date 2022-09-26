@@ -1,6 +1,6 @@
 import { IDevice } from './devices';
 import { DevicesConfig } from './config';
-import { DevicesGroup } from './groups';
+import { IGroup } from './groups';
 import { App } from './apps';
 
 export interface State {
@@ -18,7 +18,7 @@ export interface DevicesConfigsState extends State {
 }
 
 export interface DevicesGroupsState extends State {
-  devicesGroups: DevicesGroup[] | null;
+  devicesGroups: IGroup[] | null;
 }
 
 export interface DevicesState extends State {
@@ -38,5 +38,5 @@ export interface UploadAppState extends State {
 }
 
 export interface GroupsState extends State {
-  group: DevicesGroup[] | null;
+  group: IGroup[] | null;
 }

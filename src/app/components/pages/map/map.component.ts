@@ -16,7 +16,7 @@ import { DivIcon, Marker } from 'leaflet';
 import { IDevice } from '../../../shared/types/devices';
 import { DevicesConfigService } from '../../../shared/services/devices-config.service';
 import { UserService } from '../../../shared/services/user.service';
-import { DevicesGroup } from '../../../shared/types/groups';
+import { IGroup } from '../../../shared/types/groups';
 
 interface DeviceGeo {
   device: IDevice;
@@ -54,7 +54,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public icon!: DivIcon;
   public device_marker!: L.Marker;
   public devices: IDevice[] = [];
-  public groups: DevicesGroup[] = [];
+  public groups: IGroup[] = [];
   public devices_res: IDevice[] = [];
   public devices_geo: DeviceGeo[] = [];
   public open = false;
@@ -87,15 +87,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.groupService
           .get('all')
           .then((res) => {
-            this.groups = res.devicesGroups;
-            res.devicesGroups.map((item) => {
-              let option = {
-                value: item.id,
-                html: item.name,
-                isSelected: false,
-              };
-              this.group_option.push(option);
-            });
+            if (res.success) {
+              if (res.devicesGroups) {
+                this.groups = res.devicesGroups;
+                res.devicesGroups.map((item) => {
+                  let option = {
+                    value: item.id,
+                    html: item.name,
+                    isSelected: false,
+                  };
+                  this.group_option.push(option);
+                });
+              }
+            }
           })
           .then(() => {
             this.mapService.initMap(61.4029, 55.1561, 13);

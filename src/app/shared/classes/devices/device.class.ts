@@ -69,18 +69,10 @@ export class DeviceClass {
     });
   }
 
-  get arrayLength() {
-    return this.array.length;
-  }
-
   // ОБНОВЛЕНИЕ СПИСКА ВЫБРАННЫХ УСТРОЙСТВ
 
   setListOfSelected(devices: IDevice[]) {
     this.selectedIDs = devices.map((d) => d.device_id);
-  }
-
-  get listOfSelectedLength() {
-    return this.selectedIDs.length;
   }
 
   // ВЫЗОВЫ СЕРВИСА

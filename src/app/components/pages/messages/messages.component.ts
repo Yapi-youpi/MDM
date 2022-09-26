@@ -12,7 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import * as states from '../../../shared/types/states';
 import { IDevice } from '../../../shared/types/devices';
-import { DevicesGroup } from '../../../shared/types/groups';
+import { IGroup } from '../../../shared/types/groups';
 import { interval } from 'rxjs';
 
 registerLocaleData(localeRu, 'ru');
@@ -30,7 +30,7 @@ export class MessagesComponent implements OnInit {
   public isStatusSortAsc: boolean = false;
   public messages!: Message[];
   public devices: IDevice[] = [];
-  public groups: DevicesGroup[] = [];
+  public groups: IGroup[] = [];
   public filter: IFilter = {
     status: null,
     dateFrom: null,
@@ -49,7 +49,7 @@ export class MessagesComponent implements OnInit {
       if (this.user.token) {
         i.unsubscribe();
         this.getDevices();
-        this.getGroups('all');
+        this.getGroups();
         this.getMessages();
       }
     });
@@ -86,9 +86,9 @@ export class MessagesComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
-  getGroups(param: string) {
+  getGroups() {
     this.group
-      .get(param)
+      .get('all')
       .then((res: states.DevicesGroupsState) => {
         if (res.success) {
           this.groups = res.devicesGroups ? res.devicesGroups : [];

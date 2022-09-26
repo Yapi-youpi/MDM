@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { DevicesConfig } from '../../../../shared/types/config';
-import { DevicesGroup } from '../../../../shared/types/groups';
+import { IGroup } from '../../../../shared/types/groups';
 import { IDevice } from '../../../../shared/types/devices';
 
 @Component({
@@ -19,7 +19,7 @@ import { IDevice } from '../../../../shared/types/devices';
 export class DeviceItemComponent {
   @Input() public device!: IDevice;
   @Input() public configs!: DevicesConfig[];
-  @Input() public groups!: DevicesGroup[];
+  @Input() public groups!: IGroup[];
   @Input() userRole!: string;
 
   @Output() onSelectUnselectDevice = new EventEmitter<IDevice>();

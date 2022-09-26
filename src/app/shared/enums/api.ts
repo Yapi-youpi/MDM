@@ -21,8 +21,8 @@ export enum appsPaths {
 export enum groupsPaths {
   GET = '/get_device_group/',
   ADD = '/add_device_group',
-  CHANGE_STATE = '/change_active_state_device_group',
-  EDIT = '/edit_device_group',
+  // CHANGE_STATE = '/change_active_state_device_group',
+  // EDIT = '/edit_device_group',
   EDIT_SEVERAL = '/edit_device_groups',
   DELETE = '/remove_device_group',
   DELETE_WITH_DEVICES = '/remove_device_group_and_all_devices',

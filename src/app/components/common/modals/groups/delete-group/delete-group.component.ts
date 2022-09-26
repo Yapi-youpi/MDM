@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesGroup } from '../../../../../shared/types/groups';
+import { IGroup } from '../../../../../shared/types/groups';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-delete-group',
@@ -8,15 +9,18 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
   styleUrls: ['./delete-group.component.scss'],
 })
 export class DeleteGroupComponent {
-  @Input() group!: DevicesGroup;
   @Input() isDataFetching: boolean = false;
 
-  @Output() onSubmit = new EventEmitter<DevicesGroup>();
+  @Output() onSubmit = new EventEmitter<IGroup>();
 
-  constructor() {}
+  constructor(private groups: GroupClass) {}
 
-  onSubmitHandler(group: DevicesGroup) {
-    this.onSubmit.emit(group);
+  get _group() {
+    return this.groups.current.value;
+  }
+
+  onSubmitHandler() {
+    if (this._group) this.onSubmit.emit(this._group);
   }
 
   onCancelHandler() {

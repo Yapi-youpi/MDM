@@ -20,7 +20,6 @@
     <app-groups-filters
       [filter]="filter"
       [configs]="configs"
-      [groups]="groups"
       (onStatusRemove)="resetOneSearchParam('status')"
       (onDateFromRemove)="resetOneSearchParam('dateFrom')"
       (onDateToRemove)="resetOneSearchParam('dateTo')"
@@ -36,7 +35,7 @@
     </ng-template>
     <app-selected-elements
       *ngIf="userRole === 'admin' || userRole === 'super'"
-      [selectedIDs]="selectedGroupsIDs"
+      [selectedIDs]="_selectedDevices"
       [editTarget]="'edit_several_groups'"
       [deleteTarget]="'delete_several_elements'"
       (onCloseClick)="cancelSelection()"
@@ -83,15 +82,14 @@
               (onCLick)="changeSortDateDir()"
             ></app-sort-btn>
           </div>
-          <!--          <p *ngIf="userRole === 'admin' || userRole === 'super'">Состояние</p>-->
           <p *ngIf="userRole === 'admin' || userRole === 'super'">Действия</p>
         </div>
       </div>
       <div class="list-body">
-        <ng-container *ngIf="groups.length !== 0; else nodata">
+        <ng-container *ngIf="_groups.length !== 0; else nodata">
           <app-group-item
             *ngFor="
-              let group of groups
+              let group of _groups
                 | search: searchParam:'group'
                 | groupFilter
                   : filter.status
@@ -107,13 +105,9 @@
             [configs]="configs"
             [userRole]="userRole"
             (onSelectUnselectGroup)="selectUnselectGroup($event)"
-            (onConfigChange)="
-              changeGroupConfig($event.group, $event.deviceConfigID)
-            "
-            (onSwitchChange)="changeGroupState($event)"
-            (onFileClick)="getGroupFiles($event)"
-            (onEditClick)="selectGroupToEdit($event)"
-            (onDeleteClick)="selectGroupToDelete($event)"
+            (onFileClick)="setCurrentGroup($event)"
+            (onEditClick)="setCurrentGroup($event, true)"
+            (onDeleteClick)="setCurrentGroup($event)"
           ></app-group-item>
         </ng-container>
         <ng-template #nodata>
@@ -137,7 +131,6 @@
   ></app-add-group>
   <app-list-files
     source="group"
-    [group]="currGroup"
     [loading]="loading"
     (onDeleteClick)="selectFileToDelete($event)"
   ></app-list-files>
@@ -161,7 +154,6 @@
     (onSubmit)="editSeveralGroups()"
   ></app-edit-several-groups>
   <app-delete-group
-    [group]="currGroup"
     [isDataFetching]="loading"
     (onSubmit)="deleteGroup()"
   ></app-delete-group>

@@ -1,7 +1,7 @@
 import { IDevice } from './devices';
 import { IFile } from './files';
 
-export interface DevicesGroup {
+export interface IGroup {
   id: string;
   name: string;
   description: string;

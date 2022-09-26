@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EditDeviceService } from '../../../../../../shared/services/forms/device/edit-device.service';
-import { DevicesGroup } from '../../../../../../shared/types/groups';
+import { IGroup } from '../../../../../../shared/types/groups';
 
 @Component({
   selector: 'app-group-action-btn',
@@ -9,13 +9,13 @@ import { DevicesGroup } from '../../../../../../shared/types/groups';
 })
 export class GroupActionBtnComponent {
   @Input() target: string = '';
-  @Input() group!: DevicesGroup;
+  @Input() group!: IGroup;
 
-  @Output() onClick = new EventEmitter<DevicesGroup>();
+  @Output() onClick = new EventEmitter<IGroup>();
 
   constructor(private form: EditDeviceService) {}
 
-  onClickHandler(group: DevicesGroup) {
+  onClickHandler(group: IGroup) {
     this.onClick.emit(group);
 
     // this.form.form.setValue({

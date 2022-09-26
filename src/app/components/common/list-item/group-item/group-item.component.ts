@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { DevicesGroup } from '../../../../shared/types/groups';
+import { IGroup } from '../../../../shared/types/groups';
 import { DevicesConfig } from '../../../../shared/types/config';
 import { Option } from '../../../../shared/types/input';
 
@@ -17,19 +17,14 @@ import { Option } from '../../../../shared/types/input';
   styleUrls: ['./group-item.component.scss'],
 })
 export class GroupItemComponent {
-  @Input() group!: DevicesGroup;
+  @Input() group!: IGroup;
   @Input() configs!: DevicesConfig[];
   @Input() userRole!: string;
 
-  @Output() onSelectUnselectGroup = new EventEmitter<DevicesGroup>();
-  @Output() onConfigChange = new EventEmitter<{
-    group: DevicesGroup;
-    deviceConfigID: string;
-  }>();
-  @Output() onSwitchChange = new EventEmitter<DevicesGroup>();
-  @Output() onFileClick = new EventEmitter<DevicesGroup>();
-  @Output() onEditClick = new EventEmitter<DevicesGroup>();
-  @Output() onDeleteClick = new EventEmitter<DevicesGroup>();
+  @Output() onSelectUnselectGroup = new EventEmitter<IGroup>();
+  @Output() onFileClick = new EventEmitter<IGroup>();
+  @Output() onEditClick = new EventEmitter<IGroup>();
+  @Output() onDeleteClick = new EventEmitter<IGroup>();
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
@@ -68,26 +63,21 @@ export class GroupItemComponent {
 
   onSelectHandler(item: Option) {
     this.currOption = item;
-    this.onConfigChange.emit({ group: this.group, deviceConfigID: item.value });
   }
 
-  onSelectUnselectGroupHandler(group: DevicesGroup) {
+  onSelectUnselectGroupHandler(group: IGroup) {
     this.onSelectUnselectGroup.emit(group);
   }
 
-  onSwitchChangeHandler(group: DevicesGroup) {
-    this.onSwitchChange.emit(group);
-  }
-
-  onFileClickHandler(group: DevicesGroup) {
+  onFileClickHandler(group: IGroup) {
     this.onFileClick.emit(group);
   }
 
-  onEditCLickHandler(group: DevicesGroup) {
+  onEditCLickHandler(group: IGroup) {
     this.onEditClick.emit(group);
   }
 
-  onDeleteClickHandler(group: DevicesGroup) {
+  onDeleteClickHandler(group: IGroup) {
     this.onDeleteClick.emit(group);
   }
 }

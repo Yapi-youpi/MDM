@@ -4,20 +4,19 @@ import { interval, timer } from 'rxjs';
 import {
   alertService,
   deviceConfigService,
-  groupService,
   userService,
 } from '../../../shared/services';
 import { group } from 'src/app/shared/services/forms';
 import { add, edit, editSeveral } from '../../../shared/services/forms/group';
 
-import { DevicesGroup } from '../../../shared/types/groups';
+import { IGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
-import * as states from '../../../shared/types/states';
 import { IGroupFilter } from '../../../shared/types/filters';
 import { AssetService } from '../../../shared/services/asset.service';
 import { addFile } from '../../../shared/services/forms/device';
 import { groupsFiles } from '../../../shared/services/files';
 import { IFile } from '../../../shared/types/files';
+import { GroupClass } from '../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-group',
@@ -26,15 +25,16 @@ import { IFile } from '../../../shared/types/files';
 })
 export class GroupsComponent implements OnInit, OnDestroy {
   public title = 'Группы устройств';
-  public groups: DevicesGroup[] = [];
-  public configs: DevicesConfig[] = [];
+
   public loading: boolean = true;
+
+  public configs: DevicesConfig[] = [];
   public userRole: string = '';
-  public currGroup!: DevicesGroup;
   public currFile: IFile | null = null;
   public isAllSelected: boolean = false;
-  public selectedGroupsIDs: string[] = [];
+
   public searchParam: string = '';
+
   public isNamesSortAsc: boolean = true;
   public isDevicesCountSortAsc: boolean = true;
   public isConfigSortAsc: boolean = true;
@@ -49,7 +49,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private groupService: groupService,
+    private groups: GroupClass,
     private configService: deviceConfigService,
     private userService: userService,
     private filterForm: group.filter,
@@ -62,9 +62,17 @@ export class GroupsComponent implements OnInit, OnDestroy {
     private fileForm: addFile
   ) {}
 
+  get _groups() {
+    return this.groups.array;
+  }
+
+  get _selectedDevices() {
+    return this.groups.selectedIDs;
+  }
+
   ngOnInit() {
     const i = interval(200).subscribe(() => {
-      this.getGroups('all');
+      this.getGroups();
       this.getConfigs('all');
       this.asset.getFromStorage('user-role').then((role: string) => {
         this.userRole = role;
@@ -77,26 +85,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.filterForm.reset();
   }
 
-  getGroups(param: string) {
-    this.loading = true;
-
-    this.groupService
-      .get(param)
-      .then((res: states.DevicesGroupsState) => {
-        if (res.success) {
-          this.groups = res.devicesGroups ? res.devicesGroups : [];
-        } else {
-          this.alert.show({
-            title: 'GET GROUPS ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
-      });
+  getGroups() {
+    this.groups.get('all');
   }
 
   getConfigs(param: string) {
@@ -197,170 +187,85 @@ export class GroupsComponent implements OnInit, OnDestroy {
   selectUnselectGroups() {
     this.isAllSelected = !this.isAllSelected;
 
-    this.groups.map((g) => {
-      g.isSelected = this.isAllSelected;
-    });
+    this.groups.setSelectionTotal(this.isAllSelected);
 
-    if (this.isAllSelected)
-      this.selectedGroupsIDs = this.groups.map((g) => g.id);
-    else this.selectedGroupsIDs = [];
+    if (this.isAllSelected) this.groups.setListOfSelected(this.groups.array);
+    else this.groups.setListOfSelected([]);
   }
 
-  selectUnselectGroup(group: DevicesGroup) {
-    this.groups.map((g) => {
-      if (g.id === group.id) {
-        g.isSelected = !g.isSelected;
+  selectUnselectGroup(group: IGroup) {
+    this.groups.setElementSelection(group);
 
-        if (g.isSelected && !this.selectedGroupsIDs.includes(g.id))
-          this.selectedGroupsIDs.push(g.id);
-
-        if (!g.isSelected && this.selectedGroupsIDs.includes(g.id))
-          this.selectedGroupsIDs = this.selectedGroupsIDs.filter(
-            (sg) => sg !== g.id
-          );
-      }
-    });
     if (!group.isSelected && this.isAllSelected) {
       this.isAllSelected = !this.isAllSelected;
     }
-    if (this.selectedGroupsIDs.length === this.groups.length)
+
+    if (this.groups.listOfSelectedLength === this.groups.arrayLength)
       this.isAllSelected = true;
   }
 
   cancelSelection() {
-    this.selectedGroupsIDs = [];
+    this.groups.setListOfSelected([]);
 
     if (this.isAllSelected) this.isAllSelected = false;
 
-    this.groups.map((g) => {
-      if (g.isSelected) g.isSelected = false;
-    });
+    this.groups.setSelectionTotal(false);
+  }
+
+  setCurrentGroup(group: IGroup, isToEdit: boolean = false) {
+    this.groups.setCurrent(group);
+    if (isToEdit) this.editForm.form.patchValue(group);
   }
 
   addGroup() {
-    this.loading = true;
-
-    this.groupService
-      .add(this.addForm.form.getRawValue())
-      .then((res: states.GroupsState) => {
-        if (res.success) {
-          if (res.group?.[0]) this.groups = [res.group[0], ...this.groups];
-
-          const modal = document.querySelector('#add_group');
-          if (!modal?.classList.contains('hidden'))
-            modal?.classList.toggle('hidden');
-
-          this.addForm.reset();
-        } else {
-          this.alert.show({
-            title: 'ADD GROUP ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
-      });
-  }
-
-  changeGroupState(group: DevicesGroup) {
-    this.loading = true;
-
-    this.groupService
-      .changeState(group.id, !group.activeState)
-      .then((res: states.State) => {
-        if (res.success) {
-          this.groups = this.groups.map((g) => {
-            return g.id === group.id
-              ? { ...g, activeState: !g.activeState }
-              : g;
-          });
-        } else {
-          this.alert.show({
-            title: 'CHANGE GROUP STATE ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
-      });
-  }
-
-  changeGroupConfig(group: DevicesGroup, deviceConfigID: string) {
-    this.loading = true;
-
-    this.groupService
-      .edit({ ...group, deviceConfigID: deviceConfigID })
-      .then((res: states.State) => {
-        if (res.success) {
-          this.groups = this.groups.map((g) => {
-            return g.id === group.id
-              ? { ...g, deviceConfigID: deviceConfigID }
-              : g;
-          });
-        } else {
-          this.alert.show({
-            title: 'CHANGE GROUP CONFIG ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
-      });
-  }
-
-  selectGroupToEdit(group: DevicesGroup) {
-    this.currGroup = group;
-    this.editForm.form.patchValue(group);
-  }
-
-  getGroupFiles(group: DevicesGroup) {
-    this.currGroup = group;
+    this.groups.add(this.addForm.values).then((res) => {
+      if (res) {
+        const modal = document.querySelector('#add_group');
+        if (!modal?.classList.contains('hidden'))
+          modal?.classList.toggle('hidden');
+      }
+    });
   }
 
   addFile() {
-    this.loading = true;
+    const group = this.groups.current.value;
 
-    this.files
-      .upload(this.currGroup.id, this.fileForm._file)
-      .then((res) => {
-        if (res.success) {
-          if (this.currGroup.files) {
-            if (this.currGroup.files?.length !== 0) {
-              this.currGroup.files = [res.file, ...this.currGroup.files];
+    if (group) {
+      this.loading = true;
+
+      this.files
+        .upload(group.id, this.fileForm._file)
+        .then((res) => {
+          if (res.success) {
+            if (group.files) {
+              if (group.files?.length !== 0) {
+                group.files = [res.file, ...group.files];
+              } else {
+                group.files.push(res.file);
+              }
             } else {
-              this.currGroup.files.push(res.file);
+              group.files = [res.file];
             }
+
+            this.fileForm.resetForm();
+
+            const modal = document.querySelector('#file_add');
+            if (!modal?.classList.contains('hidden'))
+              modal?.classList.toggle('hidden');
           } else {
-            this.currGroup.files = [res.file];
+            this.alert.show({
+              title: 'ADD FILE ERROR',
+              content: res.error,
+            });
           }
-
-          this.fileForm.resetForm();
-
-          const modal = document.querySelector('#file_add');
-          if (!modal?.classList.contains('hidden'))
-            modal?.classList.toggle('hidden');
-        } else {
-          this.alert.show({
-            title: 'ADD FILE ERROR',
-            content: res.error,
+        })
+        .finally(() => {
+          const t = timer(500).subscribe(() => {
+            t.unsubscribe();
+            this.loading = false;
           });
-        }
-      })
-      .finally(() => {
-        const t = timer(500).subscribe(() => {
-          t.unsubscribe();
-          this.loading = false;
         });
-      });
+    }
   }
 
   selectFileToDelete(file: IFile) {
@@ -368,68 +273,54 @@ export class GroupsComponent implements OnInit, OnDestroy {
   }
 
   deleteFile(file: IFile) {
-    this.loading = true;
+    const group = this.groups.current.value;
 
-    this.files
-      .delete(this.currGroup.id, file.fileID)
-      .then((res) => {
-        if (res.success) {
-          if (this.currGroup.files)
-            this.currGroup.files = this.currGroup.files?.filter(
-              (f) => f.fileID !== file.fileID
-            );
-          this.currFile = null;
+    if (group) {
+      this.loading = true;
 
-          const modal = document.querySelector('#file_delete');
-          if (!modal?.classList.contains('hidden'))
-            modal?.classList.toggle('hidden');
-        } else {
-          console.log(res.error);
-        }
-      })
-      .finally(() => {
-        const t = timer(500).subscribe(() => {
-          t.unsubscribe();
-          this.loading = false;
+      this.files
+        .delete(group.id, file.fileID)
+        .then((res) => {
+          if (res.success) {
+            if (group.files)
+              group.files = group.files?.filter(
+                (f) => f.fileID !== file.fileID
+              );
+            this.currFile = null;
+
+            const modal = document.querySelector('#file_delete');
+            if (!modal?.classList.contains('hidden'))
+              modal?.classList.toggle('hidden');
+          } else {
+            console.log(res.error);
+          }
+        })
+        .finally(() => {
+          const t = timer(500).subscribe(() => {
+            t.unsubscribe();
+            this.loading = false;
+          });
         });
-      });
+    }
   }
 
   editGroup() {
-    this.loading = true;
-
-    this.groupService
-      .edit({ ...this.currGroup, ...this.editForm.form.getRawValue() })
-      .then((res: { success: boolean; error: string }) => {
-        if (res.success) {
-          this.groups = this.groups.map((g) => {
-            return g.id === this.currGroup.id
-              ? { ...g, ...this.editForm.form.getRawValue() }
-              : g;
-          });
+    this.groups
+      .edit([{ ...this.groups.current.value, ...this.editForm.values }])
+      .then((res) => {
+        if (res) {
+          this.groups.updateGroups(this.editForm.values);
 
           const modal = document.querySelector('#edit_group');
           if (!modal?.classList.contains('hidden'))
             modal?.classList.toggle('hidden');
-        } else {
-          this.alert.show({
-            title: 'EDIT GROUP ERROR',
-            content: res.error,
-          });
         }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
       });
   }
 
   editSeveralGroups() {
-    this.loading = true;
-
-    const data: DevicesGroup[] = this.groups
-      .filter((g) => this.selectedGroupsIDs.includes(g.id))
+    const data: IGroup[] = this.groups.array
+      .filter((g) => this.groups.selectedIDs.includes(g.id))
       .map((g) => {
         return {
           ...g,
@@ -438,73 +329,31 @@ export class GroupsComponent implements OnInit, OnDestroy {
         };
       });
 
-    this.groupService
-      .editSeveral(data)
-      .then((res: states.State) => {
-        if (res.success) {
-          data.forEach((d) => {
-            this.groups = this.groups.map((g) => {
-              if (g.id === d.id) return d;
-              else return g;
-            });
-          });
-
-          this.selectedGroupsIDs = [];
-
-          const modal = document.querySelector('#edit_several_groups');
-          if (!modal?.classList.contains('hidden'))
-            modal?.classList.toggle('hidden');
-        } else {
-          this.alert.show({
-            title: 'EDIT SEVERAL ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
-      });
-  }
-
-  selectGroupToDelete(group: DevicesGroup) {
-    this.currGroup = group;
+    this.groups.edit(data).then((res) => {
+      if (res) {
+        this.groups.updateGroups(undefined, true, data);
+        const modal = document.querySelector('#edit_several_groups');
+        if (!modal?.classList.contains('hidden'))
+          modal?.classList.toggle('hidden');
+      }
+    });
   }
 
   deleteGroup() {
-    this.loading = true;
-
-    this.groupService
-      .delete(this.currGroup)
-      .then((res: states.State) => {
-        if (res.success) {
-          this.groups = this.groups.filter((g) => {
-            return g.id !== this.currGroup.id;
-          });
-
+    if (this.groups.current.value) {
+      this.groups.delete([this.groups.current.value], true).then((res) => {
+        if (res) {
           const modal = document.querySelector('#delete_group');
           if (!modal?.classList.contains('hidden'))
             modal?.classList.toggle('hidden');
-        } else {
-          this.alert.show({
-            title: 'DELETE GROUP ERROR',
-            content: res.error,
-          });
         }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
       });
+    }
   }
 
   deleteSeveralGroups() {
-    this.loading = true;
-
-    const data: DevicesGroup[] = this.groups
-      .filter((g) => this.selectedGroupsIDs.includes(g.id))
+    const data: IGroup[] = this.groups.array
+      .filter((g) => this.groups.selectedIDs.includes(g.id))
       .map((g) => {
         return {
           ...g,
@@ -513,30 +362,12 @@ export class GroupsComponent implements OnInit, OnDestroy {
         };
       });
 
-    this.groupService
-      .deleteSeveral(data)
-      .then((res: states.State) => {
-        if (res.success) {
-          data.forEach((d) => {
-            this.groups = this.groups.filter((g) => g.id !== d.id);
-          });
-
-          this.selectedGroupsIDs = [];
-
-          const modal = document.querySelector('#delete_several_elements');
-          if (!modal?.classList.contains('hidden'))
-            modal?.classList.toggle('hidden');
-        } else {
-          this.alert.show({
-            title: 'EDIT SEVERAL ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          this.loading = false;
-        });
-      });
+    this.groups.delete(data).then((res) => {
+      if (res) {
+        const modal = document.querySelector('#delete_several_elements');
+        if (!modal?.classList.contains('hidden'))
+          modal?.classList.toggle('hidden');
+      }
+    });
   }
 }

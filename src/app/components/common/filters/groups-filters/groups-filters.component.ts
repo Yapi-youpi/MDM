@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { IGroupFilter } from '../../../../shared/types/filters';
 import { DevicesConfig } from '../../../../shared/types/config';
-import { DevicesGroup } from '../../../../shared/types/groups';
 
 @Component({
   selector: 'app-groups-filters',
@@ -12,7 +11,6 @@ import { DevicesGroup } from '../../../../shared/types/groups';
 export class GroupsFiltersComponent {
   @Input() filter!: IGroupFilter;
   @Input() configs!: DevicesConfig[];
-  @Input() groups!: DevicesGroup[];
 
   @Output() onStatusRemove = new EventEmitter();
   @Output() onDateFromRemove = new EventEmitter();
@@ -48,10 +46,5 @@ export class GroupsFiltersComponent {
   onConfigsIDsRemoveHandler(name: string) {
     const idx = this.configs.findIndex((c) => c.name === name);
     this.onConfigsIDsRemove.emit(this.configs[idx].ID);
-  }
-
-  onGroupsIDsRemoveHandler(name: string) {
-    const idx = this.groups.findIndex((g) => g.name === name);
-    this.onGroupsIDsRemove.emit(this.groups[idx].id);
   }
 }
