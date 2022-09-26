@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DevicesService } from '../../services/devices.service';
-import { AlertService } from '../../services/alert.service';
-import { IAddDevice, IDevice, IDevice as CDevice } from '../../types/devices';
+import { alertService, deviceService } from '../../services';
+import { IAddDevice, IDevice } from '../../types/devices';
 import { BehaviorSubject, timer } from 'rxjs';
 
 @Injectable({
@@ -10,12 +9,12 @@ import { BehaviorSubject, timer } from 'rxjs';
 export class DeviceClass {
   public loading: boolean = false;
 
-  public array: CDevice[] = [];
-  public current: BehaviorSubject<CDevice | null> =
-    new BehaviorSubject<CDevice | null>(null);
+  public array: IDevice[] = [];
+  public current: BehaviorSubject<IDevice | null> =
+    new BehaviorSubject<IDevice | null>(null);
   public selectedIDs: string[] = [];
 
-  constructor(private service: DevicesService, private alert: AlertService) {}
+  constructor(private service: deviceService, private alert: alertService) {}
 
   private resetLoading() {
     const t = timer(500).subscribe(() => {
@@ -128,7 +127,7 @@ export class DeviceClass {
     });
   }
 
-  edit(devices: CDevice[]) {
+  edit(devices: IDevice[]) {
     return new Promise<boolean>((resolve) => {
       this.loading = true;
 

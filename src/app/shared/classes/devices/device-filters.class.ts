@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { device } from '../../services/forms';
 
-// import { IDevicesFilter } from '../../types/filters';
-
 @Injectable()
 export class DeviceFiltersClass {
   public status: boolean | null = null;
@@ -10,14 +8,6 @@ export class DeviceFiltersClass {
   public dateTo: string | null = null;
   public groupsIDs: string[] | null = null;
   public configsIDs: string[] | null = null;
-
-  // public filter: IDevicesFilter = {
-  //   status: null,
-  //   dateFrom: null,
-  //   dateTo: null,
-  //   configsIDs: null,
-  //   groupsIDs: null,
-  // };
 
   constructor(private form: device.filter) {}
 
