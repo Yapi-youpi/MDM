@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { IGroup } from '../../../../../shared/types/groups';
 import { AddDeviceService } from '../../../../../shared/services/forms/device/add-device.service';
 import { Option } from '../../../../../shared/types/input';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-add-device',
@@ -10,12 +10,11 @@ import { Option } from '../../../../../shared/types/input';
   styleUrls: ['./add-device.component.scss'],
 })
 export class AddDeviceComponent {
-  @Input() public groups!: IGroup[];
   @Input() isDataFetching: boolean = false;
 
   @Output() public onSubmit = new EventEmitter();
 
-  constructor(public form: AddDeviceService) {}
+  constructor(public form: AddDeviceService, private groups: GroupClass) {}
 
   get _form() {
     return this.form.form;
@@ -38,7 +37,7 @@ export class AddDeviceComponent {
   }
 
   get _options() {
-    return this.groups.map((g) => {
+    return this.groups.array.map((g) => {
       return {
         value: g.id,
         html: g.name,
@@ -48,7 +47,9 @@ export class AddDeviceComponent {
 
   get _currOption() {
     const value = this._group_id?.value;
-    const html = this.groups.find((g) => g.id === this._group_id?.value)?.name;
+    const html = this.groups.array.find(
+      (g) => g.id === this._group_id?.value
+    )?.name;
 
     return {
       value: value ? value : '',

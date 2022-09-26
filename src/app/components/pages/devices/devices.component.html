@@ -19,7 +19,6 @@
     </div>
     <app-devices-filters
       [configs]="configs"
-      [groups]="groups"
       (onStatusRemove)="resetOneSearchParam('status')"
       (onDateFromRemove)="resetOneSearchParam('dateFrom')"
       (onDateToRemove)="resetOneSearchParam('dateTo')"
@@ -116,12 +115,12 @@
                   : filters.groupsIDs
                 | devices_status: sortStatusAsc
                 | devices_date: sortDateAsc
-                | devices_group: groups:sortGroupAsc
+                | devices_group: _groups:sortGroupAsc
                 | devices_battery: sortBatteryAsc
                 | devices_name: sortNameAsc
             "
             [device]="device"
-            [groups]="groups"
+            [groups]="_groups"
             [configs]="configs"
             [userRole]="userRole"
             (onSelectUnselectDevice)="selectUnselectDevice($event)"
@@ -143,24 +142,20 @@
 
 <app-filter-devices
   [configs]="configs"
-  [groups]="groups"
   (onCancel)="resetSearchParams()"
   (onSubmit)="searchDevicesWithParams()"
 ></app-filter-devices>
 <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
   <app-add-device
-    [groups]="groups"
     [isDataFetching]="loading"
     (onSubmit)="addDevice()"
   ></app-add-device>
   <app-qr-code></app-qr-code>
   <app-edit-device
-    [groups]="groups"
     [isDataFetching]="loading"
     (onSubmit)="editDevice()"
   ></app-edit-device>
   <app-edit-several-devices
-    [groups]="groups"
     [isDataFetching]="loading"
     (onSubmit)="editSeveralDevices()"
   ></app-edit-several-devices>

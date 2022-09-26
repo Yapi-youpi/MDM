@@ -3,8 +3,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { filter } from 'src/app/shared/services/forms/device';
 
 import { DevicesConfig } from '../../../../../shared/types/config';
-import { IGroup } from '../../../../../shared/types/groups';
 import { Option } from '../../../../../shared/types/input';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-filter-devices',
@@ -13,12 +13,11 @@ import { Option } from '../../../../../shared/types/input';
 })
 export class FilterDevicesComponent {
   @Input() configs!: DevicesConfig[];
-  @Input() groups!: IGroup[];
 
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();
 
-  constructor(private form: filter) {}
+  constructor(private form: filter, private groups: GroupClass) {}
 
   get _form() {
     return this.form.form;
@@ -59,7 +58,7 @@ export class FilterDevicesComponent {
   }
 
   get _options_groups() {
-    return this.groups.map((g) => {
+    return this.groups.array.map((g) => {
       return {
         value: g.id,
         html: g.name,

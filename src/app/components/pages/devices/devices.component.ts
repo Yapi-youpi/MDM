@@ -4,20 +4,18 @@ import {
   alertService,
   deviceConfigService,
   filesService,
-  groupService,
   userService,
 } from '../../../shared/services';
 import { device, files } from 'src/app/shared/services/forms';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { IDevice } from '../../../shared/types/devices';
-import { IGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
-import * as states from '../../../shared/types/states';
 import { AssetService } from '../../../shared/services/asset.service';
 import { IFile } from '../../../shared/types/files';
 import { DeviceClass } from '../../../shared/classes/devices/device.class';
 import { DeviceSubscriptionClass } from '../../../shared/classes/devices/device-subscription.class';
 import { DeviceFiltersClass } from '../../../shared/classes/devices/device-filters.class';
+import { GroupClass } from '../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-devices',
@@ -30,7 +28,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   public loading: boolean = true;
 
-  public groups: IGroup[] = [];
+  // public groups: IGroup[] = [];
   public configs: DevicesConfig[] = [];
 
   public currFile: IFile | null = null;
@@ -50,7 +48,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private db: DatabaseService,
     private user: userService,
     private elementRef: ElementRef,
-    private group: groupService,
+    private groups: GroupClass,
     private config: deviceConfigService,
     private device: DeviceClass,
     private subDevice: DeviceSubscriptionClass,
@@ -71,6 +69,10 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   get _selectedDevices() {
     return this.device.selectedIDs;
+  }
+
+  get _groups() {
+    return this.groups.array;
   }
 
   ngOnInit() {
@@ -117,26 +119,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   getGroups() {
-    this.loading = true;
-
-    this.group
-      .get('all')
-      .then((res: states.DevicesGroupsState) => {
-        if (res.success) {
-          this.groups = res.devicesGroups ? res.devicesGroups : [];
-        } else {
-          this.alert.show({
-            title: 'GET GROUPS ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => {
-        const t = timer(500).subscribe(() => {
-          t.unsubscribe();
-          this.loading = false;
-        });
-      });
+    this.groups.get('all');
   }
 
   getDevices() {
