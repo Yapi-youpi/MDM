@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { App } from '../../../../../shared/types/apps';
+import { IApp } from '../../../../../shared/types/apps';
 
 @Component({
   selector: 'app-delete-app',
@@ -8,7 +8,7 @@ import { App } from '../../../../../shared/types/apps';
   styleUrls: ['./delete-app.component.scss'],
 })
 export class DeleteAppComponent {
-  @Input() public app!: App;
+  @Input() public app!: IApp;
   @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();

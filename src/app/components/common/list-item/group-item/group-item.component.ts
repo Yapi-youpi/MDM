@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { IGroup } from '../../../../shared/types/groups';
-import { DevicesConfig } from '../../../../shared/types/config';
+import { IConfig } from '../../../../shared/types/config';
 import { Option } from '../../../../shared/types/input';
 
 @Component({
@@ -18,7 +18,7 @@ import { Option } from '../../../../shared/types/input';
 })
 export class GroupItemComponent {
   @Input() group!: IGroup;
-  @Input() configs!: DevicesConfig[];
+  @Input() configs!: IConfig[];
   @Input() userRole!: string;
 
   @Output() onSelectUnselectGroup = new EventEmitter<IGroup>();

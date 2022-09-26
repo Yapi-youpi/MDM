@@ -8,8 +8,8 @@ import {
 } from '../../../shared/services';
 import { add, edit } from '../../../shared/services/forms/app';
 
-import { AppState, State, UploadAppState } from '../../../shared/types/states';
-import { App } from '../../../shared/types/apps';
+import { IAppsState, IState, IAppState } from '../../../shared/types/states';
+import { IApp } from '../../../shared/types/apps';
 
 @Component({
   selector: 'app-apps',
@@ -19,8 +19,8 @@ import { App } from '../../../shared/types/apps';
 export class AppsComponent {
   public title = 'Приложения';
   public loading: boolean = true;
-  public apps: App[] = [];
-  public currApp!: App;
+  public apps: IApp[] = [];
+  public currApp!: IApp;
   public searchParam: string = '';
   public isSystemApps: boolean = false;
   public isNameSortAsc: boolean = true;
@@ -41,7 +41,7 @@ export class AppsComponent {
   }
 
   getApps() {
-    this.appsService.get('all').then((res: AppState) => {
+    this.appsService.get('all').then((res: IAppsState) => {
       if (res.success) {
         if (res.app) {
           // console.log(res.app);
@@ -131,7 +131,7 @@ export class AppsComponent {
 
     this.appsService
       .upload(this.addAppForm._file)
-      .then((res: UploadAppState) => {
+      .then((res: IAppState) => {
         if (res.success) {
           if (res.app) {
             // Приложение - родитель
@@ -169,7 +169,7 @@ export class AppsComponent {
       });
   }
 
-  selectAppToEdit(app: App) {
+  selectAppToEdit(app: IApp) {
     this.currApp = app;
     this.editAppForm.form.patchValue(app);
   }
@@ -182,7 +182,7 @@ export class AppsComponent {
         ID: this.currApp.ID,
         ...this.editAppForm.form.getRawValue(),
       })
-      .then((res: State) => {
+      .then((res: IState) => {
         if (res.success) {
           this.apps = this.apps.map((ag) => {
             if (ag.ID === this.currApp.ID) {
@@ -222,7 +222,7 @@ export class AppsComponent {
       });
   }
 
-  selectAppToDelete(app: App) {
+  selectAppToDelete(app: IApp) {
     this.currApp = app;
   }
 
@@ -231,7 +231,7 @@ export class AppsComponent {
 
     this.appsService
       .delete(this.currApp)
-      .then((res: State) => {
+      .then((res: IState) => {
         if (res.success) {
           if (this.currApp.children.length !== 0) {
             const appGroup = this.apps.filter(

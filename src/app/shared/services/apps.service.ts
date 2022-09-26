@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { appsPaths as api } from '../enums/api';
-import { App } from '../types/apps';
+import { IApp } from '../types/apps';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class AppsService {
     });
   }
 
-  edit(app: App) {
+  edit(app: IApp) {
     return new Promise<any>((resolve, reject) => {
       this.http.post(environment.url + api.EDIT, app).subscribe({
         next: (res) => resolve(res),
@@ -39,7 +39,7 @@ export class AppsService {
     });
   }
 
-  delete(app: App) {
+  delete(app: IApp) {
     return new Promise<any>((resolve, reject) => {
       this.http
         .post(environment.url + api.DELETE, { app_id: app.ID })

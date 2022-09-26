@@ -5,7 +5,7 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { App } from '../../../../../shared/types/apps';
+import { IApp } from '../../../../../shared/types/apps';
 import { environment } from '../../../../../../environments/environment';
 import { appsPaths as api } from '../../../../../shared/enums/api';
 
@@ -15,13 +15,13 @@ import { appsPaths as api } from '../../../../../shared/enums/api';
   styleUrls: ['./add-app-to-config.component.scss'],
 })
 export class AddAppToConfigComponent implements OnChanges {
-  @Input() apps: App[] = [];
+  @Input() apps: IApp[] = [];
   @Input() appsInConfig: string[] = [];
   @Input() isModalAddAppOpen!: boolean;
 
   @Output() onSubmit = new EventEmitter();
 
-  public appGroups: App[] = [];
+  public appGroups: IApp[] = [];
   public appsToAdd: string[] = [];
   public isSubmitted: boolean = false;
   public filter: string = 'all';

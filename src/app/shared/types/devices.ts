@@ -1,4 +1,4 @@
-import { App } from './apps';
+import { IApp } from './apps';
 import { IFile } from './files';
 
 export interface IDevice {
@@ -39,7 +39,7 @@ export interface IDevice {
   signalLevel: string;
   device_info: {
     androidVersion: string;
-    applications: App[] | null;
+    applications: IApp[] | null;
     batteryCharging: string;
     batteryLevel: number;
     cpu: string;

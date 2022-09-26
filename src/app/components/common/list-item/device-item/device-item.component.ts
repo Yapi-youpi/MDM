@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { DevicesConfig } from '../../../../shared/types/config';
+import { IConfig } from '../../../../shared/types/config';
 import { IGroup } from '../../../../shared/types/groups';
 import { IDevice } from '../../../../shared/types/devices';
 
@@ -18,7 +18,7 @@ import { IDevice } from '../../../../shared/types/devices';
 })
 export class DeviceItemComponent {
   @Input() public device!: IDevice;
-  @Input() public configs!: DevicesConfig[];
+  @Input() public configs!: IConfig[];
   @Input() public groups!: IGroup[];
   @Input() userRole!: string;
 

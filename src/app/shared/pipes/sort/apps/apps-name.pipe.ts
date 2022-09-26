@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { App } from '../../../types/apps';
+import { IApp } from '../../../types/apps';
 
 @Pipe({
   name: 'apps_name',
 })
 export class AppsNamePipe implements PipeTransform {
-  transform(apps: App[], isNameAsc: boolean): App[] {
+  transform(apps: IApp[], isNameAsc: boolean): IApp[] {
     // FROM A ENG TO A RU
     if (isNameAsc)
       return apps.sort((a, b) =>

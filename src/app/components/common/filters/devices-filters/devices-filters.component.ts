@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DevicesConfig } from '../../../../shared/types/config';
+import { IConfig } from '../../../../shared/types/config';
 import { DeviceFiltersClass } from '../../../../shared/classes/devices/device-filters.class';
 import { GroupClass } from '../../../../shared/classes/groups/group.class';
 
@@ -9,7 +9,7 @@ import { GroupClass } from '../../../../shared/classes/groups/group.class';
   styleUrls: ['./devices-filters.component.scss'],
 })
 export class DevicesFiltersComponent {
-  @Input() configs!: DevicesConfig[];
+  @Input() configs!: IConfig[];
 
   @Output() onStatusRemove = new EventEmitter();
   @Output() onDateFromRemove = new EventEmitter();

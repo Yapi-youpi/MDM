@@ -1,6 +1,6 @@
 export interface AllowedClasses {}
 
-export interface DevicesConfig {
+export interface IConfig {
   GPS?: boolean | true;
   ID: string;
   appUpdateTime?: string | '02:00';

@@ -9,7 +9,7 @@ import {
   userService,
 } from '../../../shared/services';
 
-import { UserState } from '../../../shared/types/states';
+import { IUserState } from '../../../shared/types/states';
 
 @Component({
   selector: 'app-auth',
@@ -50,7 +50,7 @@ export class AuthComponent {
     } else {
       this.auth
         .login(this.logForm._login, this.logForm._pass)
-        .then((res: UserState) => {
+        .then((res: IUserState) => {
           this.asset.setToStorage('token', res.token).then();
           this.asset.setToStorage('id', res.id).then();
           this.asset.setToStorage('login', this.logForm._login).then();

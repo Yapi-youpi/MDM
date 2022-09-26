@@ -73,7 +73,7 @@ export class MessagesComponent implements OnInit {
   getDevices() {
     this.device
       .get('all')
-      .then((res: states.DevicesState) => {
+      .then((res: states.IDevicesState) => {
         if (res.success) {
           this.devices = res.devices ? res.devices : [];
         } else {
@@ -89,7 +89,7 @@ export class MessagesComponent implements OnInit {
   getGroups() {
     this.group
       .get('all')
-      .then((res: states.DevicesGroupsState) => {
+      .then((res: states.IGroupsState) => {
         if (res.success) {
           this.groups = res.devicesGroups ? res.devicesGroups : [];
         } else {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { App } from '../../../../../shared/types/apps';
+import { IApp } from '../../../../../shared/types/apps';
 
 import { EditAppService } from '../../../../../shared/services/forms/app/edit-app.service';
 
@@ -10,7 +10,7 @@ import { EditAppService } from '../../../../../shared/services/forms/app/edit-ap
   styleUrls: ['./edit-app.component.scss'],
 })
 export class EditAppComponent {
-  @Input() app!: App;
+  @Input() app!: IApp;
   @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();

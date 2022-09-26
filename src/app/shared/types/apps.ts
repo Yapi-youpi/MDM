@@ -1,4 +1,4 @@
-export interface App {
+export interface IApp {
   ID: string;
   parentAppID: string;
   configID: string;
@@ -25,24 +25,5 @@ export interface App {
   skipVersion: boolean;
   screenOrder: number;
   bottom: boolean;
-
-  children: App[];
+  children: IApp[];
 }
-
-export interface AppsGroup {
-  [name: string]: App[];
-}
-
-// export interface UploadedApp {
-//   appID: string
-//   appName: string
-//   arch: string
-//   fileByteSize: number
-//   fileName: string
-//   fileSize: string
-//   iconUID: string
-//   parentAppID: string
-//   pkg: string
-//   version: string
-//   versionCode: number
-// }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DevicesConfig } from '../../../../../shared/types/config';
+import { IConfig } from '../../../../../shared/types/config';
 import { editSeveral } from '../../../../../shared/services/forms/group';
 import { Option } from '../../../../../shared/types/input';
 
@@ -9,7 +9,7 @@ import { Option } from '../../../../../shared/types/input';
   styleUrls: ['./edit-several-groups.component.scss'],
 })
 export class EditSeveralGroupsComponent {
-  @Input() configs!: DevicesConfig[];
+  @Input() configs!: IConfig[];
   @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesConfig } from '../../../../shared/types/config';
+import { IConfig } from '../../../../shared/types/config';
 import { GroupFiltersClass } from '../../../../shared/classes/groups/group-filters.class';
 
 @Component({
@@ -9,7 +9,7 @@ import { GroupFiltersClass } from '../../../../shared/classes/groups/group-filte
   styleUrls: ['./groups-filters.component.scss'],
 })
 export class GroupsFiltersComponent {
-  @Input() configs!: DevicesConfig[];
+  @Input() configs!: IConfig[];
 
   @Output() onStatusRemove = new EventEmitter();
   @Output() onDateFromRemove = new EventEmitter();

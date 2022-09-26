@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { App } from '../../../../shared/types/apps';
+import { IApp } from '../../../../shared/types/apps';
 import { appsPaths as api } from '../../../../shared/enums/api';
 
 import { environment } from '../../../../../environments/environment';
@@ -18,10 +18,10 @@ import { environment } from '../../../../../environments/environment';
   styleUrls: ['./app-item.component.scss'],
 })
 export class AppItemComponent {
-  @Input() app!: App;
+  @Input() app!: IApp;
 
-  @Output() onEditClick = new EventEmitter<App>();
-  @Output() onDeleteClick = new EventEmitter<App>();
+  @Output() onEditClick = new EventEmitter<IApp>();
+  @Output() onDeleteClick = new EventEmitter<IApp>();
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('nametip') nametipRef!: ElementRef;
@@ -72,11 +72,11 @@ export class AppItemComponent {
     this.isChildrenHidden = !this.isChildrenHidden;
   }
 
-  onEditClickHandler(app: App) {
+  onEditClickHandler(app: IApp) {
     this.onEditClick.emit(app);
   }
 
-  onDeleteClickHandler(app: App) {
+  onDeleteClickHandler(app: IApp) {
     this.onDeleteClick.emit(app);
   }
 }

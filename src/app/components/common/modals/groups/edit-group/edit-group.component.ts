@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { edit } from '../../../../../shared/services/forms/group';
-import { DevicesConfig } from '../../../../../shared/types/config';
+import { IConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 import { groupIcons } from '../../../../../shared/types/groups';
 
@@ -10,7 +10,7 @@ import { groupIcons } from '../../../../../shared/types/groups';
   styleUrls: ['./edit-group.component.scss'],
 })
 export class EditGroupComponent {
-  @Input() configs: DevicesConfig[] = [];
+  @Input() configs: IConfig[] = [];
   @Input() isDataFetching: boolean = false;
 
   @Output() onSubmit = new EventEmitter();

@@ -9,7 +9,7 @@ import {
 import { device, files } from 'src/app/shared/services/forms';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { IDevice } from '../../../shared/types/devices';
-import { DevicesConfig } from '../../../shared/types/config';
+import { IConfig } from '../../../shared/types/config';
 import { AssetService } from '../../../shared/services/asset.service';
 import { IFile } from '../../../shared/types/files';
 import { DeviceClass } from '../../../shared/classes/devices/device.class';
@@ -29,7 +29,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
 
   // public groups: IGroup[] = [];
-  public configs: DevicesConfig[] = [];
+  public configs: IConfig[] = [];
 
   public currFile: IFile | null = null;
   public isAllSelected: boolean = false;

@@ -10,7 +10,7 @@ import { group } from 'src/app/shared/services/forms';
 import { add, edit, editSeveral } from '../../../shared/services/forms/group';
 
 import { IGroup } from '../../../shared/types/groups';
-import { DevicesConfig } from '../../../shared/types/config';
+import { IConfig } from '../../../shared/types/config';
 import { AssetService } from '../../../shared/services/asset.service';
 import { addFile } from '../../../shared/services/forms/device';
 import { groupsFiles } from '../../../shared/services/files';
@@ -29,7 +29,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
   public loading: boolean = true;
 
-  public configs: DevicesConfig[] = [];
+  public configs: IConfig[] = [];
   public userRole: string = '';
   public currFile: IFile | null = null;
   public isAllSelected: boolean = false;

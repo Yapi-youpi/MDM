@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DevicesConfig } from '../../../../../shared/types/config';
+import { IConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 import { add } from '../../../../../shared/services/forms/group';
 import { groupIcons } from '../../../../../shared/types/groups';
@@ -10,7 +10,7 @@ import { groupIcons } from '../../../../../shared/types/groups';
   styleUrls: ['./add-group.component.scss'],
 })
 export class AddGroupComponent {
-  @Input() configs: DevicesConfig[] = [];
+  @Input() configs: IConfig[] = [];
   @Input() isDataFetching: boolean = false;
 
   @Output() public onSubmit = new EventEmitter();

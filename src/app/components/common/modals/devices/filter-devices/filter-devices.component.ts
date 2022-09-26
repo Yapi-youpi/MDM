@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { filter } from 'src/app/shared/services/forms/device';
 
-import { DevicesConfig } from '../../../../../shared/types/config';
+import { IConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
@@ -12,7 +12,7 @@ import { GroupClass } from '../../../../../shared/classes/groups/group.class';
   styleUrls: ['./filter-devices.component.scss'],
 })
 export class FilterDevicesComponent {
-  @Input() configs!: DevicesConfig[];
+  @Input() configs!: IConfig[];
 
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DevicesConfig } from '../../../../../shared/types/config';
+import { IConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 
 import { filter } from '../../../../../shared/services/forms/group';
@@ -11,7 +11,7 @@ import { filter } from '../../../../../shared/services/forms/group';
   styleUrls: ['./filter-groups.component.scss'],
 })
 export class FilterGroupsComponent {
-  @Input() configs!: DevicesConfig[];
+  @Input() configs!: IConfig[];
 
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();
