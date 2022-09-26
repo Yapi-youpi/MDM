@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { IGroupFilter } from '../../../../shared/types/filters';
 import { DevicesConfig } from '../../../../shared/types/config';
+import { GroupFiltersClass } from '../../../../shared/classes/groups/group-filters.class';
 
 @Component({
   selector: 'app-groups-filters',
@@ -9,7 +9,6 @@ import { DevicesConfig } from '../../../../shared/types/config';
   styleUrls: ['./groups-filters.component.scss'],
 })
 export class GroupsFiltersComponent {
-  @Input() filter!: IGroupFilter;
   @Input() configs!: DevicesConfig[];
 
   @Output() onStatusRemove = new EventEmitter();
@@ -18,13 +17,13 @@ export class GroupsFiltersComponent {
   @Output() onConfigsIDsRemove = new EventEmitter<string>();
   @Output() onGroupsIDsRemove = new EventEmitter<string>();
 
-  constructor() {}
+  constructor(public filters: GroupFiltersClass) {}
 
   get _configIDs() {
-    if (!this.filter.configsIDs || this.filter.configsIDs.length === 0)
+    if (!this.filters.configsIDs || this.filters.configsIDs.length === 0)
       return null;
     else {
-      return this.filter.configsIDs.map((c) => {
+      return this.filters.configsIDs.map((c) => {
         const idx = this.configs.map((e) => e.ID).indexOf(c);
         return this.configs[idx].name;
       });

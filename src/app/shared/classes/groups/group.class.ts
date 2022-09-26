@@ -60,18 +60,10 @@ export class GroupClass {
     });
   }
 
-  get arrayLength() {
-    return this.array.length;
-  }
-
   // ОБНОВЛЕНИЕ ВЫБРАННЫХ ГРУПП
 
   setListOfSelected(groups: IGroup[]) {
     this.selectedIDs = groups.map((d) => d.id);
-  }
-
-  get listOfSelectedLength() {
-    return this.selectedIDs.length;
   }
 
   // ОБНОВЛЕНИЕ ТЕКУЩЕЙ ВЫБРАННОЙ ГРУППЫ

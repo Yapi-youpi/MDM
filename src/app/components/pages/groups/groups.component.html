@@ -18,7 +18,6 @@
       ></app-add-button>
     </div>
     <app-groups-filters
-      [filter]="filter"
       [configs]="configs"
       (onStatusRemove)="resetOneSearchParam('status')"
       (onDateFromRemove)="resetOneSearchParam('dateFrom')"
@@ -92,10 +91,10 @@
               let group of _groups
                 | search: searchParam:'group'
                 | groupFilter
-                  : filter.status
-                  : filter.dateFrom
-                  : filter.dateTo
-                  : filter.configsIDs
+                  : filters.status
+                  : filters.dateFrom
+                  : filters.dateTo
+                  : filters.configsIDs
                 | group_name: isNamesSortAsc
                 | group_devices_count: isDevicesCountSortAsc
                 | group_config: configsNV:isConfigSortAsc

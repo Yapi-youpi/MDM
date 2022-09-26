@@ -11,17 +11,18 @@ import { add, edit, editSeveral } from '../../../shared/services/forms/group';
 
 import { IGroup } from '../../../shared/types/groups';
 import { DevicesConfig } from '../../../shared/types/config';
-import { IGroupFilter } from '../../../shared/types/filters';
 import { AssetService } from '../../../shared/services/asset.service';
 import { addFile } from '../../../shared/services/forms/device';
 import { groupsFiles } from '../../../shared/services/files';
 import { IFile } from '../../../shared/types/files';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
+import { GroupFiltersClass } from '../../../shared/classes/groups/group-filters.class';
 
 @Component({
   selector: 'app-group',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss'],
+  providers: [GroupFiltersClass],
 })
 export class GroupsComponent implements OnInit, OnDestroy {
   public title = 'Группы устройств';
@@ -41,13 +42,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
   public configsNV: { name: string; value: string }[] = [];
   public isDateSortAsc: boolean = true;
 
-  public filter: IGroupFilter = {
-    status: null,
-    dateFrom: null,
-    dateTo: null,
-    configsIDs: null,
-  };
-
   constructor(
     private groups: GroupClass,
     private configService: deviceConfigService,
@@ -59,7 +53,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
     private alert: alertService,
     private asset: AssetService,
     private files: groupsFiles,
-    private fileForm: addFile
+    private fileForm: addFile,
+    public filters: GroupFiltersClass
   ) {}
 
   get _groups() {
@@ -118,57 +113,20 @@ export class GroupsComponent implements OnInit, OnDestroy {
   }
 
   resetSearchParams() {
-    this.filter.status = null;
-    this.filter.dateFrom = null;
-    this.filter.dateTo = null;
-    this.filter.configsIDs = null;
+    this.filters.resetAll();
   }
 
   resetOneSearchParam(
     type: 'status' | 'dateFrom' | 'dateTo' | 'configsIDs',
     value?: string
   ) {
-    switch (type) {
-      case 'status': {
-        this.filter.status = null;
-        if (this.filterForm.form.controls['status-on'].value === true)
-          this.filterForm.form.controls['status-on'].setValue(false);
-        if (this.filterForm.form.controls['status-off'].value === true)
-          this.filterForm.form.controls['status-off'].setValue(false);
-        break;
-      }
-      case 'dateFrom': {
-        this.filter.dateFrom = null;
-        this.filterForm.form.controls['date-from'].setValue(null);
-        break;
-      }
-      case 'dateTo': {
-        this.filter.dateTo = null;
-        this.filterForm.form.controls['date-to'].setValue(null);
-        break;
-      }
-      case 'configsIDs': {
-        if (value) {
-          const prevValues: string[] =
-            this.filterForm.form.controls['config_ids'].value;
-          const newValues = prevValues.filter((c) => c !== value);
-          this.filterForm.form.controls['config_ids'].setValue(newValues);
-          this.filter.configsIDs = newValues;
-        }
-        break;
-      }
-      default:
-        return;
-    }
+    this.filters.resetOneParam(type, value);
   }
 
   searchGroupsWithParams() {
     this.cancelSelection();
 
-    this.filter.status = this.filterForm._status;
-    this.filter.dateFrom = this.filterForm._dateFrom;
-    this.filter.dateTo = this.filterForm._dateTo;
-    this.filter.configsIDs = this.filterForm._configsIDs;
+    this.filters.setParams();
   }
 
   changeSortNameDir() {
@@ -200,7 +158,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
       this.isAllSelected = !this.isAllSelected;
     }
 
-    if (this.groups.listOfSelectedLength === this.groups.arrayLength)
+    if (this.groups.selectedIDs.length === this.groups.array.length)
       this.isAllSelected = true;
   }
 
