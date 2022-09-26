@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DevicesConfigService } from '../../../shared/services/devices-config.service';
+import { ConfigsService } from '../../../shared/services/configs.service';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { AssetService } from '../../../shared/services/asset.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -19,7 +19,7 @@ export class ConfigsComponent implements OnInit {
   public currentConfig!: DevicesConfig;
   constructor(
     public asset: AssetService,
-    private configService: DevicesConfigService
+    private configService: ConfigsService
   ) {
     this.newConfigForm = new FormGroup({
       name: new FormControl('', Validators.required),

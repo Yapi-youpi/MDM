@@ -7,7 +7,7 @@ import { configsPaths as api } from '../enums/api';
 @Injectable({
   providedIn: 'root',
 })
-export class DevicesConfigService {
+export class ConfigsService {
   constructor(private http: HttpClient) {}
 
   getConfig(param: string) {

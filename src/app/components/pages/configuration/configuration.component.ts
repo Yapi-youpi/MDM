@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DevicesConfigService } from '../../../shared/services/devices-config.service';
+import { ConfigsService } from '../../../shared/services/configs.service';
 import { DevicesConfig, Permissions } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
@@ -39,7 +39,7 @@ export class ConfigurationComponent implements OnInit {
     public appsService: AppsService,
     private alert: alertService,
     private route: ActivatedRoute,
-    private configService: DevicesConfigService,
+    private configService: ConfigsService,
     private router: Router,
     private elementRef: ElementRef,
     private asset: AssetService

@@ -14,7 +14,7 @@ import { LiveQuerySubscription } from 'parse';
 import * as L from 'leaflet';
 import { DivIcon, Marker } from 'leaflet';
 import { IDevice } from '../../../shared/types/devices';
-import { DevicesConfigService } from '../../../shared/services/devices-config.service';
+import { ConfigsService } from '../../../shared/services/configs.service';
 import { UserService } from '../../../shared/services/user.service';
 import { IGroup } from '../../../shared/types/groups';
 
@@ -64,7 +64,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     private mapService: MapService,
     private groupService: GroupsService,
     private db: DatabaseService,
-    protected configService: DevicesConfigService,
+    protected configService: ConfigsService,
     protected user: UserService
   ) {}
 
