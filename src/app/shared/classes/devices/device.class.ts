@@ -85,7 +85,7 @@ export class DeviceClass {
 
   // ВЫЗОВЫ СЕРВИСА
 
-  get(param: string, group_id?: string) {
+  get(param: 'all' | string, group_id?: string) {
     this.loading = true;
 
     this.service
