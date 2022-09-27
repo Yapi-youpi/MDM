@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FileClass } from '../../../../../shared/classes/files/file.class';
+import { FileLoaderClass } from '../../../../../shared/classes/files/file-loader.class';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-delete-file',
@@ -7,22 +10,55 @@ import { FileClass } from '../../../../../shared/classes/files/file.class';
   styleUrls: ['./delete-file.component.scss'],
 })
 export class DeleteFileComponent {
-  @Input() isDataFetching: boolean = false;
+  @Input() source: 'device' | 'group' = 'device';
 
-  @Output() onSubmit = new EventEmitter();
+  constructor(
+    private loader: FileLoaderClass,
+    private files: FileClass,
+    private device: DeviceClass,
+    private group: GroupClass
+  ) {}
 
-  constructor(private files: FileClass) {}
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _file() {
-    return this.files.current.value;
+    return this.files.current;
   }
 
   onSubmitHandler() {
-    this.onSubmit.emit();
+    if (this.source === 'device') {
+      const device = this.device.current;
+      const file = this._file;
+
+      if (device && file) {
+        this.files
+          .delete('device', device.device_id, file.fileID)
+          .then((res) => {
+            if (res) {
+              this.closeModal();
+            }
+          });
+      }
+    }
+
+    if (this.source === 'group') {
+      const group = this.group.current;
+      const file = this._file;
+
+      if (group && file) {
+        this.files.delete('group', group.id, file.fileID).then((res) => {
+          if (res) {
+            this.closeModal();
+          }
+        });
+      }
+    }
   }
 
-  onCancelHandler() {
+  closeModal() {
     const modal = document.querySelector('#file_delete');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

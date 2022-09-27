@@ -1,40 +1,31 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, timer } from 'rxjs';
 import { alertService, fileService } from '../../services';
 import { DeviceClass } from '../devices/device.class';
 import { IFile } from '../../types/files';
 import { GroupClass } from '../groups/group.class';
+import { FileLoaderClass } from './file-loader.class';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FileClass {
-  public loading: boolean = false;
-
-  public current: BehaviorSubject<IFile | null> =
-    new BehaviorSubject<IFile | null>(null);
+  public current: IFile | null = null;
 
   constructor(
+    private loading: FileLoaderClass,
     private files: fileService,
     private devices: DeviceClass,
     private groups: GroupClass,
     private alert: alertService
   ) {}
 
-  resetLoading() {
-    const t = timer(500).subscribe(() => {
-      t.unsubscribe();
-      this.loading = false;
-    });
-  }
-
   setCurrent(file: IFile | null) {
-    this.current.next(file);
+    this.current = file;
   }
 
   upload(entity: 'device' | 'group', eID: string, file: FormData) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       this.files
         .upload(entity, eID, file)
@@ -42,7 +33,7 @@ export class FileClass {
           if (res.success) {
             switch (entity) {
               case 'device': {
-                const device = this.devices.current.value;
+                const device = this.devices.current;
 
                 if (device) {
                   if (device.device_info.files) {
@@ -67,7 +58,7 @@ export class FileClass {
                 break;
               }
               case 'group': {
-                const group = this.groups.current.value;
+                const group = this.groups.current;
 
                 if (group) {
                   if (group.files) {
@@ -95,13 +86,13 @@ export class FileClass {
             resolve(false);
           }
         })
-        .finally(() => this.resetLoading());
+        .finally(() => this.loading.end());
     });
   }
 
   delete(entity: 'device' | 'group', eID: string, fID: string) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       this.files
         .delete(entity, eID, fID)
@@ -109,7 +100,7 @@ export class FileClass {
           if (res) {
             switch (entity) {
               case 'device': {
-                const device = this.devices.current.value;
+                const device = this.devices.current;
 
                 if (device) {
                   if (device.device_info.files)
@@ -127,7 +118,7 @@ export class FileClass {
                 break;
               }
               case 'group': {
-                const group = this.groups.current.value;
+                const group = this.groups.current;
 
                 if (group) {
                   this.groups.setCurrent({
@@ -150,7 +141,7 @@ export class FileClass {
             resolve(false);
           }
         })
-        .finally(() => this.resetLoading());
+        .finally(() => this.loading.end());
     });
   }
 }

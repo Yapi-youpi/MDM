@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 import { add } from '../../../../../shared/services/forms/group';
 import { groupIcons } from '../../../../../shared/types/groups';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
 
 @Component({
   selector: 'app-add-group',
@@ -11,14 +13,19 @@ import { groupIcons } from '../../../../../shared/types/groups';
 })
 export class AddGroupComponent {
   @Input() configs: IConfig[] = [];
-  @Input() isDataFetching: boolean = false;
-
-  @Output() public onSubmit = new EventEmitter();
 
   public groupIcons: string[] = groupIcons;
   public isIconContainerShown: boolean = false;
 
-  constructor(private form: add) {}
+  constructor(
+    private form: add,
+    private group: GroupClass,
+    private loader: GroupLoaderClass
+  ) {}
+
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -91,7 +98,11 @@ export class AddGroupComponent {
     if (this.form.form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      this.group.add(this.form.values).then((res) => {
+        if (res) {
+          this.closeModal();
+        }
+      });
     }
   }
 
@@ -114,7 +125,11 @@ export class AddGroupComponent {
       deviceConfigID: '',
     });
 
+    this.closeModal();
+  }
+
+  closeModal() {
     const modal = document.querySelector('#add_group');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

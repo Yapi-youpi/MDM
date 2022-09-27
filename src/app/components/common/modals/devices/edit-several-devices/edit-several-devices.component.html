@@ -35,7 +35,7 @@
         [margin]="'30px'"
         [submitText]="'Сохранить'"
         [cancelText]="'Отменить'"
-        [isSubmitBtnDisabled]="isDataFetching"
+        [isSubmitBtnDisabled]="(_loading | async) || false"
         (onSubmit)="onSubmitHandler()"
         (onCancel)="onCancelHandler()"
       ></app-modal-action-btns>

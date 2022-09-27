@@ -37,7 +37,7 @@
       <p>{{ device.imei }}</p>
     </div>
     <p class="font-bold-color group">
-      {{ device.device_group_id | groupConverter: groups }}
+      {{ device.device_group_id | groupConverter: _groups }}
     </p>
     <p class="font-bold-color conf">
       {{ device.device_config_id | configConverter: configs }}

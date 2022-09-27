@@ -1,23 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
 import { filter } from 'src/app/shared/services/forms/device';
 
 import { IConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { DeviceFiltersClass } from '../../../../../shared/classes/devices/device-filters.class';
+import { DeviceSelectedClass } from '../../../../../shared/classes/devices/device-selected.class';
 
 @Component({
   selector: 'app-filter-devices',
   templateUrl: './filter-devices.component.html',
   styleUrls: ['./filter-devices.component.scss'],
 })
-export class FilterDevicesComponent {
+export class FilterDevicesComponent implements OnDestroy {
   @Input() configs!: IConfig[];
 
-  @Output() onSubmit = new EventEmitter();
-  @Output() onCancel = new EventEmitter();
+  constructor(
+    private form: filter,
+    private groups: GroupClass,
+    private filters: DeviceFiltersClass,
+    private selection: DeviceSelectedClass
+  ) {}
 
-  constructor(private form: filter, private groups: GroupClass) {}
+  ngOnDestroy() {
+    this.filters.resetAll();
+  }
 
   get _form() {
     return this.form.form;
@@ -95,16 +103,25 @@ export class FilterDevicesComponent {
     this._form.controls['group_ids'].setValue(data);
   }
 
+  onSubmitHandler() {
+    this.filters.setParams();
+
+    this.selection.cancelSelection();
+
+    this.closeModal();
+  }
+
   onCancelHandler() {
     this.form.reset();
 
-    const modal = document.querySelector('#filter_devices');
-    modal?.classList.toggle('hidden');
+    this.filters.resetAll();
+    this.selection.cancelSelection();
 
-    this.onCancel.emit();
+    this.closeModal();
   }
 
-  onSubmitHandler() {
-    this.onSubmit.emit();
+  closeModal() {
+    const modal = document.querySelector('#filter_devices');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

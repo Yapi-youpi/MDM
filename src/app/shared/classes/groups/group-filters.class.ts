@@ -24,7 +24,7 @@ export class GroupFiltersClass {
     this.configsIDs = null;
   }
 
-  resetOneParam(
+  resetParam(
     type: 'status' | 'dateFrom' | 'dateTo' | 'configsIDs',
     value?: string
   ) {

@@ -54,7 +54,7 @@
           [target]="'file_add'"
         ></app-add-button>
       </div>
-      <ng-container *ngIf="loading; else dummy">
+      <ng-container *ngIf="_loading | async; else dummy">
         <div class="progress">
           <div class="indeterminate"></div>
         </div>
@@ -109,7 +109,7 @@
                   "
                   [file]="file"
                   (onFileClick)="setCurrentFile($event)"
-                  (onDeleteClick)="onDeleteClickHandler($event)"
+                  (onDeleteClick)="setCurrentFile($event)"
                   (onDownloadClick)="onDownloadClickHandler($event)"
                 ></app-file-item>
               </ng-container>
@@ -132,7 +132,7 @@
                   "
                   [file]="file"
                   (onFileClick)="setCurrentFile($event)"
-                  (onDeleteClick)="onDeleteClickHandler($event)"
+                  (onDeleteClick)="setCurrentFile($event)"
                   (onDownloadClick)="onDownloadClickHandler($event)"
                 ></app-file-item>
               </ng-container>

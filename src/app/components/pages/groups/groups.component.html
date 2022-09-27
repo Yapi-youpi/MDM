@@ -17,14 +17,8 @@
         [target]="'add_group'"
       ></app-add-button>
     </div>
-    <app-groups-filters
-      [configs]="configs"
-      (onStatusRemove)="resetOneSearchParam('status')"
-      (onDateFromRemove)="resetOneSearchParam('dateFrom')"
-      (onDateToRemove)="resetOneSearchParam('dateTo')"
-      (onConfigsIDsRemove)="resetOneSearchParam('configsIDs', $event)"
-    ></app-groups-filters>
-    <ng-container *ngIf="loading; else dummy">
+    <app-groups-filters [configs]="configs"></app-groups-filters>
+    <ng-container *ngIf="(_gLoading | async) || false; else dummy">
       <div class="progress">
         <div class="indeterminate"></div>
       </div>
@@ -34,10 +28,9 @@
     </ng-template>
     <app-selected-elements
       *ngIf="userRole === 'admin' || userRole === 'super'"
-      [selectedIDs]="_selectedDevices"
+      [source]="'group'"
       [editTarget]="'edit_several_groups'"
       [deleteTarget]="'delete_several_elements'"
-      (onCloseClick)="cancelSelection()"
     ></app-selected-elements>
     <div class="list">
       <div class="list-header row">
@@ -103,10 +96,6 @@
             [group]="group"
             [configs]="configs"
             [userRole]="userRole"
-            (onSelectUnselectGroup)="selectUnselectGroup($event)"
-            (onFileClick)="setCurrentGroup($event)"
-            (onEditClick)="setCurrentGroup($event, true)"
-            (onDeleteClick)="setCurrentGroup($event)"
           ></app-group-item>
         </ng-container>
         <ng-template #nodata>
@@ -117,45 +106,15 @@
   </div>
 </main>
 
-<app-filter-group
-  [configs]="configs"
-  (onSubmit)="searchGroupsWithParams()"
-  (onCancel)="resetSearchParams()"
-></app-filter-group>
+<app-filter-group [configs]="configs"></app-filter-group>
+
 <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
-  <app-add-group
-    [configs]="configs"
-    [isDataFetching]="loading"
-    (onSubmit)="addGroup()"
-  ></app-add-group>
-  <app-list-files
-    source="group"
-    [loading]="loading"
-    (onDeleteClick)="setCurrentFile($event)"
-  ></app-list-files>
-  <app-add-file
-    [isDataFetching]="loading"
-    (onSubmit)="addFile()"
-  ></app-add-file>
-  <app-delete-file
-    [isDataFetching]="loading"
-    (onSubmit)="deleteFile()"
-  ></app-delete-file>
-  <app-edit-group
-    [configs]="configs"
-    [isDataFetching]="loading"
-    (onSubmit)="editGroup()"
-  ></app-edit-group>
-  <app-edit-several-groups
-    [configs]="configs"
-    [isDataFetching]="loading"
-    (onSubmit)="editSeveralGroups()"
-  ></app-edit-several-groups>
-  <app-delete-group
-    [isDataFetching]="loading"
-    (onSubmit)="deleteGroup()"
-  ></app-delete-group>
-  <app-delete-several-elements
-    (onSubmit)="deleteSeveralGroups()"
-  ></app-delete-several-elements>
+  <app-add-group [configs]="configs"></app-add-group>
+  <app-list-files [source]="'group'"></app-list-files>
+  <app-add-file [source]="'group'"></app-add-file>
+  <app-delete-file [source]="'group'"></app-delete-file>
+  <app-edit-group [configs]="configs"></app-edit-group>
+  <app-edit-several-groups [configs]="configs"></app-edit-several-groups>
+  <app-delete-group></app-delete-group>
+  <app-delete-several-elements [source]="'group'"></app-delete-several-elements>
 </ng-container>

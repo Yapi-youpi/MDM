@@ -27,7 +27,7 @@ export class FileItemComponent {
   constructor(private files: FileClass) {}
 
   get _curFile() {
-    return this.files.current.value;
+    return this.files.current;
   }
 
   displayTip() {

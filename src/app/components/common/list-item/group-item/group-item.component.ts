@@ -1,15 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 import { IGroup } from '../../../../shared/types/groups';
 import { IConfig } from '../../../../shared/types/config';
 import { Option } from '../../../../shared/types/input';
+import { GroupSelectedClass } from '../../../../shared/classes/groups/group-selected.class';
+import { GroupClass } from '../../../../shared/classes/groups/group.class';
+import { edit } from '../../../../shared/services/forms/group';
 
 @Component({
   selector: 'app-group-item',
@@ -21,15 +17,16 @@ export class GroupItemComponent {
   @Input() configs!: IConfig[];
   @Input() userRole!: string;
 
-  @Output() onSelectUnselectGroup = new EventEmitter<IGroup>();
-  @Output() onFileClick = new EventEmitter<IGroup>();
-  @Output() onEditClick = new EventEmitter<IGroup>();
-  @Output() onDeleteClick = new EventEmitter<IGroup>();
-
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
   public currOption: Option = { value: '', html: '' };
+
+  constructor(
+    private selection: GroupSelectedClass,
+    private groups: GroupClass,
+    private form: edit
+  ) {}
 
   displayTip() {
     if (
@@ -66,18 +63,19 @@ export class GroupItemComponent {
   }
 
   onSelectUnselectGroupHandler(group: IGroup) {
-    this.onSelectUnselectGroup.emit(group);
+    this.selection.selectUnselectSingleGroup(group);
   }
 
   onFileClickHandler(group: IGroup) {
-    this.onFileClick.emit(group);
+    this.groups.setCurrent(group);
   }
 
   onEditCLickHandler(group: IGroup) {
-    this.onEditClick.emit(group);
+    this.groups.setCurrent(group);
+    this.form.form.patchValue(group);
   }
 
   onDeleteClickHandler(group: IGroup) {
-    this.onDeleteClick.emit(group);
+    this.groups.setCurrent(group);
   }
 }

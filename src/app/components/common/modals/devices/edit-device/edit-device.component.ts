@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { EditDeviceService } from '../../../../../shared/services/forms/device/edit-device.service';
-
 import { Option } from '../../../../../shared/types/input';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
 
 @Component({
   selector: 'app-edit-device',
@@ -11,13 +11,18 @@ import { GroupClass } from '../../../../../shared/classes/groups/group.class';
   styleUrls: ['./edit-device.component.scss'],
 })
 export class EditDeviceComponent {
-  @Input() isDataFetching: boolean = false;
-
-  @Output() public onSubmit = new EventEmitter();
-
   public currOption!: Option;
 
-  constructor(public form: EditDeviceService, private groups: GroupClass) {}
+  constructor(
+    public form: EditDeviceService,
+    private group: GroupClass,
+    private loader: DeviceLoaderClass,
+    private device: DeviceClass
+  ) {}
+
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -40,7 +45,7 @@ export class EditDeviceComponent {
   }
 
   get _options() {
-    return this.groups.array.map((g) => {
+    return this.group.array.map((g) => {
       return {
         value: g.id,
         html: g.name,
@@ -51,7 +56,7 @@ export class EditDeviceComponent {
   get _currOption() {
     return {
       value: this._group_id?.value,
-      html: this.groups.array.find((g) => g.id === this._group_id?.value)?.name,
+      html: this.group.array.find((g) => g.id === this._group_id?.value)?.name,
     } as Option;
   }
 
@@ -69,7 +74,24 @@ export class EditDeviceComponent {
     if (this._form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      const device = this.device.current;
+
+      if (device) {
+        this.device
+          .edit([
+            {
+              ...device,
+              name: this.form._name,
+              description: this.form._description,
+              device_group_id: this.form._group_id,
+            },
+          ])
+          .then((res) => {
+            if (res) {
+              this.closeModal();
+            }
+          });
+      }
     }
   }
 
@@ -77,7 +99,11 @@ export class EditDeviceComponent {
     this.form.resetSubmitted();
     this.form.form.reset();
 
+    this.closeModal();
+  }
+
+  closeModal() {
     const modal = document.querySelector('#edit_device');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

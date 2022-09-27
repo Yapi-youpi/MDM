@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
 import { IGroup } from '../../types/groups';
 import { alertService, groupService } from '../../services';
-import { BehaviorSubject, timer } from 'rxjs';
+import { GroupLoaderClass } from './group-loader.class';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupClass {
-  public loading: boolean = false;
-
   public array: IGroup[] = [];
-  public current: BehaviorSubject<IGroup | null> =
-    new BehaviorSubject<IGroup | null>(null);
-  public selectedIDs: string[] = [];
+  public current: IGroup | null = null;
 
-  constructor(private service: groupService, private alert: alertService) {}
+  constructor(
+    private loading: GroupLoaderClass,
+    private service: groupService,
+    private alert: alertService
+  ) {}
 
-  private resetLoading() {
-    const t = timer(500).subscribe(() => {
-      t.unsubscribe();
-      this.loading = false;
-    });
+  // ОБНОВЛЕНИЕ ТЕКУЩЕЙ ВЫБРАННОЙ ГРУППЫ
+
+  setCurrent(group: IGroup | null) {
+    this.current = group;
   }
 
   // ОБНОВЛЕНИЕ СПИСКА
@@ -35,47 +34,15 @@ export class GroupClass {
       });
     } else if (gValues) {
       this.array = this.array.map((g) => {
-        return g.id === this.current.value?.id ? { ...g, ...gValues } : g;
+        return g.id === this.current?.id ? { ...g, ...gValues } : g;
       });
     }
-  }
-
-  setSelectionTotal(value: boolean) {
-    this.array.map((d) => {
-      d.isSelected = value;
-    });
-  }
-
-  setElementSelection(group: IGroup) {
-    this.array.map((d) => {
-      if (d.id === group.id) {
-        d.isSelected = !d.isSelected;
-
-        if (d.isSelected && !this.selectedIDs.includes(d.id))
-          this.selectedIDs.push(d.id);
-
-        if (!d.isSelected && this.selectedIDs.includes(d.id))
-          this.selectedIDs = this.selectedIDs.filter((sg) => sg !== d.id);
-      }
-    });
-  }
-
-  // ОБНОВЛЕНИЕ ВЫБРАННЫХ ГРУПП
-
-  setListOfSelected(groups: IGroup[]) {
-    this.selectedIDs = groups.map((d) => d.id);
-  }
-
-  // ОБНОВЛЕНИЕ ТЕКУЩЕЙ ВЫБРАННОЙ ГРУППЫ
-
-  setCurrent(group: IGroup | null) {
-    this.current.next(group);
   }
 
   // ВЫЗОВЫ СЕРВИСА
 
   get(param: 'all' | string) {
-    this.loading = true;
+    this.loading.start();
 
     this.service
       .get(param)
@@ -89,12 +56,12 @@ export class GroupClass {
           });
         }
       })
-      .finally(() => this.resetLoading());
+      .finally(() => this.loading.end());
   }
 
   add(group: IGroup) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       this.service.add(group).then((res) => {
         if (res.success) {
@@ -108,21 +75,15 @@ export class GroupClass {
           resolve(false);
         }
       });
-    }).finally(() => this.resetLoading());
+    }).finally(() => this.loading.end());
   }
 
   edit(groups: IGroup[]) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       this.service.edit(groups).then((res) => {
         if (res.success) {
-          // this.array = this.array.map((g) => {
-          //   return g.id === this.current.value?.id
-          //     ? { ...g, ...this.editForm.values }
-          //     : g;
-          // });
-          if (groups.length > 1) this.selectedIDs = [];
           resolve(true);
         } else {
           this.alert.show({
@@ -132,12 +93,12 @@ export class GroupClass {
           resolve(false);
         }
       });
-    }).finally(() => this.resetLoading());
+    }).finally(() => this.loading.end());
   }
 
   delete(groups: IGroup[], isSingle: boolean = false) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       if (isSingle) {
         this.service
@@ -145,7 +106,7 @@ export class GroupClass {
           .then((res) => {
             if (res.success) {
               this.array = this.array.filter((g) => {
-                return g.id !== this.current.value?.id;
+                return g.id !== this.current?.id;
               });
               resolve(true);
             } else {
@@ -156,13 +117,12 @@ export class GroupClass {
               resolve(false);
             }
           })
-          .finally(() => this.resetLoading());
+          .finally(() => this.loading.end());
       } else {
         this.service
           .deleteSeveral(groups)
           .then((res) => {
             if (res.success) {
-              this.selectedIDs = [];
               resolve(true);
             } else {
               this.alert.show({
@@ -172,7 +132,7 @@ export class GroupClass {
               resolve(false);
             }
           })
-          .finally(() => this.resetLoading());
+          .finally(() => this.loading.end());
       }
     });
   }

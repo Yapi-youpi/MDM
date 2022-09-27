@@ -1,16 +1,15 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   Input,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { IFile } from '../../../../../shared/types/files';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { FileClass } from '../../../../../shared/classes/files/file.class';
+import { FileLoaderClass } from '../../../../../shared/classes/files/file-loader.class';
 
 @Component({
   selector: 'app-list-files',
@@ -19,9 +18,6 @@ import { FileClass } from '../../../../../shared/classes/files/file.class';
 })
 export class ListFilesComponent {
   @Input() source: 'device' | 'group' = 'device';
-  @Input() loading: boolean = false;
-
-  @Output() onDeleteClick = new EventEmitter<IFile>();
 
   public displayFiles: 'all' | 'import' | 'export' = 'all';
   private imagesEXT: string[] = ['ico', 'jpg', 'jpeg', 'png', 'gif', 'svg'];
@@ -37,21 +33,26 @@ export class ListFilesComponent {
   @ViewChild('tip') tipRef!: ElementRef;
 
   constructor(
-    private groups: GroupClass,
     private device: DeviceClass,
+    private groups: GroupClass,
+    private loader: FileLoaderClass,
     private files: FileClass
   ) {}
 
+  get _loading() {
+    return this.loader.loading;
+  }
+
   get _group() {
-    return this.groups.current.value;
+    return this.groups.current;
   }
 
   get _device() {
-    return this.device.current.value;
+    return this.device.current;
   }
 
   get _file() {
-    return this.files.current.value;
+    return this.files.current;
   }
 
   toggleFilesDisplay(type: typeof this.displayFiles) {
@@ -82,10 +83,6 @@ export class ListFilesComponent {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }
-
-  onDeleteClickHandler(file: IFile) {
-    this.onDeleteClick.emit(file);
   }
 
   setCurrentFile(file: IFile) {
@@ -124,7 +121,7 @@ export class ListFilesComponent {
       !event.target.classList.contains('video') &&
       !event.target.classList.contains('img')
     ) {
-      if (this.files.current.value) this.files.setCurrent(null);
+      if (this._file) this.files.setCurrent(null);
     }
   }
 }

@@ -1,32 +1,25 @@
 import { Injectable } from '@angular/core';
 import { alertService, deviceService } from '../../services';
 import { IAddDevice, IDevice } from '../../types/devices';
-import { BehaviorSubject, timer } from 'rxjs';
+import { DeviceLoaderClass } from './device-loader.class';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DeviceClass {
-  public loading: boolean = false;
-
   public array: IDevice[] = [];
-  public current: BehaviorSubject<IDevice | null> =
-    new BehaviorSubject<IDevice | null>(null);
-  public selectedIDs: string[] = [];
+  public current: IDevice | null = null;
 
-  constructor(private service: deviceService, private alert: alertService) {}
-
-  private resetLoading() {
-    const t = timer(500).subscribe(() => {
-      t.unsubscribe();
-      this.loading = false;
-    });
-  }
+  constructor(
+    private loading: DeviceLoaderClass,
+    private service: deviceService,
+    private alert: alertService
+  ) {}
 
   // ОБНОВЛЕНИЕ ТЕКУЩЕГО ВЫБРАННОГО УСТРОЙСТВА
 
   setCurrent(device: IDevice | null) {
-    this.current.next(device);
+    this.current = device;
   }
 
   // ОБНОВЛЕНИЕ СПИСКА
@@ -47,38 +40,10 @@ export class DeviceClass {
         ];
   }
 
-  setSelectionTotal(value: boolean) {
-    this.array.map((d) => {
-      d.isSelected = value;
-    });
-  }
-
-  setElementSelection(device: IDevice) {
-    this.array.map((d) => {
-      if (d.device_id === device.device_id) {
-        d.isSelected = !d.isSelected;
-
-        if (d.isSelected && !this.selectedIDs.includes(d.device_id))
-          this.selectedIDs.push(d.device_id);
-
-        if (!d.isSelected && this.selectedIDs.includes(d.device_id))
-          this.selectedIDs = this.selectedIDs.filter(
-            (sd) => sd !== d.device_id
-          );
-      }
-    });
-  }
-
-  // ОБНОВЛЕНИЕ СПИСКА ВЫБРАННЫХ УСТРОЙСТВ
-
-  setListOfSelected(devices: IDevice[]) {
-    this.selectedIDs = devices.map((d) => d.device_id);
-  }
-
   // ВЫЗОВЫ СЕРВИСА
 
   get(param: 'all' | string, group_id?: string) {
-    this.loading = true;
+    this.loading.start();
 
     this.service
       .get(param, group_id)
@@ -94,12 +59,12 @@ export class DeviceClass {
           });
         }
       })
-      .finally(() => this.resetLoading());
+      .finally(() => this.loading.end());
   }
 
   add(addDevice: IAddDevice) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       this.service
         .add(addDevice)
@@ -115,19 +80,18 @@ export class DeviceClass {
             resolve(false);
           }
         })
-        .finally(() => this.resetLoading());
+        .finally(() => this.loading.end());
     });
   }
 
   edit(devices: IDevice[]) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       this.service
         .edit(devices)
         .then((res) => {
           if (res.success) {
-            if (devices.length > 1) this.selectedIDs = [];
             resolve(true);
           } else {
             this.alert.show({
@@ -137,19 +101,18 @@ export class DeviceClass {
             resolve(false);
           }
         })
-        .finally(() => this.resetLoading());
+        .finally(() => this.loading.end());
     });
   }
 
   delete(devIDs: string[]) {
     return new Promise<boolean>((resolve) => {
-      this.loading = true;
+      this.loading.start();
 
       this.service
         .delete(devIDs)
         .then((res) => {
           if (res.success) {
-            if (devIDs.length > 1) this.selectedIDs = [];
             resolve(true);
           } else {
             this.alert.show({
@@ -159,12 +122,12 @@ export class DeviceClass {
             resolve(false);
           }
         })
-        .finally(() => this.resetLoading());
+        .finally(() => this.loading.end());
     });
   }
 
   reload(devID: string) {
-    this.loading = true;
+    this.loading.start();
 
     this.service
       .reload(devID)
@@ -182,6 +145,6 @@ export class DeviceClass {
           });
         }
       })
-      .finally(() => this.resetLoading());
+      .finally(() => this.loading.end());
   }
 }

@@ -18,7 +18,7 @@ export class QrCodeComponent {
   constructor(private device: DeviceClass) {}
 
   get _device() {
-    return this.device.current.value;
+    return this.device.current;
   }
 
   onHelpClickHandler() {

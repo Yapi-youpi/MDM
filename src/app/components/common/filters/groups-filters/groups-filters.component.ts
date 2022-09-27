@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { IConfig } from '../../../../shared/types/config';
 import { GroupFiltersClass } from '../../../../shared/classes/groups/group-filters.class';
@@ -10,12 +10,6 @@ import { GroupFiltersClass } from '../../../../shared/classes/groups/group-filte
 })
 export class GroupsFiltersComponent {
   @Input() configs!: IConfig[];
-
-  @Output() onStatusRemove = new EventEmitter();
-  @Output() onDateFromRemove = new EventEmitter();
-  @Output() onDateToRemove = new EventEmitter();
-  @Output() onConfigsIDsRemove = new EventEmitter<string>();
-  @Output() onGroupsIDsRemove = new EventEmitter<string>();
 
   constructor(public filters: GroupFiltersClass) {}
 
@@ -31,19 +25,19 @@ export class GroupsFiltersComponent {
   }
 
   onStatusRemoveHandler() {
-    this.onStatusRemove.emit();
+    this.filters.resetParam('status');
   }
 
   onDateFromRemoveHandler() {
-    this.onDateFromRemove.emit();
+    this.filters.resetParam('dateFrom');
   }
 
   onDateToRemoveHandler() {
-    this.onDateToRemove.emit();
+    this.filters.resetParam('dateTo');
   }
 
   onConfigsIDsRemoveHandler(name: string) {
     const idx = this.configs.findIndex((c) => c.name === name);
-    this.onConfigsIDsRemove.emit(this.configs[idx].ID);
+    this.filters.resetParam('configsIDs', this.configs[idx].ID);
   }
 }
