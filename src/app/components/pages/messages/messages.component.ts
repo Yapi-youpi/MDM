@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Filter } from '../../../shared/types/filters';
+import { IFilter } from '../../../shared/types/filters';
 import { Message } from '../../../shared/types/message';
 import {
   alertService,
@@ -11,8 +11,8 @@ import {
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import * as states from '../../../shared/types/states';
-import { Device } from '../../../shared/types/devices';
-import { DevicesGroup } from '../../../shared/types/groups';
+import { IDevice } from '../../../shared/types/devices';
+import { IGroup } from '../../../shared/types/groups';
 import { interval } from 'rxjs';
 
 registerLocaleData(localeRu, 'ru');
@@ -28,10 +28,10 @@ export class MessagesComponent implements OnInit {
   public isDateSortAsc: boolean = true;
   public isTargetSortAsc: boolean = false;
   public isStatusSortAsc: boolean = false;
-  public messages: Message[] = [];
-  public devices: Device[] = [];
-  public groups: DevicesGroup[] = [];
-  public filter: Filter = {
+  public messages!: Message[];
+  public devices: IDevice[] = [];
+  public groups: IGroup[] = [];
+  public filter: IFilter = {
     status: null,
     dateFrom: null,
     dateTo: null,
@@ -49,7 +49,7 @@ export class MessagesComponent implements OnInit {
       if (this.user.token) {
         i.unsubscribe();
         this.getDevices();
-        this.getGroups('all');
+        this.getGroups();
         this.getMessages();
       }
     });
@@ -62,6 +62,8 @@ export class MessagesComponent implements OnInit {
         this.messages = res.sort((a, b) => {
           return b.id - a.id;
         });
+
+        console.log(this.messages);
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +73,7 @@ export class MessagesComponent implements OnInit {
   getDevices() {
     this.device
       .get('all')
-      .then((res: states.DevicesState) => {
+      .then((res: states.IDevicesState) => {
         if (res.success) {
           this.devices = res.devices ? res.devices : [];
         } else {
@@ -84,10 +86,10 @@ export class MessagesComponent implements OnInit {
       .catch((err) => console.log(err));
   }
 
-  getGroups(param: string) {
+  getGroups() {
     this.group
-      .get(param)
-      .then((res: states.DevicesGroupsState) => {
+      .get('all')
+      .then((res: states.IGroupsState) => {
         if (res.success) {
           this.groups = res.devicesGroups ? res.devicesGroups : [];
         } else {

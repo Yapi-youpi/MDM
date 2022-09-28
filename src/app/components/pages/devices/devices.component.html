@@ -17,17 +17,13 @@
         [target]="'add_device'"
       ></app-add-button>
     </div>
-    <app-devices-filters
-      [filter]="filter"
-      [configs]="configs"
-      [groups]="groups"
-      (onStatusRemove)="resetOneSearchParam('status')"
-      (onDateFromRemove)="resetOneSearchParam('dateFrom')"
-      (onDateToRemove)="resetOneSearchParam('dateTo')"
-      (onConfigsIDsRemove)="resetOneSearchParam('configsIDs', $event)"
-      (onGroupsIDsRemove)="resetOneSearchParam('groupsIDs', $event)"
-    ></app-devices-filters>
-    <ng-container *ngIf="loading; else dummy">
+    <app-devices-filters [configs]="configs"></app-devices-filters>
+    <ng-container
+      *ngIf="
+        (_dLoading | async) || false || (_gLoading | async) || false;
+        else dummy
+      "
+    >
       <div class="progress">
         <div class="indeterminate"></div>
       </div>
@@ -37,10 +33,8 @@
     </ng-template>
     <app-selected-elements
       *ngIf="userRole === 'admin' || userRole === 'super'"
-      [selectedIDs]="selectedDevicesIDs"
       [editTarget]="'edit_several_devices'"
       [deleteTarget]="'delete_several_elements'"
-      (onCloseClick)="cancelSelection()"
     ></app-selected-elements>
     <div class="list">
       <div class="list-header">
@@ -104,34 +98,26 @@
         </div>
       </div>
       <div class="list-body">
-        <ng-container *ngIf="devices.length !== 0; else nodata">
+        <ng-container *ngIf="_devices.length !== 0; else nodata">
           <app-device-item
             *ngFor="
-              let device of devices
+              let device of _devices
                 | search: searchParam:'device'
                 | devicesFilter
-                  : filter.status
-                  : filter.dateFrom
-                  : filter.dateTo
-                  : filter.configsIDs
-                  : filter.groupsIDs
+                  : filters.status
+                  : filters.dateFrom
+                  : filters.dateTo
+                  : filters.configsIDs
+                  : filters.groupsIDs
                 | devices_status: sortStatusAsc
                 | devices_date: sortDateAsc
-                | devices_group: groups:sortGroupAsc
+                | devices_group: _groups:sortGroupAsc
                 | devices_battery: sortBatteryAsc
                 | devices_name: sortNameAsc
             "
             [device]="device"
-            [groups]="groups"
             [configs]="configs"
             [userRole]="userRole"
-            (onSelectUnselectDevice)="selectUnselectDevice($event)"
-            (onChangeDeviceState)="changeDeviceState($event)"
-            (onClickDeviceQRCode)="getDeviceQRCode($event)"
-            (onClickDeviceEdit)="selectDeviceToEdit($event)"
-            (onClickDeviceDelete)="selectDeviceToDelete($event)"
-            (onClickDeviceReboot)="rebootDevice($event)"
-            (onClickDeviceFiles)="getDeviceFiles($event)"
           ></app-device-item>
         </ng-container>
         <ng-template #nodata>
@@ -142,50 +128,18 @@
   </div>
 </main>
 
-<app-filter-devices
-  [configs]="configs"
-  [groups]="groups"
-  (onCancel)="resetSearchParams()"
-  (onSubmit)="searchDevicesWithParams()"
-></app-filter-devices>
+<app-filter-devices [configs]="configs"></app-filter-devices>
+
 <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
-  <app-add-device
-    [groups]="groups"
-    [isDataFetching]="loading"
-    (onSubmit)="addDevice()"
-  ></app-add-device>
-  <app-qr-code [device]="currDevice"></app-qr-code>
-  <app-edit-device
-    [groups]="groups"
-    [isDataFetching]="loading"
-    (onSubmit)="editDevice()"
-  ></app-edit-device>
-  <app-edit-several-devices
-    [groups]="groups"
-    [isDataFetching]="loading"
-    (onSubmit)="editSeveralDevices()"
-  ></app-edit-several-devices>
-  <app-delete-device
-    [device]="currDevice"
-    [isDataFetching]="loading"
-    (onSubmit)="deleteDevice($event)"
-  ></app-delete-device>
+  <app-add-device></app-add-device>
+  <app-qr-code></app-qr-code>
+  <app-edit-device></app-edit-device>
+  <app-edit-several-devices></app-edit-several-devices>
+  <app-delete-device></app-delete-device>
   <app-delete-several-elements
-    [isDataFetching]="loading"
-    (onSubmit)="deleteSeveralDevices()"
+    [source]="'device'"
   ></app-delete-several-elements>
-  <app-list-files
-    [device]="currDevice"
-    [loading]="loading"
-    (onDeleteClick)="selectFileToDelete($event)"
-  ></app-list-files>
-  <app-add-file
-    [isDataFetching]="loading"
-    (onSubmit)="addFile()"
-  ></app-add-file>
-  <app-delete-file
-    [file]="currFile"
-    [isDataFetching]="loading"
-    (onSubmit)="deleteFile($event)"
-  ></app-delete-file>
+  <app-list-files [source]="'device'"></app-list-files>
+  <app-add-file [source]="'device'"></app-add-file>
+  <app-delete-file [source]="'device'"></app-delete-file>
 </ng-container>

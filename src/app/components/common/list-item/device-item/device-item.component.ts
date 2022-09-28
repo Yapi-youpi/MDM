@@ -1,15 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
-import { DevicesConfig } from '../../../../shared/types/config';
-import { DevicesGroup } from '../../../../shared/types/groups';
-import { Device } from '../../../../shared/types/devices';
+import { IConfig } from '../../../../shared/types/config';
+import { IDevice } from '../../../../shared/types/devices';
+import { DeviceSelectedClass } from '../../../../shared/classes/devices/device-selected.class';
+import { DeviceClass } from '../../../../shared/classes/devices/device.class';
+import { edit } from '../../../../shared/services/forms/device';
+import { GroupClass } from '../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-device-item',
@@ -17,21 +13,23 @@ import { Device } from '../../../../shared/types/devices';
   styleUrls: ['./device-item.component.scss'],
 })
 export class DeviceItemComponent {
-  @Input() public device!: Device;
-  @Input() public configs!: DevicesConfig[];
-  @Input() public groups!: DevicesGroup[];
-  @Input() userRole!: string;
-
-  @Output() onSelectUnselectDevice = new EventEmitter<Device>();
-  @Output() onChangeDeviceState = new EventEmitter<Device>();
-  @Output() onClickDeviceQRCode = new EventEmitter<Device>();
-  @Output() onClickDeviceEdit = new EventEmitter<Device>();
-  @Output() onClickDeviceDelete = new EventEmitter<Device>();
-  @Output() onClickDeviceReboot = new EventEmitter<Device>();
-  @Output() onClickDeviceFiles = new EventEmitter<Device>();
+  @Input() public device!: IDevice;
+  @Input() public configs!: IConfig[];
+  @Input() public userRole!: string;
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
+
+  constructor(
+    private groups: GroupClass,
+    private selection: DeviceSelectedClass,
+    private devices: DeviceClass,
+    private form: edit
+  ) {}
+
+  get _groups() {
+    return this.groups.array;
+  }
 
   displayTip() {
     if (
@@ -47,31 +45,39 @@ export class DeviceItemComponent {
     this.tipRef.nativeElement.style.opacity = 0;
   }
 
-  onSelectUnselectDeviceHandler(device: Device) {
-    this.onSelectUnselectDevice.emit(device);
+  onSelectUnselectDeviceHandler(device: IDevice) {
+    this.selection.selectUnselectSingleDevice(device);
   }
 
-  onChangeDeviceStateHandler(device: Device) {
-    this.onChangeDeviceState.emit(device);
+  onChangeDeviceStateHandler(device: IDevice) {
+    this.devices
+      .edit([
+        {
+          ...device,
+          active_state: !device.active_state,
+        },
+      ])
+      .then();
   }
 
-  onClickDeviceQRCodeHandler(device: Device) {
-    this.onClickDeviceQRCode.emit(device);
+  onClickDeviceQRCodeHandler(device: IDevice) {
+    this.devices.setCurrent(device);
   }
 
-  onClickDeviceEditHandler(device: Device) {
-    this.onClickDeviceEdit.emit(device);
+  onClickDeviceEditHandler(device: IDevice) {
+    this.devices.setCurrent(device);
+    this.form.form.patchValue(device);
   }
 
-  onClickDeviceDeleteHandler(device: Device) {
-    this.onClickDeviceDelete.emit(device);
+  onClickDeviceDeleteHandler(device: IDevice) {
+    this.devices.setCurrent(device);
   }
 
-  onClickDeviceReloadHandler(device: Device) {
-    this.onClickDeviceReboot.emit(device);
+  onClickDeviceReloadHandler(device: IDevice) {
+    this.devices.reload(device.device_id);
   }
 
-  onClickDeviceFilesHandler(device: Device) {
-    this.onClickDeviceFiles.emit(device);
+  onClickDeviceFilesHandler(device: IDevice) {
+    this.devices.setCurrent(device);
   }
 }

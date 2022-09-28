@@ -1,8 +1,8 @@
 <app-modal [modalID]="'delete_group'" [isClosable]="true">
   <div class="modal-form w-500">
     <div class="modal-form-header">
-      <h4 i18n class="text-title text-center">
-        Удалить группу "{{ group?.name }}"?
+      <h4 class="text-title text-center">
+        Удалить группу "{{ _group?.name }}"?
       </h4>
     </div>
     <div class="modal-form-footer">
@@ -11,9 +11,9 @@
         [submitText]="'Да'"
         [cancelText]="'Нет'"
         [margin]="'50px'"
-        [isSubmitBtnDisabled]="isDataFetching"
-        (onCancel)="onCancelHandler()"
-        (onSubmit)="onSubmitHandler(group)"
+        [isSubmitBtnDisabled]="(_loading | async) || false"
+        (onCancel)="closeModal()"
+        (onSubmit)="onSubmitHandler()"
       ></app-modal-action-btns>
     </div>
   </div>

@@ -25,6 +25,10 @@ export class EditAppService {
     });
   }
 
+  get values() {
+    return this.form.getRawValue();
+  }
+
   setSubmitted() {
     this.isSubmitted = true;
   }

@@ -1,17 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Device } from '../../../types/devices';
-import { DevicesGroup } from '../../../types/groups';
+import { IDevice } from '../../../types/devices';
+import { IGroup } from '../../../types/groups';
 
 @Pipe({
   name: 'devices_group',
 })
 export class DeviceGroupPipe implements PipeTransform {
   transform(
-    devices: Device[],
-    groups: DevicesGroup[],
+    devices: IDevice[],
+    groups: IGroup[],
     isGroupAsc: boolean
-  ): Device[] {
+  ): IDevice[] {
     if (groups && groups.length !== 0) {
       return devices.sort((a, b) => {
         const aIDX = groups.map((e) => e.id).indexOf(a.device_group_id);

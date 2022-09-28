@@ -22,7 +22,7 @@
         [target]="'add_app'"
       ></app-add-button>
     </div>
-    <ng-container *ngIf="loading; else dummy">
+    <ng-container *ngIf="(_loading | async) || false; else dummy">
       <div class="progress">
         <div class="indeterminate"></div>
       </div>
@@ -54,18 +54,16 @@
         <p i18n>Действия</p>
       </div>
       <div class="list-body">
-        <ng-container *ngIf="apps.length !== 0; else nodata">
+        <ng-container *ngIf="_apps.length !== 0; else nodata">
           <app-app-item
             *ngFor="
-              let app of apps
+              let app of _apps
                 | search: searchParam:'app'
                 | apps_system: isSystemApps
                 | apps_name: isNameSortAsc
                 | apps_size: isSizeSortAsc
             "
             [app]="app"
-            (onEditClick)="selectAppToEdit($event)"
-            (onDeleteClick)="selectAppToDelete($event)"
           ></app-app-item>
         </ng-container>
         <ng-template #nodata>
@@ -76,14 +74,8 @@
   </div>
 </main>
 
-<app-add-app [isDataFetching]="loading" (onSubmit)="uploadApp()"></app-add-app>
-<app-edit-app
-  [app]="currApp"
-  [isDataFetching]="loading"
-  (onSubmit)="editApp()"
-></app-edit-app>
-<app-delete-app
-  [app]="currApp"
-  [isDataFetching]="loading"
-  (onSubmit)="deleteApp()"
-></app-delete-app>
+<ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
+  <app-add-app></app-add-app>
+  <app-edit-app></app-edit-app>
+  <app-delete-app></app-delete-app>
+</ng-container>

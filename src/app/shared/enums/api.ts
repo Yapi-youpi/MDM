@@ -4,8 +4,6 @@ export enum devicesPaths {
   REMOVE = '/remove_device',
   EDIT = '/edit_device',
   REBOOT = '/reboot_device',
-  UPLOAD_FILE = '/upload_device_file/',
-  DELETE_FILE = '/remove_device_file',
 }
 
 export enum appsPaths {
@@ -21,14 +19,12 @@ export enum appsPaths {
 export enum groupsPaths {
   GET = '/get_device_group/',
   ADD = '/add_device_group',
-  CHANGE_STATE = '/change_active_state_device_group',
-  EDIT = '/edit_device_group',
+  // CHANGE_STATE = '/change_active_state_device_group',
+  // EDIT = '/edit_device_group',
   EDIT_SEVERAL = '/edit_device_groups',
   DELETE = '/remove_device_group',
   DELETE_WITH_DEVICES = '/remove_device_group_and_all_devices',
   DELETE_SEVERAL = '/remove_device_groups_and_all_devices',
-  UPLOAD_FILE = '/upload_group_file/',
-  DELETE_FILE = '/remove_group_file',
 }
 
 export enum configsPaths {
@@ -40,4 +36,11 @@ export enum configsPaths {
   GET_RESTRICTIONS = '/get_default_restrictions',
   UPLOAD_WP = '/upload_wallpaper',
   REMOVE_WP = '/remove_wallpaper',
+}
+
+export enum filePaths {
+  UPLOAD = '/upload_',
+  REMOVE = '/remove_',
+  DEVICE_FILE = 'device_file',
+  GROUP_FILE = 'group_file',
 }

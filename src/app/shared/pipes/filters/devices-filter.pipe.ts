@@ -1,25 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
 
-import { Device } from '../../types/devices';
+import { IDevice } from '../../types/devices';
 
 @Pipe({
   name: 'devicesFilter',
 })
 export class DevicesFilterPipe implements PipeTransform {
   transform(
-    devices: Device[] | null,
+    devices: IDevice[] | null,
     status: boolean | null,
     dateFrom: string | null,
     dateTo: string | null,
     configIDs: string[] | null,
     groupIDs: string[] | null
-  ): Device[] {
+  ): IDevice[] {
     if (!devices) return [];
     else {
       return devices.filter((d) => {
         return (
-          (status !== null ? d.active_state === status : d) &&
+          (status !== null ? d.online_state === status : d) &&
           (dateFrom ? moment(d.updatedAt).isAfter(moment(dateFrom)) : d) &&
           (dateTo ? moment(d.updatedAt).isBefore(moment(dateTo)) : d) &&
           (configIDs && configIDs.length !== 0

@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment/moment';
 
-import { DevicesGroup } from '../../../types/groups';
+import { IGroup } from '../../../types/groups';
 
 @Pipe({
   name: 'group_date',
 })
 export class GroupDatePipe implements PipeTransform {
-  transform(groups: DevicesGroup[], isDateAsc: boolean) {
+  transform(groups: IGroup[], isDateAsc: boolean) {
     // FROM NEW TO OLD
     if (isDateAsc)
       return groups.sort((a, b) =>

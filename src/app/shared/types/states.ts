@@ -1,42 +1,44 @@
-import { Device } from './devices';
-import { DevicesConfig } from './config';
-import { DevicesGroup } from './groups';
-import { App } from './apps';
+import { IDevice } from './devices';
+import { IConfig } from './config';
+import { IGroup } from './groups';
+import { IApp } from './apps';
+import { IFile } from './files';
 
-export interface State {
+export interface IState {
   success: boolean;
   error: string;
 }
 
-export interface UserState extends State {
+export interface IUserState extends IState {
   id: string;
   token: string;
 }
 
-export interface DevicesConfigsState extends State {
-  devicesConfigs: DevicesConfig[] | null;
+// export interface IConfigsState extends IState {
+//   devicesConfigs: IConfig[] | null;
+// }
+
+export interface IGroupState extends IState {
+  group: IGroup[] | null;
+}
+export interface IGroupsState extends IState {
+  devicesGroups: IGroup[] | null;
 }
 
-export interface DevicesGroupsState extends State {
-  devicesGroups: DevicesGroup[] | null;
+export interface IDeviceState extends IState {
+  device: IDevice | null;
+}
+export interface IDevicesState extends IState {
+  devices: IDevice[] | null;
 }
 
-export interface DevicesState extends State {
-  devices: Device[] | null;
+export interface IAppState extends IState {
+  app: IApp | null;
+}
+export interface IAppsState extends IState {
+  app: IApp[] | null;
 }
 
-export interface SingleDeviceState extends State {
-  device: Device | null;
-}
-
-export interface AppState extends State {
-  app: App[] | null;
-}
-
-export interface UploadAppState extends State {
-  app: App | null;
-}
-
-export interface GroupsState extends State {
-  group: DevicesGroup[] | null;
+export interface IFileState extends IState {
+  file: IFile;
 }

@@ -1,15 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
-import { DevicesGroup } from '../../../../shared/types/groups';
-import { DevicesConfig } from '../../../../shared/types/config';
+import { IGroup } from '../../../../shared/types/groups';
+import { IConfig } from '../../../../shared/types/config';
 import { Option } from '../../../../shared/types/input';
+import { GroupSelectedClass } from '../../../../shared/classes/groups/group-selected.class';
+import { GroupClass } from '../../../../shared/classes/groups/group.class';
+import { edit } from '../../../../shared/services/forms/group';
 
 @Component({
   selector: 'app-group-item',
@@ -17,24 +13,20 @@ import { Option } from '../../../../shared/types/input';
   styleUrls: ['./group-item.component.scss'],
 })
 export class GroupItemComponent {
-  @Input() group!: DevicesGroup;
-  @Input() configs!: DevicesConfig[];
+  @Input() group!: IGroup;
+  @Input() configs!: IConfig[];
   @Input() userRole!: string;
-
-  @Output() onSelectUnselectGroup = new EventEmitter<DevicesGroup>();
-  @Output() onConfigChange = new EventEmitter<{
-    group: DevicesGroup;
-    deviceConfigID: string;
-  }>();
-  @Output() onSwitchChange = new EventEmitter<DevicesGroup>();
-  @Output() onFileClick = new EventEmitter<DevicesGroup>();
-  @Output() onEditClick = new EventEmitter<DevicesGroup>();
-  @Output() onDeleteClick = new EventEmitter<DevicesGroup>();
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
   public currOption: Option = { value: '', html: '' };
+
+  constructor(
+    private selection: GroupSelectedClass,
+    private groups: GroupClass,
+    private form: edit
+  ) {}
 
   displayTip() {
     if (
@@ -68,26 +60,22 @@ export class GroupItemComponent {
 
   onSelectHandler(item: Option) {
     this.currOption = item;
-    this.onConfigChange.emit({ group: this.group, deviceConfigID: item.value });
   }
 
-  onSelectUnselectGroupHandler(group: DevicesGroup) {
-    this.onSelectUnselectGroup.emit(group);
+  onSelectUnselectGroupHandler(group: IGroup) {
+    this.selection.selectUnselectSingleGroup(group);
   }
 
-  onSwitchChangeHandler(group: DevicesGroup) {
-    this.onSwitchChange.emit(group);
+  onFileClickHandler(group: IGroup) {
+    this.groups.setCurrent(group);
   }
 
-  onFileClickHandler(group: DevicesGroup) {
-    this.onFileClick.emit(group);
+  onEditCLickHandler(group: IGroup) {
+    this.groups.setCurrent(group);
+    this.form.form.patchValue(group);
   }
 
-  onEditCLickHandler(group: DevicesGroup) {
-    this.onEditClick.emit(group);
-  }
-
-  onDeleteClickHandler(group: DevicesGroup) {
-    this.onDeleteClick.emit(group);
+  onDeleteClickHandler(group: IGroup) {
+    this.groups.setCurrent(group);
   }
 }

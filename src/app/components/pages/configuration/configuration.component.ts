@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DevicesConfigService } from '../../../shared/services/devices-config.service';
+import { ConfigsService } from '../../../shared/services/configs.service';
 import { DevicesConfig, Permissions } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
-import { App } from '../../../shared/types/apps';
-import { AppState } from '../../../shared/types/states';
+import { IApp } from '../../../shared/types/apps';
+import { IAppsState } from '../../../shared/types/states';
 import { AppsService } from '../../../shared/services/apps.service';
 import { alertService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
@@ -21,7 +21,7 @@ export class ConfigurationComponent implements OnInit {
   public title = 'Конфигурации / ';
   public config!: DevicesConfig;
   public configForm: FormGroup;
-  public apps: App[] = [];
+  public apps: IApp[] = [];
   // public restrictions: string[] = [];
   public restrictionList: Permissions;
   public isModalAddAppOpen = false;
@@ -31,7 +31,7 @@ export class ConfigurationComponent implements OnInit {
   public bgImg!: string;
   public bgImage = '';
 
-  private editedApps: App[] = [];
+  private editedApps: IApp[] = [];
   private initialAppList: string[] = [];
 
   constructor(
@@ -39,7 +39,7 @@ export class ConfigurationComponent implements OnInit {
     public appsService: AppsService,
     private alert: alertService,
     private route: ActivatedRoute,
-    private configService: DevicesConfigService,
+    private configService: ConfigsService,
     private router: Router,
     private elementRef: ElementRef,
     private asset: AssetService
@@ -103,9 +103,10 @@ export class ConfigurationComponent implements OnInit {
   getApps() {
     this.appsService
       .get('all')
-      .then((res: AppState) => {
+      .then((res: IAppsState) => {
         if (res.success) {
           this.apps = res.app ? res.app : [];
+          // console.log('APPS: ', this.apps);
         } else {
           console.log(res.error);
         }
@@ -123,7 +124,7 @@ export class ConfigurationComponent implements OnInit {
         if (res.length > 0) {
           this.config = Object.assign(res[0]);
           this.initialAppList = res[0].applications || [];
-          console.log(this.config);
+          // console.log(this.config);
         }
       })
       .then(() => {
@@ -190,7 +191,7 @@ export class ConfigurationComponent implements OnInit {
     this.configService
       .editConfig(config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const saveBtn = document.querySelector('.save-btn');
         saveBtn?.classList.add('save-btn--success');
         let i = interval(2000).subscribe(() => {

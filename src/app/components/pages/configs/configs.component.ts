@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DevicesConfigService } from '../../../shared/services/devices-config.service';
+import { ConfigsService } from '../../../shared/services/configs.service';
 import { DevicesConfig } from '../../../interfaces/interfaces';
 import { AssetService } from '../../../shared/services/asset.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -19,7 +19,7 @@ export class ConfigsComponent implements OnInit {
   public currentConfig!: DevicesConfig;
   constructor(
     public asset: AssetService,
-    private configService: DevicesConfigService
+    private configService: ConfigsService
   ) {
     this.newConfigForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -44,7 +44,7 @@ export class ConfigsComponent implements OnInit {
       .getConfig('default')
       .then((res) => {
         this.default_config = Object.assign(res[0]);
-        console.log(this.default_config);
+        // console.log(this.default_config);
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +55,7 @@ export class ConfigsComponent implements OnInit {
     this.configService
       .getConfig('all')
       .then((res) => {
-        console.log(res);
+        // console.log('CONFIGS: ', res);
         this.loading = false;
         this.configs = res;
         this.sortConfigs();

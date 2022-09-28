@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { AddAppService } from '../../../../../shared/services/forms/app/add-app.service';
+import { AppClass } from '../../../../../shared/classes/apps/app.class';
+import { AppLoaderClass } from '../../../../../shared/classes/apps/app-loader.class';
 
 @Component({
   selector: 'app-add-app',
@@ -8,11 +10,15 @@ import { AddAppService } from '../../../../../shared/services/forms/app/add-app.
   styleUrls: ['./add-app.component.scss'],
 })
 export class AddAppComponent {
-  @Input() isDataFetching: boolean = false;
+  constructor(
+    private form: AddAppService,
+    private apps: AppClass,
+    private loader: AppLoaderClass
+  ) {}
 
-  @Output() onSubmit = new EventEmitter();
-
-  constructor(private form: AddAppService) {}
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -26,17 +32,17 @@ export class AddAppComponent {
     return this._form.get('name');
   }
 
-  get _runAfterInstall() {
-    return this._form.get('runAfterInstall');
-  }
-
-  get _runAtBoot() {
-    return this._form.get('runAtBoot');
-  }
-
-  get _showIcon() {
-    return this._form.get('showIcon');
-  }
+  // get _runAfterInstall() {
+  //   return this._form.get('runAfterInstall');
+  // }
+  //
+  // get _runAtBoot() {
+  //   return this._form.get('runAtBoot');
+  // }
+  //
+  // get _showIcon() {
+  //   return this._form.get('showIcon');
+  // }
 
   get _isSubmitted() {
     return this.form.isSubmitted;
@@ -55,14 +61,24 @@ export class AddAppComponent {
     if (this.form.form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      if (this.form._file) {
+        this.apps.upload(this.form._file).then((res) => {
+          if (res) {
+            this.closeModal();
+            this.form.resetForm();
+          }
+        });
+      }
     }
   }
 
   onCancelHandler() {
+    this.closeModal();
     this.form.resetForm();
+  }
 
+  closeModal() {
     const modal = document.querySelector('#add_app');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

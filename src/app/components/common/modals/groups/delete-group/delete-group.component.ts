@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { DevicesGroup } from '../../../../../shared/types/groups';
+import { Component } from '@angular/core';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
 
 @Component({
   selector: 'app-delete-group',
@@ -8,19 +8,29 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
   styleUrls: ['./delete-group.component.scss'],
 })
 export class DeleteGroupComponent {
-  @Input() group!: DevicesGroup;
-  @Input() isDataFetching: boolean = false;
+  constructor(private group: GroupClass, private loader: GroupLoaderClass) {}
 
-  @Output() onSubmit = new EventEmitter<DevicesGroup>();
-
-  constructor() {}
-
-  onSubmitHandler(group: DevicesGroup) {
-    this.onSubmit.emit(group);
+  get _loading() {
+    return this.loader.loading;
   }
 
-  onCancelHandler() {
+  get _group() {
+    return this.group.current;
+  }
+
+  onSubmitHandler() {
+    if (this._group) {
+      this.group.delete([this._group], true).then((res) => {
+        if (res) {
+          // todo: unselect in in selectedlist
+          this.closeModal();
+        }
+      });
+    }
+  }
+
+  closeModal() {
     const modal = document.querySelector('#delete_group');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

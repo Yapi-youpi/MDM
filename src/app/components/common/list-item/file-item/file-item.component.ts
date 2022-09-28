@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IFile } from '../../../../shared/types/files';
+import { FileClass } from '../../../../shared/classes/files/file.class';
 
 @Component({
   selector: 'app-file-item',
@@ -15,7 +16,6 @@ import { IFile } from '../../../../shared/types/files';
 })
 export class FileItemComponent {
   @Input() file!: IFile;
-  @Input() currFile: IFile | null = null;
 
   @Output() onFileClick = new EventEmitter<IFile>();
   @Output() onDownloadClick = new EventEmitter<IFile>();
@@ -24,10 +24,10 @@ export class FileItemComponent {
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
-  constructor() {}
+  constructor(private files: FileClass) {}
 
-  onFileClickHandler(file: IFile) {
-    this.onFileClick.emit(file);
+  get _curFile() {
+    return this.files.current;
   }
 
   displayTip() {
@@ -42,6 +42,10 @@ export class FileItemComponent {
   hideTip() {
     this.tipRef.nativeElement.style.visibility = 'hidden';
     this.tipRef.nativeElement.style.opacity = 0;
+  }
+
+  onFileClickHandler(file: IFile) {
+    this.onFileClick.emit(file);
   }
 
   onDownloadClickHandler(file: IFile) {

@@ -1,10 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   NgxQrcodeElementTypes,
   NgxQrcodeErrorCorrectionLevels,
 } from '@techiediaries/ngx-qrcode';
-
-import { Device } from '../../../../../shared/types/devices';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 
 @Component({
   selector: 'app-qr-code',
@@ -12,16 +11,14 @@ import { Device } from '../../../../../shared/types/devices';
   styleUrls: ['./qr-code.component.scss'],
 })
 export class QrCodeComponent {
-  @Input() public device!: Device;
-
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   public isTipHidden: boolean = true;
 
-  constructor() {}
+  constructor(private device: DeviceClass) {}
 
-  get _qrcode() {
-    return JSON.stringify(this.device?.qr_code);
+  get _device() {
+    return this.device.current;
   }
 
   onHelpClickHandler() {

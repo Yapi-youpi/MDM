@@ -1,15 +1,15 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   Input,
-  Output,
   ViewChild,
 } from '@angular/core';
-import { Device } from '../../../../../shared/types/devices';
 import { IFile } from '../../../../../shared/types/files';
-import { DevicesGroup } from '../../../../../shared/types/groups';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { FileClass } from '../../../../../shared/classes/files/file.class';
+import { FileLoaderClass } from '../../../../../shared/classes/files/file-loader.class';
 
 @Component({
   selector: 'app-list-files',
@@ -18,11 +18,6 @@ import { DevicesGroup } from '../../../../../shared/types/groups';
 })
 export class ListFilesComponent {
   @Input() source: 'device' | 'group' = 'device';
-  @Input() device!: Device;
-  @Input() group!: DevicesGroup;
-  @Input() loading: boolean = false;
-
-  @Output() onDeleteClick = new EventEmitter<IFile>();
 
   public displayFiles: 'all' | 'import' | 'export' = 'all';
   private imagesEXT: string[] = ['ico', 'jpg', 'jpeg', 'png', 'gif', 'svg'];
@@ -34,12 +29,31 @@ export class ListFilesComponent {
   public isSizeSortAsc: boolean = true;
   public isDateSortAsc: boolean = true;
 
-  public currFile: IFile | null = null;
-
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
-  constructor() {}
+  constructor(
+    private device: DeviceClass,
+    private groups: GroupClass,
+    private loader: FileLoaderClass,
+    private files: FileClass
+  ) {}
+
+  get _loading() {
+    return this.loader.loading;
+  }
+
+  get _group() {
+    return this.groups.current;
+  }
+
+  get _device() {
+    return this.device.current;
+  }
+
+  get _file() {
+    return this.files.current;
+  }
 
   toggleFilesDisplay(type: typeof this.displayFiles) {
     if (type === this.displayFiles) return;
@@ -71,12 +85,8 @@ export class ListFilesComponent {
     document.body.removeChild(link);
   }
 
-  onDeleteClickHandler(file: IFile) {
-    this.onDeleteClick.emit(file);
-  }
-
   setCurrentFile(file: IFile) {
-    this.currFile = file;
+    this.files.setCurrent(file);
   }
 
   fileType(fileURL: string): 'img' | 'video' | 'other' | 'none' {
@@ -84,7 +94,7 @@ export class ListFilesComponent {
     else {
       const fType = fileURL.split('.');
       const ext = fType[fType.length - 1];
-      // return this.imagesEXT.includes(ext);
+
       if (this.imagesEXT.includes(ext)) return 'img';
       if (this.videoEXT.includes(ext)) return 'video';
       return 'other';
@@ -111,7 +121,7 @@ export class ListFilesComponent {
       !event.target.classList.contains('video') &&
       !event.target.classList.contains('img')
     ) {
-      if (this.currFile) this.currFile = null;
+      if (this._file) this.files.setCurrent(null);
     }
   }
 }

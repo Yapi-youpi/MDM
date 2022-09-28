@@ -1,17 +1,17 @@
 <ng-container
   *ngIf="
-    filter.status !== null ||
-    (filter.dateFrom && filter.dateFrom !== '') ||
-    (filter.dateTo && filter.dateTo !== '') ||
-    (filter.configsIDs && filter.configsIDs.length !== 0)
+    filters.status !== null ||
+    (filters.dateFrom && filters.dateFrom !== '') ||
+    (filters.dateTo && filters.dateTo !== '') ||
+    (filters.configsIDs && filters.configsIDs.length !== 0)
   "
 >
   <div class="row filters-wrapper">
     <app-button
-      *ngIf="filter.status !== null"
+      *ngIf="filters.status !== null"
       [height]="'auto'"
       [padding]="'7px 9px 7px 10px'"
-      [text]="filter.status ? 'статус: вкл' : 'статус: выкл'"
+      [text]="filters.status ? 'статус: вкл' : 'статус: выкл'"
       [textLike]="'like-body'"
       [color]="'blue'"
       [radius]="'14px'"
@@ -20,10 +20,10 @@
       <span class="icon"></span>
     </app-button>
     <app-button
-      *ngIf="filter.dateFrom !== null"
+      *ngIf="filters.dateFrom !== null"
       [height]="'auto'"
       [padding]="'7px 9px 7px 10px'"
-      [text]="'с ' + (filter.dateFrom | dateConverter: 'HH:mm, D MMM YYYY')"
+      [text]="'с ' + (filters.dateFrom | dateConverter: 'HH:mm, D MMM YYYY')"
       [textLike]="'like-body'"
       [color]="'blue'"
       [radius]="'14px'"
@@ -32,10 +32,10 @@
       <span class="icon"></span>
     </app-button>
     <app-button
-      *ngIf="filter.dateTo !== null"
+      *ngIf="filters.dateTo !== null"
       [height]="'auto'"
       [padding]="'7px 9px 7px 10px'"
-      [text]="'по ' + (filter.dateTo | dateConverter: 'HH:mm, D MMM YYYY')"
+      [text]="'по ' + (filters.dateTo | dateConverter: 'HH:mm, D MMM YYYY')"
       [textLike]="'like-body'"
       [color]="'blue'"
       [radius]="'14px'"

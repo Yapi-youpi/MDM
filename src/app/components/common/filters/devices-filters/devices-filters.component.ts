@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { DevicesFilter } from '../../../../shared/types/filters';
-import { DevicesConfig } from '../../../../shared/types/config';
-import { DevicesGroup } from '../../../../shared/types/groups';
+import { Component, Input } from '@angular/core';
+import { IConfig } from '../../../../shared/types/config';
+import { DeviceFiltersClass } from '../../../../shared/classes/devices/device-filters.class';
+import { GroupClass } from '../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-devices-filters',
@@ -10,23 +9,15 @@ import { DevicesGroup } from '../../../../shared/types/groups';
   styleUrls: ['./devices-filters.component.scss'],
 })
 export class DevicesFiltersComponent {
-  @Input() filter!: DevicesFilter;
-  @Input() configs!: DevicesConfig[];
-  @Input() groups!: DevicesGroup[];
+  @Input() configs!: IConfig[];
 
-  @Output() onStatusRemove = new EventEmitter();
-  @Output() onDateFromRemove = new EventEmitter();
-  @Output() onDateToRemove = new EventEmitter();
-  @Output() onConfigsIDsRemove = new EventEmitter<string>();
-  @Output() onGroupsIDsRemove = new EventEmitter<string>();
-
-  constructor() {}
+  constructor(private groups: GroupClass, public filters: DeviceFiltersClass) {}
 
   get _configIDs() {
-    if (!this.filter.configsIDs || this.filter.configsIDs.length === 0)
+    if (!this.filters.configsIDs || this.filters.configsIDs.length === 0)
       return null;
     else {
-      return this.filter.configsIDs.map((c) => {
+      return this.filters.configsIDs.map((c) => {
         const idx = this.configs.map((e) => e.ID).indexOf(c);
         return this.configs[idx].name;
       });
@@ -34,35 +25,35 @@ export class DevicesFiltersComponent {
   }
 
   get _groupsIDs() {
-    if (!this.filter.groupsIDs || this.filter.groupsIDs.length === 0)
+    if (!this.filters.groupsIDs || this.filters.groupsIDs.length === 0)
       return null;
     else {
-      return this.filter.groupsIDs.map((c) => {
-        const idx = this.groups.map((e) => e.id).indexOf(c);
-        return this.groups[idx].name;
+      return this.filters.groupsIDs.map((c) => {
+        const idx = this.groups.array.map((e) => e.id).indexOf(c);
+        return this.groups.array[idx].name;
       });
     }
   }
 
   onStatusRemoveHandler() {
-    this.onStatusRemove.emit();
+    this.filters.resetParam('status');
   }
 
   onDateFromRemoveHandler() {
-    this.onDateFromRemove.emit();
+    this.filters.resetParam('dateFrom');
   }
 
   onDateToRemoveHandler() {
-    this.onDateToRemove.emit();
+    this.filters.resetParam('dateTo');
   }
 
   onConfigsIDsRemoveHandler(name: string) {
     const idx = this.configs.findIndex((c) => c.name === name);
-    this.onConfigsIDsRemove.emit(this.configs[idx].ID);
+    this.filters.resetParam('configsIDs', this.configs[idx].ID);
   }
 
   onGroupsIDsRemoveHandler(name: string) {
-    const idx = this.groups.findIndex((g) => g.name === name);
-    this.onGroupsIDsRemove.emit(this.groups[idx].id);
+    const idx = this.groups.array.findIndex((g) => g.name === name);
+    this.filters.resetParam('groupsIDs', this.groups.array[idx].id);
   }
 }

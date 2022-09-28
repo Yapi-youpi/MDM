@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { App } from '../../../../../shared/types/apps';
+import { Component } from '@angular/core';
 
 import { EditAppService } from '../../../../../shared/services/forms/app/edit-app.service';
+import { AppLoaderClass } from '../../../../../shared/classes/apps/app-loader.class';
+import { AppClass } from '../../../../../shared/classes/apps/app.class';
 
 @Component({
   selector: 'app-edit-app',
@@ -10,12 +10,15 @@ import { EditAppService } from '../../../../../shared/services/forms/app/edit-ap
   styleUrls: ['./edit-app.component.scss'],
 })
 export class EditAppComponent {
-  @Input() app!: App;
-  @Input() isDataFetching: boolean = false;
+  constructor(
+    private form: EditAppService,
+    private loader: AppLoaderClass,
+    private apps: AppClass
+  ) {}
 
-  @Output() onSubmit = new EventEmitter();
-
-  constructor(private form: EditAppService) {}
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -25,9 +28,9 @@ export class EditAppComponent {
     return this.form.isSubmitted;
   }
 
-  get _system() {
-    return this._form.get('system');
-  }
+  // get _system() {
+  //   return this._form.get('system');
+  // }
 
   get _name() {
     return this._form.get('name');
@@ -41,13 +44,13 @@ export class EditAppComponent {
     return this._form.get('runAtBoot');
   }
 
-  get _showIcon() {
-    return this._form.get('showIcon');
-  }
-
-  toggleSystemView() {
-    this._form.controls['system'].setValue(!this._system?.value);
-  }
+  // get _showIcon() {
+  //   return this._form.get('showIcon');
+  // }
+  //
+  // toggleSystemView() {
+  //   this._form.controls['system'].setValue(!this._system?.value);
+  // }
 
   onSubmitHandler() {
     this.form.setSubmitted();
@@ -55,7 +58,12 @@ export class EditAppComponent {
     if (this._form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      if (this.apps.current && this.form.values)
+        this.apps.edit(this.apps.current.ID, this.form.values).then((res) => {
+          if (res) {
+            this.closeModal();
+          }
+        });
     }
   }
 
@@ -63,7 +71,11 @@ export class EditAppComponent {
     this.form.resetSubmitted();
     this.form.resetForm();
 
+    this.closeModal();
+  }
+
+  closeModal() {
     const modal = document.querySelector('#edit_app');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

@@ -11,16 +11,15 @@ import { GroupsService } from '../../../shared/services/groups.service';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { interval } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
-import { DivIcon, Marker } from 'leaflet';
 import * as L from 'leaflet';
-import { Device } from '../../../shared/types/devices';
-import { DevicesConfigService } from '../../../shared/services/devices-config.service';
+import { DivIcon, Marker } from 'leaflet';
+import { IDevice } from '../../../shared/types/devices';
+import { ConfigsService } from '../../../shared/services/configs.service';
 import { UserService } from '../../../shared/services/user.service';
-import { DevicesGroup } from '../../../shared/types/groups';
-import { environment } from '../../../../environments/environment';
+import { IGroup } from '../../../shared/types/groups';
 
 interface DeviceGeo {
-  device: Device;
+  device: IDevice;
   marker: Marker;
 }
 
@@ -54,9 +53,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public sub!: LiveQuerySubscription;
   public icon!: DivIcon;
   public device_marker!: L.Marker;
-  public devices: Device[] = [];
-  public groups: DevicesGroup[] = [];
-  public devices_res: Device[] = [];
+  public devices: IDevice[] = [];
+  public groups: IGroup[] = [];
+  public devices_res: IDevice[] = [];
   public devices_geo: DeviceGeo[] = [];
   public open = false;
   public search = '';
@@ -65,7 +64,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     private mapService: MapService,
     private groupService: GroupsService,
     private db: DatabaseService,
-    protected configService: DevicesConfigService,
+    protected configService: ConfigsService,
     protected user: UserService
   ) {}
 
@@ -79,8 +78,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     let t = interval(200).subscribe(() => {
@@ -89,18 +87,22 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.groupService
           .get('all')
           .then((res) => {
-            this.groups = res.devicesGroups;
-            res.devicesGroups.map((item) => {
-              let option = {
-                value: item.id,
-                html: item.name,
-                isSelected: false,
-              };
-              this.group_option.push(option);
-            });
+            if (res.success) {
+              if (res.devicesGroups) {
+                this.groups = res.devicesGroups;
+                res.devicesGroups.map((item) => {
+                  let option = {
+                    value: item.id,
+                    html: item.name,
+                    isSelected: false,
+                  };
+                  this.group_option.push(option);
+                });
+              }
+            }
           })
           .then(() => {
-            this.mapService.initMap(71.43190, 51.12765, 13);
+            this.mapService.initMap(61.4029, 55.1561, 13);
 
             this.deviceSub().then();
           });
@@ -119,24 +121,40 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async deviceSub() {
-    let query = this.db.query(environment.parseClasses.devices);
+    let query = this.db.query('Device');
     this.sub = await query.subscribe();
-    let device: Device | any;
+    let device: IDevice | any;
     this.sub.on('open', () => {
       console.log('OPEN PARSE CONN');
     });
     this.sub.on('update', (item) => {
       device = item.attributes;
-      this.devices_geo.find((dev)=>
-        dev.device.device_id === device.device_id
-      )?.marker.setLatLng({
-        lat: device.gps_location._latitude,
-        lng: device.gps_location._longitude,
-      })
+      // console.log({
+      //   device_id: device.name,
+      //   lat: device.gps_location._latitude,
+      //   lng: device.gps_location._longitude,
+      // });
+      let index = this.devices_geo.findIndex((item) => {
+        if (item.device.device_id === device.device_id) {
+          return item;
+        } else {
+          return -1;
+        }
+      });
+      if (
+        index !== -1 &&
+        device.gps_location._latitude !== 0 &&
+        device.gps_location._longitude !== 0
+      ) {
+        this.devices_geo[index].marker.setLatLng({
+          lat: device.gps_location._latitude,
+          lng: device.gps_location._longitude,
+        });
+      }
     });
     this.sub.on('create', (item) => {
-      // console.log(item.attributes);
-      // console.log('NEW OBJECT WAS CREATED');
+      console.log(item.attributes);
+      console.log('NEW OBJECT WAS CREATED');
     });
     query.findAll().then((res) => {
       res.map((item) => {
@@ -157,9 +175,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  addMarkers(lat: number, lng: number, device: Device) {
+  addMarkers(lat: number, lng: number, device: IDevice) {
     let color = device.online_state ? '#AFD9A1' : '#FCA3A3';
-    let text = device.online_state ? 'активно' : 'неактивно';
     let signalLevel = !device.signalLevel
       ? ''
       : Number(device.signalLevel) < -92
@@ -173,7 +190,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.icon = L.divIcon({
       html: `
-        <div title='${device.name + ' ' + text}' id="m_${device.device_id}" class="marker" (click)="showInfo($event)">
+        <div id="m_${device.device_id}" class="marker" (click)="showInfo($event)">
           <div class="marker__header">
             <div class="marker__label">
               ${device.name}
@@ -284,7 +301,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
 
-    this.mapService.map.fitBounds(bounds);
+    if (Object.keys(bounds).length > 0) {
+      this.mapService.map.fitBounds(bounds);
+    }
   }
 
   getValue(event) {
@@ -299,7 +318,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  setView(device: Device) {
+  setView(device: IDevice) {
     this.devices = Array.from(this.devices_res);
     this.search = '';
     this.mapService.map.setView({

@@ -7,7 +7,7 @@ import { configsPaths as api } from '../enums/api';
 @Injectable({
   providedIn: 'root',
 })
-export class DevicesConfigService {
+export class ConfigsService {
   constructor(private http: HttpClient) {}
 
   getConfig(param: string) {
@@ -63,18 +63,18 @@ export class DevicesConfigService {
     });
   }
 
-  renameConfig(id: string, name: string) {
-    const body = {
-      id,
-      name,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(environment.url + api.RENAME, body).subscribe({
-        next: (res) => resolve(res),
-        error: (err) => reject(err),
-      });
-    });
-  }
+  // renameConfig(id: string, name: string) {
+  //   const body = {
+  //     id,
+  //     name,
+  //   };
+  //   return new Promise<any>((resolve, reject) => {
+  //     this.http.post(environment.url + api.RENAME, body).subscribe({
+  //       next: (res) => resolve(res),
+  //       error: (err) => reject(err),
+  //     });
+  //   });
+  // }
 
   removeConfig(id: string) {
     return new Promise<any>((resolve, reject) => {
@@ -89,24 +89,24 @@ export class DevicesConfigService {
     });
   }
 
-  getRestrictions() {
-    return new Promise<string>((resolve, reject) => {
-      this.http.get(environment.url + api.GET_RESTRICTIONS).subscribe({
-        next: (
-          res:
-            | {
-                error: string;
-                success: boolean;
-                defaultRestrictions: string;
-              }
-            | any
-        ) => {
-          resolve(res.defaultRestrictions);
-        },
-        error: (err) => reject(err),
-      });
-    });
-  }
+  // getRestrictions() {
+  //   return new Promise<string>((resolve, reject) => {
+  //     this.http.get(environment.url + api.GET_RESTRICTIONS).subscribe({
+  //       next: (
+  //         res:
+  //           | {
+  //               error: string;
+  //               success: boolean;
+  //               defaultRestrictions: string;
+  //             }
+  //           | any
+  //       ) => {
+  //         resolve(res.defaultRestrictions);
+  //       },
+  //       error: (err) => reject(err),
+  //     });
+  //   });
+  // }
 
   uploadWallpaper(id: string, wallpaper: string) {
     return new Promise<any>((resolve, reject) => {

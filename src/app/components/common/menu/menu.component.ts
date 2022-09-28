@@ -17,8 +17,7 @@ export class MenuComponent implements OnInit {
     let t = timer(300).subscribe(() => {
       this.asset.getFromStorage('user-role').then((role: string) => {
         this.userRole = role;
-        console.log(role);
-        console.log('get ussser role');
+        // console.log('get ussser role');
         t.unsubscribe();
       });
     });

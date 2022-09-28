@@ -26,6 +26,10 @@ export class EditGroupService {
     });
   }
 
+  get values() {
+    return this.form.getRawValue();
+  }
+
   get _name() {
     return this.form.getRawValue()['name'];
   }

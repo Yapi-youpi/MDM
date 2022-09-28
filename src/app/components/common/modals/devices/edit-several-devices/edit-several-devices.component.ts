@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { DevicesGroup } from '../../../../../shared/types/groups';
-
+import { Component } from '@angular/core';
 import { EditSeveralDevicesService } from '../../../../../shared/services/forms/device/edit-several-devices.service';
-
 import { Option } from '../../../../../shared/types/input';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { IDevice } from '../../../../../shared/types/devices';
+import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
+import { DeviceSelectedClass } from '../../../../../shared/classes/devices/device-selected.class';
 
 @Component({
   selector: 'app-edit-several-devices',
@@ -12,14 +13,19 @@ import { Option } from '../../../../../shared/types/input';
   styleUrls: ['./edit-several-devices.component.scss'],
 })
 export class EditSeveralDevicesComponent {
-  @Input() groups!: DevicesGroup[];
-  @Input() isDataFetching: boolean = false;
-
-  @Output() onSubmit = new EventEmitter();
-
   public currOption: Option = { value: '', html: '' };
 
-  constructor(public form: EditSeveralDevicesService) {}
+  constructor(
+    public form: EditSeveralDevicesService,
+    private group: GroupClass,
+    private loader: DeviceLoaderClass,
+    private device: DeviceClass,
+    private dSelected: DeviceSelectedClass
+  ) {}
+
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -38,7 +44,7 @@ export class EditSeveralDevicesComponent {
   }
 
   get _options() {
-    return this.groups.map((g) => {
+    return this.group.array.map((g) => {
       return {
         value: g.id,
         html: g.name,
@@ -49,7 +55,7 @@ export class EditSeveralDevicesComponent {
   get _currOption() {
     return {
       value: this._group_id?.value,
-      html: this.groups.find((g) => g.id === this._group_id?.value)?.name,
+      html: this.group.array.find((g) => g.id === this._group_id?.value)?.name,
     } as Option;
   }
 
@@ -67,7 +73,24 @@ export class EditSeveralDevicesComponent {
     if (this.form.form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      const data: IDevice[] = this.device.array
+        .filter((d) => this.dSelected.selectedIDs.includes(d.device_id))
+        .map((d) => {
+          return {
+            ...d,
+            device_group_id: this.form._group,
+            active_state: this.form._state,
+          };
+        });
+
+      this.device.edit(data).then((res) => {
+        if (res) {
+          if (data.length > 1) {
+            this.dSelected.setListOfSelected([]);
+          }
+          this.closeModal();
+        }
+      });
     }
   }
 
@@ -80,7 +103,11 @@ export class EditSeveralDevicesComponent {
     });
     this.currOption = { value: '', html: '' };
 
+    this.closeModal();
+  }
+
+  closeModal() {
     const modal = document.querySelector('#edit_several_devices');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

@@ -1,17 +1,19 @@
 <app-modal [modalID]="'qr_code'" [isClosable]="true">
   <div class="modal-form">
     <div class="modal-form-header">
-      <h4 i18n class="text-title text-center">Устройство "{{ device?.name }}"</h4>
+      <h4 class="text-title text-center">Устройство "{{ _device?.name }}"</h4>
     </div>
     <hr class="divider" />
     <div class="modal-form-body row">
-      <ngx-qrcode
-        class="qr-code"
-        [elementType]="elementType"
-        [errorCorrectionLevel]="correctionLevel"
-        [value]="_qrcode"
-        [width]="420"
-      ></ngx-qrcode>
+      <ng-container *ngIf="_device">
+        <ngx-qrcode
+          class="qr-code"
+          [elementType]="elementType"
+          [errorCorrectionLevel]="correctionLevel"
+          [value]="_device.raw_qr_code"
+          [width]="420"
+        ></ngx-qrcode>
+      </ng-container>
       <app-qr-tip *ngIf="!isTipHidden"></app-qr-tip>
     </div>
     <div class="modal-form-footer">

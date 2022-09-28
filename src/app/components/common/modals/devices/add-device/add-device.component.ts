@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { DevicesGroup } from '../../../../../shared/types/groups';
+import { Component } from '@angular/core';
 import { AddDeviceService } from '../../../../../shared/services/forms/device/add-device.service';
 import { Option } from '../../../../../shared/types/input';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
 
 @Component({
   selector: 'app-add-device',
@@ -10,12 +11,16 @@ import { Option } from '../../../../../shared/types/input';
   styleUrls: ['./add-device.component.scss'],
 })
 export class AddDeviceComponent {
-  @Input() public groups!: DevicesGroup[];
-  @Input() isDataFetching: boolean = false;
+  constructor(
+    public form: AddDeviceService,
+    private group: GroupClass,
+    private device: DeviceClass,
+    private loader: DeviceLoaderClass
+  ) {}
 
-  @Output() public onSubmit = new EventEmitter();
-
-  constructor(public form: AddDeviceService) {}
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -38,7 +43,7 @@ export class AddDeviceComponent {
   }
 
   get _options() {
-    return this.groups.map((g) => {
+    return this.group.array.map((g) => {
       return {
         value: g.id,
         html: g.name,
@@ -48,7 +53,9 @@ export class AddDeviceComponent {
 
   get _currOption() {
     const value = this._group_id?.value;
-    const html = this.groups.find((g) => g.id === this._group_id?.value)?.name;
+    const html = this.group.array.find(
+      (g) => g.id === this._group_id?.value
+    )?.name;
 
     return {
       value: value ? value : '',
@@ -68,7 +75,23 @@ export class AddDeviceComponent {
     if (this.form.form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      this.device
+        .add({
+          name: this.form._name,
+          description: this.form._desc,
+          device_group_id: this.form._group,
+        })
+        .then((res) => {
+          if (res) {
+            this.closeModal();
+
+            const modalQR = document.querySelector('#qr_code');
+            if (modalQR?.classList.contains('hidden'))
+              modalQR?.classList.toggle('hidden');
+
+            this.form.resetForm();
+          }
+        });
     }
   }
 
@@ -79,7 +102,11 @@ export class AddDeviceComponent {
       device_group_id: '',
     });
 
+    this.closeModal();
+  }
+
+  closeModal() {
     const modal = document.querySelector('#add_device');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

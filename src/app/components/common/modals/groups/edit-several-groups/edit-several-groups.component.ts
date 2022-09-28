@@ -1,7 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DevicesConfig } from '../../../../../shared/types/config';
+import { Component, Input } from '@angular/core';
+import { IConfig } from '../../../../../shared/types/config';
 import { editSeveral } from '../../../../../shared/services/forms/group';
 import { Option } from '../../../../../shared/types/input';
+import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { IGroup } from '../../../../../shared/types/groups';
+import { GroupSelectedClass } from '../../../../../shared/classes/groups/group-selected.class';
 
 @Component({
   selector: 'app-edit-several-groups',
@@ -9,14 +13,20 @@ import { Option } from '../../../../../shared/types/input';
   styleUrls: ['./edit-several-groups.component.scss'],
 })
 export class EditSeveralGroupsComponent {
-  @Input() configs!: DevicesConfig[];
-  @Input() isDataFetching: boolean = false;
-
-  @Output() onSubmit = new EventEmitter();
+  @Input() configs!: IConfig[];
 
   public currOption: Option = { value: '', html: '' };
 
-  constructor(private form: editSeveral) {}
+  constructor(
+    private form: editSeveral,
+    private loader: GroupLoaderClass,
+    private group: GroupClass,
+    private gSelected: GroupSelectedClass
+  ) {}
+
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -64,7 +74,23 @@ export class EditSeveralGroupsComponent {
     if (this.form.form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      const data: IGroup[] = this.group.array
+        .filter((g) => this.gSelected.selectedIDs.includes(g.id))
+        .map((g) => {
+          return {
+            ...g,
+            deviceConfigID: this.form._config,
+            activeState: this.form._state,
+          };
+        });
+
+      this.group.edit(data).then((res) => {
+        if (res) {
+          if (data.length > 1) this.gSelected.setListOfSelected([]);
+          this.group.updateGroups(undefined, true, data);
+          this.closeModal();
+        }
+      });
     }
   }
 
@@ -77,7 +103,11 @@ export class EditSeveralGroupsComponent {
     });
     this.currOption = { value: '', html: '' };
 
+    this.closeModal();
+  }
+
+  closeModal() {
     const modal = document.querySelector('#edit_several_groups');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

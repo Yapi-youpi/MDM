@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { App } from '../../../../../shared/types/apps';
+import { Component } from '@angular/core';
+import { AppLoaderClass } from '../../../../../shared/classes/apps/app-loader.class';
+import { AppClass } from '../../../../../shared/classes/apps/app.class';
 
 @Component({
   selector: 'app-delete-app',
@@ -8,19 +8,28 @@ import { App } from '../../../../../shared/types/apps';
   styleUrls: ['./delete-app.component.scss'],
 })
 export class DeleteAppComponent {
-  @Input() public app!: App;
-  @Input() isDataFetching: boolean = false;
+  constructor(private loader: AppLoaderClass, private apps: AppClass) {}
 
-  @Output() onSubmit = new EventEmitter();
-
-  constructor() {}
-
-  onSubmitHandler() {
-    this.onSubmit.emit();
+  get _loading() {
+    return this.loader.loading;
   }
 
-  onCancelHandler() {
+  get _current() {
+    return this.apps.current;
+  }
+
+  onSubmitHandler() {
+    if (this.apps.current) {
+      this.apps.delete(this.apps.current).then((res) => {
+        if (res) {
+          this.closeModal();
+        }
+      });
+    }
+  }
+
+  closeModal() {
     const modal = document.querySelector('#delete_app');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

@@ -12,8 +12,9 @@
             class="visually-hidden"
             type="radio"
             name="filter"
-            [value]="'all'"
+            value="all"
             (change)="setFilter($event)"
+            [checked]="filter === 'all'"
           />
           <span class="custom-radio__span">все</span>
         </label>
@@ -22,8 +23,9 @@
             class="visually-hidden"
             type="radio"
             name="filter"
-            [value]="'uploaded'"
+            value="uploaded"
             (change)="setFilter($event)"
+            [checked]="filter === 'uploaded'"
           />
           <span class="custom-radio__span">загруженные</span>
         </label>
@@ -32,8 +34,9 @@
             class="visually-hidden"
             type="radio"
             name="filter"
-            [value]="'system'"
+            value="system"
             (change)="setFilter($event)"
+            [checked]="filter === 'system'"
           />
           <span class="custom-radio__span">системные</span>
         </label>
@@ -45,25 +48,23 @@
           <div class="indeterminate"></div>
         </div>
       </ng-template>
-      <ng-container *ngIf="apps.length > 0; else loader">
+      <ng-container *ngIf="appGroups.length > 0; else loader">
         <div class="checkbox-group">
           <label
             *ngFor="
-              let group of appsGroup
+              let group of appGroups
+                | search: searchParam:'app'
                 | appGroup: filter
-                | keyvalue
-                | search: searchParam:'appGroup'
             "
             class="checkbox-wrapper"
-            for="{{ group.value[0].name }}"
+            for="{{ group.name }}"
           >
             <input
-              (change)="onCheckboxChange($event, group.value[0].name)"
+              (change)="onCheckboxChange($event)"
               class="visually-hidden"
-              id="{{ group.value[0].name }}"
               name="apps"
               type="checkbox"
-              value="{{ group.value[0].ID }}"
+              value="{{ group.ID }}"
             />
             <div class="input checkbox-custom">
               <svg width="18" height="18" viewBox="0 0 20 20">
@@ -74,26 +75,39 @@
               <img
                 class="app__img"
                 src="{{
-                  group.value[0].iconUID !== ''
-                    ? url + group.value[0].ID
+                  group.iconUID !== ''
+                    ? url + group.ID
                     : '/assets/config-images/app.png'
                 }}"
-                alt="{{ group.value[0].iconText }}"
+                alt="{{ group.iconText }}"
               />
-              <span [title]="group.key" class="app__name">{{ group.key }}</span>
+              <span [title]="group.name" class="app__name">{{
+                group.name
+              }}</span>
 
               <select
-                *ngIf="!group.value[0].system; else systemApp"
+                *ngIf="
+                  group.children && group.children.length > 0;
+                  else nochildren
+                "
                 (change)="setValue($event)"
                 class="select-app-action app__version"
-                id="version-{{ group.value[0].name }}"
+                id="version-{{ group.name }}"
                 name="version"
               >
-                <option *ngFor="let app of group.value" [value]="app.ID">
+                <option [value]="group.ID">
+                  {{ group.version }}
+                </option>
+
+                <option *ngFor="let app of group.children" [value]="app.ID">
                   {{ app.version }}
                 </option>
               </select>
-              <ng-template #systemApp> Системное приложение </ng-template>
+              <ng-template #nochildren>
+                <p *ngIf="group.system" class="app__system">
+                  Системное приложение
+                </p>
+              </ng-template>
             </div>
           </label>
         </div>

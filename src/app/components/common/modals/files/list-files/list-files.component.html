@@ -3,7 +3,7 @@
     <div class="modal-form-header">
       <h4 class="text-title text-center">
         Файлы {{ source === 'device' ? 'на устройстве' : 'в группе' }}
-        {{ source === 'device' ? device?.name : group?.name }}
+        {{ source === 'device' ? _device?.name : _group?.name }}
       </h4>
       <hr class="divider" />
     </div>
@@ -54,7 +54,7 @@
           [target]="'file_add'"
         ></app-add-button>
       </div>
-      <ng-container *ngIf="loading; else dummy">
+      <ng-container *ngIf="_loading | async; else dummy">
         <div class="progress">
           <div class="indeterminate"></div>
         </div>
@@ -92,15 +92,15 @@
             <ng-container *ngIf="source === 'device'">
               <ng-container
                 *ngIf="
-                  device &&
-                    device.device_info?.files &&
-                    device.device_info?.files?.length !== 0;
+                  _device &&
+                    _device.device_info?.files &&
+                    _device.device_info?.files?.length !== 0;
                   else nodata
                 "
               >
                 <app-file-item
                   *ngFor="
-                    let file of device.device_info.files
+                    let file of _device.device_info.files
                       | search: searchTerm:'file'
                       | fileName: isNameSortAsc
                       | deviceFileSize: isSizeSortAsc
@@ -108,9 +108,8 @@
                       | filesSort: displayFiles
                   "
                   [file]="file"
-                  [currFile]="currFile"
                   (onFileClick)="setCurrentFile($event)"
-                  (onDeleteClick)="onDeleteClickHandler($event)"
+                  (onDeleteClick)="setCurrentFile($event)"
                   (onDownloadClick)="onDownloadClickHandler($event)"
                 ></app-file-item>
               </ng-container>
@@ -118,13 +117,13 @@
             <ng-container *ngIf="source === 'group'">
               <ng-container
                 *ngIf="
-                  group && group?.files && group?.files?.length !== 0;
+                  _group && _group?.files && _group?.files?.length !== 0;
                   else nodata
                 "
               >
                 <app-file-item
                   *ngFor="
-                    let file of group.files
+                    let file of _group.files
                       | search: searchTerm:'file'
                       | fileName: isNameSortAsc
                       | deviceFileSize: isSizeSortAsc
@@ -132,9 +131,8 @@
                       | filesSort: displayFiles
                   "
                   [file]="file"
-                  [currFile]="currFile"
                   (onFileClick)="setCurrentFile($event)"
-                  (onDeleteClick)="onDeleteClickHandler($event)"
+                  (onDeleteClick)="setCurrentFile($event)"
                   (onDownloadClick)="onDownloadClickHandler($event)"
                 ></app-file-item>
               </ng-container>
@@ -147,28 +145,28 @@
         <div class="preview-wrapper">
           <div
             class="preview r-14"
-            [class.video]="currFile && fileType(currFile.url) === 'video'"
+            [class.video]="_file && fileType(_file.url) === 'video'"
           >
-            <span *ngIf="!currFile" class="text-choose">область просмотра</span>
-            <ng-container *ngIf="currFile">
+            <span *ngIf="!_file" class="text-choose">область просмотра</span>
+            <ng-container *ngIf="_file">
               <span
                 *ngIf="
-                  fileType(currFile.url) === 'none' ||
-                  fileType(currFile.url) === 'other'
+                  fileType(_file.url) === 'none' ||
+                  fileType(_file.url) === 'other'
                 "
                 class="text-choose"
                 >непросматриваемый файл</span
               >
               <img
-                *ngIf="fileType(currFile.url) === 'img'"
+                *ngIf="fileType(_file.url) === 'img'"
                 class="img"
-                [src]="currFile?.url"
+                [src]="_file?.url"
                 alt=""
               />
               <video
-                *ngIf="fileType(currFile.url) === 'video'"
+                *ngIf="fileType(_file.url) === 'video'"
                 class="video"
-                [src]="currFile.url"
+                [src]="_file.url"
                 controls
                 [disableRemotePlayback]="true"
                 [controlsList]="['nodownload']"

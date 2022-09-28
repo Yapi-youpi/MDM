@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { appsPaths as api } from '../../../../shared/enums/api';
-import { App } from '../../../../shared/types/apps';
+import { IApp } from '../../../../shared/types/apps';
 import { AppsService } from '../../../../shared/services/apps.service';
 import { timer } from 'rxjs';
 
@@ -19,7 +19,7 @@ import { timer } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppsConfigComponent implements OnInit {
-  @Input() apps: App[] = [];
+  @Input() apps: IApp[] = [];
   @Input() appsInConfig: string[] = [];
   @Input() installedAppsInConfig: string[] = [];
   @Input() removedAppsInConfig: string[] = [];
@@ -100,11 +100,11 @@ export class AppsConfigComponent implements OnInit {
     if (currentApp) {
       if (event.target.value === '0') {
         this.appsService
-          .removeAppFromInstall(this.configId, id)
+          .removeFromInstall(this.configId, id)
           .then((res) => console.log(res));
       } else if (event.target.value === '1') {
         this.appsService
-          .addAppToInstall(this.configId, id)
+          .addToInstall(this.configId, id)
           .then((res) => console.log(res));
       }
       this.onChangeAction.emit([id, event.target.value]);

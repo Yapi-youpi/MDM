@@ -9,8 +9,12 @@
         [submitText]="'Да'"
         [cancelText]="'Нет'"
         [margin]="'50px'"
-        [isSubmitBtnDisabled]="isDataFetching"
-        (onCancel)="onCancelHandler()"
+        [isSubmitBtnDisabled]="
+          source === 'device'
+            ? (_dLoading | async) || false
+            : (_gLoading | async) || false
+        "
+        (onCancel)="closeModal()"
         (onSubmit)="onSubmitHandler()"
       ></app-modal-action-btns>
     </div>

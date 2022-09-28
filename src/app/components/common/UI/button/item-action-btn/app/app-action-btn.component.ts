@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EditDeviceService } from '../../../../../../shared/services/forms/device/edit-device.service';
-import { App } from '../../../../../../shared/types/apps';
+import { IApp } from '../../../../../../shared/types/apps';
 
 @Component({
   selector: 'app-app-action-btn',
@@ -9,15 +9,13 @@ import { App } from '../../../../../../shared/types/apps';
 })
 export class AppActionBtnComponent {
   @Input() target: string = '';
-  @Input() app!: App;
-  @Input() text!: string;
+  @Input() app!: IApp;
 
-  @Output() onClick = new EventEmitter<App>();
+  @Output() onClick = new EventEmitter<IApp>();
 
-  constructor(private form: EditDeviceService) {
-  }
+  constructor(private form: EditDeviceService) {}
 
-  onClickHandler(app: App) {
+  onClickHandler(app: IApp) {
     this.onClick.emit(app);
     const modal = document.querySelector(`#${this.target}`);
     modal?.classList.toggle('hidden');

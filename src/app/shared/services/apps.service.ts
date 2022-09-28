@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { appsPaths as api } from '../enums/api';
-import { App } from '../types/apps';
+import { IApp } from '../types/apps';
+import { IAppsState, IAppState, IState } from '../types/states';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,8 @@ export class AppsService {
   get(param: string) {
     const url = environment.url + api.GET + param;
 
-    return new Promise<any>((resolve, reject) => {
-      this.http.get(url).subscribe({
+    return new Promise<IAppsState>((resolve, reject) => {
+      this.http.get<IAppsState>(url).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err),
       });
@@ -22,27 +23,27 @@ export class AppsService {
   }
 
   upload(file: FormData) {
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(environment.url + api.UPLOAD, file).subscribe({
+    return new Promise<IAppState>((resolve, reject) => {
+      this.http.post<IAppState>(environment.url + api.UPLOAD, file).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err),
       });
     });
   }
 
-  edit(app: App) {
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(environment.url + api.EDIT, app).subscribe({
+  edit(app: IApp) {
+    return new Promise<IState>((resolve, reject) => {
+      this.http.post<IState>(environment.url + api.EDIT, app).subscribe({
         next: (res) => resolve(res),
         error: (err) => reject(err),
       });
     });
   }
 
-  delete(app: App) {
-    return new Promise<any>((resolve, reject) => {
+  delete(app: IApp) {
+    return new Promise<IState>((resolve, reject) => {
       this.http
-        .post(environment.url + api.DELETE, { app_id: app.ID })
+        .post<IState>(environment.url + api.DELETE, { app_id: app.ID })
         .subscribe({
           next: (res) => resolve(res),
           error: (err) => reject(err),
@@ -50,10 +51,10 @@ export class AppsService {
     });
   }
 
-  addAppToInstall(configId, appId) {
-    return new Promise<any>((resolve, reject) => {
+  addToInstall(configId, appId) {
+    return new Promise<IState>((resolve, reject) => {
       this.http
-        .post(environment.url + api.ADD_TO_INST, {
+        .post<IState>(environment.url + api.ADD_TO_INST, {
           configId: configId,
           appId: appId,
         })
@@ -63,10 +64,11 @@ export class AppsService {
         });
     });
   }
-  removeAppFromInstall(configId, appId) {
-    return new Promise<any>((resolve, reject) => {
+
+  removeFromInstall(configId, appId) {
+    return new Promise<IState>((resolve, reject) => {
       this.http
-        .post(environment.url + api.REMOVE_FROM_INST, {
+        .post<IState>(environment.url + api.REMOVE_FROM_INST, {
           configId: configId,
           appId: appId,
         })

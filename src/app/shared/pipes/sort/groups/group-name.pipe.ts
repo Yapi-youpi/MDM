@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { DevicesGroup } from '../../../types/groups';
+import { IGroup } from '../../../types/groups';
 
 @Pipe({
   name: 'group_name',
 })
 export class GroupNamePipe implements PipeTransform {
-  transform(groups: DevicesGroup[], isNameAsc: boolean): DevicesGroup[] {
+  transform(groups: IGroup[], isNameAsc: boolean): IGroup[] {
     // FROM A ENG TO A RU
     if (isNameAsc)
       return groups.sort((a, b) =>

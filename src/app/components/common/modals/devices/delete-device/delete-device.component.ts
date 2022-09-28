@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { Device } from '../../../../../shared/types/devices';
+import { Component } from '@angular/core';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
 
 @Component({
   selector: 'app-delete-device',
@@ -8,18 +8,29 @@ import { Device } from '../../../../../shared/types/devices';
   styleUrls: ['./delete-device.component.scss'],
 })
 export class DeleteDeviceComponent {
-  @Input() public device!: Device;
-  @Input() isDataFetching: boolean = false;
+  constructor(private loader: DeviceLoaderClass, private device: DeviceClass) {}
 
-  @Output() onSubmit = new EventEmitter<Device>();
-  constructor() {}
-
-  onSubmitHandler(device: Device) {
-    this.onSubmit.emit(device);
+  get _loading() {
+    return this.loader.loading;
   }
 
-  onCancelHandler() {
+  get _device() {
+    return this.device.current;
+  }
+
+  onSubmitHandler() {
+    if (this._device) {
+      this.device.delete([this._device.device_id]).then((res) => {
+        if (res) {
+          // todo: delete from selected list in exists in selected list
+          this.closeModal();
+        }
+      });
+    }
+  }
+
+  closeModal() {
     const modal = document.querySelector('#delete_device');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

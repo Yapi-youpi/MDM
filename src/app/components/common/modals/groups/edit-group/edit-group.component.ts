@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { edit } from '../../../../../shared/services/forms/group';
-import { DevicesConfig } from '../../../../../shared/types/config';
+import { IConfig } from '../../../../../shared/types/config';
 import { Option } from '../../../../../shared/types/input';
 import { groupIcons } from '../../../../../shared/types/groups';
+import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
 @Component({
   selector: 'app-edit-group',
@@ -10,16 +12,21 @@ import { groupIcons } from '../../../../../shared/types/groups';
   styleUrls: ['./edit-group.component.scss'],
 })
 export class EditGroupComponent {
-  @Input() configs: DevicesConfig[] = [];
-  @Input() isDataFetching: boolean = false;
-
-  @Output() onSubmit = new EventEmitter();
+  @Input() configs: IConfig[] = [];
 
   public currOption!: Option;
   public groupIcons: string[] = groupIcons;
   public isIconContainerShown: boolean = false;
 
-  constructor(private form: edit) {}
+  constructor(
+    private form: edit,
+    private loader: GroupLoaderClass,
+    private group: GroupClass
+  ) {}
+
+  get _loading() {
+    return this.loader.loading;
+  }
 
   get _form() {
     return this.form.form;
@@ -92,7 +99,15 @@ export class EditGroupComponent {
     if (this._form.invalid) {
       return;
     } else {
-      this.onSubmit.emit();
+      this.group
+        .edit([{ ...this.group.current, ...this.form.values }])
+        .then((res) => {
+          if (res) {
+            this.group.updateGroups(this.form.values);
+
+            this.closeModal();
+          }
+        });
     }
   }
 
@@ -100,7 +115,11 @@ export class EditGroupComponent {
     this.form.resetSubmitted();
     this.form.form.reset();
 
+    this.closeModal();
+  }
+
+  closeModal() {
     const modal = document.querySelector('#edit_group');
-    modal?.classList.toggle('hidden');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

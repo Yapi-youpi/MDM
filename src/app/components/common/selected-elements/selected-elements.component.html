@@ -1,8 +1,17 @@
 <div
   class="selected-devices row space-between"
-  [class.hidden]="selectedIDs.length === 0"
+  [class.hidden]="
+    source === 'device'
+      ? _dSelectedIDs.length === 0
+      : _gSelectedIDs.length === 0
+  "
 >
-  <p i18n>{{ selectedIDs.length }} выбран(-о)</p>
+  <p>
+    {{
+      source === 'device' ? _dSelectedIDs.length : _gSelectedIDs.length
+    }}
+    выбран(-о)
+  </p>
   <span class="icon close" (click)="onCloseClickHandler()"></span>
   <app-button
     [height]="'24px'"

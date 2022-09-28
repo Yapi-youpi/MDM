@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { EditDeviceService } from '../../../../../../shared/services/forms/device/edit-device.service';
 
-import { Device } from '../../../../../../shared/types/devices';
+import { IDevice } from '../../../../../../shared/types/devices';
 
 @Component({
   selector: 'app-device-action-btn',
@@ -11,14 +11,13 @@ import { Device } from '../../../../../../shared/types/devices';
 })
 export class DeviceActionBtnComponent {
   @Input() target: string = '';
-  @Input() title: string = '';
-  @Input() device!: Device;
+  @Input() device!: IDevice;
 
-  @Output() onClick = new EventEmitter<Device>();
+  @Output() onClick = new EventEmitter<IDevice>();
 
   constructor(private form: EditDeviceService) {}
 
-  onClickHandler(device: Device) {
+  onClickHandler(device: IDevice) {
     this.onClick.emit(device);
 
     this.form.form.setValue({
