@@ -2,7 +2,7 @@
   <div class="modal-form w-500">
     <div class="modal-form-header">
       <h4 class="text-title text-center">
-        Удалить приложение<br />"{{ app?.name }}"?
+        Удалить приложение<br />"{{ _current?.name }}"?
       </h4>
     </div>
     <div class="modal-form-footer">
@@ -11,8 +11,8 @@
         [submitText]="'Да'"
         [cancelText]="'Нет'"
         [margin]="'50px'"
-        [isSubmitBtnDisabled]="isDataFetching"
-        (onCancel)="onCancelHandler()"
+        [isSubmitBtnDisabled]="(_loading | async) || false"
+        (onCancel)="closeModal()"
         (onSubmit)="onSubmitHandler()"
       ></app-modal-action-btns>
     </div>

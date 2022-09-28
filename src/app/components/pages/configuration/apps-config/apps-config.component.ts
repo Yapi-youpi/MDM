@@ -100,11 +100,11 @@ export class AppsConfigComponent implements OnInit {
     if (currentApp) {
       if (event.target.value === '0') {
         this.appsService
-          .removeAppFromInstall(this.configId, id)
+          .removeFromInstall(this.configId, id)
           .then((res) => console.log(res));
       } else if (event.target.value === '1') {
         this.appsService
-          .addAppToInstall(this.configId, id)
+          .addToInstall(this.configId, id)
           .then((res) => console.log(res));
       }
       this.onChangeAction.emit([id, event.target.value]);

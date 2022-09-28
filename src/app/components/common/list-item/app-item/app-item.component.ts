@@ -1,16 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 import { IApp } from '../../../../shared/types/apps';
 import { appsPaths as api } from '../../../../shared/enums/api';
 
 import { environment } from '../../../../../environments/environment';
+import { AppClass } from '../../../../shared/classes/apps/app.class';
+import { edit } from '../../../../shared/services/forms/app';
 
 @Component({
   selector: 'app-app-item',
@@ -19,9 +14,6 @@ import { environment } from '../../../../../environments/environment';
 })
 export class AppItemComponent {
   @Input() app!: IApp;
-
-  @Output() onEditClick = new EventEmitter<IApp>();
-  @Output() onDeleteClick = new EventEmitter<IApp>();
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('nametip') nametipRef!: ElementRef;
@@ -32,7 +24,13 @@ export class AppItemComponent {
 
   public url: string = environment.url + api.GET_ICON;
 
-  constructor() {}
+  constructor(private apps: AppClass, private editForm: edit) {}
+
+  get _height() {
+    return this.isChildrenHidden
+      ? 60
+      : 60 + (40 + 1) * (this.app.children?.length || 0);
+  }
 
   displayNameTip() {
     if (
@@ -62,21 +60,16 @@ export class AppItemComponent {
     this.vtipRef.nativeElement.style.opacity = 0;
   }
 
-  get _height() {
-    return this.isChildrenHidden
-      ? 60
-      : 60 + (40 + 1) * (this.app.children?.length || 0);
-  }
-
   toggleChildren() {
     this.isChildrenHidden = !this.isChildrenHidden;
   }
 
   onEditClickHandler(app: IApp) {
-    this.onEditClick.emit(app);
+    this.apps.setCurrent(app);
+    this.editForm.form.patchValue(app);
   }
 
   onDeleteClickHandler(app: IApp) {
-    this.onDeleteClick.emit(app);
+    this.apps.setCurrent(app);
   }
 }
