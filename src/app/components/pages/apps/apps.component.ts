@@ -34,7 +34,7 @@ export class AppsComponent {
   }
 
   get _apps() {
-    return this.apps.array;
+    return this.apps.groupedArray;
   }
 
   ngOnInit() {

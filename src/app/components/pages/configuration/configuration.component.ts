@@ -6,11 +6,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
 import { IApp } from '../../../shared/types/apps';
-import { IAppsState } from '../../../shared/types/states';
-import { AppsService } from '../../../shared/services/apps.service';
 import { alertService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
 import Compressor from 'compressorjs';
+import { AppClass } from '../../../shared/classes/apps/app.class';
+import { AppSelectedClass } from '../../../shared/classes/apps/app-selected.class';
 
 @Component({
   selector: 'app-configuration',
@@ -21,7 +21,7 @@ export class ConfigurationComponent implements OnInit {
   public title = 'Конфигурации / ';
   public config!: DevicesConfig;
   public configForm: FormGroup;
-  public apps: IApp[] = [];
+  // public apps: IApp[] = [];
   // public restrictions: string[] = [];
   public restrictionList: Permissions;
   public isModalAddAppOpen = false;
@@ -36,7 +36,9 @@ export class ConfigurationComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    public appsService: AppsService,
+    // public appsService: AppsService,
+    private apps: AppClass,
+    private selected: AppSelectedClass,
     private alert: alertService,
     private route: ActivatedRoute,
     private configService: ConfigsService,
@@ -96,24 +98,12 @@ export class ConfigurationComponent implements OnInit {
     });
   }
 
+  // get _apps() {
+  //   return this.apps.rawArray;
+  // }
+
   ngOnInit() {
     this.getConfig();
-  }
-
-  getApps() {
-    this.appsService
-      .get('all')
-      .then((res: IAppsState) => {
-        if (res.success) {
-          this.apps = res.app ? res.app : [];
-          // console.log('APPS: ', this.apps);
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   getConfig() {
@@ -162,7 +152,7 @@ export class ConfigurationComponent implements OnInit {
       this.configForm.patchValue({ wifiSecurityType: 'NONE' });
     }
 
-    this.getApps();
+    this.apps.get('all', true);
     // this.getRestrictions();
     if (this.config) {
       this.config.applications = this.initialAppList;
@@ -204,11 +194,8 @@ export class ConfigurationComponent implements OnInit {
       .catch((err) => console.log(err));
 
     if (this.editedApps.length > 0) {
-      this.editedApps.map((app) => {
-        this.appsService
-          .edit(app)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
+      this.editedApps.forEach((app) => {
+        this.apps.edit(app.ID, app).then((res) => console.log(res));
       });
     }
 
@@ -220,11 +207,13 @@ export class ConfigurationComponent implements OnInit {
     }
   }
 
-  editApp(id: string) {
-    const currentApp = this.apps.find((app) => app.ID === id);
+  editApp(app: IApp) {
+    const currentApp = this.apps.rawArray.find((a) => a.ID === app.ID);
     if (currentApp) {
       this.editedApps.push(currentApp);
     }
+    // this.apps.setCurrent(app);
+    // this.editedApps.push(currentApp);
   }
 
   toggleApp(app) {
@@ -298,8 +287,10 @@ export class ConfigurationComponent implements OnInit {
     }
   }
 
-  addApp(addedApps: string[]) {
-    this.config.applications = this.config.applications?.concat(addedApps);
+  addApps() {
+    this.config.applications = this.config.applications?.concat(
+      this.selected.selectedIDs
+    );
     this.isModalAddAppOpen = false;
   }
 

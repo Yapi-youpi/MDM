@@ -46,47 +46,54 @@
   padding: 16px 0;
 }
 
-.app {
-  padding: 15px 16px;
-  display: flex;
-  gap: 10px;
-  flex: 1;
-  //justify-content: space-between;
-  align-items: center;
-  background: var(--light-grey);
-  box-shadow: var(--box-shadow);
-  border-radius: 14px;
-  &__img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    filter: drop-shadow(0px 0px 10px rgba(133, 133, 133, 0.15));
-    border-radius: 8px;
-  }
-  &__name {
-    //flex: 1;
-    width: 290px;
-    margin-right: 10px;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 12px;
+.item {
+  &-wrapper {
+    width: 100%;
 
-    // чтобы не было горизонтального скролла
-    //max-width: 300px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
 
-  &__version {
-    width: 120px;
-    margin-left: auto;
-    padding: 8px;
-    background: #ffffff !important;
-    border-radius: 8px;
-  }
+  &-content {
+    width: 100%;
 
-  &__system {
-    margin-left: auto;
+    margin-left: 10px;
+    padding: 15px 16px;
+
+    background-color: var(--light-blue-grey);
+
+    box-shadow: var(--box-shadow);
+
+    > *:last-child {
+      margin-left: auto;
+    }
+
+    .img {
+      height: 30px;
+      width: 30px;
+
+      margin-right: 10px;
+    }
+
+    .name {
+      width: 290px;
+      margin-right: 10px;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 12px;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .version {
+      width: 120px;
+      margin-left: auto;
+      padding: 8px;
+      background: #ffffff !important;
+      border-radius: 8px;
+    }
   }
 }

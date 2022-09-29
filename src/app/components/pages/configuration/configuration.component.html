@@ -883,7 +883,6 @@
         <div class="card__header card-title">Приложения</div>
         <div class="config-settings">
           <app-apps-config
-            [apps]="apps"
             [configId]="config.ID"
             [isModalAddAppOpen]="isModalAddAppOpen"
             [appsInConfig]="config.applications ? config.applications : []"
@@ -1082,8 +1081,7 @@
 
 <app-add-app-to-config
   *ngIf="config"
-  [apps]="apps"
   [appsInConfig]="config.applications ? config.applications : []"
   [isModalAddAppOpen]="isModalAddAppOpen"
-  (onSubmit)="addApp($event)"
+  (onSubmit)="addApps()"
 ></app-add-app-to-config>
