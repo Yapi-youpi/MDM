@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigsService } from '../../../shared/services/configs.service';
-import { DevicesConfig, Permissions } from '../../../interfaces/interfaces';
+import { Permissions } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
@@ -11,6 +11,7 @@ import { AssetService } from '../../../shared/services/asset.service';
 import Compressor from 'compressorjs';
 import { AppClass } from '../../../shared/classes/apps/app.class';
 import { AppSelectedClass } from '../../../shared/classes/apps/app-selected.class';
+import { IConfig } from '../../../shared/types/config';
 
 @Component({
   selector: 'app-configuration',
@@ -19,7 +20,7 @@ import { AppSelectedClass } from '../../../shared/classes/apps/app-selected.clas
 })
 export class ConfigurationComponent implements OnInit {
   public title = 'Конфигурации / ';
-  public config!: DevicesConfig;
+  public config!: IConfig;
   public configForm: FormGroup;
   // public apps: IApp[] = [];
   // public restrictions: string[] = [];

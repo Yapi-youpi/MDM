@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DevicesConfig } from '../../../../../interfaces/interfaces';
 import { ConfigsService } from '../../../../../shared/services/configs.service';
+import { IConfig } from '../../../../../shared/types/config';
 
 @Component({
   selector: 'app-add-config',
@@ -9,8 +9,8 @@ import { ConfigsService } from '../../../../../shared/services/configs.service';
   styleUrls: ['./add-config.component.scss'],
 })
 export class AddConfigComponent implements OnInit {
-  @Input() configs: DevicesConfig[] = [];
-  @Input() default_config!: DevicesConfig;
+  @Input() configs: IConfig[] = [];
+  @Input() default_config!: IConfig;
   public newConfigForm: FormGroup;
   @Output() onSubmit = new EventEmitter();
   constructor(private configService: ConfigsService) {

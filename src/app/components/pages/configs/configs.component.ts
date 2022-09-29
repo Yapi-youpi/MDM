@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigsService } from '../../../shared/services/configs.service';
-import { DevicesConfig } from '../../../interfaces/interfaces';
 import { AssetService } from '../../../shared/services/asset.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { IConfig } from '../../../shared/types/config';
 
 @Component({
   selector: 'app-configs',
@@ -13,10 +13,10 @@ export class ConfigsComponent implements OnInit {
   public title = 'Конфигурации';
   public newConfigForm: FormGroup;
   public search = '';
-  public default_config!: DevicesConfig;
-  public configs: DevicesConfig[] = [];
+  public default_config!: IConfig;
+  public configs: IConfig[] = [];
   public loading = true;
-  public currentConfig!: DevicesConfig;
+  public currentConfig!: IConfig;
   constructor(
     public asset: AssetService,
     private configService: ConfigsService

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DevicesConfig } from '../../../../../interfaces/interfaces';
 import { ConfigsService } from '../../../../../shared/services/configs.service';
+import { IConfig } from '../../../../../shared/types/config';
 
 @Component({
   selector: 'app-delete-config',
@@ -8,7 +8,7 @@ import { ConfigsService } from '../../../../../shared/services/configs.service';
   styleUrls: ['./delete-config.component.scss'],
 })
 export class DeleteConfigComponent implements OnInit {
-  @Input() currentConfig!: DevicesConfig;
+  @Input() currentConfig!: IConfig;
   @Output() onSubmit = new EventEmitter();
   constructor(private configService: ConfigsService) {}
 

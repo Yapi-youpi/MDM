@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DevicesConfig } from '../../interfaces/interfaces';
+import { IConfig } from '../types/config';
 
 @Pipe({
   name: 'configSearch',
 })
 export class ConfigSearchPipe implements PipeTransform {
-  transform(configs: DevicesConfig[], search: string): DevicesConfig[] {
+  transform(configs: IConfig[], search: string): IConfig[] {
     return !search
       ? configs
       : configs.filter((item) => {

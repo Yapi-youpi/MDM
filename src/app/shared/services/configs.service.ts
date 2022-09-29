@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { DevicesConfig } from '../../interfaces/interfaces';
 import { configsPaths as api } from '../enums/api';
+import { IConfig } from '../types/config';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +11,12 @@ export class ConfigsService {
   constructor(private http: HttpClient) {}
 
   getConfig(param: string) {
-    return new Promise<DevicesConfig[]>((resolve, reject) => {
+    return new Promise<IConfig[]>((resolve, reject) => {
       this.http.get(environment.url + api.GET + param).subscribe({
         next: (
           res:
             | {
-                devicesConfigs: DevicesConfig[];
+                devicesConfigs: IConfig[];
                 error: string;
                 success: boolean;
               }
@@ -29,11 +29,7 @@ export class ConfigsService {
     });
   }
 
-  addConfig(
-    config: DevicesConfig | undefined,
-    name: string,
-    description: string
-  ) {
+  addConfig(config: IConfig | undefined, name: string, description: string) {
     if (config) {
       config.name = name;
       config.description = description;
@@ -50,7 +46,7 @@ export class ConfigsService {
     });
   }
 
-  editConfig(config: DevicesConfig) {
+  editConfig(config: IConfig) {
     return new Promise<any>((resolve, reject) => {
       this.http
         .post(environment.url + api.EDIT, {
