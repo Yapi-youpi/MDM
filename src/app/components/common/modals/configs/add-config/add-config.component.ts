@@ -38,7 +38,7 @@ export class AddConfigComponent implements OnInit {
         ? this.default_config
         : this.configs.find((conf) => conf.name === config);
     this.configService
-      .addConfig(prototype, name, description)
+      .add(prototype, name, description)
       .then((res) => {
         console.log(res);
         this.closeModal();

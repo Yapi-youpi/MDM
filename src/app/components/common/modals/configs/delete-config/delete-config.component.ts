@@ -16,7 +16,7 @@ export class DeleteConfigComponent implements OnInit {
 
   removeConfig(id: string) {
     this.configService
-      .removeConfig(id)
+      .delete(id)
       .then((res) => {
         console.log(res);
         this.closeModal();

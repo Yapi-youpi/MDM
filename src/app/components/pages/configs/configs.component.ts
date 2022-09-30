@@ -41,9 +41,9 @@ export class ConfigsComponent implements OnInit {
 
   getDefaultConfig() {
     this.configService
-      .getConfig('default')
+      .get('default')
       .then((res) => {
-        this.default_config = Object.assign(res[0]);
+        if (res) this.default_config = Object.assign(res[0]);
         // console.log(this.default_config);
       })
       .catch((err) => {
@@ -53,12 +53,14 @@ export class ConfigsComponent implements OnInit {
 
   getAllConfigs() {
     this.configService
-      .getConfig('all')
+      .get('all')
       .then((res) => {
+        if (res) {
+          this.loading = false;
+          this.configs = res;
+          this.sortConfigs();
+        }
         // console.log('CONFIGS: ', res);
-        this.loading = false;
-        this.configs = res;
-        this.sortConfigs();
       })
       .catch((err) => {
         console.log(err.error.error);

@@ -82,9 +82,9 @@ export class DevicesComponent implements OnInit, OnDestroy {
     const i = interval(1000).subscribe(() => {
       if (this.user.token) {
         i.unsubscribe();
-        this.getGroups();
+        this.groups.get('all').then();
         this.getConfigs();
-        this.getDevices();
+        this.device.get('all').then();
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;
         });
@@ -103,8 +103,10 @@ export class DevicesComponent implements OnInit, OnDestroy {
     // this.loading = true;
 
     this.config
-      .getConfig('all')
-      .then((res) => (this.configs = res))
+      .get('all')
+      .then((res) => {
+        if (res) this.configs = res;
+      })
       .catch((err) => {
         this.alert.show({
           title: 'GET CONFIGS ERROR',
@@ -117,14 +119,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
           // this.loading = false;
         });
       });
-  }
-
-  getGroups() {
-    this.groups.get('all').then();
-  }
-
-  getDevices() {
-    this.device.get('all').then();
   }
 
   onChangeSearchInputHandler(value: string) {

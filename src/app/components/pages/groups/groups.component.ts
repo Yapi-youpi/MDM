@@ -65,8 +65,8 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     const i = interval(200).subscribe(() => {
-      this.getGroups();
-      this.getConfigs('all');
+      this.group.get('all').then();
+      this.getConfigs();
       this.asset.getFromStorage('user-role').then((role: string) => {
         this.userRole = role;
       });
@@ -74,20 +74,18 @@ export class GroupsComponent implements OnInit {
     });
   }
 
-  getGroups() {
-    this.group.get('all').then();
-  }
-
-  getConfigs(param: string) {
+  getConfigs() {
     // this.loading = true;
 
     this.configService
-      .getConfig(param)
+      .get('all')
       .then((res) => {
-        this.configs = res;
-        this.configs.forEach((c) => {
-          this.configsNV.push({ name: c.name, value: c.ID });
-        });
+        if (res) {
+          this.configs = res;
+          this.configs.forEach((c) => {
+            this.configsNV.push({ name: c.name, value: c.ID });
+          });
+        }
       })
       .catch((err) => {
         this.alert.show({

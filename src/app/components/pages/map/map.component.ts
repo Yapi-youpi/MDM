@@ -3,7 +3,6 @@ import {
   Component,
   HostListener,
   OnDestroy,
-  OnInit,
 } from '@angular/core';
 import { MapService } from '../../../shared/services/map.service';
 import { Option } from '../../../shared/types/input';
@@ -27,7 +26,7 @@ interface DeviceGeo {
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MapComponent implements AfterViewInit, OnDestroy {
   public title = 'Карта';
   public group_option: Option[] = [];
   public config_option: Option[] = [];
@@ -80,8 +79,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {}
-
   ngAfterViewInit() {
     let t = interval(200).subscribe(() => {
       if (this.user.token) {
@@ -105,15 +102,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
             this.deviceSub().then();
           });
-        this.configService.getConfig('all').then((res) => {
-          res.map((item) => {
-            let option = {
-              value: item.ID,
-              html: item.name,
-              isSelected: false,
-            };
-            this.config_option.push(option);
-          });
+        this.configService.get('all').then((res) => {
+          if (res) {
+            res.map((item) => {
+              let option = {
+                value: item.ID,
+                html: item.name,
+                isSelected: false,
+              };
+              this.config_option.push(option);
+            });
+          }
         });
       }
     });

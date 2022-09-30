@@ -110,12 +110,14 @@ export class ConfigurationComponent implements OnInit {
   getConfig() {
     const id = this.route.snapshot.paramMap.get('id') || 'default';
     this.configService
-      .getConfig(id)
+      .get(id)
       .then((res) => {
-        if (res.length > 0) {
-          this.config = Object.assign(res[0]);
-          this.initialAppList = res[0].applications || [];
-          // console.log(this.config);
+        if (res) {
+          if (res.length > 0) {
+            this.config = Object.assign(res[0]);
+            this.initialAppList = res[0].applications || [];
+            // console.log(this.config);
+          }
         }
       })
       .then(() => {
@@ -180,15 +182,17 @@ export class ConfigurationComponent implements OnInit {
       config.mobileData = !config.mobileData;
     }
     this.configService
-      .editConfig(config)
+      .edit(config)
       .then((res) => {
-        // console.log(res);
-        const saveBtn = document.querySelector('.save-btn');
-        saveBtn?.classList.add('save-btn--success');
-        let i = interval(2000).subscribe(() => {
-          saveBtn?.classList.remove('save-btn--success');
-          i.unsubscribe();
-        });
+        if (res) {
+          // console.log(res);
+          const saveBtn = document.querySelector('.save-btn');
+          saveBtn?.classList.add('save-btn--success');
+          let i = interval(2000).subscribe(() => {
+            saveBtn?.classList.remove('save-btn--success');
+            i.unsubscribe();
+          });
+        }
 
         // this.configForm.reset();
       })
