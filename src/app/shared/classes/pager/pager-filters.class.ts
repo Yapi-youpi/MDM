@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { filter } from '../../services/forms/messages';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PagerFiltersClass {
   status: boolean | null = null;
   dateFrom: string | null = null;
