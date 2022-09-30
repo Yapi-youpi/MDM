@@ -89,8 +89,8 @@
 
 <app-add-message
   (onSend)="getMessages()"
-  [devices]="devices"
-  [groups]="groups"
+  [devices]="_devices"
+  [groups]="_groups"
 ></app-add-message>
 <app-filter-messages
   (onSubmit)="applyFilterParams($event)"

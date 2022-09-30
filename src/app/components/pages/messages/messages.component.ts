@@ -1,19 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IFilter } from '../../../shared/types/filters';
 import { Message } from '../../../shared/types/message';
-import {
-  alertService,
-  deviceService,
-  groupService,
-  pagerService,
-  userService,
-} from '../../../shared/services';
+import { pagerService, userService } from '../../../shared/services';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
-import * as states from '../../../shared/types/states';
-import { IDevice } from '../../../shared/types/devices';
-import { IGroup } from '../../../shared/types/groups';
 import { interval } from 'rxjs';
+import { GroupClass } from '../../../shared/classes/groups/group.class';
+import { DeviceClass } from '../../../shared/classes/devices/device.class';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -29,27 +22,33 @@ export class MessagesComponent implements OnInit {
   public isTargetSortAsc: boolean = false;
   public isStatusSortAsc: boolean = false;
   public messages!: Message[];
-  public devices: IDevice[] = [];
-  public groups: IGroup[] = [];
   public filter: IFilter = {
     status: null,
     dateFrom: null,
     dateTo: null,
   };
+
   constructor(
     private user: userService,
-    private device: deviceService,
+    private device: DeviceClass,
     private pager: pagerService,
-    private group: groupService,
-    private alert: alertService
+    private group: GroupClass
   ) {}
+
+  get _devices() {
+    return this.device.array;
+  }
+
+  get _groups() {
+    return this.group.array;
+  }
 
   ngOnInit() {
     const i = interval(300).subscribe(() => {
       if (this.user.token) {
         i.unsubscribe();
-        this.getDevices();
-        this.getGroups();
+        this.device.get('all').then();
+        this.group.get('all').then();
         this.getMessages();
       }
     });
@@ -68,38 +67,6 @@ export class MessagesComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  getDevices() {
-    this.device
-      .get('all')
-      .then((res: states.IDevicesState) => {
-        if (res.success) {
-          this.devices = res.devices ? res.devices : [];
-        } else {
-          this.alert.show({
-            title: 'GET DEVICES ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  }
-
-  getGroups() {
-    this.group
-      .get('all')
-      .then((res: states.IGroupsState) => {
-        if (res.success) {
-          this.groups = res.devicesGroups ? res.devicesGroups : [];
-        } else {
-          this.alert.show({
-            title: 'GET GROUPS ERROR',
-            content: res.error,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
   }
 
   resetFilterParams() {

@@ -120,11 +120,11 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   getGroups() {
-    this.groups.get('all');
+    this.groups.get('all').then();
   }
 
   getDevices() {
-    this.device.get('all');
+    this.device.get('all').then();
   }
 
   onChangeSearchInputHandler(value: string) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IApp } from '../../types/apps';
 import { AppLoaderClass } from './app-loader.class';
-import { alertService, appsService } from '../../services';
+import { appsService } from '../../services';
 
 @Injectable({
   providedIn: 'root',
@@ -11,30 +11,26 @@ export class AppClass {
   public groupedArray: IApp[] = [];
   public current: IApp | null = null;
 
-  constructor(
-    private loader: AppLoaderClass,
-    private service: appsService,
-    private alert: alertService
-  ) {}
+  constructor(private loader: AppLoaderClass, private service: appsService) {}
 
   setCurrent(app: IApp | null) {
     this.current = app;
   }
 
   get(param: 'all' | string, isRaw: boolean = false) {
-    this.loader.start();
+    return new Promise<boolean>((resolve) => {
+      this.loader.start();
 
-    this.service
-      .get(param)
-      .then((res) => {
-        if (res.success) {
-          if (res.app) {
+      this.service
+        .get(param)
+        .then((res) => {
+          if (res) {
             if (isRaw) {
-              this.rawArray = res.app;
+              this.rawArray = res;
             } else {
               if (this.groupedArray.length !== 0) this.groupedArray = [];
 
-              res.app.forEach((a) => {
+              res.forEach((a) => {
                 if (a.ID === a.parentAppID)
                   this.groupedArray = [
                     { ...a, children: [] },
@@ -42,7 +38,7 @@ export class AppClass {
                   ];
               });
 
-              res.app.forEach((a) => {
+              res.forEach((a) => {
                 if (a.parentAppID !== a.ID) {
                   this.groupedArray = this.groupedArray.map((ag) => {
                     if (a.parentAppID === ag.ID) {
@@ -81,15 +77,11 @@ export class AppClass {
                 } else return ag;
               });
             }
-          }
-        } else {
-          this.alert.show({
-            title: 'Ошибка получения списка приложений',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => this.loader.end());
+            resolve(true);
+          } else resolve(false);
+        })
+        .finally(() => this.loader.end());
+    });
   }
 
   upload(file: FormData) {
@@ -99,28 +91,20 @@ export class AppClass {
       this.service
         .upload(file)
         .then((res) => {
-          if (res.success) {
-            if (res.app) {
-              if (res.app.parentAppID === res.app.ID) {
-                this.get('all');
-              } else {
-                this.groupedArray = this.groupedArray.map((ag) => {
-                  if (ag.ID === res.app?.parentAppID) {
-                    return { ...ag, children: [...ag.children, res.app] };
-                  } else return ag;
-                });
-              }
-
-              this.sortChildrenByVCode();
+          if (res) {
+            if (res.parentAppID === res.ID) {
+              this.get('all').then();
+            } else {
+              this.groupedArray = this.groupedArray.map((ag) => {
+                if (ag.ID === res?.parentAppID) {
+                  return { ...ag, children: [...ag.children, res] };
+                } else return ag;
+              });
             }
+
+            this.sortChildrenByVCode();
             resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка загрузки приложения',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          } else resolve(false);
         })
         .finally(() => this.loader.end());
     });
@@ -136,7 +120,7 @@ export class AppClass {
           ID: appID,
         })
         .then((res) => {
-          if (res.success) {
+          if (res) {
             this.groupedArray = this.groupedArray.map((ag) => {
               if (ag.ID === appID) {
                 return {
@@ -158,13 +142,7 @@ export class AppClass {
               }
             });
             resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка редактирования приложения',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          } else resolve(false);
         })
         .finally(() => this.loader.end());
     });
@@ -175,7 +153,7 @@ export class AppClass {
       this.loader.start();
 
       this.service.delete(app).then((res) => {
-        if (res.success) {
+        if (res) {
           if (app.children.length !== 0) {
             const appGroup = this.groupedArray.filter(
               (ag) => ag.ID === app.ID
@@ -202,13 +180,7 @@ export class AppClass {
               });
           }
           resolve(true);
-        } else {
-          this.alert.show({
-            title: 'Ошибка удаления приложения',
-            content: res.error,
-          });
-          resolve(false);
-        }
+        } else resolve(false);
       });
     });
   }
@@ -220,16 +192,10 @@ export class AppClass {
       this.service
         .addToInstall(configID, appID)
         .then((res) => {
-          if (res.success) {
+          if (res) {
             // ???
             resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка добавления приложения к установке',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          } else resolve(false);
         })
         .finally(() => this.loader.end());
     });
@@ -242,16 +208,10 @@ export class AppClass {
       this.service
         .removeFromInstall(configID, appID)
         .then((res) => {
-          if (res.success) {
+          if (res) {
             // ???
             resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка удаления приложения из установки',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          } else resolve(false);
         })
         .finally(() => this.loader.end());
     });

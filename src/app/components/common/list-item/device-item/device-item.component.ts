@@ -74,7 +74,7 @@ export class DeviceItemComponent {
   }
 
   onClickDeviceReloadHandler(device: IDevice) {
-    this.devices.reload(device.device_id);
+    this.devices.reload(device.device_id).then();
   }
 
   onClickDeviceFilesHandler(device: IDevice) {

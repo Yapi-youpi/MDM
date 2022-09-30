@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { alertService, fileService } from '../../services';
+import { fileService } from '../../services';
 import { DeviceClass } from '../devices/device.class';
 import { IFile } from '../../types/files';
 import { GroupClass } from '../groups/group.class';
@@ -15,8 +15,7 @@ export class FileClass {
     private loading: FileLoaderClass,
     private files: fileService,
     private devices: DeviceClass,
-    private groups: GroupClass,
-    private alert: alertService
+    private groups: GroupClass
   ) {}
 
   setCurrent(file: IFile | null) {
@@ -30,7 +29,7 @@ export class FileClass {
       this.files
         .upload(entity, eID, file)
         .then((res) => {
-          if (res.success) {
+          if (res) {
             switch (entity) {
               case 'device': {
                 const device = this.devices.current;
@@ -41,7 +40,7 @@ export class FileClass {
                       ...device,
                       device_info: {
                         ...device.device_info,
-                        files: [res.file, ...device.device_info.files],
+                        files: [res, ...device.device_info.files],
                       },
                     });
                   } else {
@@ -49,11 +48,11 @@ export class FileClass {
                       ...device,
                       device_info: {
                         ...device.device_info,
-                        files: [res.file],
+                        files: [res],
                       },
                     });
                   }
-                  this.setCurrent(res.file);
+                  this.setCurrent(res);
                 }
                 break;
               }
@@ -64,27 +63,21 @@ export class FileClass {
                   if (group.files) {
                     this.groups.setCurrent({
                       ...group,
-                      files: [res.file, ...group.files],
+                      files: [res, ...group.files],
                     });
                   } else {
                     this.groups.setCurrent({
                       ...group,
-                      files: [res.file],
+                      files: [res],
                     });
                   }
-                  this.setCurrent(res.file);
+                  this.setCurrent(res);
                 }
                 break;
               }
             }
             resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка загрузки файла',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          } else resolve(false);
         })
         .finally(() => this.loading.end());
     });
@@ -133,13 +126,7 @@ export class FileClass {
               }
             }
             resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка удаления файла',
-              content: '',
-            });
-            resolve(false);
-          }
+          } else resolve(false);
         })
         .finally(() => this.loading.end());
     });

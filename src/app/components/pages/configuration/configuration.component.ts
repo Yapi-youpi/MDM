@@ -153,7 +153,7 @@ export class ConfigurationComponent implements OnInit {
       this.configForm.patchValue({ wifiSecurityType: 'NONE' });
     }
 
-    this.apps.get('all', true);
+    this.apps.get('all', true).then();
     // this.getRestrictions();
     if (this.config) {
       this.config.applications = this.initialAppList;

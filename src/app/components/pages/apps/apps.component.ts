@@ -41,7 +41,7 @@ export class AppsComponent {
     const i = interval(1000).subscribe(() => {
       if (this.user.token) {
         i.unsubscribe();
-        this.apps.get('all');
+        this.apps.get('all').then();
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;
         });

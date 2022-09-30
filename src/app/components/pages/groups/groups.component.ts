@@ -75,7 +75,7 @@ export class GroupsComponent implements OnInit {
   }
 
   getGroups() {
-    this.group.get('all');
+    this.group.get('all').then();
   }
 
   getConfigs(param: string) {

@@ -49,7 +49,7 @@ export class AddAppToConfigComponent implements OnChanges {
         changes.isModalAddAppOpen?.currentValue === true &&
         this._rawApps.length > 0
       ) {
-        this.apps.get('all');
+        this.apps.get('all').then();
       }
     }
   }

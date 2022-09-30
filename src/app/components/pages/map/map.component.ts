@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { MapService } from '../../../shared/services/map.service';
 import { Option } from '../../../shared/types/input';
-import { GroupsService } from '../../../shared/services/groups.service';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { interval } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
@@ -16,7 +15,7 @@ import { DivIcon, Marker } from 'leaflet';
 import { IDevice } from '../../../shared/types/devices';
 import { ConfigsService } from '../../../shared/services/configs.service';
 import { UserService } from '../../../shared/services/user.service';
-import { IGroup } from '../../../shared/types/groups';
+import { GroupClass } from '../../../shared/classes/groups/group.class';
 
 interface DeviceGeo {
   device: IDevice;
@@ -54,7 +53,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public icon!: DivIcon;
   public device_marker!: L.Marker;
   public devices: IDevice[] = [];
-  public groups: IGroup[] = [];
   public devices_res: IDevice[] = [];
   public devices_geo: DeviceGeo[] = [];
   public open = false;
@@ -62,11 +60,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private mapService: MapService,
-    private groupService: GroupsService,
+    private group: GroupClass,
     private db: DatabaseService,
     protected configService: ConfigsService,
     protected user: UserService
   ) {}
+
+  get _groups() {
+    return this.group.array;
+  }
 
   @HostListener('document:mouseup', ['$event'])
   onGlobalClick(event) {
@@ -84,21 +86,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     let t = interval(200).subscribe(() => {
       if (this.user.token) {
         t.unsubscribe();
-        this.groupService
+        this.group
           .get('all')
           .then((res) => {
-            if (res.success) {
-              if (res.devicesGroups) {
-                this.groups = res.devicesGroups;
-                res.devicesGroups.map((item) => {
-                  let option = {
-                    value: item.id,
-                    html: item.name,
-                    isSelected: false,
-                  };
-                  this.group_option.push(option);
-                });
-              }
+            if (res) {
+              this._groups.map((item) => {
+                let option = {
+                  value: item.id,
+                  html: item.name,
+                  isSelected: false,
+                };
+                this.group_option.push(option);
+              });
             }
           })
           .then(() => {
@@ -184,7 +183,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       : Number(device.signalLevel) < -83
       ? 'medium'
       : 'high';
-    const img = this.groups.find(
+    const img = this._groups.find(
       (g) => g.id === device.device_group_id
     )?.iconID;
 
