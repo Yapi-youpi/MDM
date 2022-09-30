@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -18,7 +17,7 @@ import { IApp } from '../../../../shared/types/apps';
   styleUrls: ['./apps-config.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppsConfigComponent implements OnInit {
+export class AppsConfigComponent {
   @Input() appsInConfig: string[] = [];
   @Input() installedAppsInConfig: string[] = [];
   @Input() removedAppsInConfig: string[] = [];
@@ -42,8 +41,6 @@ export class AppsConfigComponent implements OnInit {
   get _apps() {
     return this.apps.rawArray;
   }
-
-  ngOnInit() {}
 
   onChangeSearch(value: string) {
     this.searchParam = value;

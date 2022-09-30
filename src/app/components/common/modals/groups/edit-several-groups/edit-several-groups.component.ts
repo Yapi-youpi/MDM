@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { IConfig } from '../../../../../shared/types/config';
+import { Component } from '@angular/core';
 import { editSeveral } from '../../../../../shared/services/forms/group';
-import { Option } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types/input';
 import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { IGroup } from '../../../../../shared/types/groups';
 import { GroupSelectedClass } from '../../../../../shared/classes/groups/group-selected.class';
+import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-edit-several-groups',
@@ -13,15 +13,14 @@ import { GroupSelectedClass } from '../../../../../shared/classes/groups/group-s
   styleUrls: ['./edit-several-groups.component.scss'],
 })
 export class EditSeveralGroupsComponent {
-  @Input() configs!: IConfig[];
-
-  public currOption: Option = { value: '', html: '' };
+  public currOption: IOption = { value: '', html: '' };
 
   constructor(
     private form: editSeveral,
     private loader: GroupLoaderClass,
     private group: GroupClass,
-    private gSelected: GroupSelectedClass
+    private gSelected: GroupSelectedClass,
+    private config: ConfigClass
   ) {}
 
   get _loading() {
@@ -45,22 +44,22 @@ export class EditSeveralGroupsComponent {
   }
 
   get _options() {
-    return this.configs.map((c) => {
+    return this.config.array.map((c) => {
       return {
         value: c.ID,
         html: c.name,
-      } as Option;
+      } as IOption;
     });
   }
 
   get _currOption() {
     return {
       value: this._config?.value,
-      html: this.configs.find((c) => c.ID === this._config?.value)?.name,
-    } as Option;
+      html: this.config.array.find((c) => c.ID === this._config?.value)?.name,
+    } as IOption;
   }
 
-  onSelectHandler(item: Option) {
+  onSelectHandler(item: IOption) {
     this._form.patchValue({
       deviceConfigID: item.value,
     });

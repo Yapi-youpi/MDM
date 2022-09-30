@@ -1,32 +1,30 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfigsService } from '../../../../../shared/services/configs.service';
-import { IConfig } from '../../../../../shared/types/config';
+import { Component } from '@angular/core';
+import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-delete-config',
   templateUrl: './delete-config.component.html',
   styleUrls: ['./delete-config.component.scss'],
 })
-export class DeleteConfigComponent implements OnInit {
-  @Input() currentConfig!: IConfig;
-  @Output() onSubmit = new EventEmitter();
-  constructor(private configService: ConfigsService) {}
+export class DeleteConfigComponent {
+  constructor(private config: ConfigClass) {}
 
-  ngOnInit(): void {}
-
-  removeConfig(id: string) {
-    this.configService
-      .delete(id)
-      .then((res) => {
-        console.log(res);
-        this.closeModal();
-        this.onSubmit.emit();
-      })
-      .catch((err) => {
-        console.log(err.error.error);
-      });
+  get _current() {
+    return this.config.current;
   }
+
+  onDeleteHandler() {
+    if (this._current) {
+      this.config.delete(this._current.ID).then((res) => {
+        if (res) {
+          this.closeModal();
+        }
+      });
+    }
+  }
+
   closeModal() {
-    document.getElementById('modal-delete-config')?.classList.add('hidden');
+    const modal = document.querySelector('#modal-delete-config');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

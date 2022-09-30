@@ -40,7 +40,7 @@
       {{ device.device_group_id | groupConverter: _groups }}
     </p>
     <p class="font-bold-color conf">
-      {{ device.device_config_id | configConverter: configs }}
+      {{ device.device_config_id | configConverter: _configs }}
     </p>
     <div class="icon-wrapper row center update">
       <app-status-icon

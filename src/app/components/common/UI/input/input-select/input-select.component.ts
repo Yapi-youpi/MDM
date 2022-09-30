@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { inputWidth, Option } from '../../../../../shared/types/input';
+import { inputWidth, IOption } from '../../../../../shared/types/input';
 
 @Component({
   selector: 'app-input-select',
@@ -15,15 +15,15 @@ import { inputWidth, Option } from '../../../../../shared/types/input';
 export class InputSelectComponent {
   @Input() color: 'common' | 'light' = 'common';
   @Input() width: inputWidth = 'w-170';
-  @Input() options: Option[] = [];
-  @Input() currOption!: Option;
+  @Input() options: IOption[] = [];
+  @Input() currOption!: IOption;
   @Input() isError: boolean = false;
   @Input() disabled: boolean = false;
 
-  @Output() onSelect = new EventEmitter<Option>();
+  @Output() onSelect = new EventEmitter<IOption>();
 
   public isDropdownHidden: boolean = true;
-  public copy: Option[] = [];
+  public copy: IOption[] = [];
 
   constructor() {}
 
@@ -41,7 +41,7 @@ export class InputSelectComponent {
     this.isDropdownHidden = !this.isDropdownHidden;
   }
 
-  onSelectHandler(option: Option) {
+  onSelectHandler(option: IOption) {
     this.currOption = option;
 
     this.onSelect.emit(option);

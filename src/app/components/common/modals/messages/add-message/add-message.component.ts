@@ -3,7 +3,7 @@ import { userService } from '../../../../../shared/services';
 import { PagerClass } from '../../../../../shared/classes/pager/pager.class';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { addMessages } from '../../../../../shared/services/forms/messages';
+import { add } from '../../../../../shared/services/forms/messages';
 
 @Component({
   selector: 'app-add-message',
@@ -16,7 +16,7 @@ export class AddMessageComponent {
     private pager: PagerClass,
     private device: DeviceClass,
     private group: GroupClass,
-    private form: addMessages
+    private form: add
   ) {}
 
   get _form() {

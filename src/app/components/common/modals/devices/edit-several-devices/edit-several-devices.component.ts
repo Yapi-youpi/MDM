@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EditSeveralDevicesService } from '../../../../../shared/services/forms/device/edit-several-devices.service';
-import { Option } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types/input';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 import { IDevice } from '../../../../../shared/types/devices';
@@ -13,7 +13,7 @@ import { DeviceSelectedClass } from '../../../../../shared/classes/devices/devic
   styleUrls: ['./edit-several-devices.component.scss'],
 })
 export class EditSeveralDevicesComponent {
-  public currOption: Option = { value: '', html: '' };
+  public currOption: IOption = { value: '', html: '' };
 
   constructor(
     public form: EditSeveralDevicesService,
@@ -48,7 +48,7 @@ export class EditSeveralDevicesComponent {
       return {
         value: g.id,
         html: g.name,
-      } as Option;
+      } as IOption;
     });
   }
 
@@ -56,10 +56,10 @@ export class EditSeveralDevicesComponent {
     return {
       value: this._group_id?.value,
       html: this.group.array.find((g) => g.id === this._group_id?.value)?.name,
-    } as Option;
+    } as IOption;
   }
 
-  onSelectHandler(item: Option) {
+  onSelectHandler(item: IOption) {
     this._form.patchValue({
       device_group_id: item.value,
     });

@@ -23,10 +23,10 @@
       </div>
     </ng-template>
     <div class="config-wrapper">
-      <ng-container *ngIf="configs.length > 0; else loader">
+      <ng-container *ngIf="_configs.length > 0; else loader">
         <div
           class="config-card"
-          *ngFor="let config of configs | configSearch: search"
+          *ngFor="let config of _configs | configSearch: search"
         >
           <div class="config-card__header">
             <div class="config-card__title">
@@ -58,12 +58,5 @@
 </main>
 
 <!--  MODALS -->
-<app-add-config
-  [configs]="configs"
-  [default_config]="default_config"
-  (onSubmit)="getAllConfigs()"
-></app-add-config>
-<app-delete-config
-  [currentConfig]="currentConfig"
-  (onSubmit)="getAllConfigs()"
-></app-delete-config>
+<app-add-config></app-add-config>
+<app-delete-config></app-delete-config>

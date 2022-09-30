@@ -1,11 +1,10 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-
-import { IConfig } from '../../../../../shared/types/config';
-import { Option } from '../../../../../shared/types/input';
+import { Component, OnDestroy } from '@angular/core';
+import { IOption } from '../../../../../shared/types/input';
 
 import { filter } from '../../../../../shared/services/forms/group';
 import { GroupFiltersClass } from '../../../../../shared/classes/groups/group-filters.class';
 import { GroupSelectedClass } from '../../../../../shared/classes/groups/group-selected.class';
+import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-filter-group',
@@ -13,16 +12,19 @@ import { GroupSelectedClass } from '../../../../../shared/classes/groups/group-s
   styleUrls: ['./filter-groups.component.scss'],
 })
 export class FilterGroupsComponent implements OnDestroy {
-  @Input() configs!: IConfig[];
-
   constructor(
     private form: filter,
     private filters: GroupFiltersClass,
-    private selection: GroupSelectedClass
+    private selection: GroupSelectedClass,
+    private config: ConfigClass
   ) {}
 
   ngOnDestroy() {
     this.filters.resetAll();
+  }
+
+  get _configs() {
+    return this.config.array;
   }
 
   get _form() {
@@ -50,12 +52,12 @@ export class FilterGroupsComponent implements OnDestroy {
   }
 
   get _options_configs() {
-    return this.configs.map((c) => {
+    return this._configs.map((c) => {
       return {
         value: c.ID,
         html: c.name,
         isSelected: false,
-      } as Option;
+      } as IOption;
     });
   }
 
@@ -67,7 +69,7 @@ export class FilterGroupsComponent implements OnDestroy {
   //   this._form.controls['status-off'].setValue(!this._status_off?.value);
   // }
 
-  onConfigSelectHandler(options: Option[]) {
+  onConfigSelectHandler(options: IOption[]) {
     let data: string[] = [];
 
     options.forEach((o) => {

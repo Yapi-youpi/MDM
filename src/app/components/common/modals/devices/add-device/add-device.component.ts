@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AddDeviceService } from '../../../../../shared/services/forms/device/add-device.service';
-import { Option } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types/input';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
@@ -47,7 +47,7 @@ export class AddDeviceComponent {
       return {
         value: g.id,
         html: g.name,
-      } as Option;
+      } as IOption;
     });
   }
 
@@ -60,10 +60,10 @@ export class AddDeviceComponent {
     return {
       value: value ? value : '',
       html: html ? html : '',
-    } as Option;
+    } as IOption;
   }
 
-  onSelectHandler(item: Option) {
+  onSelectHandler(item: IOption) {
     this._form.patchValue({
       device_group_id: item.value,
     });

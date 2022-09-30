@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { filterMessages } from '../../services/forms/messages';
+import { filter } from '../../services/forms/messages';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class PagerFiltersClass {
   status: boolean | null = null;
   dateFrom: string | null = null;
   dateTo: string | null = null;
 
-  constructor(private form: filterMessages) {}
+  constructor(private form: filter) {}
 
   resetAll() {
     this.status = null;

@@ -5,16 +5,16 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { MapService } from '../../../shared/services/map.service';
-import { Option } from '../../../shared/types/input';
+import { IOption } from '../../../shared/types/input';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { interval } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
 import * as L from 'leaflet';
 import { DivIcon, Marker } from 'leaflet';
 import { IDevice } from '../../../shared/types/devices';
-import { ConfigsService } from '../../../shared/services/configs.service';
 import { UserService } from '../../../shared/services/user.service';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
+import { ConfigClass } from '../../../shared/classes/configs/config.class';
 
 interface DeviceGeo {
   device: IDevice;
@@ -28,9 +28,9 @@ interface DeviceGeo {
 })
 export class MapComponent implements AfterViewInit, OnDestroy {
   public title = 'Карта';
-  public group_option: Option[] = [];
-  public config_option: Option[] = [];
-  public status_option: Option[] = [
+  public group_option: IOption[] = [];
+  public config_option: IOption[] = [];
+  public status_option: IOption[] = [
     {
       value: 'true',
       html: 'online',
@@ -61,7 +61,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     private mapService: MapService,
     private group: GroupClass,
     private db: DatabaseService,
-    protected configService: ConfigsService,
+    private config: ConfigClass,
     protected user: UserService
   ) {}
 
@@ -102,12 +102,12 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
             this.deviceSub().then();
           });
-        this.configService.get('all').then((res) => {
+        this.config.get('all').then((res) => {
           if (res) {
-            res.map((item) => {
+            this.config.array.map((c) => {
               let option = {
-                value: item.ID,
-                html: item.name,
+                value: c.ID,
+                html: c.name,
                 isSelected: false,
               };
               this.config_option.push(option);

@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { edit } from '../../../../../shared/services/forms/group';
-import { IConfig } from '../../../../../shared/types/config';
-import { Option } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types/input';
 import { groupIcons } from '../../../../../shared/types/groups';
 import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-edit-group',
@@ -12,16 +12,15 @@ import { GroupClass } from '../../../../../shared/classes/groups/group.class';
   styleUrls: ['./edit-group.component.scss'],
 })
 export class EditGroupComponent {
-  @Input() configs: IConfig[] = [];
-
-  public currOption!: Option;
+  public currOption!: IOption;
   public groupIcons: string[] = groupIcons;
   public isIconContainerShown: boolean = false;
 
   constructor(
     private form: edit,
     private loader: GroupLoaderClass,
-    private group: GroupClass
+    private group: GroupClass,
+    private config: ConfigClass
   ) {}
 
   get _loading() {
@@ -53,27 +52,27 @@ export class EditGroupComponent {
   }
 
   get _options() {
-    return this.configs.map((c) => {
+    return this.config.array.map((c) => {
       return {
         value: c.ID,
         html: c.name,
-      } as Option;
+      } as IOption;
     });
   }
 
   get _currOption() {
     return {
       value: this._deviceConfigID?.value,
-      html: this.configs.find((c) => c.ID === this._deviceConfigID?.value)
+      html: this.config.array.find((c) => c.ID === this._deviceConfigID?.value)
         ?.name,
-    } as Option;
+    } as IOption;
   }
 
   toggleIconsContainer() {
     this.isIconContainerShown = !this.isIconContainerShown;
   }
 
-  onSelectHandler(item: Option) {
+  onSelectHandler(item: IOption) {
     this._form.patchValue({
       deviceConfigID: item.value,
     });

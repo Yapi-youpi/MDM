@@ -17,10 +17,15 @@
         [target]="'add_device'"
       ></app-add-button>
     </div>
-    <app-devices-filters [configs]="configs"></app-devices-filters>
+    <app-devices-filters></app-devices-filters>
     <ng-container
       *ngIf="
-        (_dLoading | async) || false || (_gLoading | async) || false;
+        (_dLoading | async) ||
+          false ||
+          (_gLoading | async) ||
+          false ||
+          (_cLoading | async) ||
+          false;
         else dummy
       "
     >
@@ -116,7 +121,6 @@
                 | devices_name: sortNameAsc
             "
             [device]="device"
-            [configs]="configs"
             [userRole]="userRole"
           ></app-device-item>
         </ng-container>
@@ -128,7 +132,7 @@
   </div>
 </main>
 
-<app-filter-devices [configs]="configs"></app-filter-devices>
+<app-filter-devices></app-filter-devices>
 
 <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
   <app-add-device></app-add-device>

@@ -1,15 +1,7 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { interval, timer } from 'rxjs';
-import {
-  alertService,
-  deviceConfigService,
-  userService,
-} from '../../../shared/services';
-import { device } from 'src/app/shared/services/forms';
-import { DatabaseService } from '../../../shared/services/database.service';
-import { IConfig } from '../../../shared/types/config';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
+import { userService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
-import { IFile } from '../../../shared/types/files';
 import { DeviceClass } from '../../../shared/classes/devices/device.class';
 import { DeviceSubscriptionClass } from '../../../shared/classes/devices/device-subscription.class';
 import { DeviceFiltersClass } from '../../../shared/classes/devices/device-filters.class';
@@ -17,6 +9,8 @@ import { GroupClass } from '../../../shared/classes/groups/group.class';
 import { DeviceLoaderClass } from '../../../shared/classes/devices/device-loader.class';
 import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.class';
 import { DeviceSelectedClass } from '../../../shared/classes/devices/device-selected.class';
+import { ConfigClass } from '../../../shared/classes/configs/config.class';
+import { ConfigLoaderClass } from '../../../shared/classes/configs/config-loader.class';
 
 @Component({
   selector: 'app-devices',
@@ -27,9 +21,6 @@ import { DeviceSelectedClass } from '../../../shared/classes/devices/device-sele
 export class DevicesComponent implements OnInit, OnDestroy {
   public title = 'Устройства';
 
-  public configs: IConfig[] = [];
-
-  public currFile: IFile | null = null;
   public isAllSelected: boolean = false;
 
   public sortStatusAsc: boolean = true;
@@ -43,24 +34,22 @@ export class DevicesComponent implements OnInit, OnDestroy {
   public userRole: string = '';
 
   constructor(
-    private db: DatabaseService,
     private user: userService,
-    private elementRef: ElementRef,
     private device: DeviceClass,
     private dSelected: DeviceSelectedClass,
     private dLoader: DeviceLoaderClass,
     private groups: GroupClass,
     private gLoader: GroupLoaderClass,
-    private config: deviceConfigService,
+    private config: ConfigClass,
+    private cLoader: ConfigLoaderClass,
     private subDevice: DeviceSubscriptionClass,
-    private addDeviceForm: device.add,
-    private editDeviceForm: device.edit,
-    private editSeveralDevicesForm: device.editSeveral,
-    private filterForm: device.filter,
     public filters: DeviceFiltersClass,
-    private alert: alertService,
     private asset: AssetService
   ) {}
+
+  get _cLoading() {
+    return this.cLoader.loading;
+  }
 
   get _dLoading() {
     return this.dLoader.loading;
@@ -83,7 +72,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
       if (this.user.token) {
         i.unsubscribe();
         this.groups.get('all').then();
-        this.getConfigs();
+        this.config.get('all').then();
         this.device.get('all').then();
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;
@@ -97,28 +86,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subDevice.unsubscribe();
-  }
-
-  getConfigs() {
-    // this.loading = true;
-
-    this.config
-      .get('all')
-      .then((res) => {
-        if (res) this.configs = res;
-      })
-      .catch((err) => {
-        this.alert.show({
-          title: 'GET CONFIGS ERROR',
-          content: err.error,
-        });
-      })
-      .finally(() => {
-        const t = timer(500).subscribe(() => {
-          t.unsubscribe();
-          // this.loading = false;
-        });
-      });
   }
 
   onChangeSearchInputHandler(value: string) {

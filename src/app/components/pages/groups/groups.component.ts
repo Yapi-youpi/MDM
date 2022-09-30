@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, timer } from 'rxjs';
+import { interval } from 'rxjs';
 
-import {
-  alertService,
-  deviceConfigService,
-  userService,
-} from '../../../shared/services';
-import { group } from 'src/app/shared/services/forms';
-import { add, edit, editSeveral } from '../../../shared/services/forms/group';
-import { IConfig } from '../../../shared/types/config';
+import { userService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
 import { IFile } from '../../../shared/types/files';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
 import { GroupFiltersClass } from '../../../shared/classes/groups/group-filters.class';
 import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.class';
 import { GroupSelectedClass } from '../../../shared/classes/groups/group-selected.class';
+import { ConfigClass } from '../../../shared/classes/configs/config.class';
+import { ConfigLoaderClass } from '../../../shared/classes/configs/config-loader.class';
 
 @Component({
   selector: 'app-group',
@@ -25,38 +20,36 @@ import { GroupSelectedClass } from '../../../shared/classes/groups/group-selecte
 export class GroupsComponent implements OnInit {
   public title = 'Группы устройств';
 
-  // public loading: boolean = true;
-
-  public configs: IConfig[] = [];
   public userRole: string = '';
   public currFile: IFile | null = null;
   public isAllSelected: boolean = false;
+
+  public configsNV: { name: string; value: string }[] = [];
 
   public searchParam: string = '';
 
   public isNamesSortAsc: boolean = true;
   public isDevicesCountSortAsc: boolean = true;
   public isConfigSortAsc: boolean = true;
-  public configsNV: { name: string; value: string }[] = [];
   public isDateSortAsc: boolean = true;
 
   constructor(
     private group: GroupClass,
     private selection: GroupSelectedClass,
     private gLoader: GroupLoaderClass,
-    private configService: deviceConfigService,
+    private config: ConfigClass,
+    private cLoader: ConfigLoaderClass,
     private userService: userService,
-    private filterForm: group.filter,
-    private editForm: edit,
-    private editSeveralForm: editSeveral,
-    private addForm: add,
-    private alert: alertService,
     private asset: AssetService,
     public filters: GroupFiltersClass
   ) {}
 
   get _gLoading() {
     return this.gLoader.loading;
+  }
+
+  get _cLoading() {
+    return this.cLoader.loading;
   }
 
   get _groups() {
@@ -75,29 +68,13 @@ export class GroupsComponent implements OnInit {
   }
 
   getConfigs() {
-    // this.loading = true;
-
-    this.configService
-      .get('all')
-      .then((res) => {
-        if (res) {
-          this.configs = res;
-          this.configs.forEach((c) => {
-            this.configsNV.push({ name: c.name, value: c.ID });
-          });
-        }
-      })
-      .catch((err) => {
-        this.alert.show({
-          title: 'GET CONFIGS ERROR',
-          content: err.error,
-        });
-      })
-      .finally(() => {
-        timer(500).subscribe(() => {
-          // this.loading = false;
-        });
-      });
+    this.config.get('all').then((res) => {
+      if (res) {
+        this.config.array.forEach((c) =>
+          this.configsNV.push({ name: c.name, value: c.ID })
+        );
+      }
+    });
   }
 
   onChangeSearchInputHandler(value: string) {

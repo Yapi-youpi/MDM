@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, timer } from 'rxjs';
+import { timer } from 'rxjs';
 
 import { userService } from '../../../shared/services';
 import { AppLoaderClass } from '../../../shared/classes/apps/app-loader.class';
@@ -13,8 +13,6 @@ import { AssetService } from '../../../shared/services/asset.service';
 })
 export class AppsComponent {
   public title = 'Приложения';
-
-  public userRole: string = '';
 
   public searchParam: string = '';
 
@@ -38,15 +36,7 @@ export class AppsComponent {
   }
 
   ngOnInit() {
-    const i = interval(1000).subscribe(() => {
-      if (this.user.token) {
-        i.unsubscribe();
-        this.apps.get('all').then();
-        this.asset.getFromStorage('user-role').then((role: string) => {
-          this.userRole = role;
-        });
-      }
-    });
+    this.apps.get('all').then();
   }
 
   onChangeSearchInputHandler(value: string) {

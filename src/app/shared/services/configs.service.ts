@@ -158,12 +158,12 @@ export class ConfigsService {
   //   });
   // }
 
-  uploadWallpaper(id: string, wallpaper: string) {
+  uploadWallpaper(cID: string, wallBase64: string) {
     return new Promise<boolean>((resolve) => {
       this.http
         .post<IState>(environment.url + api.UPLOAD_WP, {
-          id,
-          wallpaper,
+          id: cID,
+          wallpaper: wallBase64,
         })
         .subscribe({
           next: (res) => {
@@ -187,11 +187,11 @@ export class ConfigsService {
     });
   }
 
-  removeWallpaper(id: string) {
+  removeWallpaper(cID: string) {
     return new Promise<boolean>((resolve) => {
       this.http
         .post<IState>(environment.url + api.REMOVE_WP, {
-          id,
+          id: cID,
         })
         .subscribe({
           next: (res) => {

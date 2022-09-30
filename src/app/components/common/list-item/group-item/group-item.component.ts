@@ -1,11 +1,11 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 import { IGroup } from '../../../../shared/types/groups';
-import { IConfig } from '../../../../shared/types/config';
-import { Option } from '../../../../shared/types/input';
+import { IOption } from '../../../../shared/types/input';
 import { GroupSelectedClass } from '../../../../shared/classes/groups/group-selected.class';
 import { GroupClass } from '../../../../shared/classes/groups/group.class';
 import { edit } from '../../../../shared/services/forms/group';
+import { ConfigClass } from '../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-group-item',
@@ -14,19 +14,23 @@ import { edit } from '../../../../shared/services/forms/group';
 })
 export class GroupItemComponent {
   @Input() group!: IGroup;
-  @Input() configs!: IConfig[];
   @Input() userRole!: string;
 
   @ViewChild('name') nameRef!: ElementRef;
   @ViewChild('tip') tipRef!: ElementRef;
 
-  public currOption: Option = { value: '', html: '' };
+  public currOption: IOption = { value: '', html: '' };
 
   constructor(
     private selection: GroupSelectedClass,
     private groups: GroupClass,
-    private form: edit
+    private form: edit,
+    private config: ConfigClass
   ) {}
+
+  get _configs() {
+    return this.config.array;
+  }
 
   displayTip() {
     if (
@@ -43,22 +47,22 @@ export class GroupItemComponent {
   }
 
   get _options() {
-    return this.configs.map((c) => {
+    return this._configs.map((c) => {
       return {
         value: c.ID,
         html: c.name,
-      } as Option;
+      } as IOption;
     });
   }
 
   get _currOption() {
     return {
       value: this.group.deviceConfigID,
-      html: this.configs.find((c) => c.ID === this.group.deviceConfigID)?.name,
-    } as Option;
+      html: this._configs.find((c) => c.ID === this.group.deviceConfigID)?.name,
+    } as IOption;
   }
 
-  onSelectHandler(item: Option) {
+  onSelectHandler(item: IOption) {
     this.currOption = item;
   }
 

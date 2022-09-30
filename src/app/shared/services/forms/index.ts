@@ -4,3 +4,4 @@ export * as app from './app';
 export * as group from './group';
 export * as files from './file';
 export * as messages from './messages';
+export * as configs from './configs';
