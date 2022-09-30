@@ -1,7 +1,7 @@
 <app-modal [modalID]="'modal-add-message'" [isClosable]="true">
   <div class="modal-form w-700">
     <h4 class="modal-title">Новое сообщение</h4>
-    <form [formGroup]="newMsgForm" class="form">
+    <form [formGroup]="_form" class="form">
       <div class="form__item">
         <label for="dst">Отправить на</label>
         <select class="select-native w-440" formControlName="dst" id="dst">
@@ -11,7 +11,7 @@
         </select>
       </div>
 
-      <ng-container *ngIf="newMsgForm.get('dst')?.value === 'group'">
+      <ng-container *ngIf="_dst?.value === 'group'">
         <div class="form__item">
           <label for="target">Группа</label>
           <select
@@ -19,19 +19,19 @@
             formControlName="target"
             id="target"
           >
-            <option value="{{ group.id }}" *ngFor="let group of groups">
+            <option value="{{ group.id }}" *ngFor="let group of _groups">
               {{ group.name }}
             </option>
           </select>
         </div>
       </ng-container>
-      <ng-container *ngIf="newMsgForm.get('dst')?.value === 'device'">
+      <ng-container *ngIf="_dst?.value === 'device'">
         <div class="form__item">
           <label>Устройство</label>
           <select class="select-native w-440" formControlName="target">
             <option
+              *ngFor="let device of _devices"
               value="{{ device.device_id }}"
-              *ngFor="let device of devices"
             >
               {{ device.name }}
             </option>

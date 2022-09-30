@@ -1,71 +1,59 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  deviceService,
-  userService,
-  pagerService,
-  groupService,
-  alertService,
-} from '../../../../../shared/services';
-import * as states from '../../../../../shared/types/states';
-import { IDevice } from '../../../../../shared/types/devices';
-import { IGroup } from '../../../../../shared/types/groups';
+import { Component } from '@angular/core';
+import { userService } from '../../../../../shared/services';
+import { PagerClass } from '../../../../../shared/classes/pager/pager.class';
+import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import { addMessages } from '../../../../../shared/services/forms/messages';
 
 @Component({
   selector: 'app-add-message',
   templateUrl: './add-message.component.html',
   styleUrls: ['./add-message.component.scss'],
 })
-export class AddMessageComponent implements OnInit {
-  public newMsgForm: FormGroup;
-  @Input() public devices: IDevice[] = [];
-  @Input() public groups: IGroup[] = [];
-
-  @Output() onSend = new EventEmitter<boolean>();
-
+export class AddMessageComponent {
   constructor(
     private user: userService,
-    private pager: pagerService,
-    private alert: alertService
-  ) {
-    this.newMsgForm = new FormGroup({
-      dst: new FormControl('', Validators.required),
-      target: new FormControl('', Validators.required),
-      text: new FormControl('', Validators.required),
-    });
+    private pager: PagerClass,
+    private device: DeviceClass,
+    private group: GroupClass,
+    private form: addMessages
+  ) {}
+
+  get _form() {
+    return this.form.form;
   }
 
-  ngOnInit() {}
+  get _dst() {
+    return this._form.get('dst');
+  }
+
+  get _devices() {
+    return this.device.array;
+  }
+
+  get _groups() {
+    return this.group.array;
+  }
 
   sendMessage() {
-    this.pager
-      .sendMessage(
-        this.newMsgForm.value.target,
-        this.newMsgForm.value.text,
-        this.newMsgForm.value.dst
-      )
-      .then((res) => {
-        console.log(res);
-        this.alert.show({
-          type: 'success',
-          title: 'УСПЕШНО',
-          content: 'Сообщение отправлено',
+    if (this.form.values) {
+      this.pager
+        .send(
+          this.form.values.target,
+          this.form.values.text,
+          this.form.values.dst
+        )
+        .then((res) => {
+          if (res) {
+            this.pager.get().then();
+            this.closeModal();
+          }
         });
-        this.onSend.emit(true);
-        this.closeModal();
-      })
-      .catch((err) => {
-        console.log(err);
-        this.alert.show({
-          title: 'ОШИБКА',
-          content: err,
-        });
-      });
-    console.log(this.newMsgForm.value);
+    }
   }
 
   closeModal() {
-    this.newMsgForm.reset();
-    document.getElementById('modal-add-message')?.classList.add('hidden');
+    const modal = document.querySelector('#modal-add-message');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

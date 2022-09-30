@@ -44,3 +44,8 @@ export enum filePaths {
   DEVICE_FILE = 'device_file',
   GROUP_FILE = 'group_file',
 }
+
+export enum messagesPaths {
+  GET = '/pager/get_messages',
+  SEND = '/pager/send_to/',
+}

@@ -1,43 +1,75 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Message } from '../types/message';
+import { IMessage } from '../types/message';
+import { alertService } from './index';
+import { IState } from '../types/states';
+import { messagesPaths as api } from '../enums/api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PagerService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private alert: alertService) {}
 
-  sendMessage(id: string, message: string, param: string) {
-    const url = environment.url + '/pager/send_to/' + param;
-    const body = {
-      id,
-      message,
-    };
-    return new Promise<boolean>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res: { success: boolean; error: string } | any) => {
-          resolve(res.success);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  get() {
+    return new Promise<IMessage[] | null>((resolve) => {
+      this.http
+        .get<{ messages: IMessage[] | null }>(environment.url + api.GET)
+        .subscribe({
+          next: (res) => {
+            if (res) resolve(res.messages);
+            else {
+              this.alert.show({
+                title: 'Ошибка получения сообщений',
+                content: '',
+              });
+              resolve(null);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(null);
+          },
+        });
     });
   }
 
-  getMessages() {
-    const url = environment.url + '/pager/get_messages';
-    return new Promise<Message[]>((resolve, reject) => {
-      this.http.get(url).subscribe({
-        next: (res: { messages: Message[] } | any) => {
-          resolve(res.messages);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  send(id: string, message: string, param: string) {
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post<IState>(environment.url + api.SEND + param, {
+          id,
+          message,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.alert.show({
+                type: 'success',
+                title: 'УСПЕШНО',
+                content: 'Сообщение отправлено',
+              });
+              resolve(true);
+            } else {
+              this.alert.show({
+                title: 'Ошибка отправки сообщения',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
+          },
+        });
     });
   }
 }

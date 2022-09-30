@@ -1,8 +1,8 @@
 import { IDevice } from './devices';
-import { IConfig } from './config';
 import { IGroup } from './groups';
 import { IApp } from './apps';
 import { IFile } from './files';
+import { IMessage } from './message';
 
 export interface IState {
   success: boolean;
@@ -41,4 +41,8 @@ export interface IAppsState extends IState {
 
 export interface IFileState extends IState {
   file: IFile;
+}
+
+export interface IMessagesState extends IState {
+  messages: IMessage[];
 }
