@@ -15,14 +15,6 @@ export class AuthService {
     });
   }
 
-  get _login() {
-    return this.form.getRawValue()['login'];
-  }
-
-  get _pass() {
-    return this.form.getRawValue()['password'];
-  }
-
   setSubmitted() {
     this.isSubmitted = true;
   }

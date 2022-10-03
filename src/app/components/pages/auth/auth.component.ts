@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {
-  assetService,
-  authService,
-  databaseService,
-  formService,
-  userService,
-} from '../../../shared/services';
+import { authService } from '../../../shared/services';
+import { auth } from '../../../shared/services/forms/user';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
@@ -19,19 +14,16 @@ export class AuthComponent {
   constructor(
     private auth: authService,
     private router: Router,
-    public user: userService,
-    public asset: assetService,
-    private db: databaseService,
-    public logForm: formService.user.auth,
+    public form: auth,
     private myUser: MyUserClass
   ) {}
 
   get _form() {
-    return this.logForm.form;
+    return this.form.form;
   }
 
   get _isSubmitted() {
-    return this.logForm.isSubmitted;
+    return this.form.isSubmitted;
   }
 
   get _login() {
@@ -43,48 +35,23 @@ export class AuthComponent {
   }
 
   login() {
-    this.logForm.setSubmitted();
+    this.form.setSubmitted();
 
     if (this._form.invalid) {
       return;
     } else {
-      this.auth.signIn(this.logForm._login, this.logForm._pass).then((res) => {
-        if (res) {
-          this.asset.setToStorage('token', res.token).then();
-          this.asset.setToStorage('id', res.id).then();
-          this.asset.setToStorage('login', this.logForm._login).then();
-          this.asset.setToStorage('last_password', this.logForm._pass).then();
-
-          this.myUser.token = res.token;
-          this.myUser.login = this.logForm._login;
-
-          this.router.navigateByUrl('devices').then(() => {
-            // if (res.error === 'change super admin password') {
-            //   // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
-            // }
+      if (this._form.value)
+        this.myUser
+          .signIn(
+            this._form.value.login.trim(),
+            this._form.value.password.trim()
+          )
+          .then((res) => {
+            if (res) {
+              this.form.resetForm();
+              this.form.resetSubmitted();
+            }
           });
-
-          this.db
-            .signup(this.myUser.login, this.logForm._pass)
-            .then((res) => {
-              console.log(res, 'Log In res');
-              this.logForm.resetForm();
-              this.logForm.resetSubmitted();
-            })
-            .catch((err) => {
-              if (err === 400) {
-                this.db
-                  .logIN(this.logForm._login, this.logForm._pass)
-                  .then((res) => {
-                    console.log(res, 'Log In res');
-                  })
-                  .catch((err) => {
-                    console.log(err, 'Log In err');
-                  });
-              }
-            });
-        }
-      });
 
       // forbidden for not super users :((
       // I wanted to get permissions and set them automatically on components and interactive elements

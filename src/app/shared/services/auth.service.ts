@@ -12,12 +12,11 @@ export class AuthService {
   constructor(private http: HttpClient, private alert: alertService) {}
 
   signIn(login: string, password: string) {
-    // const url = environment.url + '/login';
     return new Promise<{ id: string; token: string } | null>((resolve) => {
       this.http
         .post<IUserState>(environment.url + api.SING_IN, {
-          login: login.trim(),
-          password: password.trim(),
+          login: login,
+          password: password,
         })
         .subscribe({
           next: (res) => {
@@ -42,7 +41,6 @@ export class AuthService {
   }
 
   signOut(token: string, login: string) {
-    // const url = environment.url + '/logout';
     const body = {};
     return new Promise<boolean>((resolve) => {
       this.http

@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { assetService, authService, userService } from '../../services';
+import {
+  assetService,
+  authService,
+  databaseService,
+  userService,
+} from '../../services';
 import { UsersLoaderClass } from './users-loader.class';
 import { IUser } from '../../types/users';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +24,9 @@ export class MyUserClass {
     private asset: assetService,
     private loader: UsersLoaderClass,
     private service: userService,
-    private auth: authService
+    private auth: authService,
+    private db: databaseService,
+    private router: Router
   ) {
     this.asset.getFromStorage('token').then((token: string) => {
       this.token = token;
@@ -51,6 +59,54 @@ export class MyUserClass {
           } else {
             this.asset.setToStorage('user-role', '').then();
             resolve(false);
+          }
+        })
+        .finally(() => this.loader.end());
+    });
+  }
+
+  signIn(login: string, password: string) {
+    return new Promise<boolean>((resolve) => {
+      this.loader.start();
+
+      this.auth
+        .signIn(login, password)
+        .then((res) => {
+          if (res) {
+            this.asset.setToStorage('token', res.token).then();
+            this.asset.setToStorage('id', res.id).then();
+            this.asset.setToStorage('login', login).then();
+            this.asset.setToStorage('last_password', password).then();
+
+            this.token = res.token;
+            this.login = login;
+
+            this.router.navigateByUrl('devices').then(() => {
+              //   // if (res.error === 'change super admin password') {
+              //   //   // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
+              //   // }
+            });
+
+            this.db
+              .signUp(login, password)
+              .then((res) => {
+                console.log(res, 'Log In res');
+                resolve(true);
+              })
+              .catch((err) => {
+                if (err === 400) {
+                  this.db
+                    .logIN(login, password)
+                    .then((res) => {
+                      console.log(res, 'Log In res');
+                      resolve(true);
+                    })
+                    .catch((err) => {
+                      console.log(err, 'Log In err');
+                      resolve(false);
+                    });
+                }
+              });
           }
         })
         .finally(() => this.loader.end());
