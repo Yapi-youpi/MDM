@@ -64,3 +64,8 @@ export enum usersPaths {
   GET_PERMISSIONS = '/super/get_all_permissions',
   EDIT_PERMISSIONS = '/super/edit_permissions',
 }
+
+export enum authPaths {
+  SING_IN = '/login',
+  SING_OUT = '/logout',
+}

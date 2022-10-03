@@ -1,48 +1,74 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { authPaths as api } from '../enums/api';
+import { IState, IUserState } from '../types/states';
+import { alertService } from './index';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private alert: alertService) {}
 
-  login(login: string, password: string) {
-    const url = environment.url + '/login';
-    const body = {
-      login: login.trim(),
-      password: password.trim(),
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (error) => {
-          reject(error);
-        },
-      });
+  signIn(login: string, password: string) {
+    // const url = environment.url + '/login';
+    return new Promise<{ id: string; token: string } | null>((resolve) => {
+      this.http
+        .post<IUserState>(environment.url + api.SING_IN, {
+          login: login.trim(),
+          password: password.trim(),
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) resolve({ id: res.id, token: res.token });
+            else {
+              this.alert.show({
+                title: 'Ошибка авторизации',
+                content: res.error,
+              });
+              resolve(null);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(null);
+          },
+        });
     });
   }
 
-  logout(token: string, login: string) {
-    const url = environment.url + '/logout';
+  signOut(token: string, login: string) {
+    // const url = environment.url + '/logout';
     const body = {};
-    return new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve) => {
       this.http
-        .post(url, body, {
+        .post<IState>(environment.url + api.SING_OUT, body, {
           headers: {
             MDMToken: token,
             MDMLogin: login,
           },
         })
         .subscribe({
-          next: (res: { success: boolean; error: string } | any) => {
-            resolve(res.success);
+          next: (res) => {
+            if (res.success) resolve(true);
+            else {
+              this.alert.show({
+                title: 'Ошибка выхода из системы',
+                content: res.error,
+              });
+              resolve(false);
+            }
           },
-          error: (error) => {
-            reject(error);
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
           },
         });
     });

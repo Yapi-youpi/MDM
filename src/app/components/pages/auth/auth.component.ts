@@ -8,8 +8,6 @@ import {
   formService,
   userService,
 } from '../../../shared/services';
-
-import { IUserState } from '../../../shared/types/states';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
@@ -50,9 +48,8 @@ export class AuthComponent {
     if (this._form.invalid) {
       return;
     } else {
-      this.auth
-        .login(this.logForm._login, this.logForm._pass)
-        .then((res: IUserState) => {
+      this.auth.signIn(this.logForm._login, this.logForm._pass).then((res) => {
+        if (res) {
           this.asset.setToStorage('token', res.token).then();
           this.asset.setToStorage('id', res.id).then();
           this.asset.setToStorage('login', this.logForm._login).then();
@@ -62,9 +59,9 @@ export class AuthComponent {
           this.myUser.login = this.logForm._login;
 
           this.router.navigateByUrl('devices').then(() => {
-            if (res.error === 'change super admin password') {
-              // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
-            }
+            // if (res.error === 'change super admin password') {
+            //   // !!! СМЕНИТЬ ПАРОЛЬ СУПЕРПОЛЬЗОВАТЕЛЮ !!!
+            // }
           });
 
           this.db
@@ -86,10 +83,8 @@ export class AuthComponent {
                   });
               }
             });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        }
+      });
 
       // forbidden for not super users :((
       // I wanted to get permissions and set them automatically on components and interactive elements

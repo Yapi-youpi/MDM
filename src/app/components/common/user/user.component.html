@@ -1,6 +1,6 @@
 <div class="user-popup-container">
   <div class="user-popup">
-    <div class="popup-btn-wrapper" [class.no-img]="currentUser?.avatar === ''">
+    <div class="popup-btn-wrapper" [class.no-img]="_me?.avatar === ''">
       <app-button
         title="Окно пользователя"
         [height]="'30px'"
@@ -10,13 +10,13 @@
         [color]="'blue'"
         (onCLick)="togglePopup()"
       >
-        <span *ngIf="currentUser?.avatar === ''" class="icon icon-user"></span>
+        <span *ngIf="_me?.avatar === ''" class="icon icon-user"></span>
         <span
           class="avatar--small"
-          *ngIf="currentUser?.avatar !== ''"
+          *ngIf="_me?.avatar !== ''"
           [style.background-image]="
-            currentUser?.avatar !== ''
-              ? 'url(data:image/jpeg;base64,' + currentUser?.avatar + ')'
+            _me?.avatar !== ''
+              ? 'url(data:image/jpeg;base64,' + _me?.avatar + ')'
               : 'none'
           "
         ></span>
@@ -28,16 +28,16 @@
           <div
             class="avatar"
             [style.background-image]="
-              currentUser?.avatar !== ''
-                ? 'url(data:image/jpeg;base64,' + currentUser?.avatar + ')'
+              _me?.avatar !== ''
+                ? 'url(data:image/jpeg;base64,' + _me?.avatar + ')'
                 : 'none'
             "
           >
-            <span *ngIf="currentUser?.avatar === ''" class="icon"></span>
+            <span *ngIf="_me?.avatar === ''" class="icon"></span>
           </div>
           <div class="info">
-            <p class="name text-menu-title">{{ currentUser?.name }}</p>
-            <p class="company">{{ currentUser?.userTags }}</p>
+            <p class="name text-menu-title">{{ _me?.name }}</p>
+            <p class="company">{{ _me?.userTags }}</p>
           </div>
         </div>
         <div class="top-right" *ngIf="router.url !== '/users'">
@@ -45,7 +45,7 @@
             title="Редактировать данные"
             [target]="'modal-new-user'"
             [bg]="'blue'"
-            *ngIf="currentUser"
+            *ngIf="_me"
           >
             <span class="icon icon-edit"></span>
           </app-card-menu-btn>
@@ -72,7 +72,7 @@
 
 <app-add-user
   *ngIf="router.url !== '/users'"
-  [currentUser]="currentUser"
+  [currentUser]="_me"
   (onClose)="setUser($event)"
 >
 </app-add-user>
