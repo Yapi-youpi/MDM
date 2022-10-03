@@ -49,3 +49,18 @@ export enum messagesPaths {
   GET = '/pager/get_messages',
   SEND = '/pager/send_to/',
 }
+
+export enum usersPaths {
+  CHANGE_MY_PASS = '/change_password',
+  CHANGE_PASS = '/change_user_password',
+  DELETE = '/delete_user',
+  GET = '/get_user/',
+  SIGN_UP = '/register',
+  RENAME = '/rename_user',
+  LOAD_AVATAR = '/load_avatar',
+  EDIT_TAG = '/edit_user_tag',
+  DELETE_TAG = '/delete_tag',
+  GET_TAGS = '/get_user_tags',
+  GET_PERMISSIONS = '/super/get_all_permissions',
+  EDIT_PERMISSIONS = '/super/edit_permissions',
+}

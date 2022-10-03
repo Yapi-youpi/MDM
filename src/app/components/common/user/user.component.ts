@@ -6,6 +6,7 @@ import {
   userService,
 } from '../../../shared/services';
 import { IUser } from '../../../shared/types/users';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-user',
@@ -22,7 +23,8 @@ export class UserComponent implements OnInit {
     private auth: authService,
     public user: userService,
     public router: Router,
-    public asset: assetService
+    public asset: assetService,
+    private myUser: MyUserClass
   ) {}
 
   @HostListener('document:mousedown', ['$event'])
@@ -46,7 +48,7 @@ export class UserComponent implements OnInit {
 
   getUser() {
     this.user
-      .getUserInfo(this.id, 'uid')
+      .get(this.id, 'uid')
       .then((res) => {
         this.currentUser = res[0];
         this.asset.setToStorage('user-role', res[0].role).then();
@@ -66,10 +68,10 @@ export class UserComponent implements OnInit {
 
   logout() {
     this.auth
-      .logout(this.user.token, this.user.login)
+      .logout(this.myUser.token, this.myUser.login)
       .then((res) => {
         if (res) {
-          this.user.token = '';
+          this.myUser.token = '';
           this.router.navigateByUrl('auth').then();
           this.asset.removeFromStorage('id').then();
           this.asset.removeFromStorage('token').then();

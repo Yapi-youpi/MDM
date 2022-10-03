@@ -10,6 +10,7 @@ import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.cl
 import { GroupSelectedClass } from '../../../shared/classes/groups/group-selected.class';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
 import { ConfigLoaderClass } from '../../../shared/classes/configs/config-loader.class';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-group',
@@ -41,7 +42,8 @@ export class GroupsComponent implements OnInit {
     private cLoader: ConfigLoaderClass,
     private userService: userService,
     private asset: AssetService,
-    public filters: GroupFiltersClass
+    public filters: GroupFiltersClass,
+    private myUser: MyUserClass
   ) {}
 
   get _gLoading() {
@@ -57,13 +59,15 @@ export class GroupsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const i = interval(200).subscribe(() => {
-      this.group.get('all').then();
-      this.getConfigs();
-      this.asset.getFromStorage('user-role').then((role: string) => {
-        this.userRole = role;
-      });
-      i.unsubscribe();
+    const i = interval(1000).subscribe(() => {
+      if (this.myUser.token) {
+        this.group.get('all').then();
+        this.getConfigs();
+        this.asset.getFromStorage('user-role').then((role: string) => {
+          this.userRole = role;
+        });
+        i.unsubscribe();
+      }
     });
   }
 

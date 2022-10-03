@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
 
   getAllUsers() {
     this.userService
-      .getUserInfo(undefined, 'all')
+      .get(undefined, 'all')
       .then((res) => {
         console.log(res);
         this.users = res;

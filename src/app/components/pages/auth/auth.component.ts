@@ -10,6 +10,7 @@ import {
 } from '../../../shared/services';
 
 import { IUserState } from '../../../shared/types/states';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +24,8 @@ export class AuthComponent {
     public user: userService,
     public asset: assetService,
     private db: databaseService,
-    public logForm: formService.user.auth
+    public logForm: formService.user.auth,
+    private myUser: MyUserClass
   ) {}
 
   get _form() {
@@ -56,8 +58,8 @@ export class AuthComponent {
           this.asset.setToStorage('login', this.logForm._login).then();
           this.asset.setToStorage('last_password', this.logForm._pass).then();
 
-          this.user.token = res.token;
-          this.user.login = this.logForm._login;
+          this.myUser.token = res.token;
+          this.myUser.login = this.logForm._login;
 
           this.router.navigateByUrl('devices').then(() => {
             if (res.error === 'change super admin password') {
@@ -66,7 +68,7 @@ export class AuthComponent {
           });
 
           this.db
-            .signup(this.user.login, this.logForm._pass)
+            .signup(this.myUser.login, this.logForm._pass)
             .then((res) => {
               console.log(res, 'Log In res');
               this.logForm.resetForm();

@@ -15,6 +15,7 @@ import { IDevice } from '../../../shared/types/devices';
 import { UserService } from '../../../shared/services/user.service';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 interface DeviceGeo {
   device: IDevice;
@@ -62,7 +63,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     private group: GroupClass,
     private db: DatabaseService,
     private config: ConfigClass,
-    protected user: UserService
+    protected user: UserService,
+    private myUser: MyUserClass
   ) {}
 
   get _groups() {
@@ -81,7 +83,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     let t = interval(200).subscribe(() => {
-      if (this.user.token) {
+      if (this.myUser.token) {
         t.unsubscribe();
         this.group
           .get('all')

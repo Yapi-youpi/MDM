@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { timer } from 'rxjs';
+import { interval, timer } from 'rxjs';
 
 import { userService } from '../../../shared/services';
 import { AppLoaderClass } from '../../../shared/classes/apps/app-loader.class';
 import { AppClass } from '../../../shared/classes/apps/app.class';
 import { AssetService } from '../../../shared/services/asset.service';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-apps',
@@ -24,7 +25,8 @@ export class AppsComponent {
     private user: userService,
     private asset: AssetService,
     private loader: AppLoaderClass,
-    private apps: AppClass
+    private apps: AppClass,
+    private myUser: MyUserClass
   ) {}
 
   get _loading() {
@@ -36,7 +38,12 @@ export class AppsComponent {
   }
 
   ngOnInit() {
-    this.apps.get('all').then();
+    const i = interval(1000).subscribe(() => {
+      if (this.myUser.token) {
+        this.apps.get('all').then();
+        i.unsubscribe();
+      }
+    });
   }
 
   onChangeSearchInputHandler(value: string) {

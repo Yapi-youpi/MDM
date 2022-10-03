@@ -11,6 +11,7 @@ import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.cl
 import { DeviceSelectedClass } from '../../../shared/classes/devices/device-selected.class';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
 import { ConfigLoaderClass } from '../../../shared/classes/configs/config-loader.class';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-devices',
@@ -44,7 +45,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private cLoader: ConfigLoaderClass,
     private subDevice: DeviceSubscriptionClass,
     public filters: DeviceFiltersClass,
-    private asset: AssetService
+    private asset: AssetService,
+    private myUser: MyUserClass
   ) {}
 
   get _cLoading() {
@@ -69,7 +71,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const i = interval(1000).subscribe(() => {
-      if (this.user.token) {
+      if (this.myUser.token) {
         i.unsubscribe();
         this.groups.get('all').then();
         this.config.get('all').then();

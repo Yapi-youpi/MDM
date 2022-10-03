@@ -10,6 +10,7 @@ import { DeviceLoaderClass } from '../../../shared/classes/devices/device-loader
 import { PagerLoaderClass } from '../../../shared/classes/pager/pager-loader.class';
 import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.class';
 import { PagerFiltersClass } from '../../../shared/classes/pager/pager-filters.class';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -35,7 +36,8 @@ export class MessagesComponent implements OnInit {
     private pLoader: PagerLoaderClass,
     private group: GroupClass,
     private gLoader: GroupLoaderClass,
-    public filters: PagerFiltersClass
+    public filters: PagerFiltersClass,
+    private myUser: MyUserClass
   ) {}
 
   get _dLoading() {
@@ -62,7 +64,7 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     const i = interval(300).subscribe(() => {
-      if (this.user.token) {
+      if (this.myUser.token) {
         i.unsubscribe();
         this.device.get('all').then();
         this.group.get('all').then();

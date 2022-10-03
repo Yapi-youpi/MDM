@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AssetService } from '../../../shared/services/asset.service';
 import { IConfig } from '../../../shared/types/config';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-configs',
@@ -13,7 +15,11 @@ export class ConfigsComponent implements OnInit {
 
   public search = '';
 
-  constructor(public asset: AssetService, private config: ConfigClass) {}
+  constructor(
+    public asset: AssetService,
+    private config: ConfigClass,
+    private myUser: MyUserClass
+  ) {}
 
   get _configs() {
     return this.config.array;
@@ -24,8 +30,13 @@ export class ConfigsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.config.get('default').then();
-    this.config.get('all').then();
+    const i = interval(1000).subscribe(() => {
+      if (this.myUser.token) {
+        this.config.get('default').then();
+        this.config.get('all').then();
+        i.unsubscribe();
+      }
+    });
   }
 
   setCurrentConfig(config: IConfig) {

@@ -30,7 +30,7 @@ export class FilterUserComponent implements OnInit {
 
   getUserTags() {
     this.user
-      .getUserTags()
+      .getTags()
       .then((res) => {
         console.log(res);
         this.userTags = res.userTags;
@@ -42,7 +42,7 @@ export class FilterUserComponent implements OnInit {
 
   deleteUserTag(tag: string) {
     this.user
-      .deleteUserTag(tag)
+      .deleteTag(tag)
       .then((res) => {
         console.log(res);
       })

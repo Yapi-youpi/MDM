@@ -13,6 +13,7 @@ import { AssetService } from '../../../../../shared/services/asset.service';
 import { alertService } from '../../../../../shared/services';
 import { IUser } from '../../../../../shared/types/users';
 import { add } from '../../../../../shared/services/forms/user';
+import { MyUserClass } from '../../../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-add-user',
@@ -41,7 +42,8 @@ export class AddUserComponent implements OnInit {
     private alert: alertService,
     private elementRef: ElementRef,
     private userService: UserService,
-    private form: add
+    private form: add,
+    private myUser: MyUserClass
   ) {}
 
   get _form() {
@@ -64,7 +66,7 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     let i = interval(200).subscribe(() => {
-      if (this.userService.token) {
+      if (this.myUser.token) {
         this.asset.getFromStorage('login').then((login) => {
           this.userLogin = login;
           if (this.currentUser?.login === this.userLogin)
@@ -83,7 +85,7 @@ export class AddUserComponent implements OnInit {
 
   getUserTags() {
     this.userService
-      .getUserTags()
+      .getTags()
       .then((res) => {
         this.userTags = res.userTags;
       })
@@ -104,7 +106,7 @@ export class AddUserComponent implements OnInit {
           ? [this.form.values.other]
           : [this.form.values.userTags];
       this.userService
-        .addUser(avatar, login, password, name, role, group)
+        .add(avatar, login, password, name, role, group)
         .then(() => {
           this.clearModal(true);
           this.showAlert('Пользователь добавлен');
@@ -140,7 +142,7 @@ export class AddUserComponent implements OnInit {
         if (this.isEditSelf) {
           const lastPassword = this.form.values.oldPassword;
           this.userService
-            .changePassword(lastPassword, password)
+            .changeMyPassword(this.myUser.login, lastPassword, password)
             .then(() => {
               document.getElementById('old-pass')?.removeAttribute('style');
               this.clearModal(true);
@@ -170,7 +172,7 @@ export class AddUserComponent implements OnInit {
 
       if (avatar && avatar?.length > 0) {
         this.userService
-          .loadAvatar(this.currentUser!.id, avatar)
+          .uploadAvatar(this.currentUser!.id, avatar)
           .then((res) => {
             this.currentUser = undefined;
             this.clearModal(true);
@@ -183,7 +185,7 @@ export class AddUserComponent implements OnInit {
 
       if (group[0][0] !== this.currentUser?.userTags[0]) {
         this.userService
-          .changeUserTag(this.currentUser!.id, group)
+          .changeTag(this.currentUser!.id, group)
           .then((res) => {
             console.log(res);
             this.currentUser = undefined;
@@ -197,7 +199,7 @@ export class AddUserComponent implements OnInit {
 
       if (name !== this.currentUser!.name) {
         this.userService
-          .renameUSer(login, name)
+          .rename(login, name)
           .then((res) => {
             this.currentUser = undefined;
             this.clearModal(true);

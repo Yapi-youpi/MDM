@@ -15,7 +15,7 @@ export class DeleteUserComponent implements OnInit {
 
   deleteUser(id: string) {
     this.userService
-      .deleteUser(id)
+      .delete(id)
       .then((res) => {
         console.log(res);
         this.closeModal(true);
