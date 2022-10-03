@@ -1,14 +1,20 @@
-export interface Users {
+export interface IUser {
+  avatar: string;
   activeState: boolean;
   id: string;
   login: string;
   name: string;
   role: string;
   userTags: string[];
-  groupsPermissions: GroupPermissions;
+  groupsPermissions: IGroupPermissions;
 }
-
-export interface GroupPermissions {
+export interface IRoles {
+  [key: string]: { text: string; color: string };
+}
+export interface IPermissions {
+  [key: string]: string;
+}
+export interface IGroupPermissions {
   applicationsAdd: boolean;
   changeOperatorPassword: boolean;
   changeSelfPassword: boolean;

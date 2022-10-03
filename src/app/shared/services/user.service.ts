@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { GroupPermissions, Users } from '../../interfaces/interfaces';
 import { assetService } from './index';
+import { IGroupPermissions, IUser } from '../types/users';
 
 @Injectable({
   providedIn: 'root',
@@ -108,10 +108,10 @@ export class UserService {
       param = id;
     }
     const url = environment.url + `/get_user/${param}${id}`;
-    return new Promise<Users[]>((resolve, reject) => {
+    return new Promise<IUser[]>((resolve, reject) => {
       this.http.get(url).subscribe({
         next: (
-          res: { users: Users[]; success: boolean; error: string } | any
+          res: { users: IUser[]; success: boolean; error: string } | any
         ) => {
           resolve(res.users);
         },
@@ -236,12 +236,12 @@ export class UserService {
 
   getPermissions() {
     const url = environment.url + '/super/get_all_permissions';
-    return new Promise<GroupPermissions[]>((resolve, reject) => {
+    return new Promise<IGroupPermissions[]>((resolve, reject) => {
       this.http.get(url).subscribe({
         next: (
           res:
             | {
-                permissions: GroupPermissions[];
+                permissions: IGroupPermissions[];
                 success: boolean;
                 error: string;
               }

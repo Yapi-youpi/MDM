@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Permissions } from '../../../interfaces/interfaces';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
 import { IApp } from '../../../shared/types/apps';
@@ -12,6 +11,7 @@ import { AppSelectedClass } from '../../../shared/classes/apps/app-selected.clas
 import { IConfig } from '../../../shared/types/config';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
 import { edit } from '../../../shared/services/forms/configs';
+import { IPermissions } from '../../../shared/types/users';
 
 @Component({
   selector: 'app-configuration',
@@ -22,7 +22,7 @@ export class ConfigurationComponent implements OnInit {
   public title = 'Конфигурации / ';
   public config!: IConfig;
   // public restrictions: string[] = [];
-  public restrictionList: Permissions;
+  public restrictionList: IPermissions;
   public isModalAddAppOpen = false;
   public manageBrightness = false;
   public file_input!: any;

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Users } from '../../../../../interfaces/interfaces';
 import { UserService } from '../../../../../shared/services/user.service';
+import { IUser } from '../../../../../shared/types/users';
 
 @Component({
   selector: 'app-delete-user',
@@ -8,7 +8,7 @@ import { UserService } from '../../../../../shared/services/user.service';
   styleUrls: ['./delete-user.component.scss'],
 })
 export class DeleteUserComponent implements OnInit {
-  @Input() currentUser: Users | undefined;
+  @Input() currentUser: IUser | undefined;
   constructor(private userService: UserService) {}
   @Output() onClose = new EventEmitter<boolean>();
   ngOnInit(): void {}

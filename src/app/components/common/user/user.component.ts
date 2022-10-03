@@ -5,7 +5,7 @@ import {
   authService,
   userService,
 } from '../../../shared/services';
-import { Users } from 'src/app/interfaces/interfaces';
+import { IUser } from '../../../shared/types/users';
 
 @Component({
   selector: 'app-user',
@@ -14,7 +14,7 @@ import { Users } from 'src/app/interfaces/interfaces';
 })
 export class UserComponent implements OnInit {
   private id: string = '';
-  public currentUser!: Users;
+  public currentUser!: IUser;
   public isPopupOpen: boolean = false;
 
   constructor(

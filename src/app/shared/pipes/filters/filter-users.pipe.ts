@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Users } from '../../../interfaces/interfaces';
+import { IUser } from '../../types/users';
 
 @Pipe({
   name: 'filterUsers',
 })
 export class FilterUsersPipe implements PipeTransform {
   transform(
-    users: Users[],
+    users: IUser[],
     roles: Array<string>,
     groups: Array<string>
-  ): Users[] {
+  ): IUser[] {
     return users.filter((user) => {
       return (
         (!roles?.length ? user : roles.includes(user.role)) &&

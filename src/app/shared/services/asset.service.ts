@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Roles } from '../../interfaces/interfaces';
+import { IRoles } from '../types/users';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssetService {
-  public roles: Roles = {
+  public roles: IRoles = {
     operator: { text: 'Оператор', color: '#AFD9A1' },
     admin: { text: 'Администратор', color: '#557EBE' },
     super: { text: 'Суперадмин', color: '#2F4459' },

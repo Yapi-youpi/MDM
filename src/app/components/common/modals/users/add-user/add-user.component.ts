@@ -6,13 +6,13 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Users } from '../../../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../../shared/services/user.service';
 import Compressor from 'compressorjs';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../../../shared/services/asset.service';
 import { alertService } from '../../../../../shared/services';
+import { IUser } from '../../../../../shared/types/users';
 
 @Component({
   selector: 'app-add-user',
@@ -20,7 +20,7 @@ import { alertService } from '../../../../../shared/services';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent implements OnInit {
-  @Input() currentUser: Users | undefined;
+  @Input() currentUser: IUser | undefined;
   public userRole = '';
   public userLogin = '';
   public form: FormGroup;
@@ -70,7 +70,8 @@ export class AddUserComponent implements OnInit {
       if (this.userService.token) {
         this.asset.getFromStorage('login').then((login) => {
           this.userLogin = login;
-          if (this.currentUser?.login === this.userLogin) this.isEditSelf = true;
+          if (this.currentUser?.login === this.userLogin)
+            this.isEditSelf = true;
         });
         this.asset.getFromStorage('user-role').then((role: string) => {
           this.userRole = role;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Users } from '../../../interfaces/interfaces';
 import { AssetService } from '../../../shared/services/asset.service';
 import { UserService } from '../../../shared/services/user.service';
+import { IUser } from '../../../shared/types/users';
 
 @Component({
   selector: 'app-users',
@@ -11,10 +11,10 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class UsersComponent implements OnInit {
   public title = 'Пользователи';
-  public users: Users[] = [];
+  public users: IUser[] = [];
   public userRole = '';
   public userLogin = '';
-  public currentUser: Users | undefined; // undefined is need for reset currentUser
+  public currentUser: IUser | undefined; // undefined is need for reset currentUser
   public search!: string;
   public loaded: boolean = false;
   public filter_roles!: Array<string>;
@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  setCurrentUser(user?: Users | undefined) {
+  setCurrentUser(user?: IUser | undefined) {
     this.currentUser = user;
   }
 

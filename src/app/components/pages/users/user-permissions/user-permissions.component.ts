@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetService } from '../../../../shared/services/asset.service';
-import {
-  GroupPermissions,
-  Permissions,
-} from '../../../../interfaces/interfaces';
 import { UserService } from '../../../../shared/services/user.service';
+import {
+  IGroupPermissions,
+  IPermissions,
+} from '../../../../shared/types/users';
 
 @Component({
   selector: 'app-user-permissions',
@@ -14,9 +14,9 @@ import { UserService } from '../../../../shared/services/user.service';
 export class UserPermissionsComponent implements OnInit {
   public loaded: boolean = false;
   public edit: boolean = false;
-  public params: Permissions;
-  public permissions: GroupPermissions[] = [];
-  private initial: GroupPermissions[] = [];
+  public params: IPermissions;
+  public permissions: IGroupPermissions[] = [];
+  private initial: IGroupPermissions[] = [];
   constructor(public asset: AssetService, public userService: UserService) {
     this.params = {
       viewDevices: 'Просмотр устройств',
