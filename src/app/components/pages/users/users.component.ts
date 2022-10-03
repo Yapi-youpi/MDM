@@ -32,10 +32,9 @@ export class UsersComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.userService
-      .get(undefined, 'all')
-      .then((res) => {
-        console.log(res);
+    this.userService.get(undefined, 'all').then((res) => {
+      // console.log(res);
+      if (res) {
         this.users = res;
         this.users.forEach((user) => {
           if (
@@ -45,10 +44,8 @@ export class UsersComponent implements OnInit {
             user.avatar = 'data:image/jpeg;base64,' + user.avatar;
         });
         this.sortUsers();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      }
+    });
   }
 
   sortUsers() {

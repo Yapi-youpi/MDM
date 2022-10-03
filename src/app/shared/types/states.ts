@@ -3,6 +3,7 @@ import { IGroup } from './groups';
 import { IApp } from './apps';
 import { IFile } from './files';
 import { IConfig } from './config';
+import { IGroupPermissions, IUser } from './users';
 
 export interface IState {
   success: boolean;
@@ -12,6 +13,21 @@ export interface IState {
 export interface IUserState extends IState {
   id: string;
   token: string;
+}
+export interface IUsersState extends IState {
+  users: IUser[];
+}
+export interface IUserTagsState extends IState {
+  userTags: string[];
+}
+export interface IGroupPermissionsState extends IState {
+  permissions: IGroupPermissions[];
+}
+export interface IRegisterState extends IState {
+  login: string;
+  name: string;
+  role: string;
+  avatar: string;
 }
 
 export interface IConfigsState extends IState {

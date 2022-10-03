@@ -47,16 +47,14 @@ export class UserComponent implements OnInit {
   }
 
   getUser() {
-    this.user
-      .get(this.id, 'uid')
-      .then((res) => {
+    this.user.get(this.id, 'uid').then((res) => {
+      if (res) {
         this.currentUser = res[0];
         this.asset.setToStorage('user-role', res[0].role).then();
-      })
-      .catch((err) => {
-        console.log(err);
+      } else {
         this.asset.setToStorage('user-role', '').then();
-      });
+      }
+    });
   }
 
   setUser(change) {

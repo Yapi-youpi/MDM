@@ -10,7 +10,7 @@ import { filter } from '../../../../../shared/services/forms/user';
   styleUrls: ['./filter-user.component.scss'],
 })
 export class FilterUserComponent implements OnInit {
-  public userTags = [];
+  public userTags: string[] = [];
 
   @Output() onSubmit = new EventEmitter();
 
@@ -29,15 +29,10 @@ export class FilterUserComponent implements OnInit {
   }
 
   getUserTags() {
-    this.user
-      .getTags()
-      .then((res) => {
-        console.log(res);
-        this.userTags = res.userTags;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.user.getTags().then((res) => {
+      // console.log(res);
+      if (res) this.userTags = res;
+    });
   }
 
   deleteUserTag(tag: string) {

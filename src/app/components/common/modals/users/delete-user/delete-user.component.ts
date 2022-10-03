@@ -14,20 +14,18 @@ export class DeleteUserComponent implements OnInit {
   ngOnInit(): void {}
 
   deleteUser(id: string) {
-    this.userService
-      .delete(id)
-      .then((res) => {
-        console.log(res);
-        this.closeModal(true);
-      })
-      .catch((err) => {
-        if (err.error.error === 'super admin never die') {
-          // M.toast({ html: "Пользователя нельзя удалить" });
-        }
-        if (err.error.error === 'api forbidden by user, only for super admin') {
-          // M.toast({ html: "Доступ запрещен" });
-        }
-      });
+    this.userService.delete(id).then((res) => {
+      // console.log(res);
+      if (res) this.closeModal(true);
+    });
+    // .catch((err) => {
+    //   if (err.error.error === 'super admin never die') {
+    //     // M.toast({ html: "Пользователя нельзя удалить" });
+    //   }
+    //   if (err.error.error === 'api forbidden by user, only for super admin') {
+    //     // M.toast({ html: "Доступ запрещен" });
+    //   }
+    // });
   }
 
   closeModal(changes?: boolean) {

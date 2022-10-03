@@ -10,7 +10,6 @@ import { UserService } from '../../../../../shared/services/user.service';
 import Compressor from 'compressorjs';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../../../shared/services/asset.service';
-import { alertService } from '../../../../../shared/services';
 import { IUser } from '../../../../../shared/types/users';
 import { add } from '../../../../../shared/services/forms/user';
 import { MyUserClass } from '../../../../../shared/classes/users/my-user.class';
@@ -25,7 +24,7 @@ export class AddUserComponent implements OnInit {
 
   public userRole = '';
   public userLogin = '';
-  public userTags = [];
+  public userTags: string[] = [];
   public file_input!: any;
   public file_placeholder!: Element;
   public avatar!: Element;
@@ -39,7 +38,6 @@ export class AddUserComponent implements OnInit {
 
   constructor(
     private asset: AssetService,
-    private alert: alertService,
     private elementRef: ElementRef,
     private userService: UserService,
     private form: add,
@@ -84,14 +82,9 @@ export class AddUserComponent implements OnInit {
   }
 
   getUserTags() {
-    this.userService
-      .getTags()
-      .then((res) => {
-        this.userTags = res.userTags;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.userService.getTags().then((res) => {
+      if (res) this.userTags = res;
+    });
   }
 
   addUser() {
@@ -107,9 +100,8 @@ export class AddUserComponent implements OnInit {
           : [this.form.values.userTags];
       this.userService
         .add(avatar, login, password, name, role, group)
-        .then(() => {
-          this.clearModal(true);
-          this.showAlert('Пользователь добавлен');
+        .then((res) => {
+          if (res) this.clearModal(true);
         })
         .catch((err) => {
           console.log(err);
@@ -143,29 +135,26 @@ export class AddUserComponent implements OnInit {
           const lastPassword = this.form.values.oldPassword;
           this.userService
             .changeMyPassword(this.myUser.login, lastPassword, password)
-            .then(() => {
-              document.getElementById('old-pass')?.removeAttribute('style');
-              this.clearModal(true);
-              this.showAlert('Пароль изменен');
-            })
-            .catch((err) => {
-              console.log(err);
-              if (err.error.error === 'wrong password or login') {
-                document
-                  .getElementById('old-pass')
-                  ?.setAttribute('style', 'outline: 2px solid #eb4f4f;');
+            .then((res) => {
+              if (res) {
+                document.getElementById('old-pass')?.removeAttribute('style');
+                this.clearModal(true);
+              } else {
+                //     if (err.error.error === 'wrong password or login') {
+                //       document
+                //         .getElementById('old-pass')
+                //         ?.setAttribute('style', 'outline: 2px solid #eb4f4f;');
+                //     }
               }
             });
         } else {
           this.userService
-            .changeUserPassword(login, password)
-            .then(() => {
-              this.currentUser = undefined;
-              this.clearModal(true);
-              this.showAlert('Пароль изменен');
-            })
-            .catch((err) => {
-              console.log(err);
+            .changeUserPassword(login, password.trim())
+            .then((res) => {
+              if (res) {
+                this.currentUser = undefined;
+                this.clearModal(true);
+              }
             });
         }
       }
@@ -174,40 +163,30 @@ export class AddUserComponent implements OnInit {
         this.userService
           .uploadAvatar(this.currentUser!.id, avatar)
           .then((res) => {
-            this.currentUser = undefined;
-            this.clearModal(true);
-            this.showAlert('Аватар обновлен');
-          })
-          .catch((err) => {
-            console.log(err);
+            if (res) {
+              this.currentUser = undefined;
+              this.clearModal(true);
+            }
           });
       }
 
       if (group[0][0] !== this.currentUser?.userTags[0]) {
-        this.userService
-          .changeTag(this.currentUser!.id, group)
-          .then((res) => {
-            console.log(res);
+        this.userService.changeTag(this.currentUser!.id, group).then((res) => {
+          // console.log(res);
+          if (res) {
             this.currentUser = undefined;
             this.clearModal(true);
-            this.showAlert('Подразделение обновлено');
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+          }
+        });
       }
 
       if (name !== this.currentUser!.name) {
-        this.userService
-          .rename(login, name)
-          .then((res) => {
+        this.userService.rename(login, name).then((res) => {
+          if (res) {
             this.currentUser = undefined;
             this.clearModal(true);
-            this.showAlert('Имя изменено');
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+          }
+        });
       }
     }
   }
@@ -307,14 +286,6 @@ export class AddUserComponent implements OnInit {
         .querySelectorAll('.validation-item')
         .forEach((i) => i.classList.remove('validation-item--ok'));
     }
-  }
-
-  showAlert(message) {
-    this.alert.show({
-      title: 'Данные успешно сохранены',
-      content: message,
-      type: 'success',
-    });
   }
 
   clearInputFile(

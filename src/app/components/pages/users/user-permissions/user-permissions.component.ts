@@ -42,9 +42,11 @@ export class UserPermissionsComponent implements OnInit {
     this.userService
       .getPermissions()
       .then((res) => {
-        this.permissions = res;
-        this.initial = JSON.parse(JSON.stringify(res));
-        this.loaded = true;
+        if (res) {
+          this.permissions = res;
+          this.initial = JSON.parse(JSON.stringify(res));
+          this.loaded = true;
+        }
       })
       .catch((err) => console.log(err));
   }
@@ -63,10 +65,8 @@ export class UserPermissionsComponent implements OnInit {
   }
 
   editPermissions() {
-    this.userService
-      .changePermissions(this.permissions)
-      .then((res) => console.log(res))
-      .then(() => this.toggleEdit())
-      .catch((err) => console.log(err));
+    this.userService.changePermissions(this.permissions).then((res) => {
+      if (res) this.toggleEdit();
+    });
   }
 }
