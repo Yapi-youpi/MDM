@@ -1,5 +1,5 @@
 <app-modal [modalID]="'modal-new-user'" [isClosable]="true">
-  <form [formGroup]="form" class="form users-form modal-form w-600">
+  <form [formGroup]="_form" class="form users-form modal-form w-600">
     <h4 class="modal-title">
       {{
         currentUser ? 'Редактирование данных' : 'Добавление нового пользователя'
@@ -57,7 +57,7 @@
       <div class="form__item" *ngIf="isEditSelf && passwordField">
         <label for="old-pass">Старый пароль</label>
         <app-input-password
-          [control]="$any(this.form.get('oldPassword'))"
+          [control]="$any(this._form.get('oldPassword'))"
           [name]="'old-pass'"
           [width]="'w-296'"
         ></app-input-password>
@@ -76,7 +76,7 @@
         <div class="validation" *ngIf="passwordField">
           <app-input-password
             [name]="'password'"
-            [control]="$any(this.form.get('password'))"
+            [control]="$any(this._form.get('password'))"
             [width]="'w-296'"
             [pattern]="pattern"
             (onFocus)="showValidation()"
@@ -136,7 +136,7 @@
           <option value="Другое">Другое</option>
         </select>
       </div>
-      <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
+      <div class="form__item" *ngIf="_form.get('userTags')?.value == 'Другое'">
         <label></label>
         <input
           formControlName="other"
@@ -152,7 +152,7 @@
         *ngIf="!currentUser; else editBtn"
         class="btn btn--big"
         (click)="addUser()"
-        [disabled]="form.invalid || form.untouched || form.pristine"
+        [disabled]="_form.invalid || _form.untouched || _form.pristine"
       >
         Добавить
       </button>

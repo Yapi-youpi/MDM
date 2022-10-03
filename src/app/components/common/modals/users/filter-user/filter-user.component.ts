@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl } from '@angular/forms';
 import { UserService } from '../../../../../shared/services/user.service';
 import { AssetService } from '../../../../../shared/services/asset.service';
+import { filter } from '../../../../../shared/services/forms/user';
 
 @Component({
   selector: 'app-filter-user',
@@ -9,18 +10,18 @@ import { AssetService } from '../../../../../shared/services/asset.service';
   styleUrls: ['./filter-user.component.scss'],
 })
 export class FilterUserComponent implements OnInit {
-  public filterForm: FormGroup;
   public userTags = [];
+
   @Output() onSubmit = new EventEmitter();
+
   constructor(
     public asset: AssetService,
-    private fb: FormBuilder,
-    private user: UserService
-  ) {
-    this.filterForm = fb.group({
-      roles: new FormArray([]),
-      groups: new FormArray([]),
-    });
+    private user: UserService,
+    private form: filter
+  ) {}
+
+  get _form() {
+    return this.form.form;
   }
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class FilterUserComponent implements OnInit {
   }
 
   onCheckboxChange(event: any, arr: string) {
-    const checkArr = this.filterForm.controls[arr] as FormArray;
+    const checkArr = this._form.controls[arr] as FormArray;
     if (event.target.checked) {
       checkArr.push(new FormControl(event.target.value));
     } else {
@@ -63,12 +64,12 @@ export class FilterUserComponent implements OnInit {
   }
 
   applyFilter() {
-    this.onSubmit.emit(this.filterForm.value);
+    this.onSubmit.emit(this._form.value);
   }
 
   clearFilter() {
-    clearCheck('role', this.filterForm);
-    clearCheck('group', this.filterForm);
+    clearCheck('role', this._form);
+    clearCheck('group', this._form);
 
     function clearCheck(arr: string, form: any) {
       const checkboxes = document.querySelectorAll(
@@ -80,7 +81,7 @@ export class FilterUserComponent implements OnInit {
       const index = checkArr.controls.findIndex((x) => x.value);
       checkArr.removeAt(index);
     }
-    this.onSubmit.emit(this.filterForm.value);
+    this.onSubmit.emit(this._form.value);
     document.getElementById('filter-user')?.classList.add('hidden');
   }
 }
