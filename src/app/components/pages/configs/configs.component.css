@@ -70,3 +70,7 @@
 .config-card__menu-btn:hover span {
   background-color: var(--blue);
 }
+
+.dummy {
+  height: 4px;
+}

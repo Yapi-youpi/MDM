@@ -227,7 +227,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('config').then();
+    this.router.navigateByUrl('configs').then();
   }
 
   toggleBrightness() {

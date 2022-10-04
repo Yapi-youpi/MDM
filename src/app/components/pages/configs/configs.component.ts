@@ -4,6 +4,7 @@ import { IConfig } from '../../../shared/types/config';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 import { interval } from 'rxjs';
+import { ConfigLoaderClass } from '../../../shared/classes/configs/config-loader.class';
 
 @Component({
   selector: 'app-configs',
@@ -18,6 +19,7 @@ export class ConfigsComponent implements OnInit {
   constructor(
     public asset: AssetService,
     private config: ConfigClass,
+    private loader: ConfigLoaderClass,
     private myUser: MyUserClass
   ) {}
 
@@ -27,6 +29,10 @@ export class ConfigsComponent implements OnInit {
 
   get _default() {
     return this.config.default;
+  }
+
+  get _loading() {
+    return this.loader.loading;
   }
 
   ngOnInit() {
