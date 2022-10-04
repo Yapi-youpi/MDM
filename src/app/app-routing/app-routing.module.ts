@@ -70,6 +70,11 @@ const routes: Routes = [
     path: 'help',
     component: HelpComponent,
   },
+  {
+    path: '**',
+    redirectTo: 'devices',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
