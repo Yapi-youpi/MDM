@@ -15,8 +15,7 @@ import { Router } from '@angular/router';
 export class MyUserClass {
   public login: string = '';
   public token: string = '';
-  // todo: убрать
-  public id: string = '';
+  public role: string = '';
 
   public me!: IUser;
 
@@ -37,31 +36,26 @@ export class MyUserClass {
   }
 
   getMe() {
-    return new Promise<boolean>(() => {
-      this.asset.getFromStorage('id').then((id: string) => {
-        this.id = id;
-        this.get(id).then();
-      });
-    });
-  }
-
-  get(id: string) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this.asset.getFromStorage('id').then((id: string) => {
+        this.loader.start();
 
-      this.service
-        .get(id, 'uid')
-        .then((res) => {
-          if (res) {
-            this.me = res[0];
-            this.asset.setToStorage('user-role', res[0].role).then();
-            resolve(true);
-          } else {
-            this.asset.setToStorage('user-role', '').then();
-            resolve(false);
-          }
-        })
-        .finally(() => this.loader.end());
+        this.service
+          .get(id, 'uid')
+          .then((res) => {
+            if (res) {
+              this.me = res[0];
+              this.asset.setToStorage('user-role', res[0].role).then();
+              this.role = res[0].role;
+              resolve(true);
+            } else {
+              this.asset.setToStorage('user-role', '').then();
+              this.role = '';
+              resolve(false);
+            }
+          })
+          .finally(() => this.loader.end());
+      });
     });
   }
 
@@ -132,6 +126,17 @@ export class MyUserClass {
             resolve(true);
           } else resolve(false);
         })
+        .finally(() => this.loader.end());
+    });
+  }
+
+  changePassword(login: string, last_password: string, password: string) {
+    return new Promise<boolean>((resolve) => {
+      this.loader.start();
+
+      this.service
+        .changeMyPassword(login, last_password, password)
+        .then((res) => resolve(res))
         .finally(() => this.loader.end());
     });
   }

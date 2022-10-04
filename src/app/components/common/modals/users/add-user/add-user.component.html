@@ -53,7 +53,7 @@
         required
       />
     </div>
-    <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
+    <ng-container *ngIf="_role === 'admin' || _role === 'super'">
       <div class="form__item" *ngIf="isEditSelf && passwordField">
         <label for="old-pass">Старый пароль</label>
         <app-input-password
@@ -108,7 +108,7 @@
               formControlName="role"
               type="radio"
               [value]="'admin'"
-              [attr.disabled]="currentUser || userRole === 'admin' ? '' : null"
+              [attr.disabled]="currentUser || _role === 'admin' ? '' : null"
             />
             <span class="custom-radio__span"> администратор </span>
           </label>
@@ -128,7 +128,7 @@
       <div class="form__item">
         <label>Подразделение</label>
         <select class="select-native w-296" formControlName="userTags">
-          <ng-container *ngFor="let tag of userTags">
+          <ng-container *ngFor="let tag of _tags">
             <option value="{{ tag }}" *ngIf="tag">
               {{ tag }}
             </option></ng-container

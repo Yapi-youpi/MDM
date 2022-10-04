@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AssetService } from '../../../shared/services/asset.service';
-import { UserService } from '../../../shared/services/user.service';
 import { IUser } from '../../../shared/types/users';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
+import { UsersClass } from '../../../shared/classes/users/users.class';
+import { interval } from 'rxjs';
+import { UsersLoaderClass } from '../../../shared/classes/users/users-loader.class';
 
 @Component({
   selector: 'app-users',
@@ -11,54 +14,54 @@ import { IUser } from '../../../shared/types/users';
 })
 export class UsersComponent implements OnInit {
   public title = 'Пользователи';
-  public users: IUser[] = [];
-  public userRole = '';
-  public userLogin = '';
-  public currentUser: IUser | undefined; // undefined is need for reset currentUser
+
   public search!: string;
-  public loaded: boolean = false;
+
   public filter_roles!: Array<string>;
   public filter_groups!: Array<string>;
-  constructor(public asset: AssetService, public userService: UserService) {}
 
-  ngOnInit() {
-    this.getAllUsers();
-    this.asset.getFromStorage('user-role').then((role: string) => {
-      this.userRole = role;
-    });
-    this.asset.getFromStorage('login').then((login: string) => {
-      this.userLogin = login;
-    });
+  constructor(
+    public asset: AssetService,
+    private users: UsersClass,
+    private myUser: MyUserClass,
+    private loader: UsersLoaderClass
+  ) {}
+
+  get _loading() {
+    return this.loader.loading;
   }
 
-  getAllUsers() {
-    this.userService.get(undefined, 'all').then((res) => {
-      // console.log(res);
-      if (res) {
-        this.users = res;
-        this.users.forEach((user) => {
-          if (
-            user.avatar.length > 0 &&
-            !user.avatar.includes('data:image/jpeg;base64,')
-          )
-            user.avatar = 'data:image/jpeg;base64,' + user.avatar;
-        });
-        this.sortUsers();
+  get _role() {
+    return this.myUser.role;
+  }
+
+  get _users() {
+    return this.users.array;
+  }
+
+  get _current() {
+    return this.users.current;
+  }
+
+  get _me() {
+    return this.myUser.me;
+  }
+
+  ngOnInit() {
+    const i = interval(1000).subscribe(() => {
+      if (this.myUser.token) {
+        i.unsubscribe();
+        this.getAllUsers();
       }
     });
   }
 
-  sortUsers() {
-    this.users.sort((a) => {
-      return a.role === 'admin' ? -1 : 1;
-    });
-    this.users.sort((a) => {
-      return a.groupsPermissions.super ? -1 : 1;
-    });
+  getAllUsers() {
+    this.users.get().then();
   }
 
-  setCurrentUser(user?: IUser | undefined) {
-    this.currentUser = user;
+  setCurrentUser(user: IUser | null = null) {
+    this.users.setCurrent(user);
   }
 
   applyFilter(filter) {
@@ -67,11 +70,9 @@ export class UsersComponent implements OnInit {
   }
 
   closeModal(changes) {
-    this.currentUser = undefined;
+    this.setCurrentUser();
     if (changes) {
       this.getAllUsers();
     }
   }
 }
-
-//VhG2NXs3_

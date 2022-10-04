@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { authService } from '../../../shared/services';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
+import { UsersClass } from '../../../shared/classes/users/users.class';
 
 @Component({
   selector: 'app-user',
@@ -15,7 +16,8 @@ export class UserComponent implements OnInit {
     private elementRef: ElementRef,
     private auth: authService,
     public router: Router,
-    private myUser: MyUserClass
+    private myUser: MyUserClass,
+    private users: UsersClass
   ) {}
 
   get _me() {
@@ -30,7 +32,9 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myUser.getMe().then();
+    this.myUser.getMe().then((res) => {
+      if (res) this.users.setCurrent(this._me);
+    });
   }
 
   togglePopup() {
@@ -39,9 +43,9 @@ export class UserComponent implements OnInit {
 
   setUser(change) {
     if (change) {
-      // todo: обращаться в другой класс
-      this.myUser.get(this.myUser.id).then();
-    } else this.myUser.me = { ...this.myUser.me };
+      this.myUser.getMe().then();
+    }
+    // else this.myUser.me = { ...this.myUser.me };
     this.isPopupOpen = false;
   }
 

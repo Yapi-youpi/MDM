@@ -6,13 +6,13 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { UserService } from '../../../../../shared/services/user.service';
 import Compressor from 'compressorjs';
 import { interval } from 'rxjs';
 import { AssetService } from '../../../../../shared/services/asset.service';
-import { IUser } from '../../../../../shared/types/users';
 import { add } from '../../../../../shared/services/forms/user';
 import { MyUserClass } from '../../../../../shared/classes/users/my-user.class';
+import { UsersClass } from '../../../../../shared/classes/users/users.class';
+import { IUser } from '../../../../../shared/types/users';
 
 @Component({
   selector: 'app-add-user',
@@ -20,17 +20,16 @@ import { MyUserClass } from '../../../../../shared/classes/users/my-user.class';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent implements OnInit {
-  @Input() currentUser: IUser | undefined;
+  @Input() currentUser: IUser | null = null;
 
-  public userRole = '';
-  public userLogin = '';
-  public userTags: string[] = [];
   public file_input!: any;
   public file_placeholder!: Element;
   public avatar!: Element;
   public userPhoto!: string;
+
   public passwordField: boolean = true;
   public isEditSelf: boolean = false;
+
   public pattern =
     "^(?=.*\\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[~'`!@#№?$%^&*()=+<>|\\\\\\/_.,:;\\[\\]{} \x22-]).{8,64}$";
 
@@ -39,19 +38,27 @@ export class AddUserComponent implements OnInit {
   constructor(
     private asset: AssetService,
     private elementRef: ElementRef,
-    private userService: UserService,
     private form: add,
-    private myUser: MyUserClass
+    private myUser: MyUserClass,
+    private users: UsersClass
   ) {}
 
   get _form() {
     return this.form.form;
   }
 
+  get _tags() {
+    return this.users.tags;
+  }
+
+  get _role() {
+    return this.myUser.role;
+  }
+
   ngOnChanges() {
     if (this.currentUser) {
       this._form.patchValue(this.currentUser);
-      this.currentUser.login === this.userLogin
+      this.currentUser.login === this.myUser.login
         ? (this.isEditSelf = true)
         : (this.isEditSelf = false);
       this.passwordField = false;
@@ -63,28 +70,19 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    let i = interval(200).subscribe(() => {
+    let i = interval(1000).subscribe(() => {
       if (this.myUser.token) {
-        this.asset.getFromStorage('login').then((login) => {
-          this.userLogin = login;
-          if (this.currentUser?.login === this.userLogin)
-            this.isEditSelf = true;
-        });
-        this.asset.getFromStorage('user-role').then((role: string) => {
-          this.userRole = role;
-          if (role === 'super' || role === 'admin') {
-            this.getUserTags();
-          }
-        });
+        if (this.currentUser?.login === this.myUser.login)
+          this.isEditSelf = true;
+        if (this._role === 'super' || this._role === 'admin')
+          this.getUserTags();
         i.unsubscribe();
       }
     });
   }
 
   getUserTags() {
-    this.userService.getTags().then((res) => {
-      if (res) this.userTags = res;
-    });
+    this.users.getTags().then();
   }
 
   addUser() {
@@ -94,18 +92,13 @@ export class AddUserComponent implements OnInit {
       const name = this.form.values.name;
       const password = this.form.values.password;
       const role = this.form.values.role;
-      const group =
-        this.form.values.userTags === 'Другое'
-          ? [this.form.values.other]
-          : [this.form.values.userTags];
-      this.userService
-        .add(avatar, login, password, name, role, group)
-        .then((res) => {
-          if (res) this.clearModal(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const group = (this.form.values.userTags === 'Другое'
+        ? [this.form.values.other]
+        : [this.form.values.userTags]) as unknown as string[];
+
+      this.users.add(avatar, login, password, name, role, group).then((res) => {
+        if (res) this.clearModal(true);
+      });
     }
   }
 
@@ -125,16 +118,15 @@ export class AddUserComponent implements OnInit {
       const login = this.form.values.login;
       const name = this.form.values.name;
       const password = this.form.values.password;
-      const group =
-        this.form.values.userTags === 'Другое'
-          ? [this.form.values.other]
-          : [this.form.values.userTags];
+      const group = (this.form.values.userTags === 'Другое'
+        ? [this.form.values.other]
+        : [this.form.values.userTags]) as unknown as string[];
 
       if (password) {
         if (this.isEditSelf) {
           const lastPassword = this.form.values.oldPassword;
-          this.userService
-            .changeMyPassword(this.myUser.login, lastPassword, password)
+          this.myUser
+            .changePassword(this.myUser.login, lastPassword, password)
             .then((res) => {
               if (res) {
                 document.getElementById('old-pass')?.removeAttribute('style');
@@ -148,42 +140,37 @@ export class AddUserComponent implements OnInit {
               }
             });
         } else {
-          this.userService
-            .changeUserPassword(login, password.trim())
-            .then((res) => {
-              if (res) {
-                this.currentUser = undefined;
-                this.clearModal(true);
-              }
-            });
+          this.users.changePassword(login, password.trim()).then((res) => {
+            if (res) {
+              this.currentUser = null;
+              this.clearModal(true);
+            }
+          });
         }
       }
 
       if (avatar && avatar?.length > 0) {
-        this.userService
-          .uploadAvatar(this.currentUser!.id, avatar)
-          .then((res) => {
-            if (res) {
-              this.currentUser = undefined;
-              this.clearModal(true);
-            }
-          });
+        this.users.uploadAvatar(this.currentUser!.id, avatar).then((res) => {
+          if (res) {
+            this.currentUser = null;
+            this.clearModal(true);
+          }
+        });
       }
 
       if (group[0][0] !== this.currentUser?.userTags[0]) {
-        this.userService.changeTag(this.currentUser!.id, group).then((res) => {
-          // console.log(res);
+        this.users.changeTag(this.currentUser!.id, group).then((res) => {
           if (res) {
-            this.currentUser = undefined;
+            this.currentUser = null;
             this.clearModal(true);
           }
         });
       }
 
       if (name !== this.currentUser!.name) {
-        this.userService.rename(login, name).then((res) => {
+        this.users.rename(login, name).then((res) => {
           if (res) {
-            this.currentUser = undefined;
+            this.currentUser = null;
             this.clearModal(true);
           }
         });
@@ -193,7 +180,6 @@ export class AddUserComponent implements OnInit {
 
   addFile(event: Event) {
     this.file_input = event.target;
-    // console.log(this.file_input);
     const file = this.file_input.files[0];
     if (file) {
       this.file_placeholder = this.elementRef.nativeElement.querySelector(
@@ -307,7 +293,7 @@ export class AddUserComponent implements OnInit {
   clearModal(changes?: boolean) {
     this.form.reset();
     document.getElementById('modal-new-user')?.classList.add('hidden');
-    this.currentUser = undefined;
+    this.currentUser = null;
     this.onClose.emit(changes);
   }
 }

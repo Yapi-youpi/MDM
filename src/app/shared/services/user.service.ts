@@ -161,7 +161,6 @@ export class UserService {
     if (!param) {
       param = id;
     }
-    // const url = environment.url + `/get_user/${param}${id}`;
     return new Promise<IUser[] | null>((resolve) => {
       this.http
         .get<IUsersState>(environment.url + api.GET + param + id)
@@ -195,7 +194,6 @@ export class UserService {
     role: string,
     userTags: string[]
   ) {
-    // const url = environment.url + '/register';
     return new Promise<boolean>((resolve) => {
       this.http
         .post<IRegisterState>(environment.url + api.SIGN_UP, {
@@ -235,7 +233,6 @@ export class UserService {
   }
 
   rename(login: string, name: string) {
-    // const url = environment.url + '/rename_user';
     return new Promise<boolean>((resolve) => {
       this.http
         .post<IState>(environment.url + api.RENAME, {
@@ -271,7 +268,6 @@ export class UserService {
   }
 
   uploadAvatar(id: string, avatar: string) {
-    // const url = environment.url + '/load_avatar';
     return new Promise<boolean>((resolve) => {
       this.http
         .post(environment.url + api.LOAD_AVATAR, {
@@ -307,7 +303,6 @@ export class UserService {
   }
 
   changeTag(id: string, userTags: string[]) {
-    // const url = environment.url + '/edit_user_tag';
     return new Promise<boolean>((resolve) => {
       this.http
         .post<IState>(environment.url + api.EDIT_TAG, {
@@ -342,43 +337,41 @@ export class UserService {
     });
   }
 
-  deleteTag(userTags: string) {
-    // const url = environment.url + '/delete_tag';
-    return new Promise<boolean>((resolve) => {
-      this.http
-        .post<IState>(environment.url + api.DELETE_TAG, {
-          userTags: userTags,
-        })
-        .subscribe({
-          next: (res) => {
-            if (res.success) {
-              this.alert.show({
-                type: 'success',
-                title: 'Подразделение удалено',
-                content: '',
-              });
-              resolve(true);
-            } else {
-              this.alert.show({
-                title: 'Ошибка удаления подразделения',
-                content: res.error,
-              });
-              resolve(false);
-            }
-          },
-          error: (err: HttpErrorResponse) => {
-            this.alert.show({
-              title: err.name,
-              content: err.message,
-            });
-            resolve(false);
-          },
-        });
-    });
-  }
+  // deleteTag(userTags: string) {
+  //   return new Promise<boolean>((resolve) => {
+  //     this.http
+  //       .post<IState>(environment.url + api.DELETE_TAG, {
+  //         userTags: userTags,
+  //       })
+  //       .subscribe({
+  //         next: (res) => {
+  //           if (res.success) {
+  //             this.alert.show({
+  //               type: 'success',
+  //               title: 'Подразделение удалено',
+  //               content: '',
+  //             });
+  //             resolve(true);
+  //           } else {
+  //             this.alert.show({
+  //               title: 'Ошибка удаления подразделения',
+  //               content: res.error,
+  //             });
+  //             resolve(false);
+  //           }
+  //         },
+  //         error: (err: HttpErrorResponse) => {
+  //           this.alert.show({
+  //             title: err.name,
+  //             content: err.message,
+  //           });
+  //           resolve(false);
+  //         },
+  //       });
+  //   });
+  // }
 
   getTags() {
-    // const url = environment.url + '/get_user_tags';
     return new Promise<string[] | null>((resolve) => {
       this.http.get<IUserTagsState>(environment.url + api.GET_TAGS).subscribe({
         next: (res) => {
@@ -403,7 +396,6 @@ export class UserService {
   }
 
   getPermissions() {
-    // const url = environment.url + '/super/get_all_permissions';
     return new Promise<IGroupPermissions[] | null>((resolve) => {
       this.http
         .get<IGroupPermissionsState>(environment.url + api.GET_PERMISSIONS)
@@ -430,7 +422,6 @@ export class UserService {
   }
 
   changePermissions(body: object) {
-    // const url = environment.url + '/super/edit_permissions';
     return new Promise<boolean>((resolve) => {
       this.http
         .post<IState>(environment.url + api.EDIT_PERMISSIONS, body)

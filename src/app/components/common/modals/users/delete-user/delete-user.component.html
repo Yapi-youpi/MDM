@@ -1,8 +1,8 @@
 <app-modal [modalID]="'modal-delete-user'" [isClosable]="true">
   <div class="modal-form w-600">
-    <h4 class="modal-title">Удалить пользователя {{ currentUser?.name }}?</h4>
+    <h4 class="modal-title">Удалить пользователя {{ _current?.name }}?</h4>
     <div class="btn-wrapper">
-      <button class="btn btn--big" (click)="deleteUser(currentUser!.id)">
+      <button class="btn btn--big" (click)="deleteUser(_current!.id)">
         Да
       </button>
       <button class="btn btn--big btn--outline" (click)="closeModal()">

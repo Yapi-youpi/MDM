@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetService } from '../../../../shared/services/asset.service';
-import { UserService } from '../../../../shared/services/user.service';
 import {
   IGroupPermissions,
   IPermissions,
 } from '../../../../shared/types/users';
+import { PermissionsClass } from '../../../../shared/classes/permissions/permissions.class';
+import { PermissionsLoaderClass } from '../../../../shared/classes/permissions/permissions-loader.class';
 
 @Component({
   selector: 'app-user-permissions',
@@ -12,12 +13,15 @@ import {
   styleUrls: ['./user-permissions.component.css'],
 })
 export class UserPermissionsComponent implements OnInit {
-  public loaded: boolean = false;
   public edit: boolean = false;
   public params: IPermissions;
-  public permissions: IGroupPermissions[] = [];
   private initial: IGroupPermissions[] = [];
-  constructor(public asset: AssetService, public userService: UserService) {
+
+  constructor(
+    public asset: AssetService,
+    private permissions: PermissionsClass,
+    private loader: PermissionsLoaderClass
+  ) {
     this.params = {
       viewDevices: 'Просмотр устройств',
       viewUsers: 'Просмотр пользователей',
@@ -34,21 +38,24 @@ export class UserPermissionsComponent implements OnInit {
     };
   }
 
+  get _loading() {
+    return this.loader.loading;
+  }
+
+  get _permissions() {
+    return this.permissions.array;
+  }
+
   ngOnInit(): void {
     this.getPermissions();
   }
 
   getPermissions() {
-    this.userService
-      .getPermissions()
-      .then((res) => {
-        if (res) {
-          this.permissions = res;
-          this.initial = JSON.parse(JSON.stringify(res));
-          this.loaded = true;
-        }
-      })
-      .catch((err) => console.log(err));
+    this.permissions.get().then((res) => {
+      if (res) {
+        this.initial = this._permissions;
+      }
+    });
   }
 
   toggleEdit() {
@@ -61,11 +68,11 @@ export class UserPermissionsComponent implements OnInit {
   }
 
   onCheckboxChange(event: any, role) {
-    this.permissions[role][event.target.value] = !!event.target.checked;
+    this.permissions.set(event, role);
   }
 
   editPermissions() {
-    this.userService.changePermissions(this.permissions).then((res) => {
+    this.permissions.change(this._permissions).then((res) => {
       if (res) this.toggleEdit();
     });
   }
