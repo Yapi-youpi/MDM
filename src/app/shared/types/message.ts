@@ -1,4 +1,4 @@
-export interface Message {
+export interface IMessage {
   id: number;
   status: boolean;
   text: string;

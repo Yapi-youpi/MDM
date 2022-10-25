@@ -74,8 +74,6 @@
   </div>
 </main>
 
-<ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
-  <app-add-app></app-add-app>
-  <app-edit-app></app-edit-app>
-  <app-delete-app></app-delete-app>
-</ng-container>
+<app-add-app></app-add-app>
+<app-edit-app></app-edit-app>
+<app-delete-app></app-delete-app>

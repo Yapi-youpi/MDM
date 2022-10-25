@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { IConfig } from '../../../../../shared/types/config';
-import { Option } from '../../../../../shared/types/input';
+import { Component } from '@angular/core';
+import { IOption } from '../../../../../shared/types/input';
 import { add } from '../../../../../shared/services/forms/group';
 import { groupIcons } from '../../../../../shared/types/groups';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
+import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-add-group',
@@ -12,15 +12,14 @@ import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loa
   styleUrls: ['./add-group.component.scss'],
 })
 export class AddGroupComponent {
-  @Input() configs: IConfig[] = [];
-
   public groupIcons: string[] = groupIcons;
   public isIconContainerShown: boolean = false;
 
   constructor(
     private form: add,
     private group: GroupClass,
-    private loader: GroupLoaderClass
+    private loader: GroupLoaderClass,
+    private config: ConfigClass
   ) {}
 
   get _loading() {
@@ -52,17 +51,17 @@ export class AddGroupComponent {
   }
 
   get _options() {
-    return this.configs.map((c) => {
+    return this.config.array.map((c) => {
       return {
         value: c.ID,
         html: c.name,
-      } as Option;
+      } as IOption;
     });
   }
 
   get _currOption() {
     const value = this._config_id?.value;
-    const html = this.configs.find(
+    const html = this.config.array.find(
       (c) => c.ID === this._config_id?.value
     )?.name;
 
@@ -76,7 +75,7 @@ export class AddGroupComponent {
     this.isIconContainerShown = !this.isIconContainerShown;
   }
 
-  onSelectHandler(item: Option) {
+  onSelectHandler(item: IOption) {
     this._form.patchValue({
       deviceConfigID: item.value,
     });

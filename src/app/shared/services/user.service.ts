@@ -1,127 +1,192 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { GroupPermissions, Users } from '../../interfaces/interfaces';
-import { assetService } from './index';
+import { IGroupPermissions, IUser } from '../types/users';
+import { usersPaths as api } from '../enums/api';
+import {
+  IGroupPermissionsState,
+  IRegisterState,
+  IState,
+  IUsersState,
+  IUserTagsState,
+} from '../types/states';
+import { alertService } from './index';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  public token = '';
-  public login = '';
   public upperCase = false;
   public lowerCase = false;
   public number = false;
   public specialChar = false;
   public passLength = 0;
-  constructor(private http: HttpClient, private asset: assetService) {
-    this.asset.getFromStorage('token').then((token: string) => {
-      this.token = token;
-    });
-    this.asset.getFromStorage('login').then((login: string) => {
-      this.login = login;
+
+  constructor(private http: HttpClient, private alert: alertService) {}
+
+  changeMyPassword(login: string, last_password: string, password: string) {
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post<IState>(environment.url + api.CHANGE_MY_PASS, {
+          login: login,
+          password: password,
+          lastPassword: last_password,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.alert.show({
+                type: 'success',
+                title: 'Пароль изменен',
+                content: '',
+              });
+              resolve(true);
+            } else {
+              this.alert.show({
+                title: 'Ошибка изменения пароля',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            // ???
+            if (err.error.error === 'wrong password or login') {
+              document
+                .getElementById('old-pass')
+                ?.setAttribute('style', 'outline: 2px solid #eb4f4f;');
+            }
+            // ???
+            resolve(false);
+          },
+        });
     });
   }
 
-  changePassword(last_password: string, password: string) {
-    const url = environment.url + '/change_password';
-    const body = {
-      login: this.login,
-      password: password,
-      lastPassword: last_password,
-    };
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
   changeUserPassword(login: string, password: string) {
     this.lowerCase = false;
     this.upperCase = false;
     this.number = false;
     this.specialChar = false;
     this.passLength = 0;
-    const url = `${environment.url}/change_user_password`;
-    const body = {
-      login: login,
-      password: password.trim(),
-    };
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          if (err.error.error.includes('lowercase letter missing')) {
-            this.lowerCase = true;
-          }
-          if (err.error.error.includes('uppercase letter missing')) {
-            this.upperCase = true;
-          }
-          if (
-            err.error.error.includes('at least one numeric character required')
-          ) {
-            this.number = true;
-          }
-          if (err.error.error.includes('special character missing')) {
-            this.specialChar = true;
-          }
-          if (
-            err.error.error.includes(
-              'password length must be between 8 to 64 character'
-            )
-          ) {
-            this.passLength = 8 - password.length;
-          }
-          reject(err);
-        },
-      });
+
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post<IState>(environment.url + api.CHANGE_PASS, {
+          login: login,
+          password: password,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.alert.show({
+                type: 'success',
+                title: 'Пароль изменен',
+                content: '',
+              });
+              resolve(true);
+            } else {
+              this.alert.show({
+                title: 'Ошибка изменения пароля',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            console.log(err);
+            if (err.error.error.includes('lowercase letter missing')) {
+              this.lowerCase = true;
+            }
+            if (err.error.error.includes('uppercase letter missing')) {
+              this.upperCase = true;
+            }
+            if (
+              err.error.error.includes(
+                'at least one numeric character required'
+              )
+            ) {
+              this.number = true;
+            }
+            if (err.error.error.includes('special character missing')) {
+              this.specialChar = true;
+            }
+            if (
+              err.error.error.includes(
+                'password length must be between 8 to 64 character'
+              )
+            ) {
+              this.passLength = 8 - password.length;
+            }
+            resolve(false);
+          },
+        });
     });
   }
 
-  deleteUser(id: string) {
-    const url = environment.url + '/delete_user';
-    const body = {
-      id,
-    };
+  delete(id: string) {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res: { success: boolean; error: string } | any) => {
-          resolve(res.success);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+      this.http
+        .post<IState>(environment.url + api.DELETE, {
+          id: id,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) resolve(true);
+            else {
+              this.alert.show({
+                title: 'Ошибка удаления пользователя',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
+          },
+        });
     });
   }
-  getUserInfo(id: string | undefined, param: string) {
+
+  get(id: string | undefined, param: string) {
     id = id ? '/' + id : '';
     if (!param) {
       param = id;
     }
-    const url = environment.url + `/get_user/${param}${id}`;
-    return new Promise<Users[]>((resolve, reject) => {
-      this.http.get(url).subscribe({
-        next: (
-          res: { users: Users[]; success: boolean; error: string } | any
-        ) => {
-          resolve(res.users);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+    return new Promise<IUser[] | null>((resolve) => {
+      this.http
+        .get<IUsersState>(environment.url + api.GET + param + id)
+        .subscribe({
+          next: (res) => {
+            if (res.success) resolve(res.users);
+            else {
+              this.alert.show({
+                title: 'Ошибка получения пользователей',
+                content: res.error,
+              });
+              resolve(null);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(null);
+          },
+        });
     });
   }
-  addUser(
+
+  add(
     avatar: string,
     login: string,
     password: string,
@@ -129,144 +194,256 @@ export class UserService {
     role: string,
     userTags: string[]
   ) {
-    const url = environment.url + '/register';
-    const body = {
-      login,
-      password,
-      role,
-      name,
-      avatar,
-      userTags,
-    };
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (error) => {
-          reject(error);
-        },
-      });
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post<IRegisterState>(environment.url + api.SIGN_UP, {
+          login: login,
+          password: password,
+          role: role,
+          name: name,
+          avatar: avatar,
+          userTags: userTags,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.alert.show({
+                type: 'success',
+                title: 'Пользователь добавлен',
+                content: res.error,
+              });
+              resolve(true);
+            } else {
+              this.alert.show({
+                title: 'Ошибка добавления пользователя',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
+          },
+        });
     });
   }
 
-  renameUSer(login: string, name: string) {
-    const url = environment.url + '/rename_user';
-    const body = {
-      login,
-      name,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  rename(login: string, name: string) {
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post<IState>(environment.url + api.RENAME, {
+          login: login,
+          name: name,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.alert.show({
+                type: 'success',
+                title: 'Имя пользователя изменено',
+                content: '',
+              });
+              resolve(true);
+            } else {
+              this.alert.show({
+                title: 'Ошибка изменения имени пользователя',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
+          },
+        });
     });
   }
 
-  loadAvatar(id: string, avatar: string) {
-    const url = environment.url + '/load_avatar';
-    const body = {
-      id,
-      avatar,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
-  changeUserTag(id: string, userTags: string[]) {
-    const url = environment.url + '/edit_user_tag';
-    const body = {
-      id,
-      userTags,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
-    });
-  }
-
-  deleteUserTag(userTags: string) {
-    const url = environment.url + '/delete_tag';
-    const body = {
-      userTags,
-    };
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+  uploadAvatar(id: string, avatar: string) {
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post(environment.url + api.LOAD_AVATAR, {
+          id: id,
+          avatar: avatar,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res['success']) {
+              this.alert.show({
+                type: 'success',
+                title: 'Аватар обновлен',
+                content: '',
+              });
+              resolve(true);
+            } else {
+              this.alert.show({
+                title: 'Ошибка загрузки аватара',
+                content: res['error'],
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
+          },
+        });
     });
   }
 
-  getUserTags() {
-    const url = environment.url + '/get_user_tags';
-    return new Promise<any>((resolve, reject) => {
-      this.http.get(url).subscribe({
+  changeTag(id: string, userTags: string[]) {
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post<IState>(environment.url + api.EDIT_TAG, {
+          id: id,
+          userTags: userTags,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.alert.show({
+                type: 'success',
+                title: 'Подразделение обновлено',
+                content: '',
+              });
+              resolve(true);
+            } else {
+              this.alert.show({
+                title: 'Ошибка редактирования подразделения',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
+          },
+        });
+    });
+  }
+
+  // deleteTag(userTags: string) {
+  //   return new Promise<boolean>((resolve) => {
+  //     this.http
+  //       .post<IState>(environment.url + api.DELETE_TAG, {
+  //         userTags: userTags,
+  //       })
+  //       .subscribe({
+  //         next: (res) => {
+  //           if (res.success) {
+  //             this.alert.show({
+  //               type: 'success',
+  //               title: 'Подразделение удалено',
+  //               content: '',
+  //             });
+  //             resolve(true);
+  //           } else {
+  //             this.alert.show({
+  //               title: 'Ошибка удаления подразделения',
+  //               content: res.error,
+  //             });
+  //             resolve(false);
+  //           }
+  //         },
+  //         error: (err: HttpErrorResponse) => {
+  //           this.alert.show({
+  //             title: err.name,
+  //             content: err.message,
+  //           });
+  //           resolve(false);
+  //         },
+  //       });
+  //   });
+  // }
+
+  getTags() {
+    return new Promise<string[] | null>((resolve) => {
+      this.http.get<IUserTagsState>(environment.url + api.GET_TAGS).subscribe({
         next: (res) => {
-          resolve(res);
+          if (res.success) resolve(res.userTags);
+          else {
+            this.alert.show({
+              title: 'Ошибка получения подразделений',
+              content: res.error,
+            });
+            resolve(null);
+          }
         },
-        error: (err) => {
-          reject(err);
+        error: (err: HttpErrorResponse) => {
+          this.alert.show({
+            title: err.name,
+            content: err.message,
+          });
+          resolve(null);
         },
       });
     });
   }
 
   getPermissions() {
-    const url = environment.url + '/super/get_all_permissions';
-    return new Promise<GroupPermissions[]>((resolve, reject) => {
-      this.http.get(url).subscribe({
-        next: (
-          res:
-            | {
-                permissions: GroupPermissions[];
-                success: boolean;
-                error: string;
-              }
-            | any
-        ) => {
-          resolve(res.permissions);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+    return new Promise<IGroupPermissions[] | null>((resolve) => {
+      this.http
+        .get<IGroupPermissionsState>(environment.url + api.GET_PERMISSIONS)
+        .subscribe({
+          next: (res) => {
+            if (res.success) resolve(res.permissions);
+            else {
+              this.alert.show({
+                title: 'Ошибка получения разрешений',
+                content: res.error,
+              });
+              resolve(null);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(null);
+          },
+        });
     });
   }
 
   changePermissions(body: object) {
-    const url = environment.url + '/super/edit_permissions';
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(url, body).subscribe({
-        next: (res) => {
-          resolve(res);
-        },
-        error: (err) => {
-          reject(err);
-        },
-      });
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post<IState>(environment.url + api.EDIT_PERMISSIONS, body)
+        .subscribe({
+          next: (res) => {
+            if (res.success) resolve(true);
+            else {
+              this.alert.show({
+                title: 'Ошибка редактирования разрешений',
+                content: res.error,
+              });
+              resolve(false);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.alert.show({
+              title: err.name,
+              content: err.message,
+            });
+            resolve(false);
+          },
+        });
     });
   }
 }

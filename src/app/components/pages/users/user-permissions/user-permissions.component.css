@@ -3,3 +3,7 @@
   overflow-y: auto;
   padding: 17px 0;
 }
+
+.dummy {
+  height: 4px;
+}

@@ -1,12 +1,11 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { filter } from 'src/app/shared/services/forms/device';
-
-import { IConfig } from '../../../../../shared/types/config';
-import { Option } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types/input';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { DeviceFiltersClass } from '../../../../../shared/classes/devices/device-filters.class';
 import { DeviceSelectedClass } from '../../../../../shared/classes/devices/device-selected.class';
+import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-filter-devices',
@@ -14,13 +13,12 @@ import { DeviceSelectedClass } from '../../../../../shared/classes/devices/devic
   styleUrls: ['./filter-devices.component.scss'],
 })
 export class FilterDevicesComponent implements OnDestroy {
-  @Input() configs!: IConfig[];
-
   constructor(
     private form: filter,
     private groups: GroupClass,
     private filters: DeviceFiltersClass,
-    private selection: DeviceSelectedClass
+    private selection: DeviceSelectedClass,
+    private config: ConfigClass
   ) {}
 
   ngOnDestroy() {
@@ -56,12 +54,12 @@ export class FilterDevicesComponent implements OnDestroy {
   }
 
   get _options_configs() {
-    return this.configs.map((c) => {
+    return this.config.array.map((c) => {
       return {
         value: c.ID,
         html: c.name,
         isSelected: false,
-      } as Option;
+      } as IOption;
     });
   }
 
@@ -71,7 +69,7 @@ export class FilterDevicesComponent implements OnDestroy {
         value: g.id,
         html: g.name,
         isSelected: false,
-      } as Option;
+      } as IOption;
     });
   }
 
@@ -83,7 +81,7 @@ export class FilterDevicesComponent implements OnDestroy {
     this._form.controls['status-off'].setValue(!this._status_off?.value);
   }
 
-  onConfigSelectHandler(options: Option[]) {
+  onConfigSelectHandler(options: IOption[]) {
     let data: string[] = [];
 
     options.forEach((o) => {
@@ -93,7 +91,7 @@ export class FilterDevicesComponent implements OnDestroy {
     this._form.controls['config_ids'].setValue(data);
   }
 
-  onGroupSelectHandler(options: Option[]) {
+  onGroupSelectHandler(options: IOption[]) {
     let data: string[] = [];
 
     options.forEach((o) => {

@@ -5,6 +5,7 @@ import { userService } from '../../../shared/services';
 import { AppLoaderClass } from '../../../shared/classes/apps/app-loader.class';
 import { AppClass } from '../../../shared/classes/apps/app.class';
 import { AssetService } from '../../../shared/services/asset.service';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-apps',
@@ -13,8 +14,6 @@ import { AssetService } from '../../../shared/services/asset.service';
 })
 export class AppsComponent {
   public title = 'Приложения';
-
-  public userRole: string = '';
 
   public searchParam: string = '';
 
@@ -26,7 +25,8 @@ export class AppsComponent {
     private user: userService,
     private asset: AssetService,
     private loader: AppLoaderClass,
-    private apps: AppClass
+    private apps: AppClass,
+    private myUser: MyUserClass
   ) {}
 
   get _loading() {
@@ -34,17 +34,14 @@ export class AppsComponent {
   }
 
   get _apps() {
-    return this.apps.array;
+    return this.apps.groupedArray;
   }
 
   ngOnInit() {
     const i = interval(1000).subscribe(() => {
-      if (this.user.token) {
+      if (this.myUser.token) {
+        this.apps.get('all').then();
         i.unsubscribe();
-        this.apps.get('all');
-        this.asset.getFromStorage('user-role').then((role: string) => {
-          this.userRole = role;
-        });
       }
     });
   }

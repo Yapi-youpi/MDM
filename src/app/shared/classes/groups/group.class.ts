@@ -42,21 +42,19 @@ export class GroupClass {
   // ВЫЗОВЫ СЕРВИСА
 
   get(param: 'all' | string) {
-    this.loading.start();
+    return new Promise<boolean>((resolve) => {
+      this.loading.start();
 
-    this.service
-      .get(param)
-      .then((res) => {
-        if (res.success) {
-          this.array = res.devicesGroups ? res.devicesGroups : [];
-        } else {
-          this.alert.show({
-            title: 'Ошибка получения групп устройств',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => this.loading.end());
+      this.service
+        .get(param)
+        .then((res) => {
+          if (res) {
+            this.array = res ? res : [];
+            resolve(true);
+          } else resolve(false);
+        })
+        .finally(() => this.loading.end());
+    });
   }
 
   add(group: IGroup) {
@@ -64,16 +62,12 @@ export class GroupClass {
       this.loading.start();
 
       this.service.add(group).then((res) => {
-        if (res.success) {
-          if (res.group?.[0]) this.array = [res.group[0], ...this.array];
-          resolve(true);
-        } else {
-          this.alert.show({
-            title: 'Ошибка добавления группы устройств',
-            content: res.error,
-          });
-          resolve(false);
-        }
+        if (res) {
+          if (res?.[0]) {
+            this.array = [res[0], ...this.array];
+            resolve(true);
+          }
+        } else resolve(false);
       });
     }).finally(() => this.loading.end());
   }
@@ -83,15 +77,8 @@ export class GroupClass {
       this.loading.start();
 
       this.service.edit(groups).then((res) => {
-        if (res.success) {
-          resolve(true);
-        } else {
-          this.alert.show({
-            title: 'Ошибка редактирования групп(-ы) устройств',
-            content: res.error,
-          });
-          resolve(false);
-        }
+        if (res) resolve(true);
+        else resolve(false);
       });
     }).finally(() => this.loading.end());
   }
@@ -104,33 +91,20 @@ export class GroupClass {
         this.service
           .delete(groups[0])
           .then((res) => {
-            if (res.success) {
+            if (res) {
               this.array = this.array.filter((g) => {
                 return g.id !== this.current?.id;
               });
               resolve(true);
-            } else {
-              this.alert.show({
-                title: 'Ошибка удаления группы устройств',
-                content: res.error,
-              });
-              resolve(false);
-            }
+            } else resolve(false);
           })
           .finally(() => this.loading.end());
       } else {
         this.service
           .deleteSeveral(groups)
           .then((res) => {
-            if (res.success) {
-              resolve(true);
-            } else {
-              this.alert.show({
-                title: 'Ошибка удаления групп устройств',
-                content: res.error,
-              });
-              resolve(false);
-            }
+            if (res) resolve(true);
+            else resolve(false);
           })
           .finally(() => this.loading.end());
       }

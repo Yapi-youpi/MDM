@@ -1,11 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  assetService,
-  authService,
-  userService,
-} from '../../../shared/services';
-import { Users } from 'src/app/interfaces/interfaces';
+import { authService } from '../../../shared/services';
+import { MyUserClass } from '../../../shared/classes/users/my-user.class';
+import { UsersClass } from '../../../shared/classes/users/users.class';
 
 @Component({
   selector: 'app-user',
@@ -13,17 +10,19 @@ import { Users } from 'src/app/interfaces/interfaces';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  private id: string = '';
-  public currentUser!: Users;
   public isPopupOpen: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
     private auth: authService,
-    public user: userService,
     public router: Router,
-    public asset: assetService
+    private myUser: MyUserClass,
+    private users: UsersClass
   ) {}
+
+  get _me() {
+    return this.myUser.me;
+  }
 
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event: Event): void {
@@ -33,10 +32,8 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.asset.getFromStorage('id').then((id: string) => {
-      this.id = id;
-
-      this.getUser();
+    this.myUser.getMe().then((res) => {
+      if (res) this.users.setCurrent(this._me);
     });
   }
 
@@ -44,46 +41,19 @@ export class UserComponent implements OnInit {
     this.isPopupOpen = !this.isPopupOpen;
   }
 
-  getUser() {
-    this.user
-      .getUserInfo(this.id, 'uid')
-      .then((res) => {
-        this.currentUser = res[0];
-        this.asset.setToStorage('user-role', res[0].role).then();
-      })
-      .catch((err) => {
-        console.log(err);
-        this.asset.setToStorage('user-role', '').then();
-      });
-  }
-
   setUser(change) {
     if (change) {
-      this.getUser();
-    } else this.currentUser = { ...this.currentUser };
+      this.myUser.getMe().then();
+    }
+    // else this.myUser.me = { ...this.myUser.me };
     this.isPopupOpen = false;
   }
 
   logout() {
-    this.auth
-      .logout(this.user.token, this.user.login)
-      .then((res) => {
-        if (res) {
-          this.user.token = '';
-          this.router.navigateByUrl('auth').then();
-          this.asset.removeFromStorage('id').then();
-          this.asset.removeFromStorage('token').then();
-          this.asset.removeFromStorage('name').then();
-          this.asset.removeFromStorage('login').then();
-          this.asset.removeFromStorage('last_password').then();
-          this.asset.removeFromStorage('user-role').then();
-          localStorage.clear();
-        } else {
-          console.log('Ошибка выхода из системы');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.myUser.signOut().then((res) => {
+      if (res) {
+        this.router.navigateByUrl('auth').then();
+      }
+    });
   }
 }

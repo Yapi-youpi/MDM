@@ -4,7 +4,7 @@
   [isClosable]="true"
 >
   <div class="modal-form-filter w-400">
-    <form class="filter" [formGroup]="filterForm" (submit)="applyFilter()">
+    <form class="filter" [formGroup]="_form" (submit)="applyFilter()">
       <div class="filter__header">Фильтр</div>
       <div class="filter__content">
         <div class="form-group-wrapper">
@@ -41,7 +41,7 @@
             [name]="'dateFrom'"
             [width]="'w-180'"
             [controlName]="'dateFrom'"
-            [groupName]="filterForm"
+            [groupName]="_form"
           ></app-input-datetime>
         </div>
         <div class="form-group-wrapper date">
@@ -50,7 +50,7 @@
             [name]="'dateTo'"
             [width]="'w-180'"
             [controlName]="'dateTo'"
-            [groupName]="filterForm"
+            [groupName]="_form"
           ></app-input-datetime>
         </div>
       </div>

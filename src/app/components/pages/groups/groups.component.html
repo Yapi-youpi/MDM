@@ -17,8 +17,13 @@
         [target]="'add_group'"
       ></app-add-button>
     </div>
-    <app-groups-filters [configs]="configs"></app-groups-filters>
-    <ng-container *ngIf="(_gLoading | async) || false; else dummy">
+    <app-groups-filters></app-groups-filters>
+    <ng-container
+      *ngIf="
+        (_gLoading | async) || false || (_cLoading | async) || false;
+        else dummy
+      "
+    >
       <div class="progress">
         <div class="indeterminate"></div>
       </div>
@@ -94,7 +99,6 @@
                 | group_date: isDateSortAsc
             "
             [group]="group"
-            [configs]="configs"
             [userRole]="userRole"
           ></app-group-item>
         </ng-container>
@@ -106,15 +110,15 @@
   </div>
 </main>
 
-<app-filter-group [configs]="configs"></app-filter-group>
+<app-filter-group></app-filter-group>
 
 <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
-  <app-add-group [configs]="configs"></app-add-group>
+  <app-add-group></app-add-group>
   <app-list-files [source]="'group'"></app-list-files>
   <app-add-file [source]="'group'"></app-add-file>
   <app-delete-file [source]="'group'"></app-delete-file>
-  <app-edit-group [configs]="configs"></app-edit-group>
-  <app-edit-several-groups [configs]="configs"></app-edit-several-groups>
+  <app-edit-group></app-edit-group>
+  <app-edit-several-groups></app-edit-several-groups>
   <app-delete-group></app-delete-group>
   <app-delete-several-elements [source]="'group'"></app-delete-several-elements>
 </ng-container>

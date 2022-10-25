@@ -1,32 +1,27 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { filter } from '../../../../../shared/services/forms/messages';
+import { PagerFiltersClass } from '../../../../../shared/classes/pager/pager-filters.class';
 
 @Component({
   selector: 'app-filter-messages',
   templateUrl: './filter-messages.component.html',
   styleUrls: ['./filter-messages.component.scss'],
+  providers: [PagerFiltersClass],
 })
-export class FilterMessagesComponent implements OnInit {
-  public filterForm: FormGroup;
-  @Output() onSubmit = new EventEmitter();
-  @Output() onCancel = new EventEmitter();
-  constructor() {
-    this.filterForm = new FormGroup({
-      status: new FormControl(true),
-      dateFrom: new FormControl(''),
-      dateTo: new FormControl(''),
-    });
+export class FilterMessagesComponent {
+  constructor(private filters: PagerFiltersClass, private form: filter) {}
+
+  get _form() {
+    return this.form.form;
   }
 
-  ngOnInit(): void {}
-
   applyFilter() {
-    this.onSubmit.emit(this.filterForm.value);
+    this.filters.setAll();
   }
 
   clearFilter() {
-    this.filterForm.reset();
-    this.onCancel.emit(this.filterForm.value);
-    document.getElementById('filter-messages')?.classList.add('hidden');
+    this.filters.resetAll();
+    const modal = document.querySelector('#filter-messages');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
   }
 }

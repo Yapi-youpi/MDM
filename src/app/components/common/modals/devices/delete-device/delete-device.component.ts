@@ -22,7 +22,6 @@ export class DeleteDeviceComponent {
     if (this._device) {
       this.device.delete([this._device.device_id]).then((res) => {
         if (res) {
-          // todo: delete from selected list in exists in selected list
           this.closeModal();
         }
       });

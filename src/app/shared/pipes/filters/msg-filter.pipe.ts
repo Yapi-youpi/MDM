@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Message } from '../../types/message';
+import { IMessage } from '../../types/message';
 
 @Pipe({
   name: 'msgFilter',
 })
 export class MsgFilterPipe implements PipeTransform {
   transform(
-    messages: Message[],
+    messages: IMessage[],
     status: boolean | null,
     dateFrom: string | null,
     dateTo: string | null
-  ): Message[] {
+  ): IMessage[] {
     if (!messages) return [];
     return messages.filter((m) => {
       return (

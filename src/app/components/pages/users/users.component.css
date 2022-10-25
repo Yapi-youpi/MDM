@@ -112,3 +112,7 @@
 .user-card__menu-btn:hover span {
   background-color: var(--blue) !important;
 }
+
+.dummy {
+  height: 4px;
+}

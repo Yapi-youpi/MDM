@@ -6,7 +6,7 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { Option } from '../../../../shared/types/input';
+import { IOption } from '../../../../shared/types/input';
 
 @Component({
   selector: 'app-mini-select',
@@ -17,7 +17,7 @@ export class MiniSelectComponent implements OnChanges {
   @Input() open = false;
   @Input() state;
   @Input() header = '';
-  @Input() options: Option[] = [];
+  @Input() options: IOption[] = [];
   @Input() headerClass: string = '';
   @Input() arrowClass: string = '';
   public currentValue = '';
@@ -43,7 +43,7 @@ export class MiniSelectComponent implements OnChanges {
     this.open = true;
   }
 
-  selectOption(option: Option) {
+  selectOption(option: IOption) {
     this.currentValue = option.html;
     this.open = !this.open;
     this.onSelect.emit(option.value);

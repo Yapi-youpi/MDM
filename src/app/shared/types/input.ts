@@ -18,7 +18,7 @@ export type inputWidth =
   | 'w-457'
   | 'w-500';
 
-export interface Option {
+export interface IOption {
   value: string;
   html: string;
   isSelected?: boolean;

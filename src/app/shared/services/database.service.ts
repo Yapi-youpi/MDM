@@ -20,11 +20,12 @@ export class DatabaseService {
     return await Parse.User.logIn(login, password);
   }
 
-  signup(login: string, password: string) {
+  signUp(login: string, password: string) {
     const user = new Parse.User();
     user.set('username', login);
     user.set('password', password);
     user.set('email', login + '@gmail.com');
+
     return new Promise<any>((resolve, reject) => {
       user
         .signUp()

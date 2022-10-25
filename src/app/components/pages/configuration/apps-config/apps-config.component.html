@@ -66,7 +66,7 @@
     <tr
       class="app-item table-row"
       *ngFor="
-        let app of apps
+        let app of _apps
           | appsConfig: appsInConfig:true
           | search: searchParam:'app'
           | apps_system: isOnlySystemApps
@@ -127,7 +127,7 @@
             class="visually-hidden"
             id="icon-{{ app.ID }}"
             [checked]="app.showIcon"
-            (change)="toggleIcon(app.ID)"
+            (change)="toggleIcon(app)"
           />
           <div class="checkbox-round">
             <span class="icon">
@@ -150,7 +150,7 @@
           min="0"
           max="12"
           [value]="app.screenOrder"
-          (change)="changeOrder(app.ID, $event)"
+          (change)="changeOrder(app, $event)"
         />
       </td>
       <td class="row center app-item__icon">
@@ -165,7 +165,7 @@
             class="visually-hidden"
             id="fix-{{ app.ID }}"
             [checked]="app.bottom"
-            (change)="toggleFix(app.ID)"
+            (change)="toggleFix(app)"
           />
           <div class="checkbox-round">
             <span class="icon">

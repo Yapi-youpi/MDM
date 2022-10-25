@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { inputWidth, Option } from '../../../../../shared/types/input';
+import { inputWidth, IOption } from '../../../../../shared/types/input';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -12,14 +12,14 @@ export class InputSelectAccordionComponent {
   @Input() title: string = '';
   @Input() width: inputWidth = 'w-170';
   @Input() control: FormControl = new FormControl(null);
-  @Input() options: Option[] = [];
-  @Input() currOptions: Option[] = [];
+  @Input() options: IOption[] = [];
+  @Input() currOptions: IOption[] = [];
   @Input() isError: boolean = false;
 
-  @Output() onSelect = new EventEmitter<Option[]>();
+  @Output() onSelect = new EventEmitter<IOption[]>();
 
   public isDropdownHidden: boolean = true;
-  public copy: Option[] = [];
+  public copy: IOption[] = [];
 
   constructor() {}
 
@@ -33,7 +33,7 @@ export class InputSelectAccordionComponent {
     this.isDropdownHidden = !this.isDropdownHidden;
   }
 
-  onOptionSelectHandler(option: Option) {
+  onOptionSelectHandler(option: IOption) {
     if (this.currOptions.length === 0) this.currOptions = this.options;
 
     if (

@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { IConfig } from '../../../../shared/types/config';
+import { Component } from '@angular/core';
 import { DeviceFiltersClass } from '../../../../shared/classes/devices/device-filters.class';
 import { GroupClass } from '../../../../shared/classes/groups/group.class';
+import { ConfigClass } from '../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-devices-filters',
@@ -9,17 +9,19 @@ import { GroupClass } from '../../../../shared/classes/groups/group.class';
   styleUrls: ['./devices-filters.component.scss'],
 })
 export class DevicesFiltersComponent {
-  @Input() configs!: IConfig[];
-
-  constructor(private groups: GroupClass, public filters: DeviceFiltersClass) {}
+  constructor(
+    private groups: GroupClass,
+    public filters: DeviceFiltersClass,
+    private config: ConfigClass
+  ) {}
 
   get _configIDs() {
     if (!this.filters.configsIDs || this.filters.configsIDs.length === 0)
       return null;
     else {
       return this.filters.configsIDs.map((c) => {
-        const idx = this.configs.map((e) => e.ID).indexOf(c);
-        return this.configs[idx].name;
+        const idx = this.config.array.map((e) => e.ID).indexOf(c);
+        return this.config.array[idx].name;
       });
     }
   }
@@ -48,8 +50,8 @@ export class DevicesFiltersComponent {
   }
 
   onConfigsIDsRemoveHandler(name: string) {
-    const idx = this.configs.findIndex((c) => c.name === name);
-    this.filters.resetParam('configsIDs', this.configs[idx].ID);
+    const idx = this.config.array.findIndex((c) => c.name === name);
+    this.filters.resetParam('configsIDs', this.config.array[idx].ID);
   }
 
   onGroupsIDsRemoveHandler(name: string) {

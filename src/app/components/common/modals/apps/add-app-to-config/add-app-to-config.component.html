@@ -48,32 +48,25 @@
           <div class="indeterminate"></div>
         </div>
       </ng-template>
-      <ng-container *ngIf="appGroups.length > 0; else loader">
+      <ng-container *ngIf="_groupedApps.length > 0; else loader">
         <div class="checkbox-group">
-          <label
+          <div
             *ngFor="
-              let group of appGroups
+              let group of _groupedApps
                 | search: searchParam:'app'
                 | appGroup: filter
             "
-            class="checkbox-wrapper"
-            for="{{ group.name }}"
+            class="item-wrapper row"
           >
-            <input
-              (change)="onCheckboxChange($event)"
-              class="visually-hidden"
-              name="apps"
-              type="checkbox"
-              value="{{ group.ID }}"
-            />
-            <div class="input checkbox-custom">
-              <svg width="18" height="18" viewBox="0 0 20 20">
-                <polyline points="2.6,8.1 5.9,11.4 13.0,4.2"></polyline>
-              </svg>
+            <div class="checkbox-wrapper">
+              <app-input-checkbox
+                [value]="checkIfExistsInList(group)"
+                (onChange)="onCheckboxChange(group, $event)"
+              ></app-input-checkbox>
             </div>
-            <div class="app">
+            <div class="item-content row r-14">
               <img
-                class="app__img"
+                class="img r-8"
                 src="{{
                   group.iconUID !== ''
                     ? url + group.ID
@@ -81,18 +74,17 @@
                 }}"
                 alt="{{ group.iconText }}"
               />
-              <span [title]="group.name" class="app__name">{{
-                group.name
-              }}</span>
-
+              <p [title]="group.name" class="text-choose name">
+                {{ group.name }}
+              </p>
               <select
                 *ngIf="
                   group.children && group.children.length > 0;
                   else nochildren
                 "
-                (change)="setValue($event)"
-                class="select-app-action app__version"
-                id="version-{{ group.name }}"
+                (change)="swapIDsInListOfSelected($event, group)"
+                class="select-app-action version"
+                id="version-{{ group.ID }}"
                 name="version"
               >
                 <option [value]="group.ID">
@@ -104,12 +96,15 @@
                 </option>
               </select>
               <ng-template #nochildren>
-                <p *ngIf="group.system" class="app__system">
+                <p *ngIf="group.system; else dummy" class="text-body">
                   Системное приложение
                 </p>
+                <ng-template #dummy>
+                  <div></div>
+                </ng-template>
               </ng-template>
             </div>
-          </label>
+          </div>
         </div>
       </ng-container>
     </div>

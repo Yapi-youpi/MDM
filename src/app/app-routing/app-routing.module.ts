@@ -51,7 +51,7 @@ const routes: Routes = [
     component: MapComponent,
   },
   {
-    path: 'config',
+    path: 'configs',
     component: ConfigsComponent,
     canActivate: [AuthGuard],
     data: {
@@ -59,7 +59,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'configuration/:id',
+    path: 'configs/:id',
     component: ConfigurationComponent,
     canActivate: [AuthGuard],
     data: {
@@ -69,6 +69,11 @@ const routes: Routes = [
   {
     path: 'help',
     component: HelpComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'devices',
+    pathMatch: 'full',
   },
 ];
 

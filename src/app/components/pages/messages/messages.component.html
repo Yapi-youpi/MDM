@@ -16,9 +16,28 @@
         [target]="'modal-add-message'"
       ></app-add-button>
     </div>
-
+    <div class="progressbar-wrapper">
+      <ng-container
+        *ngIf="
+          (_dLoading | async) ||
+            false ||
+            (_gLoading | async) ||
+            false ||
+            (_pLoading | async) ||
+            false;
+          else dummy
+        "
+      >
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </ng-container>
+      <ng-template #dummy>
+        <div class="dummy"></div>
+      </ng-template>
+    </div>
     <div class="message-wrapper">
-      <table *ngIf="messages?.length !== 0; else nodata">
+      <table *ngIf="_messages?.length !== 0; else nodata">
         <thead>
           <tr class="table-row">
             <th>
@@ -52,9 +71,9 @@
           <tr
             class="msg-item table-row"
             *ngFor="
-              let msg of messages
+              let msg of _messages
                 | search: search:'message'
-                | msgFilter: filter.status:filter.dateFrom:filter.dateTo
+                | msgFilter: filters.status:filters.dateFrom:filters.dateTo
             "
           >
             <!--| msg: isDateSortAsc:'date'
@@ -87,12 +106,5 @@
   </div>
 </main>
 
-<app-add-message
-  (onSend)="getMessages()"
-  [devices]="devices"
-  [groups]="groups"
-></app-add-message>
-<app-filter-messages
-  (onSubmit)="applyFilterParams($event)"
-  (onCancel)="resetFilterParams()"
-></app-filter-messages>
+<app-add-message></app-add-message>
+<app-filter-messages></app-filter-messages>

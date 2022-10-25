@@ -1,10 +1,10 @@
-export interface AllowedClasses {}
+export interface IAllowedClasses {}
 
 export interface IConfig {
   GPS?: boolean | true;
   ID: string;
   appUpdateTime?: string | '02:00';
-  applications?: string[] | null;
+  applications: string[];
   autoBrightness: boolean | false;
   autoUpdate: boolean | false;
   backgroundColor: string;
@@ -36,6 +36,7 @@ export interface IConfig {
   mobileData: boolean | true;
   mobileEnrollment: boolean | false;
   name: string;
+  nfcState: boolean;
   orientation: number | 0;
   pushOptions: string | 'all';
   restrictions: string | '';
@@ -53,5 +54,29 @@ export interface IConfig {
   wifiPassword: string | '';
   wifiSSID: string | '';
   wifiSecurityType: string | '';
-  allowedClasses: AllowedClasses;
+  allowedClasses: IAllowedClasses;
+  //новые поля
+  appName: string | '';
+  appUpdateFrom: string | '';
+  appUpdateTo: string | '';
+  configVersion: number;
+  custom1: string | '';
+  custom2: string | '';
+  custom3: string | '';
+  imei: string | '';
+  installedApps: string[];
+  lockStatusBar: false;
+  mainApp: string | '';
+  newNumber: string | '';
+  newServerUrl: '';
+  password: '';
+  passwordMode: '';
+  phone: '';
+  removedApps: string[];
+  requestUpdates: '';
+  runDefaultLauncher: false;
+  systemUpdateFrom: '';
+  systemUpdateTo: '';
+  title: '';
+  vendor: '';
 }

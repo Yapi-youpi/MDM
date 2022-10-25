@@ -8,13 +8,14 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { UserService } from './shared/services/user.service';
 import { errorService } from './shared/services';
+import { MyUserClass } from './shared/classes/users/my-user.class';
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
   constructor(
-    private userService: UserService,
+    // private userService: UserService,
+    private myUser: MyUserClass,
     private router: Router,
     private err: errorService
   ) {}
@@ -22,8 +23,8 @@ export class AppInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.userService.token;
-    const login = this.userService.login;
+    const token = this.myUser.token;
+    const login = this.myUser.login;
     // console.log(req);
     if (
       req.url.includes('login') ||

@@ -1,11 +1,10 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-
-import { IConfig } from '../../../../shared/types/config';
 import { IDevice } from '../../../../shared/types/devices';
 import { DeviceSelectedClass } from '../../../../shared/classes/devices/device-selected.class';
 import { DeviceClass } from '../../../../shared/classes/devices/device.class';
 import { edit } from '../../../../shared/services/forms/device';
 import { GroupClass } from '../../../../shared/classes/groups/group.class';
+import { ConfigClass } from '../../../../shared/classes/configs/config.class';
 
 @Component({
   selector: 'app-device-item',
@@ -14,7 +13,6 @@ import { GroupClass } from '../../../../shared/classes/groups/group.class';
 })
 export class DeviceItemComponent {
   @Input() public device!: IDevice;
-  @Input() public configs!: IConfig[];
   @Input() public userRole!: string;
 
   @ViewChild('name') nameRef!: ElementRef;
@@ -24,8 +22,13 @@ export class DeviceItemComponent {
     private groups: GroupClass,
     private selection: DeviceSelectedClass,
     private devices: DeviceClass,
-    private form: edit
+    private form: edit,
+    private config: ConfigClass
   ) {}
+
+  get _configs() {
+    return this.config.array;
+  }
 
   get _groups() {
     return this.groups.array;
@@ -74,7 +77,7 @@ export class DeviceItemComponent {
   }
 
   onClickDeviceReloadHandler(device: IDevice) {
-    this.devices.reload(device.device_id);
+    this.devices.reload(device.device_id).then();
   }
 
   onClickDeviceFilesHandler(device: IDevice) {

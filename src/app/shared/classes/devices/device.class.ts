@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { alertService, deviceService } from '../../services';
+import { deviceService } from '../../services';
 import { IAddDevice, IDevice } from '../../types/devices';
 import { DeviceLoaderClass } from './device-loader.class';
 
@@ -12,8 +12,7 @@ export class DeviceClass {
 
   constructor(
     private loading: DeviceLoaderClass,
-    private service: deviceService,
-    private alert: alertService
+    private service: deviceService
   ) {}
 
   // ОБНОВЛЕНИЕ ТЕКУЩЕГО ВЫБРАННОГО УСТРОЙСТВА
@@ -43,23 +42,21 @@ export class DeviceClass {
   // ВЫЗОВЫ СЕРВИСА
 
   get(param: 'all' | string, group_id?: string) {
-    this.loading.start();
+    return new Promise<boolean>((resolve) => {
+      this.loading.start();
 
-    this.service
-      .get(param, group_id)
-      .then((res) => {
-        if (res.success) {
-          this.array = res.devices
-            ? res.devices.map((d) => ({ ...d, isSelected: false }))
-            : [];
-        } else {
-          this.alert.show({
-            title: 'Ошибка получения списка устройств',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => this.loading.end());
+      this.service
+        .get(param, group_id)
+        .then((res) => {
+          if (res) {
+            this.array = res
+              ? res.map((d) => ({ ...d, isSelected: false }))
+              : [];
+            resolve(true);
+          } else resolve(false);
+        })
+        .finally(() => this.loading.end());
+    });
   }
 
   add(addDevice: IAddDevice) {
@@ -69,16 +66,10 @@ export class DeviceClass {
       this.service
         .add(addDevice)
         .then((res) => {
-          if (res.success) {
-            if (res.device) this.setCurrent(res.device);
+          if (res) {
+            this.setCurrent(res);
             resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка добавления устройства',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          } else resolve(false);
         })
         .finally(() => this.loading.end());
     });
@@ -91,15 +82,8 @@ export class DeviceClass {
       this.service
         .edit(devices)
         .then((res) => {
-          if (res.success) {
-            resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка редактирования одного/нескольких устройств',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          if (res) resolve(true);
+          else resolve(false);
         })
         .finally(() => this.loading.end());
     });
@@ -112,39 +96,21 @@ export class DeviceClass {
       this.service
         .delete(devIDs)
         .then((res) => {
-          if (res.success) {
-            resolve(true);
-          } else {
-            this.alert.show({
-              title: 'Ошибка удаления одного/нескольких устройств',
-              content: res.error,
-            });
-            resolve(false);
-          }
+          if (res) resolve(true);
+          else resolve(false);
         })
         .finally(() => this.loading.end());
     });
   }
 
   reload(devID: string) {
-    this.loading.start();
+    return new Promise<boolean>((resolve) => {
+      this.loading.start();
 
-    this.service
-      .reload(devID)
-      .then((res) => {
-        if (res.success) {
-          this.alert.show({
-            type: 'success',
-            title: 'Устройство будет перезагружено',
-            content: 'Это может занять некоторое время',
-          });
-        } else {
-          this.alert.show({
-            title: 'Ошибка перезагрузки устройства',
-            content: res.error,
-          });
-        }
-      })
-      .finally(() => this.loading.end());
+      this.service
+        .reload(devID)
+        .then((res) => resolve(res))
+        .finally(() => this.loading.end());
+    });
   }
 }

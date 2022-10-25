@@ -1,16 +1,17 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfigsService } from '../../../shared/services/configs.service';
-import { DevicesConfig, Permissions } from '../../../interfaces/interfaces';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
 import { IApp } from '../../../shared/types/apps';
-import { IAppsState } from '../../../shared/types/states';
-import { AppsService } from '../../../shared/services/apps.service';
 import { alertService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
 import Compressor from 'compressorjs';
+import { AppClass } from '../../../shared/classes/apps/app.class';
+import { AppSelectedClass } from '../../../shared/classes/apps/app-selected.class';
+import { IConfig } from '../../../shared/types/config';
+import { ConfigClass } from '../../../shared/classes/configs/config.class';
+import { edit } from '../../../shared/services/forms/configs';
+import { IPermissions } from '../../../shared/types/users';
 
 @Component({
   selector: 'app-configuration',
@@ -19,11 +20,9 @@ import Compressor from 'compressorjs';
 })
 export class ConfigurationComponent implements OnInit {
   public title = 'Конфигурации / ';
-  public config!: DevicesConfig;
-  public configForm: FormGroup;
-  public apps: IApp[] = [];
+  public config!: IConfig;
   // public restrictions: string[] = [];
-  public restrictionList: Permissions;
+  public restrictionList: IPermissions;
   public isModalAddAppOpen = false;
   public manageBrightness = false;
   public file_input!: any;
@@ -36,13 +35,15 @@ export class ConfigurationComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    public appsService: AppsService,
+    private apps: AppClass,
+    private selected: AppSelectedClass,
     private alert: alertService,
     private route: ActivatedRoute,
-    private configService: ConfigsService,
+    private configClass: ConfigClass,
     private router: Router,
     private elementRef: ElementRef,
-    private asset: AssetService
+    private asset: AssetService,
+    private form: edit
   ) {
     this.title = this.title + this.asset.configName;
     this.restrictionList = {
@@ -54,77 +55,66 @@ export class ConfigurationComponent implements OnInit {
       no_factory_reset: 'сброс настроек',
       no_fun: 'развлекательные приложения',
     };
-    this.configForm = new FormGroup({
-      autoUpdate: new FormControl(false, Validators.required),
-      autoBrightness: new FormControl(false, Validators.required),
-      backgroundColor: new FormControl('', Validators.required),
-      blockStatusBar: new FormControl(false, Validators.required),
-      bluetooth: new FormControl(true, Validators.required),
-      brightness: new FormControl(255, Validators.required),
-      configUpdateTime: new FormControl('00:00', Validators.required),
-      description: new FormControl('', Validators.required),
-      desktopHeader: new FormControl('', Validators.required),
-      desktopHeaderTemplate: new FormControl('', Validators.required),
-      disableScreenshots: new FormControl(false, Validators.required),
-      GPS: new FormControl(true, Validators.required),
-      iconSize: new FormControl('SMALL', Validators.required),
-      keepaliveTime: new FormControl(60000000000, Validators.required),
-      kioskMode: new FormControl(false, Validators.required),
-      lockSafeSettings: new FormControl(true, Validators.required),
-      lockVolume: new FormControl(false, Validators.required),
-      mainApp: new FormControl('', Validators.required),
-      manageTimeout: new FormControl(false, Validators.required),
-      manageVolume: new FormControl(false, Validators.required),
-      mobileData: new FormControl(true, Validators.required),
-      mobileEnrollment: new FormControl(false, Validators.required),
-      name: new FormControl('', Validators.required),
-      nfcState: new FormControl(true, Validators.required),
-      orientation: new FormControl(0, Validators.required),
-      pushOptions: new FormControl('all', Validators.required),
-      scheduleAppUpdate: new FormControl(false, Validators.required),
-      systemUpdateType: new FormControl(0, Validators.required),
-      systemUpdateTime: new FormControl('00:00', Validators.required),
-      textColor: new FormControl('', Validators.required),
-      timeout: new FormControl(30000000000, Validators.required),
-      usbStorage: new FormControl(false, Validators.required),
-      useDefaultDesignSettings: new FormControl(false, Validators.required),
-      volume: new FormControl(90, Validators.required),
-      wifi: new FormControl(true, Validators.required),
-      wifiPassword: new FormControl('', Validators.required),
-      wifiSSID: new FormControl('', Validators.required),
-      wifiSecurityType: new FormControl('', Validators.required),
-    });
+  }
+
+  get _form() {
+    return this.form.form;
+  }
+  get _systemUpdateType() {
+    return this._form.get('systemUpdateType');
+  }
+  get _mobileData() {
+    return this._form.get('mobileData');
+  }
+  get _wifi() {
+    return this._form.get('wifi');
+  }
+  get _manageVolume() {
+    return this._form.get('manageVolume');
+  }
+  get _manageTimeout() {
+    return this._form.get('manageTimeout');
+  }
+  get _autoBrightness() {
+    return this._form.get('autoBrightness');
+  }
+  get _useDefaultDesignSettings() {
+    return this._form.get('useDefaultDesignSettings');
+  }
+  get _desktopHeader() {
+    return this._form.get('desktopHeader');
+  }
+  get _desktopHeaderTemplate() {
+    return this._form.get('desktopHeaderTemplate');
+  }
+  get _description() {
+    return this._form.get('description');
+  }
+  get _backgroundColor() {
+    return this._form.get('backgroundColor');
+  }
+  get _textColor() {
+    return this._form.get('textColor');
+  }
+  get _iconSize() {
+    return this._form.get('iconSize');
+  }
+  get _orientation() {
+    return this._form.get('orientation');
   }
 
   ngOnInit() {
     this.getConfig();
   }
 
-  getApps() {
-    this.appsService
-      .get('all')
-      .then((res: IAppsState) => {
-        if (res.success) {
-          this.apps = res.app ? res.app : [];
-          // console.log('APPS: ', this.apps);
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   getConfig() {
     const id = this.route.snapshot.paramMap.get('id') || 'default';
-    this.configService
-      .getConfig(id)
+    this.configClass
+      .get(id)
       .then((res) => {
-        if (res.length > 0) {
-          this.config = Object.assign(res[0]);
-          this.initialAppList = res[0].applications || [];
-          // console.log(this.config);
+        if (res && this.configClass.array.length > 0) {
+          this.config = Object.assign(this.configClass.array[0]);
+          this.initialAppList = this.configClass.array[0].applications || [];
         }
       })
       .then(() => {
@@ -150,19 +140,20 @@ export class ConfigurationComponent implements OnInit {
   // }
 
   setConfig() {
-    this.configForm.patchValue(this.config);
+    // this.configForm.patchValue(this.config);
+    this.form.updateWithConfig(this.config);
 
-    if (!this.configForm.value.textColor) {
-      this.configForm.patchValue({ textColor: '#ffffff' });
+    if (!this.form.values.textColor) {
+      this.form.form.patchValue({ textColor: '#ffffff' });
     }
-    if (!this.configForm.value.backgroundColor) {
-      this.configForm.patchValue({ backgroundColor: '#557ebe' });
+    if (!this.form.values.backgroundColor) {
+      this.form.form.patchValue({ backgroundColor: '#557ebe' });
     }
-    if (!this.configForm.value.wifiSecurityType) {
-      this.configForm.patchValue({ wifiSecurityType: 'NONE' });
+    if (!this.form.values.wifiSecurityType) {
+      this.form.form.patchValue({ wifiSecurityType: 'NONE' });
     }
 
-    this.getApps();
+    this.apps.get('all', true).then();
     // this.getRestrictions();
     if (this.config) {
       this.config.applications = this.initialAppList;
@@ -182,49 +173,41 @@ export class ConfigurationComponent implements OnInit {
   }
 
   editConfig() {
-    const config = Object.assign(this.config, this.configForm.value);
+    const config = { ...this.config, ...this.form.values };
     // дополнительная проверка на одновременное отключение интернета и wifi
     if (!config.wifi && !config.mobileData) {
       // включаем интернет, если пользователю удалось отключить и интернет, и wifi
       config.mobileData = !config.mobileData;
     }
-    this.configService
-      .editConfig(config)
-      .then((res) => {
-        // console.log(res);
+    this.configClass.edit(config).then((res) => {
+      if (res) {
         const saveBtn = document.querySelector('.save-btn');
         saveBtn?.classList.add('save-btn--success');
         let i = interval(2000).subscribe(() => {
           saveBtn?.classList.remove('save-btn--success');
           i.unsubscribe();
         });
-
-        // this.configForm.reset();
-      })
-      .catch((err) => console.log(err));
+      }
+    });
 
     if (this.editedApps.length > 0) {
-      this.editedApps.map((app) => {
-        this.appsService
-          .edit(app)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
+      this.editedApps.forEach((app) => {
+        this.apps.edit(app.ID, app).then((res) => console.log(res));
       });
     }
 
     if (this.bgImage) {
-      this.configService
-        .uploadWallpaper(this.config.ID, this.bgImage)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+      this.configClass.uploadWallpaper(this.config.ID, this.bgImage).then();
     }
   }
 
-  editApp(id: string) {
-    const currentApp = this.apps.find((app) => app.ID === id);
+  editApp(app: IApp) {
+    const currentApp = this.apps.rawArray.find((a) => a.ID === app.ID);
     if (currentApp) {
       this.editedApps.push(currentApp);
     }
+    // this.apps.setCurrent(app);
+    // this.editedApps.push(currentApp);
   }
 
   toggleApp(app) {
@@ -244,7 +227,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('config').then();
+    this.router.navigateByUrl('configs').then();
   }
 
   toggleBrightness() {
@@ -298,8 +281,10 @@ export class ConfigurationComponent implements OnInit {
     }
   }
 
-  addApp(addedApps: string[]) {
-    this.config.applications = this.config.applications?.concat(addedApps);
+  addApps() {
+    this.config.applications = this.config.applications?.concat(
+      this.selected.selectedIDs
+    );
     this.isModalAddAppOpen = false;
   }
 
@@ -346,10 +331,7 @@ export class ConfigurationComponent implements OnInit {
         this.config.backgroundImageUrl &&
         this.config.backgroundImageUrl === this.bgImg
       ) {
-        this.configService
-          .removeWallpaper(this.config.ID)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
+        this.configClass.removeWallpaper(this.config.ID).then();
         this.config.backgroundImageUrl = '';
       }
       this.bgImg = '';
