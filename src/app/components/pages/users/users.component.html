@@ -24,11 +24,11 @@
       </div>
     </ng-template>
     <div class="users-wrapper">
-      <ng-container *ngIf="users.length > 0; else loader">
+      <ng-container *ngIf="_users.length > 0; else loader">
         <div
           class="user-card"
           *ngFor="
-            let user of users
+            let user of _users
               | searchUsers: search
               | filterUsers: filter_roles:filter_groups
           "
@@ -44,9 +44,9 @@
             </div>
             <div
               *ngIf="
-                userRole === 'super' ||
-                (userRole === 'admin' ) ||
-                userLogin === user.login
+                _role === 'super' ||
+                (_role === 'admin' ) ||
+                _me?.login === user.login
               "
               class="user-card__menu"
             >
@@ -93,16 +93,15 @@
 
   <!--   ПРАВЫЙ САЙДБАР    -->
   <app-user-permissions
-    *ngIf="userRole === 'super'"
+    *ngIf="_role === 'super'"
     class="card card--sidebar"
   ></app-user-permissions>
 </main>
 
 <!--  MODALS -->
-<app-add-user [currentUser]="currentUser" (onClose)="closeModal($event)">
+<app-add-user [currentUser]="_current" (onClose)="closeModal($event)">
 </app-add-user>
 <app-delete-user
-  [currentUser]="currentUser"
   (onClose)="closeModal($event)"
 ></app-delete-user>
 

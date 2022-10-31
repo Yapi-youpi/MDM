@@ -52,16 +52,19 @@
       <app-group-action-btn
         [group]="group"
         [target]="'list_files'"
+        [title]='"Файлы групп"'
         (onClick)="onFileClickHandler(group)"
       ></app-group-action-btn>
       <app-group-action-btn
         [group]="group"
         [target]="'edit_group'"
+        [title]='"Редактировать группу"'
         (onClick)="onEditCLickHandler(group)"
       ></app-group-action-btn>
       <app-group-action-btn
         [group]="group"
         [target]="'delete_group'"
+        [title]='"Удалить группу"'
         (onClick)="onDeleteClickHandler(group)"
       ></app-group-action-btn>
     </div>

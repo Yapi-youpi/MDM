@@ -10,7 +10,7 @@ import { IGroup } from '../../../../../../shared/types/groups';
 export class GroupActionBtnComponent {
   @Input() target: string = '';
   @Input() group!: IGroup;
-
+@Input() title! : string
   @Output() onClick = new EventEmitter<IGroup>();
 
   constructor(private form: EditDeviceService) {}

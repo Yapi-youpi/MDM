@@ -22,7 +22,7 @@
   </ng-template>
 
   <div class="card">
-    <form [formGroup]="configForm" *ngIf="config; else loader">
+    <form [formGroup]="_form" *ngIf="config; else loader">
       <!--        ОБЩИЕ           -->
       <div class="form__tab">
         <div class="card__header card-title">Общие</div>
@@ -309,7 +309,7 @@
                     type="radio"
                     [value]="false"
                     [attr.disabled]="
-                      configForm.get('mobileData')?.value ? null : true
+                     _mobileData?.value ? null : true
                     "
                   />
                   <span class="custom-radio__span">выкл</span>
@@ -392,7 +392,7 @@
                     type="radio"
                     [value]="false"
                     [attr.disabled]="
-                      configForm.get('wifi')?.value ? null : true
+                      _wifi?.value ? null : true
                     "
                   />
                   <span class="custom-radio__span">выкл</span>
@@ -426,7 +426,7 @@
                 </label>
               </div>
               <div
-                *ngIf="configForm.get('manageVolume')?.value == true"
+                *ngIf="_manageVolume?.value == true"
                 class="form__item"
               >
                 <div class="range-wrapper w-500">
@@ -502,7 +502,7 @@
                 </label>
               </div>
               <div
-                *ngIf="configForm.get('manageTimeout')?.value == true"
+                *ngIf="_manageTimeout?.value == true"
                 class="form__item"
               >
                 <div class="range-slider timeout-slider">
@@ -620,7 +620,7 @@
                   </label>
                 </div>
                 <div
-                  *ngIf="configForm.get('autoBrightness')?.value === false"
+                  *ngIf="_autoBrightness?.value === false"
                   class="form__item"
                 >
                   <div class="range-wrapper">
@@ -694,7 +694,7 @@
               </label>
             </div>-->
             <ng-container
-              *ngIf="!configForm.get('useDefaultDesignSettings')?.value"
+              *ngIf="!_useDefaultDesignSettings?.value"
             >
               <div class="form__item w-500">
                 <label for="desktopHeader">Заголовок рабочего стола</label>
@@ -711,7 +711,7 @@
               </div>
               <div
                 class="form__item w-500"
-                *ngIf="configForm.get('desktopHeader')?.value == 'TEMPLATE'"
+                *ngIf="_desktopHeader?.value == 'TEMPLATE'"
               >
                 <label for="desktopHeaderTemplate">Шаблон заголовка</label>
                 <input
@@ -739,7 +739,7 @@
                         [value]="'#557ebe'"
                       />
                       <span *ngIf="!bgImg">{{
-                        configForm.value.backgroundColor
+                        _backgroundColor?.value
                       }}</span>
                     </div>
                     <div class="input-color fit" [class.set]="bgImg">
@@ -781,7 +781,7 @@
                         id="textColor"
                         value="#ffffff"
                       />
-                      <span>{{ configForm.value.textColor }}</span>
+                      <span>{{ _textColor?.value }}</span>
                     </div>
                   </div>
                 </div>
@@ -864,17 +864,17 @@
 
           <app-interface
             [title]="
-              configForm.get('desktopHeader')?.value === 'DESCRIPTION'
-                ? configForm.get('description')?.value
-                : configForm.get('desktopHeader')?.value === 'TEMPLATE'
-                ? configForm.get('desktopHeaderTemplate')?.value
-                : configForm.get('desktopHeader')?.value || ''
+              _desktopHeader?.value === 'DESCRIPTION'
+                ? _description?.value
+                : _desktopHeader?.value === 'TEMPLATE'
+                ? _desktopHeaderTemplate?.value
+                : _desktopHeader?.value || ''
             "
-            [bgColor]="configForm.get('backgroundColor')?.value || ''"
+            [bgColor]="_backgroundColor?.value || ''"
             [bgImg]="bgImg"
-            [textColor]="configForm.get('textColor')?.value || ''"
-            [iconSize]="configForm.get('iconSize')?.value || ''"
-            [orientation]="configForm.get('orientation')?.value || 0"
+            [textColor]="_textColor?.value || ''"
+            [iconSize]="_iconSize?.value || ''"
+            [orientation]="_orientation?.value || 0"
           ></app-interface>
         </div>
       </div>
@@ -883,7 +883,6 @@
         <div class="card__header card-title">Приложения</div>
         <div class="config-settings">
           <app-apps-config
-            [apps]="apps"
             [configId]="config.ID"
             [isModalAddAppOpen]="isModalAddAppOpen"
             [appsInConfig]="config.applications ? config.applications : []"
@@ -1082,8 +1081,7 @@
 
 <app-add-app-to-config
   *ngIf="config"
-  [apps]="apps"
   [appsInConfig]="config.applications ? config.applications : []"
   [isModalAddAppOpen]="isModalAddAppOpen"
-  (onSubmit)="addApp($event)"
+  (onSubmit)="addApps()"
 ></app-add-app-to-config>

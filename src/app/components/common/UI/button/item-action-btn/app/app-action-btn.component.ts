@@ -10,7 +10,7 @@ import { IApp } from '../../../../../../shared/types/apps';
 export class AppActionBtnComponent {
   @Input() target: string = '';
   @Input() app!: IApp;
-
+@Input() text!: string
   @Output() onClick = new EventEmitter<IApp>();
 
   constructor(private form: EditDeviceService) {}

@@ -12,7 +12,7 @@ import { IDevice } from '../../../../../../shared/types/devices';
 export class DeviceActionBtnComponent {
   @Input() target: string = '';
   @Input() device!: IDevice;
-
+  @Input() title!: string
   @Output() onClick = new EventEmitter<IDevice>();
 
   constructor(private form: EditDeviceService) {}

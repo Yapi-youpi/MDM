@@ -4,7 +4,7 @@
   [direction]="'horizontal'"
 >
   <div class="modal-form-filter w-400">
-    <form class="filter" [formGroup]="filterForm" (submit)="applyFilter()">
+    <form class="filter" [formGroup]="_form" (submit)="applyFilter()">
       <div i18n class="filter__header">Фильтр</div>
       <div class="filter__content">
         <div>
@@ -40,7 +40,7 @@
               <label
                 for="{{ tag }}"
                 class="checkbox-wrapper"
-                *ngFor="let tag of userTags"
+                *ngFor="let tag of _tags"
               >
                 <ng-container *ngIf="tag">
                   <input

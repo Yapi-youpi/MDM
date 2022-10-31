@@ -34,6 +34,7 @@
 
       & .modal-container {
         max-height: calc(100vh - 10%);
+        min-height: 50vh;
         display: flex;
         flex-direction: column;
         overflow-y: auto;

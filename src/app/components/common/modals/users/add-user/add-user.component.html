@@ -1,5 +1,5 @@
 <app-modal [modalID]="'modal-new-user'" [isClosable]="true">
-  <form [formGroup]="form" class="form users-form modal-form w-600">
+  <form [formGroup]="_form" class="form users-form modal-form w-600">
     <h4 class="modal-title">
       {{
         currentUser ? 'Редактирование данных' : 'Добавление нового пользователя'
@@ -53,11 +53,11 @@
         required
       />
     </div>
-    <ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
+    <ng-container *ngIf="_role === 'admin' || _role === 'super'">
       <div class="form__item" *ngIf="isEditSelf && passwordField">
         <label i18n for="old-pass">Старый пароль</label>
         <app-input-password
-          [control]="$any(this.form.get('oldPassword'))"
+          [control]="$any(this._form.get('oldPassword'))"
           [name]="'old-pass'"
           [width]="'w-296'"
         ></app-input-password>
@@ -77,7 +77,7 @@
         <div class="validation" *ngIf="passwordField">
           <app-input-password
             [name]="'password'"
-            [control]="$any(this.form.get('password'))"
+            [control]="$any(this._form.get('password'))"
             [width]="'w-296'"
             [pattern]="pattern"
             (onFocus)="showValidation()"
@@ -109,7 +109,7 @@
               formControlName="role"
               type="radio"
               [value]="'admin'"
-              [attr.disabled]="currentUser || userRole === 'admin' ? '' : null"
+              [attr.disabled]="currentUser || _role === 'admin' ? '' : null"
             />
             <span i18n class="custom-radio__span"> администратор </span>
           </label>
@@ -129,7 +129,7 @@
       <div class="form__item">
         <label i18n>Подразделение</label>
         <select class="select-native w-296" formControlName="userTags">
-          <ng-container *ngFor="let tag of userTags">
+          <ng-container *ngFor="let tag of _tags">
             <option value="{{ tag }}" *ngIf="tag">
               {{ tag }}
             </option></ng-container
@@ -137,7 +137,7 @@
           <option i18n value="Другое">Другое</option>
         </select>
       </div>
-      <div class="form__item" *ngIf="form.get('userTags')?.value == 'Другое'">
+      <div class="form__item" *ngIf="_form.get('userTags')?.value == 'Другое'">
         <label></label>
         <input
           formControlName="other"
@@ -153,7 +153,7 @@
         *ngIf="!currentUser; else editBtn"
         class="btn btn--big"
         (click)="addUser()"
-        [disabled]="form.invalid || form.untouched || form.pristine"
+        [disabled]="_form.invalid || _form.untouched || _form.pristine"
         i18n
       >
         Добавить
