@@ -8,7 +8,7 @@ import { IApp } from '../../types';
 export class AppSelectedClass {
   public selectedIDs: string[] = [];
 
-  constructor(private apps: AppClass) {}
+  constructor(private _apps: AppClass) {}
 
   setListOfSelected(apps: string[]) {
     this.selectedIDs = apps;
@@ -36,7 +36,7 @@ export class AppSelectedClass {
     value: string = ''
   ) {
     if (isHead) {
-      this.apps.groupedArray.map((g) => {
+      this._apps.groupedApps.map((g) => {
         if (g.ID === group.ID) {
           if (!this.selectedIDs.includes(g.ID)) this.selectedIDs.push(g.ID);
           else this.selectedIDs = this.selectedIDs.filter((sg) => sg !== g.ID);

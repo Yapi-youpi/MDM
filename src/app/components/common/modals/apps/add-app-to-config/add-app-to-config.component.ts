@@ -8,9 +8,8 @@ import {
 } from '@angular/core';
 import { environment } from '../../../../../../environments/environment';
 import { appsPaths as api } from '../../../../../shared/enums/api';
-import { AppClass } from '../../../../../shared/classes/apps/app.class';
+import { AppClass, AppSelectedClass } from '../../../../../shared/classes';
 import { IApp } from '../../../../../shared/types';
-import { AppSelectedClass } from '../../../../../shared/classes/apps/app-selected.class';
 
 @Component({
   selector: 'app-add-app-to-config',
@@ -29,17 +28,17 @@ export class AddAppToConfigComponent implements OnChanges {
   public searchParam: string = '';
 
   constructor(
-    private elRef: ElementRef,
-    private apps: AppClass,
-    private selected: AppSelectedClass
+    private _elRef: ElementRef,
+    private _apps: AppClass,
+    private _appsSelected: AppSelectedClass
   ) {}
 
-  get _rawApps() {
-    return this.apps.rawArray;
+  get rawApps() {
+    return this._apps.rawApps;
   }
 
-  get _groupedApps() {
-    return this.apps.groupedArray;
+  get groupedApps() {
+    return this._apps.groupedApps;
   }
 
   ngOnChanges(changes) {
@@ -47,9 +46,9 @@ export class AddAppToConfigComponent implements OnChanges {
       if (
         key === 'isModalAddAppOpen' &&
         changes.isModalAddAppOpen?.currentValue === true &&
-        this._rawApps.length > 0
+        this.rawApps.length > 0
       ) {
-        this.apps.get('all').then();
+        this._apps.get('all').then();
       }
     }
   }
@@ -63,26 +62,28 @@ export class AddAppToConfigComponent implements OnChanges {
   }
 
   checkIfExistsInList(group: IApp) {
-    return this.selected.checkIfExistsInList(group);
+    return this._appsSelected.checkIfExistsInList(group);
   }
 
   onCheckboxChange(group: IApp, event) {
     const check = !event; // потому что берется предыдущее значение
-    const select = this.elRef.nativeElement.querySelector(
+    const select = this._elRef.nativeElement.querySelector(
       `#version-${group.ID}`
     );
 
     if (!select) {
-      this.selected.setElementSelection(group);
-      if (check) this.selected.checkAppsInConfig(this.appsInConfig, group.ID);
+      this._appsSelected.setElementSelection(group);
+      if (check)
+        this._appsSelected.checkAppsInConfig(this.appsInConfig, group.ID);
     } else {
       const value = select.value;
 
       if (value === group.ID) {
-        this.selected.setElementSelection(group);
-        if (check) this.selected.checkAppsInConfig(this.appsInConfig, group.ID);
+        this._appsSelected.setElementSelection(group);
+        if (check)
+          this._appsSelected.checkAppsInConfig(this.appsInConfig, group.ID);
       } else {
-        this.selected.setElementSelection(group, false, check, value);
+        this._appsSelected.setElementSelection(group, false, check, value);
       }
     }
   }
@@ -97,18 +98,18 @@ export class AddAppToConfigComponent implements OnChanges {
     if (checkbox) {
       const id = (event.target as HTMLSelectElement).value;
 
-      this.selected.swapIDs(group, id);
+      this._appsSelected.swapIDs(group, id);
 
-      this.selected.checkAppsInConfig(this.appsInConfig, id);
+      this._appsSelected.checkAppsInConfig(this.appsInConfig, id);
     }
   }
 
   resetForm() {
-    this.selected.setListOfSelected([]);
+    this._appsSelected.setListOfSelected([]);
   }
 
   onSubmitHandler() {
-    this.onSubmit.emit(this.selected.selectedIDs);
+    this.onSubmit.emit(this._appsSelected.selectedIDs);
     this.onCancelHandler();
   }
 

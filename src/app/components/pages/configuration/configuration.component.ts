@@ -2,16 +2,16 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
-import { IApp } from '../../../shared/types';
+import { IApp, IConfig, IPermissions } from '../../../shared/types';
 import { alertService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
 import Compressor from 'compressorjs';
-import { AppClass } from '../../../shared/classes/apps/app.class';
-import { AppSelectedClass } from '../../../shared/classes/apps/app-selected.class';
-import { IConfig } from '../../../shared/types';
-import { ConfigClass } from '../../../shared/classes/configs/config.class';
+import {
+  AppClass,
+  AppSelectedClass,
+  ConfigClass,
+} from '../../../shared/classes';
 import { edit } from '../../../shared/services/forms/configs';
-import { IPermissions } from '../../../shared/types';
 
 @Component({
   selector: 'app-configuration',
@@ -34,18 +34,18 @@ export class ConfigurationComponent implements OnInit {
   private initialAppList: string[] = [];
 
   constructor(
-    public userService: UserService,
-    private apps: AppClass,
-    private selected: AppSelectedClass,
-    private alert: alertService,
-    private route: ActivatedRoute,
-    private configClass: ConfigClass,
-    private router: Router,
-    private elementRef: ElementRef,
-    private asset: AssetService,
-    private form: edit
+    public _user: UserService,
+    private _apps: AppClass,
+    private _appsSelected: AppSelectedClass,
+    private _alert: alertService,
+    private _route: ActivatedRoute,
+    private _config: ConfigClass,
+    private _router: Router,
+    private _elRef: ElementRef,
+    private _asset: AssetService,
+    private _form: edit
   ) {
-    this.title = this.title + this.asset.configName;
+    this.title = this.title + this._asset.configName;
     this.restrictionList = {
       no_install_apps: 'установка приложений',
       no_uninstall_apps: 'удаление приложений',
@@ -57,50 +57,50 @@ export class ConfigurationComponent implements OnInit {
     };
   }
 
-  get _form() {
-    return this.form.form;
+  get form() {
+    return this._form.form;
   }
-  get _systemUpdateType() {
-    return this._form.get('systemUpdateType');
+  get systemUpdateType() {
+    return this.form.get('systemUpdateType');
   }
-  get _mobileData() {
-    return this._form.get('mobileData');
+  get mobileData() {
+    return this.form.get('mobileData');
   }
-  get _wifi() {
-    return this._form.get('wifi');
+  get wifi() {
+    return this.form.get('wifi');
   }
-  get _manageVolume() {
-    return this._form.get('manageVolume');
+  get manageVolume() {
+    return this.form.get('manageVolume');
   }
-  get _manageTimeout() {
-    return this._form.get('manageTimeout');
+  get manageTimeout() {
+    return this.form.get('manageTimeout');
   }
-  get _autoBrightness() {
-    return this._form.get('autoBrightness');
+  get autoBrightness() {
+    return this.form.get('autoBrightness');
   }
-  get _useDefaultDesignSettings() {
-    return this._form.get('useDefaultDesignSettings');
+  get useDefaultDesignSettings() {
+    return this.form.get('useDefaultDesignSettings');
   }
-  get _desktopHeader() {
-    return this._form.get('desktopHeader');
+  get desktopHeader() {
+    return this.form.get('desktopHeader');
   }
-  get _desktopHeaderTemplate() {
-    return this._form.get('desktopHeaderTemplate');
+  get desktopHeaderTemplate() {
+    return this.form.get('desktopHeaderTemplate');
   }
-  get _description() {
-    return this._form.get('description');
+  get description() {
+    return this.form.get('description');
   }
-  get _backgroundColor() {
-    return this._form.get('backgroundColor');
+  get backgroundColor() {
+    return this.form.get('backgroundColor');
   }
-  get _textColor() {
-    return this._form.get('textColor');
+  get textColor() {
+    return this.form.get('textColor');
   }
-  get _iconSize() {
-    return this._form.get('iconSize');
+  get iconSize() {
+    return this.form.get('iconSize');
   }
-  get _orientation() {
-    return this._form.get('orientation');
+  get orientation() {
+    return this.form.get('orientation');
   }
 
   ngOnInit() {
@@ -108,22 +108,22 @@ export class ConfigurationComponent implements OnInit {
   }
 
   getConfig() {
-    const id = this.route.snapshot.paramMap.get('id') || 'default';
-    this.configClass
+    const id = this._route.snapshot.paramMap.get('id') || 'default';
+    this._config
       .get(id)
       .then((res) => {
-        if (res && this.configClass.array.length > 0) {
-          this.config = Object.assign(this.configClass.array[0]);
-          this.initialAppList = this.configClass.array[0].applications || [];
+        if (res && this._config.array.length > 0) {
+          this.config = Object.assign(this._config.array[0]);
+          this.initialAppList = this._config.array[0].applications || [];
         }
       })
       .then(() => {
         let i = interval(200).subscribe(() => {
           i.unsubscribe();
           this.file_placeholder =
-            this.elementRef.nativeElement.querySelector('.bg-placeholder');
+            this._elRef.nativeElement.querySelector('.bg-placeholder');
           this.file_input =
-            this.elementRef.nativeElement.querySelector('#input-bg');
+            this._elRef.nativeElement.querySelector('#input-bg');
           this.setConfig();
         });
       })
@@ -141,19 +141,19 @@ export class ConfigurationComponent implements OnInit {
 
   setConfig() {
     // this.configForm.patchValue(this.config);
-    this.form.updateWithConfig(this.config);
+    this._form.updateWithConfig(this.config);
 
-    if (!this.form.values.textColor) {
-      this.form.form.patchValue({ textColor: '#ffffff' });
+    if (!this._form.values.textColor) {
+      this._form.form.patchValue({ textColor: '#ffffff' });
     }
-    if (!this.form.values.backgroundColor) {
-      this.form.form.patchValue({ backgroundColor: '#557ebe' });
+    if (!this._form.values.backgroundColor) {
+      this._form.form.patchValue({ backgroundColor: '#557ebe' });
     }
-    if (!this.form.values.wifiSecurityType) {
-      this.form.form.patchValue({ wifiSecurityType: 'NONE' });
+    if (!this._form.values.wifiSecurityType) {
+      this._form.form.patchValue({ wifiSecurityType: 'NONE' });
     }
 
-    this.apps.get('all', true).then();
+    this._apps.get('all', true).then();
     // this.getRestrictions();
     if (this.config) {
       this.config.applications = this.initialAppList;
@@ -173,13 +173,13 @@ export class ConfigurationComponent implements OnInit {
   }
 
   editConfig() {
-    const config = { ...this.config, ...this.form.values };
+    const config = { ...this.config, ...this._form.values };
     // дополнительная проверка на одновременное отключение интернета и wifi
     if (!config.wifi && !config.mobileData) {
       // включаем интернет, если пользователю удалось отключить и интернет, и wifi
       config.mobileData = !config.mobileData;
     }
-    this.configClass.edit(config).then((res) => {
+    this._config.edit(config).then((res) => {
       if (res) {
         const saveBtn = document.querySelector('.save-btn');
         saveBtn?.classList.add('save-btn--success');
@@ -192,17 +192,17 @@ export class ConfigurationComponent implements OnInit {
 
     if (this.editedApps.length > 0) {
       this.editedApps.forEach((app) => {
-        this.apps.edit(app.ID, app).then((res) => console.log(res));
+        this._apps.edit(app.ID, app).then((res) => console.log(res));
       });
     }
 
     if (this.bgImage) {
-      this.configClass.uploadWallpaper(this.config.ID, this.bgImage).then();
+      this._config.uploadWallpaper(this.config.ID, this.bgImage).then();
     }
   }
 
   editApp(app: IApp) {
-    const currentApp = this.apps.rawArray.find((a) => a.ID === app.ID);
+    const currentApp = this._apps.rawApps.find((a) => a.ID === app.ID);
     if (currentApp) {
       this.editedApps.push(currentApp);
     }
@@ -227,7 +227,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('configs').then();
+    this._router.navigateByUrl('configs').then();
   }
 
   toggleBrightness() {
@@ -283,7 +283,7 @@ export class ConfigurationComponent implements OnInit {
 
   addApps() {
     this.config.applications = this.config.applications?.concat(
-      this.selected.selectedIDs
+      this._appsSelected.selectedIDs
     );
     this.isModalAddAppOpen = false;
   }
@@ -331,7 +331,7 @@ export class ConfigurationComponent implements OnInit {
         this.config.backgroundImageUrl &&
         this.config.backgroundImageUrl === this.bgImg
       ) {
-        this.configClass.removeWallpaper(this.config.ID).then();
+        this._config.removeWallpaper(this.config.ID).then();
         this.config.backgroundImageUrl = '';
       }
       this.bgImg = '';
@@ -341,7 +341,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   showAlert() {
-    this.alert.show({
+    this._alert.show({
       title: 'Предупреждение!',
       content:
         'Отключение GPS исключает возможность отображения на карте устройств данной конфигурации',

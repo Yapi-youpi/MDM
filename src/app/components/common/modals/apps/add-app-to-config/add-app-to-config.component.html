@@ -48,11 +48,11 @@
           <div class="indeterminate"></div>
         </div>
       </ng-template>
-      <ng-container *ngIf="_groupedApps.length > 0; else loader">
+      <ng-container *ngIf="groupedApps.length > 0; else loader">
         <div class="checkbox-group">
           <div
             *ngFor="
-              let group of _groupedApps
+              let group of groupedApps
                 | search: searchParam:'app'
                 | appGroup: filter
             "

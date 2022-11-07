@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { interval, timer } from 'rxjs';
 
 import { userService } from '../../../shared/services';
-import { AppClass, LoaderClass } from '../../../shared/classes';
+import { AppClass, LoaderClass, MyUserClass } from '../../../shared/classes';
 import { AssetService } from '../../../shared/services/asset.service';
-import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
   selector: 'app-apps',
@@ -21,29 +20,29 @@ export class AppsComponent {
   public isSizeSortAsc: boolean = true;
 
   constructor(
-    private user: userService,
-    private asset: AssetService,
-    private loader: LoaderClass,
-    private apps: AppClass,
-    private myUser: MyUserClass
+    private _user: userService,
+    private _asset: AssetService,
+    private _loader: LoaderClass,
+    private _apps: AppClass,
+    private _myUser: MyUserClass
   ) {}
 
   get loading$() {
-    return this.loader.loading$;
+    return this._loader.loading$;
   }
 
   get entity$() {
-    return this.loader.entity$;
+    return this._loader.entity$;
   }
 
-  get _apps() {
-    return this.apps.groupedArray;
+  get apps() {
+    return this._apps.groupedApps;
   }
 
   ngOnInit() {
     const i = interval(1000).subscribe(() => {
-      if (this.myUser.token) {
-        this.apps.get('all').then();
+      if (this._myUser.token) {
+        this._apps.get('all').then();
         i.unsubscribe();
       }
     });
@@ -54,12 +53,12 @@ export class AppsComponent {
   }
 
   toggleSystemApps() {
-    this.loader.start('apps');
+    this._loader.start('apps');
 
     const t = timer(500).subscribe(() => {
       t.unsubscribe();
       this.isSystemApps = !this.isSystemApps;
-      this.loader.end();
+      this._loader.end();
     });
   }
 

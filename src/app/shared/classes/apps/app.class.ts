@@ -7,14 +7,26 @@ import { LoaderClass } from '../loader.class';
   providedIn: 'root',
 })
 export class AppClass {
-  public rawArray: IApp[] = [];
-  public groupedArray: IApp[] = [];
-  public current: IApp | null = null;
+  private _rawApps: IApp[] = [];
+  private _groupedApps: IApp[] = [];
+  private _current: IApp | null = null;
 
   constructor(private _service: appsService, private _loader: LoaderClass) {}
 
+  get rawApps() {
+    return this._rawApps;
+  }
+
+  get groupedApps() {
+    return this._groupedApps;
+  }
+
+  get current() {
+    return this._current;
+  }
+
   setCurrent(app: IApp | null) {
-    this.current = app;
+    this._current = app;
   }
 
   get(param: 'all' | string, isRaw: boolean = false) {
@@ -24,21 +36,21 @@ export class AppClass {
       this._service.get(param).then((res) => {
         if (res) {
           if (isRaw) {
-            this.rawArray = res;
+            this._rawApps = res;
           } else {
-            if (this.groupedArray.length !== 0) this.groupedArray = [];
+            if (this._groupedApps.length !== 0) this._groupedApps = [];
 
             res.forEach((a) => {
               if (a.ID === a.parentAppID)
-                this.groupedArray = [
+                this._groupedApps = [
                   { ...a, children: [] },
-                  ...this.groupedArray,
+                  ...this._groupedApps,
                 ];
             });
 
             res.forEach((a) => {
               if (a.parentAppID !== a.ID) {
-                this.groupedArray = this.groupedArray.map((ag) => {
+                this._groupedApps = this._groupedApps.map((ag) => {
                   if (a.parentAppID === ag.ID) {
                     if (ag.children?.length === 0)
                       return {
@@ -60,7 +72,7 @@ export class AppClass {
 
             this.sortChildrenByVCode();
 
-            this.groupedArray = this.groupedArray.map((ag) => {
+            this._groupedApps = this._groupedApps.map((ag) => {
               if (ag.children.length !== 0) {
                 const head = { ...ag, children: [] };
                 const tail = ag.children[0];
@@ -90,7 +102,7 @@ export class AppClass {
           if (res.parentAppID === res.ID) {
             this.get('all').then();
           } else {
-            this.groupedArray = this.groupedArray.map((ag) => {
+            this._groupedApps = this._groupedApps.map((ag) => {
               if (ag.ID === res?.parentAppID) {
                 return { ...ag, children: [...ag.children, res] };
               } else return ag;
@@ -115,7 +127,7 @@ export class AppClass {
         })
         .then((res) => {
           if (res) {
-            this.groupedArray = this.groupedArray.map((ag) => {
+            this._groupedApps = this._groupedApps.map((ag) => {
               if (ag.ID === appID) {
                 return {
                   ...ag,
@@ -148,24 +160,24 @@ export class AppClass {
       this._service.delete(app).then((res) => {
         if (res) {
           if (app.children.length !== 0) {
-            const appGroup = this.groupedArray.filter(
+            const appGroup = this._groupedApps.filter(
               (ag) => ag.ID === app.ID
             )[0];
             const head = appGroup.children[0];
             const body = appGroup.children.filter((c) => c.ID !== head.ID);
 
-            this.groupedArray = this.groupedArray.map((ag) => {
+            this._groupedApps = this._groupedApps.map((ag) => {
               if (ag.ID === app.ID) {
                 return { ...head, children: body };
               } else return ag;
             });
           } else {
-            if (this.groupedArray.find((ag) => ag.ID === app.ID))
-              this.groupedArray = this.groupedArray.filter(
+            if (this._groupedApps.find((ag) => ag.ID === app.ID))
+              this._groupedApps = this._groupedApps.filter(
                 (ag) => ag.ID !== app.ID
               );
             else
-              this.groupedArray = this.groupedArray.map((ag) => {
+              this._groupedApps = this._groupedApps.map((ag) => {
                 return {
                   ...ag,
                   children: ag.children.filter((c) => c.ID !== app.ID),
@@ -205,7 +217,7 @@ export class AppClass {
   }
 
   sortChildrenByVCode() {
-    this.groupedArray.map((a) => {
+    this._groupedApps.map((a) => {
       return {
         ...a,
         children: a.children.sort(

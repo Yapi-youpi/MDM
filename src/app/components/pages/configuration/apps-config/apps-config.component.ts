@@ -8,7 +8,7 @@ import {
 import { environment } from '../../../../../environments/environment';
 import { appsPaths as api } from '../../../../shared/enums/api';
 import { timer } from 'rxjs';
-import { AppClass } from '../../../../shared/classes/apps/app.class';
+import { AppClass } from '../../../../shared/classes';
 import { IApp } from '../../../../shared/types';
 
 @Component({
@@ -36,10 +36,10 @@ export class AppsConfigComponent {
   @Output() onChangeAction = new EventEmitter<Array<any>>();
   @Output() onOpenModal = new EventEmitter<boolean>();
 
-  constructor(private apps: AppClass) {}
+  constructor(private _apps: AppClass) {}
 
-  get _apps() {
-    return this.apps.rawArray;
+  get apps() {
+    return this._apps.rawApps;
   }
 
   onChangeSearch(value: string) {
@@ -69,7 +69,7 @@ export class AppsConfigComponent {
   }
 
   toggleIcon(app: IApp) {
-    const currentApp = this._apps.find((a) => a.ID === app.ID);
+    const currentApp = this.apps.find((a) => a.ID === app.ID);
     if (currentApp) {
       currentApp!.showIcon = !currentApp!.showIcon;
       this.onSave.emit(app);
@@ -77,7 +77,7 @@ export class AppsConfigComponent {
   }
 
   changeOrder(app: IApp, event) {
-    const currentApp = this._apps.find((a) => a.ID === app.ID);
+    const currentApp = this.apps.find((a) => a.ID === app.ID);
     if (currentApp) {
       currentApp!.screenOrder = +event.target.value;
       this.onSave.emit(app);
@@ -85,7 +85,7 @@ export class AppsConfigComponent {
   }
 
   toggleFix(app: IApp) {
-    const currentApp = this._apps.find((a) => a.ID === app.ID);
+    const currentApp = this.apps.find((a) => a.ID === app.ID);
     if (currentApp) {
       currentApp!.bottom = !currentApp!.bottom;
       this.onSave.emit(app);
@@ -97,12 +97,12 @@ export class AppsConfigComponent {
   }
 
   setAction(id, event) {
-    const currentApp = this._apps.find((app) => app.ID === id);
+    const currentApp = this.apps.find((app) => app.ID === id);
     if (currentApp) {
       if (event.target.value === '0') {
-        this.apps.removeFromInstall(this.configId, id).then((res) => {});
+        this._apps.removeFromInstall(this.configId, id).then((res) => {});
       } else if (event.target.value === '1') {
-        this.apps.addToInstall(this.configId, id).then((res) => {});
+        this._apps.addToInstall(this.configId, id).then((res) => {});
       }
       this.onChangeAction.emit([id, event.target.value]);
     }
