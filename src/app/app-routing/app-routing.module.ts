@@ -11,33 +11,36 @@ import { ConfigurationComponent } from '../components/pages/configuration/config
 import { AppsComponent } from '../components/pages/apps/apps.component';
 import { MessagesComponent } from '../components/pages/messages/messages.component';
 import { HelpComponent } from '../components/pages/help/help.component';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard, NotAuthGuard, RoleGuard } from '../guards';
 
 const routes: Routes = [
   {
-    path: 'users',
-    component: UsersComponent,
+    path: 'auth',
+    component: AuthComponent,
+    canActivate: [NotAuthGuard],
+  },
+  {
+    path: 'devices',
+    component: DevicesComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'groups',
+    component: GroupsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'apps',
+    component: AppsComponent,
+    canActivate: [AuthGuard, RoleGuard],
     data: {
       requiredRoles: ['super', 'admin'],
     },
   },
   {
-    path: 'auth',
-    component: AuthComponent,
-  },
-  {
-    path: 'devices',
-    component: DevicesComponent,
-  },
-  {
-    path: 'groups',
-    component: GroupsComponent,
-  },
-  {
-    path: 'apps',
-    component: AppsComponent,
-    canActivate: [AuthGuard],
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AuthGuard, RoleGuard],
     data: {
       requiredRoles: ['super', 'admin'],
     },
@@ -45,15 +48,17 @@ const routes: Routes = [
   {
     path: 'messages',
     component: MessagesComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'map',
     component: MapComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'configs',
     component: ConfigsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
     data: {
       requiredRoles: ['super', 'admin'],
     },
@@ -61,7 +66,7 @@ const routes: Routes = [
   {
     path: 'configs/:id',
     component: ConfigurationComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
     data: {
       requiredRoles: ['super', 'admin'],
     },
@@ -69,6 +74,7 @@ const routes: Routes = [
   {
     path: 'help',
     component: HelpComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

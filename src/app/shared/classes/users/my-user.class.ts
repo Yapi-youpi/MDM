@@ -35,6 +35,15 @@ export class MyUserClass {
     });
   }
 
+  isAuth() {
+    return new Promise<boolean>((resolve) => {
+      this.asset.getFromStorage('token').then((res) => {
+        if (res && res !== '') resolve(true);
+        else resolve(false);
+      });
+    });
+  }
+
   getMe() {
     return new Promise<boolean>((resolve) => {
       this.asset.getFromStorage('id').then((id: string) => {
