@@ -51,6 +51,7 @@
               <span class="btn--edit"></span>
             </a>
             <app-card-menu-btn
+              *ngIf="config.ID !== 'default_config_id'"
               title="Удалить конфигурацию"
               [target]="'modal-delete-config'"
               (click)="setCurrentConfig(config)"
