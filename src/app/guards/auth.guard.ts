@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -7,30 +6,25 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { assetService } from '../shared/services';
+import { MyUserClass } from '../shared/classes/users/my-user.class';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private asset: assetService) {}
+  constructor(private _router: Router, private _myUser: MyUserClass) {}
 
-  public canActivate(
+  canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean | UrlTree> | boolean {
-    // console.log('check Auth Guard');
-
-    const roles = route.data['requiredRoles'] as Array<string>;
-
-    return this.asset.getFromStorage('user-role').then((role = '') => {
-      return roles.includes(role);
+    return this._myUser.isAuth().then((res) => {
+      if (res) return true;
+      else {
+        this._router.navigate(['/auth']);
+        return false;
+      }
     });
   }
-
-  /*  public canLoad():
-    boolean | Observable<boolean> | Promise<boolean> {
-    console.log('check Loading Guard');
-    return true;
-  }*/
 }
