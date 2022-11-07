@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { errorService } from './shared/services';
-import { MyUserClass } from './shared/classes/users/my-user.class';
+import { errorService } from './hide/shared/services';
+import { MyUserClass } from './hide/shared/classes/users/my-user.class';
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
