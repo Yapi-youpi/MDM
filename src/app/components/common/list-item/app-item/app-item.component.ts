@@ -65,11 +65,11 @@ export class AppItemComponent {
   }
 
   onEditClickHandler(app: IApp) {
-    this.apps.setCurrent(app);
+    this.apps.current = app;
     this.editForm.form.patchValue(app);
   }
 
   onDeleteClickHandler(app: IApp) {
-    this.apps.setCurrent(app);
+    this.apps.current = app;
   }
 }

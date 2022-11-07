@@ -25,7 +25,7 @@ export class AppClass {
     return this._current;
   }
 
-  setCurrent(app: IApp | null) {
+  set current(app) {
     this._current = app;
   }
 
