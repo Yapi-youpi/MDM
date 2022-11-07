@@ -3,7 +3,7 @@ import {
   NgxQrcodeElementTypes,
   NgxQrcodeErrorCorrectionLevels,
 } from '@techiediaries/ngx-qrcode';
-import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import { DeviceClass } from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-qr-code',
@@ -12,13 +12,13 @@ import { DeviceClass } from '../../../../../shared/classes/devices/device.class'
 })
 export class QrCodeComponent {
   public elementType = NgxQrcodeElementTypes.URL;
-  public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  public correctionLevel = NgxQrcodeErrorCorrectionLevels.LOW;
   public isTipHidden: boolean = true;
 
-  constructor(private device: DeviceClass) {}
+  constructor(private _device: DeviceClass) {}
 
-  get _device() {
-    return this.device.current;
+  get device() {
+    return this._device.current;
   }
 
   onHelpClickHandler() {
