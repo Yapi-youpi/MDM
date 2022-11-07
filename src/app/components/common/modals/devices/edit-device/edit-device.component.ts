@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { EditDeviceService } from '../../../../../shared/services/forms/device/edit-device.service';
 import { IOption } from '../../../../../shared/types';
-import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
-import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
+import {
+  DeviceClass,
+  GroupClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-edit-device',
@@ -16,12 +18,16 @@ export class EditDeviceComponent {
   constructor(
     public form: EditDeviceService,
     private group: GroupClass,
-    private loader: DeviceLoaderClass,
-    private device: DeviceClass
+    private device: DeviceClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _form() {

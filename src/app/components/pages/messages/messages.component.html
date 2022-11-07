@@ -19,12 +19,11 @@
     <div class="progressbar-wrapper">
       <ng-container
         *ngIf="
-          (_dLoading | async) ||
-            false ||
-            (_gLoading | async) ||
-            false ||
-            (_pLoading | async) ||
-            false;
+          ((loading$ | async) || false) &&
+            ((entity$ | async) === 'messages' ||
+              false ||
+              (entity$ | async) === 'devices' || false ||
+              (entity$ | async) === 'groups' || false);
           else dummy
         "
       >

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
+import { GroupClass, LoaderClass } from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-delete-group',
@@ -8,10 +7,14 @@ import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loa
   styleUrls: ['./delete-group.component.scss'],
 })
 export class DeleteGroupComponent {
-  constructor(private group: GroupClass, private loader: GroupLoaderClass) {}
+  constructor(private group: GroupClass, private _loader: LoaderClass) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _group() {

@@ -6,10 +6,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IFile } from '../../../../../shared/types';
-import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import {
+  DeviceClass,
+  FileClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { FileClass } from '../../../../../shared/classes/files/file.class';
-import { FileLoaderClass } from '../../../../../shared/classes/files/file-loader.class';
 
 @Component({
   selector: 'app-list-files',
@@ -35,12 +37,16 @@ export class ListFilesComponent {
   constructor(
     private device: DeviceClass,
     private groups: GroupClass,
-    private loader: FileLoaderClass,
-    private files: FileClass
+    private files: FileClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _group() {

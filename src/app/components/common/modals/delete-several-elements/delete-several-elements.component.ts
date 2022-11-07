@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { DeviceClass } from '../../../../shared/classes/devices/device.class';
 import { GroupClass } from '../../../../shared/classes/groups/group.class';
-import { DeviceLoaderClass } from '../../../../shared/classes/devices/device-loader.class';
-import { GroupLoaderClass } from '../../../../shared/classes/groups/group-loader.class';
 import { DeviceSelectedClass } from '../../../../shared/classes/devices/device-selected.class';
 import { GroupSelectedClass } from '../../../../shared/classes/groups/group-selected.class';
 import { IGroup } from '../../../../shared/types';
+import { LoaderClass } from '../../../../shared/classes';
 
 @Component({
   selector: 'app-delete-several-elements',
@@ -16,20 +15,19 @@ export class DeleteSeveralElementsComponent {
   @Input() public source: 'device' | 'group' = 'device';
 
   constructor(
-    private dLoading: DeviceLoaderClass,
     private devices: DeviceClass,
     private dSelected: DeviceSelectedClass,
-    private gLoading: GroupLoaderClass,
     private groups: GroupClass,
-    private gSelected: GroupSelectedClass
+    private gSelected: GroupSelectedClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _dLoading() {
-    return this.dLoading.loading;
+  get loading$() {
+    return this._loader.loading$;
   }
 
-  get _gLoading() {
-    return this.gLoading.loading;
+  get entity$() {
+    return this._loader.entity$;
   }
 
   onSubmitHandler() {

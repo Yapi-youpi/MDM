@@ -56,7 +56,10 @@
         [margin]="'66px'"
         [submitText]="'Сохранить'"
         [cancelText]="'Отменить'"
-        [isSubmitBtnDisabled]="(_loading | async) || false"
+        [isSubmitBtnDisabled]="
+          ((loading$ | async) || false) &&
+          ((entity$ | async) === 'devices' || false)
+        "
         (onSubmit)="onSubmitHandler()"
         (onCancel)="onCancelHandler()"
       ></app-modal-action-btns>

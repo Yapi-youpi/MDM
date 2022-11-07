@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IOption } from '../../../../../shared/types';
+import { groupIcons, IOption } from '../../../../../shared/types';
 import { add } from '../../../../../shared/services/forms/group';
-import { groupIcons } from '../../../../../shared/types';
-import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
-import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
+import {
+  ConfigClass,
+  GroupClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-add-group',
@@ -18,12 +19,16 @@ export class AddGroupComponent {
   constructor(
     private form: add,
     private group: GroupClass,
-    private loader: GroupLoaderClass,
+    private _loader: LoaderClass,
     private config: ConfigClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _form() {

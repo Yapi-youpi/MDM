@@ -23,7 +23,7 @@ export class RoleGuard implements CanActivate {
 
     const roles = route.data['requiredRoles'] as Array<string>;
 
-    return this._asset.getFromStorage('user-role').then((role = '') => {
+    return this._asset.get('user-role').then((role = '') => {
       return roles.includes(role);
     });
   }

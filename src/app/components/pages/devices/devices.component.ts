@@ -2,15 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
 import { userService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
-import { DeviceClass } from '../../../shared/classes/devices/device.class';
-import { DeviceSubscriptionClass } from '../../../shared/classes/devices/device-subscription.class';
-import { DeviceFiltersClass } from '../../../shared/classes/devices/device-filters.class';
-import { GroupClass } from '../../../shared/classes/groups/group.class';
-import { DeviceLoaderClass } from '../../../shared/classes/devices/device-loader.class';
-import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.class';
-import { DeviceSelectedClass } from '../../../shared/classes/devices/device-selected.class';
-import { ConfigClass } from '../../../shared/classes/configs/config.class';
-import { ConfigLoaderClass } from '../../../shared/classes/configs/config-loader.class';
+import {
+  ConfigClass,
+  DeviceClass,
+  DeviceFiltersClass,
+  DeviceSelectedClass,
+  DeviceSubscriptionClass,
+  GroupClass,
+  LoaderClass,
+} from '../../../shared/classes';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
@@ -38,27 +38,21 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private user: userService,
     private device: DeviceClass,
     private dSelected: DeviceSelectedClass,
-    private dLoader: DeviceLoaderClass,
     private groups: GroupClass,
-    private gLoader: GroupLoaderClass,
     private config: ConfigClass,
-    private cLoader: ConfigLoaderClass,
     private subDevice: DeviceSubscriptionClass,
     public filters: DeviceFiltersClass,
     private asset: AssetService,
-    private myUser: MyUserClass
+    private myUser: MyUserClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _cLoading() {
-    return this.cLoader.loading;
+  get loading$() {
+    return this._loader.loading$;
   }
 
-  get _dLoading() {
-    return this.dLoader.loading;
-  }
-
-  get _gLoading() {
-    return this.gLoader.loading;
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _devices() {
@@ -76,7 +70,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
         this.groups.get('all').then();
         this.config.get('all').then();
         this.device.get('all').then();
-        this.asset.getFromStorage('user-role').then((role: string) => {
+        this.asset.get('user-role').then((role: string) => {
           this.userRole = role;
         });
         this.subDevice.subscribe().then();

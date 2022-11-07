@@ -11,7 +11,10 @@
         [submitText]="'Да'"
         [cancelText]="'Нет'"
         [margin]="'50px'"
-        [isSubmitBtnDisabled]="(_loading | async) || false"
+        [isSubmitBtnDisabled]="
+          ((loading$ | async) || false) &&
+          ((entity$ | async) === 'groups' || false)
+        "
         (onCancel)="closeModal()"
         (onSubmit)="onSubmitHandler()"
       ></app-modal-action-btns>

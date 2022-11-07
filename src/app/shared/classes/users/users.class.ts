@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { UsersLoaderClass } from './users-loader.class';
 import { userService } from '../../services';
 import { IPermissions, IUser } from '../../types';
+import { LoaderClass } from '../loader.class';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class UsersClass {
 
   public current: IUser | null = null;
 
-  constructor(private loader: UsersLoaderClass, private service: userService) {}
+  constructor(private _loader: LoaderClass, private _service: userService) {}
 
   setCurrent(user: IUser | null = null) {
     this.current = user;
@@ -30,26 +30,23 @@ export class UsersClass {
 
   get() {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
-        .get(undefined, 'all')
-        .then((res) => {
-          if (res) {
-            this.array = res;
-            this.array.forEach((user) => {
-              if (
-                user.avatar.length > 0 &&
-                !user.avatar.includes('data:image/jpeg;base64,')
-              )
-                user.avatar = 'data:image/jpeg;base64,' + user.avatar;
-            });
-            this.sortUsers();
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+      this._service.get(undefined, 'all').then((res) => {
+        if (res) {
+          this.array = res;
+          this.array.forEach((user) => {
+            if (
+              user.avatar.length > 0 &&
+              !user.avatar.includes('data:image/jpeg;base64,')
+            )
+              user.avatar = 'data:image/jpeg;base64,' + user.avatar;
+          });
+          this.sortUsers();
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loader.end());
   }
 
   add(
@@ -61,51 +58,41 @@ export class UsersClass {
     tags: string[]
   ) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
+      this._service
         .add(avatar, login, password, name, role, tags)
-        .then((res) => resolve(res))
-        .finally(() => this.loader.end());
-    });
+        .then((res) => resolve(res));
+    }).finally(() => this._loader.end());
   }
 
   delete(id: string) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
-        .delete(id)
-        .then((res) => resolve(res))
-        .finally(() => this.loader.end());
-    });
+      this._service.delete(id).then((res) => resolve(res));
+    }).finally(() => this._loader.end());
   }
 
   getTags() {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
-        .getTags()
-        .then((res) => {
-          if (res) {
-            this.tags = res;
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+      this._service.getTags().then((res) => {
+        if (res) {
+          this.tags = res;
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loader.end());
   }
 
   changeTag(id: string, tags: string[]) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
-        .changeTag(id, tags)
-        .then((res) => resolve(res))
-        .finally(() => this.loader.end());
-    });
+      this._service.changeTag(id, tags).then((res) => resolve(res));
+    }).finally(() => this._loader.end());
   }
 
   // deleteTag(tag: string) {
@@ -121,34 +108,27 @@ export class UsersClass {
 
   changePassword(login: string, password: string) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
+      this._service
         .changeUserPassword(login, password)
-        .then((res) => resolve(res))
-        .finally(() => this.loader.end());
-    });
+        .then((res) => resolve(res));
+    }).finally(() => this._loader.end());
   }
 
   uploadAvatar(id: string, avatar: string) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
-        .uploadAvatar(id, avatar)
-        .then((res) => resolve(res))
-        .finally(() => this.loader.end());
-    });
+      this._service.uploadAvatar(id, avatar).then((res) => resolve(res));
+    }).finally(() => this._loader.end());
   }
 
   rename(login: string, name: string) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('users');
 
-      this.service
-        .rename(login, name)
-        .then((res) => resolve(res))
-        .finally(() => this.loader.end());
-    });
+      this._service.rename(login, name).then((res) => resolve(res));
+    }).finally(() => this._loader.end());
   }
 }

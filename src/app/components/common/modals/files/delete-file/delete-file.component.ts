@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { FileClass } from '../../../../../shared/classes/files/file.class';
-import { FileLoaderClass } from '../../../../../shared/classes/files/file-loader.class';
-import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import {
+  DeviceClass,
+  FileClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 
 @Component({
@@ -13,14 +15,18 @@ export class DeleteFileComponent {
   @Input() source: 'device' | 'group' = 'device';
 
   constructor(
-    private loader: FileLoaderClass,
     private files: FileClass,
     private device: DeviceClass,
-    private group: GroupClass
+    private group: GroupClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _file() {

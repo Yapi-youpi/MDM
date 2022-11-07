@@ -54,7 +54,13 @@
           [target]="'file_add'"
         ></app-add-button>
       </div>
-      <ng-container *ngIf="_loading | async; else dummy">
+      <ng-container
+        *ngIf="
+          ((loading$ | async) || false) &&
+            ((entity$ | async) === 'files' || false);
+          else dummy
+        "
+      >
         <div class="progress">
           <div class="indeterminate"></div>
         </div>

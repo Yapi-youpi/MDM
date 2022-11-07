@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { EditSeveralDevicesService } from '../../../../../shared/services/forms/device/edit-several-devices.service';
-import { IOption } from '../../../../../shared/types';
+import { IDevice, IOption } from '../../../../../shared/types';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
-import { IDevice } from '../../../../../shared/types';
-import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
-import { DeviceSelectedClass } from '../../../../../shared/classes/devices/device-selected.class';
+import {
+  DeviceClass,
+  DeviceSelectedClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-edit-several-devices',
@@ -18,13 +19,17 @@ export class EditSeveralDevicesComponent {
   constructor(
     public form: EditSeveralDevicesService,
     private group: GroupClass,
-    private loader: DeviceLoaderClass,
     private device: DeviceClass,
-    private dSelected: DeviceSelectedClass
+    private dSelected: DeviceSelectedClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _form() {

@@ -6,10 +6,8 @@ import { AssetService } from '../../../shared/services/asset.service';
 import { IFile } from '../../../shared/types';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
 import { GroupFiltersClass } from '../../../shared/classes/groups/group-filters.class';
-import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.class';
 import { GroupSelectedClass } from '../../../shared/classes/groups/group-selected.class';
-import { ConfigClass } from '../../../shared/classes/configs/config.class';
-import { ConfigLoaderClass } from '../../../shared/classes/configs/config-loader.class';
+import { ConfigClass, LoaderClass } from '../../../shared/classes';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
 @Component({
@@ -37,21 +35,20 @@ export class GroupsComponent implements OnInit {
   constructor(
     private group: GroupClass,
     private selection: GroupSelectedClass,
-    private gLoader: GroupLoaderClass,
     private config: ConfigClass,
-    private cLoader: ConfigLoaderClass,
     private userService: userService,
     private asset: AssetService,
     public filters: GroupFiltersClass,
-    private myUser: MyUserClass
+    private myUser: MyUserClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _gLoading() {
-    return this.gLoader.loading;
+  get loading$() {
+    return this._loader.loading$;
   }
 
-  get _cLoading() {
-    return this.cLoader.loading;
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _groups() {
@@ -63,7 +60,7 @@ export class GroupsComponent implements OnInit {
       if (this.myUser.token) {
         this.group.get('all').then();
         this.getConfigs();
-        this.asset.getFromStorage('user-role').then((role: string) => {
+        this.asset.get('user-role').then((role: string) => {
           this.userRole = role;
         });
         i.unsubscribe();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { deviceService } from '../../services';
 import { IAddDevice, IDevice } from '../../types';
-import { DeviceLoaderClass } from './device-loader.class';
+import { LoaderClass } from '../loader.class';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +10,7 @@ export class DeviceClass {
   public array: IDevice[] = [];
   public current: IDevice | null = null;
 
-  constructor(
-    private loading: DeviceLoaderClass,
-    private service: deviceService
-  ) {}
+  constructor(private _loading: LoaderClass, private _service: deviceService) {}
 
   // ОБНОВЛЕНИЕ ТЕКУЩЕГО ВЫБРАННОГО УСТРОЙСТВА
 
@@ -43,74 +40,57 @@ export class DeviceClass {
 
   get(param: 'all' | string, group_id?: string) {
     return new Promise<boolean>((resolve) => {
-      this.loading.start();
+      this._loading.start('devices');
 
-      this.service
-        .get(param, group_id)
-        .then((res) => {
-          if (res) {
-            this.array = res
-              ? res.map((d) => ({ ...d, isSelected: false }))
-              : [];
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loading.end());
-    });
+      this._service.get(param, group_id).then((res) => {
+        if (res) {
+          this.array = res ? res.map((d) => ({ ...d, isSelected: false })) : [];
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loading.end());
   }
 
   add(addDevice: IAddDevice) {
     return new Promise<boolean>((resolve) => {
-      this.loading.start();
+      this._loading.start('devices');
 
-      this.service
-        .add(addDevice)
-        .then((res) => {
-          if (res) {
-            this.setCurrent(res);
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loading.end());
-    });
+      this._service.add(addDevice).then((res) => {
+        if (res) {
+          this.setCurrent(res);
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loading.end());
   }
 
   edit(devices: IDevice[]) {
     return new Promise<boolean>((resolve) => {
-      this.loading.start();
+      this._loading.start('devices');
 
-      this.service
-        .edit(devices)
-        .then((res) => {
-          if (res) resolve(true);
-          else resolve(false);
-        })
-        .finally(() => this.loading.end());
-    });
+      this._service.edit(devices).then((res) => {
+        if (res) resolve(true);
+        else resolve(false);
+      });
+    }).finally(() => this._loading.end());
   }
 
   delete(devIDs: string[]) {
     return new Promise<boolean>((resolve) => {
-      this.loading.start();
+      this._loading.start('devices');
 
-      this.service
-        .delete(devIDs)
-        .then((res) => {
-          if (res) resolve(true);
-          else resolve(false);
-        })
-        .finally(() => this.loading.end());
-    });
+      this._service.delete(devIDs).then((res) => {
+        if (res) resolve(true);
+        else resolve(false);
+      });
+    }).finally(() => this._loading.end());
   }
 
   reload(devID: string) {
     return new Promise<boolean>((resolve) => {
-      this.loading.start();
+      this._loading.start('devices');
 
-      this.service
-        .reload(devID)
-        .then((res) => resolve(res))
-        .finally(() => this.loading.end());
-    });
+      this._service.reload(devID).then((res) => resolve(res));
+    }).finally(() => this._loading.end());
   }
 }

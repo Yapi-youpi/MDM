@@ -3,7 +3,7 @@ import { AddDeviceService } from '../../../../../shared/services/forms/device/ad
 import { IOption } from '../../../../../shared/types';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
-import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
+import { LoaderClass } from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-add-device',
@@ -15,11 +15,15 @@ export class AddDeviceComponent {
     public form: AddDeviceService,
     private group: GroupClass,
     private device: DeviceClass,
-    private loader: DeviceLoaderClass
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _form() {

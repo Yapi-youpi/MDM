@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IGroupPermissions } from '../../types';
 import { userService } from '../../services';
-import { PermissionsLoaderClass } from './permissions-loader.class';
+import { LoaderClass } from '../loader.class';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +9,7 @@ import { PermissionsLoaderClass } from './permissions-loader.class';
 export class PermissionsClass {
   public array: IGroupPermissions[] = [];
 
-  constructor(
-    private service: userService,
-    private loader: PermissionsLoaderClass
-  ) {}
+  constructor(private _service: userService, private _loader: LoaderClass) {}
 
   set(event: any, role) {
     this.array[role][event.target.value] = !!event.target.checked;
@@ -20,28 +17,22 @@ export class PermissionsClass {
 
   get() {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('permissions');
 
-      this.service
-        .getPermissions()
-        .then((res) => {
-          if (res) {
-            this.array = res;
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+      this._service.getPermissions().then((res) => {
+        if (res) {
+          this.array = res;
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loader.end());
   }
 
   change(permissions) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('permissions');
 
-      this.service
-        .changePermissions(permissions)
-        .then((res) => resolve(res))
-        .finally(() => this.loader.end());
-    });
+      this._service.changePermissions(permissions).then((res) => resolve(res));
+    }).finally(() => this._loader.end());
   }
 }

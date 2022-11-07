@@ -13,29 +13,31 @@ export class AssetService {
   };
   public configName = '';
 
-  constructor(private storage: Storage) {
-    this.storage.create().then();
+  constructor(private _storage: Storage) {
+    this._storage.create().then();
   }
 
-  setToStorage(key: string, value: string) {
+  set(key: string, value: string) {
     return new Promise((resolve, reject) => {
-      this.storage
+      this._storage
         .set(key, value)
         .then((res) => resolve(res))
         .catch((err) => reject(err));
     });
   }
-  getFromStorage(key: string) {
+
+  get(key: string) {
     return new Promise<string>((resolve, reject) => {
-      this.storage
+      this._storage
         .get(key)
         .then((res) => resolve(res))
         .catch((err) => reject(err));
     });
   }
-  removeFromStorage(key: string) {
+
+  delete(key: string) {
     return new Promise((resolve, reject) => {
-      this.storage
+      this._storage
         .remove(key)
         .then((res) => resolve(res))
         .catch((err) => reject(err));

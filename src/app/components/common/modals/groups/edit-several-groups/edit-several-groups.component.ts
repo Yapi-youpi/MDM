@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { editSeveral } from '../../../../../shared/services/forms/group';
-import { IOption } from '../../../../../shared/types';
-import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
-import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { IGroup } from '../../../../../shared/types';
-import { GroupSelectedClass } from '../../../../../shared/classes/groups/group-selected.class';
-import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
+import { IGroup, IOption } from '../../../../../shared/types';
+import {
+  ConfigClass,
+  GroupClass,
+  GroupSelectedClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-edit-several-groups',
@@ -17,14 +18,18 @@ export class EditSeveralGroupsComponent {
 
   constructor(
     private form: editSeveral,
-    private loader: GroupLoaderClass,
     private group: GroupClass,
     private gSelected: GroupSelectedClass,
-    private config: ConfigClass
+    private config: ConfigClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _form() {

@@ -20,7 +20,10 @@
     <app-groups-filters></app-groups-filters>
     <ng-container
       *ngIf="
-        (_gLoading | async) || false || (_cLoading | async) || false;
+        ((loading$ | async) || false) &&
+          ((entity$ | async) === 'groups' ||
+            false ||
+            (entity$ | async) === 'configs' || false);
         else dummy
       "
     >

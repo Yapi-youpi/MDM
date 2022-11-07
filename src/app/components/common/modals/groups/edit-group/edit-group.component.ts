@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { edit } from '../../../../../shared/services/forms/group';
-import { IOption } from '../../../../../shared/types';
-import { groupIcons } from '../../../../../shared/types';
-import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
-import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
+import { groupIcons, IOption } from '../../../../../shared/types';
+import {
+  ConfigClass,
+  GroupClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-edit-group',
@@ -18,13 +19,17 @@ export class EditGroupComponent {
 
   constructor(
     private form: edit,
-    private loader: GroupLoaderClass,
     private group: GroupClass,
-    private config: ConfigClass
+    private config: ConfigClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _form() {

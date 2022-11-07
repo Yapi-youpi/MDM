@@ -10,7 +10,13 @@
   </button>
 </div>
 <form class="user-settings">
-  <ng-container *ngIf="(_loading | async) || false; else dummy">
+  <ng-container
+    *ngIf="
+      ((loading$ | async) || false) &&
+        ((entity$ | async) === 'permissions' || false);
+      else dummy
+    "
+  >
     <div class="progress">
       <div class="indeterminate"></div>
     </div>

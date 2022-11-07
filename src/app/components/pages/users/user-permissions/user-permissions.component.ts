@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetService } from '../../../../shared/services/asset.service';
 import { IGroupPermissions, IPermissions } from '../../../../shared/types';
-import { PermissionsClass } from '../../../../shared/classes/permissions/permissions.class';
-import { PermissionsLoaderClass } from '../../../../shared/classes/permissions/permissions-loader.class';
+import { LoaderClass, PermissionsClass } from '../../../../shared/classes';
 
 @Component({
   selector: 'app-user-permissions',
@@ -17,7 +16,7 @@ export class UserPermissionsComponent implements OnInit {
   constructor(
     public asset: AssetService,
     private permissions: PermissionsClass,
-    private loader: PermissionsLoaderClass
+    private _loader: LoaderClass
   ) {
     this.params = {
       viewDevices: 'Просмотр устройств',
@@ -35,8 +34,12 @@ export class UserPermissionsComponent implements OnInit {
     };
   }
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _permissions() {

@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { AssetService } from '../../../shared/services/asset.service';
 import { IUser } from '../../../shared/types';
-import { MyUserClass } from '../../../shared/classes/users/my-user.class';
-import { UsersClass } from '../../../shared/classes/users/users.class';
+import { LoaderClass, MyUserClass, UsersClass } from '../../../shared/classes';
 import { interval } from 'rxjs';
-import { UsersLoaderClass } from '../../../shared/classes/users/users-loader.class';
 
 @Component({
   selector: 'app-users',
@@ -24,11 +22,15 @@ export class UsersComponent implements OnInit {
     public asset: AssetService,
     private users: UsersClass,
     private myUser: MyUserClass,
-    private loader: UsersLoaderClass
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _role() {

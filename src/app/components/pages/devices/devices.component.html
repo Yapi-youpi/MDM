@@ -20,12 +20,12 @@
     <app-devices-filters></app-devices-filters>
     <ng-container
       *ngIf="
-        (_dLoading | async) ||
-          false ||
-          (_gLoading | async) ||
-          false ||
-          (_cLoading | async) ||
-          false;
+        ((loading$ | async) || false) &&
+          ((entity$ | async) === 'devices' ||
+            false ||
+            (entity$ | async) === 'groups' || false ||
+            (entity$ | async) === 'configs' ||
+            false);
         else dummy
       "
     >

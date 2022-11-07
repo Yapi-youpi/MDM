@@ -10,9 +10,10 @@
         [cancelText]="'Нет'"
         [margin]="'50px'"
         [isSubmitBtnDisabled]="
-          source === 'device'
-            ? (_dLoading | async) || false
-            : (_gLoading | async) || false
+          ((loading$ | async) || false) &&
+          (source === 'device'
+            ? (entity$ | async) === 'devices' || false
+            : (entity$ | async) === 'groups' || false)
         "
         (onCancel)="closeModal()"
         (onSubmit)="onSubmitHandler()"

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
-import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';
+import { DeviceClass, LoaderClass } from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-delete-device',
@@ -8,10 +7,14 @@ import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-
   styleUrls: ['./delete-device.component.scss'],
 })
 export class DeleteDeviceComponent {
-  constructor(private loader: DeviceLoaderClass, private device: DeviceClass) {}
+  constructor(private device: DeviceClass, private _loader: LoaderClass) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _device() {

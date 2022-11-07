@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { add } from '../../../../../shared/services/forms/file';
-import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
+import {
+  DeviceClass,
+  FileClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { FileClass } from '../../../../../shared/classes/files/file.class';
-import { FileLoaderClass } from '../../../../../shared/classes/files/file-loader.class';
 
 @Component({
   selector: 'app-add-file',
@@ -17,12 +19,16 @@ export class AddFileComponent {
     private form: add,
     private device: DeviceClass,
     private group: GroupClass,
-    private loader: FileLoaderClass,
-    private files: FileClass
+    private files: FileClass,
+    private _loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
   }
 
   get _form() {

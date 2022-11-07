@@ -17,7 +17,13 @@
       >
       </app-add-button>
     </div>
-    <ng-container *ngIf="(_loading | async) || false; else dummy">
+    <ng-container
+      *ngIf="
+        ((loading$ | async) || false) &&
+          ((entity$ | async) === 'configs' || false);
+        else dummy
+      "
+    >
       <div class="progress">
         <div class="indeterminate"></div>
       </div>
