@@ -103,20 +103,20 @@ export class DevicesService {
   }
 
   delete(devIDs: string[]) {
-    return new Promise<IDevice | null>((resolve) => {
+    return new Promise<boolean>((resolve) => {
       this.http
-        .post<IDeviceState>(environment.url + api.REMOVE, {
+        .post<IState>(environment.url + api.REMOVE, {
           remove: devIDs,
         })
         .subscribe({
           next: (res) => {
-            if (res.success) resolve(res.device);
+            if (res.success) resolve(true);
             else {
               this.alert.show({
                 title: 'Ошибка удаления одного/нескольких устройств',
                 content: res.error,
               });
-              resolve(null);
+              resolve(false);
             }
           },
           error: (err: HttpErrorResponse) => {
@@ -124,7 +124,7 @@ export class DevicesService {
               title: err.name,
               content: err.message,
             });
-            resolve(null);
+            resolve(false);
           },
         });
     });
