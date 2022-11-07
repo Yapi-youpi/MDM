@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AppLoaderClass } from '../../../../../shared/classes/apps/app-loader.class';
-import { AppClass } from '../../../../../shared/classes/apps/app.class';
+import { AppClass, LoaderClass } from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-delete-app',
@@ -8,10 +7,14 @@ import { AppClass } from '../../../../../shared/classes/apps/app.class';
   styleUrls: ['./delete-app.component.scss'],
 })
 export class DeleteAppComponent {
-  constructor(private loader: AppLoaderClass, private apps: AppClass) {}
+  constructor(private apps: AppClass, private loader: LoaderClass) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this.loader.loading$;
+  }
+
+  get entity$() {
+    return this.loader.entity$;
   }
 
   get _current() {

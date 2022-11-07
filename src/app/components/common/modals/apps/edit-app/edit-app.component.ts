@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
 import { EditAppService } from '../../../../../shared/services/forms/app/edit-app.service';
-import { AppLoaderClass } from '../../../../../shared/classes/apps/app-loader.class';
-import { AppClass } from '../../../../../shared/classes/apps/app.class';
+import { AppClass, LoaderClass } from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-edit-app',
@@ -12,12 +11,16 @@ import { AppClass } from '../../../../../shared/classes/apps/app.class';
 export class EditAppComponent {
   constructor(
     private form: EditAppService,
-    private loader: AppLoaderClass,
-    private apps: AppClass
+    private apps: AppClass,
+    private loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this.loader.loading$;
+  }
+
+  get entity$() {
+    return this.loader.entity$;
   }
 
   get _form() {

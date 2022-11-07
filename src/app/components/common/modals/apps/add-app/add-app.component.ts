@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AddAppService } from '../../../../../shared/services/forms/app/add-app.service';
-import { AppClass } from '../../../../../shared/classes/apps/app.class';
-import { AppLoaderClass } from '../../../../../shared/classes/apps/app-loader.class';
+import { AppClass, LoaderClass } from '../../../../../shared/classes';
 
 @Component({
   selector: 'app-add-app',
@@ -13,11 +12,15 @@ export class AddAppComponent {
   constructor(
     private form: AddAppService,
     private apps: AppClass,
-    private loader: AppLoaderClass
+    private loader: LoaderClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this.loader.loading$;
+  }
+
+  get entity$() {
+    return this.loader.entity$;
   }
 
   get _form() {

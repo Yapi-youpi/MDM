@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { interval, timer } from 'rxjs';
 
 import { userService } from '../../../shared/services';
-import { AppLoaderClass } from '../../../shared/classes/apps/app-loader.class';
-import { AppClass } from '../../../shared/classes/apps/app.class';
+import { AppClass, LoaderClass } from '../../../shared/classes';
 import { AssetService } from '../../../shared/services/asset.service';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 
@@ -24,13 +23,17 @@ export class AppsComponent {
   constructor(
     private user: userService,
     private asset: AssetService,
-    private loader: AppLoaderClass,
+    private loader: LoaderClass,
     private apps: AppClass,
     private myUser: MyUserClass
   ) {}
 
-  get _loading() {
-    return this.loader.loading;
+  get loading$() {
+    return this.loader.loading$;
+  }
+
+  get entity$() {
+    return this.loader.entity$;
   }
 
   get _apps() {
@@ -51,7 +54,7 @@ export class AppsComponent {
   }
 
   toggleSystemApps() {
-    this.loader.start();
+    this.loader.start('apps');
 
     const t = timer(500).subscribe(() => {
       t.unsubscribe();

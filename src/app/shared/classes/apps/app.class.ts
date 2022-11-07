@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IApp } from '../../types';
-import { AppLoaderClass } from './app-loader.class';
 import { appsService } from '../../services';
+import { LoaderClass } from '../loader.class';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class AppClass {
   public groupedArray: IApp[] = [];
   public current: IApp | null = null;
 
-  constructor(private loader: AppLoaderClass, private service: appsService) {}
+  constructor(private _service: appsService, private _loader: LoaderClass) {}
 
   setCurrent(app: IApp | null) {
     this.current = app;
@@ -19,102 +19,96 @@ export class AppClass {
 
   get(param: 'all' | string, isRaw: boolean = false) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('apps');
 
-      this.service
-        .get(param)
-        .then((res) => {
-          if (res) {
-            if (isRaw) {
-              this.rawArray = res;
-            } else {
-              if (this.groupedArray.length !== 0) this.groupedArray = [];
+      this._service.get(param).then((res) => {
+        if (res) {
+          if (isRaw) {
+            this.rawArray = res;
+          } else {
+            if (this.groupedArray.length !== 0) this.groupedArray = [];
 
-              res.forEach((a) => {
-                if (a.ID === a.parentAppID)
-                  this.groupedArray = [
-                    { ...a, children: [] },
-                    ...this.groupedArray,
-                  ];
-              });
+            res.forEach((a) => {
+              if (a.ID === a.parentAppID)
+                this.groupedArray = [
+                  { ...a, children: [] },
+                  ...this.groupedArray,
+                ];
+            });
 
-              res.forEach((a) => {
-                if (a.parentAppID !== a.ID) {
-                  this.groupedArray = this.groupedArray.map((ag) => {
-                    if (a.parentAppID === ag.ID) {
-                      if (ag.children?.length === 0)
+            res.forEach((a) => {
+              if (a.parentAppID !== a.ID) {
+                this.groupedArray = this.groupedArray.map((ag) => {
+                  if (a.parentAppID === ag.ID) {
+                    if (ag.children?.length === 0)
+                      return {
+                        ...ag,
+                        children: [a, ...ag.children],
+                      };
+                    else {
+                      if (ag.children?.includes(a)) return ag;
+                      else
                         return {
                           ...ag,
                           children: [a, ...ag.children],
                         };
-                      else {
-                        if (ag.children?.includes(a)) return ag;
-                        else
-                          return {
-                            ...ag,
-                            children: [a, ...ag.children],
-                          };
-                      }
-                    } else return ag;
-                  });
-                }
-              });
+                    }
+                  } else return ag;
+                });
+              }
+            });
 
-              this.sortChildrenByVCode();
+            this.sortChildrenByVCode();
 
-              this.groupedArray = this.groupedArray.map((ag) => {
-                if (ag.children.length !== 0) {
-                  const head = { ...ag, children: [] };
-                  const tail = ag.children[0];
+            this.groupedArray = this.groupedArray.map((ag) => {
+              if (ag.children.length !== 0) {
+                const head = { ...ag, children: [] };
+                const tail = ag.children[0];
 
-                  return {
-                    ...tail,
-                    children: [
-                      ...ag.children.filter((c) => c.ID !== tail.ID),
-                      head,
-                    ],
-                  };
-                } else return ag;
-              });
-            }
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+                return {
+                  ...tail,
+                  children: [
+                    ...ag.children.filter((c) => c.ID !== tail.ID),
+                    head,
+                  ],
+                };
+              } else return ag;
+            });
+          }
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loader.end());
   }
 
   upload(file: FormData) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('apps');
 
-      this.service
-        .upload(file)
-        .then((res) => {
-          if (res) {
-            if (res.parentAppID === res.ID) {
-              this.get('all').then();
-            } else {
-              this.groupedArray = this.groupedArray.map((ag) => {
-                if (ag.ID === res?.parentAppID) {
-                  return { ...ag, children: [...ag.children, res] };
-                } else return ag;
-              });
-            }
+      this._service.upload(file).then((res) => {
+        if (res) {
+          if (res.parentAppID === res.ID) {
+            this.get('all').then();
+          } else {
+            this.groupedArray = this.groupedArray.map((ag) => {
+              if (ag.ID === res?.parentAppID) {
+                return { ...ag, children: [...ag.children, res] };
+              } else return ag;
+            });
+          }
 
-            this.sortChildrenByVCode();
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+          this.sortChildrenByVCode();
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loader.end());
   }
 
   edit(appID: string, formValues: IApp) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('apps');
 
-      this.service
+      this._service
         .edit({
           ...formValues,
           ID: appID,
@@ -143,16 +137,15 @@ export class AppClass {
             });
             resolve(true);
           } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+        });
+    }).finally(() => this._loader.end());
   }
 
   delete(app: IApp) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('apps');
 
-      this.service.delete(app).then((res) => {
+      this._service.delete(app).then((res) => {
         if (res) {
           if (app.children.length !== 0) {
             const appGroup = this.groupedArray.filter(
@@ -182,39 +175,33 @@ export class AppClass {
           resolve(true);
         } else resolve(false);
       });
-    });
+    }).finally(() => this._loader.end());
   }
 
   addToInstall(configID: string, appID) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('apps');
 
-      this.service
-        .addToInstall(configID, appID)
-        .then((res) => {
-          if (res) {
-            // ???
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+      this._service.addToInstall(configID, appID).then((res) => {
+        if (res) {
+          // ???
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loader.end());
   }
 
   removeFromInstall(configID: string, appID) {
     return new Promise<boolean>((resolve) => {
-      this.loader.start();
+      this._loader.start('apps');
 
-      this.service
-        .removeFromInstall(configID, appID)
-        .then((res) => {
-          if (res) {
-            // ???
-            resolve(true);
-          } else resolve(false);
-        })
-        .finally(() => this.loader.end());
-    });
+      this._service.removeFromInstall(configID, appID).then((res) => {
+        if (res) {
+          // ???
+          resolve(true);
+        } else resolve(false);
+      });
+    }).finally(() => this._loader.end());
   }
 
   sortChildrenByVCode() {
