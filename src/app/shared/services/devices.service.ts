@@ -3,8 +3,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 
-import { IAddDevice, IDevice } from '../types/devices';
-import { IDevicesState, IDeviceState, IState } from '../types/states';
+import {
+  IAddDevice,
+  IDevice,
+  IDevicesState,
+  IDeviceState,
+  IState,
+} from '../types';
 
 import { devicesPaths as api } from '../enums/api';
 import { alertService } from './index';

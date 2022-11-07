@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { inputWidth, IOption } from '../../../../../shared/types/input';
+import { inputWidth, IOption } from '../../../../../shared/types';
 import { FormControl } from '@angular/forms';
 
 @Component({

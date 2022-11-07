@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { fileService } from '../../services';
 import { DeviceClass } from '../devices/device.class';
-import { IFile } from '../../types/files';
+import { IFile } from '../../types';
 import { GroupClass } from '../groups/group.class';
 import { FileLoaderClass } from './file-loader.class';
 

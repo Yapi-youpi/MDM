@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IGroupPermissions } from '../../types/users';
+import { IGroupPermissions } from '../../types';
 import { userService } from '../../services';
 import { PermissionsLoaderClass } from './permissions-loader.class';
 

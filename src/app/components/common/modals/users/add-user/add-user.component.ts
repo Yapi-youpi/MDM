@@ -12,7 +12,7 @@ import { AssetService } from '../../../../../shared/services/asset.service';
 import { add } from '../../../../../shared/services/forms/user';
 import { MyUserClass } from '../../../../../shared/classes/users/my-user.class';
 import { UsersClass } from '../../../../../shared/classes/users/users.class';
-import { IUser } from '../../../../../shared/types/users';
+import { IUser } from '../../../../../shared/types';
 
 @Component({
   selector: 'app-add-user',

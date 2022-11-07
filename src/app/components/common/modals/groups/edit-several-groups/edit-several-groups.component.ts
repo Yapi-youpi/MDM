@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { editSeveral } from '../../../../../shared/services/forms/group';
-import { IOption } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types';
 import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
-import { IGroup } from '../../../../../shared/types/groups';
+import { IGroup } from '../../../../../shared/types';
 import { GroupSelectedClass } from '../../../../../shared/classes/groups/group-selected.class';
 import { ConfigClass } from '../../../../../shared/classes/configs/config.class';
 

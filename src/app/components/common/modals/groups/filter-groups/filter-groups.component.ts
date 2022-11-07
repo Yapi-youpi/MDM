@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { IOption } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types';
 
 import { filter } from '../../../../../shared/services/forms/group';
 import { GroupFiltersClass } from '../../../../../shared/classes/groups/group-filters.class';

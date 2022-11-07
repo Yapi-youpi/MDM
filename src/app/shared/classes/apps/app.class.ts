@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IApp } from '../../types/apps';
+import { IApp } from '../../types';
 import { AppLoaderClass } from './app-loader.class';
 import { appsService } from '../../services';
 

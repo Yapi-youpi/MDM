@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { IFileState, IState } from '../types/states';
+import { IFile, IFileState, IState } from '../types';
 import { environment } from '../../../environments/environment';
 import { filePaths as api } from '../enums/api';
 import { alertService } from './index';
-import { IFile } from '../types/files';
 
 @Injectable({
   providedIn: 'root',

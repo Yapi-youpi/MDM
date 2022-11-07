@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { IDevice } from '../../../types/devices';
+import { IDevice } from '../../../types';
 
 @Pipe({
   name: 'devices_battery',

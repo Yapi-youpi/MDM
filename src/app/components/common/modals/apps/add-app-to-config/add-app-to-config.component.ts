@@ -9,7 +9,7 @@ import {
 import { environment } from '../../../../../../environments/environment';
 import { appsPaths as api } from '../../../../../shared/enums/api';
 import { AppClass } from '../../../../../shared/classes/apps/app.class';
-import { IApp } from '../../../../../shared/types/apps';
+import { IApp } from '../../../../../shared/types';
 import { AppSelectedClass } from '../../../../../shared/classes/apps/app-selected.class';
 
 @Component({

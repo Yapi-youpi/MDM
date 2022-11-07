@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDevice } from '../../types/devices';
+import { IDevice } from '../../types';
 import { DeviceClass } from './device.class';
 
 @Injectable({

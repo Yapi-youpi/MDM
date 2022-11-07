@@ -5,7 +5,7 @@ import { DeviceLoaderClass } from '../../../../shared/classes/devices/device-loa
 import { GroupLoaderClass } from '../../../../shared/classes/groups/group-loader.class';
 import { DeviceSelectedClass } from '../../../../shared/classes/devices/device-selected.class';
 import { GroupSelectedClass } from '../../../../shared/classes/groups/group-selected.class';
-import { IGroup } from '../../../../shared/types/groups';
+import { IGroup } from '../../../../shared/types';
 
 @Component({
   selector: 'app-delete-several-elements',

@@ -2,16 +2,16 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { UserService } from '../../../shared/services/user.service';
-import { IApp } from '../../../shared/types/apps';
+import { IApp } from '../../../shared/types';
 import { alertService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
 import Compressor from 'compressorjs';
 import { AppClass } from '../../../shared/classes/apps/app.class';
 import { AppSelectedClass } from '../../../shared/classes/apps/app-selected.class';
-import { IConfig } from '../../../shared/types/config';
+import { IConfig } from '../../../shared/types';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
 import { edit } from '../../../shared/services/forms/configs';
-import { IPermissions } from '../../../shared/types/users';
+import { IPermissions } from '../../../shared/types';
 
 @Component({
   selector: 'app-configuration',

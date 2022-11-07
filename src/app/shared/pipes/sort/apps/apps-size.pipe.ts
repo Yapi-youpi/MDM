@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IApp } from '../../../types/apps';
+import { IApp } from '../../../types';
 
 @Pipe({
   name: 'apps_size',

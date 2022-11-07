@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { IMessage } from '../types/message';
+import { IMessage, IState } from '../types';
 import { alertService } from './index';
-import { IState } from '../types/states';
 import { messagesPaths as api } from '../enums/api';
 
 @Injectable({

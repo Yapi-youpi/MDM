@@ -9,7 +9,7 @@ import { environment } from '../../../../../environments/environment';
 import { appsPaths as api } from '../../../../shared/enums/api';
 import { timer } from 'rxjs';
 import { AppClass } from '../../../../shared/classes/apps/app.class';
-import { IApp } from '../../../../shared/types/apps';
+import { IApp } from '../../../../shared/types';
 
 @Component({
   selector: 'app-apps-config',

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { appsPaths as api } from '../enums/api';
-import { IApp } from '../types/apps';
-import { IAppsState, IAppState, IState } from '../types/states';
+import { IApp, IAppsState, IAppState, IState } from '../types';
 import { alertService } from './index';
 
 @Injectable({

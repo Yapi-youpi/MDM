@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IMessage } from '../../types/message';
+import { IMessage } from '../../types';
 
 @Pipe({
   name: 'msgFilter',

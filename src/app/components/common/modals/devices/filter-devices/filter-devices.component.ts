@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 
 import { filter } from 'src/app/shared/services/forms/device';
-import { IOption } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { DeviceFiltersClass } from '../../../../../shared/classes/devices/device-filters.class';
 import { DeviceSelectedClass } from '../../../../../shared/classes/devices/device-selected.class';

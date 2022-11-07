@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { inputWidth } from '../../../../../shared/types/input';
+import { inputWidth } from '../../../../../shared/types';
 
 @Component({
   selector: 'app-input-password',

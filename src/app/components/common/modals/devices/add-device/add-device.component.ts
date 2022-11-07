@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AddDeviceService } from '../../../../../shared/services/forms/device/add-device.service';
-import { IOption } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 import { DeviceLoaderClass } from '../../../../../shared/classes/devices/device-loader.class';

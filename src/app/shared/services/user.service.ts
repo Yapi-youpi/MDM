@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { IGroupPermissions, IUser } from '../types/users';
-import { usersPaths as api } from '../enums/api';
 import {
+  IGroupPermissions,
   IGroupPermissionsState,
   IRegisterState,
   IState,
+  IUser,
   IUsersState,
   IUserTagsState,
-} from '../types/states';
+} from '../types';
+import { usersPaths as api } from '../enums/api';
 import { alertService } from './index';
 
 @Injectable({

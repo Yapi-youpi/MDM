@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetService } from '../../../../shared/services/asset.service';
-import {
-  IGroupPermissions,
-  IPermissions,
-} from '../../../../shared/types/users';
+import { IGroupPermissions, IPermissions } from '../../../../shared/types';
 import { PermissionsClass } from '../../../../shared/classes/permissions/permissions.class';
 import { PermissionsLoaderClass } from '../../../../shared/classes/permissions/permissions-loader.class';
 

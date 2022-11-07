@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 
 import { DeviceClass } from './device.class';
 
-import { IDevice } from '../../types/devices';
+import { IDevice } from '../../types';
 
 import { DatabaseService } from '../../services/database.service';
 

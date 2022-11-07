@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { IFile } from '../../../../shared/types/files';
+import { IFile } from '../../../../shared/types';
 import { FileClass } from '../../../../shared/classes/files/file.class';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { deviceService } from '../../services';
-import { IAddDevice, IDevice } from '../../types/devices';
+import { IAddDevice, IDevice } from '../../types';
 import { DeviceLoaderClass } from './device-loader.class';
 
 @Injectable({

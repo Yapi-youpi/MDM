@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GroupClass } from './group.class';
-import { IGroup } from '../../types/groups';
+import { IGroup } from '../../types';
 
 @Injectable({
   providedIn: 'root',

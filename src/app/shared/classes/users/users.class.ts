@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UsersLoaderClass } from './users-loader.class';
 import { userService } from '../../services';
-import { IPermissions, IUser } from '../../types/users';
+import { IPermissions, IUser } from '../../types';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { IPermissions, IUser } from '../../types/users';
 export class UsersClass {
   public array: IUser[] = [];
   public tags: string[] = [];
-  public permissons: IPermissions[] = [];
+  public permissions: IPermissions[] = [];
 
   public current: IUser | null = null;
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IFile } from '../../../../../../shared/types/files';
+import { IFile } from '../../../../../../shared/types';
 
 @Component({
   selector: 'app-file-action-btn',

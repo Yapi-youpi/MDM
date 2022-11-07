@@ -6,7 +6,7 @@ import {
   userService,
 } from '../../services';
 import { UsersLoaderClass } from './users-loader.class';
-import { IUser } from '../../types/users';
+import { IUser } from '../../types';
 import { Router } from '@angular/router';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMessage } from '../../types/message';
+import { IMessage } from '../../types';
 import { PagerLoaderClass } from './pager-loader.class';
 import { pagerService } from '../../services';
 

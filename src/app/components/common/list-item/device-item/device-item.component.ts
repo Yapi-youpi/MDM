@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { IDevice } from '../../../../shared/types/devices';
+import { IDevice } from '../../../../shared/types';
 import { DeviceSelectedClass } from '../../../../shared/classes/devices/device-selected.class';
 import { DeviceClass } from '../../../../shared/classes/devices/device.class';
 import { edit } from '../../../../shared/services/forms/device';

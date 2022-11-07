@@ -3,7 +3,7 @@ import { interval } from 'rxjs';
 
 import { userService } from '../../../shared/services';
 import { AssetService } from '../../../shared/services/asset.service';
-import { IFile } from '../../../shared/types/files';
+import { IFile } from '../../../shared/types';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
 import { GroupFiltersClass } from '../../../shared/classes/groups/group-filters.class';
 import { GroupLoaderClass } from '../../../shared/classes/groups/group-loader.class';

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { authPaths as api } from '../enums/api';
-import { IState, IUserState } from '../types/states';
+import { IState, IUserState } from '../types';
 import { alertService } from './index';
 
 @Injectable({

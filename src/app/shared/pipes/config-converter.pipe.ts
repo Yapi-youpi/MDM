@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { IConfig } from '../types/config';
+import { IConfig } from '../types';
 
 @Pipe({
   name: 'configConverter',

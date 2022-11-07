@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetService } from '../../../shared/services/asset.service';
-import { IConfig } from '../../../shared/types/config';
+import { IConfig } from '../../../shared/types';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 import { interval } from 'rxjs';

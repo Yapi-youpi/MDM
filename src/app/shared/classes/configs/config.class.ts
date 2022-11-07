@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IConfig } from '../../types/config';
+import { IConfig } from '../../types';
 import { ConfigLoaderClass } from './config-loader.class';
 import { configsService } from '../../services';
 

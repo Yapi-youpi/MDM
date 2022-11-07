@@ -6,7 +6,7 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { IOption } from '../../../../shared/types/input';
+import { IOption } from '../../../../shared/types';
 
 @Component({
   selector: 'app-mini-select',

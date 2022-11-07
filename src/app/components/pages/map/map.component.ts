@@ -5,13 +5,13 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { MapService } from '../../../shared/services/map.service';
-import { IOption } from '../../../shared/types/input';
+import { IOption } from '../../../shared/types';
 import { DatabaseService } from '../../../shared/services/database.service';
 import { interval } from 'rxjs';
 import { LiveQuerySubscription } from 'parse';
 import * as L from 'leaflet';
 import { DivIcon, Marker } from 'leaflet';
-import { IDevice } from '../../../shared/types/devices';
+import { IDevice } from '../../../shared/types';
 import { UserService } from '../../../shared/services/user.service';
 import { GroupClass } from '../../../shared/classes/groups/group.class';
 import { ConfigClass } from '../../../shared/classes/configs/config.class';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AssetService } from '../../../shared/services/asset.service';
-import { IUser } from '../../../shared/types/users';
+import { IUser } from '../../../shared/types';
 import { MyUserClass } from '../../../shared/classes/users/my-user.class';
 import { UsersClass } from '../../../shared/classes/users/users.class';
 import { interval } from 'rxjs';

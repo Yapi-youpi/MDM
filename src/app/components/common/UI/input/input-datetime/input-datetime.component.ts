@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
-import { inputWidth } from '../../../../../shared/types/input';
+import { inputWidth } from '../../../../../shared/types';
 
 @Component({
   selector: 'app-input-datetime',

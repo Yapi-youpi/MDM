@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment/moment';
 
-import { IGroup } from '../../types/groups';
+import { IGroup } from '../../types';
 
 @Pipe({
   name: 'groupFilter',

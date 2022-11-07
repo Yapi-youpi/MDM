@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { inputWidth, IOption } from '../../../../../shared/types/input';
+import { inputWidth, IOption } from '../../../../../shared/types';
 
 @Component({
   selector: 'app-input-select',

@@ -5,7 +5,7 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { IFile } from '../../../../../shared/types/files';
+import { IFile } from '../../../../../shared/types';
 import { DeviceClass } from '../../../../../shared/classes/devices/device.class';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { FileClass } from '../../../../../shared/classes/files/file.class';

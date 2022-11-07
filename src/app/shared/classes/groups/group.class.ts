@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IGroup } from '../../types/groups';
+import { IGroup } from '../../types';
 import { alertService, groupService } from '../../services';
 import { GroupLoaderClass } from './group-loader.class';
 

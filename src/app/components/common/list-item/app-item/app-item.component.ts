@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
-import { IApp } from '../../../../shared/types/apps';
+import { IApp } from '../../../../shared/types';
 import { appsPaths as api } from '../../../../shared/enums/api';
 
 import { environment } from '../../../../../environments/environment';

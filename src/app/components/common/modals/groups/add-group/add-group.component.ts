@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IOption } from '../../../../../shared/types/input';
+import { IOption } from '../../../../../shared/types';
 import { add } from '../../../../../shared/services/forms/group';
-import { groupIcons } from '../../../../../shared/types/groups';
+import { groupIcons } from '../../../../../shared/types';
 import { GroupClass } from '../../../../../shared/classes/groups/group.class';
 import { GroupLoaderClass } from '../../../../../shared/classes/groups/group-loader.class';
 import { ConfigClass } from '../../../../../shared/classes/configs/config.class';

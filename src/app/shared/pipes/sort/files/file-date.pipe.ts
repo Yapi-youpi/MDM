@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IFile } from '../../../types/files';
+import { IFile } from '../../../types';
 
 @Pipe({
   name: 'fileDate',

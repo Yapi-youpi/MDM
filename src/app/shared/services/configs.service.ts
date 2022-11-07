@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { configsPaths as api } from '../enums/api';
-import { IConfig } from '../types/config';
+import { IConfig, IConfigsState, IState } from '../types';
 import { alertService } from './index';
-import { IConfigsState, IState } from '../types/states';
 
 @Injectable({
   providedIn: 'root',

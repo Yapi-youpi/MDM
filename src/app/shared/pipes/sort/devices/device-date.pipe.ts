@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
 
-import { IDevice } from '../../../types/devices';
+import { IDevice } from '../../../types';
 
 @Pipe({
   name: 'devices_date',

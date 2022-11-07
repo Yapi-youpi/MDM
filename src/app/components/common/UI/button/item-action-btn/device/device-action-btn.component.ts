@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { EditDeviceService } from '../../../../../../shared/services/forms/device/edit-device.service';
 
-import { IDevice } from '../../../../../../shared/types/devices';
+import { IDevice } from '../../../../../../shared/types';
 
 @Component({
   selector: 'app-device-action-btn',

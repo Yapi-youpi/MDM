@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { IGroup } from '../../../types/groups';
+import { IGroup } from '../../../types';
 
 @Pipe({
   name: 'group_devices_count',

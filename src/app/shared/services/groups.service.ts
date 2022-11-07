@@ -5,8 +5,7 @@ import { environment } from '../../../environments/environment';
 
 import { groupsPaths as api } from '../enums/api';
 
-import { IGroup } from '../types/groups';
-import { IGroupsState, IGroupState, IState } from '../types/states';
+import { IGroup, IGroupsState, IGroupState, IState } from '../types';
 import { alertService } from './index';
 
 @Injectable({

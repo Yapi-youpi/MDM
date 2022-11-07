@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
-import { IGroup } from '../../../../shared/types/groups';
-import { IOption } from '../../../../shared/types/input';
+import { IGroup } from '../../../../shared/types';
+import { IOption } from '../../../../shared/types';
 import { GroupSelectedClass } from '../../../../shared/classes/groups/group-selected.class';
 import { GroupClass } from '../../../../shared/classes/groups/group.class';
 import { edit } from '../../../../shared/services/forms/group';
