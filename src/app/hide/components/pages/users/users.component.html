@@ -1,0 +1,116 @@
+<main class="global-main card-wrapper">
+  <div class="card">
+    <div class="card__header">
+      <span class="search-wrapper">
+        <input
+          [(ngModel)]="search"
+          type="search"
+          name="search"
+          id="search"
+          class="search-input" /><i class="search-icon"></i
+      ></span>
+      <app-filter-btn [target]="'filter-user'"></app-filter-btn>
+      <app-add-button
+        class="btn--right"
+        [target]="'modal-new-user'"
+        [title]="'Добавить пользователя'"
+        (click)="setCurrentUser()"
+      >
+      </app-add-button>
+    </div>
+    <ng-container
+      *ngIf="
+        ((loading$ | async) || false) &&
+          ((entity$ | async) === 'users' || false);
+        else dummy
+      "
+    >
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </ng-container>
+    <ng-template #dummy>
+      <div class="dummy"></div>
+    </ng-template>
+    <div class="users-wrapper">
+      <ng-container *ngIf="_users.length > 0">
+        <div
+          class="user-card"
+          *ngFor="
+            let user of _users
+              | searchUsers: search
+              | filterUsers: filter_roles:filter_groups
+          "
+        >
+          <div
+            class="user-card__header"
+            [ngStyle]="{
+              background: asset.roles[user.role].color
+            }"
+          >
+            <div class="user-card__role">
+              {{ asset.roles[user.role].text }}
+            </div>
+            <div
+              *ngIf="
+                _role === 'super' ||
+                (_role === 'admin' && user.role === 'operator') ||
+                _me?.login === user.login
+              "
+              class="user-card__menu"
+            >
+              <app-card-menu-btn
+                [target]="'modal-new-user'"
+                (onClick)="setCurrentUser(user)"
+              >
+                <span
+                  class="btn--edit"
+                  [style.background-color]="asset.roles[user.role].color"
+                ></span>
+              </app-card-menu-btn>
+              <app-card-menu-btn
+                [disabled]="user.role === 'super'"
+                [target]="'modal-delete-user'"
+                (click)="setCurrentUser(user)"
+              >
+                <span
+                  class="btn--delete"
+                  [style.background-color]="asset.roles[user.role].color"
+                ></span>
+              </app-card-menu-btn>
+            </div>
+          </div>
+          <div class="user-card__content">
+            <div
+              class="user-card__avatar"
+              [style.background-image]="'url(' + user.avatar + ')'"
+            ></div>
+            <div class="user-card__descr">
+              <div class="user-card__name">{{ user.name }}</div>
+              <div class="user-card__email">
+                {{ user.login }}
+              </div>
+              <ng-container *ngFor="let tag of user.userTags">
+                <div class="user-card__group">{{ tag }}</div>
+              </ng-container>
+            </div>
+          </div>
+        </div></ng-container
+      >
+    </div>
+  </div>
+
+  <!--   ПРАВЫЙ САЙДБАР    -->
+  <app-user-permissions
+    *ngIf="_role === 'super'"
+    class="card card--sidebar"
+  ></app-user-permissions>
+</main>
+
+<!--  MODALS -->
+<app-add-user [currentUser]="_current" (onClose)="closeModal($event)">
+</app-add-user>
+<app-delete-user (onClose)="closeModal($event)"></app-delete-user>
+
+<!--  FILTER -->
+<app-filter-user (onSubmit)="applyFilter($event)"></app-filter-user>

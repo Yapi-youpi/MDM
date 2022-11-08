@@ -1,0 +1,105 @@
+<app-modal [modalID]="'edit_group'" [isClosable]="true">
+  <div class="modal-form w-700">
+    <div class="modal-form-header">
+      <h4 i18n class="text-title text-center">Редактировать группу</h4>
+    </div>
+    <hr class="divider" />
+    <div class="modal-form-body">
+      <form [formGroup]="_form">
+        <div class="form-group-wrapper">
+          <label for="name" class="text-menu-title"> Название </label>
+          <app-input-text
+            [control]="$any(_name)"
+            [name]="'name'"
+            [width]="'w-440'"
+            [isError]="_isSubmitted && !!_name?.errors"
+          ></app-input-text>
+          <app-input-alert
+            *ngIf="_isSubmitted && _name?.errors"
+            [control]="$any(_name)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+        <div class="form-group-wrapper">
+          <label for="description" class="text-menu-title"> Описание </label>
+          <app-input-text
+            [control]="$any(_description)"
+            [name]="'description'"
+            [width]="'w-440'"
+            [isError]="_isSubmitted && !!_description?.errors"
+          ></app-input-text>
+          <app-input-alert
+            *ngIf="_isSubmitted && _description?.errors"
+            [control]="$any(_description)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+        <div class="form-group-wrapper">
+          <label class="text-menu-title"> Конфигурация </label>
+          <app-input-select
+            [width]="'w-440'"
+            [options]="_options"
+            [currOption]="!currOption ? _currOption : currOption"
+            (onSelect)="onSelectHandler($event)"
+          ></app-input-select>
+        </div>
+        <div class="group-icon">
+          <div class="row">
+            <label class="text-menu-title">Обозначение</label>
+            <div class="right">
+              <div class="img-wrapper">
+                <img
+                  class="img"
+                  [src]="
+                    _iconID?.value && _iconID?.value !== ''
+                      ? _iconID?.value
+                      : '/assets/group-icons/rhombus.png'
+                  "
+                  alt="Иконка группы"
+                />
+              </div>
+              <div
+                *ngIf="!isIconContainerShown"
+                class="icon pencil"
+                (click)="toggleIconsContainer()"
+              ></div>
+            </div>
+          </div>
+          <div class="choose-icon" [class.hidden]="!isIconContainerShown">
+            <p class="text-menu-title">Выбор значка:</p>
+            <div class="icons-container">
+              <ng-container *ngFor="let icon of groupIcons; index as i">
+                <div
+                  class="img-wrapper"
+                  [style.margin-top]="i + 1 <= 10 ? '0' : '12px'"
+                  [style.margin-right]="(i + 1) % 10 !== 0 ? '15px' : '0'"
+                  (click)="onIconSelectHandler($event)"
+                >
+                  <!--                  [class.chosen]="_iconID?.value.includes(icon)"-->
+                  <img
+                    class="img"
+                    [src]="'/assets/group-icons/' + icon + '.png'"
+                    [alt]="icon"
+                  />
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [margin]="'66px'"
+        [submitText]="'Сохранить'"
+        [cancelText]="'Отменить'"
+        [isSubmitBtnDisabled]="
+          ((loading$ | async) || false) &&
+          ((entity$ | async) === 'groups' || false)
+        "
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
+  </div>
+</app-modal>

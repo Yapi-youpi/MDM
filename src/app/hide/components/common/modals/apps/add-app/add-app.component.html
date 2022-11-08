@@ -1,0 +1,84 @@
+<app-modal [modalID]="'add_app'" [isClosable]="true">
+  <div class="modal-form w-700">
+    <div class="modal-form-header">
+      <h4 i18n class="text-title text-center">Добавить приложение</h4>
+    </div>
+    <hr class="divider" />
+    <div class="modal-form-body">
+      <form [formGroup]="_form">
+        <!--        <div class="form-group-wrapper">-->
+        <!--          <label for="name" class="text-menu-title">-->
+        <!--            Название-->
+        <!--          </label>-->
+        <!--          <app-input-text-->
+        <!--            [control]="$any(_name)"-->
+        <!--            [name]="'name'"-->
+        <!--            [width]="'w-440'"-->
+        <!--            [isError]="_isSubmitted && !!_name?.errors"-->
+        <!--          ></app-input-text>-->
+        <!--          <app-input-alert-->
+        <!--            *ngIf="_isSubmitted && !!_name?.errors"-->
+        <!--            [control]="$any(_name)"-->
+        <!--          ></app-input-alert>-->
+        <!--        </div>-->
+        <div class="form-group-wrapper file">
+          <label i18n for="file" class="text-menu-title"> Файл </label>
+          <app-input-file
+            [control]="$any(_file)"
+            [name]="'file'"
+            [width]="'w-440'"
+            [isError]="_isSubmitted && !!_file?.errors"
+            (onChange)="onInputFileChangeHandler($event)"
+          ></app-input-file>
+          <app-input-alert
+            *ngIf="_isSubmitted && !!_file?.errors"
+            style="width: 500px; position: absolute; top: -37px; right: 0"
+            [control]="$any(_file)"
+            [type]="'error'"
+          ></app-input-alert>
+        </div>
+        <!--        <div class="form-group-wrapper boot">-->
+        <!--          <label class="text-menu-title">Запуск:</label>-->
+        <!--          <div class="inner-wrapper row space-between">-->
+        <!--            <label for="runAfterInstall" class="text-menu-title">после установки</label>-->
+        <!--            <app-input-switch-->
+        <!--              [control]="$any(_runAfterInstall)"-->
+        <!--              [name]="'runAfterInstall'"-->
+        <!--            ></app-input-switch>-->
+        <!--          </div>-->
+        <!--          <div class="inner-wrapper">-->
+        <!--            <div class="inner-wrapper row space-between">-->
+        <!--              <label for="runAtBoot" class="text-menu-title">после загрузки</label>-->
+        <!--              <app-input-switch-->
+        <!--                [control]="$any(_runAtBoot)"-->
+        <!--                [name]="'runAtBoot'"-->
+        <!--              ></app-input-switch>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="form-group-wrapper icon">-->
+        <!--          <label for="showIcon" class="text-menu-title">-->
+        <!--            Ярлык-->
+        <!--          </label>-->
+        <!--          <app-input-switch-->
+        <!--            [control]="$any(_showIcon)"-->
+        <!--            [name]="'showIcon'"-->
+        <!--          ></app-input-switch>-->
+        <!--        </div>-->
+      </form>
+    </div>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [submitText]="'Сохранить'"
+        [cancelText]="'Отменить'"
+        [margin]="'66px'"
+        [isSubmitBtnDisabled]="
+          ((loading$ | async) || false) &&
+          ((entity$ | async) === 'apps' || false)
+        "
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
+  </div>
+</app-modal>

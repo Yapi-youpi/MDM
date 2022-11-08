@@ -1,0 +1,23 @@
+<app-modal [modalID]="'delete_several_elements'" [isClosable]="true">
+  <div class="modal-form w-500">
+    <div class="modal-form-header">
+      <h4 i18n class="text-title text-center">Удалить выбранные элементы?</h4>
+    </div>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [isReverse]="true"
+        [submitText]="'Да'"
+        [cancelText]="'Нет'"
+        [margin]="'50px'"
+        [isSubmitBtnDisabled]="
+          ((loading$ | async) || false) &&
+          (source === 'device'
+            ? (entity$ | async) === 'devices' || false
+            : (entity$ | async) === 'groups' || false)
+        "
+        (onCancel)="closeModal()"
+        (onSubmit)="onSubmitHandler()"
+      ></app-modal-action-btns>
+    </div>
+  </div>
+</app-modal>

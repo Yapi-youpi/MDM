@@ -1,0 +1,118 @@
+import { Component } from '@angular/core';
+import { EditSeveralDevicesService } from '../../../../../shared/services/forms/device/edit-several-devices.service';
+import { IDevice, IOption } from '../../../../../shared/types';
+import { GroupClass } from '../../../../../shared/classes/groups/group.class';
+import {
+  DeviceClass,
+  DeviceSelectedClass,
+  LoaderClass,
+} from '../../../../../shared/classes';
+
+@Component({
+  selector: 'app-edit-several-devices',
+  templateUrl: './edit-several-devices.component.html',
+  styleUrls: ['./edit-several-devices.component.scss'],
+})
+export class EditSeveralDevicesComponent {
+  public currOption: IOption = { value: '', html: '' };
+
+  constructor(
+    public form: EditSeveralDevicesService,
+    private group: GroupClass,
+    private device: DeviceClass,
+    private dSelected: DeviceSelectedClass,
+    private _loader: LoaderClass
+  ) {}
+
+  get loading$() {
+    return this._loader.loading$;
+  }
+
+  get entity$() {
+    return this._loader.entity$;
+  }
+
+  get _form() {
+    return this.form.form;
+  }
+
+  get _isSubmitted() {
+    return this.form.isSubmitted;
+  }
+
+  get _group_id() {
+    return this._form.get('device_group_id');
+  }
+
+  get _state() {
+    return this._form.get('active_state');
+  }
+
+  get _options() {
+    return this.group.array.map((g) => {
+      return {
+        value: g.id,
+        html: g.name,
+      } as IOption;
+    });
+  }
+
+  get _currOption() {
+    return {
+      value: this._group_id?.value,
+      html: this.group.array.find((g) => g.id === this._group_id?.value)?.name,
+    } as IOption;
+  }
+
+  onSelectHandler(item: IOption) {
+    this._form.patchValue({
+      device_group_id: item.value,
+    });
+
+    this.currOption = item;
+  }
+
+  onSubmitHandler() {
+    this.form.setSubmitted();
+
+    if (this.form.form.invalid) {
+      return;
+    } else {
+      const data: IDevice[] = this.device.array
+        .filter((d) => this.dSelected.selectedIDs.includes(d.device_id))
+        .map((d) => {
+          return {
+            ...d,
+            device_group_id: this.form._group,
+            active_state: this.form._state,
+          };
+        });
+
+      this.device.edit(data).then((res) => {
+        if (res) {
+          if (data.length > 1) {
+            this.dSelected.setListOfSelected([]);
+          }
+          this.closeModal();
+        }
+      });
+    }
+  }
+
+  onCancelHandler() {
+    this.form.resetSubmitted();
+    this.form.resetForm();
+
+    this._form.patchValue({
+      device_group_id: '',
+    });
+    this.currOption = { value: '', html: '' };
+
+    this.closeModal();
+  }
+
+  closeModal() {
+    const modal = document.querySelector('#edit_several_devices');
+    if (!modal?.classList.contains('hidden')) modal?.classList.toggle('hidden');
+  }
+}

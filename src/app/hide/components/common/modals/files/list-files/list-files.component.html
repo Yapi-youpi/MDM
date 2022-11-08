@@ -1,0 +1,187 @@
+<app-modal [modalID]="'list_files'" [isClosable]="true">
+  <div class="modal-form">
+    <div class="modal-form-header">
+      <h4 class="text-title text-center">
+        Файлы {{ source === 'device' ? 'на устройстве' : 'в группе' }}
+        {{ source === 'device' ? _device?.name : _group?.name }}
+      </h4>
+      <hr class="divider" />
+    </div>
+    <div class="modal-form-body">
+      <div class="row filters">
+        <app-input-search
+          [value]="searchTerm"
+          (onChange)="onChangeSearchInputHandler($event)"
+        ></app-input-search>
+        <ng-container *ngIf="source === 'device'">
+          <app-button
+            class="files-filter-btn-all"
+            [class.chosen]="displayFiles === 'all'"
+            height="auto"
+            padding="9px 14px"
+            text="все"
+            textLike="like-body"
+            radius="14px"
+            [color]="displayFiles === 'all' ? 'blue' : 'common'"
+            (onCLick)="toggleFilesDisplay('all')"
+          ></app-button>
+          <app-button
+            class="files-filter-btn-import"
+            [class.chosen]="displayFiles === 'import'"
+            height="auto"
+            padding="9px 14px"
+            text="импорт"
+            textLike="like-body"
+            radius="14px"
+            [color]="displayFiles === 'import' ? 'blue' : 'common'"
+            (onCLick)="toggleFilesDisplay('import')"
+          ></app-button>
+          <app-button
+            class="files-filter-btn-export"
+            [class.chosen]="displayFiles === 'export'"
+            height="auto"
+            padding="9px 14px"
+            text="экспорт"
+            textLike="like-body"
+            radius="14px"
+            [color]="displayFiles === 'export' ? 'blue' : 'common'"
+            (onCLick)="toggleFilesDisplay('export')"
+          ></app-button>
+        </ng-container>
+        <app-add-button
+          class="add-btn"
+          [title]="'добавить новый'"
+          [target]="'file_add'"
+        ></app-add-button>
+      </div>
+      <ng-container
+        *ngIf="
+          ((loading$ | async) || false) &&
+            ((entity$ | async) === 'files' || false);
+          else dummy
+        "
+      >
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </ng-container>
+      <ng-template #dummy>
+        <div class="dummy"></div>
+      </ng-template>
+      <div class="row space-between">
+        <div class="list">
+          <div class="list-header row space-between">
+            <div class="sort-btn-wrapper">
+              <app-sort-btn
+                title="Название"
+                [isSortAsc]="isNameSortAsc"
+                (onCLick)="changeNameSortDir()"
+              ></app-sort-btn>
+            </div>
+            <div class="sort-btn-wrapper">
+              <app-sort-btn
+                title="Размер"
+                [isSortAsc]="isSizeSortAsc"
+                (onCLick)="changeSizeSOrtDir()"
+              ></app-sort-btn>
+            </div>
+            <div class="sort-btn-wrapper">
+              <app-sort-btn
+                title="Дата"
+                [isSortAsc]="isDateSortAsc"
+                (onCLick)="changeDateSortDir()"
+              ></app-sort-btn>
+            </div>
+            <p class="text-body">Действия</p>
+          </div>
+          <div class="list-body">
+            <ng-container *ngIf="source === 'device'">
+              <ng-container
+                *ngIf="
+                  _device &&
+                    _device.device_info?.files &&
+                    _device.device_info?.files?.length !== 0;
+                  else nodata
+                "
+              >
+                <app-file-item
+                  *ngFor="
+                    let file of _device.device_info.files
+                      | search: searchTerm:'file'
+                      | fileName: isNameSortAsc
+                      | deviceFileSize: isSizeSortAsc
+                      | fileDate: isDateSortAsc
+                      | filesSort: displayFiles
+                  "
+                  [file]="file"
+                  (onFileClick)="setCurrentFile($event)"
+                  (onDeleteClick)="setCurrentFile($event)"
+                  (onDownloadClick)="onDownloadClickHandler($event)"
+                ></app-file-item>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="source === 'group'">
+              <ng-container
+                *ngIf="
+                  _group && _group?.files && _group?.files?.length !== 0;
+                  else nodata
+                "
+              >
+                <app-file-item
+                  *ngFor="
+                    let file of _group.files
+                      | search: searchTerm:'file'
+                      | fileName: isNameSortAsc
+                      | deviceFileSize: isSizeSortAsc
+                      | fileDate: isDateSortAsc
+                      | filesSort: displayFiles
+                  "
+                  [file]="file"
+                  (onFileClick)="setCurrentFile($event)"
+                  (onDeleteClick)="setCurrentFile($event)"
+                  (onDownloadClick)="onDownloadClickHandler($event)"
+                ></app-file-item>
+              </ng-container>
+            </ng-container>
+            <ng-template #nodata>
+              <app-no-list-data></app-no-list-data>
+            </ng-template>
+          </div>
+        </div>
+        <div class="preview-wrapper">
+          <div
+            class="preview r-14"
+            [class.video]="_file && fileType(_file.url) === 'video'"
+          >
+            <span *ngIf="!_file" class="text-choose">область просмотра</span>
+            <ng-container *ngIf="_file">
+              <span
+                *ngIf="
+                  fileType(_file.url) === 'none' ||
+                  fileType(_file.url) === 'other'
+                "
+                class="text-choose"
+                >непросматриваемый файл</span
+              >
+              <img
+                *ngIf="fileType(_file.url) === 'img'"
+                class="img"
+                [src]="_file?.url"
+                alt=""
+              />
+              <video
+                *ngIf="fileType(_file.url) === 'video'"
+                class="video"
+                [src]="_file.url"
+                controls
+                [disableRemotePlayback]="true"
+                [controlsList]="['nodownload']"
+              ></video>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-form-footer"></div>
+  </div>
+</app-modal>

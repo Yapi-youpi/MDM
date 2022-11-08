@@ -1,0 +1,48 @@
+<app-modal [modalID]="'edit_several_devices'" [isClosable]="true">
+  <div class="modal-form w-700">
+    <div class="modal-form-header">
+      <h4 i18n class="text-title text-center">Настройки выбранных устройств</h4>
+    </div>
+    <hr class="divider" />
+    <div class="modal-form-body">
+      <form [formGroup]="_form">
+        <div class="form-group-wrapper">
+          <label i18n class="text-menu-title"> Группа </label>
+          <app-input-select
+            [width]="'w-440'"
+            [options]="_options"
+            [currOption]="currOption.value === '' ? _currOption : currOption"
+            [isError]="_isSubmitted && currOption.value === ''"
+            (onSelect)="onSelectHandler($event)"
+          ></app-input-select>
+          <app-input-alert
+            *ngIf="_isSubmitted && currOption.value === ''"
+            [type]="'error'"
+            [message]="'Данное поле должно быть заполнено'"
+            i18n
+          ></app-input-alert>
+        </div>
+        <div class="form-group-wrapper switch">
+          <label i18n for="active_state" class="text-menu-title"> Блокировка </label>
+          <app-input-switch
+            [control]="$any(_state)"
+            [name]="'active_state'"
+          ></app-input-switch>
+        </div>
+      </form>
+    </div>
+    <div class="modal-form-footer">
+      <app-modal-action-btns
+        [margin]="'30px'"
+        [submitText]="'Сохранить'"
+        [cancelText]="'Отменить'"
+        [isSubmitBtnDisabled]="
+          ((loading$ | async) || false) &&
+          ((entity$ | async) === 'devices' || false)
+        "
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
+  </div>
+</app-modal>
