@@ -1,0 +1,71 @@
+<aside class="sidebar-wrapper" [class.collapsed]="isCollapsed">
+  <div class="sidebar-top">
+    <div class="sidebar-header">
+      <button
+        type="button"
+        class="button-icon sidebar-toggler"
+        (click)="onCollapseBtnClickHandler()"
+      >
+        <span class="icon"></span>
+      </button>
+      <img src="/assets/images/logo.svg" alt="logo" class="logo" />
+    </div>
+    <div class="sidebar-content">
+      <nav class="nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/devices" routerLinkActive="active">
+            <span class="icon devices"></span>
+            <p class="nav-text text-title-menu">Устройства</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/groups" routerLinkActive="active">
+            <span class="icon groups"></span>
+            <p class="nav-text text-title-menu">Группы устройств</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/apps" routerLinkActive="active">
+            <span class="icon apps"></span>
+            <p class="nav-text text-title-menu">Приложения</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/messages" routerLinkActive="active">
+            <span class="icon messages"></span>
+            <p class="nav-text text-title-menu">Сообщения</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/map" routerLinkActive="active">
+            <span class="icon map"></span>
+            <p class="nav-text text-title-menu">Карта устройств</p>
+          </a>
+        </li>
+        <hr class="nav-divider" />
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/configs" routerLinkActive="active">
+            <span class="icon configs"></span>
+            <p class="nav-text text-title-menu">Конфигурации</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users" routerLinkActive="active">
+            <span class="icon users"></span>
+            <p class="nav-text text-title-menu">Пользователи</p>
+          </a>
+        </li>
+        <hr class="nav-divider" />
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/help" routerLinkActive="active">
+            <span class="icon help"></span>
+            <p class="nav-text text-title-menu">Справка</p>
+          </a>
+        </li>
+      </nav>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <p class="sidebar-version text-tip">1.0.1</p>
+  </div>
+</aside>

@@ -26,9 +26,9 @@
     margin-left: 12px;
     margin-right: auto;
     mask-size: 8px 8px;
-    mask-image: url('/assets/UI/cross.svg');
+    mask-image: url('/assets/images/UI/cross.svg');
     -webkit-mask-size: 8px 8px;
-    -webkit-mask-image: url('/assets/UI/cross.svg');
+    -webkit-mask-image: url('/assets/images/UI/cross.svg');
     background-color: var(--dark-blue-grey);
     cursor: pointer;
   }
@@ -42,18 +42,18 @@
       height: 12.8px;
       width: 12.8px;
       mask-size: 12.8px 12.8px;
-      mask-image: url('/assets/UI/pencil.svg');
+      mask-image: url('/assets/images/UI/pencil.svg');
       -webkit-mask-size: 12.8px 12.8px;
-      -webkit-mask-image: url('/assets/UI/pencil.svg');
+      -webkit-mask-image: url('/assets/images/UI/pencil.svg');
     }
 
     &-delete {
       height: 13.6px;
       width: 11.2px;
       mask-size: 11.2px 13.6px;
-      mask-image: url('/assets/UI/trash.svg');
+      mask-image: url('/assets/images/UI/trash.svg');
       -webkit-mask-size: 11.2px 13.6px;
-      -webkit-mask-image: url('/assets/UI/trash.svg');
+      -webkit-mask-image: url('/assets/images/UI/trash.svg');
     }
   }
 }

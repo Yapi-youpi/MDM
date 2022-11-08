@@ -6,15 +6,15 @@
   background-color: var(--white);
 
   &.list_files {
-    mask-image: url('/assets/UI/paperclip.svg');
-    -webkit-mask-image: url('/assets/UI/paperclip.svg');
+    mask-image: url('/assets/images/UI/paperclip.svg');
+    -webkit-mask-image: url('/assets/images/UI/paperclip.svg');
   }
   &.edit_group {
-    mask-image: url('/assets/UI/pencil.svg');
-    -webkit-mask-image: url('/assets/UI/pencil.svg');
+    mask-image: url('/assets/images/UI/pencil.svg');
+    -webkit-mask-image: url('/assets/images/UI/pencil.svg');
   }
   &.delete_group {
-    mask-image: url('/assets/UI/trash.svg');
-    -webkit-mask-image: url('/assets/UI/trash.svg');
+    mask-image: url('/assets/images/UI/trash.svg');
+    -webkit-mask-image: url('/assets/images/UI/trash.svg');
   }
 }

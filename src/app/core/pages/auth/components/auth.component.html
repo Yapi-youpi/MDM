@@ -1,0 +1,69 @@
+<section class="auth">
+  <form class="form" [formGroup]="form" (submit)="onFormSubmitHandler()">
+    <div class="form-top">
+      <div class="title-wrapper">
+        <h1 class="text-title title">Вход</h1>
+      </div>
+    </div>
+    <div class="form-content">
+      <div class="form-error-wrapper">
+        <div class="form-group">
+          <label class="form-label" for="login">Логин</label>
+          <app-input-text
+            [control]="$any(login)"
+            placeholder="Логин"
+            width="350px"
+            [isError]="isSubmitted && !!login?.errors"
+          ></app-input-text>
+        </div>
+        <span
+          *ngIf="isSubmitted && !!login?.errors; else loginNoErrors"
+          class="form-error"
+        >
+          <ng-container *ngIf="login?.errors?.['required']"
+            >Это поле должно быть заполненным</ng-container
+          >
+        </span>
+        <ng-template #loginNoErrors>
+          <div class="dummy"></div>
+        </ng-template>
+      </div>
+      <div class="form-error-wrapper">
+        <div class="form-group">
+          <label class="form-label" for="password">Пароль</label>
+          <app-input-password
+            [control]="$any(password)"
+            placeholder="Пароль"
+            width="350px"
+            [isError]="isSubmitted && !!password?.errors"
+          ></app-input-password>
+        </div>
+        <span
+          *ngIf="isSubmitted && !!password?.errors; else passwordNoErrors"
+          class="form-error"
+        >
+          <ng-container *ngIf="password?.errors?.['required']"
+            >Это поле должно быть заполненным</ng-container
+          >
+        </span>
+        <ng-template #passwordNoErrors>
+          <div class="dummy"></div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="form-bottom">
+      <button type="submit" class="button button-blue-fulfilled big">
+        Войти
+      </button>
+      <div class="row between">
+        <app-input-checkbox
+          [control]="$any(isRememberMe)"
+          [title]="'Запомнить меня'"
+        ></app-input-checkbox>
+        <a class="text-title-menu redirect" routerLink="/auth"
+          >Забыли пароль?</a
+        >
+      </div>
+    </div>
+  </form>
+</section>

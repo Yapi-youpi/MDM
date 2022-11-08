@@ -49,9 +49,9 @@
           height: 30px;
           width: 30px;
           mask-size: 18px 18px;
-          mask-image: url('/assets/UI/question.svg');
+          mask-image: url('/assets/images/UI/question.svg');
           -webkit-mask-size: 18px 18px;
-          -webkit-mask-image: url('/assets/UI/question.svg');
+          -webkit-mask-image: url('/assets/images/UI/question.svg');
           background-color: var(--white);
         }
       }
@@ -116,8 +116,8 @@
         right: 0;
         mask-size: 8px 6px;
         -wekit-mask-size: 8px 6px;
-        mask-image: url('/assets/UI/arrow_down.svg');
-        -webkit-mask-image: url('/assets/UI/arrow_down.svg');
+        mask-image: url('/assets/images/UI/arrow_down.svg');
+        -webkit-mask-image: url('/assets/images/UI/arrow_down.svg');
         background-color: var(--dark-blue-grey);
         transition: transform var(--transition-time) ease;
 
@@ -173,9 +173,9 @@
 
         .icon {
           mask-size: 10px 10px;
-          mask-image: url('/assets/UI/check.svg');
+          mask-image: url('/assets/images/UI/check.svg');
           -webkit-mask-size: 10px 10px;
-          -webkit-mask-image: url('/assets/UI/check.svg');
+          -webkit-mask-image: url('/assets/images/UI/check.svg');
         }
       }
 
@@ -184,9 +184,9 @@
 
         .icon {
           mask-size: 14px 14px;
-          mask-image: url('/assets/UI/minus.svg');
+          mask-image: url('/assets/images/UI/minus.svg');
           -webkit-mask-size: 14px 14px;
-          -webkit-mask-image: url('/assets/UI/minus.svg');
+          -webkit-mask-image: url('/assets/images/UI/minus.svg');
         }
       }
     }

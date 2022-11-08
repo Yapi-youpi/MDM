@@ -1,0 +1,24 @@
+<div
+  class="alert row"
+  [ngClass]="{ success: alert.type, error: !alert.type }"
+  [@openClose]="alert.show ? 'open' : 'closed'"
+  (mouseenter)="stopCountDown()"
+  (mouseleave)="countDown()"
+>
+  <div class="content-left">
+    <div class="status">
+      <span class="icon"></span>
+    </div>
+  </div>
+  <div class="content-right">
+    <div class="content-top">
+      <h5 class="text-base-middle title">{{ alert.title }}</h5>
+      <p class="text-body-small">{{ alert.message }}</p>
+    </div>
+    <div class="content-bottom">
+      <div class="timer-wrapper">
+        <div class="timer-counter" #progress></div>
+      </div>
+    </div>
+  </div>
+</div>

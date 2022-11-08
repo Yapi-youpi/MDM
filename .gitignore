@@ -3,6 +3,9 @@
 # Prettier
 .prettierrc
 
+# Swagger
+swagger.yaml
+
 # Compiled output
 /dist
 /tmp
