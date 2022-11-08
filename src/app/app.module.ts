@@ -8,6 +8,7 @@ import { PageWrapperModule } from './core/common/page-wrapper/page-wrapper.modul
 import { AlertModule } from './core/common/alert/alert.module';
 import { ParseService, StorageService, UserService } from './shared/services';
 import { LoaderModel, UserModel } from './shared/models';
+import { AuthGuard, NotAuthGuard } from './shared/guards';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,8 @@ import { LoaderModel, UserModel } from './shared/models';
     StorageService,
     ParseService,
     LoaderModel,
+    AuthGuard,
+    NotAuthGuard,
     UserService,
     UserModel,
   ],
