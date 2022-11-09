@@ -1,0 +1,27 @@
+.icon-f-item {
+  height: 14px;
+  width: 14px;
+  mask-size: 14px 14px;
+  -webkit-mask-size: 14px 14px;
+  background-color: var(--light-blue-grey);
+
+  &.file_download {
+    mask-size: 16px 16px;
+    mask-image: url('/assets/UI/download.svg');
+    -webkit-mask-image: url('/assets/UI/download.svg');
+  }
+  &.file_hide {
+    mask-size: 16px 16px;
+    mask-image: url('/assets/UI/eye_show.svg');
+    -webkit-mask-image: url('/assets/UI/eye_show.svg');
+  }
+  &.file_show {
+    mask-size: 16px 16px;
+    mask-image: url('/assets/UI/qr_code.svg');
+    -webkit-mask-image: url('/assets/UI/qr_code.svg');
+  }
+  &.file_delete {
+    mask-image: url('/assets/UI/cross.svg');
+    -webkit-mask-image: url('/assets/UI/cross.svg');
+  }
+}

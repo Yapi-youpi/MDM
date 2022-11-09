@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public title: string = '';
-  public isAuth: boolean = false;
+  public title = 'SDM';
+  public isAuth = false;
 
   constructor() {}
 
-  onActivateHandler(component) {
+  onActivate(component) {
     this.title = component.title;
     this.isAuth = window.location.pathname === '/auth';
   }

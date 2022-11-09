@@ -1,9 +1,4 @@
-export enum EAuth {
-  SING_IN = '/login',
-  SING_OUT = '/logout',
-}
-
-export enum EDevices {
+export enum devicesPaths {
   ADD = '/add_device',
   GET = '/get_device/',
   REMOVE = '/remove_device',
@@ -11,7 +6,7 @@ export enum EDevices {
   REBOOT = '/reboot_device',
 }
 
-export enum EApps {
+export enum appsPaths {
   GET = '/get_app/',
   UPLOAD = '/upload_file',
   GET_ICON = '/get_icon_by_app_id/',
@@ -21,7 +16,7 @@ export enum EApps {
   REMOVE_FROM_INST = '/config_remove_app_from_install',
 }
 
-export enum EGroups {
+export enum groupsPaths {
   GET = '/get_device_group/',
   ADD = '/add_device_group',
   // CHANGE_STATE = '/change_active_state_device_group',
@@ -32,7 +27,7 @@ export enum EGroups {
   DELETE_SEVERAL = '/remove_device_groups_and_all_devices',
 }
 
-export enum EConfigs {
+export enum configsPaths {
   GET = '/get_config/',
   ADD = '/add_config',
   EDIT = '/edit_config',
@@ -43,14 +38,19 @@ export enum EConfigs {
   REMOVE_WP = '/remove_wallpaper',
 }
 
-export enum EFiled {
+export enum filePaths {
   UPLOAD = '/upload_',
   REMOVE = '/remove_',
   DEVICE_FILE = 'device_file',
   GROUP_FILE = 'group_file',
 }
 
-export enum EUsers {
+export enum messagesPaths {
+  GET = '/pager/get_messages',
+  SEND = '/pager/send_to/',
+}
+
+export enum usersPaths {
   CHANGE_MY_PASS = '/change_password',
   CHANGE_PASS = '/change_user_password',
   DELETE = '/delete_user',
@@ -65,7 +65,7 @@ export enum EUsers {
   EDIT_PERMISSIONS = '/super/edit_permissions',
 }
 
-export enum EMessages {
-  GET = '/pager/get_messages',
-  SEND = '/pager/send_to/',
+export enum authPaths {
+  SING_IN = '/login',
+  SING_OUT = '/logout',
 }

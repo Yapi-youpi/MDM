@@ -28,9 +28,7 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/global.scss",
-              "src/assets/scss/form.scss",
-              "src/assets/scss/button.scss"
+              "node_modules/normalize.css/normalize.css"
             ],
             "scripts": []
           },
@@ -93,12 +91,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "src/styles.scss",
-              "src/assets/scss/global.scss",
-              "src/assets/scss/form.scss",
-              "src/assets/scss/button.scss"
-            ],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         }
