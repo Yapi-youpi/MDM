@@ -1,0 +1,121 @@
+<app-modal [modalID]="'add_app_config'" [isClosable]="true">
+  <div class="modal">
+    <div class="modal__header">Добавить приложения в конфигурацию</div>
+    <form class="filter-btn-wrapper">
+      <div class="tags-container">
+        <app-input-search
+          [value]="searchParam"
+          (onChange)="changeSearchParam($event)"
+        ></app-input-search>
+        <label class="custom-radio">
+          <input
+            class="visually-hidden"
+            type="radio"
+            name="filter"
+            value="all"
+            (change)="setFilter($event)"
+            [checked]="filter === 'all'"
+          />
+          <span class="custom-radio__span">все</span>
+        </label>
+        <label class="custom-radio">
+          <input
+            class="visually-hidden"
+            type="radio"
+            name="filter"
+            value="uploaded"
+            (change)="setFilter($event)"
+            [checked]="filter === 'uploaded'"
+          />
+          <span class="custom-radio__span">загруженные</span>
+        </label>
+        <label class="custom-radio">
+          <input
+            class="visually-hidden"
+            type="radio"
+            name="filter"
+            value="system"
+            (change)="setFilter($event)"
+            [checked]="filter === 'system'"
+          />
+          <span class="custom-radio__span">системные</span>
+        </label>
+      </div>
+    </form>
+    <div class="modal__content">
+      <ng-template #loader>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="_groupedApps.length > 0; else loader">
+        <div class="checkbox-group">
+          <div
+            *ngFor="
+              let group of _groupedApps
+                | search: searchParam:'app'
+                | appGroup: filter
+            "
+            class="item-wrapper row"
+          >
+            <div class="checkbox-wrapper">
+              <app-input-checkbox
+                [value]="checkIfExistsInList(group)"
+                (onChange)="onCheckboxChange(group, $event)"
+              ></app-input-checkbox>
+            </div>
+            <div class="item-content row r-14">
+              <img
+                class="img r-8"
+                src="{{
+                  group.iconUID !== ''
+                    ? url + group.ID
+                    : '/assets/config-images/app.png'
+                }}"
+                alt="{{ group.iconText }}"
+              />
+              <p [title]="group.name" class="text-choose name">
+                {{ group.name }}
+              </p>
+              <select
+                *ngIf="
+                  group.children && group.children.length > 0;
+                  else nochildren
+                "
+                (change)="swapIDsInListOfSelected($event, group)"
+                class="select-app-action version"
+                id="version-{{ group.ID }}"
+                name="version"
+              >
+                <option [value]="group.ID">
+                  {{ group.version }}
+                </option>
+
+                <option *ngFor="let app of group.children" [value]="app.ID">
+                  {{ app.version }}
+                </option>
+              </select>
+              <ng-template #nochildren>
+                <p *ngIf="group.system; else dummy" class="text-body">
+                  Системное приложение
+                </p>
+                <ng-template #dummy>
+                  <div></div>
+                </ng-template>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="modal__footer">
+      <app-modal-action-btns
+        [submitText]="'Добавить'"
+        [cancelText]="'Отменить'"
+        [margin]="'66px'"
+        (onSubmit)="onSubmitHandler()"
+        (onCancel)="onCancelHandler()"
+      ></app-modal-action-btns>
+    </div>
+  </div>
+</app-modal>

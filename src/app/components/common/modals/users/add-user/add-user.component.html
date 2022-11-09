@@ -1,0 +1,169 @@
+<app-modal [modalID]="'modal-new-user'" [isClosable]="true">
+  <form [formGroup]="_form" class="form users-form modal-form w-600">
+    <h4 class="modal-title">
+      {{
+        currentUser ? 'Редактирование данных' : 'Добавление нового пользователя'
+      }}
+    </h4>
+    <div class="avatar-wrapper">
+      <label for="user-avatar">
+        <div class="avatar">
+          <div
+            class="avatar__image"
+            *ngIf="
+              currentUser && (currentUser?.avatar)!.length > 0;
+              else noAvatar
+            "
+            [ngStyle]="{
+              'background-image': 'url(' + currentUser?.avatar + ')',
+              'background-size': 'cover'
+            }"
+          ></div>
+          <ng-template #noAvatar>
+            <div class="avatar__image"></div>
+          </ng-template>
+          <div class="avatar__camera"></div>
+          <input
+            (change)="addFile($event)"
+            class="visually-hidden"
+            type="file"
+            id="user-avatar"
+            accept="image/*"
+          /></div
+      ></label>
+      <div class="avatar__attachment"></div>
+    </div>
+    <div class="form__item">
+      <label i18n for="name">Имя</label>
+      <input
+        formControlName="name"
+        type="text"
+        id="name"
+        class="w-296"
+        required
+      />
+    </div>
+    <div class="form__item" *ngIf="!currentUser">
+      <label i18n for="login">Логин</label>
+      <input
+        formControlName="login"
+        type="text"
+        id="login"
+        class="w-296"
+        required
+      />
+    </div>
+    <ng-container *ngIf="_role === 'admin' || _role === 'super'">
+      <div class="form__item" *ngIf="isEditSelf && passwordField">
+        <label i18n for="old-pass">Старый пароль</label>
+        <app-input-password
+          [control]="$any(_form.get('oldPassword'))"
+          [name]="'old-pass'"
+          [width]="'w-296'"
+        ></app-input-password>
+      </div>
+      <div class="form__item">
+        <label for="password">{{
+          isEditSelf ? 'Новый пароль' : 'Пароль'
+        }}</label>
+        <button
+          *ngIf="!passwordField"
+          class="btn btn--big btn--outline w-296"
+          (click)="showPasswordField()"
+          i18n
+        >
+          Сменить пароль
+        </button>
+        <div class="validation" *ngIf="passwordField">
+          <app-input-password
+            [name]="'password'"
+            [control]="$any(_form.get('password'))"
+            [width]="'w-296'"
+            [pattern]="pattern"
+            (onFocus)="showValidation()"
+            (onBlur)="hideValidation()"
+            (onInput)="validate()"
+          ></app-input-password>
+
+          <ul class="validation-list w-296">
+            <li i18n class="validation-item" data-pattern="uppercase">
+              заглавные буквы
+            </li>
+            <li i18n class="validation-item" data-pattern="lowercase">
+              строчные буквы
+            </li>
+            <li i18n class="validation-item" data-pattern="length">
+              не менее 8 символов
+            </li>
+            <li i18n class="validation-item" data-pattern="numbers">цифры</li>
+            <li i18n class="validation-item" data-pattern="symbols">символы</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form__item" *ngIf="!currentUser">
+        <label i18n>Роль</label>
+        <div class="tags-container w-296">
+          <label class="custom-radio">
+            <input
+              class="visually-hidden"
+              formControlName="role"
+              type="radio"
+              [value]="'admin'"
+              [attr.disabled]="currentUser || _role === 'admin' ? '' : null"
+            />
+            <span i18n class="custom-radio__span"> администратор </span>
+          </label>
+
+          <label class="custom-radio">
+            <input
+              class="visually-hidden"
+              formControlName="role"
+              type="radio"
+              [value]="'operator'"
+              [attr.disabled]="currentUser ? '' : null"
+            />
+            <span i18n class="custom-radio__span"> оператор </span>
+          </label>
+        </div>
+      </div>
+      <div class="form__item">
+        <label i18n>Подразделение</label>
+        <select class="select-native w-296" formControlName="userTags">
+          <ng-container *ngFor="let tag of _tags">
+            <option value="{{ tag }}" *ngIf="tag">
+              {{ tag }}
+            </option></ng-container
+          >
+          <option i18n value="Другое">Другое</option>
+        </select>
+      </div>
+      <div class="form__item" *ngIf="_form.get('userTags')?.value == 'Другое'">
+        <label></label>
+        <input
+          formControlName="other"
+          type="text"
+          id="other"
+          class="w-296"
+          placeholder="Введите название подразделения"
+        />
+      </div>
+    </ng-container>
+    <div class="modal-form-footer btn-wrapper">
+      <button
+        *ngIf="!currentUser; else editBtn"
+        class="btn btn--big"
+        (click)="addUser()"
+        [disabled]="_form.invalid || _form.untouched || _form.pristine"
+        i18n
+      >
+        Добавить
+      </button>
+      <ng-template #editBtn>
+        <button i18n class="btn btn--big" (click)="editUser()">Сохранить</button>
+      </ng-template>
+      <button i18n class="btn btn--big btn--outline" (click)="clearModal()">
+        Отменить
+      </button>
+    </div>
+  </form>
+</app-modal>

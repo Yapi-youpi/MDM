@@ -1,0 +1,72 @@
+<div class="row space-between item">
+  <div
+    class="checkbox-wrapper"
+    *ngIf="userRole === 'admin' || userRole === 'super'"
+  >
+    <app-input-checkbox
+      title='Выбрать'
+      [value]="!!group.isSelected"
+      (onChange)="onSelectUnselectGroupHandler(group)"
+    ></app-input-checkbox>
+  </div>
+  <div class="row space-between content">
+    <div class="name-wrapper">
+      <p
+        class="text-choose name"
+        (mouseenter)="displayTip()"
+        (mouseleave)="hideTip()"
+        #name
+      >
+        {{ group.name }}
+      </p>
+      <p class="list-tip" #tip>{{ group.name }}</p>
+    </div>
+    <p>{{ group.description }}</p>
+    <div class="icon-wrapper group-icon">
+      <ng-container *ngIf="group.iconID !== ''; else noicon">
+        <div class="img-wrapper">
+          <img class="img" [src]="group.iconID" alt="Иконка группы" />
+        </div>
+      </ng-container>
+      <ng-template #noicon>
+        <p>Без иконки</p>
+      </ng-template>
+    </div>
+    <p>{{ group.capacity }} шт.</p>
+    <div class="select-wrapper">
+      <app-input-select
+        [color]="'light'"
+        [width]="'w-186'"
+        [options]="_options"
+        [disabled]="true"
+        [currOption]="currOption.value === '' ? _currOption : currOption"
+        (onSelect)="onSelectHandler($event)"
+      ></app-input-select>
+    </div>
+    <p>{{ group.updateTime | dateConverter }}</p>
+    <div
+      class="row device-actions-wrapper"
+      style="gap: 8px"
+      *ngIf="userRole === 'admin' || userRole === 'super'"
+    >
+      <app-group-action-btn
+        [group]="group"
+        [title]="'список файлов'"
+        [target]="'list_files'"
+        (onClick)="onFileClickHandler(group)"
+      ></app-group-action-btn>
+      <app-group-action-btn
+        [group]="group"
+        [target]="'edit_group'"
+        [title]="'редактировать группу'"
+        (onClick)="onEditCLickHandler(group)"
+      ></app-group-action-btn>
+      <app-group-action-btn
+        [group]="group"
+        [target]="'delete_group'"
+        [title]="'удалить группу'"
+        (onClick)="onDeleteClickHandler(group)"
+      ></app-group-action-btn>
+    </div>
+  </div>
+</div>

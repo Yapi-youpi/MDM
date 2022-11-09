@@ -1,0 +1,20 @@
+.datetime-wrapper {
+  display: flex;
+  align-items: center;
+
+  .icon-datetime {
+    height: 26.65px;
+    width: 26.65px;
+    margin-left: 18px;
+    mask-size: 26.65px 26.65px;
+    mask-image: url('/assets/UI/calendar.svg');
+    -webkit-mask-size: 26.65px 26.65px;
+    -webkit-mask-image: url('/assets/UI/calendar.svg');
+    background-color: var(--dark-blue);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--blue);
+    }
+  }
+}

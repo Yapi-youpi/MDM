@@ -1,0 +1,124 @@
+<main class="global-main card-wrapper">
+  <div class="card page-content">
+    <div class="top row space-between">
+      <app-input-search
+        [value]="searchParam"
+        (onChange)="onChangeSearchInputHandler($event)"
+      ></app-input-search>
+      <div class="filter-wrapper">
+        <app-filter-btn
+          title="Показать фильтры поиска"
+          [target]="'filter_groups'"
+        ></app-filter-btn>
+      </div>
+      <app-add-button
+        *ngIf="userRole === 'admin' || userRole === 'super'"
+        [title]="'добавить группу'"
+        [target]="'add_group'"
+      ></app-add-button>
+    </div>
+    <app-groups-filters></app-groups-filters>
+    <ng-container
+      *ngIf="
+        (_gLoading | async) || false || (_cLoading | async) || false;
+        else dummy
+      "
+    >
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </ng-container>
+    <ng-template #dummy>
+      <div class="dummy"></div>
+    </ng-template>
+    <app-selected-elements
+      *ngIf="userRole === 'admin' || userRole === 'super'"
+      [source]="'group'"
+      [editTarget]="'edit_several_groups'"
+      [deleteTarget]="'delete_several_elements'"
+    ></app-selected-elements>
+    <div class="list">
+      <div class="list-header row">
+        <div
+          class="checkbox-wrapper"
+          *ngIf="userRole === 'admin' || userRole === 'super'"
+        >
+          <app-input-checkbox
+            [value]="isAllSelected"
+            (onChange)="selectUnselectGroups()"
+          ></app-input-checkbox>
+        </div>
+        <div class="sort-headers row space-between">
+          <div class="sort-btn-wrapper status">
+            <app-sort-btn
+              [title]="'Название'"
+              [isSortAsc]="isNamesSortAsc"
+              (onCLick)="changeSortNameDir()"
+            ></app-sort-btn>
+          </div>
+          <p>Описание</p>
+          <p>Обозначение</p>
+          <div class="sort-btn-wrapper status">
+            <app-sort-btn
+              [title]="'Количество устройств'"
+              [isSortAsc]="isDevicesCountSortAsc"
+              (onCLick)="changeSortDevicesCountDir()"
+            ></app-sort-btn>
+          </div>
+          <div class="sort-btn-wrapper status">
+            <app-sort-btn
+              [title]="'Конфигурация'"
+              [isSortAsc]="isConfigSortAsc"
+              (onCLick)="changeSortConfigDir()"
+            ></app-sort-btn>
+          </div>
+          <div class="sort-btn-wrapper status">
+            <app-sort-btn
+              [title]="'Дата обновления'"
+              [isSortAsc]="isDateSortAsc"
+              (onCLick)="changeSortDateDir()"
+            ></app-sort-btn>
+          </div>
+          <p *ngIf="userRole === 'admin' || userRole === 'super'">Действия</p>
+        </div>
+      </div>
+      <div class="list-body">
+        <ng-container *ngIf="_groups.length !== 0; else nodata">
+          <app-group-item
+            *ngFor="
+              let group of _groups
+                | search: searchParam:'group'
+                | groupFilter
+                  : filters.status
+                  : filters.dateFrom
+                  : filters.dateTo
+                  : filters.configsIDs
+                | group_name: isNamesSortAsc
+                | group_devices_count: isDevicesCountSortAsc
+                | group_config: configsNV:isConfigSortAsc
+                | group_date: isDateSortAsc
+            "
+            [group]="group"
+            [userRole]="userRole"
+          ></app-group-item>
+        </ng-container>
+        <ng-template #nodata>
+          <app-no-list-data></app-no-list-data>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-filter-group></app-filter-group>
+
+<ng-container *ngIf="userRole === 'admin' || userRole === 'super'">
+  <app-add-group></app-add-group>
+  <app-list-files [source]="'group'"></app-list-files>
+  <app-add-file [source]="'group'"></app-add-file>
+  <app-delete-file [source]="'group'"></app-delete-file>
+  <app-edit-group></app-edit-group>
+  <app-edit-several-groups></app-edit-several-groups>
+  <app-delete-group></app-delete-group>
+  <app-delete-several-elements [source]="'group'"></app-delete-several-elements>
+</ng-container>
