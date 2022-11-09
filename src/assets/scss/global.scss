@@ -1,0 +1,65 @@
+.text {
+  &-title {
+    font-weight: 550;
+    font-size: 24px;
+    line-height: 24px;
+
+    &-sub {
+      font-weight: 550;
+      font-size: 20px;
+      line-height: 20px;
+    }
+
+    &-choose {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 16px;
+    }
+
+    &-menu {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+
+  &-body {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+
+    &-choose {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 12px;
+    }
+
+    &-sub {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 10px;
+    }
+  }
+
+  &-tip {
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 10px;
+  }
+}
+
+.icon {
+  display: block;
+
+  mask-position: center center;
+  mask-repeat: no-repeat;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+
+  &.between {
+    justify-content: space-between;
+  }
+}
